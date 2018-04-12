@@ -1,1 +1,4 @@
+<<<<<<< HEAD
 Bonjour tout le monde
+Hello
+quatrième ajout
