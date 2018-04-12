@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+<<<<<<< HEAD Olivier SAP
 
 - Bonjour tout le monde
 Hello
 cinquième ajout
 456
-=======
-Bonjour tout le monde
-Hello
-quatrième ajout
-coucou
-ON CASSE LES FICHIERS DES COPAINS, ANARCHIIIIIIE
-<<<<<<< HEAD
->>>>>>> c9e2599159fb6995b45cc279aac61c9f2773767b
-=======
-attaque
->>>>>>> b1e640e4782475661d4104bb4fe055143f0d7429
+
+
