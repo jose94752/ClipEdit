@@ -1,3 +1,3 @@
+<<<<<<< HEAD
 Bonjour tout le monde
 Hello
-Voila une troisième ligne
