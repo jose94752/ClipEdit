@@ -1,6 +1,13 @@
 jose pluquet
+<<<<<<< HEAD
 <<<<<<< HEAD Si je veux
 adresse jose.pluquet[PAS2Spam]gmail.com
 https://fr-fr.facebook.com/hirondelleinformatiqueembarquee/
 
 
+=======
+adresse jose.pluquet[PAS2Spam]gmail
+coucou
+ON CASSE LES FICHIERS DES COPAINS, ANARCHIIIIIIE !!!!
+deuxième attaque
+>>>>>>> b1e640e4782475661d4104bb4fe055143f0d7429
