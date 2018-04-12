@@ -1,5 +1,7 @@
-<<<<<<< HEAD
-Bonjour tout le monde
+
+- Bonjour tout le monde
 Hello
-quatrième ajout
-ON CASSE LES FICHIERS DES COPAINS, ANARCHIIIIIIE
+cinquième ajout
+456
+
+
