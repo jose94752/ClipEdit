@@ -52,9 +52,9 @@ docx:
 	mkdir -p Docs/en/docx
 
 	pandoc --toc -f markdown -t docx Docs/fr/presentation.md -o Docs/fr/docx/presentation.docx
-	pandoc --toc -f markdown -t docx Docs/fr/pandocInstallFedora.md -o Docs/fr/docx/pandocInstallFedora.docx
+	pandoc --toc -f markdown -t docx Docs/fr/pandocInstall.md -o Docs/fr/docx/pandocInstall.docx
 	pandoc --toc -f markdown -t docx Docs/en/presentation.md -o Docs/en/docx/presentation.docx
-	pandoc --toc -f markdown -t docx Docs/en/pandocInstallFedora.md -o Docs/en/docx/pandocInstallFedora.docx
+	pandoc --toc -f markdown -t docx Docs/en/pandocInstall.md -o Docs/en/docx/pandocInstall.docx
 
 doc-epub:
 	# Create dir if necessary
