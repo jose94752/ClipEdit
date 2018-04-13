@@ -73,6 +73,9 @@ doc-epub:
 	# Generate international docs
 	pandoc -s --toc  -t EPUB Docs/fr/presentation.md -o Docs/fr/epub/ClipEdit-doc-fr.epub
 	pandoc -s --toc  -t EPUB Docs/en/presentation.md -o Docs/en/epub/ClipEdit-doc-en.epub
+	pandoc --toc -f markdown -t EPUB Docs/fr/pandocInstall.md -o Docs/fr/epub/pandocInstall.epub
+	pandoc --toc -f markdown -t EPUB Docs/en/pandocInstall.md -o Docs/en/epub/pandocInstall.epub
+
 
 clean:
 	rm -f *.o
