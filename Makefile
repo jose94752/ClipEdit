@@ -31,10 +31,10 @@ docx:
 	# Create dir if necessary
 	mkdir -p Docs/fr/docx
 	mkdir -p Docs/en/docx
-	pandoc -f markdown -t docx Docs/fr/presentation.md -o Docs/fr/docx/presentation.docx
-	pandoc -f markdown -t docx Docs/fr/pandocInstallationFedora.md -o Docs/fr/docx/pandocInstallFedora.docx
-	pandoc -f markdown -t docx Docs/en/presentation.md -o Docs/en/docx/presentation.docx
-	pandoc -f markdown -t docx Docs/en/pandocInstallFedora.md -o Docs/en/docx/pandocInstallFedora.docx
+	pandoc --toc -f markdown -t docx Docs/fr/presentation.md -o Docs/fr/docx/presentation.docx
+	pandoc --toc -f markdown -t docx Docs/fr/pandocInstallationFedora.md -o Docs/fr/docx/pandocInstallFedora.docx
+	pandoc --toc -f markdown -t docx Docs/en/presentation.md -o Docs/en/docx/presentation.docx
+	pandoc --toc -f markdown -t docx Docs/en/pandocInstallFedora.md -o Docs/en/docx/pandocInstallFedora.docx
 	
 
 clean:
