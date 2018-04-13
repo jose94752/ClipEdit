@@ -2,51 +2,51 @@
 % M2I Team
 % \today
 
-# Brief
+# Résumé
 
-The main goal of the **ClipEdit** project is to manipulate cliparts to edit, highlight and customize images in a user-friendly way.
+L'objectif principal du projet **ClipEdit** est de manipuler les cliparts pour éditer, mettre en surbrillance et personnaliser les images de manière conviviale.
 
-# Features
+# Caractéristiques
 
-ClipEdit comes with a set of features to help you customize, edit or draw attention to specific parts of your document. Every widget at your disposal is fully movable, scalable and editable so you can always open and edit your document in the future without the need of starting over.
+ClipEdit est livré avec un ensemble de fonctionnalités pour vous aider à personnaliser, éditer ou attirer l'attention sur des parties spécifiques de votre document. Chaque élément est entièrement mobile, évolutif et modifiable. Ainsi, vous pouvez toujours ouvrir et modifier votre document à l'avenir sans avoir à recommencer.
 
-Let's review the different features at your disposal.
+Passons en revue les différentes fonctionnalités à votre disposition.
 
-## Text boxes
+## Zones de texte
 
-Simple text boxes to add quotes, notes or huge text walls wherever you want to.
+Des zones de texte simples pour ajouter des citations, des notes ou des murs de texte énormes où vous voulez.
 
-## Numbered bubbles
+## Bulles numérotées
 
-Add a set of numbered bubbles on top of your document to facilitate the explanation of multi-steps actions.
+Ajouter un ensemble de bulles numérotées sur le dessus de votre document pour faciliter l'explication des actions en plusieurs étapes.
 
-## Arrows
+## Flèches
 
-A set of arrows to help you point and focus on crucial information. Different styles and shapes are available.
+Un ensemble de flèches pour vous aider à pointer et à vous concentrer sur des informations cruciales. Différents styles et formes sont disponibles.
 
-## Cliparts library
+## Bibliothèque de Cliparts
 
-Import and place images or icons all over the place !
+Importez et positionnez des images ou des icônes !
 
-## Charts
+## Graphiques
 
-Create charts in your document by entering a set of data.
+Créez des graphiques dans votre document à partir d'un ensemble de données.
 
-## Shapes
+## Formes
 
-Add basic and scalable shapes to your document. Each shape comes with a shape of vertex you can use to manipulate it.
+Ajoutez des formes basiques et évolutives à votre document. Chaque forme vient avec une forme de sommet que vous pouvez utiliser pour le manipuler.
 
-Available shapes:
+Formes disponibles:
 
 * Rectangles
 * Triangles
-* Circles
+* Cercles
 
-## Layers
+## Multi couches
 
-Create sophisticated documents using layers.
+Créez des documents sophistiqués en utilisant différentes couches.
 
-# How to use
+# Utilisation
 
-Coming soon
+En construction...
 
