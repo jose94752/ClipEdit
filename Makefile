@@ -31,7 +31,7 @@ doc-html:
 	# TO DO
 	
 clean:
-	rm -f *.o
+	# rm -f *.o
 	
 distclean:
 	rm -f *.o ClipEdit
