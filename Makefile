@@ -4,7 +4,7 @@
 #TO DO : 	- Package checking ?
 #			- Sub makefile for doc		
 
-all: docx doc-pdf doc-man doc-html
+all: docx doc-pdf doc-man doc-html doc-odt
 
 
 doc-man:
@@ -22,8 +22,8 @@ doc-odt:
 	mkdir -p Docs/en/odt
 	
 	# Generate international docs
-	# TO DO
-	# En cours josé
+	pandoc -s -t Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-fr.odt
+	pandoc -s -t Docs/en/presentation.md -o Docs/en/man/ClipEdit-en.odt
 	
 
 doc-pdf:
@@ -38,8 +38,8 @@ doc-pdf:
 	# pandoc MANUAL.txt --pdf-engine=xelatex -o example13.pdf
 	# par contre cet exemple
 	#	Code à refaire:
-	# pandoc -st beamer -V theme:Warsaw Docs/fr/presentation.md -V fontsize:11pt -o Docs/fr/pdf/ClipEdit-doc-fr.pdf
-	# pandoc -st beamer -V theme:Warsaw Docs/en/presentation.md -V fontsize:11pt -o Docs/en/pdf/ClipEdit-doc-en.pdf
+	pandoc	Docs/fr/presentation.md	-V	fontsize:11pt	-o	Docs/fr/pdf/ClipEdit-doc-fr.pdf
+	pandoc	Docs/en/presentation.md	-V	fontsize:11pt	-o	Docs/en/pdf/ClipEdit-doc-en.pdf
 	
 doc-html:
 	# TO DO
@@ -55,6 +55,3 @@ docx:
 
 clean:
 	rm -f *.o
-	
-distclean:
-	rm -f *.o ClipEdit
