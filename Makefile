@@ -5,7 +5,6 @@
 MD_DOC=presentation.md
 MD_PANDOC=pandocInstall.md
 
-
 # Language directories
 DIR_FR=Docs/fr
 DIR_EN=Docs/en
@@ -46,8 +45,10 @@ doc-pdf:
 	pandoc	$(DIR_FR)/$(MD_PANDOC) -V fontsize:11pt --toc -o $(DIR_FR)/pdf/$(BASE_PANDOC).pdf
 	pandoc	$(DIR_EN)/$(MD_DOC) -V fontsize:11pt --toc -o $(DIR_EN)/pdf/$(BASE_DOC).pdf
 	pandoc	$(DIR_EN)/$(MD_PANDOC) -V fontsize:11pt --toc -o $(DIR_EN)/pdf/$(BASE_PANDOC).pdf
+	
 doc-html:
 	# TO DO
+	
 docx:
 	# Create dir if necessary
 	@mkdir -p $(DIR_FR)/docx
