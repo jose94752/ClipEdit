@@ -2,3 +2,8 @@
 *.pro.user
 Build*/
 *.a
+*.pdf
+*.odt
+*.doc
+*.docx
+*.html

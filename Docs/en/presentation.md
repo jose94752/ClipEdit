@@ -1,3 +1,7 @@
+% ClipEdit
+% M2I Team
+% \today
+
 # Brief
 
 The main goal of the **ClipEdit** project is to manipulate cliparts to edit, highlight and customize images in a user-friendly way.
@@ -23,6 +27,10 @@ A set of arrows to help you point and focus on crucial information. Different st
 ## Cliparts library
 
 Import and place images or icons all over the place !
+
+## Charts
+
+Create charts in your document by entering a set of data.
 
 ## Shapes
 
