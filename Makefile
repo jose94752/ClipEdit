@@ -4,7 +4,7 @@
 #TO DO : 	- Package checking ?
 #			- Sub makefile for doc		
 
-all: docx doc-pdf doc-man doc-html doc-odt
+all: docx doc-pdf doc-man doc-html odt
 
 
 doc-man:
@@ -16,14 +16,16 @@ doc-man:
 	pandoc -s -t man Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-man-fr
 	pandoc -s -t man Docs/en/presentation.md -o Docs/en/man/ClipEdit-man-en
 
-doc-odt:
+odt:
 	# Create dir if neccessary
 	mkdir -p Docs/fr/odt
 	mkdir -p Docs/en/odt
 	
 	# Generate international docs
-	pandoc -s -t Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-fr.odt
-	pandoc -s -t Docs/en/presentation.md -o Docs/en/man/ClipEdit-en.odt
+	pandoc -f markdown -t odt Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-fr.odt
+	pandoc -f markdown -t odt Docs/fr/pandocInstallationFedora.md -o Docs/fr/man/pandocInstallationFedora.odt
+	pandoc -f markdown -t odt Docs/en/presentation.md -o Docs/en/man/ClipEdit-en.odt
+	pandoc -f markdown -t odt Docs/en/pandocInstallFedora.md -o Docs/en/man/pandocInstallFedora.odt
 	
 
 doc-pdf:
