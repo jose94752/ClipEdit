@@ -13,7 +13,7 @@ DIR_EN=Docs/en
 BASE_DOC=clipedit
 BASE_PANDOC=pandocInstall
 
-all: docx doc-pdf doc-man doc-html odt doc-epub
+all: doc-docx doc-pdf doc-man doc-html doc-odt doc-epub
 
 doc-man:
 	# Create dir if necessary
@@ -24,7 +24,7 @@ doc-man:
 	pandoc -s -t man $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/man/$(BASE_DOC)
 	pandoc -s -t man $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/man/$(BASE_DOC)
 
-odt:
+doc-odt:
 	# Create dir if neccessary
 	@mkdir -p $(DIR_FR)/odt
 	@mkdir -p $(DIR_EN)/odt
@@ -49,7 +49,7 @@ doc-pdf:
 doc-html:
 	# TO DO
 	
-docx:
+doc-docx:
 	# Create dir if necessary
 	@mkdir -p $(DIR_FR)/docx
 	@mkdir -p $(DIR_EN)/docx
