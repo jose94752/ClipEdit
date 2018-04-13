@@ -38,8 +38,8 @@ doc-pdf:
 	# pandoc MANUAL.txt --pdf-engine=xelatex -o example13.pdf
 	# par contre cet exemple
 	#	Code à refaire:
-	pandoc	Docs/fr/presentation.md	-V	fontsize:11pt	-o	Docs/fr/pdf/ClipEdit-doc-fr.pdf
-	pandoc	Docs/en/presentation.md	-V	fontsize:11pt	-o	Docs/en/pdf/ClipEdit-doc-en.pdf
+	pandoc	Docs/fr/presentation.md	-V	fontsize:11pt --toc	-o	Docs/fr/pdf/ClipEdit-doc-fr.pdf
+	pandoc	Docs/en/presentation.md	-V	fontsize:11pt --toc	-o	Docs/en/pdf/ClipEdit-doc-en.pdf
 	
 doc-html:
 	# TO DO
