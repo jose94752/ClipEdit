@@ -6,6 +6,8 @@
 
 all:
 	#TO DO
+        #il manque l'implementation ...
+
 
 doc-man:
 	# Create dir if necessary
