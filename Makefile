@@ -22,17 +22,10 @@ odt:
 	mkdir -p Docs/en/odt
 	
 	# Generate international docs
-<<<<<<< HEAD
-	pandoc -f markdown -t odt Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-fr.odt
-	pandoc -f markdown -t odt Docs/fr/pandocInstallation.md -o Docs/fr/man/pandocInstallation.odt
-	pandoc -f markdown -t odt Docs/en/presentation.md -o Docs/en/man/ClipEdit-en.odt
-	pandoc -f markdown -t odt Docs/en/pandocInstall.md -o Docs/en/man/pandocInstall.odt
-=======
 	pandoc -f markdown -t odt Docs/fr/presentation.md -o Docs/fr/odt/ClipEdit-fr.odt
 	pandoc -f markdown -t odt Docs/fr/pandocInstallFedora.md -o Docs/fr/odt/pandocInstallationFedora.odt
 	pandoc -f markdown -t odt Docs/en/presentation.md -o Docs/en/odt/ClipEdit-en.odt
 	pandoc -f markdown -t odt Docs/en/pandocInstallFedora.md -o Docs/en/odt/pandocInstallFedora.odt
->>>>>>> 2d7d7d40983d09c44f76f4a45568234fe18952be
 	
 
 doc-pdf:
