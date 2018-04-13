@@ -4,9 +4,7 @@
 #TO DO : 	- Package checking ?
 #			- Sub makefile for doc		
 
-all:
-	#TO DO
-        #il manque l'implementation ...
+all: docx doc-pdf doc-man doc-html
 
 
 doc-man:
