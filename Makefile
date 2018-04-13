@@ -66,8 +66,21 @@ docx:
 	pandoc --toc -f markdown -t docx Docs/fr/pandocInstallationFedora.md -o Docs/fr/docx/pandocInstallFedora.docx
 	pandoc --toc -f markdown -t docx Docs/en/presentation.md -o Docs/en/docx/presentation.docx
 	pandoc --toc -f markdown -t docx Docs/en/pandocInstallFedora.md -o Docs/en/docx/pandocInstallFedora.docx
+<<<<<<< HEAD
 >>>>>>> 2d7d7d40983d09c44f76f4a45568234fe18952be
 	
+=======
+
+doc-epub:
+	# Create dir if necessary
+	mkdir -p Docs/fr/epub
+	mkdir -p Docs/en/epub 
+
+	# Generate international docs
+	pandoc -s --toc  -t EPUB Docs/fr/presentation.md -o Docs/fr/epub/ClipEdit-doc-fr.epub
+	pandoc -s --toc  -t EPUB Docs/en/presentation.md -o Docs/en/epub/ClipEdit-doc-en.epub
+
+>>>>>>> 139e80c090d593910220b75353d62fb9746bf466
 
 clean:
 	rm -f *.o
