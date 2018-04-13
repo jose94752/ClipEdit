@@ -37,6 +37,8 @@ doc-pdf:
 	pandoc	Docs/en/presentation.md	-V	fontsize:11pt --toc	-o	Docs/en/pdf/ClipEdit-doc-en.pdf
 	pandoc	Docs/fr/pandocInstall.md	-V	fontsize:11pt --toc	-o	Docs/fr/pdf/pandocInstall.pdf
 	pandoc	Docs/en/pandocInstall.md	-V	fontsize:11pt --toc	-o	Docs/en/pdf/pandocInstall.pdf
+	
+	
 doc-html:
 	# TO DO
 	# Create dir if necessary
