@@ -1,81 +1,78 @@
 # ClipEdit Makefile
 # -----------------
 
-#TO DO : 	- Package checking ?
-#			- Sub makefile for doc		
+# Markdown files
+MD_DOC=presentation.md
+MD_PANDOC=pandocInstall.md
+
+
+# Language directories
+DIR_FR=Docs/fr
+DIR_EN=Docs/en
+
+# Output bases
+BASE_DOC=clipedit
+BASE_PANDOC=pandocInstall
 
 all: docx doc-pdf doc-man doc-html odt doc-epub
 
 
+
+
 doc-man:
 	# Create dir if necessary
-	mkdir -p Docs/fr/man
-	mkdir -p Docs/en/man
+	mkdir -p $(DIR_FR)/man
+	mkdir -p $(DIR_EN)/man
 	
 	# Generate international docs
-	pandoc -s -t man Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-man-fr
-	pandoc -s -t man Docs/en/presentation.md -o Docs/en/man/ClipEdit-man-en
+	pandoc -s -t man $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/man/$(BASE_DOC)
+	pandoc -s -t man $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/man/$(BASE_DOC)
 
 odt:
 	# Create dir if neccessary
-	mkdir -p Docs/fr/odt
-	mkdir -p Docs/en/odt
+	mkdir -p $(DIR_FR)/odt
+	mkdir -p $(DIR_EN)/odt
 	
 	# Generate international docs
-	pandoc -f markdown -t odt Docs/fr/presentation.md -o Docs/fr/odt/ClipEdit-fr.odt
-	pandoc -f markdown -t odt Docs/fr/pandocInstall.md -o Docs/fr/odt/pandocInstallation.odt
-	pandoc -f markdown -t odt Docs/en/presentation.md -o Docs/en/odt/ClipEdit-en.odt
-	pandoc -f markdown -t odt Docs/en/pandocInstall.md -o Docs/en/odt/pandocInstall.odt
+	pandoc -f markdown -t odt $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/odt/$(BASE_DOC).odt
+	pandoc -f markdown -t odt $(DIR_FR)/$(MD_PANDOC) -o $(DIR_FR)/odt/$(BASE_PANDOC).odt
+	pandoc -f markdown -t odt $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/odt/$(BASE_DOC).odt
+	pandoc -f markdown -t odt $(DIR_EN)/$(MD_PANDOC) -o $(DIR_EN)/odt/$(BASE_PANDOC).odt
 	
 
 doc-pdf:
 	# Create dir if necessary
-	mkdir -p Docs/fr/pdf
-	mkdir -p Docs/en/pdf
-	
-	pandoc	Docs/fr/presentation.md	-V	fontsize:11pt --toc	-o	Docs/fr/pdf/ClipEdit-doc-fr.pdf
-	pandoc	Docs/en/presentation.md	-V	fontsize:11pt --toc	-o	Docs/en/pdf/ClipEdit-doc-en.pdf
-	pandoc	Docs/fr/pandocInstall.md	-V	fontsize:11pt --toc	-o	Docs/fr/pdf/pandocInstall.pdf
-	pandoc	Docs/en/pandocInstall.md	-V	fontsize:11pt --toc	-o	Docs/en/pdf/pandocInstall.pdf
-	
-	
+	mkdir -p $(DIR_FR)/pdf
+	mkdir -p $(DIR_EN)/pdf
+
+	pandoc	$(DIR_FR)/$(MD_DOC) -V fontsize:11pt --toc -o $(DIR_FR)/pdf/$(BASE_DOC).pdf
+	pandoc	$(DIR_FR)/$(MD_PANDOC) -V fontsize:11pt --toc -o $(DIR_FR)/pdf/$(BASE_PANDOC).pdf
+	pandoc	$(DIR_EN)/$(MD_DOC) -V fontsize:11pt --toc -o $(DIR_EN)/pdf/$(BASE_DOC).pdf
+	pandoc	$(DIR_EN)/$(MD_PANDOC) -V fontsize:11pt --toc -o $(DIR_EN)/pdf/$(BASE_PANDOC).pdf
 doc-html:
 	# TO DO
-	# Create dir if necessary
-	mkdir -p Docs/fr/html
-	mkdir -p Docs/en/html
-	
-	# Convert all files in this directory that have a .md suffix
-	# From markdown to html:
-	# Code fait
-	pandoc	Docs/fr/presentation.md	 --toc	-o	Docs/fr/html/ClipEdit-doc-fr.html
-	pandoc	Docs/en/presentation.md	 --toc	-o	Docs/en/html/ClipEdit-doc-en.html
-	
-	
-	
-	
-        
 docx:
 	# Create dir if necessary
-	mkdir -p Docs/fr/docx
-	mkdir -p Docs/en/docx
+	mkdir -p $(DIR_FR)/docx
+	mkdir -p $(DIR_EN)/docx
 
-	pandoc --toc -f markdown -t docx Docs/fr/presentation.md -o Docs/fr/docx/presentation.docx
-	pandoc --toc -f markdown -t docx Docs/fr/pandocInstall.md -o Docs/fr/docx/pandocInstall.docx
-	pandoc --toc -f markdown -t docx Docs/en/presentation.md -o Docs/en/docx/presentation.docx
-	pandoc --toc -f markdown -t docx Docs/en/pandocInstall.md -o Docs/en/docx/pandocInstall.docx
+	pandoc --toc -f markdown -t docx $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/docx/$(BASE_DOC).docx
+	pandoc --toc -f markdown -t docx $(DIR_FR)/$(MD_PANDOC) -o $(DIR_FR)/docx/$(BASE_PANDOC).docx
+	pandoc --toc -f markdown -t docx $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/docx/$(BASE_DOC).docx
+	pandoc --toc -f markdown -t docx $(DIR_EN)/$(MD_PANDOC) -o $(DIR_EN)/docx/$(BASE_PANDOC).docx
 
 doc-epub:
 	# Create dir if necessary
-	mkdir -p Docs/fr/epub
-	mkdir -p Docs/en/epub 
+	mkdir -p $(DIR_FR)/epub
+	mkdir -p $(DIR_EN)/epub 
 
 	# Generate international docs
-	pandoc -s --toc  -t EPUB Docs/fr/presentation.md -o Docs/fr/epub/ClipEdit-doc-fr.epub
-	pandoc -s --toc  -t EPUB Docs/en/presentation.md -o Docs/en/epub/ClipEdit-doc-en.epub
-	pandoc --toc -f markdown -t EPUB Docs/fr/pandocInstall.md -o Docs/fr/epub/pandocInstall.epub
-	pandoc --toc -f markdown -t EPUB Docs/en/pandocInstall.md -o Docs/en/epub/pandocInstall.epub
-
+	pandoc -s --toc  -t EPUB $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/epub/$(BASE_DOC).epub
+	pandoc -s --toc  -t EPUB $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/epub/$(BASE_DOC).epub
+	pandoc --toc -f markdown -t EPUB $(DIR_FR)/$(MD_PANDOC) -o $(DIR_FR)/epub/$(BASE_PANDOC).epub
+	pandoc --toc -f markdown -t EPUB $(DIR_EN)/$(MD_PANDOC) -o $(DIR_EN)/epub/$(BASE_PANDOC).epub
 
 clean:
 	rm -f *.o
+	rm -rf $(DIR_FR)/*/
+	rm -rf $(DIR_EN)/*/
