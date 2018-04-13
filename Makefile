@@ -22,8 +22,8 @@ doc-odt:
 	mkdir -p Docs/en/odt
 	
 	# Generate international docs
-	# TO DO
-	# En cours josé
+	pandoc -s -t Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-fr.odt
+	pandoc -s -t Docs/en/presentation.md -o Docs/en/man/ClipEdit-en.odt
 	
 
 doc-pdf:
