@@ -1,0 +1,4 @@
+*.swp
+*.pro.user
+Build*/
+*.a
