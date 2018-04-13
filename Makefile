@@ -66,6 +66,8 @@ doc-epub:
 	# Generate international docs
 	pandoc -s --toc  -t EPUB $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/epub/$(BASE_DOC).epub
 	pandoc -s --toc  -t EPUB $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/epub/$(BASE_DOC).epub
+	pandoc --toc -f markdown -t EPUB $(DIR_FR)/$(MD_PANDOC) -o $(DIR_FR)/epub/$(BASE_PANDOC).epub
+	pandoc --toc -f markdown -t EPUB $(DIR_EN)/$(MD_PANDOC) -o $(DIR_EN)/epub/$(BASE_PANDOC).epub
 
 clean:
 	@rm -f *.o
