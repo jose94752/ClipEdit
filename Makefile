@@ -4,7 +4,7 @@
 #TO DO : 	- Package checking ?
 #			- Sub makefile for doc		
 
-all: docx doc-pdf doc-man doc-html odt
+all: docx doc-pdf doc-man doc-html odt doc-epub
 
 
 doc-man:
