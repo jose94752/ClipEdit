@@ -45,6 +45,20 @@ doc-pdf:
 	
 doc-html:
 	# TO DO
+	# Create dir if necessary
+	mkdir -p Docs/fr/html
+	mkdir -p Docs/en/htm
+	
+	# Convert all files in this directory that have a .md suffix
+	# From markdown to html:
+	# Code fait
+	pandoc	Docs/fr/presentation.md	 --toc	-o	Docs/fr/html/ClipEdit-doc-fr.html
+	pandoc	Docs/en/presentation.md	 --toc	-o	Docs/en/html/ClipEdit-doc-en.html
+	
+	
+	
+	
+        
 docx:
 	# Create dir if necessary
 	mkdir -p Docs/fr/docx
