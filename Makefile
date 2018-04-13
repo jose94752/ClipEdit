@@ -5,6 +5,7 @@
 MD_DOC=presentation.md
 MD_PANDOC=pandocInstall.md
 
+
 # Language directories
 DIR_FR=Docs/fr
 DIR_EN=Docs/en
@@ -13,7 +14,10 @@ DIR_EN=Docs/en
 BASE_DOC=clipedit
 BASE_PANDOC=pandocInstall
 
-all: docx doc-pdf doc-man doc-html odt
+all: docx doc-pdf doc-man doc-html odt doc-epub
+
+
+
 
 doc-man:
 	# Create dir if necessary
