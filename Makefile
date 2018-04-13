@@ -27,9 +27,18 @@ doc-pdf:
 	pandoc -st beamer -V theme:Warsaw Docs/fr/presentation.md -V fontsize:11pt -o Docs/fr/pdf/ClipEdit-doc-fr.pdf
 	pandoc -st beamer -V theme:Warsaw Docs/en/presentation.md -V fontsize:11pt -o Docs/en/pdf/ClipEdit-doc-en.pdf
 	
+doc-docx:
+	# Create dir if necessary
+	mkdir -p Docs/fr/docx
+	mkdir -p Docs/en/docx 
+
+	# Generate international docs
+	pandoc -s -t docx Docs/fr/presentation.md -o Docs/fr/docx/ClipEdit-doc-fr.docx
+	pandoc -s -t docx Docs/en/presentation.md -o Docs/en/docx/ClipEdit-doc-en.docx
+	
 doc-html:
 	# TO DO
-	
+
 clean:
 	rm -f *.o
 	
