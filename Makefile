@@ -22,8 +22,8 @@ doc-pdf:
 	mkdir -p Docs/en/pdf
 	
 	# Generate international docs
-	pandoc -st beamer -V theme:Warsaw Docs/fr/*.md -V fontsize:11pt -o Docs/fr/pdf/ClipEdit-doc-*-fr.pdf
-	pandoc -st beamer -V theme:Warsaw Docs/en/*.md -V fontsize:11pt -o Docs/en/pdf/ClipEdit-doc-*-en.pdf
+	pandoc -st beamer -V theme:Warsaw Docs/fr/presentation.md -V fontsize:11pt -o Docs/fr/pdf/presentation.pdf
+	pandoc -st beamer -V theme:Warsaw Docs/en/presentation.md -V fontsize:11pt -o Docs/en/pdf/presentation.pdf
 	
 doc-html:
 	# TO DO
