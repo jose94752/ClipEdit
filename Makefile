@@ -36,6 +36,16 @@ doc-docx:
 	pandoc -s -t docx Docs/fr/presentation.md -o Docs/fr/docx/ClipEdit-doc-fr.docx
 	pandoc -s -t docx Docs/en/presentation.md -o Docs/en/docx/ClipEdit-doc-en.docx
 	
+doc-epub:
+	# Create dir if necessary
+	mkdir -p Docs/fr/epub
+	mkdir -p Docs/en/epub 
+
+	# Generate international docs
+	pandoc -s --toc  -t EPUB Docs/fr/presentation.md -o Docs/fr/epub/ClipEdit-doc-fr.epub
+	pandoc -s --toc  -t EPUB Docs/en/presentation.md -o Docs/en/epub/ClipEdit-doc-en.epub
+
+
 doc-html:
 	# TO DO
 
