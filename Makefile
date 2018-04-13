@@ -23,9 +23,9 @@ odt:
 	
 	# Generate international docs
 	pandoc -f markdown -t odt Docs/fr/presentation.md -o Docs/fr/man/ClipEdit-fr.odt
-	pandoc -f markdown -t odt Docs/fr/pandocInstallationFedora.md -o Docs/fr/man/pandocInstallationFedora.odt
+	pandoc -f markdown -t odt Docs/fr/pandocInstallation.md -o Docs/fr/man/pandocInstallation.odt
 	pandoc -f markdown -t odt Docs/en/presentation.md -o Docs/en/man/ClipEdit-en.odt
-	pandoc -f markdown -t odt Docs/en/pandocInstallFedora.md -o Docs/en/man/pandocInstallFedora.odt
+	pandoc -f markdown -t odt Docs/en/pandocInstall.md -o Docs/en/man/pandocInstall.odt
 	
 
 doc-pdf:
@@ -50,9 +50,9 @@ docx:
 	mkdir -p Docs/fr/docx
 	mkdir -p Docs/en/docx
 	pandoc -f markdown -t docx Docs/fr/presentation.md -o Docs/fr/docx/presentation.docx
-	pandoc -f markdown -t docx Docs/fr/pandocInstallationFedora.md -o Docs/fr/docx/pandocInstallFedora.docx
+	pandoc -f markdown -t docx Docs/fr/pandocInstallation.md -o Docs/fr/docx/pandocInstall.docx
 	pandoc -f markdown -t docx Docs/en/presentation.md -o Docs/en/docx/presentation.docx
-	pandoc -f markdown -t docx Docs/en/pandocInstallFedora.md -o Docs/en/docx/pandocInstallFedora.docx
+	pandoc -f markdown -t docx Docs/en/pandocInstall.md -o Docs/en/docx/pandocInstall.docx
 	
 
 clean:
