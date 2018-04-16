@@ -7,7 +7,11 @@
 	- Filre général RVB/Niveau de gris
 	- Filtre niveau de transparence (optionnel)
 	- Légende de texte
-		- Position
+		- Taille
+		- Couleur
+		- Position horizontale droite/centre/gauche
+		- Postion verticale haut/milieu/bas
+		- Orientation texte en degré/verticale/horizontale
 	- Retailler image (crop)
 	- Mosaïque
 	- Etiquette temporelle
