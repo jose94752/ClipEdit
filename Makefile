@@ -1,10 +1,6 @@
 # ClipEdit Makefile
 # -----------------
 
-# Markdown files
-MD_DOC=presentation.md
-MD_PANDOC=pandocInstall.md
-
 # Language directories
 DIR_FR=Docs/fr
 DIR_EN=Docs/en
@@ -17,8 +13,7 @@ EPUB=$(patsubst %.md, %.epub, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
 HTML=$(patsubst %.md, %.html, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
 MAN=$(patsubst %.md, %, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
 
-#all: $(PDF) $(ODT) $(DOCX) $(EPUB)
-all: $(HTML)
+all: $(PDF) $(ODT) $(DOCX) $(EPUB) $(HTML) $(MAN)
 
 %.pdf: %.md
 
