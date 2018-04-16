@@ -55,9 +55,9 @@ Plus d'info sur les QChart [ici](https://doc.qt.io/qt-5.10/qtcharts-overview.htm
 
 On peut imaginer un bouton dans l'interface (toolbar et/ou via menu contextuel) pour insérer un graphe.
 
-Un dialog s'ouvrirait alors pour demander à l'utilisateur de choisir un type de graphe (combobox) puis d'entrer les données. L'entrée des données pourrait se faire via le chargement d'un fichier ou en mode manuel, en définissant un séparateur pour le parsing.
+Un dialog s'ouvrirait alors pour demander à l'utilisateur de choisir un type de graphe (*combobox*) puis d'entrer les données. L'entrée des données pourrait se faire via le chargement d'un fichier ou en mode manuel, en définissant un séparateur pour le parsing.
 
-Le dialog comprendrait également des champs (line edit) pour le titre du graphique et des axes. (+ l'unité éventuellement).
+Le dialog comprendrait également des champs (*line edit*) pour le titre du graphique et des axes. (+ l'unité éventuellement).
 
 Boutons radio pour choisir entre une échelle manuelle auto ou une échelle manuelle.
 
