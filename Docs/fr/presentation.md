@@ -14,7 +14,7 @@ Passons en revue les différentes fonctionnalités à votre disposition.
 
 ## Zones de texte
 
-Des zones de texte simples pour ajouter des citations, des notes ou des murs de texte énormes où vous voulez.
+Des zones de texte simples pour ajouter des citations, des notes ou des pavés de texte où vous voulez.
 
 ## Bulles numérotées
 
