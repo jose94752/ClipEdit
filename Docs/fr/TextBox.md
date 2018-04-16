@@ -2,11 +2,16 @@ TextBox
 =======
 
 - couleur du texte
+- couleur du fond
 - taille des caracteres
 - police
 - style
 - texte
-- redimmensionnable ?
-- repositionnement ?
-- alignement
+- dimension
+- position
+- alignement centré
+- edition ligne
+- possibilité de templatiser
+- rotation ?
+- pas de contour
 
