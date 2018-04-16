@@ -14,7 +14,7 @@ Les graphiques possèdent quelques caractéristiques et propriétés qui seront 
 	
 ### Principales :
 
-- Le type de graphique
+- Le type de graphique (Camemberts, nuages de points, diagramme à barres, lignes)
 - Le set de données
 - Le titre du graphique
 - Le nom des axes (ainsi que les unités utilisées si existantes)
@@ -31,6 +31,8 @@ Les graphiques possèdent quelques caractéristiques et propriétés qui seront 
 
 Dans la librairie Qt, il existe déjà une classe permettant de générer des graphiques: la classe **QChart**.
 
+**Les QChart sont des QGraphicsWidget qui peuvent être affichés dans un objet QGraphicsScene.**
+
 Chaque graphique est représenté par une classe dérivée de QAbstractSeries. Les graphiques sont alors crées en ajoutant des valeurs dans une classe série héritée puis en ajoutant cette série dans un QChart ou un QChartView. Chaque type de graphique utilise un type de série spécifique (voir doc).
 
 Exemple de création basique:
@@ -45,7 +47,7 @@ chartView->chart()->createDefaultAxes();
 ```
 Il existe des accesseurs et des mutateurs pour les axes et les couleurs (thème). Des méthodes existent également pour le zoom-in / zoom-out.
 
-Plus d'info sur les Qchart [ici](https://doc.qt.io/qt-5.10/qtcharts-overview.html)
+Plus d'info sur les QChart [ici](https://doc.qt.io/qt-5.10/qtcharts-overview.html)
 
 # Dans ClipEdit
 
@@ -56,6 +58,8 @@ On peut imaginer un bouton dans l'interface (toolbar et/ou via menu contextuel) 
 Un dialog s'ouvrirait alors pour demander à l'utilisateur de choisir un type de graphe (combobox) puis d'entrer les données. L'entrée des données pourrait se faire via le chargement d'un fichier ou en mode manuel, en définissant un séparateur pour le parsing.
 
 Le dialog comprendrait également des champs (line edit) pour le titre du graphique et des axes. (+ l'unité éventuellement).
+
+Boutons radio pour choisir entre une échelle manuelle auto ou une échelle manuelle.
 
 On peut aussi imaginer des boutons pour sélectionner les couleurs à utiliser ou bien une liste déroulante proposant les thèmes déjà intégrés à Qt (ou créer un thème personnalisé et l'enregistrer).
 
