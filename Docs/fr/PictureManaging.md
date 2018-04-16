@@ -20,7 +20,7 @@
 		- Transformation image
 			- Rotation
 			- Inclinaison
-		- Couleurs
+		- Format texte
 			- Texte Libre
 			- TexteBox
 				- Taille
@@ -29,14 +29,14 @@
 				- Style
 			- Fond
 		- Couleurs
-			- Choix format
-			- 
+			- Choix format RVB/Niveau de gris
+			- Filtre niveau de transparence
 		- Calques
 			- Changer niveau
 			- Copier objet multi-calque
 			- Copier calque
 			- Supprimer objet multi-calque
-			- Supprimer
+			- Supprimer calque
 		- Aide
 
 
