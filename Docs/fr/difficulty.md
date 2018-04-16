@@ -1,10 +1,11 @@
-SpecArrows 5
-SpecCliparts 4
-SpecNumberedBullets 2
-SpecReadWriteExports 4
-SpecTextBoxes  6
-SpecCharts 4
-SpecLayers 6
-SpecPictures  2
-SpecScreenShots 3
-
+| Nom de la spécification | Difficulté |
+| ----------------------- | ---------- |
+| SpecNumberedBullets     | :two:      |
+| SpecPictures            | :two:      |
+| SpecScreenShots         | :three:    |
+| SpecCharts              | :four:     |
+| SpecCliparts            | :four:     |
+| SpecReadWriteExports    | :four:     |
+| SpecArrows              | :five:     |
+| SpecLayers              | :six:      |
+| SpecTextBoxes           | :six:      |

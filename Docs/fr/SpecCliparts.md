@@ -43,7 +43,7 @@ Un exemple :
 
 ## Gestion et fonctionnalités
 
-Dans l'application, un clipart est une image [1] [#reference_1] avec une taille
+Dans l'application, un clipart est une image [1](#reference_1) avec une taille
 fixe.
 
 C'est au démarrage que l'application va charger toutes les collections clipart.
@@ -71,4 +71,4 @@ Les sous-dossiers sont ignorés.
 
 # Références
 
-[#reference_1] : [SpecPictures.md](SpecPictures.md)
+[1]{#reference_1} : [SpecPictures.md](SpecPictures.md)
