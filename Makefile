@@ -16,7 +16,6 @@ MAN=$(patsubst %.md, %, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
 all: $(PDF) $(ODT) $(DOCX) $(EPUB) $(HTML) $(MAN)
 
 %.pdf: %.md
-
 	# Create dir if necessary
 	@mkdir -p $(DIR_FR)/pdf $(DIR_EN)/pdf
 
