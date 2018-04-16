@@ -1,11 +1,11 @@
-# Collections clipart
+# Bibliothèques de *clip arts*
 
 ## Définition
 
-Une collection clipart, c'est
+Une bibliothèque de *clip arts*, c'est
 
-* une [texture atlas](https://en.wikipedia.org/wiki/Texture_atlas).
-* un fichier de descriptions des images
+* Une image.
+* Un fichier de descriptions des *clip arts*
 
 Son nom c'est le nom de cette image et du nom du fichier de description qui
 doivent être identiques.
@@ -13,12 +13,13 @@ doivent être identiques.
 
 ## Les fichiers
 
-Les formats gérés pour l'image sont :
+L'image est une [texture atlas](https://en.wikipedia.org/wiki/Texture_atlas),
+au format :
 
 * *png*
 * *jpeg*
 
-Le fichier de description est un fichier *json*.
+Le fichier de descriptions est un fichier *json*.
 Un exemple :
 ```json
   [
@@ -39,36 +40,36 @@ Un exemple :
 ```
 
 
-# L'application
+# Dans l'application ClipEdit
 
 ## Gestion et fonctionnalités
 
-Dans l'application, un clipart est une image [1](#reference_1) avec une taille
-fixe.
+Un clip art est une image [1](#ref_1) avec une taille fixe.
 
-C'est au démarrage que l'application va charger toutes les collections clipart.
-Ainsi, peut-être que l'application peut détecter :
+C'est au démarrage que l'application chargera toutes les bibliothèques de
+*clip arts*. Peut-être que l'application peut détecter :
 
-* les collections incomplètes (manquement de l'image ou du fichier de descriptions)
-* des images qui se supersposent dans une même collection.
+* Les bibliothèques incomplètes (manquement de l'image ou du fichier de descriptions)
+* Des *clip arts* qui se supersposent dans une même bibliothèque.
 
 
-## Intégration 
+## Intégration
 
-* Une boite outil qui :
-    * liste toutes les collections
-    * affiche toutes les images de la collection sélectionnée
-    * permet de déposer/ glisser une image
-* Un bouton **Recharger** pour mettre à jour la liste des collections clipart
-pendant l'exécution.
+* Une boite à outils qui :
+    * Liste toutes les bibliothèques
+    * Affiche toutes les *clip arts* de la collection sélectionnée
+    * Permet de déposer/ glisser un *clip art*
+* Un bouton **Recharger** pour mettre à jour la liste des bibliothèques de
+*clip arts* pendant l'exécution.
 
 
 ## Stockage
 
-Gérer un dossier qui va contenir toutes les collections clipart.
+Gérer un dossier qui va contenir toutes les bibliothèques de *clip arts*.
 Les sous-dossiers sont ignorés.
 
 
-# Références
+# Référence
 
-[1]{#reference_1} : [SpecPictures.md](SpecPictures.md)
+#ref_1:
+[SpecPictures.md](SpecPictures.md)
