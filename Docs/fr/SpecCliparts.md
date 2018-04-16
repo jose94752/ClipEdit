@@ -44,7 +44,7 @@ Un exemple :
 
 ## Gestion et fonctionnalités
 
-Un clip art est une image [1](#ref_1) avec une taille fixe.
+Un clip art est une image [1](#ref-1) avec une taille fixe.
 
 C'est au démarrage que l'application chargera toutes les bibliothèques de
 *clip arts*. Peut-être que l'application peut détecter :
@@ -71,5 +71,5 @@ Les sous-dossiers sont ignorés.
 
 # Référence
 
-#ref_1:
+# ref-1
 [SpecPictures.md](SpecPictures.md)

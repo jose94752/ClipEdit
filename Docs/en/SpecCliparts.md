@@ -43,7 +43,7 @@ One example:
 
 ## Management and functionnalities
 
-A *clipart* is a fixed size picture [1](#ref_1).
+A *clipart* is a fixed size picture [1](#ref-1).
 
 During the startup, the application will load all *clipart* collections.
 Maybe the application can detect :
@@ -58,7 +58,7 @@ Maybe the application can detect :
     * Lists all *clipart* collections
     * Displays all *cliparts* inside the selected collection
     * Lets drag and drop one *clipart*
-* A button**Reload** to update the list of *clipart* collections at runtime.
+* A button **Reload** to update the list of *clipart* collections at runtime.
 
 
 ## Storage
@@ -69,5 +69,5 @@ Subfolders are discarded.
 
 # Reference
 
-#ref_1:
+# ref-1
 [SpecPictures.md](SpecPictures.md)
