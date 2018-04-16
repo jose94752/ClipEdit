@@ -20,6 +20,7 @@ De simples zones de texte  pour ajouter des citations, des notes ou des pavés d
 
 Ajouter un ensemble de bulles numérotées sur votre document pour faciliter l'explication d'actions en plusieurs étapes.
 Pour des bulles numérotées vous pouvez :
+
 - Sélectionner la couleur du numéro.
 - Sélectionner la police du numéro.
 - Sélectionner la taille de la police du numéro. 
@@ -36,7 +37,17 @@ Importez et positionnez des images ou des icônes !
 
 ## Graphes
 
-Créez des graphes dans votre document à partir d'un ensemble de données.
+Visualisez un ensemble de données dans votre document à l'aide de graphiques. Plusieurs éléments sont paramétrables :
+
+- Type de graphique : Choisissez le type de représentation de données parmi une liste (Camemberts, nuages de points, diagramme à barres...)
+- Set de données : Vos données à afficher - Via importation de fichier ou entrée manuelle
+- Légendes : Titre du graphique et des axes (unités incluses)
+- Echelle : Automatique ou définie par l'utilisateur
+- Couleurs : Fond et données (Sauvegarde du thème)
+- Zoom in / zoom out
+- Panning / Scaling / Rotation
+
+Il vous est possible d'éditer les paramètres de votre graphique une fois créé.
 
 ## Formes
 
