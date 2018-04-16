@@ -52,6 +52,7 @@ all: $(PDF) $(ODT) $(DOCX) $(EPUB) $(HTML) $(MAN)
 	# Create dir if necessary
 	@mkdir -p $(DIR_FR)/html $(DIR_EN)/html 
 
+	# Generate docs
 	pandoc --ascii --from=markdown --to=html $< -o $@
 	@mv $@ $(dir $@)/html
 
@@ -59,7 +60,7 @@ all: $(PDF) $(ODT) $(DOCX) $(EPUB) $(HTML) $(MAN)
 	# Create dir if necessary
 	@mkdir -p $(DIR_FR)/man $(DIR_EN)/man
 	
-	# Generate international docs
+	# Generate docs
 	pandoc -s -t man $< -o $@
 	@mv $@ $(dir $@)/man
 
