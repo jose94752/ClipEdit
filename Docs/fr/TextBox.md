@@ -6,4 +6,7 @@ TextBox
 - police
 - style
 - texte
+- redimmensionnable ?
+- repositionnement ?
+- alignement
 
