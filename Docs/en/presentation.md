@@ -18,7 +18,7 @@ Simple text boxes to add quotes, notes or huge text walls wherever you want to.
 
 ## Numbered bubbles
 
-Add a set of numbered bubbles on top of your document to facilitate the explanation of multi-steps actions.
+Add a set of numbered bubbles on top of your document to create legends or facilitate the explanation of multi-steps actions.
 
 ## Arrows
 
