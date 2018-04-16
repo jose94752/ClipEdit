@@ -39,6 +39,6 @@ yum install texlive-scheme-full
 
 ~~~bash
 sudo apt  install texlive-lang-french
-~~~
+~~~ 
 
 
