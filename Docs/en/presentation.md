@@ -26,11 +26,11 @@ A set of arrows to help you point and focus on crucial information. Different st
 
 ## Cliparts library
 
-Import and place images or icons all over the place !
+Create or import cliparts in your document.
 
 ## Charts
 
-Create charts in your document by entering a set of data.
+Create charts in your document by entering a set of data. Choose a type, adjust the color and generate it.
 
 ## Shapes
 
@@ -44,7 +44,7 @@ Available shapes:
 
 ## Layers
 
-Create sophisticated documents using layers.
+Create sophisticated documents using layers. 
 
 # How to use
 
