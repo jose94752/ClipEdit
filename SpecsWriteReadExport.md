@@ -10,3 +10,4 @@ la liste des calques (bulles,clipart)
 -leur emplacement dans un rectangle pour les calques
 La position de départ et d'arrivée des flèches.
 Les propriétés propres à chaque élément.
+Les dépendances de calques, calque parent, calques enfants.
