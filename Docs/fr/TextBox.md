@@ -1,7 +1,8 @@
 TextBox
 =======
 
-- couleur du text
+- couleur du texte
+- taille des caracteres
 - police
 - style
 - texte
