@@ -65,4 +65,4 @@ all: $(PDF) $(ODT) $(DOCX) $(EPUB) $(HTML) $(MAN)
 
 clean:
 	@rm -f *.o
-	@rm -rf $(DIR_FR)/*/ $(DIR_EN)/*/
+	@rm -rf $(DIR_FR)/*/ $(DIR_EN)/*/ 
