@@ -14,12 +14,12 @@
 2. transformer:
 	- rotation
 	- miroir
-3. fusionner avec un autre calque
+3. fusionner 2 calques
 4. positionner
 5. redimensionner
 6. couleur de fond (défaut transparent)
 7. bordure
+	- type
+	- taille
 
 ### Caractéristiques par exemple
-
-#### Sélection CSS

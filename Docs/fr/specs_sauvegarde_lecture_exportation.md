@@ -2,43 +2,11 @@
 
 L'objectif est d'enregistrer les projets, de les relire et de les exporter sous forme l'image.
 
-#Contenu à enregistrer
--liste des objets graphiques
--leurs propriétés (couleurs, types d'arrondis,ext)
--leur position
+On doit avoir dans un menu une entrée sauvegarde de projets, une entrée lecture de projet, une entréer exporter une image.
+Les 3 entrées ouvrent une boite de dialogue pour choisir le dossier et le nom du fichier à enregistrer ou à ouvrir.
 
-enregistrer des propriétés pré-définies d'éléments.
-
-#mode d'enregistrement
-A définir
-formation xml
-
-#fichier de configuration
-config.xml
-<config>
-   <cliparts>
-      <clipart>path/img.jpg</clipart
-      <clipart>path/img2.jpg</clipart>
-   </cliparts>
-   <boxes>//boites de styles préenregistrées en fonction des préférences des utilisateurs
-      <box>
-         <type>type</type>
-         <color>blue</color>
-         <property>round</property>
-      </box>
-   </boxes>
-</config>
-
-#fichier projet
-<projet>
-   <boxes>
-      <boxe>
-          <type>type</type>
-          <position>xx;yy</position>
-          <color>green</color>
-          <property>rounded</property>
-      </boxe>
-   </boxes>
-</project>
-
-
+L'enregistrement permet de stocker dans un fichier l'ensemble des données enregistrées par l'utilisateur pour un projet à savoir
+la liste des calques (bulles,clipart)
+-leur emplacement dans un rectangle pour les calques
+La position de départ et d'arrivée des flèches.
+Les propriétés propres à chaque élément.
