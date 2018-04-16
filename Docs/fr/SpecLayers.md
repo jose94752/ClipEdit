@@ -2,7 +2,7 @@
 
 > Une partie de ClipEdit.
 
-> Un calque est un élément graphique "CliptEdit" qui est lui un ensemble d'éléments graphiques "ClipEdit".
+> Un calque est un ensemble d'éléments graphiques "ClipEdit".
 
 ## Caractéristiques
 
