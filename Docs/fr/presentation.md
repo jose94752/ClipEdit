@@ -14,7 +14,8 @@ Passons en revue les différentes fonctionnalités à votre disposition.
 
 ## Zones de texte
 
-De simples blocs de texte pour ajouter des citations, des notes ou des murs de texte énormes où vous voulez.
+<<<<<<< HEAD
+De simples zones de texte  pour ajouter des citations, des notes ou des pavés de texte où vous voulez.
 
 ## Bulles numérotées
 
@@ -34,7 +35,7 @@ Créez des graphiques dans votre document à partir d'un ensemble de données.
 
 ## Formes
 
-Ajoutez des formes basiques et évolutives à votre document. Chaque forme vient avec un ensemble de vertices que vous pouvez utiliser pour la manipuler.
+Ajoutez des formes basiques et évolutives que vous pouvez manipuler à volonté.
 
 Formes disponibles:
 
