@@ -1,22 +1,21 @@
-##  options pour flèches 
+#  options pour flèches 
 
-différentes options sont  proposées pour  construire  des flèches
+> Différentes options sont  proposées pour  construire  des flèches
 
-. 0, 1 ou 2 points de  rattachement
+> 0, 1 ou 2 points de  rattachement
 
 
-. choix  paramètres:
+## choix  paramètres :
 
- 
-- modif longueur / largeur de la  flèche   
+	- modif longueur / largeur de la  flèche   
       
-- couleur du  contour de la  flèche  
+	- couleur du  contour de la  flèche  
       
-- couleur  de remplissage  de la  flèche
+	- couleur  de remplissage  de la  flèche
          
-- épaisseur des  traits du  contour  : 4 choix possibilités (1 - 4)
+	- épaisseur des  traits du  contour  : 4 choix possibilités (1 - 4)
        
-- choix  type tête  de flèche 
+	- choix  type tête  de flèche 
            
      
     
