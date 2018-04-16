@@ -14,7 +14,6 @@ Passons en revue les différentes fonctionnalités à votre disposition.
 
 ## Zones de texte
 
-<<<<<<< HEAD
 De simples zones de texte  pour ajouter des citations, des notes ou des pavés de texte où vous voulez.
 
 ## Bulles numérotées
