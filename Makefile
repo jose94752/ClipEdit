@@ -1,76 +1,68 @@
 # ClipEdit Makefile
 # -----------------
 
-# Markdown files
-MD_DOC=presentation.md
-MD_PANDOC=pandocInstall.md
-
-
 # Language directories
 DIR_FR=Docs/fr
 DIR_EN=Docs/en
 
-# Output bases
-BASE_DOC=clipedit
-BASE_PANDOC=pandocInstall
+# Output files
+PDF=$(patsubst %.md, %.pdf, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
+ODT=$(patsubst %.md, %.odt, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
+DOCX=$(patsubst %.md, %.docx, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
+EPUB=$(patsubst %.md, %.epub, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
+HTML=$(patsubst %.md, %.html, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
+MAN=$(patsubst %.md, %, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))
 
-all: docx doc-pdf doc-man doc-html odt doc-epub
+all: $(PDF) $(ODT) $(DOCX) $(EPUB) $(HTML) $(MAN)
 
-
-
-
-doc-man:
+%.pdf: %.md
 	# Create dir if necessary
-	mkdir -p $(DIR_FR)/man
-	mkdir -p $(DIR_EN)/man
-	
-	# Generate international docs
-	pandoc -s -t man $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/man/$(BASE_DOC)
-	pandoc -s -t man $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/man/$(BASE_DOC)
+	@mkdir -p $(DIR_FR)/pdf $(DIR_EN)/pdf
 
-odt:
+	# Generate docs
+	pandoc $< -V fontsize:11pt --toc -o $@
+	@mv $@ $(dir $@)/pdf
+
+%.odt: %.md
 	# Create dir if neccessary
-	mkdir -p $(DIR_FR)/odt
-	mkdir -p $(DIR_EN)/odt
+	@mkdir -p $(DIR_FR)/odt $(DIR_EN)/odt
 	
-	# Generate international docs
-	pandoc -f markdown -t odt $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/odt/$(BASE_DOC).odt
-	pandoc -f markdown -t odt $(DIR_FR)/$(MD_PANDOC) -o $(DIR_FR)/odt/$(BASE_PANDOC).odt
-	pandoc -f markdown -t odt $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/odt/$(BASE_DOC).odt
-	pandoc -f markdown -t odt $(DIR_EN)/$(MD_PANDOC) -o $(DIR_EN)/odt/$(BASE_PANDOC).odt
+	# Generate docs
+	pandoc -f markdown -t odt $< -o $@
+	@mv $@ $(dir $@)/odt
 	
-
-doc-pdf:
+%.docx: %.md
 	# Create dir if necessary
-	mkdir -p $(DIR_FR)/pdf
-	mkdir -p $(DIR_EN)/pdf
+	@mkdir -p $(DIR_FR)/docx $(DIR_EN)/docx
 
-	pandoc	$(DIR_FR)/$(MD_DOC) -V fontsize:11pt --toc -o $(DIR_FR)/pdf/$(BASE_DOC).pdf
-	pandoc	$(DIR_FR)/$(MD_PANDOC) -V fontsize:11pt --toc -o $(DIR_FR)/pdf/$(BASE_PANDOC).pdf
-	pandoc	$(DIR_EN)/$(MD_DOC) -V fontsize:11pt --toc -o $(DIR_EN)/pdf/$(BASE_DOC).pdf
-	pandoc	$(DIR_EN)/$(MD_PANDOC) -V fontsize:11pt --toc -o $(DIR_EN)/pdf/$(BASE_PANDOC).pdf
-doc-html:
-	# TO DO
-docx:
+	# Generate docs
+	pandoc --toc -f markdown -t docx $< -o $@
+	@mv $@ $(dir $@)/docx
+
+%.epub: %.md
 	# Create dir if necessary
-	mkdir -p $(DIR_FR)/docx
-	mkdir -p $(DIR_EN)/docx
+	@mkdir -p $(DIR_FR)/epub $(DIR_EN)/epub 
 
-	pandoc --toc -f markdown -t docx $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/docx/$(BASE_DOC).docx
-	pandoc --toc -f markdown -t docx $(DIR_FR)/$(MD_PANDOC) -o $(DIR_FR)/docx/$(BASE_PANDOC).docx
-	pandoc --toc -f markdown -t docx $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/docx/$(BASE_DOC).docx
-	pandoc --toc -f markdown -t docx $(DIR_EN)/$(MD_PANDOC) -o $(DIR_EN)/docx/$(BASE_PANDOC).docx
+	# Generate docs
+	pandoc -s --toc  -t EPUB $< -o $@
+	@mv $@ $(dir $@)/epub
 
-doc-epub:
+%.html: %.md
 	# Create dir if necessary
-	mkdir -p $(DIR_FR)/epub
-	mkdir -p $(DIR_EN)/epub 
+	@mkdir -p $(DIR_FR)/html $(DIR_EN)/html 
 
-	# Generate international docs
-	pandoc -s --toc  -t EPUB $(DIR_FR)/$(MD_DOC) -o $(DIR_FR)/epub/$(BASE_DOC).epub
-	pandoc -s --toc  -t EPUB $(DIR_EN)/$(MD_DOC) -o $(DIR_EN)/epub/$(BASE_DOC).epub
+	# Generate docs
+	pandoc --ascii --from=markdown --to=html $< -o $@
+	@mv $@ $(dir $@)/html
+
+%: %.md
+	# Create dir if necessary
+	@mkdir -p $(DIR_FR)/man $(DIR_EN)/man
+	
+	# Generate docs
+	pandoc -s -t man $< -o $@
+	@mv $@ $(dir $@)/man
 
 clean:
-	rm -f *.o
-	rm -rf $(DIR_FR)/*/
-	rm -rf $(DIR_EN)/*/
+	@rm -f *.o
+	@rm -rf $(DIR_FR)/*/ $(DIR_EN)/*/ 
