@@ -8,6 +8,7 @@
 	- Layers  [SpecLayers](/Docs/en/SpecLayers.md)
 	- NumberedBullets  [SpecNumberedBullets](/Docs/en/SpecNumberedBullets.md)
 	- Pictures  [SpecPictures](/Docs/en/SpecPictures.md)
+	- ReadWriteExports [SpecReadWriteExports](/Docs/en/SpecReadWriteExports.md)
 	- ScreenShots  [SpecScreenShots](/Docs/en/SpecScreenShots.md)
 	- TextBoxes  [SpecTextBoxes](/Docs/en/SpecTextBoxes.md)
 	
