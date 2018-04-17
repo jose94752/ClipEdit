@@ -3,7 +3,7 @@
 | SpecNumberedBullets     | :two:      |              |
 | SpecPictures            | :two:      |              |
 | SpecScreenShots         | :three:    |              |
-| SpecCharts              | :four:     |              |
+| SpecCharts              | :four:     | Mihaela             |
 | SpecCliparts            | :four:     |              |
 | SpecReadWriteExports    | :four:     | olivier |
 | SpecArrows              | :five:     |              |
