@@ -24,9 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    buildMenu();
-    buildToolBar();
-    buildView();
+    init();
 }
 
 MainWindow::~MainWindow()
@@ -36,6 +34,13 @@ MainWindow::~MainWindow()
 
 // UI building
 // -----------
+
+void MainWindow::init()
+{
+    buildMenu();
+    buildToolBar();
+    buildView();
+}
 
 ///
 /// \brief MainWindow::buildMenu
@@ -55,7 +60,12 @@ void MainWindow::buildMenu()
 ///
 void MainWindow::buildToolBar()
 {
-
+    ui->mainToolBar->addAction(ui->actionArrow);
+    ui->mainToolBar->addAction(ui->actionCharts);
+    ui->mainToolBar->addAction(ui->actionCliparts);
+    ui->mainToolBar->addAction(ui->actionNumberedBullets);
+    ui->mainToolBar->addAction(ui->actionPicture);
+    ui->mainToolBar->addAction(ui->actionTextBox);
 }
 
 ///
@@ -66,7 +76,6 @@ void MainWindow::buildView()
 {
     int offset = 600;
     m_scene.setSceneRect((-width()-offset)/2, (-height()-offset)/2, width()+offset, height()+offset);
-
     ui->graphicsView->setScene(&m_scene);
 }
 
