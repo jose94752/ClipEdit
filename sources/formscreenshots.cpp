@@ -1,14 +1,14 @@
 #include "formscreenshots.h"
 #include "ui_formscreenshots.h"
 
-formscreenshots::formscreenshots(QWidget *parent) :
+Formscreenshots::Formscreenshots(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::formscreenshots)
+    ui(new Ui::Formscreenshots)
 {
     ui->setupUi(this);
 }
 
-formscreenshots::~formscreenshots()
+Formscreenshots::~Formscreenshots()
 {
     delete ui;
 }

@@ -30,7 +30,7 @@
       </widget>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>8</number>
+        <number>9</number>
        </property>
        <widget class="QWidget" name="Arrows"/>
        <widget class="QWidget" name="Charts"/>
@@ -54,7 +54,7 @@
      <x>0</x>
      <y>0</y>
      <width>487</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
@@ -206,13 +206,15 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>formscreenshots</class>
-   <extends>QWidget</extends>
-   <header>formscreenshots.h</header>
    <class>FormTextBoxes</class>
    <extends>QWidget</extends>
    <header>formtextboxes.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>formscreenshots</class>
+   <extends>QWidget</extends>
+   <header>formscreenshots.h</header>
   </customwidget>
  </customwidgets>
  <resources>

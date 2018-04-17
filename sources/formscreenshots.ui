@@ -14,7 +14,15 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border: 1px solid;</string>
+   <string notr="true">border: 1px solid;
+
+groupBox
+{
+	color: yellow;
+	backgroud-color:  #27a9c3
+	border-whidth: 0px
+	border-raduis: 3px
+}</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
