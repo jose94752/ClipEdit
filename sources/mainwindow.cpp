@@ -24,9 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->actionSave,SIGNAL(triggered(bool)),this,SLOT(save(bool)));//save
-    connect(ui->actionOpen,SIGNAL(triggered(bool)),this,SLOT(openFile(bool)));//open
-    connect(ui->actionExports,SIGNAL(triggered(bool)),this,SLOT(exportView(bool)));//exports
+    buildMenu();
+    buildToolBar();
 }
 
 MainWindow::~MainWindow()
@@ -43,7 +42,9 @@ MainWindow::~MainWindow()
 ///
 void MainWindow::buildMenu()
 {
-
+    connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(save(bool)));
+    connect(ui->actionOpen, SIGNAL(triggered(bool)), this, SLOT(openFile(bool)));
+    connect(ui->actionExports, SIGNAL(triggered(bool)), this, SLOT(exportView(bool)));
 }
 
 ///
