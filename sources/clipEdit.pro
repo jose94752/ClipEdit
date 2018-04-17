@@ -28,18 +28,21 @@ SOURCES += \
         mainwindow.cpp \
     commongraphicitem.cpp \
     about.cpp \
-    formarrows.cpp
+    formarrows.cpp \
+    formscreenshots.cpp
 
 HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
     about.h \
-    formarrows.h
+    formarrows.h \
+    formscreenshots.h
 
 FORMS += \
         mainwindow.ui \
     about.ui \
-    formarrows.ui
+    formarrows.ui \
+    formscreenshots.ui
 
 
 RESOURCES += \
