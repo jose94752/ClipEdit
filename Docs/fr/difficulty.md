@@ -7,5 +7,5 @@
 | SpecCliparts            | :four:     | Cédric       |
 | SpecReadWriteExports    | :four:     | Olivier      |
 | SpecArrows              | :five:     |              |
-| SpecLayers              | :six:      |              |
+| SpecLayers              | :six:      | David        |
 | SpecTextBoxes           | :six:      | Nilsen       | 
