@@ -3,9 +3,9 @@
 | SpecNumberedBullets     | :two:      |              |
 | SpecPictures            | :two:      |              |
 | SpecScreenShots         | :three:    |              |
-| SpecCharts              | :four:     |              |
-| SpecCliparts            | :four:     | cedric       |
-| SpecReadWriteExports    | :four:     | olivier      |
+| SpecCharts              | :four:     | Mihaela      |
+| SpecCliparts            | :four:     | Cédric       |
+| SpecReadWriteExports    | :four:     | Olivier      |
 | SpecArrows              | :five:     |              |
 | SpecLayers              | :six:      |              |
-| SpecTextBoxes           | :six:      |              |
+| SpecTextBoxes           | :six:      | Nilsen       | 
