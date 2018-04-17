@@ -46,6 +46,7 @@ void MainWindow::buildMenu()
     connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(save(bool)));
     connect(ui->actionOpen, SIGNAL(triggered(bool)), this, SLOT(openFile(bool)));
     connect(ui->actionExports, SIGNAL(triggered(bool)), this, SLOT(exportView(bool)));
+    connect(ui->actionQuit, SIGNAL(triggered(bool)), this, SLOT(close()));
 }
 
 ///
