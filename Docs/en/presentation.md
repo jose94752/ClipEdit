@@ -42,7 +42,17 @@ Create or import cliparts in your document.
 
 ## Charts
 
-Create charts in your document by entering a set of data. Choose a type, adjust the color and generate it.
+Visualize a set of data in your document by creating a new chart. Several parameters are customizable : 
+
+- Chart type : Choose the way you want to represent your data among a list of available styles (pies, scatter points, bars, ...)
+- Data set : The data you want to display - Via file importation or manual entry
+- Legends : Chart title and axis labels (include units)
+- Scale : Automatic or user-defined
+- Colors : Background and data (you can save a color theme)
+- Zoom in / Zoom out
+- Panning / Scaling / Rotation
+
+Once created, you can modify a chart from the user interface.
 
 ## Shapes
 

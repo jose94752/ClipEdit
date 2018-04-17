@@ -2,7 +2,17 @@
 
 > Différentes options sont  proposées pour  construire  des flèches
 
-> 0, 1 ou 2 points de  rattachement
+>> sans point d'ancrage : 
+>>>aider à pointer et attirer l'attention sur les informations cruciales. Différents styles et formes sont disponibles
+
+>> 1 point d'ancrage  : 
+>>>flèche  rattachée à un objet;
+
+
+>> 2 points d'ancrage : 
+>>>flèche  rattachée à 2 objets;
+En modifiant ou déplacant  le(s)objet(s), la flèche  l'est  également
+ 
 
 
 ## choix  paramètres :
