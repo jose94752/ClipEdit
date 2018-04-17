@@ -30,27 +30,22 @@ SOURCES += \
     formcharts.cpp \
     about.cpp \
     formarrows.cpp \
-    formtextboxes.cpp \
-    formscreenshots.cpp
+    formtextboxes.cpp
 
 HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
     formcharts.h \
-    formscreenshots.h  \
     about.h \
     formarrows.h \
-    formtextboxes.h \
-    formscreenshots.h
+    formtextboxes.h
 
 FORMS += \
         mainwindow.ui \
     about.ui \
     formarrows.ui \
     formcharts.ui \
-    formscreenshots.ui \
-    formtextboxes.ui \
-    formscreenshots.ui
+    formtextboxes.ui
 
 RESOURCES += \
     resources/resources.qrc
