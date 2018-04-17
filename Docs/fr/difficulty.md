@@ -8,4 +8,4 @@
 | SpecReadWriteExports    | :four:     | olivier |
 | SpecArrows              | :five:     |              |
 | SpecLayers              | :six:      |              |
-| SpecTextBoxes           | :six:      |              |
+| SpecTextBoxes           | :six:      |  Nilsen            |
