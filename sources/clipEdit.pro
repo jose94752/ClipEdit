@@ -48,13 +48,10 @@ FORMS += \
     about.ui \
     formarrows.ui \
     formcharts.ui \
-<<<<<<< HEAD
     formtextboxes.ui \
     formscreenshots.ui
-=======
     formscreenshots.ui \
     formtextboxes.ui
->>>>>>> a43dbf6aa9335ee4757ac13b977a2ac0aea43a63
 
 RESOURCES += \
     resources/resources.qrc
