@@ -51,6 +51,7 @@ class MainWindow
 
         // Menu slots
         void save(bool);
+        void save_as(bool);
         void openFile(bool);
         void exportView(bool);
 };
