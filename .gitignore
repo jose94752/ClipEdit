@@ -1,5 +1,5 @@
 *.swp
-*.pro.user
+*.pro.user.*
 Build*/
 *.a
 *.pdf
