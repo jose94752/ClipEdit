@@ -6,6 +6,8 @@ Formscreenshots::Formscreenshots(QWidget *parent) :
     ui(new Ui::Formscreenshots)
 {
     ui->setupUi(this);
+    //
+
 }
 
 Formscreenshots::~Formscreenshots()

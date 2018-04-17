@@ -32,7 +32,7 @@
        <widget class="QWidget" name="NumberedBullets"/>
        <widget class="QWidget" name="Pictures"/>
        <widget class="QWidget" name="ReadWriteExports"/>
-       <widget class="QWidget" name="ScreenShots"/>
+       <widget class="formscreenshots" name="ScreenShots"/>
        <widget class="QWidget" name="TextBoxes"/>
       </widget>
      </widget>
@@ -84,6 +84,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>formscreenshots</class>
+   <extends>QWidget</extends>
+   <header>formscreenshots.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
