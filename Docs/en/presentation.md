@@ -19,6 +19,18 @@ Simple text boxes to add quotes, notes or huge text walls wherever you want to.
 ## Numbered bubbles
 
 Add a set of numbered bubbles on top of your document to create legends or facilitate the explanation of multi-steps actions.
+For numbered bubbles you can:
+- Select the color of the number.
+- Select the color of the bubble.
+- Select the number font.
+- Select the size of the bubble.
+- Select the font size of the number.
+- Select the start of the numbering.
+- Select the number of bubbles.
+- Select the shape of bubbles.
+	rectangle
+	round
+	rectangle with radius
 
 ## Arrows
 
@@ -30,7 +42,17 @@ Create or import cliparts in your document.
 
 ## Charts
 
-Create charts in your document by entering a set of data. Choose a type, adjust the color and generate it.
+Visualize a set of data in your document by creating a new chart. Several parameters are customizable : 
+
+- Chart type : Choose the way you want to represent your data among a list of available styles (pies, scatter points, bars, ...)
+- Data set : The data you want to display - Via file importation or manual entry
+- Legends : Chart title and axis labels (include units)
+- Scale : Automatic or user-defined
+- Colors : Background and data (you can save a color theme)
+- Zoom in / Zoom out
+- Panning / Scaling / Rotation
+
+Once created, you can modify a chart from the user interface.
 
 ## Shapes
 

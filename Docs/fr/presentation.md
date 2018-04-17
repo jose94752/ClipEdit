@@ -21,14 +21,48 @@ De simples zones de texte  pour ajouter des citations, des notes ou des pavés d
 Ajouter un ensemble de bulles numérotées sur votre document pour faciliter l'explication d'actions en plusieurs étapes.
 Pour des bulles numérotées vous pouvez :
 - Sélectionner la couleur du numéro.
+- Sélectionner la couleur de la bulle.
 - Sélectionner la police du numéro.
+- Sélectionner la taille de la bulle. 
 - Sélectionner la taille de la police du numéro. 
 - Sélectionner le départ de la numérotation.
 - Sélectionner le numéro de bulles.
+- Sélectionner la forme de bulles:
+	rectangle
+	rond
+	rectangle avec radius
 
 ## Flèches
 
-Un ensemble de flèches pour vous aider à pointer et attirer l'attention sur les informations cruciales. Différents styles et formes sont disponibles.
+###  options pour flèches 
+
+Différentes options sont  proposées pour  construire  des flèches
+
+sans point d'ancrage : 
+aider à pointer et attirer l'attention sur les informations cruciales. Différents styles et formes sont disponibles
+
+1 point d'ancrage  : 
+	flèche  rattachée à un objet;
+
+
+2 points d'ancrage : 
+	flèche  rattachée à 2 objets;
+	En modifiant ou déplacant  le(s)objet(s), la flèche  l'est  également
+ 
+
+
+### choix  paramètres :
+
+	- modif longueur / largeur de la  flèche   
+      
+	- couleur du  contour de la  flèche  
+      
+	- couleur  de remplissage  de la  flèche
+         
+	- épaisseur des  traits du  contour  : 4 choix possibilités (1 - 4)
+       
+	- choix  type tête  de flèche 
+           
 
 ## Bibliothèque de Cliparts
 
@@ -36,7 +70,17 @@ Importez et positionnez des images ou des icônes !
 
 ## Graphes
 
-Créez des graphes dans votre document à partir d'un ensemble de données.
+Visualisez un ensemble de données dans votre document à l'aide de graphiques. Plusieurs éléments sont paramétrables :
+
+- Type de graphique : Choisissez le type de représentation de données parmi une liste (Camemberts, nuages de points, diagramme à barres...)
+- Set de données : Vos données à afficher - Via importation de fichier ou entrée manuelle
+- Légendes : Titre du graphique et des axes (unités incluses)
+- Echelle : Automatique ou définie par l'utilisateur
+- Couleurs : Fond et données (Sauvegarde du thème)
+- Zoom in / zoom out
+- Panning / Scaling / Rotation
+
+Il vous est possible d'éditer les paramètres de votre graphique une fois créé.
 
 ## Formes
 
