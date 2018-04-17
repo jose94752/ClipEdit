@@ -14,6 +14,7 @@
 // --------
 
 #include <QMainWindow>
+#include <QGraphicsScene>
 
 namespace Ui
 {
@@ -38,10 +39,12 @@ class MainWindow
 
         // UI
         Ui::MainWindow *ui;
-
-        // UI building
         void buildMenu();
         void buildToolBar();
+        void buildView();
+
+        // Scene
+        QGraphicsScene m_scene;
 
     private slots:
 

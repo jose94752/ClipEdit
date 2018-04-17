@@ -20,7 +20,14 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QGraphicsView" name="graphicsView"/>
+      <widget class="QGraphicsView" name="graphicsView">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
         <number>8</number>
@@ -60,7 +67,7 @@
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionExports"/>
-    <addaction name="actionExit"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -194,9 +201,9 @@
     <string>Merge down</string>
    </property>
   </action>
-  <action name="actionExit">
+  <action name="actionQuit">
    <property name="text">
-    <string>Exit</string>
+    <string>Quit</string>
    </property>
   </action>
  </widget>
