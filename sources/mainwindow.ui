@@ -30,7 +30,11 @@
       </widget>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
+<<<<<<< HEAD
+        <number>9</number>
+=======
         <number>1</number>
+>>>>>>> c00872c423f8e768af4de5b697f862d22fc3dfe0
        </property>
        <widget class="QWidget" name="Arrows"/>
        <widget class="FormCharts" name="Charts"/>
@@ -39,8 +43,6 @@
        <widget class="QWidget" name="NumberedBullets"/>
        <widget class="QWidget" name="Pictures"/>
        <widget class="QWidget" name="ReadWriteExports"/>
-       <widget class="formscreenshots" name="ScreenShots"/>
-       <widget class="QWidget" name="TextBoxes"/>
        <widget class="QWidget" name="ScreenShots"/>
        <widget class="FormTextBoxes" name="TextBoxes"/>
       </widget>
@@ -54,7 +56,7 @@
      <x>0</x>
      <y>0</y>
      <width>487</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
@@ -140,32 +142,63 @@
    </property>
   </action>
   <action name="actionArrow">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/arrow-icon.png</normaloff>:/icons/icons/arrow-icon.png</iconset>
+   </property>
    <property name="text">
     <string>Arrow</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Arrow</string>
    </property>
   </action>
   <action name="actionCharts">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
-     <normaloff>:/icons/icons/charts-icon.png</normaloff>:/icons/icons/charts-icon.png</iconset>
+     <normaloff>:/icons/icons/chart-icon.png</normaloff>:/icons/icons/chart-icon.png</iconset>
    </property>
    <property name="text">
     <string>Charts</string>
    </property>
+   <property name="toolTip">
+    <string>Insert Chart</string>
+   </property>
   </action>
   <action name="actionCliparts">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/clipart-icon.png</normaloff>:/icons/icons/clipart-icon.png</iconset>
+   </property>
    <property name="text">
     <string>Cliparts</string>
    </property>
+   <property name="toolTip">
+    <string>Insert Clipart</string>
+   </property>
   </action>
   <action name="actionNumberedBullets">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/numbered-bullet-icon.png</normaloff>:/icons/icons/numbered-bullet-icon.png</iconset>
+   </property>
    <property name="text">
     <string>Numbered Bullets</string>
    </property>
+   <property name="toolTip">
+    <string>Insert Numbered Bullets</string>
+   </property>
   </action>
   <action name="actionPicture">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/picture-icon.png</normaloff>:/icons/icons/picture-icon.png</iconset>
+   </property>
    <property name="text">
     <string>Picture</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Picture</string>
    </property>
   </action>
   <action name="actionTextBox">
@@ -176,10 +209,20 @@
    <property name="text">
     <string>TextBox</string>
    </property>
+   <property name="toolTip">
+    <string>Insert TextBox</string>
+   </property>
   </action>
   <action name="actionNewLayer">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/layer-icon.png</normaloff>:/icons/icons/layer-icon.png</iconset>
+   </property>
    <property name="text">
     <string>New layer</string>
+   </property>
+   <property name="toolTip">
+    <string>Layers</string>
    </property>
   </action>
   <action name="actionRemoveLayer">
@@ -206,19 +249,22 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>formscreenshots</class>
-   <extends>QWidget</extends>
-   <header>formscreenshots.h</header>
    <class>FormTextBoxes</class>
    <extends>QWidget</extends>
    <header>formtextboxes.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
+<<<<<<< HEAD
+   <class>formscreenshots</class>
+   <extends>QWidget</extends>
+   <header>formscreenshots.h</header>
+=======
    <class>FormCharts</class>
    <extends>QWidget</extends>
    <header>formcharts.h</header>
    <container>1</container>
+>>>>>>> c00872c423f8e768af4de5b697f862d22fc3dfe0
   </customwidget>
  </customwidgets>
  <resources>

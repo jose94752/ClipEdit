@@ -14,31 +14,32 @@
 
 // Includes
 // --------
+
 #include <QWidget>
 
-
-// Namespace for FormArrows
-// ------------------------
-
- namespace Ui {
+namespace Ui
+{
     class FormArrows;
 }
 
 // Class
 // -----
 
-class FormArrows : public QWidget
+class FormArrows
+    :   public QWidget
 {
     Q_OBJECT
 
-public:
-    // Constructors, destructor
-    explicit FormArrows(QWidget *parent = 0);
-    ~FormArrows();
+    public:
 
-private:
-    // Private
-    Ui::FormArrows *ui;
+        // Constructors, destructor
+        explicit FormArrows(QWidget* parent = 0);
+        ~FormArrows();
+
+    private:
+
+        // UI
+        Ui::FormArrows *ui;
 };
 
-#endif // FORMARROWS_H
+#endif
