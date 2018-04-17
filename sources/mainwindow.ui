@@ -22,8 +22,15 @@
       </property>
       <widget class="QGraphicsView" name="graphicsView"/>
       <widget class="QStackedWidget" name="stackedWidget">
-       <widget class="QWidget" name="page"/>
-       <widget class="QWidget" name="page_2"/>
+       <widget class="QWidget" name="Arrows"/>
+       <widget class="QWidget" name="Charts"/>
+       <widget class="QWidget" name="Cliparts"/>
+       <widget class="QWidget" name="Layers"/>
+       <widget class="QWidget" name="NumberedBullets"/>
+       <widget class="QWidget" name="Pictures"/>
+       <widget class="QWidget" name="ReadWriteExports"/>
+       <widget class="QWidget" name="ScreenShots"/>
+       <widget class="QWidget" name="TextBoxes"/>
       </widget>
      </widget>
     </item>
@@ -35,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>628</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
