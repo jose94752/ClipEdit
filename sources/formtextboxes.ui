@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="labelTextBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -36,21 +36,21 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="groupBoxStyle">
      <property name="styleSheet">
       <string notr="true"/>
      </property>
      <property name="title">
       <string>Content</string>
      </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="labelText">
         <property name="text">
-         <string>Text</string>
+         <string>&amp;Text</string>
+        </property>
+        <property name="buddy">
+         <cstring>plainTextEdit</cstring>
         </property>
        </widget>
       </item>
@@ -58,9 +58,12 @@
        <widget class="QPlainTextEdit" name="plainTextEdit"/>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="labelFont">
         <property name="text">
-         <string>Font</string>
+         <string>&amp;Font</string>
+        </property>
+        <property name="buddy">
+         <cstring>fontComboBox</cstring>
         </property>
        </widget>
       </item>
@@ -68,14 +71,17 @@
        <widget class="QFontComboBox" name="fontComboBox"/>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="labelPointSize">
         <property name="text">
-         <string>Point size</string>
+         <string>&amp;Point size</string>
+        </property>
+        <property name="buddy">
+         <cstring>spinBoxPointSize</cstring>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="spinBoxPointSize">
         <property name="suffix">
          <string>pt</string>
         </property>
@@ -91,23 +97,26 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="labelStyle">
         <property name="text">
-         <string>Style</string>
+         <string>&amp;Style</string>
+        </property>
+        <property name="buddy">
+         <cstring>checkBoxBold</cstring>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="checkBoxBold">
           <property name="text">
            <string>Bold</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox_2">
+         <widget class="QCheckBox" name="checkBoxItalic">
           <property name="text">
            <string>Italic</string>
           </property>
@@ -116,16 +125,19 @@
        </layout>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="labelAlignment">
         <property name="text">
-         <string>Alignment</string>
+         <string>&amp;Alignment</string>
+        </property>
+        <property name="buddy">
+         <cstring>radioButtonLeft</cstring>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QRadioButton" name="radioButton">
+         <widget class="QRadioButton" name="radioButtonLeft">
           <property name="text">
            <string>Left</string>
           </property>
@@ -135,14 +147,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radioButton_2">
+         <widget class="QRadioButton" name="radioButtonRight">
           <property name="text">
            <string>Right</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radioButton_3">
+         <widget class="QRadioButton" name="radioButtonCentered">
           <property name="text">
            <string>Centered</string>
           </property>
@@ -154,10 +166,66 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBoxContent">
      <property name="title">
       <string>Style</string>
      </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelBackgroundColor">
+        <property name="text">
+         <string>Back&amp;ground color</string>
+        </property>
+        <property name="buddy">
+         <cstring>pushButtonBackgroundColor</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelTextColor">
+        <property name="text">
+         <string>Text &amp;color</string>
+        </property>
+        <property name="buddy">
+         <cstring>pushButtonTextColor</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelBorders">
+        <property name="text">
+         <string>&amp;Borders</string>
+        </property>
+        <property name="buddy">
+         <cstring>checkBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButtonBackgroundColor">
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButtonTextColor">
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>Visible</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>

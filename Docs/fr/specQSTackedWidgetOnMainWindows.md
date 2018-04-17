@@ -1,20 +1,19 @@
-# Spécification QStackedWidget sur le MainWindows
-	- Nous utilisons des QWidget pour que chaque spécification
+# Spécification QStackedWidget sur le fenêtre principale
 
-## Liste des QWidget, nom des classes formulaires et correspondances
-
-	| QWidget          | FormClassName        |   Correspondances                                        |
-	| ---------------- | -------------------- | -------------------------------------------------------- |
-	| Arrows           | FormArrows           | [SpecArrows](/Docs/fr/SpecArrows.md)                     |
-	| Charts           | FormCharts           | [SpecCharts](/Docs/fr/SpecCharts.md)                     |
-	| Cliparts         | FormCliparts         | [SpecCliparts](/Docs/fr/SpecCliparts.md)                 |
-	| Layers           | FormLayers           | [SpecLayers](/Docs/fr/SpecLayers.md)                     |
-	| NumberedBullets  | FormNumberedBullets  | [SpecNumberedBullets](/Docs/fr/SpecNumberedBullets.md)   |
-	| Pictures         | FormPictures         | [SpecPictures](/Docs/fr/SpecPictures.md)                 |
-	| ReadWriteExports | FormReadWriteExports | [SpecReadWriteExports](/Docs/en/SpecReadWriteExports.md) |
-	| ScreenShots      | FormScreenShots      | [SpecScreenShots](/Docs/fr/SpecScreenShots.md)           |
-	| TextBoxes        | FormTextBoxes        | [SpecTextBoxes](/Docs/fr/SpecTextBoxes.md)               |
-	
+	- Nous utilisons des QWidget pour chaque spécification
 
 
-	
+## Liste des QWidget, leur nom de classe formulaire et leur spécification
+
+| Nom du QWidget   | Nom de la classe formulaire  | Spécification                                     |
+| ---------------- | :--------------------------: | ------------------------------------------------- |
+| Arrows           | FormArrows                   | [SpecArrows](./SpecArrows.md)                     |
+| Charts           | FormCharts                   | [SpecCharts](./SpecCharts.md)                     |
+| Cliparts         | FormCliparts                 | [SpecCliparts](./SpecCliparts.md)                 |
+| Layers           | FormLayers                   | [SpecLayers](./SpecLayers.md)                     |
+| NumberedBullets  | FormNumberedBullets          | [SpecNumberedBullets](./SpecNumberedBullets.md)   |
+| Pictures         | FormPictures                 | [SpecPictures](./SpecPictures.md)                 |
+| ReadWriteExports | FormReadWriteExports         | [SpecReadWriteExports](./SpecReadWriteExports.md) |
+| ScreenShots      | FormScreenShots              | [SpecScreenShots](./SpecScreenShots.md)           |
+| TextBoxes        | FormTextBoxes                | [SpecTextBoxes](./SpecTextBoxes.md)               |
+

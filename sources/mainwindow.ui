@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>628</width>
-    <height>386</height>
+    <width>487</width>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ClipEdit</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -20,7 +20,14 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QGraphicsView" name="graphicsView"/>
+      <widget class="QGraphicsView" name="graphicsView">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
         <number>1</number>
@@ -32,6 +39,8 @@
        <widget class="QWidget" name="NumberedBullets"/>
        <widget class="QWidget" name="Pictures"/>
        <widget class="QWidget" name="ReadWriteExports"/>
+       <widget class="formscreenshots" name="ScreenShots"/>
+       <widget class="QWidget" name="TextBoxes"/>
        <widget class="QWidget" name="ScreenShots"/>
        <widget class="FormTextBoxes" name="TextBoxes"/>
       </widget>
@@ -44,19 +53,62 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>628</width>
-     <height>22</height>
+     <width>487</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_as"/>
     <addaction name="actionExports"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuInsert">
+     <property name="title">
+      <string>Insert</string>
+     </property>
+     <addaction name="actionArrow"/>
+     <addaction name="actionCharts"/>
+     <addaction name="actionCliparts"/>
+     <addaction name="actionNumberedBullets"/>
+     <addaction name="actionPicture"/>
+     <addaction name="actionTextBox"/>
+    </widget>
+    <widget class="QMenu" name="menuLayers">
+     <property name="title">
+      <string>Layers</string>
+     </property>
+     <addaction name="actionNewLayer"/>
+     <addaction name="actionRemoveLayer"/>
+     <addaction name="actionMergeDown"/>
+    </widget>
+    <addaction name="menuInsert"/>
+    <addaction name="separator"/>
+    <addaction name="menuLayers"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
    </widget>
    <addaction name="menufile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -82,10 +134,81 @@
     <string>Exports</string>
    </property>
   </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionArrow">
+   <property name="text">
+    <string>Arrow</string>
+   </property>
+  </action>
+  <action name="actionCharts">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/charts-icon.png</normaloff>:/icons/icons/charts-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Charts</string>
+   </property>
+  </action>
+  <action name="actionCliparts">
+   <property name="text">
+    <string>Cliparts</string>
+   </property>
+  </action>
+  <action name="actionNumberedBullets">
+   <property name="text">
+    <string>Numbered Bullets</string>
+   </property>
+  </action>
+  <action name="actionPicture">
+   <property name="text">
+    <string>Picture</string>
+   </property>
+  </action>
+  <action name="actionTextBox">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/textbox-icon.png</normaloff>:/icons/icons/textbox-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>TextBox</string>
+   </property>
+  </action>
+  <action name="actionNewLayer">
+   <property name="text">
+    <string>New layer</string>
+   </property>
+  </action>
+  <action name="actionRemoveLayer">
+   <property name="text">
+    <string>Remove layer</string>
+   </property>
+  </action>
+  <action name="actionMergeDown">
+   <property name="text">
+    <string>Merge down</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>formscreenshots</class>
+   <extends>QWidget</extends>
+   <header>formscreenshots.h</header>
    <class>FormTextBoxes</class>
    <extends>QWidget</extends>
    <header>formtextboxes.h</header>
@@ -98,6 +221,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
