@@ -17,6 +17,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    ///slots when users select save, open or exports in the menu
+    void slot_save(bool);//save
+    void slot_open(bool);//open
+    void slot_exports(bool);//exports
 };
 
 #endif // MAINWINDOW_H

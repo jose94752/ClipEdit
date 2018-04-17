@@ -27,25 +27,22 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     commongraphicitem.cpp \
-    dialog.cpp \
     formarrows.cpp \
     formcharts.cpp \
-    formcharts.cpp
+    formscreenshots.cpp
 
 HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
-    dialog.h \
-    formarrows.h \
     formcharts.h \
-    formcharts.h
+    formscreenshots.h  \
+    formarrows.h
 
 FORMS += \
         mainwindow.ui \
-    dialog.ui \
     formarrows.ui \
     formcharts.ui \
-    formcharts.ui
+    formscreenshots.ui
 
 RESOURCES += \
     resources/resources.qrc
