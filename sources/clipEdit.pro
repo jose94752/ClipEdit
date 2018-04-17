@@ -47,12 +47,6 @@ FORMS += \
     about.ui \
     formarrows.ui \
     formcharts.ui \
-<<<<<<< HEAD
-    formtextboxes.ui \
-    formscreenshots.ui
-    formscreenshots.ui \
-=======
->>>>>>> e0d1496f2a1451db772c2f55e17384fa6ff7addc
     formtextboxes.ui
 
 RESOURCES += \
