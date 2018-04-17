@@ -23,7 +23,7 @@
       <widget class="QGraphicsView" name="graphicsView"/>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>7</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="Arrows"/>
        <widget class="QWidget" name="Charts"/>
@@ -33,7 +33,7 @@
        <widget class="QWidget" name="Pictures"/>
        <widget class="QWidget" name="ReadWriteExports"/>
        <widget class="QWidget" name="ScreenShots"/>
-       <widget class="QWidget" name="TextBoxes"/>
+       <widget class="FormTextBoxes" name="TextBoxes"/>
       </widget>
      </widget>
     </item>
@@ -84,6 +84,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>FormTextBoxes</class>
+   <extends>QWidget</extends>
+   <header>formtextboxes.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
