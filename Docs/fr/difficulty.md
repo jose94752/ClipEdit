@@ -4,8 +4,8 @@
 | SpecPictures            | :two:      |              |
 | SpecScreenShots         | :three:    |              |
 | SpecCharts              | :four:     |              |
-| SpecCliparts            | :four:     |              |
-| SpecReadWriteExports    | :four:     | olivier |
+| SpecCliparts            | :four:     | cedric       |
+| SpecReadWriteExports    | :four:     | olivier      |
 | SpecArrows              | :five:     |              |
 | SpecLayers              | :six:      |              |
 | SpecTextBoxes           | :six:      |              |
