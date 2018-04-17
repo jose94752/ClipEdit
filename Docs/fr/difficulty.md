@@ -2,7 +2,7 @@
 | ----------------------- | :--------: | ------------ |
 | SpecNumberedBullets     | :two:      | jerome       |
 | SpecPictures            | :two:      | Laurent      |
-| SpecScreenShots         | :three:    |              |
+| SpecScreenShots         | :three:    | Toumi        |
 | SpecCharts              | :four:     | Mihaela      |
 | SpecCliparts            | :four:     | Cédric       |
 | SpecReadWriteExports    | :four:     | Olivier      |
