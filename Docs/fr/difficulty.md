@@ -1,6 +1,6 @@
 | Nom de la spécification | Difficulté | Contributeur |
 | ----------------------- | :--------: | ------------ |
-| SpecNumberedBullets     | :two:      |              |
+| SpecNumberedBullets     | :two:      | jerome       |
 | SpecPictures            | :two:      | Laurent      |
 | SpecScreenShots         | :three:    |              |
 | SpecCharts              | :four:     | Mihaela      |
