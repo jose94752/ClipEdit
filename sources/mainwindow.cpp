@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     buildMenu();
     buildToolBar();
+    buildView();
 }
 
 MainWindow::~MainWindow()
@@ -37,7 +38,7 @@ MainWindow::~MainWindow()
 // -----------
 
 ///
-/// \brief MainWindow::buildToolBar
+/// \brief MainWindow::buildMenu
 /// Initializations and methods calls related to the menu
 ///
 void MainWindow::buildMenu()
@@ -56,25 +57,41 @@ void MainWindow::buildToolBar()
 
 }
 
+///
+/// \brief MainWindow::buildView
+/// Initializations and methods calls related to the main view
+///
+void MainWindow::buildView()
+{
+    int offset = 600;
+    m_scene.setSceneRect((-width()-offset)/2, (-height()-offset)/2, width()+offset, height()+offset);
+
+    ui->graphicsView->setScene(&m_scene);
+}
+
 // Slots
 // -----
 
 ///
 /// \brief save
-/// This function is called on save
+/// This slot is called on save
 ///
-void MainWindow::save(bool isok)
+void MainWindow::save(bool)
 {
     // To do
 }
 
-///slot open: This function is told when users tells to open data
+///
+/// \brief openFile
+/// This slot is called on file open
 void MainWindow::openFile(bool)
 {
     // To do
 }
 
-///slot exports: This function is told when users tells to export data
+///
+/// \brief exportView
+/// This slot is called on export
 void MainWindow::exportView(bool)
 {
     // To do
