@@ -1,22 +1,22 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef ABOUT_H
+#define ABOUT_H
 
 #include <QDialog>
 
 namespace Ui {
-class Dialog;
+class about;
 }
 
-class Dialog : public QDialog
+class about : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Dialog(QWidget *parent = 0);
-    ~Dialog();
+    explicit about(QWidget *parent = 0);
+    ~about();
 
 private:
-    Ui::Dialog *ui;
+    Ui::about *ui;
 };
 
-#endif // DIALOG_H
+#endif // ABOUT_H

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>about</class>
+ <widget class="QDialog" name="about">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
-    <height>577</height>
+    <width>775</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>50</x>
      <y>40</y>
      <width>65</width>
      <height>331</height>
@@ -52,9 +52,9 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>170</x>
      <y>30</y>
-     <width>258</width>
+     <width>501</width>
      <height>341</height>
     </rect>
    </property>

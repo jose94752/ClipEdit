@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>Formscreenshots</class>
- <widget class="QWidget" name="Formscreenshots">
+ <class>FormCharts</class>
+ <widget class="QWidget" name="FormCharts">
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -1,42 +1,28 @@
-#  options pour flèches 
+# Options pour flèches 
 
-> Différentes options sont  proposées pour  construire  des flèches
+> Différentes options sont proposées pour construire des flèches
 
->> sans point d'ancrage : 
->>>aider à pointer et attirer l'attention sur les informations cruciales. Différents styles et formes sont disponibles
+>> Sans point d'ancrage : 
+>>> Aider à pointer et attirer l'attention sur les informations cruciales. Différents styles et formes sont disponibles
 
->> 1 point d'ancrage  : 
->>>flèche  rattachée à un objet;
+>> 1 Point d'ancrage  : 
+>>> Flèche  rattachée à un objet
 
 
 >> 2 points d'ancrage : 
->>>flèche  rattachée à 2 objets;
-En modifiant ou déplacant  le(s)objet(s), la flèche  l'est  également
- 
+>>> Flèche  rattachée à 2 objets
+En modifiant ou déplacant le(s)objet(s), la flèche l'est également
 
 
-## choix  paramètres :
+## Choix paramètres de la flèche :
 
-	- modif longueur / largeur de la  flèche   
+	- Modification longueur/largeur
       
-	- couleur du  contour de la  flèche  
+	- Couleur contour
       
-	- couleur  de remplissage  de la  flèche
+	- Couleur remplissage
          
-	- épaisseur des  traits du  contour  : 4 choix possibilités (1 - 4)
+	- Epaisseur traits contour 4 choix possibilités (1 - 4)
        
-	- choix  type tête  de flèche 
+	- Choix type tête
            
-     
-    
-      
-      
-      
-      
-      
-      
-      
- 
-
-
- 

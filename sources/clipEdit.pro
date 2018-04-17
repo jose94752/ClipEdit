@@ -27,31 +27,28 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     commongraphicitem.cpp \
-    dialog.cpp \
-<<<<<<< HEAD
-    formscreenshots.cpp
-=======
-    formarrows.cpp
->>>>>>> 2efeb0160e89eff9c291231f95871c5636f2af3d
+    formcharts.cpp \
+    about.cpp \
+    formarrows.cpp \
+    formscreenshots.cpp \
+    formtextboxes.cpp
 
 HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
-    dialog.h \
-<<<<<<< HEAD
-    formscreenshots.h
-=======
-    formarrows.h
->>>>>>> 2efeb0160e89eff9c291231f95871c5636f2af3d
+    formcharts.h \
+    formscreenshots.h  \
+    about.h \
+    formarrows.h \
+    formtextboxes.h
 
 FORMS += \
         mainwindow.ui \
-    dialog.ui \
-<<<<<<< HEAD
-    formscreenshots.ui
-=======
-    formarrows.ui
->>>>>>> 2efeb0160e89eff9c291231f95871c5636f2af3d
+    about.ui \
+    formarrows.ui \
+    formcharts.ui \
+    formscreenshots.ui \
+    formtextboxes.ui
 
 RESOURCES += \
     resources/resources.qrc
