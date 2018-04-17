@@ -1,0 +1,23 @@
+#ifndef FORMSCREENSHOTS_H
+#define FORMSCREENSHOTS_H
+
+#include <QWidget>
+#include<commongraphicitem.h>
+
+namespace Ui {
+class Formscreenshots;
+}
+
+class Formscreenshots : public CommonGraphicItem
+{
+    Q_OBJECT
+
+public:
+    explicit Formscreenshots(QWidget *parent = 0);
+    ~Formscreenshots();
+
+private:
+    Ui::Formscreenshots *ui;
+};
+
+#endif // FORMSCREENSHOTS_H
