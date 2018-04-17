@@ -7,80 +7,65 @@
     <x>0</x>
     <y>0</y>
     <width>653</width>
-    <height>471</height>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>60</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Logiciel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>150</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Version</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>230</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Git</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>153</x>
      <y>40</y>
-     <width>211</width>
-     <height>70</height>
+     <width>55</width>
+     <height>331</height>
     </rect>
    </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Logiciel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Version</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Git</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QTextEdit" name="textEdit_2">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>153</x>
-     <y>130</y>
-     <width>211</width>
-     <height>70</height>
+     <x>150</x>
+     <y>30</y>
+     <width>258</width>
+     <height>341</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>153</x>
-     <y>220</y>
-     <width>211</width>
-     <height>70</height>
-    </rect>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="textEdit_2"/>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="textEdit_3"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
