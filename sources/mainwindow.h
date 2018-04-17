@@ -39,6 +39,7 @@ class MainWindow
 
         // UI
         Ui::MainWindow *ui;
+        void init();
         void buildMenu();
         void buildToolBar();
         void buildView();
