@@ -30,10 +30,10 @@
       </widget>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>8</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Arrows"/>
-       <widget class="QWidget" name="Charts"/>
+       <widget class="FormCharts" name="Charts"/>
        <widget class="QWidget" name="Cliparts"/>
        <widget class="QWidget" name="Layers"/>
        <widget class="QWidget" name="NumberedBullets"/>
@@ -248,6 +248,12 @@
    <class>FormTextBoxes</class>
    <extends>QWidget</extends>
    <header>formtextboxes.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FormCharts</class>
+   <extends>QWidget</extends>
+   <header>formcharts.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
