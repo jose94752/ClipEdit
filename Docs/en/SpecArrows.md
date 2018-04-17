@@ -18,7 +18,7 @@ By modifying or moving the object (s), the arrow is also
 
 - Modification length / width
       
-- Color outline
+- Outline color
       
 - Fill color
          
