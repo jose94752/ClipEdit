@@ -39,13 +39,10 @@
        <widget class="QWidget" name="NumberedBullets"/>
        <widget class="QWidget" name="Pictures"/>
        <widget class="QWidget" name="ReadWriteExports"/>
-<<<<<<< HEAD
        <widget class="formscreenshots" name="ScreenShots"/>
        <widget class="QWidget" name="TextBoxes"/>
-=======
        <widget class="QWidget" name="ScreenShots"/>
        <widget class="FormTextBoxes" name="TextBoxes"/>
->>>>>>> 579d426b9574a9e5e157919a0bf5ecefab8fb7fd
       </widget>
      </widget>
     </item>
@@ -210,15 +207,12 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-<<<<<<< HEAD
    <class>formscreenshots</class>
    <extends>QWidget</extends>
    <header>formscreenshots.h</header>
-=======
    <class>FormTextBoxes</class>
    <extends>QWidget</extends>
    <header>formtextboxes.h</header>
->>>>>>> 579d426b9574a9e5e157919a0bf5ecefab8fb7fd
    <container>1</container>
   </customwidget>
  </customwidgets>
