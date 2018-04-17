@@ -1,16 +1,32 @@
+/*
+================================================
+* File:         mainwindow.cpp
+* Project:      ClipEdit
+* Creation:     17/04/2018
+* Brief:        Application's main window
+================================================
+*/
+
+// Includes
+// --------
+
+#include <QDebug>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
+
+// Constructor, destructor
+// -----------------------
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ///connection between signals and slots when users select save, open or exports in the menu
-    connect(ui->actionSave,SIGNAL(triggered(bool)),this,SLOT(slot_save(bool)));//save
-    connect(ui->actionOpen,SIGNAL(triggered(bool)),this,SLOT(slot_open(bool)));//open
-    connect(ui->actionExports,SIGNAL(triggered(bool)),this,SLOT(slot_exports(bool)));//exports
+
+    connect(ui->actionSave,SIGNAL(triggered(bool)),this,SLOT(save(bool)));//save
+    connect(ui->actionOpen,SIGNAL(triggered(bool)),this,SLOT(openFile(bool)));//open
+    connect(ui->actionExports,SIGNAL(triggered(bool)),this,SLOT(exportView(bool)));//exports
 }
 
 MainWindow::~MainWindow()
@@ -18,20 +34,47 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-///slot save: This function is told when users tells to save data
-void MainWindow::slot_save(bool isok)
+// UI building
+// -----------
+
+///
+/// \brief MainWindow::buildToolBar
+/// Initializations and methods calls related to the menu
+///
+void MainWindow::buildMenu()
 {
-    //qDebug()<<"save";
+
+}
+
+///
+/// \brief MainWindow::buildToolBar
+/// Initializations and methods calls related to the toolbar
+///
+void MainWindow::buildToolBar()
+{
+
+}
+
+// Slots
+// -----
+
+///
+/// \brief save
+/// This function is called on save
+///
+void MainWindow::save(bool isok)
+{
+    // To do
 }
 
 ///slot open: This function is told when users tells to open data
-void MainWindow::slot_open(bool)
+void MainWindow::openFile(bool)
 {
-    //qDebug()<<"open";
+    // To do
 }
 
 ///slot exports: This function is told when users tells to export data
-void MainWindow::slot_exports(bool)
+void MainWindow::exportView(bool)
 {
-    //qDebug()<<"exports";
+    // To do
 }

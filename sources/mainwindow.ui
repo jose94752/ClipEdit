@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>628</width>
-    <height>386</height>
+    <width>487</width>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ClipEdit</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -44,7 +44,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>628</width>
+     <width>487</width>
      <height>22</height>
     </rect>
    </property>
@@ -52,11 +52,53 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
     <addaction name="actionExports"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuInsert">
+     <property name="title">
+      <string>Insert</string>
+     </property>
+     <addaction name="actionArrow"/>
+     <addaction name="actionCharts"/>
+     <addaction name="actionCliparts"/>
+     <addaction name="actionNumbered_Bullets"/>
+     <addaction name="actionPicture"/>
+     <addaction name="actionTextBox"/>
+    </widget>
+    <widget class="QMenu" name="menuLayers">
+     <property name="title">
+      <string>Layers</string>
+     </property>
+     <addaction name="actionNew_layer_2"/>
+     <addaction name="actionRemove_layer"/>
+     <addaction name="actionMerge_down"/>
+    </widget>
+    <addaction name="menuInsert"/>
+    <addaction name="separator"/>
+    <addaction name="menuLayers"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
    </widget>
    <addaction name="menufile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -80,6 +122,76 @@
   <action name="actionExports">
    <property name="text">
     <string>Exports</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionInsert_TextBox">
+   <property name="text">
+    <string>Insert TextBox</string>
+   </property>
+  </action>
+  <action name="actionInsert_Numbered_Bubble">
+   <property name="text">
+    <string>Insert Numbered Bubble</string>
+   </property>
+  </action>
+  <action name="actionInsert_Chart">
+   <property name="text">
+    <string>Insert Chart</string>
+   </property>
+  </action>
+  <action name="actionArrow">
+   <property name="text">
+    <string>Arrow</string>
+   </property>
+  </action>
+  <action name="actionCharts">
+   <property name="text">
+    <string>Charts</string>
+   </property>
+  </action>
+  <action name="actionCliparts">
+   <property name="text">
+    <string>Cliparts</string>
+   </property>
+  </action>
+  <action name="actionNumbered_Bullets">
+   <property name="text">
+    <string>Numbered Bullets</string>
+   </property>
+  </action>
+  <action name="actionPicture">
+   <property name="text">
+    <string>Picture</string>
+   </property>
+  </action>
+  <action name="actionTextBox">
+   <property name="text">
+    <string>TextBox</string>
+   </property>
+  </action>
+  <action name="actionNew_layer_2">
+   <property name="text">
+    <string>New layer</string>
+   </property>
+  </action>
+  <action name="actionRemove_layer">
+   <property name="text">
+    <string>Remove layer</string>
+   </property>
+  </action>
+  <action name="actionMerge_down">
+   <property name="text">
+    <string>Merge down</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
    </property>
   </action>
  </widget>
