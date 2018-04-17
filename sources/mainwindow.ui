@@ -30,6 +30,7 @@
       </widget>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
+        <number>9</number>
         <number>1</number>
        </property>
        <widget class="QWidget" name="Arrows"/>
@@ -74,23 +75,17 @@
       <string>Insert</string>
      </property>
      <addaction name="actionArrow"/>
-     <addaction name="actionCharts"/>
-     <addaction name="actionCliparts"/>
+     <addaction name="actionChart"/>
+     <addaction name="actionClipart"/>
      <addaction name="actionNumberedBullets"/>
      <addaction name="actionPicture"/>
      <addaction name="actionTextBox"/>
     </widget>
-    <widget class="QMenu" name="menuLayers">
-     <property name="title">
-      <string>Layers</string>
-     </property>
-     <addaction name="actionNewLayer"/>
-     <addaction name="actionRemoveLayer"/>
-     <addaction name="actionMergeDown"/>
-    </widget>
     <addaction name="menuInsert"/>
     <addaction name="separator"/>
-    <addaction name="menuLayers"/>
+    <addaction name="actionScreenshot"/>
+    <addaction name="separator"/>
+    <addaction name="actionLayers"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -149,19 +144,19 @@
     <string>Insert Arrow</string>
    </property>
   </action>
-  <action name="actionCharts">
+  <action name="actionChart">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
      <normaloff>:/icons/icons/chart-icon.png</normaloff>:/icons/icons/chart-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Charts</string>
+    <string>Chart</string>
    </property>
    <property name="toolTip">
     <string>Insert Chart</string>
    </property>
   </action>
-  <action name="actionCliparts">
+  <action name="actionClipart">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
      <normaloff>:/icons/icons/clipart-icon.png</normaloff>:/icons/icons/clipart-icon.png</iconset>
@@ -239,6 +234,27 @@
   <action name="actionSave_as">
    <property name="text">
     <string>Save as</string>
+   </property>
+  </action>
+  <action name="actionScreenshot">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/screenshot-icon.png</normaloff>:/icons/icons/screenshot-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Screenshot</string>
+   </property>
+   <property name="toolTip">
+    <string>Take a screenshot</string>
+   </property>
+  </action>
+  <action name="actionLayers">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/layer-icon.png</normaloff>:/icons/icons/layer-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Layers</string>
    </property>
   </action>
  </widget>

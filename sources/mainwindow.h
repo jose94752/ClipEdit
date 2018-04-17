@@ -49,11 +49,12 @@ class MainWindow
 
     private slots:
 
-        // Menu slots
+        // Menu and toolbar
         void save(bool);
-        void save_as(bool);
+        void saveAs(bool);
         void openFile(bool);
         void exportView(bool);
+        void changeLateralForm(bool);
 };
 
 #endif
