@@ -41,16 +41,20 @@ HEADERS += \
     formcharts.h \
     about.h \
     formarrows.h \
-    formtextboxes.h \
-    formscreenshots.h
+    formtextboxes.h
 
 FORMS += \
         mainwindow.ui \
     about.ui \
     formarrows.ui \
     formcharts.ui \
+<<<<<<< HEAD
     formtextboxes.ui \
     formscreenshots.ui
+=======
+    formscreenshots.ui \
+    formtextboxes.ui
+>>>>>>> a43dbf6aa9335ee4757ac13b977a2ac0aea43a63
 
 RESOURCES += \
     resources/resources.qrc
