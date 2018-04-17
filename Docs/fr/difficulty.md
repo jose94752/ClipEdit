@@ -5,7 +5,7 @@
 | SpecScreenShots         | :three:    |              |
 | SpecCharts              | :four:     |              |
 | SpecCliparts            | :four:     |              |
-| SpecReadWriteExports    | :four:     |              |
+| SpecReadWriteExports    | :four:     | olivier |
 | SpecArrows              | :five:     |              |
 | SpecLayers              | :six:      |              |
 | SpecTextBoxes           | :six:      |              |
