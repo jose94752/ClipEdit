@@ -33,10 +33,15 @@ class FormTextBoxes
         explicit FormTextBoxes(QWidget *parent = 0);
         ~FormTextBoxes();
 
+    private slots:
+
+        void pickColor(bool);
+
     private:
 
         // Ui
         Ui::FormTextBoxes *ui;
+
 };
 
 #endif
