@@ -28,7 +28,8 @@ SOURCES += \
         mainwindow.cpp \
     commongraphicitem.cpp \
     dialog.cpp \
-<<<<<<< HEAD
+<<<<<<< HEAD \
+    about.cpp
     formscreenshots.cpp
 =======
     formarrows.cpp
@@ -38,7 +39,8 @@ HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
     dialog.h \
-<<<<<<< HEAD
+<<<<<<< HEAD \
+    about.h
     formscreenshots.h
 =======
     formarrows.h
@@ -47,7 +49,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     dialog.ui \
-<<<<<<< HEAD
+<<<<<<< HEAD \
+    about.ui
     formscreenshots.ui
 =======
     formarrows.ui

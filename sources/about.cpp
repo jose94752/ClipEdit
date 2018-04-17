@@ -1,25 +1,14 @@
-/*
-================================================
-* File:         dialog.cpp
-* Project:      ClipEdit
-* Creation:     17/04/2018
-* Brief:        Give a description of the software,
-*               its version and the sha of the git.
-================================================
-*/
+#include "about.h"
+#include "ui_about.h"
 
-
-#include "dialog.h"
-#include "ui_dialog.h"
-
-Dialog::Dialog(QWidget *parent) :
+about::about(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Dialog)
+    ui(new Ui::about)
 {
     ui->setupUi(this);
 }
 
-Dialog::~Dialog()
+about::~about()
 {
     delete ui;
 }
