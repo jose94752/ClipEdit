@@ -6,6 +6,6 @@
 | SpecCharts              | :four:     | Mihaela      |
 | SpecCliparts            | :four:     | Cédric       |
 | SpecReadWriteExports    | :four:     | Olivier      |
-| SpecArrows              | :five:     |              |
+| SpecArrows              | :five:     | Jose         |
 | SpecLayers              | :six:      | David        |
 | SpecTextBoxes           | :six:      | Nilsen       | 
