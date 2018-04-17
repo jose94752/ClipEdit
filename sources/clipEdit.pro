@@ -37,7 +37,6 @@ HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
     formcharts.h \
-    formscreenshots.h  \
     about.h \
     formarrows.h \
     formtextboxes.h \
@@ -48,7 +47,6 @@ FORMS += \
     about.ui \
     formarrows.ui \
     formcharts.ui \
-    formscreenshots.ui \
     formtextboxes.ui \
     formscreenshots.ui
 
