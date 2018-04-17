@@ -218,7 +218,7 @@
     <string>New layer</string>
    </property>
    <property name="toolTip">
-    <string>Insert Layer</string>
+    <string>Layers</string>
    </property>
   </action>
   <action name="actionRemoveLayer">
