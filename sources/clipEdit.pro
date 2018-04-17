@@ -39,4 +39,4 @@ FORMS += \
     dialog.ui
 
 RESOURCES += \
-    resources.qrc
+    resources/resources.qrc
