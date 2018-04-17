@@ -42,8 +42,7 @@ HEADERS += \
     formscreenshots.h  \
     about.h \
     formarrows.h \
-    formtextboxes.h \
-    formscreenshots.h
+    formtextboxes.h
 
 FORMS += \
         mainwindow.ui \
@@ -51,8 +50,7 @@ FORMS += \
     formarrows.ui \
     formcharts.ui \
     formscreenshots.ui \
-    formtextboxes.ui \
-    formscreenshots.ui
+    formtextboxes.ui
 
 RESOURCES += \
     resources/resources.qrc
