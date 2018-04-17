@@ -1,28 +1,54 @@
+/*
+================================================
+* File:         mainwindow.h
+* Project:      ClipEdit
+* Creation:     17/04/2018
+* Brief:        Application's main window
+================================================
+*/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+// Includes
+// --------
+
 #include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+// Class
+// -----
+
+class MainWindow
+    :   public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    public:
 
-private:
-    Ui::MainWindow *ui;
+        // Constructor, destructor
+        explicit MainWindow(QWidget *parent = 0);
+        ~MainWindow();
 
-private slots:
-    ///slots when users select save, open or exports in the menu
-    void slot_save(bool);//save
-    void slot_open(bool);//open
-    void slot_exports(bool);//exports
+    private:
+
+        // UI
+        Ui::MainWindow *ui;
+
+        // UI building
+        void buildMenu();
+        void buildToolBar();
+
+    private slots:
+
+        // Menu slots
+        void save(bool);
+        void openFile(bool);
+        void exportView(bool);
 };
 
-#endif // MAINWINDOW_H
+#endif

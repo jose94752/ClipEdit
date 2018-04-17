@@ -16,9 +16,9 @@
 // Constructor, destructor
 // -----------------------
 
-FormTextBoxes::FormTextBoxes(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormTextBoxes)
+FormTextBoxes::FormTextBoxes(QWidget *parent)
+    :   QWidget(parent),
+        ui(new Ui::FormTextBoxes)
 {
     ui->setupUi(this);
 }
