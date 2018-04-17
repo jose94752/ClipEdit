@@ -43,6 +43,7 @@ HEADERS += \
     formarrows.h \
     formtextboxes.h \
     formnumberedbullet.h
+    formscreenshots.h
 
 FORMS += \
         mainwindow.ui \
@@ -52,6 +53,7 @@ FORMS += \
     formscreenshots.ui \
     formtextboxes.ui \
     formnumberedbullet.ui
+    formscreenshots.ui
 
 RESOURCES += \
     resources/resources.qrc

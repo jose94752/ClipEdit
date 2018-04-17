@@ -14,38 +14,27 @@
 
 // Includes
 // --------
-#include <QGraphicsLineItem>
+#include <QWidget>
 
-// Herit QWidget from commongraphicsitem
-#include "commongraphicitem.h"
 
 // Namespace for FormArrows
 // ------------------------
-namespace Ui {
-    class CommonGraphicItem;
+
+ namespace Ui {
     class FormArrows;
 }
 
 // Class
 // -----
 
-class FormArrows : public CommonGraphicItem
+class FormArrows : public QWidget
 {
     Q_OBJECT
 
 public:
     // Constructors, destructor
-    explicit FormArrows(CommonGraphicItem *parent = 0);
+    explicit FormArrows(QWidget *parent = 0);
     ~FormArrows();
-
-    // Re-use of Pure virtual methods
-    QRectF boundingRect() const = 0;
-    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, CommonGraphicItem* widget = 0) = 0;
-
-protected:
-
-    // Protected section
-    // Shared attributes set here
 
 private:
     // Private
