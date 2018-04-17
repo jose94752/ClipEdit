@@ -24,9 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    buildMenu();
-    buildToolBar();
-    buildView();
+    init();
 }
 
 MainWindow::~MainWindow()
@@ -37,6 +35,13 @@ MainWindow::~MainWindow()
 // UI building
 // -----------
 
+void MainWindow::init()
+{
+    buildMenu();
+    buildToolBar();
+    buildView();
+}
+
 ///
 /// \brief MainWindow::buildMenu
 /// Initializations and methods calls related to the menu
@@ -44,9 +49,9 @@ MainWindow::~MainWindow()
 void MainWindow::buildMenu()
 {
     connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(save(bool)));
+    connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(save_as(bool)));
     connect(ui->actionOpen, SIGNAL(triggered(bool)), this, SLOT(openFile(bool)));
     connect(ui->actionExports, SIGNAL(triggered(bool)), this, SLOT(exportView(bool)));
-    connect(ui->actionQuit, SIGNAL(triggered(bool)), this, SLOT(close()));
 }
 
 ///
@@ -55,7 +60,12 @@ void MainWindow::buildMenu()
 ///
 void MainWindow::buildToolBar()
 {
-
+    ui->mainToolBar->addAction(ui->actionArrow);
+    ui->mainToolBar->addAction(ui->actionCharts);
+    ui->mainToolBar->addAction(ui->actionCliparts);
+    ui->mainToolBar->addAction(ui->actionNumberedBullets);
+    ui->mainToolBar->addAction(ui->actionPicture);
+    ui->mainToolBar->addAction(ui->actionTextBox);
 }
 
 ///
@@ -66,7 +76,6 @@ void MainWindow::buildView()
 {
     int offset = 600;
     m_scene.setSceneRect((-width()-offset)/2, (-height()-offset)/2, width()+offset, height()+offset);
-
     ui->graphicsView->setScene(&m_scene);
 }
 
@@ -80,6 +89,11 @@ void MainWindow::buildView()
 void MainWindow::save(bool)
 {
     // To do
+}
+
+void MainWindow::save_as(bool)
+{
+    //to do
 }
 
 ///

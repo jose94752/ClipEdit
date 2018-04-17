@@ -39,6 +39,7 @@ class MainWindow
 
         // UI
         Ui::MainWindow *ui;
+        void init();
         void buildMenu();
         void buildToolBar();
         void buildView();
@@ -50,6 +51,7 @@ class MainWindow
 
         // Menu slots
         void save(bool);
+        void save_as(bool);
         void openFile(bool);
         void exportView(bool);
 };

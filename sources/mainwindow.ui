@@ -39,6 +39,8 @@
        <widget class="QWidget" name="NumberedBullets"/>
        <widget class="QWidget" name="Pictures"/>
        <widget class="QWidget" name="ReadWriteExports"/>
+       <widget class="formscreenshots" name="ScreenShots"/>
+       <widget class="QWidget" name="TextBoxes"/>
        <widget class="QWidget" name="ScreenShots"/>
        <widget class="FormTextBoxes" name="TextBoxes"/>
       </widget>
@@ -52,7 +54,7 @@
      <x>0</x>
      <y>0</y>
      <width>487</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
@@ -61,6 +63,7 @@
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
+    <addaction name="actionSave_as"/>
     <addaction name="actionExports"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -75,7 +78,7 @@
      <addaction name="actionArrow"/>
      <addaction name="actionCharts"/>
      <addaction name="actionCliparts"/>
-     <addaction name="actionNumbered_Bullets"/>
+     <addaction name="actionNumberedBullets"/>
      <addaction name="actionPicture"/>
      <addaction name="actionTextBox"/>
     </widget>
@@ -83,9 +86,9 @@
      <property name="title">
       <string>Layers</string>
      </property>
-     <addaction name="actionNew_layer_2"/>
-     <addaction name="actionRemove_layer"/>
-     <addaction name="actionMerge_down"/>
+     <addaction name="actionNewLayer"/>
+     <addaction name="actionRemoveLayer"/>
+     <addaction name="actionMergeDown"/>
     </widget>
     <addaction name="menuInsert"/>
     <addaction name="separator"/>
@@ -136,27 +139,16 @@
     <string>About</string>
    </property>
   </action>
-  <action name="actionInsert_TextBox">
-   <property name="text">
-    <string>Insert TextBox</string>
-   </property>
-  </action>
-  <action name="actionInsert_Numbered_Bubble">
-   <property name="text">
-    <string>Insert Numbered Bubble</string>
-   </property>
-  </action>
-  <action name="actionInsert_Chart">
-   <property name="text">
-    <string>Insert Chart</string>
-   </property>
-  </action>
   <action name="actionArrow">
    <property name="text">
     <string>Arrow</string>
    </property>
   </action>
   <action name="actionCharts">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/charts-icon.png</normaloff>:/icons/icons/charts-icon.png</iconset>
+   </property>
    <property name="text">
     <string>Charts</string>
    </property>
@@ -166,7 +158,7 @@
     <string>Cliparts</string>
    </property>
   </action>
-  <action name="actionNumbered_Bullets">
+  <action name="actionNumberedBullets">
    <property name="text">
     <string>Numbered Bullets</string>
    </property>
@@ -177,21 +169,25 @@
    </property>
   </action>
   <action name="actionTextBox">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/textbox-icon.png</normaloff>:/icons/icons/textbox-icon.png</iconset>
+   </property>
    <property name="text">
     <string>TextBox</string>
    </property>
   </action>
-  <action name="actionNew_layer_2">
+  <action name="actionNewLayer">
    <property name="text">
     <string>New layer</string>
    </property>
   </action>
-  <action name="actionRemove_layer">
+  <action name="actionRemoveLayer">
    <property name="text">
     <string>Remove layer</string>
    </property>
   </action>
-  <action name="actionMerge_down">
+  <action name="actionMergeDown">
    <property name="text">
     <string>Merge down</string>
    </property>
@@ -201,16 +197,26 @@
     <string>Quit</string>
    </property>
   </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>formscreenshots</class>
+   <extends>QWidget</extends>
+   <header>formscreenshots.h</header>
    <class>FormTextBoxes</class>
    <extends>QWidget</extends>
    <header>formtextboxes.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

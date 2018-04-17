@@ -4,19 +4,19 @@
 #include <QWidget>
 
 namespace Ui {
-class Formscreenshots;
+class formscreenshots;
 }
 
-class Formscreenshots : public QWidget
+class formscreenshots : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Formscreenshots(QWidget *parent = 0);
-    ~Formscreenshots();
+    explicit formscreenshots(QWidget *parent = 0);
+    ~formscreenshots();
 
 private:
-    Ui::Formscreenshots *ui;
+    Ui::formscreenshots *ui;
 };
 
 #endif // FORMSCREENSHOTS_H
