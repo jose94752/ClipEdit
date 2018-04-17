@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/icons">
-        <file>resources/icons/charts-icon.png</file>
-    </qresource>
-    <qresource prefix="/fonts"/>
-</RCC>
