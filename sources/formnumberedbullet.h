@@ -1,6 +1,5 @@
 #ifndef FORMNUMBEREDBULLET_H
 #define FORMNUMBEREDBULLET_H
-#include "commongraphicitem.h"
 
 #include <QWidget>
 
@@ -8,7 +7,7 @@ namespace Ui {
 class FormNumberedBullet;
 }
 
-class FormNumberedBullet : public QWidget, public CommonGraphicItem
+class FormNumberedBullet : public QWidget
 {
     Q_OBJECT
 

@@ -31,7 +31,8 @@ SOURCES += \
     about.cpp \
     formarrows.cpp \
     formscreenshots.cpp \
-    formtextboxes.cpp
+    formtextboxes.cpp \
+    formnumberedbullet.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     formscreenshots.h  \
     about.h \
     formarrows.h \
-    formtextboxes.h
+    formtextboxes.h \
+    formnumberedbullet.h
 
 FORMS += \
         mainwindow.ui \
@@ -48,7 +50,8 @@ FORMS += \
     formarrows.ui \
     formcharts.ui \
     formscreenshots.ui \
-    formtextboxes.ui
+    formtextboxes.ui \
+    formnumberedbullet.ui
 
 RESOURCES += \
     resources/resources.qrc
