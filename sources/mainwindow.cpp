@@ -66,6 +66,8 @@ void MainWindow::buildToolBar()
     ui->mainToolBar->addAction(ui->actionNumberedBullets);
     ui->mainToolBar->addAction(ui->actionPicture);
     ui->mainToolBar->addAction(ui->actionTextBox);
+    ui->mainToolBar->addSeparator();
+    ui->mainToolBar->addAction(ui->actionNewLayer);
 }
 
 ///

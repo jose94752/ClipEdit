@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += charts
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,12 +35,12 @@ SOURCES += \
     formscreenshots.cpp \
     formtextboxes.cpp \
     formnumberedbullet.cpp
+    formtextboxes.cpp
 
 HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
     formcharts.h \
-    formscreenshots.h  \
     about.h \
     formarrows.h \
     formtextboxes.h \
