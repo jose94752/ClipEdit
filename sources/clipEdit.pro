@@ -27,6 +27,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     commongraphicitem.cpp \
+    formcharts.cpp \
     about.cpp \
     formarrows.cpp \
     formscreenshots.cpp
@@ -34,14 +35,16 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     commongraphicitem.h \
+    formcharts.h \
+    formscreenshots.h  \
     about.h \
-    formarrows.h \
-    formscreenshots.h
+    formarrows.h
 
 FORMS += \
         mainwindow.ui \
     about.ui \
     formarrows.ui \
+    formcharts.ui \
     formscreenshots.ui
 
 RESOURCES += \
