@@ -3,6 +3,7 @@
 L'objectif est d'enregistrer les projets, de les relire et de les exporter sous forme l'image.
 
 #éléments communs
+
 On doit avoir dans un menu 
 -une entrée sauvegarde de projets
 -une entrée lecture de projet
@@ -10,6 +11,7 @@ On doit avoir dans un menu
 Les 3 entrées ouvrent une boite de dialogue pour choisir le dossier et le nom du fichier à enregistrer ou à ouvrir.
 
 #L'enregistrement
+
 L'enregistrement permet de stocker dans un fichier l'ensemble des données enregistrées par l'utilisateur pour un projet à savoir
 -la liste des calques (bulles,clipart)
 -leur emplacement dans un rectangle pour les calques
