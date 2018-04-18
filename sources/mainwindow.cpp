@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    connect (ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT (slot_NumberedBullets ()));
     init();
 }
 
@@ -58,13 +58,13 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
 
-    connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
-    connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
-    connect(ui->actionClipart,         SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
-    connect(ui->actionNumberedBullets, SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
-    connect(ui->actionPicture,         SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
-    connect(ui->actionScreenshot,      SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
-    connect(ui->actionTextBox,         SIGNAL( triggered(bool) ), this, SLOT( changeLateralForm(bool) ));
+    connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionClipart,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionNumberedBullets, SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionPicture,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionScreenshot,      SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionTextBox,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 }
 
 ///
@@ -100,7 +100,7 @@ void MainWindow::buildToolBar()
 ///
 /// \brief MainWindow::changeLateralForm
 /// Change stacked widget view depending on the action clicked
-void MainWindow::changeLateralForm(bool)
+void MainWindow::actionClicked(bool)
 {
     if (sender() == ui->actionArrow) {
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_ARROW]);
@@ -121,6 +121,11 @@ void MainWindow::changeLateralForm(bool)
     } else if (sender() == ui->actionTextBox) {
        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
     }
+}
+
+void MainWindow::slot_NumberedBullets()
+{
+
 }
 
 ///
