@@ -238,7 +238,7 @@
                            </widget>
                           </item>
                           <item>
-                           <widget class="QToolButton" name="toolButtonFillColorContents">
+                           <widget class="ColorButton" name="toolButtonFillColorContents">
                             <property name="text">
                              <string>...</string>
                             </property>

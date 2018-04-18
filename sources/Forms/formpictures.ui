@@ -235,7 +235,7 @@
                 <item>
                  <widget class="QLabel" name="label_7">
                   <property name="text">
-                   <string>Font Colour</string>
+                   <string>Font Color</string>
                   </property>
                  </widget>
                 </item>
@@ -264,9 +264,9 @@
                  <widget class="QLineEdit" name="lineEdit_lg_si"/>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="toolButton_lg_colour">
+                 <widget class="ColorButton" name="toolButton_lg_colour">
                   <property name="text">
-                   <string>...</string>
+                   <string>color</string>
                   </property>
                  </widget>
                 </item>
@@ -344,6 +344,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>Classes/colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>
