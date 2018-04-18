@@ -24,7 +24,6 @@
 #include "Classes/graphsgraphicsitem.h"
 
 
-
 // Constructor, destructor
 // -----------------------
 
