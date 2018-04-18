@@ -29,7 +29,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    about.cpp \
     Forms/formarrows.cpp \
     Forms/formcharts.cpp \
     Forms/formcliparts.cpp \
@@ -41,11 +40,11 @@ SOURCES += \
     Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
-    Classes/arrow.cpp
+    Classes/arrow.cpp \
+    Classes/graphsgraphicsitem.cpp
 
 HEADERS += \
     mainwindow.h \
-    about.h \
     Forms/formarrows.h \
     Forms/formcharts.h \
     Forms/formcliparts.h \
@@ -57,7 +56,8 @@ HEADERS += \
     Classes/save.h \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
-    Classes/arrow.h
+    Classes/arrow.h \
+    Classes/graphsgraphicsitem.h
 
 FORMS += \
     mainwindow.ui \
