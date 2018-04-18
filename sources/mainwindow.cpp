@@ -147,6 +147,11 @@ void MainWindow::slotTextBoxes()
     //m_scene.addItem(new TextBoxItem());
 }
 
+void MainWindow::slotTextPicture()
+{
+    //m_scene.addItem(new PictureItem());
+}
+
 ///
 /// \brief exportView
 /// This slot is called on export
