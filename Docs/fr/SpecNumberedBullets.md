@@ -17,5 +17,5 @@ Pour des bulles numérotées vous pouvez :
 - Sélectionner la forme de bulles.
 	rectangle
 	rond
-	rectangle avec radius
+	rectangle arrondi
 	
