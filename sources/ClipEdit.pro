@@ -41,11 +41,9 @@ SOURCES += \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
     Classes/arrow.cpp \
-<<<<<<< HEAD
-    screenshotsgraphicsitem.cpp
-=======
-    numberedbulletgraphicitem.cpp
->>>>>>> f0f597b68b28f2124d7776dd6c3237410746eecc
+    screenshotsgraphicsitem.cpp \
+    numberedbulletgraphicitem.cpp \
+    picturesgraphicsitem.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -61,11 +59,11 @@ HEADERS += \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
     Classes/arrow.h \
-<<<<<<< HEAD
-    screenshotsgraphicsitem.h
-=======
-    numberedbulletgraphicitem.h
->>>>>>> f0f597b68b28f2124d7776dd6c3237410746eecc
+    screenshotsgraphicsitem.h \
+    numberedbulletgraphicitem.h \
+    picturesgraphicsitem.h
+
+
 
 FORMS += \
     mainwindow.ui \
