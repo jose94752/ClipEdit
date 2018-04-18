@@ -13,7 +13,7 @@
 #include "formcliparts.h"
 #include "ui_formcliparts.h"
 
-#include "../Canvas_Items/Item_Arrow.h"
+#include "../Items/item_arrow.h"
 
 // Constructor, destructor
 // -----------------------
@@ -38,7 +38,7 @@ FormCliparts::~FormCliparts()
 
 void FormCliparts::event_onClick(bool)
 {
-    Item_Arrow* arrow = new Item_Arrow();
+    ItemArrow* arrow = new ItemArrow();
 
     if (arrow != NULL)
     {

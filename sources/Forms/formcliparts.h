@@ -22,7 +22,7 @@ namespace Ui
     class FormCliparts;
 }
 
-class Item_Arrow;
+class ItemArrow;
 
 
 // Class
@@ -51,7 +51,7 @@ class FormCliparts
 
         Ui::FormCliparts* ui;
 
-        QVector<Item_Arrow*> list_arrows;
+        QVector<ItemArrow*> list_arrows;
 };
 
 #endif
