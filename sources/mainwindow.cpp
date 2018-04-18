@@ -11,9 +11,12 @@
 // --------
 
 #include <QDebug>
+#include <QFile>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "Classes/save.h"
 
 
 #define INIT_BUTTON(BUTTON_ID, TEXT, PIXMAP) \
@@ -87,7 +90,7 @@ void MainWindow::buildMenu()
 {
     // Connects
     connect(ui->actionSave,    SIGNAL( triggered(bool) ), this, SLOT( save(bool) ));
-    connect(ui->actionSave,    SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
+    connect(ui->actionSave_as,    SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
     connect(ui->actionOpen,    SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports, SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
 
@@ -217,5 +220,16 @@ void MainWindow::save(bool)
 ///
 void MainWindow::saveAs(bool)
 {
-    //to do
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.clipEdit",tr("ClipEdit (*.clipEdit)"));
+    if(fileName!=""){
+        QString extfilename=Save::verifyExtension(fileName);
+        QFile fileToSave(fileName);
+        if(fileName!=extfilename && fileToSave.exists()){
+            //DialogFileAlreadyExists dfae;
+            //dfae.exec();
+        }else{
+            ui->actionSave->setEnabled(true);
+            Save save(fileName);
+        }
+    }
 }
