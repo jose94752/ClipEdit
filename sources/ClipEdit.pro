@@ -43,6 +43,7 @@ SOURCES += \
     Classes/arrow.cpp \
     numberedbulletgraphicitem.cpp \
     picturesgraphicsitem.cpp
+    screenshotsgraphicsitem.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -60,7 +61,7 @@ HEADERS += \
     Classes/arrow.h \
     numberedbulletgraphicitem.h \
     picturesgraphicsitem.h
-
+    screenshotsgraphicsitem.h
 
 FORMS += \
     mainwindow.ui \
