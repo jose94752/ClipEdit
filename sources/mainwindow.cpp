@@ -20,7 +20,7 @@
 
 #include "picturesgraphicsitem.h"
 #include "numberedbulletgraphicitem.h"
-#include "graphsgraphicsitem.h"
+//#include "graphsgraphicsitem.h"
 
 
 // Constructor, destructor
