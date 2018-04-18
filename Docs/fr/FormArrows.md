@@ -5,7 +5,7 @@
 | QGroupBox noms objets        |
 | ---------------------------- |
 | groupBoxAnchorArrowPoints    |
-| groupBoxArrowSettings   |
+| groupBoxArrowSettings        |
 
 
 ## QLabels
