@@ -18,6 +18,9 @@
 #include "ui_mainwindow.h"
 #include "Classes/save.h"
 
+#include "picturesgraphicsitem.h"
+#include "numberedbulletgraphicitem.h"
+
 
 // Constructor, destructor
 // -----------------------
@@ -26,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect (ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT (slot_NumberedBullets ()));
     init();
 }
 
@@ -44,6 +46,7 @@ void MainWindow::init()
 {
     buildMenu();
     buildToolBar();
+    buildView();
 }
 
 ///
@@ -65,6 +68,11 @@ void MainWindow::buildMenu()
     connect(ui->actionPicture,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionScreenshot,      SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionTextBox,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+
+    // INSERT YOUR GRAPHIC ITEMS SLOT HERE
+    connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
+    connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
+    connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
 }
 
 ///
@@ -91,6 +99,12 @@ void MainWindow::buildToolBar()
     m_listIndexes.insert(BUTTON_ID_LAYERS,      ui->stackedWidgetForms->addWidget(&m_formLayers));
 
     ui->stackedWidgetForms->setCurrentIndex(0);
+}
+
+void MainWindow::buildView()
+{
+    m_scene.setSceneRect(-400, -400, 800, 800);
+    ui->graphicsView->setScene(&m_scene);
 }
 
 
@@ -123,11 +137,16 @@ void MainWindow::actionClicked(bool)
     }
 }
 
-void MainWindow::slot_NumberedBullets()
+void MainWindow::slotNumberedBullets()
 {
-  /*ui->stackedWidgetForms->... =*/
   NumberedBulletGraphicItem * numberedBulletGraphicItem;
   numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
+
+}
+
+void MainWindow::slotTextBoxes()
+{
+    //m_scene.addItem(new TextBoxItem());
 }
 
 ///
