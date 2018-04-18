@@ -11,6 +11,8 @@
 // --------
 
 #include <QDebug>
+#include <QFile>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -217,5 +219,16 @@ void MainWindow::save(bool)
 ///
 void MainWindow::saveAs(bool)
 {
-    //to do
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.clipEdit",tr("ClipEdit (*.clipEdit)"));
+    if(fileName!=""){
+        //QString extfilename=Save::verifyExtension(fileName);
+        QFile fileToSave(fileName);
+        //if(fileName!=extfilename && fileToSave.exists()){
+            //DialogFileAlreadyExists dfae;
+            //dfae.exec();
+        //}else{
+            ui->actionSave->setEnabled(true);
+            //Save save(fileName);
+       // }
+    }
 }
