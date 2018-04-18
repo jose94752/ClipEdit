@@ -125,7 +125,9 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::slot_NumberedBullets()
 {
-
+  /*ui->stackedWidgetForms->... =*/
+  NumberedBulletGraphicItem * numberedBulletGraphicItem;
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
 }
 
 ///
