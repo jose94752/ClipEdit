@@ -9,15 +9,13 @@
 
 #ifndef FORMNUMBEREDBULLETS_H
 #define FORMNUMBEREDBULLETS_H
-//#include "commongraphicitem.h"
 
 #include <QWidget>
 
-#include "../Classes/One_Form.h"
-
 
 // Forward Declaration
-namespace Ui {
+namespace Ui
+{
     class FormNumberedBullets;
 }
 
@@ -25,18 +23,21 @@ namespace Ui {
 // Class
 // -----
 
-class FormNumberedBullets: public QWidget, public One_Form {
+class FormNumberedBullets: public QWidget
+{
     Q_OBJECT
 
 
-public:
-    explicit FormNumberedBullets(One_Layered_Canvas& /*app_canvas*/,
-                                 QWidget*            /*parent*/ = 0);
+    public:
 
-    ~FormNumberedBullets();
+        explicit FormNumberedBullets(QWidget* parent = 0);
 
-private:
-    Ui::FormNumberedBullets *ui;
+        ~FormNumberedBullets();
+
+    private:
+
+        // UI
+        Ui::FormNumberedBullets *ui;
 };
 
-#endif // FORMNUMBEREDBULLETS_H
+#endif

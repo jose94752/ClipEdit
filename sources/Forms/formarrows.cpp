@@ -18,9 +18,9 @@
 // Constructor, destructor
 // -----------------------
 
-FormArrows::FormArrows(One_Layered_Canvas& app_canvas, QWidget *parent) :
-            QWidget(parent), One_Form(app_canvas), ui(new Ui::FormArrows) {
-
+FormArrows::FormArrows(QWidget *parent)
+    :   QWidget(parent), ui(new Ui::FormArrows)
+{
     ui->setupUi(this);
 }
 

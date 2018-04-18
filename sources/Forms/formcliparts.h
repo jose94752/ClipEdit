@@ -16,11 +16,9 @@
 #include <QVector>
 #include <QWidget>
 
-#include "../Classes/One_Form.h"
-
-
 // Forward Declarations
-namespace Ui {
+namespace Ui
+{
     class FormCliparts;
 }
 
@@ -30,31 +28,30 @@ class Item_Arrow;
 // Class
 // -----
 
-class FormCliparts: public QWidget, public One_Form {
+class FormCliparts
+    :   public QWidget
+{
     Q_OBJECT
 
+    // Constructor & Destructor
+    public:
 
-// Constructor & Destructor
-public:
+        explicit FormCliparts(QWidget* parent = 0);
 
-    explicit FormCliparts(One_Layered_Canvas& /*app_canvas*/,
-                          QWidget*            /*parent*/ = 0);
+        ~FormCliparts();
 
-    ~FormCliparts();
+    // Event
+    private slots:
 
-
-// Event
-private slots:
-
-    void event_onClick(bool);
+        void event_onClick(bool);
 
 
-// Data Members
-private:
+    // Data Members
+    private:
 
-    Ui::FormCliparts* ui;
+        Ui::FormCliparts* ui;
 
-    QVector<Item_Arrow*> list_arrows;
+        QVector<Item_Arrow*> list_arrows;
 };
 
 #endif

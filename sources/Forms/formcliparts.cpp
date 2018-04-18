@@ -18,8 +18,9 @@
 // Constructor, destructor
 // -----------------------
 
-FormCliparts::FormCliparts(One_Layered_Canvas& app_canvas, QWidget *parent) :
-    QWidget(parent), One_Form(app_canvas), ui(new Ui::FormCliparts) {
+FormCliparts::FormCliparts(QWidget* parent)
+    :   QWidget(parent), ui(new Ui::FormCliparts)
+{
 
     ui->setupUi(this);
 
@@ -27,19 +28,22 @@ FormCliparts::FormCliparts(One_Layered_Canvas& app_canvas, QWidget *parent) :
 }
 
 
-FormCliparts::~FormCliparts() {
+FormCliparts::~FormCliparts()
+{
     delete ui;
 
     list_arrows.clear();
 }
 
 
-void FormCliparts::event_onClick(bool) {
+void FormCliparts::event_onClick(bool)
+{
     Item_Arrow* arrow = new Item_Arrow();
 
-    if (arrow != NULL) {
+    if (arrow != NULL)
+    {
         list_arrows.append(arrow);
 
-        canvas.add_widget(arrow);
+        //canvas.add_widget(arrow);
     }
 }
