@@ -14,10 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-
-
-</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0" colspan="2">
@@ -85,6 +82,15 @@
    </item>
    <item row="2" column="0">
     <widget class="QPushButton" name="pushButton">
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+	color: yellow;
+	backgroud-color:  #27a9c3
+	border-whidth: 0px
+	border-raduis: 3px
+}</string>
+     </property>
      <property name="text">
       <string>Go</string>
      </property>
@@ -98,6 +104,9 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#2e3436;&quot;&gt;ScreenShot&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
