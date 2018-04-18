@@ -72,6 +72,7 @@ void MainWindow::buildMenu()
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
     connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
+    connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
 }
 
 ///
