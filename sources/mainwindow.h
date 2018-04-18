@@ -17,7 +17,7 @@
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStackedWidget>
 
-#include "Components/One_Menu_Button.h"
+#include "Components/One_menu_Button.h"
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
