@@ -1,13 +1,19 @@
-# Spécification QStackedWidget sur le MainWindows
-	- Nous utilisons des QWidget pour que chaque spécification
+# Spécification QStackedWidget sur le fenêtre principale
 
-## Liste des QWidget et correspondances
-	- Arrows  [SpecArrows](/Docs/fr/SpecArrows.md)
-	- Charts  [SpecCharts](/Docs/fr/SpecCharts.md)
-	- Cliparts  [SpecCliparts](/Docs/fr/SpecCliparts.md)
-	- Layers  [SpecLayers](/Docs/fr/SpecLayers.md)
-	- NumberedBullets  [SpecNumberedBullets](/Docs/fr/SpecNumberedBullets.md)
-	- Pictures  [SpecPictures](/Docs/fr/SpecPictures.md)
-	- ScreenShots  [SpecScreenShots](/Docs/fr/SpecScreenShots.md)
-	- TextBoxes  [SpecTextBoxes](/Docs/fr/SpecTextBoxes.md)
-	
+	- Nous utilisons des QWidget pour chaque spécification
+
+
+## Liste des QWidget, leur nom de classe formulaire et leur spécification
+
+| Nom du QWidget   | Nom de la classe formulaire  | Spécification                                     |
+| ---------------- | :--------------------------: | ------------------------------------------------- |
+| Arrows           | FormArrows                   | [SpecArrows](./SpecArrows.md)                     |
+| Charts           | FormCharts                   | [SpecCharts](./SpecCharts.md)                     |
+| Cliparts         | FormCliparts                 | [SpecCliparts](./SpecCliparts.md)                 |
+| Layers           | FormLayers                   | [SpecLayers](./SpecLayers.md)                     |
+| NumberedBullets  | FormNumberedBullets          | [SpecNumberedBullets](./SpecNumberedBullets.md)   |
+| Pictures         | FormPictures                 | [SpecPictures](./SpecPictures.md)                 |
+| ReadWriteExports | FormReadWriteExports         | [SpecReadWriteExports](./SpecReadWriteExports.md) |
+| ScreenShots      | FormScreenShots              | [SpecScreenShots](./SpecScreenShots.md)           |
+| TextBoxes        | FormTextBoxes                | [SpecTextBoxes](./SpecTextBoxes.md)               |
+
