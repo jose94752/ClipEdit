@@ -4,5 +4,11 @@
 ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QGraphicsItem *parent)
         : QGraphicsItem(parent)
 {
+    //Constructor
+
+
+    //Destructor
+    vitual ~ScreenshotsGraphicsItem();
+
 
 }
