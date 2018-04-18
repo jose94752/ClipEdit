@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += charts
+QT += xml
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -39,7 +40,8 @@ SOURCES += \
     Forms/formscreenshots.cpp \
     Forms/formtextboxes.cpp \
     Components/one_menu_button.cpp \
-    Components/one_layered_canvas.cpp
+    Components/one_layered_canvas.cpp \
+    Classes/save.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -55,7 +57,8 @@ HEADERS += \
     Forms/formscreenshots.h \
     Forms/formtextboxes.h \
     Components/one_menu_button.h \
-    Components/one_layered_canvas.h
+    Components/one_layered_canvas.h \
+    Classes/save.h
 
 FORMS += \
     mainwindow.ui \
