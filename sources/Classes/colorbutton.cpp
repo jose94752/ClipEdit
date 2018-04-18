@@ -27,6 +27,7 @@ void ColorButton::setColor(QColor vcolor)
 void ColorButton::slotChoiseColor(bool)
 {
       color = QColorDialog::getColor(color, this );
+      update();
 }
 
 void ColorButton::paintEvent( QPaintEvent *event )
