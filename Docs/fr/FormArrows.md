@@ -1,12 +1,18 @@
 # Liste des objets graphiques FormArrows
 
+## QGroupBox
+
+| QGroupBox noms objets        |
+| ---------------------------- |
+| groupBoxAnchorArrowPoints    |
+| groupBoxArrowSettings   |
+
+
 ## QLabels
 	
 | QLabel noms objets           |
 | ---------------------------- |
-| labelAnchorArrowPoints       |
 | labelArrowHeight             |
-| labelArrowSettings           |
 | labelArrowWidth              |
 | labelFillColor               |
 | labelHeadTypeChoice          |
@@ -31,7 +37,8 @@
 | --------------------------- |
 | spinBoxArrowWidthContents   |
 | spinBoxArrowHeightContents  |
-	
+
+
 ## QQToolButton
 
 | QToolButton noms objets         |
@@ -39,24 +46,23 @@
 | toolButtonOutlineColorContents  |
 | toolButtonFillColorContents     |
 
+
 ## QPushButton
 
 | QPushButton noms objets        |
 | ------------------------------ |
 | pushButtonChangeOutlineColor   |
 | pushButtonChangeFillColor      |
+| pushButtonBeforeShape          |
+| pushButtonDefaultShape         |
+
 
 ## QRadioButton
 
-| QRadioButton noms objets      |
+| QRadioButton noms objets        |
 | ------------------------------- |
 | radioButtonWithoutAnchorPoint   |
 | radioButton1AnchorPoints        |
 | radioButton2AnchorPoints        |
 
-## QDialogButtonBox
-
-| QDialogButtonBox noms objets    |
-| ------------------------------- |
-| buttonBoxOptionsForArrows       |
 
