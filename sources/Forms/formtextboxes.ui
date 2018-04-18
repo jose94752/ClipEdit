@@ -36,7 +36,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBoxStyle">
+    <widget class="QGroupBox" name="groupBoxContent">
      <property name="styleSheet">
       <string notr="true"/>
      </property>
@@ -166,7 +166,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBoxContent">
+    <widget class="QGroupBox" name="groupBoxStyle">
      <property name="title">
       <string>Style</string>
      </property>

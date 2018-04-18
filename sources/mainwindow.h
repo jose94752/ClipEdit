@@ -41,9 +41,9 @@ class MainWindow
 {
     Q_OBJECT
 
-    // Constructor & Destructor
     public:
 
+        // Constructor & Destructor
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
