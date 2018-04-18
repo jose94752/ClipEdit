@@ -12,17 +12,25 @@
 #ifndef TEXTBOXITEM_H
 #define TEXTBOXITEM_H
 
+// Includes
+// --------
+
 #include <QGraphicsItem>
+
+// Class
+// -----
 
 class TextBoxItem
     :   public QGraphicsItem
 {
     public:
 
-        TextBoxItem();
+        // Constructor, destructor
+        TextBoxItem(QGraphicsItem* parent = 0);
 
+        // Pure virtual methods implementation
         QRectF boundingRect() const;
-        void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 };
 
 #endif

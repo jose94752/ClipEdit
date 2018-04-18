@@ -9,6 +9,9 @@
 ================================================
 */
 
+// Includes
+// --------
+
 #include <QPainter>
 #include <ctime>
 #include <cstdlib>
@@ -16,12 +19,19 @@
 #include "textboxitem.h"
 
 
-TextBoxItem::TextBoxItem()
+// Constructor, destructor
+// -----------------------
+
+TextBoxItem::TextBoxItem(QGraphicsItem* parent)
+    :   QGraphicsItem(parent)
 {
     srand(time(NULL));
     setPos(rand() % 300, rand() % 300);
 }
 
+
+// Pure virtual methods implementation
+// -----------------------------------
 
 QRectF TextBoxItem::boundingRect() const
 {
