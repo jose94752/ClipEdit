@@ -39,7 +39,6 @@ SOURCES += \
     Forms/formpictures.cpp \
     Forms/formscreenshots.cpp \
     Forms/formtextboxes.cpp \
-    Components/one_menu_button.cpp \
     Components/one_layered_canvas.cpp \
     Classes/save.cpp
 
@@ -56,7 +55,6 @@ HEADERS += \
     Forms/formpictures.h \
     Forms/formscreenshots.h \
     Forms/formtextboxes.h \
-    Components/one_menu_button.h \
     Components/one_layered_canvas.h \
     Classes/save.h
 
