@@ -164,7 +164,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="ToolButton_BulletColor">
+                 <widget class="ColorButton" name="ToolButton_BulletColor">
                   <property name="text">
                    <string>...</string>
                   </property>
@@ -215,7 +215,7 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
-               <widget class="QToolButton" name="ToolButton_NumberColor">
+               <widget class="ColorButton" name="ColorButton_NumberColor">
                 <property name="text">
                  <string>...</string>
                 </property>
@@ -270,6 +270,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>Classes/colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

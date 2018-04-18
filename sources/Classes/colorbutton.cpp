@@ -10,8 +10,8 @@ ColorButton::ColorButton(QWidget* widget):QToolButton(widget)
 {
    color=Qt::black;
    connect(this,SIGNAL(clicked(bool)),this,SLOT(slotChoiseColor(bool)));
-   //QPaintEvent pe;
-   //this->paintEvent(pe);
+   this->setText("");
+   //this->resize(150,45);
 }
 
 QColor ColorButton::getColor()
@@ -38,6 +38,6 @@ QToolButton::paintEvent(event) ;
     QPen p(color);
     painter.setPen(p);
     painter.setBrush(b);
-    painter.drawEllipse(this->width()/2,this->height()/2,this->width()/3,this->height()/3);
+    painter.drawEllipse(this->width()/8,this->height()/8,3*this->width()/4,3*this->height()/4);
 
 }
