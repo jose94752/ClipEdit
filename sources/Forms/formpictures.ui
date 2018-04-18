@@ -266,7 +266,7 @@
                 <item>
                  <widget class="ColorButton" name="toolButton_lg_colour">
                   <property name="text">
-                   <string>color</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
