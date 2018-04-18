@@ -91,6 +91,7 @@ class MainWindow
         void openFile(bool);
         void exportView(bool);
         void actionClicked(bool);
+        void  slot_NumberedBullets ();
 };
 
 #endif

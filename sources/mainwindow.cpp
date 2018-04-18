@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    connect (ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT (slot_NumberedBullets ()));
     init();
 }
 
@@ -121,6 +121,11 @@ void MainWindow::actionClicked(bool)
     } else if (sender() == ui->actionTextBox) {
        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
     }
+}
+
+void MainWindow::slot_NumberedBullets()
+{
+
 }
 
 ///
