@@ -15,6 +15,7 @@
 
 #include <QMainWindow>
 #include <QMap>
+#include <QGraphicsScene>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -77,11 +78,14 @@ class MainWindow
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
 
+        // Scene
+        QGraphicsScene m_scene;
+
         // Building
         void init();
         void buildMenu();
         void buildToolBar();
-
+        void buildView();
 
     private slots:
 
@@ -91,6 +95,11 @@ class MainWindow
         void openFile(bool);
         void exportView(bool);
         void actionClicked(bool);
+
+        // SLOTS TEST GRAPHIC ITEM INSERTION
+        void slotNumberedBullets();
+        void slotTextBoxes();
+        void slotTextPicture();
 };
 
 #endif

@@ -6,7 +6,7 @@
 
 QT       += core gui
 QT       += charts
-QT += xml
+QT       += xml
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -41,7 +41,9 @@ SOURCES += \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
     Classes/arrow.cpp \
-    Classes/arrowsgraphicsitem.cpp
+    screenshotsgraphicsitem.cpp \
+    numberedbulletgraphicitem.cpp \
+    picturesgraphicsitem.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -57,11 +59,12 @@ HEADERS += \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
     Classes/arrow.h \
-    Classes/arrowsgraphicsitem.h
+    numberedbulletgraphicitem.h \
+    picturesgraphicsitem.h
+    screenshotsgraphicsitem.h
 
 FORMS += \
     mainwindow.ui \
-    about.ui \
     Forms/formarrows.ui \
     Forms/formcharts.ui \
     Forms/formcliparts.ui \
