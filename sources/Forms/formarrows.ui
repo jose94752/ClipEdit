@@ -188,7 +188,7 @@
                                </widget>
                               </item>
                               <item>
-                               <widget class="QToolButton" name="toolButtonOutlineColorContents">
+                               <widget class="ColorButton" name="toolButtonOutlineColorContents">
                                 <property name="text">
                                  <string>...</string>
                                 </property>
@@ -399,6 +399,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>Classes/colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

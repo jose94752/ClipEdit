@@ -36,22 +36,20 @@ namespace Ui
 // Class
 // -----
 
-class MainWindow: public QMainWindow
+class MainWindow
+    :   public QMainWindow
 {
     Q_OBJECT
 
-
-    // Constructor & Destructor
     public:
 
+        // Constructor & Destructor
         explicit MainWindow(QWidget* parent = 0);
-
         ~MainWindow();
 
-
-    // Buttons Ids
     private:
 
+        // Buttons Ids
         enum e_BUTTON_IDS {
             BUTTON_ID_ARROW = 0,
             BUTTON_ID_CHART,
@@ -63,28 +61,6 @@ class MainWindow: public QMainWindow
             BUTTON_ID_LAYERS,
             NB_BUTTONS
         };
-
-
-    // Main Menu
-    private:
-
-      QMap<e_BUTTON_IDS, int> m_listIndexes;
-
-      int m_selectedForm;
-
-
-
-    private:
-
-        void init();
-
-        void buildMenu();
-
-        void buildToolBar();
-
-
-    // Data Members
-    private:
 
         // UI
         Ui::MainWindow* ui;
@@ -98,6 +74,13 @@ class MainWindow: public QMainWindow
         FormPictures        m_formPictures;
         FormScreenshots     m_formScreenshots;
         FormTextBoxes       m_formTextboxes;
+
+        QMap<e_BUTTON_IDS, int> m_listIndexes;
+
+        // Building
+        void init();
+        void buildMenu();
+        void buildToolBar();
 
 
     private slots:
