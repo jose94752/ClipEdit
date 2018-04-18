@@ -41,7 +41,7 @@ SOURCES += \
     Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
-    Items/item_arrow.cpp
+    Classes/arrow.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -57,7 +57,7 @@ HEADERS += \
     Classes/save.h \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
-    Items/item_arrow.h
+    Classes/arrow.h
 
 FORMS += \
     mainwindow.ui \

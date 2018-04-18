@@ -13,7 +13,7 @@
 #include "formcliparts.h"
 #include "ui_formcliparts.h"
 
-#include "../Items/item_arrow.h"
+//#include "../Items/item_arrow.h"
 
 // Constructor, destructor
 // -----------------------
@@ -32,18 +32,18 @@ FormCliparts::~FormCliparts()
 {
     delete ui;
 
-    list_arrows.clear();
+    //list_arrows.clear();
 }
 
 
 void FormCliparts::event_onClick(bool)
 {
-    ItemArrow* arrow = new ItemArrow();
+//    ItemArrow* arrow = new ItemArrow();
 
-    if (arrow != NULL)
-    {
-        list_arrows.append(arrow);
+//    if (arrow != NULL)
+//    {
+//        list_arrows.append(arrow);
 
-        //canvas.add_widget(arrow);
-    }
+//        canvas.add_widget(arrow);
+//    }
 }

@@ -51,7 +51,7 @@ class FormCliparts
 
         Ui::FormCliparts* ui;
 
-        QVector<ItemArrow*> list_arrows;
+        //QVector<ItemArrow*> list_arrows;
 };
 
 #endif
