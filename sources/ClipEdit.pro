@@ -40,10 +40,12 @@ SOURCES += \
     Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
-    numberedbulletgraphicitem.cpp \
-    picturesgraphicsitem.cpp \
+    Classes/arrow.cpp \
+    Classes/graphsgraphicsitem.cpp \
     textboxitem.cpp \
-    screenshotsgraphicsitem.cpp
+    screenshotsgraphicsitem.cpp \
+    numberedbulletgraphicitem.cpp \
+    picturesgraphicsitem.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -58,10 +60,12 @@ HEADERS += \
     Classes/save.h \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
-    numberedbulletgraphicitem.h \
-    picturesgraphicsitem.h \
+    Classes/arrow.h \
+    Classes/graphsgraphicsitem.h \
     textboxitem.h \
-    screenshotsgraphicsitem.h
+    screenshotsgraphicsitem.h \
+    numberedbulletgraphicitem.h \
+    picturesgraphicsitem.h
 
 FORMS += \
     mainwindow.ui \
