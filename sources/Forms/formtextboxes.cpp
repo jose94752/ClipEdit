@@ -47,11 +47,11 @@ void FormTextBoxes::pickColor(bool)
 
     if (sender() == ui->pushButtonBackgroundColor)
     {
-        //ui->pushButtonBackgroundColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
+        ui->pushButtonBackgroundColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
     }
     else if (sender() == ui->pushButtonTextColor)
     {
-        //ui->pushButtonTextColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
+        ui->pushButtonTextColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
     }
 
     update();
