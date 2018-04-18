@@ -16,9 +16,9 @@
 // Constructor, destructor
 // -----------------------
 
-FormLayers::FormLayers(One_Layered_Canvas& app_canvas, QWidget *parent) :
-    QWidget(parent), One_Form(app_canvas), ui(new Ui::FormLayers) {
-
+FormLayers::FormLayers(QWidget *parent)
+    :   QWidget(parent), ui(new Ui::FormLayers)
+{
     ui->setupUi(this);
 }
 
