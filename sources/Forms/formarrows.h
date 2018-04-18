@@ -17,23 +17,28 @@
 
 #include <QWidget>
 
-namespace Ui
-{
+#include "../Classes/One_Form.h"
+
+
+// Forward Declaration
+namespace Ui {
     class FormArrows;
 }
+
 
 // Class
 // -----
 
-class FormArrows
-    :   public QWidget
-{
+class FormArrows: public QWidget, public One_Form {
     Q_OBJECT
+
 
     public:
 
         // Constructors, destructor
-        explicit FormArrows(QWidget* parent = 0);
+        explicit FormArrows(One_Layered_Canvas& /*app_canvas*/,
+                            QWidget*            /*parent*/ = 0);
+
         ~FormArrows();
 
     private:

@@ -18,10 +18,9 @@
 // Constructor, destructor
 // -----------------------
 
-FormTextBoxes::FormTextBoxes(QWidget *parent)
-    :   QWidget(parent),
-        ui(new Ui::FormTextBoxes)
-{
+FormTextBoxes::FormTextBoxes(One_Layered_Canvas& app_canvas, QWidget *parent) :
+    QWidget(parent), One_Form(app_canvas), ui(new Ui::FormTextBoxes) {
+
     ui->setupUi(this);
 
     ui->pushButtonBackgroundColor->setAutoFillBackground(true);
