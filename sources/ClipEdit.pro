@@ -42,7 +42,8 @@ SOURCES += \
     Components/one_layered_canvas.cpp \
     Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
-    Classes/colorbutton.cpp
+    Classes/colorbutton.cpp \
+    Classes/arrow.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -60,7 +61,8 @@ HEADERS += \
     Components/one_layered_canvas.h \
     Classes/save.h \
     Forms/dialogfilealreadyexists.h \
-    Classes/colorbutton.h
+    Classes/colorbutton.h \
+    Classes/arrow.h
 
 FORMS += \
     mainwindow.ui \
