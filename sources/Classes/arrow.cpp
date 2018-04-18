@@ -11,6 +11,8 @@
 
 #include "Classes/arrow.h"
 
+/*Arrow::Arrow(DiagramItem *startItem, DiagramItem *endItem, QGraphicsItem *parent)
+    : QGraphicsLineItem(parent)*/
 Arrow::Arrow()
 {
 
