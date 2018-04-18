@@ -3,7 +3,6 @@
 
 	- Chemin de l'image (path)
 	- Dimension de l'image
-	- Redimensionnement de l'image
 	- Filre général RVB/Niveau de gris
 	- Filtre niveau de transparence (optionnel)
 	- Légende de texte
