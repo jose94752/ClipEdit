@@ -16,6 +16,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "Classes/save.h"
 
 
 #define INIT_BUTTON(BUTTON_ID, TEXT, PIXMAP) \
@@ -221,14 +222,14 @@ void MainWindow::saveAs(bool)
 {
     QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.clipEdit",tr("ClipEdit (*.clipEdit)"));
     if(fileName!=""){
-        //QString extfilename=Save::verifyExtension(fileName);
+        QString extfilename=Save::verifyExtension(fileName);
         QFile fileToSave(fileName);
-        //if(fileName!=extfilename && fileToSave.exists()){
+        if(fileName!=extfilename && fileToSave.exists()){
             //DialogFileAlreadyExists dfae;
             //dfae.exec();
-        //}else{
+        }else{
             ui->actionSave->setEnabled(true);
-            //Save save(fileName);
-       // }
+            Save save(fileName);
+        }
     }
 }
