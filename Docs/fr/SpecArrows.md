@@ -25,4 +25,7 @@ En modifiant ou déplacant le(s)objet(s), la flèche l'est également
 	- Epaisseur traits contour 4 choix possibilités (1 - 4)
        
 	- Choix type tête
-           
+	
+	- Etat précédent (Before shape) pour la flèche en cours revenir aux conditions de quand Options pour flèches a été appelée.
+	
+	- Etat par défaut (Default shape) pour la flèche en cours redémarrer les Options pour flèches avec les conditions par défaut.
