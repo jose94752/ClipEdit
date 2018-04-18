@@ -6,41 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>682</width>
-    <height>442</height>
+    <width>743</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit_apercu">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>300</y>
-     <width>81</width>
-     <height>91</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>330</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Aperçu</string>
-   </property>
-  </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>40</y>
+     <x>50</x>
+     <y>30</y>
      <width>196</width>
      <height>168</height>
     </rect>
@@ -56,7 +33,7 @@
         <item>
          <widget class="QLabel" name="LabelBulletColor_2">
           <property name="text">
-           <string> Color</string>
+           <string>Color</string>
           </property>
          </widget>
         </item>
@@ -95,7 +72,7 @@
          <widget class="QComboBox" name="comboBox_shape_2">
           <item>
            <property name="text">
-            <string>cercle</string>
+            <string>circle</string>
            </property>
           </item>
           <item>
@@ -105,7 +82,7 @@
           </item>
           <item>
            <property name="text">
-            <string>rectangle arrondi</string>
+            <string>rounded corner rectangle </string>
            </property>
           </item>
          </widget>
@@ -122,8 +99,8 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>30</y>
+     <x>300</x>
+     <y>20</y>
      <width>352</width>
      <height>229</height>
     </rect>
@@ -162,13 +139,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLabel" name="label_bulletsize_6">
-        <property name="text">
-         <string>From</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item row="0" column="1">
@@ -185,10 +155,61 @@
       <item>
        <widget class="QSpinBox" name="spinBox_LineWidth_2"/>
       </item>
-      <item>
-       <widget class="QSpinBox" name="spinBox"/>
-      </item>
      </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>310</y>
+     <width>151</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_8">
+    <item>
+     <widget class="QLabel" name="label_apercu">
+      <property name="text">
+       <string>Aperçu</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="textEdi_apercu"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>360</y>
+     <width>246</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_From">
+      <property name="text">
+       <string>Numbered from </string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="spinBox_From"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_To">
+      <property name="text">
+       <string>to</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="spinBox_To"/>
     </item>
    </layout>
   </widget>
