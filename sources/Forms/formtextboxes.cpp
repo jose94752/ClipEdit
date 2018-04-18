@@ -11,6 +11,7 @@
 // --------
 
 #include <QColorDialog>
+#include <QColor>
 
 #include "formtextboxes.h"
 #include "ui_formtextboxes.h"
