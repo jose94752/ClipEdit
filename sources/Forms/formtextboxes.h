@@ -15,28 +15,39 @@
 
 #include <QWidget>
 
+#include "../Classes/One_Form.h"
+
+
+// Forward Declaration
+namespace Ui {
+    class FormTextBoxes;
+}
+
+
 // Class
 // -----
 
-namespace Ui {
-class FormTextBoxes;
-}
-
-class FormTextBoxes
-    :   public QWidget
-{
+class FormTextBoxes: public QWidget, public One_Form {
     Q_OBJECT
+
 
     public:
 
         // Constructor, destructor
-        explicit FormTextBoxes(QWidget *parent = 0);
+        explicit FormTextBoxes(One_Layered_Canvas& /*app_canvas*/,
+                               QWidget*            /*parent*/ = 0);
+
         ~FormTextBoxes();
+
+    private slots:
+
+        void pickColor(bool);
 
     private:
 
         // Ui
         Ui::FormTextBoxes *ui;
+
 };
 
 #endif

@@ -1,6 +1,6 @@
 /*
 ================================================
-* File:         formarrows.cpp
+* File:         formcharts.cpp
 * Project:      ClipEdit
 * Creation:     17/04/2018
 * Brief:        Options for Arrows
@@ -9,23 +9,16 @@
 ================================================
 */
 
-// Includes
-// --------
+#include "formcharts.h"
+#include "ui_formcharts.h"
 
-#include "formarrows.h"
-#include "ui_formarrows.h"
+FormCharts::FormCharts(One_Layered_Canvas& app_canvas, QWidget *parent) :
+    QWidget(parent), One_Form(app_canvas), ui(new Ui::FormCharts) {
 
-// Constructor, destructor
-// -----------------------
-
-FormArrows::FormArrows(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormArrows)
-{
     ui->setupUi(this);
 }
 
-FormArrows::~FormArrows()
+FormCharts::~FormCharts()
 {
     delete ui;
 }

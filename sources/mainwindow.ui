@@ -6,46 +6,228 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>487</width>
-    <height>425</height>
+    <width>689</width>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ClipEdit</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="centralLayout">
     <item>
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+     <widget class="QFrame" name="main_menu">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <widget class="QGraphicsView" name="graphicsView">
-       <property name="minimumSize">
-        <size>
-         <width>400</width>
-         <height>0</height>
-        </size>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>110</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>110</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-color:#d2d2d2;background-color:#E2E2E2;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <layout class="QVBoxLayout" name="menu_layout">
+       <property name="spacing">
+        <number>0</number>
        </property>
-      </widget>
-      <widget class="QStackedWidget" name="stackedWidget">
-       <property name="currentIndex">
-<<<<<<< HEAD
-        <number>9</number>
-=======
-        <number>1</number>
->>>>>>> c00872c423f8e768af4de5b697f862d22fc3dfe0
+       <property name="leftMargin">
+        <number>12</number>
        </property>
-       <widget class="QWidget" name="Arrows"/>
-       <widget class="FormCharts" name="Charts"/>
-       <widget class="QWidget" name="Cliparts"/>
-       <widget class="QWidget" name="Layers"/>
-       <widget class="QWidget" name="NumberedBullets"/>
-       <widget class="QWidget" name="Pictures"/>
-       <widget class="QWidget" name="ReadWriteExports"/>
-       <widget class="QWidget" name="ScreenShots"/>
-       <widget class="FormTextBoxes" name="TextBoxes"/>
-      </widget>
+       <property name="topMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>12</number>
+       </property>
+       <property name="bottomMargin">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="inner_main_menu" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="One_Menu_Button" name="button_arrow" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer01">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_chart" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer02">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_bullet" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer03">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_clipart" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer04">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_picture" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer05">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_textbox" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer06">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_screenshot" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer07">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>8</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="One_Menu_Button" name="button_layers" native="true"/>
+          </item>
+          <item>
+           <spacer name="menu_spacer08">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
@@ -55,8 +237,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>487</width>
-     <height>22</height>
+     <width>689</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
@@ -69,33 +251,6 @@
     <addaction name="actionExports"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Tools</string>
-    </property>
-    <widget class="QMenu" name="menuInsert">
-     <property name="title">
-      <string>Insert</string>
-     </property>
-     <addaction name="actionArrow"/>
-     <addaction name="actionCharts"/>
-     <addaction name="actionCliparts"/>
-     <addaction name="actionNumberedBullets"/>
-     <addaction name="actionPicture"/>
-     <addaction name="actionTextBox"/>
-    </widget>
-    <widget class="QMenu" name="menuLayers">
-     <property name="title">
-      <string>Layers</string>
-     </property>
-     <addaction name="actionNewLayer"/>
-     <addaction name="actionRemoveLayer"/>
-     <addaction name="actionMergeDown"/>
-    </widget>
-    <addaction name="menuInsert"/>
-    <addaction name="separator"/>
-    <addaction name="menuLayers"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
@@ -107,18 +262,31 @@
      <string>Edit</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuInsert">
+     <property name="title">
+      <string>Insert</string>
+     </property>
+     <addaction name="actionArrow"/>
+     <addaction name="actionChart"/>
+     <addaction name="actionClipart"/>
+     <addaction name="actionNumberedBullets"/>
+     <addaction name="actionPicture"/>
+     <addaction name="actionTextBox"/>
+    </widget>
+    <addaction name="menuInsert"/>
+    <addaction name="separator"/>
+    <addaction name="actionScreenshot"/>
+    <addaction name="separator"/>
+    <addaction name="actionLayers"/>
+   </widget>
    <addaction name="menufile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSave">
@@ -153,19 +321,19 @@
     <string>Insert Arrow</string>
    </property>
   </action>
-  <action name="actionCharts">
+  <action name="actionChart">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
      <normaloff>:/icons/icons/chart-icon.png</normaloff>:/icons/icons/chart-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Charts</string>
+    <string>Chart</string>
    </property>
    <property name="toolTip">
     <string>Insert Chart</string>
    </property>
   </action>
-  <action name="actionCliparts">
+  <action name="actionClipart">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
      <normaloff>:/icons/icons/clipart-icon.png</normaloff>:/icons/icons/clipart-icon.png</iconset>
@@ -245,26 +413,35 @@
     <string>Save as</string>
    </property>
   </action>
+  <action name="actionScreenshot">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/screenshot-icon.png</normaloff>:/icons/icons/screenshot-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Screenshot</string>
+   </property>
+   <property name="toolTip">
+    <string>Take a screenshot</string>
+   </property>
+  </action>
+  <action name="actionLayers">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/layer-icon.png</normaloff>:/icons/icons/layer-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Layers</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>FormTextBoxes</class>
+   <class>One_Menu_Button</class>
    <extends>QWidget</extends>
-   <header>formtextboxes.h</header>
+   <header>Components/one_menu_button.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-<<<<<<< HEAD
-   <class>formscreenshots</class>
-   <extends>QWidget</extends>
-   <header>formscreenshots.h</header>
-=======
-   <class>FormCharts</class>
-   <extends>QWidget</extends>
-   <header>formcharts.h</header>
-   <container>1</container>
->>>>>>> c00872c423f8e768af4de5b697f862d22fc3dfe0
   </customwidget>
  </customwidgets>
  <resources>
