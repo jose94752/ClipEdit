@@ -42,19 +42,15 @@ void FormTextBoxes::pickColor(bool)
 {
     // !! Stylesheets
 
-    QColor color = QColorDialog::getColor(Qt::white);
+    QColor color = QColorDialog::getColor(Qt::white, this);
 
     if (sender() == ui->pushButtonBackgroundColor)
     {
-        QPalette p = ui->pushButtonBackgroundColor->palette();
-        p.setColor(QPalette::Background, color);
-        ui->pushButtonBackgroundColor->setPalette(p);
+        ui->pushButtonBackgroundColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
     }
     else if (sender() == ui->pushButtonTextColor)
     {
-        QPalette p = ui->pushButtonTextColor->palette();
-        p.setColor(QPalette::Background, color);
-        ui->pushButtonTextColor->setPalette(p);
+        ui->pushButtonTextColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
     }
 
     update();
