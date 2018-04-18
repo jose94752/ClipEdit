@@ -6,7 +6,7 @@
 
 QT       += core gui
 QT       += charts
-QT += xml
+QT       += xml
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -29,7 +29,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    about.cpp \
     Forms/formarrows.cpp \
     Forms/formcharts.cpp \
     Forms/formcliparts.cpp \
@@ -45,7 +44,6 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
-    about.h \
     Forms/formarrows.h \
     Forms/formcharts.h \
     Forms/formcliparts.h \
@@ -61,7 +59,6 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
-    about.ui \
     Forms/formarrows.ui \
     Forms/formcharts.ui \
     Forms/formcliparts.ui \
