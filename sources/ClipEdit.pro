@@ -59,11 +59,9 @@ HEADERS += \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
     Classes/arrow.h \
-    screenshotsgraphicsitem.h \
     numberedbulletgraphicitem.h \
     picturesgraphicsitem.h
-
-
+    screenshotsgraphicsitem.h
 
 FORMS += \
     mainwindow.ui \
