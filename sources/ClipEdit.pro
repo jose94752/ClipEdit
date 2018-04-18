@@ -39,9 +39,10 @@ SOURCES += \
     Forms/formpictures.cpp \
     Forms/formscreenshots.cpp \
     Forms/formtextboxes.cpp \
-    Components/one_menu_button.cpp \
     Components/one_layered_canvas.cpp \
-    Classes/save.cpp
+    Classes/save.cpp \
+    Forms/dialogfilealreadyexists.cpp \
+    Classes/colorbutton.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -56,9 +57,10 @@ HEADERS += \
     Forms/formpictures.h \
     Forms/formscreenshots.h \
     Forms/formtextboxes.h \
-    Components/one_menu_button.h \
     Components/one_layered_canvas.h \
-    Classes/save.h
+    Classes/save.h \
+    Forms/dialogfilealreadyexists.h \
+    Classes/colorbutton.h
 
 FORMS += \
     mainwindow.ui \
@@ -72,7 +74,8 @@ FORMS += \
     Forms/formscreenshots.ui \
     Forms/formtextboxes.ui \
     Components/one_menu_button.ui \
-    Components/one_layered_canvas.ui
+    Components/one_layered_canvas.ui \
+    Forms/dialogfilealreadyexists.ui
 
 RESOURCES += \
     resources/resources.qrc
