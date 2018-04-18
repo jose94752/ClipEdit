@@ -234,16 +234,16 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <widget class="QPushButton" name="qBackColor">
+               <widget class="ColorButton" name="qBackColor">
                 <property name="text">
-                 <string>Background</string>
+                 <string> </string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="qColor">
+               <widget class="ColorButton" name="qColor">
                 <property name="text">
-                 <string>Color</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -310,6 +310,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header location="global">Classes/colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>qChartType</tabstop>
   <tabstop>qData</tabstop>
