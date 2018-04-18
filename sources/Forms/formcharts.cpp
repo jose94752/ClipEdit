@@ -12,9 +12,9 @@
 #include "formcharts.h"
 #include "ui_formcharts.h"
 
-FormCharts::FormCharts(One_Layered_Canvas& app_canvas, QWidget *parent) :
-    QWidget(parent), One_Form(app_canvas), ui(new Ui::FormCharts) {
-
+FormCharts::FormCharts(QWidget* parent)
+    :   QWidget(parent), ui(new Ui::FormCharts)
+{
     ui->setupUi(this);
 }
 

@@ -16,9 +16,9 @@
 // Constructor, destructor
 // -----------------------
 
-FormScreenshots::FormScreenshots(One_Layered_Canvas& app_canvas, QWidget *parent) :
-    QWidget(parent), One_Form(app_canvas), ui(new Ui::FormScreenshots) {
-
+FormScreenshots::FormScreenshots(QWidget* parent) :
+    QWidget(parent), ui(new Ui::FormScreenshots)
+{
     ui->setupUi(this);
 }
 

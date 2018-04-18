@@ -12,7 +12,7 @@
 
 #include <QDebug>
 #include <QFile>
-#include <QFileDialog>
+#include <QFileDialog> 
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"

@@ -15,11 +15,10 @@
 
 #include <QWidget>
 
-#include "../Classes/One_Form.h"
-
 
 // Forward Declaration
-namespace Ui {
+namespace Ui
+{
     class FormPictures;
 }
 
@@ -27,15 +26,15 @@ namespace Ui {
 // Class
 // -----
 
-class FormPictures: public QWidget, public One_Form {
+class FormPictures: public QWidget
+{
     Q_OBJECT
 
 
     public:
 
         // Constructor, destructor
-        explicit FormPictures(One_Layered_Canvas& /*app_canvas*/,
-                              QWidget*            /*parent*/ = 0);
+        explicit FormPictures(QWidget* parent = 0);
 
         ~FormPictures();
 
@@ -46,4 +45,4 @@ class FormPictures: public QWidget, public One_Form {
 
 };
 
-#endif // FORMPICTURES_H
+#endif
