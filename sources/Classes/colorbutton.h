@@ -14,6 +14,10 @@ public:
     void paintEvent( QPaintEvent*);
 protected:
     QColor color;
+
+signals:
+    void colorChanged();
+
 private slots:
     void slotChoiseColor(bool);
 };

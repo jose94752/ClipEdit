@@ -6,7 +6,7 @@
 
 QT       += core gui
 QT       += charts
-QT += xml
+QT       += xml
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -29,8 +29,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    about.cpp \
-    Canvas_Items/Item_Arrow.cpp \
     Forms/formarrows.cpp \
     Forms/formcharts.cpp \
     Forms/formcliparts.cpp \
@@ -39,17 +37,18 @@ SOURCES += \
     Forms/formpictures.cpp \
     Forms/formscreenshots.cpp \
     Forms/formtextboxes.cpp \
-    Components/one_layered_canvas.cpp \
     Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
+<<<<<<< HEAD
     picturesgraphicsitem.cpp
+=======
+    Classes/arrow.cpp \
+    numberedbulletgraphicitem.cpp
+>>>>>>> 543072785003502c1ed86f7dac1f3f61e3a02787
 
 HEADERS += \
     mainwindow.h \
-    about.h \
-    Canvas_Items/Item_Arrow.h \
-    Classes/One_Form.h \
     Forms/formarrows.h \
     Forms/formcharts.h \
     Forms/formcliparts.h \
@@ -58,15 +57,18 @@ HEADERS += \
     Forms/formpictures.h \
     Forms/formscreenshots.h \
     Forms/formtextboxes.h \
-    Components/one_layered_canvas.h \
     Classes/save.h \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
+<<<<<<< HEAD
     picturesgraphicsitem.h
+=======
+    Classes/arrow.h \
+    numberedbulletgraphicitem.h
+>>>>>>> 543072785003502c1ed86f7dac1f3f61e3a02787
 
 FORMS += \
     mainwindow.ui \
-    about.ui \
     Forms/formarrows.ui \
     Forms/formcharts.ui \
     Forms/formcliparts.ui \
@@ -75,8 +77,6 @@ FORMS += \
     Forms/formpictures.ui \
     Forms/formscreenshots.ui \
     Forms/formtextboxes.ui \
-    Components/one_menu_button.ui \
-    Components/one_layered_canvas.ui \
     Forms/dialogfilealreadyexists.ui
 
 RESOURCES += \

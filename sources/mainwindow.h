@@ -90,7 +90,8 @@ class MainWindow
         void saveAs(bool);
         void openFile(bool);
         void exportView(bool);
-        void changeLateralForm(bool);
+        void actionClicked(bool);
+        void  slot_NumberedBullets ();
 };
 
 #endif
