@@ -15,11 +15,10 @@
 
 #include <QWidget>
 
-#include "../Classes/One_Form.h"
-
 
 // Forward Declaration
-namespace Ui {
+namespace Ui
+{
     class FormTextBoxes;
 }
 
@@ -27,15 +26,15 @@ namespace Ui {
 // Class
 // -----
 
-class FormTextBoxes: public QWidget, public One_Form {
+class FormTextBoxes
+    :   public QWidget
+{
     Q_OBJECT
-
 
     public:
 
         // Constructor, destructor
-        explicit FormTextBoxes(One_Layered_Canvas& /*app_canvas*/,
-                               QWidget*            /*parent*/ = 0);
+        explicit FormTextBoxes(QWidget* parent = 0);
 
         ~FormTextBoxes();
 

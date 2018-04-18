@@ -14,11 +14,9 @@
 
 #include <QWidget>
 
-#include "../Classes/One_Form.h"
-
-
 // Forward Declaration
-namespace Ui {
+namespace Ui
+{
     class FormCharts;
 }
 
@@ -26,18 +24,20 @@ namespace Ui {
 // Class
 // -----
 
-class FormCharts: public QWidget, public One_Form {
+class FormCharts
+    :   public QWidget
+{
     Q_OBJECT
 
+    public:
 
-public:
-    explicit FormCharts(One_Layered_Canvas& /*app_canvas*/,
-                        QWidget*            /*parent*/ = 0);
+        explicit FormCharts(QWidget* parent = 0);
 
-    ~FormCharts();
+        ~FormCharts();
 
-private:
-    Ui::FormCharts *ui;
+    private:
+
+        Ui::FormCharts *ui;
 };
 
-#endif // FORMCHARTS_H
+#endif

@@ -15,27 +15,23 @@
 
 #include <QWidget>
 
-#include "../Classes/One_Form.h"
-
-
 // Forward Declaration
-namespace Ui {
+namespace Ui
+{
     class FormLayers;
 }
-
 
 // Class
 // -----
 
-class FormLayers: public QWidget, public One_Form {
+class FormLayers: public QWidget
+{
     Q_OBJECT
-
 
     public:
 
         // Constructor, destructor
-        explicit FormLayers(One_Layered_Canvas& /*app_canvas*/,
-                            QWidget*            /*parent*/ = 0);
+        explicit FormLayers(QWidget* parent = 0);
 
         ~FormLayers();
 
@@ -46,4 +42,4 @@ class FormLayers: public QWidget, public One_Form {
 
 };
 
-#endif // FORMSLAYERS_H
+#endif
