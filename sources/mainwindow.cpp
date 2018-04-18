@@ -211,7 +211,7 @@ void MainWindow::openFile(bool)
 ///
 void MainWindow::save(bool)
 {
-    // To do
+    Save save();
 }
 
 
