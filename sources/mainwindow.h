@@ -99,6 +99,7 @@ class MainWindow
         // SLOTS TEST GRAPHIC ITEM INSERTION
         void slotNumberedBullets();
         void slotTextBoxes();
+        void slotTextPicture();
 };
 
 #endif
