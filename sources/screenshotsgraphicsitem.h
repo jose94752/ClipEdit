@@ -25,8 +25,9 @@ public:
     // Pure virtual methods implementation
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-    //QRect
-   // QRect::getRect() const;
+    //
+    getRect();
+    void  setRect(const QRecF &rect);
 
 private:
     QRectF m_rect_sc;
