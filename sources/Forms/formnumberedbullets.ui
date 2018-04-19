@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>384</width>
-    <height>346</height>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -247,6 +247,13 @@
              </layout>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonCreateBullet">
+            <property name="text">
+             <string>Go</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer">

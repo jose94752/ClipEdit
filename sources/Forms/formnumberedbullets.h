@@ -11,6 +11,7 @@
 #define FORMNUMBEREDBULLETS_H
 
 #include <QWidget>
+#include <QPushButton>
 
 
 // Forward Declaration
@@ -33,7 +34,8 @@ class FormNumberedBullets: public QWidget
         explicit FormNumberedBullets(QWidget* parent = 0);
 
         ~FormNumberedBullets();
-        void get_info (int& from, int& to, int& taille, int& shape, QColor& button_color, QColor& number_color);
+        void get_info (int& /*from*/, int& /*to*/, int& taille, int& shape, QColor& button_color, QColor& number_color, QFont&);
+        QPushButton *getGoPushButton();
     private:
 
         // UI

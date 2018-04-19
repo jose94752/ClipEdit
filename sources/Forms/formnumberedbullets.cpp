@@ -25,7 +25,7 @@ FormNumberedBullets::~FormNumberedBullets()
 //                1-> rectangle
 //                2-> rounded rectangle
 //TBD enum in NumberedBulletGraphicItem
-void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor) {
+void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) {
     from = ui->spinBox_From->value();
     to = ui->spinBox_To->value ();
     taille = ui->spinBox_Size->value();
@@ -35,4 +35,9 @@ void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape,
     numbercolor = ui->ColorButton_NumberColor->getColor();
 
 
+}
+
+QPushButton *FormNumberedBullets::getGoPushButton()
+{
+    return ui->pushButtonCreateBullet;
 }

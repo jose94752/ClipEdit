@@ -75,10 +75,11 @@ void MainWindow::buildMenu()
     connect(ui->actionLayers,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
-    connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotChart()));
+
+    connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
 }
 
 ///
@@ -154,12 +155,7 @@ void MainWindow::slotNumberedBullets()
   //checker le new ok
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
-
-  if (numberedBulletGraphicItem != NULL) {
-    delete numberedBulletGraphicItem;
-    numberedBulletGraphicItem = NULL;
-  }
-
+  m_scene.addItem(numberedBulletGraphicItem);
 }
 
 void MainWindow::slotTextBoxes()

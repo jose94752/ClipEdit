@@ -8,10 +8,9 @@ QRectF NumberedBulletGraphicItem::boundingRect() const
 
 
 void NumberedBulletGraphicItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-
-    qDebug () << "NumberBullet::paint :";
-    print_debug ();
-    qDebug () << "\n";
+   QPoint A (0, 0), D (100, 100);
+   QRect qrect (A, D);
+   painter->drawText(qrect, "NumberedBullet");
 }
 
 NumberedBulletGraphicItem::NumberedBulletGraphicItem(int from, int to, shape_e button_shape, QColor button_color,

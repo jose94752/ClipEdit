@@ -3,6 +3,8 @@
 #include <QGraphicsItem>
 #include <QRectF>
 #include <qfont.h>
+#include <qpainter.h>
+
 class NumberedBulletGraphicItem : public QGraphicsItem
 {
 public:
