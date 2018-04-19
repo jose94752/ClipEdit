@@ -4,6 +4,7 @@
 #include <QGraphicsItem>
 #include <QRectF>
 #include <QPainter>
+#include <QColor>
 
 class ArrowsGraphicsItem
         : public QGraphicsItem
@@ -17,10 +18,12 @@ class ArrowsGraphicsItem
                QWidget *widget);
 
 private:
+    QColor ItemOutlineColorArrow;
+    QColor ItemFillColorArrow;
 
 
 private slots:
-    //new
+
 
 };
 
