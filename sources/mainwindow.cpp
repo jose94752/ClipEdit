@@ -75,7 +75,7 @@ void MainWindow::buildMenu()
     connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
-    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotChart()));
+    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
 }
 
 ///
@@ -161,10 +161,12 @@ void MainWindow::slotTextPicture()
     //m_scene.addItem(new PictureItem());
 }
 
-
+///
+/// \brief slotGraphs
+/// This slot is called on graphs
 void MainWindow::slotGraphs()
 {
-    //m_scene.addItem(new GraphsGraphicsItem());
+    m_scene.addItem(new GraphsGraphicsItem());
 
     //GraphsGraphicsItem *g = new GraphsGraphicsItem();
 }
