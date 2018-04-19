@@ -20,7 +20,8 @@
 
 #include "picturesgraphicsitem.h"
 #include "numberedbulletgraphicitem.h"
-//#include "graphsgraphicsitem.h"
+#include "textboxitem.h"
+#include "Classes/graphsgraphicsitem.h"
 
 
 // Constructor, destructor
@@ -146,7 +147,7 @@ void MainWindow::slotNumberedBullets()
 
 void MainWindow::slotTextBoxes()
 {
-    //m_scene.addItem(new TextBoxItem());
+    m_scene.addItem(new TextBoxItem());
 }
 
 void MainWindow::slotTextPicture()

@@ -17,3 +17,8 @@ Arrow::Arrow()
 {
 
 }
+
+Arrow::~Arrow()
+{
+
+}
