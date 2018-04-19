@@ -42,9 +42,12 @@ SOURCES += \
     Classes/colorbutton.cpp \
     Classes/arrow.cpp \
     Classes/graphsgraphicsitem.cpp \
+    textboxitem.cpp \
     screenshotsgraphicsitem.cpp \
     numberedbulletgraphicitem.cpp \
-    picturesgraphicsitem.cpp
+    picturesgraphicsitem.cpp \
+    Items/basegraphicitem.cpp \
+    Items/itemhandler.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -61,9 +64,12 @@ HEADERS += \
     Classes/colorbutton.h \
     Classes/arrow.h \
     Classes/graphsgraphicsitem.h \
+    textboxitem.h \
+    screenshotsgraphicsitem.h \
     numberedbulletgraphicitem.h \
     picturesgraphicsitem.h \
-    screenshotsgraphicsitem.h
+    Items/basegraphicitem.h \
+    Items/itemhandler.h
 
 FORMS += \
     mainwindow.ui \

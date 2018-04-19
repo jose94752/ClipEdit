@@ -2,7 +2,7 @@
 #define SCREENSHOTSGRAPHICSITEM_H
 
 //add
-#include<QGraphicsItem>
+#include <QGraphicsItem>
 
 
 
