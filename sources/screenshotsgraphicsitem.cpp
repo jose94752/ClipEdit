@@ -23,18 +23,20 @@ QRectF ScreenshotsGraphicsItem::boundingRect() const
 
 void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
 {
-        if(rect == m_rect_sc)  return;
+    if(rect == m_rect_sc)  return;
 
-        //This call is important to inform the scene about the coming geometry change.
-        prepareGeometryChange();
-        m_rect_sc = rect;
-
+    //This call is important to inform the scene about the coming geometry change.
+    //prepareGeometryChange();
+    //m_rect_sc = rect;
 }
+
+
 
 QRectF ScreenshotsGraphicsItem::getRect()
 {
     return m_rect_sc;
 }
+
 
 // Second Pure virtual method implementation
 
