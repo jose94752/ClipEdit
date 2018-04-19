@@ -27,7 +27,9 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">
+
+</string>
      </property>
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#2e3436;&quot;&gt;ScreenShot&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -42,7 +44,7 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>12</x>
@@ -74,7 +76,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>13</x>
@@ -129,13 +131,8 @@
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="styleSheet">
-        <string notr="true">QPushButton
-{
-	color: yellow;
-	backgroud-color:  #27a9c3
-	border-whidth: 0px
-	border-raduis: 3px
-}</string>
+        <string notr="true">background-color: green;
+border-color: rgb(17, 29, 255);</string>
        </property>
        <property name="text">
         <string>Go</string>
