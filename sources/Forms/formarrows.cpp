@@ -46,6 +46,7 @@ FormArrows::FormArrows(QWidget *parent)
     connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged()),this,SLOT(OutlineColorArrowChange()));
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged()),this,SLOT(FillColorArrowChange()));
 
+    //
 }
 
 FormArrows::~FormArrows()
@@ -60,7 +61,7 @@ void FormArrows::FillColorArrowChanged()
     emit FormFillColorArrowChanged(FormFillColorArrow);
 }
 
-void FormArrows::OutlineColorArrowChange()
+void FormArrows::OutlineColorArrowChanged()
 {
     BeforeFormOutlineColorArrow = FormOutlineColorArrow;
     FormOutlineColorArrow = ui->toolButtonOutlineColorContents->getColor();
