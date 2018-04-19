@@ -114,10 +114,10 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <widget class="QLineEdit" name="lineEdit_pic_he"/>
+               <widget class="QSpinBox" name="spinBox_pic_h"/>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_pic_gr"/>
+               <widget class="QSpinBox" name="spinBox_pic_sh"/>
               </item>
              </layout>
             </item>
@@ -142,17 +142,17 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QLineEdit" name="lineEdit_pic_wi"/>
+               <widget class="QSpinBox" name="spinBox_pic_w"/>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_pic_tr"/>
+               <widget class="QSpinBox" name="spinBox_pic_t"/>
               </item>
              </layout>
             </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
-               <widget class="QCheckBox" name="checkBox_fx">
+               <widget class="QCheckBox" name="checkBox_pic_fx">
                 <property name="text">
                  <string>Fixed</string>
                 </property>
@@ -195,7 +195,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_lg_txt_2"/>
+             <widget class="QLineEdit" name="lineEdit_lg_txt"/>
             </item>
            </layout>
           </item>
@@ -242,14 +242,7 @@
                 <item>
                  <widget class="QLabel" name="label_8">
                   <property name="text">
-                   <string>Position (v) :</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_12">
-                  <property name="text">
-                   <string>Position (h) :</string>
+                   <string>Position :</string>
                   </property>
                  </widget>
                 </item>
@@ -261,71 +254,19 @@
                  <widget class="QFontComboBox" name="fontComboBox_lg_font"/>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="lineEdit_lg_si"/>
+                 <widget class="QSpinBox" name="spinBox_lg_size"/>
                 </item>
                 <item>
-                 <widget class="ColorButton" name="toolButton_lg_colour">
+                 <widget class="ColorButton" name="toolButton_color">
                   <property name="text">
-                   <string/>
+                   <string>...</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_6">
                   <item>
-                   <widget class="QRadioButton" name="radioButton_lg_r">
-                    <property name="text">
-                     <string>right</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_lg_m">
-                    <property name="text">
-                     <string>middle</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_lg_l">
-                    <property name="text">
-                     <string>left</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_7">
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_lg_h">
-                    <property name="text">
-                     <string>high</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                     <string notr="true">buttonGroup_2</string>
-                    </attribute>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_c">
-                    <property name="text">
-                     <string>center</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                     <string notr="true">buttonGroup_2</string>
-                    </attribute>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_lg_d">
-                    <property name="text">
-                     <string>down</string>
-                    </property>
-                    <attribute name="buttonGroup">
-                     <string notr="true">buttonGroup_2</string>
-                    </attribute>
-                   </widget>
+                   <widget class="QComboBox" name="comboBox_lg_pos"/>
                   </item>
                  </layout>
                 </item>

@@ -25,6 +25,7 @@
 #include "Forms/resizescenedialog.h"
 
 
+
 // Constructor, destructor
 // -----------------------
 
@@ -172,6 +173,11 @@ void MainWindow::slotTextBoxes()
 void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
+    PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem;
+    m_scene.addItem(PictureItem);
+
+
+
 }
 
 ///
