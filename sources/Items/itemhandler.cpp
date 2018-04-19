@@ -39,7 +39,7 @@ QPointF ItemHandler::pos()
     return m_pos;
 }
 
-void ItemHandler::setPos(QPointF pos)
+void ItemHandler::setPos(const QPointF& pos)
 {
     m_pos = pos;
     updateRect();
