@@ -25,6 +25,12 @@ FormPictures::FormPictures(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // toolButton_path
+    // connect (ui->pushButton_sortir, SIGNAL(clicked(bool)), this, SLOT(close()));
+    connect (ui->toolButton_path, SIGNAL(pressed()), this, SLOT(chose_picture)));
+
+
+
     ui->comboBox_lg_pos->addItem("Above Right");
     ui->comboBox_lg_pos->addItem("Above Middle");
     ui->comboBox_lg_pos->addItem("Above Left");
