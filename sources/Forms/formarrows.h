@@ -53,6 +53,8 @@ class FormArrows
     private slots:
         void FillColorArrowChanged();
         void OutlineColorArrowChanged();
+        void ClickOnpushButtonChangeOutlineColor(bool);
+        void ClickOnpushButtonChangeFillColor(bool);
 
     signals:
         void FormFillColorArrowChanged(QColor newFormFillColorArrow);
