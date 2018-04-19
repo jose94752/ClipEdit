@@ -48,7 +48,8 @@ SOURCES += \
     numberedbulletgraphicitem.cpp \
     picturesgraphicsitem.cpp \
     Items/basegraphicitem.cpp \
-    Items/itemhandler.cpp
+    Items/itemhandler.cpp \
+    Forms/resizescenedialog.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -71,7 +72,8 @@ HEADERS += \
     numberedbulletgraphicitem.h \
     picturesgraphicsitem.h \
     Items/basegraphicitem.h \
-    Items/itemhandler.h
+    Items/itemhandler.h \
+    Forms/resizescenedialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -83,7 +85,8 @@ FORMS += \
     Forms/formpictures.ui \
     Forms/formscreenshots.ui \
     Forms/formtextboxes.ui \
-    Forms/dialogfilealreadyexists.ui
+    Forms/dialogfilealreadyexists.ui \
+    Forms/resizescenedialog.ui
 
 RESOURCES += \
     resources/resources.qrc

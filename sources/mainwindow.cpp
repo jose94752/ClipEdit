@@ -22,6 +22,7 @@
 #include "numberedbulletgraphicitem.h"
 #include "textboxitem.h"
 #include "Classes/graphsgraphicsitem.h"
+#include "Forms/resizescenedialog.h"
 
 
 // Constructor, destructor
@@ -144,7 +145,8 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    //to do
+    ResizeSceneDialog scenedialog(this,&m_scene);
+    scenedialog.exec();
 }
 
 void MainWindow::slotNumberedBullets()
