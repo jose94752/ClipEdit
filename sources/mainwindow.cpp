@@ -62,6 +62,7 @@ void MainWindow::buildMenu()
     connect(ui->actionSaveAs,      SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
+    connect(ui->actionresize, SIGNAL(triggered(bool)),this,SLOT(resizeTold(bool)));
 
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
@@ -70,6 +71,7 @@ void MainWindow::buildMenu()
     connect(ui->actionPicture,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionScreenshot,      SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionTextBox,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionLayers,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
     connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
@@ -140,6 +142,11 @@ void MainWindow::actionClicked(bool)
     }
 }
 
+void MainWindow::resizeTold(bool)
+{
+    //to do
+}
+
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
@@ -191,7 +198,7 @@ void MainWindow::openFile(bool)
 ///
 void MainWindow::save(bool)
 {
-    // To do
+    Save save;
 }
 
 
