@@ -26,12 +26,12 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     //
-    getRect();
-    void  setRect(const QRecF &rect);
+    QRectF getRect();
+    void setRect(const QRectF& rect);
 
 private:
     QRectF m_rect_sc;
 
 };
 
-#endif // SCREENSHOTSGRAPHICSITEM_H
+#endif

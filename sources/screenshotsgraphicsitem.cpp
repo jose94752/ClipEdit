@@ -21,7 +21,7 @@ QRectF ScreenshotsGraphicsItem::boundingRect() const
 }
 
 
-void ScreenshotsGraphicsItem::setRect(const QRecF &rect) const
+void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
 {
         if(rect == m_rect_sc)  return;
 
@@ -31,7 +31,7 @@ void ScreenshotsGraphicsItem::setRect(const QRecF &rect) const
 
 }
 
-ScreenshotsGraphicsItem::getRect()
+QRectF ScreenshotsGraphicsItem::getRect()
 {
     return m_rect_sc;
 }

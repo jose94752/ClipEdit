@@ -25,7 +25,17 @@ class BaseGraphicItem
 {
     public:
 
-        // Constructors, destructor
+        enum Type
+        {
+            TextBoxGraphicsItem = UserType+1,
+            ImageGraphicsItem,
+            ArrowGraphicsItem,
+            ChartGraphicsItem,
+            ScreenshotGraphicsItem,
+            NumberedBulletGraphicsItem
+        };
+
+        // Constructor, destructor
         BaseGraphicItem(QGraphicsItem* parent = 0);
         BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent = 0);
         BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool drawBoundingRect, QGraphicsItem* parent = 0);

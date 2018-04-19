@@ -52,5 +52,5 @@ void TextBoxItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 int TextBoxItem::type() const
 {
-    return UserType + 1;
+    return Type::TextBoxGraphicsItem;
 }
