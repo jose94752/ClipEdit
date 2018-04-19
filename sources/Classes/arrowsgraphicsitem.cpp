@@ -10,7 +10,6 @@
 */
 #include "Classes/arrowsgraphicsitem.h"
 #include <QGraphicsItem>
-//#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 ArrowsGraphicsItem::ArrowsGraphicsItem(BaseGraphicItem *parent)
