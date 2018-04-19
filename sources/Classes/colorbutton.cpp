@@ -27,7 +27,7 @@ void ColorButton::setColor(QColor vcolor)
 void ColorButton::slotChoiseColor(bool)
 {
       color = QColorDialog::getColor(color, this );
-      emit colorChanged();
+      emit colorChanged(color);
       update();
 }
 

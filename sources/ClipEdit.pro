@@ -41,9 +41,15 @@ SOURCES += \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
     Classes/arrow.cpp \
+    Classes/arrowsgraphicsitem.cpp \
+    Classes/graphsgraphicsitem.cpp \
+    textboxitem.cpp \
     screenshotsgraphicsitem.cpp \
     numberedbulletgraphicitem.cpp \
-    picturesgraphicsitem.cpp
+    picturesgraphicsitem.cpp \
+    Items/basegraphicitem.cpp \
+    Items/itemhandler.cpp \
+    Forms/resizescenedialog.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -59,9 +65,15 @@ HEADERS += \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
     Classes/arrow.h \
+    Classes/arrowsgraphicsitem.h \
+    Classes/graphsgraphicsitem.h \
+    textboxitem.h \
+    screenshotsgraphicsitem.h \
     numberedbulletgraphicitem.h \
-    picturesgraphicsitem.h
-    screenshotsgraphicsitem.h
+    picturesgraphicsitem.h \
+    Items/basegraphicitem.h \
+    Items/itemhandler.h \
+    Forms/resizescenedialog.h
 
 FORMS += \
     mainwindow.ui \
@@ -73,7 +85,8 @@ FORMS += \
     Forms/formpictures.ui \
     Forms/formscreenshots.ui \
     Forms/formtextboxes.ui \
-    Forms/dialogfilealreadyexists.ui
+    Forms/dialogfilealreadyexists.ui \
+    Forms/resizescenedialog.ui
 
 RESOURCES += \
     resources/resources.qrc

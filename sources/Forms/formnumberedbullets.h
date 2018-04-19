@@ -38,6 +38,7 @@ class FormNumberedBullets: public QWidget
 
         // UI
         Ui::FormNumberedBullets *ui;
+        void get_info (qint8& from, qint8& to);
 };
 
 #endif
