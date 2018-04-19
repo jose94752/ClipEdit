@@ -42,7 +42,7 @@ BaseGraphicItem::BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent)
     m_heightForRotationHandler = 30;
     m_current = 0;
 
-    setRect(m_rect);
+    setRect(rect);
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
     createHandlers();
 }
@@ -56,7 +56,7 @@ BaseGraphicItem::BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool draw
     m_heightForRotationHandler = 30;
     m_current = 0;
 
-    setRect(m_rect);
+    setRect(rect);
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
     createHandlers();
 }
@@ -101,7 +101,7 @@ bool BaseGraphicItem::drawBoundingRect() const
     return m_drawBoundingRect;
 }
 
-bool BaseGraphicItem::setDrawBoundingRect(bool drawBoundingRect)
+void BaseGraphicItem::setDrawBoundingRect(bool drawBoundingRect)
 {
     m_drawBoundingRect = drawBoundingRect;
     update();
