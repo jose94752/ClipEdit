@@ -25,8 +25,10 @@ class BaseGraphicItem
 {
     public:
 
-        // Constructor, destructor
+        // Constructors, destructor
         BaseGraphicItem(QGraphicsItem* parent = 0);
+        BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent = 0);
+        BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool drawBoundingRect, QGraphicsItem* parent = 0);
         virtual ~BaseGraphicItem();
 
         // Virtual pure methods
@@ -37,6 +39,18 @@ class BaseGraphicItem
         virtual int type() const = 0;
 
         // Getters and setters
+        bool hasHandlers() const;
+        void setHasHandlers(bool hasHandlers);
+
+        bool drawBoundingRect() const;
+        bool setDrawBoundingRect(bool drawBoundingRect);
+
+        int handlerSize() const;
+        void setHandlerSize(int size);
+
+        int heightForRotationHandler() const;
+        void setHeightForRotationHandler(int height);
+
         void setRect(const QRectF& rect);
 
     protected:
