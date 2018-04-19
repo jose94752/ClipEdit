@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>367</width>
+    <width>384</width>
     <height>346</height>
    </rect>
   </property>
@@ -164,7 +164,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="ColorButton" name="ToolButton_BulletColor">
+                 <widget class="ColorButton" name="ColorButton_BulletColor">
                   <property name="text">
                    <string>...</string>
                   </property>

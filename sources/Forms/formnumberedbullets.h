@@ -33,12 +33,11 @@ class FormNumberedBullets: public QWidget
         explicit FormNumberedBullets(QWidget* parent = 0);
 
         ~FormNumberedBullets();
-
+        void get_info (int& from, int& to, int& taille, int& shape, QColor& button_color, QColor& number_color);
     private:
 
         // UI
         Ui::FormNumberedBullets *ui;
-        void get_info (qint8& from, qint8& to);
 };
 
 #endif

@@ -154,8 +154,10 @@ void MainWindow::slotNumberedBullets()
   //checker le new ok
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
+
   if (numberedBulletGraphicItem != NULL) {
     delete numberedBulletGraphicItem;
+    numberedBulletGraphicItem = NULL;
   }
 
 }
