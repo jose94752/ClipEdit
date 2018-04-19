@@ -22,6 +22,7 @@
 #include "numberedbulletgraphicitem.h"
 
 
+
 // Constructor, destructor
 // -----------------------
 
@@ -150,6 +151,9 @@ void MainWindow::slotTextBoxes()
 void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
+    QGraphicsItem  * PictureItem = new PicturesGraphicsItem;
+
+
 }
 
 ///
