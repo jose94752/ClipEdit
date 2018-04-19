@@ -12,6 +12,7 @@
 // Includes
 // --------
 
+#include <QDebug>
 #include <QPainter>
 #include <ctime>
 #include <cstdlib>
@@ -44,11 +45,12 @@ QRectF TextBoxItem::boundingRect() const
 
 void TextBoxItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawText(boundingRect(), m_text);
+    painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    painter->drawText(m_rect, m_text);
     BaseGraphicItem::paint(painter, option, widget);
 }
 
 int TextBoxItem::type() const
 {
-    return UserType + 1;
+    return Type::TextBoxGraphicsItem;
 }
