@@ -22,6 +22,7 @@
 #include "numberedbulletgraphicitem.h"
 #include "textboxitem.h"
 #include "Classes/graphsgraphicsitem.h"
+#include "Forms/resizescenedialog.h"
 
 
 // Constructor, destructor
@@ -62,6 +63,7 @@ void MainWindow::buildMenu()
     connect(ui->actionSaveAs,      SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
+    connect(ui->actionresize, SIGNAL(triggered(bool)),this,SLOT(resizeTold(bool)));
 
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
@@ -70,6 +72,7 @@ void MainWindow::buildMenu()
     connect(ui->actionPicture,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionScreenshot,      SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionTextBox,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionLayers,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
     connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
@@ -140,9 +143,21 @@ void MainWindow::actionClicked(bool)
     }
 }
 
+void MainWindow::resizeTold(bool)
+{
+    ResizeSceneDialog scenedialog(this,&m_scene);
+    scenedialog.exec();
+}
+
 void MainWindow::slotNumberedBullets()
 {
-    //m_scene.addItem(new NumberedBulletGraphicItem());
+  //checker le new ok
+  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
+  if (numberedBulletGraphicItem != NULL) {
+    delete numberedBulletGraphicItem;
+  }
+
 }
 
 void MainWindow::slotTextBoxes()
@@ -189,7 +204,7 @@ void MainWindow::openFile(bool)
 ///
 void MainWindow::save(bool)
 {
-    // To do
+    Save save;
 }
 
 

@@ -16,6 +16,7 @@
 // --------
 
 #include <QWidget>
+#include <QColor>
 
 // Forward Declaration
 namespace Ui
@@ -42,6 +43,21 @@ class FormArrows
 
         // UI
         Ui::FormArrows *ui;
+        QColor FormOutlineColorArrow;
+        QColor FormFillColorArrow;
+        QColor BeforeFormOutlineColorArrow;
+        QColor BeforeFormFillColorArrow;
+        QColor DefaultFormOutlineColorArrow;
+        QColor DefaultFormFillColorArrow;
+
+    private slots:
+        void FillColorArrowChanged();
+        void OutlineColorArrowChange();
+
+    signals:
+        void FormFillColorArrowChanged(QColor newFormFillColorArrow);
+        void FormOutlineColorArrowChanged(QColor newFormOutlineColorArrow);
+
 };
 
 #endif
