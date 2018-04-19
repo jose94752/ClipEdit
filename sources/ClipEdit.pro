@@ -41,6 +41,7 @@ SOURCES += \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
     Classes/arrow.cpp \
+    Classes/arrowsgraphicsitem.cpp \
     screenshotsgraphicsitem.cpp \
     numberedbulletgraphicitem.cpp \
     picturesgraphicsitem.cpp
@@ -59,8 +60,9 @@ HEADERS += \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
     Classes/arrow.h \
+    Classes/arrowsgraphicsitem.h \
     numberedbulletgraphicitem.h \
-    picturesgraphicsitem.h
+    picturesgraphicsitem.h \
     screenshotsgraphicsitem.h
 
 FORMS += \
