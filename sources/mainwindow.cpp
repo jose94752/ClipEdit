@@ -23,7 +23,7 @@
 #include "textboxitem.h"
 #include "Classes/graphsgraphicsitem.h"
 #include "Forms/resizescenedialog.h"
-#include "arrowsgraphicsitem.h"
+#include "Classes/arrowsgraphicsitem.h"
 
 
 // Constructor, destructor
