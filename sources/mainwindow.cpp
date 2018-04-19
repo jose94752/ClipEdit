@@ -139,8 +139,12 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::slotNumberedBullets()
 {
-  NumberedBulletGraphicItem * numberedBulletGraphicItem;
+  //checker le new ok
+  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
+  if (numberedBulletGraphicItem != NULL) {
+    delete numberedBulletGraphicItem;
+  }
 
 }
 

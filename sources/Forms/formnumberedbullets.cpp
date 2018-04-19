@@ -20,3 +20,7 @@ FormNumberedBullets::~FormNumberedBullets()
 {
     delete ui;
 }
+
+void FormNumberedBullets::get_info (qint8& from, qint8& to) {
+
+}
