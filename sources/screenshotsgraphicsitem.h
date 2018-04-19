@@ -3,13 +3,35 @@
 
 //add
 #include <QGraphicsItem>
+//#include "Items/itemhandler.h"
+#include <QRectF>
+#include <QPointF>
 
 
 
 class ScreenshotsGraphicsItem : public QGraphicsItem
 {
+
 public:
-    ScreenshotsGraphicsItem(QGraphicsItem *parent = 0);
+    // The Constructor and thedestructor
+    explicit ScreenshotsGraphicsItem(QGraphicsItem *parent = 0);
+
+
+    //the virtual destructor makes sure that it gets called even if the class
+    //is getting deleted through a base class pointer.
+    virtual ~ScreenshotsGraphicsItem() {}
+
+public:
+    // Pure virtual methods implementation
+    QRectF boundingRect() const;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    //
+    getRect();
+    void  setRect(const QRecF &rect);
+
+private:
+    QRectF m_rect_sc;
+
 };
 
 #endif // SCREENSHOTSGRAPHICSITEM_H
