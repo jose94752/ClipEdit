@@ -1,3 +1,13 @@
+/*
+================================================
+* File:         arrowsgraphicsitem.h
+* Project:      ClipEdit
+* Creation:     18/04/2018
+* Brief:        Arrows GraphicsItem
+*               Different options are proposed
+*               to build arrows in ClipEdit
+================================================
+*/
 #ifndef ARROWSGRAPHICSITEM_H
 #define ARROWSGRAPHICSITEM_H
 
@@ -15,6 +25,8 @@ public:
 
     ArrowsGraphicsItem();
 
+
+
     // Overriding of the Type
     //int type() const override { return Type; }
 
@@ -27,8 +39,11 @@ protected:
 
 
 private:
-    //DiagramItem *StI;
+    //DiagramItem *m_StartItem;
+    //DiagramItem *m_EndItem;
 
+    //PositionItem *m_StartPositionItem;
+    //PositionItem *m_EndPositionItem;
 
     QColor ItemOutlineColorArrow;
     QColor ItemFillColorArrow;

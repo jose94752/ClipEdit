@@ -23,6 +23,7 @@
 #include "textboxitem.h"
 #include "Classes/graphsgraphicsitem.h"
 #include "Forms/resizescenedialog.h"
+#include "Classes/arrowsgraphicsitem.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -85,6 +86,7 @@ void MainWindow::buildMenu()
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
 }
 
 ///
@@ -198,6 +200,21 @@ void MainWindow::slotGraphs()
     createChart(true);
 }
 
+
+void MainWindow::slotArrowsGraphicsItem()
+{
+    //m_scene.addItem(new ArrowsGraphicsItem());
+    // 3 Methods
+    // Without anchor point:
+    //          we need 2 points on the scene
+    // 1 anchor point:
+    //          we need 1 point on the scene and an object of scene
+    //          or an object of scene and 1 point on the scene
+    // 2 anchors points:
+    //          we need 2 objects of scene
+}
+
+
 ///
 /// \brief exportView
 /// This slot is called on export
@@ -247,7 +264,7 @@ void MainWindow::saveAs(bool)
 
 
 
-void MainWindow::createChart(bool )
+void MainWindow::createChart(bool)
 {
 //![1]
     QLineSeries *series0 = new QLineSeries();

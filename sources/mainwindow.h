@@ -107,6 +107,7 @@ private:
         void slotTextBoxes();
         void slotTextPicture();
         void slotGraphs();
+        void slotArrowsGraphicsItem();
 
         void createChart(bool);
 };
