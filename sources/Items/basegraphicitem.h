@@ -23,21 +23,46 @@ class ItemHandler;
 class BaseGraphicItem
     :   public QGraphicsItem
 {
-
     public:
-    enum Type {TextBoxGraphicsItem=UserType+1,ImageGraphicItem };
-        // Constructor, destructor
+
+        // Item types to be use as return value for the type() method
+        enum Type
+        {
+            TextBoxGraphicsItem = UserType+1,
+            ImageGraphicsItem,
+            ArrowGraphicsItem,
+            ChartGraphicsItem,
+            ScreenshotGraphicsItem,
+            NumberedBulletGraphicsItem
+        };
+
+        // Constructors, destructor
         BaseGraphicItem(QGraphicsItem* parent = 0);
+        BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent = 0);
+        BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool drawBoundingRect, QGraphicsItem* parent = 0);
         virtual ~BaseGraphicItem();
 
-        // Virtual pure methods
+        // Implementation of virtual pure methods from QGraphicsItem
         virtual QRectF boundingRect() const;
         virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
-        // Force a type for all subclasses
+        // Type of the item
+        // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
 
         // Getters and setters
+        bool hasHandlers() const;
+        void setHasHandlers(bool hasHandlers);
+
+        bool drawBoundingRect() const;
+        void setDrawBoundingRect(bool drawBoundingRect);
+
+        int handlerSize() const;
+        void setHandlerSize(int size);
+
+        int heightForRotationHandler() const;
+        void setHeightForRotationHandler(int height);
+
         void setRect(const QRectF& rect);
 
     protected:
