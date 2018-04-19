@@ -102,6 +102,7 @@ class MainWindow
         void slotTextBoxes();
         void slotTextPicture();
         void slotGraphs();
+        void slotArrowsGraphicsItem();
 };
 
 #endif
