@@ -25,7 +25,7 @@
 #include "Forms/formpictures.h"
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
-
+#include "numberedbulletgraphicitem.h"
 
 // Forward declaration
 namespace Ui
@@ -100,6 +100,7 @@ class MainWindow
         void slotNumberedBullets();
         void slotTextBoxes();
         void slotTextPicture();
+        void slotGraphs();
 };
 
 #endif
