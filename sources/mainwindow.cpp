@@ -157,7 +157,9 @@ void MainWindow::slotTextPicture()
 
 void MainWindow::slotGraphs()
 {
-    //m_scene.addItem(new NumberedBulletGraphicItem());
+    //m_scene.addItem(new GraphsGraphicsItem());
+
+    //GraphsGraphicsItem *g = new GraphsGraphicsItem();
 }
 
 ///
