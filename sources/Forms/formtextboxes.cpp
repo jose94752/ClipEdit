@@ -36,6 +36,24 @@ FormTextBoxes::~FormTextBoxes()
     delete ui;
 }
 
+// Getters
+// -------
+
+QString FormTextBoxes::getText() const
+{
+    return ui->plainTextEdit->toPlainText();
+}
+
+QString FormTextBoxes::getFontFamily() const
+{
+    return ui->fontComboBox->currentText();
+}
+
+int FormTextBoxes::getFontPointSize() const
+{
+    return ui->spinBoxPointSize->value();
+}
+
 // Slots
 // -----
 

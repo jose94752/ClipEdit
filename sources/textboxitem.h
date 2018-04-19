@@ -17,20 +17,28 @@
 
 #include <QGraphicsItem>
 
+#include "Items/basegraphicitem.h"
+
 // Class
 // -----
 
 class TextBoxItem
-    :   public QGraphicsItem
+    :   public BaseGraphicItem
 {
     public:
 
         // Constructor, destructor
-        TextBoxItem(QGraphicsItem* parent = 0);
+        TextBoxItem(const QString& text, QGraphicsItem* parent = 0);
 
         // Pure virtual methods implementation
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+
+        int type() const;
+
+    private:
+
+        QString m_text;
 };
 
 #endif

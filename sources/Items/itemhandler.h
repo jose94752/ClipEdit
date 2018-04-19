@@ -51,7 +51,7 @@ class ItemHandler
 
         // Getters and setters
         QPointF pos();
-        void setPos(QPointF pos);
+        void setPos(const QPointF& pos);
 
         HandlerType type();
         void setType(HandlerType type);

@@ -38,6 +38,11 @@ class FormTextBoxes
 
         ~FormTextBoxes();
 
+        // Getters
+        QString getText() const;
+        QString getFontFamily() const;
+        int getFontPointSize() const;
+
     private slots:
 
         void pickColor(bool);
@@ -45,7 +50,7 @@ class FormTextBoxes
     private:
 
         // Ui
-        Ui::FormTextBoxes *ui;
+        Ui::FormTextBoxes* ui;
 
 };
 
