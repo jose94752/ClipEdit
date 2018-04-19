@@ -145,7 +145,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this);
+    ResizeSceneDialog scenedialog(this,&m_scene);
     scenedialog.exec();
 }
 
