@@ -15,6 +15,7 @@
 
 #include "formtextboxes.h"
 #include "ui_formtextboxes.h"
+#include "Classes/colorbutton.h"
 
 // Constructor, destructor
 // -----------------------
@@ -24,11 +25,8 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->pushButtonBackgroundColor->setAutoFillBackground(true);
-    ui->pushButtonBackgroundColor->setAutoFillBackground(true);
-
-    connect(ui->pushButtonBackgroundColor, SIGNAL(clicked(bool)), this, SLOT(pickColor(bool)));
-    connect(ui->pushButtonTextColor, SIGNAL(clicked(bool)), this, SLOT(pickColor(bool)));
+    ui->toolButtonBackgroundColor->setColor(Qt::white);
+    ui->toolButtonTextColor->setColor(Qt::black);
 }
 
 FormTextBoxes::~FormTextBoxes()
@@ -52,25 +50,4 @@ QString FormTextBoxes::getFontFamily() const
 int FormTextBoxes::getFontPointSize() const
 {
     return ui->spinBoxPointSize->value();
-}
-
-// Slots
-// -----
-
-void FormTextBoxes::pickColor(bool)
-{
-    // !! Stylesheets
-
-    QColor color = QColorDialog::getColor(Qt::white, this);
-
-    if (sender() == ui->pushButtonBackgroundColor)
-    {
-        ui->pushButtonBackgroundColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
-    }
-    else if (sender() == ui->pushButtonTextColor)
-    {
-        ui->pushButtonTextColor->setStyleSheet("background-color:" + color.name(QColor::HexRgb));
-    }
-
-    update();
 }
