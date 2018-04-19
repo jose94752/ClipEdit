@@ -20,6 +20,8 @@
 
 #include "picturesgraphicsitem.h"
 #include "numberedbulletgraphicitem.h"
+#include "textboxitem.h"
+#include "Classes/graphsgraphicsitem.h"
 
 
 // Constructor, destructor
@@ -73,6 +75,7 @@ void MainWindow::buildMenu()
     connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
+    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotChart()));
 }
 
 ///
@@ -150,12 +153,18 @@ void MainWindow::slotNumberedBullets()
 
 void MainWindow::slotTextBoxes()
 {
-    //m_scene.addItem(new TextBoxItem());
+    m_scene.addItem(new TextBoxItem());
 }
 
 void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
+}
+
+
+void MainWindow::slotGraphs()
+{
+    //m_scene.addItem(new NumberedBulletGraphicItem());
 }
 
 ///

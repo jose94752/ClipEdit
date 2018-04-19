@@ -100,6 +100,7 @@ class MainWindow
         void slotNumberedBullets();
         void slotTextBoxes();
         void slotTextPicture();
+        void slotGraphs();
 };
 
 #endif

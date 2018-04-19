@@ -16,7 +16,6 @@
 // --------
 
 #include <QGraphicsLineItem>
-//#include
 
 // Forward Declaration
 QT_BEGIN_NAMESPACE
@@ -46,17 +45,17 @@ public:
           QGraphicsItem *parent = 0);*/
     ~Arrow();
 
-    int type() const override { return Type; }
-    QRectF boundingRect() const override;
-    QPainterPath shape() const override;
-    void setColor(const QColor &color) { myColor = color; }
+    //int type() const override { return Type; }
+    //QRectF boundingRect() const override;
+    //QPainterPath shape() const override;
+    //void setColor(const QColor &color) { myColor = color; }
     //DiagramItem *startItem() const { return myStartItem; }
     //DiagramItem *endItem() const { return myEndItem; }
 
     void updatePosition();
 
 protected:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) override;
+    //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) override;
 
 private:
     //DiagramItem *myStartItem;
