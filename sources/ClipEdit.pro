@@ -45,7 +45,9 @@ SOURCES += \
     textboxitem.cpp \
     screenshotsgraphicsitem.cpp \
     numberedbulletgraphicitem.cpp \
-    picturesgraphicsitem.cpp
+    picturesgraphicsitem.cpp \
+    Items/basegraphicitem.cpp \
+    Items/itemhandler.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -65,7 +67,9 @@ HEADERS += \
     textboxitem.h \
     screenshotsgraphicsitem.h \
     numberedbulletgraphicitem.h \
-    picturesgraphicsitem.h
+    picturesgraphicsitem.h \
+    Items/basegraphicitem.h \
+    Items/itemhandler.h
 
 FORMS += \
     mainwindow.ui \

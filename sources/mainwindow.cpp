@@ -143,7 +143,13 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::slotNumberedBullets()
 {
-    //m_scene.addItem(new NumberedBulletGraphicItem());
+  //checker le new ok
+  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
+  if (numberedBulletGraphicItem != NULL) {
+    delete numberedBulletGraphicItem;
+  }
+
 }
 
 void MainWindow::slotTextBoxes()

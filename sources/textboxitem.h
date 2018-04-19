@@ -3,7 +3,7 @@
 * File:         textboxitem.h
 * Project:      ClipEdit
 * Creation:     18/04/2018
-* Brief:        Inherit from CommonGraphicsItem
+* Brief:        Inherit from BaseGraphicsItem
 *               Define a box item containing some
 *               text
 ================================================
