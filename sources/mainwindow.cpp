@@ -25,6 +25,7 @@
 #include "Forms/resizescenedialog.h"
 
 
+
 // Constructor, destructor
 // -----------------------
 
@@ -160,12 +161,21 @@ void MainWindow::slotNumberedBullets()
 
 void MainWindow::slotTextBoxes()
 {
-    m_scene.addItem(new TextBoxItem());
+    // Retrieve information from the textboxform
+    QString text = m_formTextboxes.getText();
+
+    if (!text.isEmpty())
+        m_scene.addItem(new TextBoxItem(text));
 }
 
 void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
+    PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem;
+    m_scene.addItem(PictureItem);
+
+
+
 }
 
 

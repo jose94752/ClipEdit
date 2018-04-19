@@ -12,6 +12,7 @@
 // Includes
 // --------
 
+#include <QDebug>
 #include <QPainter>
 #include <ctime>
 #include <cstdlib>
@@ -22,11 +23,15 @@
 // Constructor, destructor
 // -----------------------
 
-TextBoxItem::TextBoxItem(QGraphicsItem* parent)
-    :   QGraphicsItem(parent)
+TextBoxItem::TextBoxItem(const QString& text, QGraphicsItem* parent)
+    :   BaseGraphicItem(parent)
 {
+    m_text = text;
     srand(time(NULL));
-    setPos(rand() % 300, rand() % 300);
+    int range = 300 - (-300) + 1;
+    setPos(-300 + (rand() % range) , -300 + (rand() % range));
+
+    setRect(QRectF(-50, -50, 100, 100));
 }
 
 
@@ -35,10 +40,17 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
 
 QRectF TextBoxItem::boundingRect() const
 {
-    return QRectF(0,0,100,100);
+    return BaseGraphicItem::boundingRect();
 }
 
 void TextBoxItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawText(boundingRect(), "Test");
+    painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    painter->drawText(m_rect, m_text);
+    BaseGraphicItem::paint(painter, option, widget);
+}
+
+int TextBoxItem::type() const
+{
+    return Type::TextBoxGraphicsItem;
 }
