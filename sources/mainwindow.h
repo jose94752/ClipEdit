@@ -17,6 +17,10 @@
 #include <QMap>
 #include <QGraphicsScene>
 
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QAreaSeries>
+
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
 #include "Forms/formcliparts.h"
@@ -48,7 +52,8 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-    private:
+
+private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -102,6 +107,8 @@ class MainWindow
         void slotTextBoxes();
         void slotTextPicture();
         void slotGraphs();
+
+        void createChart(bool);
 };
 
 #endif
