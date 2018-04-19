@@ -23,8 +23,9 @@ class ItemHandler;
 class BaseGraphicItem
     :   public QGraphicsItem
 {
-    public:
 
+    public:
+    enum Type {TextBoxGraphicsItem=UserType+1,ImageGraphicItem };
         // Constructor, destructor
         BaseGraphicItem(QGraphicsItem* parent = 0);
         virtual ~BaseGraphicItem();
