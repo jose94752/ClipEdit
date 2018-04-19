@@ -16,7 +16,7 @@ protected:
     QColor color;
 
 signals:
-    void colorChanged();
+    void colorChanged(QColor);
 
 private slots:
     void slotChoiseColor(bool);
