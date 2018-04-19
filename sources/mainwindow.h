@@ -95,6 +95,7 @@ class MainWindow
         void openFile(bool);
         void exportView(bool);
         void actionClicked(bool);
+        void resizeTold(bool);
 
         // SLOTS TEST GRAPHIC ITEM INSERTION
         void slotNumberedBullets();
