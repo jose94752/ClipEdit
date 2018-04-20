@@ -20,7 +20,7 @@ public:
         MAXPUCES = 5
     };
     NumberedBulletGraphicItem(int from = 0, int to = 0, shape_e bullet_shape = NB_CIRCLE, QColor bullet_color = QColor (),
-                              QColor numbercolor = QColor (), const QFont font = QFont (), BaseGraphicItem *parent = NULL);
+                              QColor numbercolor = QColor (), const QFont font = QFont (), int taille = 12, BaseGraphicItem *parent = NULL);
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void print_debug () const;
@@ -32,7 +32,7 @@ private :
     QColor m_bulletcolor;
     QColor m_numbercolor;
     QFont m_font;
-
+    int m_taille;
 };
 
 #endif // NUMBEREDBULLETGRAPHICITEM_H

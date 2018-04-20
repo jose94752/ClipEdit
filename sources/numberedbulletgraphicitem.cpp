@@ -8,13 +8,18 @@ QRectF NumberedBulletGraphicItem::boundingRect() const
 
 
 void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    //notes
+    //regler la fontsize pr un qpainter::write :
+    //QFont font;
+    //font.setPixelSize(12);
+
     qDebug () << "\tdans NumberBulletItem::paint\n";
     qDebug () << "\tm_from == " << m_from << "\n";
     qDebug () << "\tm_to == " << m_to << "\n";
     int nb_bullet (m_to + 1 - m_from);
     qDebug () << "\tnombre de bullet :" << nb_bullet << "\n";
     int num_bullet (m_from);
-    QPoint center (100, 100);
+    QPoint center (10, 10); //milieu
     int rx (50), ry (rx), y (50);
     qpainter->setPen(m_bulletcolor);
 
@@ -23,9 +28,8 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
     m_shape = NB_CIRCLE;
     QString strnum;
     QRect rect;
+    m_font.setPixelSize ((m_taille >1?m_taille -1: 0);
     qpainter->setFont(m_font);
-    //pas de font size, sur le
-    //passer par un TextLabel ?
     for (; num_bullet != m_to +1; ++num_bullet) {
         //qvar = num_bullet;
         switch (m_shape) {
@@ -61,14 +65,15 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
 }
 
 NumberedBulletGraphicItem::NumberedBulletGraphicItem(int from, int to, shape_e bullet_shape, QColor bullet_color,
-                          QColor numbercolor, const QFont font, BaseGraphicItem *parent) :
+                          QColor numbercolor, const QFont font, int taille, BaseGraphicItem *parent) :
   BaseGraphicItem(parent),
   m_from (from),
   m_to (to),
   m_shape (bullet_shape),
   m_bulletcolor (bullet_color),
   m_numbercolor (numbercolor),
-  m_font (font) {
+  m_font (font),
+  m_taille (taille) {
 
 }
 

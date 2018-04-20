@@ -163,6 +163,9 @@
                   <property name="minimum">
                    <number>1</number>
                   </property>
+                  <property name="value">
+                   <number>10</number>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -224,13 +227,6 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QLabel" name="label_FontSize">
-                <property name="text">
-                 <string>Font Size</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
             <item>
@@ -247,9 +243,6 @@
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                <item>
-                 <widget class="QSpinBox" name="spinBox_FontSize"/>
-                </item>
                 <item>
                  <spacer name="horizontalSpacer_3">
                   <property name="orientation">
