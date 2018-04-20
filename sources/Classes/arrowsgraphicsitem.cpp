@@ -16,6 +16,8 @@
 #include <QRect>
 #include <QPainter>
 
+// For Tests
+#include <QDebug>
 
 
 
@@ -43,9 +45,12 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(QGraphicsItem *parent)
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
+    /*
     qreal penWidth = 1;
     return QRectF(-10 - penWidth / 2, -10 - penWidth / 2,
                   20 + penWidth, 20 + penWidth);
+    */
+    return BaseGraphicItem::boundingRect();
 }
 
 QPainterPath ArrowsGraphicsItem::shape() const
@@ -55,6 +60,7 @@ QPainterPath ArrowsGraphicsItem::shape() const
 
 void ArrowsGraphicsItem::paint(QPainter *arrowPainter, const QStyleOptionGraphicsItem *arrowQStyleOption, QWidget *arrowWidget)
 {
+    qDebug () << "\tAppel de ArrowsGraphicsItem::paint\n";
 
     // Examples of QRect:
     //QRect r1(100, 200, 11, 16);
@@ -62,7 +68,7 @@ void ArrowsGraphicsItem::paint(QPainter *arrowPainter, const QStyleOptionGraphic
     QRect *paintRectArrow = new QRect (100,200,11,16);
 
 
-    ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+    BaseGraphicItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
 
 
 }

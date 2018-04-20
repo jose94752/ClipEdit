@@ -215,28 +215,6 @@ void MainWindow::slotGraphs()
 
 void MainWindow::slotArrowsGraphicsItem()
 {
-    /*
-     * Exemple depuis void MainWindow::slotTextBoxes()
-     *
-    // Retrieve information from the textboxform
-    QString text = m_formTextboxes.getText();
-
-    if (!text.isEmpty())
-        m_scene.addItem(new TextBoxItem(text));
-
-    */
-    //m_scene.addItem(new ArrowsGraphicsItem());
-
-    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem();
-    m_scene.addItem(ArrowItem);
-
-
-
-
-
-
- //End Zone tests
-
     // 3 Methods
     // Without anchor point:
     //          we need 2 points on the scene
@@ -245,6 +223,17 @@ void MainWindow::slotArrowsGraphicsItem()
     //          or an object of scene and 1 point on the scene
     // 2 anchors points:
     //          we need 2 objects of scene
+    //m_scene.addItem(new ArrowsGraphicsItem());
+
+    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem();
+    m_scene.addItem(ArrowItem);
+
+
+
+    //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+
+
+
 }
 
 
