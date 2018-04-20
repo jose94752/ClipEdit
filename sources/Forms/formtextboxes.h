@@ -43,6 +43,7 @@ class FormTextBoxes
         QString getFontFamily() const;
         int getFontPointSize() const;
 
+
     private:
 
         // Ui

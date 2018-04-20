@@ -67,10 +67,10 @@ void MainWindow::buildMenu()
 {
     // Connects
     connect(ui->actionSave,         SIGNAL( triggered(bool) ), this, SLOT( save(bool) ));
-    connect(ui->actionSaveAs,      SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
+    connect(ui->actionSaveAs,       SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
-    connect(ui->actionresize, SIGNAL(triggered(bool)),this,SLOT(resizeTold(bool)));
+    connect(ui->actionresize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
 
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
