@@ -36,8 +36,10 @@ class FormArrows
 
         // Constructors, destructor
         explicit FormArrows(QWidget* parent = 0);
-
         ~FormArrows();
+
+        // Method GetInfosArrows
+        void GetInfosArrows();
 
     private:
 
