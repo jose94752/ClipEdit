@@ -58,9 +58,9 @@ QRectF ArrowsGraphicsItem::boundingRect() const
 QPainterPath ArrowsGraphicsItem::shape() const
 {
     // To do
-    QPainterPath path = QGraphicsLineItem::shape();
-    path.addPolygon(arrowHead);
-    return path;
+//    QPainterPath path = QGraphicsLineItem::shape();
+//    path.addPolygon(arrowHead);
+//    return path;
 
 }
 
