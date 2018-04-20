@@ -25,8 +25,9 @@ public:
     // 4 Type of Thickness outline lines 4 choices possibilities (1 - 4)
     enum { Type = UserType + 3 };
 
-    ArrowsGraphicsItem(BaseGraphicItem *parent = 0);
-
+    //ArrowsGraphicsItem(BaseGraphicItem *parent = 0);
+    ArrowsGraphicsItem(QGraphicsItem *parent = 0);
+    //ArrowsGraphicsItem(QGraphicsItem *parent = 0);
 
 
     // Overriding of the Type

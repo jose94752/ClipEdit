@@ -12,9 +12,20 @@
 #include <QGraphicsItem>
 #include "ui_mainwindow.h"
 
-ArrowsGraphicsItem::ArrowsGraphicsItem(BaseGraphicItem *parent)
+// Includes for drawing arrows
+#include <QRect>
+#include <QPainter>
+
+
+
+
+ArrowsGraphicsItem::ArrowsGraphicsItem(QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
+    // Temp dud BaseGraphicItem::paintEvent()
+    //ArrowsGraphicsItem->setHasHandler(false);
+    // End Temp
+
 
     // 3 Methods
     // Without anchor point:
@@ -24,6 +35,9 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(BaseGraphicItem *parent)
     //          or an object of scene and 1 point on the scene
     // 2 anchors points:
     //          we need 2 objects of scene
+
+    setPos(0, 0); // setPos for tests
+
 }
 
 
@@ -39,10 +53,18 @@ QPainterPath ArrowsGraphicsItem::shape() const
     // To do
 }
 
-void ArrowsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void ArrowsGraphicsItem::paint(QPainter *arrowPainter, const QStyleOptionGraphicsItem *arrowQStyleOption, QWidget *arrowWidget)
 {
-    //painter->drawRoundedRect(-10, -10, 20, 20, 5, 5);
-    painter->drawRoundedRect(-10, -10, 20, 20, 5, 5);
+
+    // Examples of QRect:
+    //QRect r1(100, 200, 11, 16);
+    //QRect r2(QPoint(100, 200), QSize(11, 16))
+    QRect *paintRectArrow = new QRect (100,200,11,16);
+
+
+    ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+
+
 }
 
 void ArrowsGraphicsItem::updateArrowPosition()
