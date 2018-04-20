@@ -121,9 +121,9 @@ void MainWindow::buildView()
     ui->graphicsView->setScene(&m_scene);
 }
 
-QMap<MainWindow::e_BUTTON_IDS, int> MainWindow::getListIndexes()
+QList<QGraphicsItem *> MainWindow::getGraphicSceneItems()
 {
-    return m_listIndexes;
+    return m_scene.items();
 }
 
 

@@ -93,7 +93,7 @@ private:
         void buildView();
 
 public:
-        QMap<e_BUTTON_IDS, int> getListIndexes();
+        QList<QGraphicsItem *> getGraphicSceneItems();
 
     private slots:
 
