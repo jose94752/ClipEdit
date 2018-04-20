@@ -52,8 +52,8 @@ FormArrows::FormArrows(QWidget *parent)
     // End default values of FormArrows
 
     // Connects for change color of the FormArrow
-    connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged()),this,SLOT(OutlineColorArrowChange()));
-    connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged()),this,SLOT(FillColorArrowChange()));
+    connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(bool)),this,SLOT(OutlineColorArrowChange()));
+    connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(bool)),this,SLOT(FillColorArrowChange()));
 
     // Connects for pushButtonChangeOutlineColor and pushButtonChangeFillColor
     connect(ui->pushButtonChangeOutlineColor,SIGNAL(clicked(bool)),this,SLOT(ClickOnpushButtonChangeOutlineColor(bool)));
