@@ -7,7 +7,7 @@ PicturesGraphicsItem::PicturesGraphicsItem( FormPictures *ptr,QGraphicsItem* par
     :   BaseGraphicItem(parent)
 {
 
-    ptr->getPictureValues   (height,width,shade_grey,trans,lg_txt,lg_font,lg_size,lg_color,lg_pos);
+    ptr->getPictureValues   (path, height,width,shade_grey,trans,lg_txt,lg_font,lg_size,lg_color,lg_pos);
 
 
      srand(time(NULL));

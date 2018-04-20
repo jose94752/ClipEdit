@@ -30,12 +30,6 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QAreaSeries>
 
-//Temp for arrows
-//Includes for paint objects on the mainwindow
-#include <QRect>
-#include <QPainter>
-// End Temp for arrows
-
 QT_CHARTS_USE_NAMESPACE
 
 // Constructor, destructor
@@ -77,8 +71,7 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
     connect(ui->actionresize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
-    connect(ui->actionNew,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
-
+    connect(ui->actionNew,          SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionClipart,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
@@ -165,7 +158,12 @@ void MainWindow::resizeTold(bool)
 
 void MainWindow::slotNew(bool)
 {
-
+    ResizeSceneDialog scenedialog(this,&m_scene);
+    scenedialog.exec();
+    foreach(QGraphicsItem *item,m_scene.items())
+    {
+        m_scene.removeItem(item);
+    }
 }
 
 void MainWindow::slotNumberedBullets()
@@ -208,36 +206,18 @@ void MainWindow::slotGraphs()
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
 
-    //GraphsGraphicsItem *g = new GraphsGraphicsItem();
+//    GraphsInfo infos;
+//    m_formCharts.GetChartsValues( infos);
 
-    createChart(true);
+//    GraphsGraphicsItem *g = new GraphsGraphicsItem();
+//    g->setInfos(infos);
+//    m_scene.addItem(g);
+
 }
 
 
 void MainWindow::slotArrowsGraphicsItem()
 {
-    //m_scene.addItem(new ArrowsGraphicsItem());
-    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem;
-    m_scene.addItem(ArrowItem);
-    // Examples of QRect:
-    //QRect r1(100, 200, 11, 16);
-    //QRect r2(QPoint(100, 200), QSize(11, 16))
-    QRect *paintRectArrow = new QRect (100,200,11,16);
-
-    // QPaintEvent::QPaintEvent(const QRect &paintRect)
-    // Constructs a paint event object with the rectangle that needs
-    //      to be updated.
-    // The region is specified by paintRect.
-
- //Zone de tests
-/*    //QPainter *arrowPainter(paintRectArrow);
-    QPainter *arrowPainter(&paintRectArrow);
-    QStyleOptionGraphicsItem *arrowQStyleOption;
-    //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
-    ArrowsGraphicsItem::paint(&arrowPainter,&arrowQStyleOption,this);
-*/
- //End Zone tests
-
     // 3 Methods
     // Without anchor point:
     //          we need 2 points on the scene
@@ -246,6 +226,17 @@ void MainWindow::slotArrowsGraphicsItem()
     //          or an object of scene and 1 point on the scene
     // 2 anchors points:
     //          we need 2 objects of scene
+    //m_scene.addItem(new ArrowsGraphicsItem());
+
+    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem();
+    m_scene.addItem(ArrowItem);
+
+
+
+    //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+
+
+
 }
 
 
@@ -296,50 +287,3 @@ void MainWindow::saveAs(bool)
     }
 }
 
-
-
-void MainWindow::createChart(bool)
-{
-//![1]
-    QLineSeries *series0 = new QLineSeries();
-    QLineSeries *series1 = new QLineSeries();
-//![1]
-
-//![2]
-    *series0 << QPointF(-1000, 500) << QPointF(-300, 700) << QPointF(700, 600);
-             //<< QPointF(90, 70) << QPointF(120, 600)
-             //<< QPointF(160, 70) << QPointF(180, 50);
-    *series1 << QPointF(-100, 300) << QPointF(-300, 400) << QPointF(700, 300);
-             //<< QPointF(80, 200) << QPointF(120, 300)
-             //<< QPointF(160, 4) << QPointF(180, 300);
-//![2]
-
-//![3]
-    QAreaSeries *series = new QAreaSeries(series0, series1);
-    series->setName("Batman");
-    QPen pen(0x059605);
-    pen.setWidth(3);
-    series->setPen(pen);
-
-    QLinearGradient gradient(QPointF(0, 0), QPointF(0, 1000));
-    gradient.setColorAt(0.0, 0x3cc63c);
-    gradient.setColorAt(1.0, 0x26f626);
-    gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-    series->setBrush(gradient);
-//![3]
-
-//![4]
-    QChart*chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Simple areachart example");
-    chart->createDefaultAxes();
-    chart->axisX()->setRange(-200, 800);
-    chart->axisY()->setRange(-200, 800);
-//4
-
-//    QChartView *qv = new  QChartView();
-//    qv->setChart( chart);
-
-    m_scene.addItem(chart);
-
-}

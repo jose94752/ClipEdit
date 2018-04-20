@@ -19,6 +19,7 @@ public:
     void getTextBoxItem(TextBoxItem *textBoxItem);
 private:
     QList<QGraphicsItem *> m_listItems;
+    int countItems;
     void save();
 };
 
