@@ -6,19 +6,10 @@
 PicturesGraphicsItem::PicturesGraphicsItem( FormPictures *ptr,QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    void getPictureValues(int &heigh, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
-/*
-     height      =
-     width       =
-     shade_grey  =
-     trans       =
-     lg_txt      =
-     lg_font     =
-     lg_size     =
-     lg_color    =
-     lg_pos      =
 
-*/
+    ptr->getPictureValues   (height,width,shade_grey,trans,lg_txt,lg_font,lg_size,lg_color,lg_pos);
+
+
      srand(time(NULL));
     int range = 300 - (-300) + 1;
     setPos(-300 + (rand() % range) , -300 + (rand() % range));
@@ -34,22 +25,15 @@ PicturesGraphicsItem::PicturesGraphicsItem( FormPictures *ptr,QGraphicsItem* par
 
 QRectF PicturesGraphicsItem::boundingRect() const
 {
+    return  QRectF (0,0, width, height);
 
-    //getPictureValues( height,  width,  shade_grey,  trans,  lg_txt, lg_font, lg_size,  lg_color,  lg_pos);
-
-
-
- //    QRectF r1(height, width, 0, 0);
-
-
-    return BaseGraphicItem::boundingRect();
+   // return BaseGraphicItem::boundingRect();
 }
 
 void PicturesGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    void getPictureValues(int &heigh, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
-
-   // painter->(boundingRect(), m_picture);
+  painter->drawText( QRectF (0,0, width, height),"coucou");
+  // painter->(boundingRect(), m_picture);
 
     BaseGraphicItem::paint(painter, option, widget);
 }
