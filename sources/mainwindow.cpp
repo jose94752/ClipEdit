@@ -162,6 +162,11 @@ void MainWindow::resizeTold(bool)
     scenedialog.exec();
 }
 
+void MainWindow::slotNew(bool)
+{
+
+}
+
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
