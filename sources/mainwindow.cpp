@@ -121,12 +121,6 @@ void MainWindow::buildView()
     ui->graphicsView->setScene(&m_scene);
 }
 
-QList<QGraphicsItem *> MainWindow::getGraphicSceneItems()
-{
-    return m_scene.items();
-}
-
-
 // Slots
 // -----
 
@@ -254,7 +248,7 @@ void MainWindow::openFile(bool)
 ///
 void MainWindow::save(bool)
 {
-    Save save;
+    Save save(this->m_scene.items());
 }
 
 
@@ -272,7 +266,7 @@ void MainWindow::saveAs(bool)
             //dfae.exec();
         }else{
             ui->actionSave->setEnabled(true);
-            Save save(fileName);
+            Save save(this->m_scene.items(),fileName);
         }
     }
 }
