@@ -165,7 +165,12 @@ void MainWindow::resizeTold(bool)
 
 void MainWindow::slotNew(bool)
 {
-
+    ResizeSceneDialog scenedialog(this,&m_scene);
+    scenedialog.exec();
+    foreach(QGraphicsItem *item,m_scene.items())
+    {
+        m_scene.removeItem(item);
+    }
 }
 
 void MainWindow::slotNumberedBullets()

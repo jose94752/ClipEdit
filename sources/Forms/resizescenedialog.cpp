@@ -10,6 +10,10 @@ ResizeSceneDialog::ResizeSceneDialog(QWidget *parent,QGraphicsScene *vscene) :
     scene=vscene;
     connect(ui->buttonBox,SIGNAL(accepted()),this,SLOT(sizeChanged()));
     connect(ui->buttonBox,SIGNAL(rejected()),this,SLOT(close()));
+    ui->spinBox_x->setValue(-400);
+    ui->spinBox_y->setValue(-400);
+    ui->spinBox_width->setValue(800);
+    ui->spinBox_height->setValue(800);
 }
 
 ResizeSceneDialog::~ResizeSceneDialog()
