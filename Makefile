@@ -2,8 +2,8 @@
 # -----------------
 
 # Language directories
-DIR_FR=fr
-DIR_EN=en
+DIR_FR=Docs/fr
+DIR_EN=Docs/en
 
 # Output files
 PDF=$(patsubst %.md, %.pdf, $(wildcard $(DIR_EN)/*.md $(DIR_FR)/*.md))

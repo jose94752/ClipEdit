@@ -73,6 +73,7 @@ HEADERS += \
     Items/itemhandler.h \
     Forms/resizescenedialog.h
 
+
 FORMS += \
     mainwindow.ui \
     Forms/formarrows.ui \
@@ -85,6 +86,7 @@ FORMS += \
     Forms/formtextboxes.ui \
     Forms/dialogfilealreadyexists.ui \
     Forms/resizescenedialog.ui
+
 
 RESOURCES += \
     resources/resources.qrc

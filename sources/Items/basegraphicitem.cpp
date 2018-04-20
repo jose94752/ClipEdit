@@ -293,7 +293,7 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
 
         // Draw the line between the rect and the rotation handler
         painter->drawLine(p1, p2);
-        painter->drawPoint(m_rect.center());
+        //painter->drawPoint(m_rect.center());
     }
 }
 
