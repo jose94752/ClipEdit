@@ -17,6 +17,7 @@
 
 #include <QWidget>
 #include <QColor>
+#include <QPolygonF>
 
 // Forward Declaration
 namespace Ui
@@ -63,13 +64,15 @@ class FormArrows
         // Arrow settings
         int FormArrowWidth;
         int FormArrowHeight;
+        QPolygonF FormArrowHeadType;
 
         int BeforeFormArrowWidth;
         int BeforeFormArrowHeight;
+        QPolygonF BeforeFormArrowHeadType;
 
         int DefaultFormArrowWidth;
         int DefaultFormArrowHeight;
-
+        QPolygonF DefaultFormArrowHeadType;
 
         //To do
         // comboBoxThicknessOutlineLinesContents

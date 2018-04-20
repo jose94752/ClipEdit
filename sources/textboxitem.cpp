@@ -32,7 +32,7 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
 
     m_backgroundColor = QColor(Qt::white);
     m_fontColor = QColor(Qt::black);
-    m_hasBorders = true;
+    m_hasBorders  = true;
     m_borderWidth = 1;
     m_borderRadius = 0;
 

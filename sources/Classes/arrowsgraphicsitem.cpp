@@ -40,9 +40,20 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(QGraphicsItem *parent)
     // 2 anchors points:
     //          we need 2 objects of scene
 
-    myColor = Qt::black; // Temp for test
+
+    //m_StartItem = startItem;
+    //m_EndItem = endItem;
+    //m_StartPositionItem = startItem.{à définir}scenePos();
+    //m_m_EndPositionItem =  endItem.{à définir}scenePos();
+
+    //setFlag(QGraphicsItem::ItemIsSelectable, true);
+   // myColor = Qt::black; // Temp for test
+
+    setRect(QRectF(10,10,300,300));
     //setPen(QPen(myColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    setPos(0, 0); // setPos for tests
+
+
+
     /*
 For example:
 
@@ -96,10 +107,11 @@ void ArrowsGraphicsItem::paint(QPainter *arrowPainter, const QStyleOptionGraphic
     // Examples of QRect:
     //QRect r1(100, 200, 11, 16);
     //QRect r2(QPoint(100, 200), QSize(11, 16))
-    QRect *paintRectArrow = new QRect (100,200,11,16);
+    //QRect *paintRectArrow = new QRect (100,200,11,16);
 
-
-    BaseGraphicItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+    arrowPainter->setPen(QPen(Qt::red, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    arrowPainter->drawLine(20,20,200,200);
+   // BaseGraphicItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
 
 
 }

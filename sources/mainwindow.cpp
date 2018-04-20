@@ -233,7 +233,7 @@ void MainWindow::slotArrowsGraphicsItem()
 
 
 
-    //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+//    ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
 
 
 

@@ -12,10 +12,13 @@
 #define ARROWSGRAPHICSITEM_H
 
 #include "Items/basegraphicitem.h"
+//#include "Items/itemhandler.h"
 #include <QGraphicsItem>
 #include <QRectF>
 #include <QPainter>
 #include <QColor>
+#include <QPolygonF>
+
 
 class ArrowsGraphicsItem
         //: public QGraphicsItem
@@ -77,16 +80,20 @@ protected:
 
 
 private:
-    BaseGraphicItem *m_StartItem;
-    BaseGraphicItem *m_EndItem;
+//    BaseGraphicItem *m_StartItem;
+//    BaseGraphicItem *m_EndItem;
 
-    QPointF *m_StartPositionItem;
-    QPointF *m_EndPositionItem;
+//    QPointF *m_StartPositionItem;
+//    QPointF *m_EndPositionItem;
 
-    QColor ItemOutlineColorArrow;
-    QColor ItemFillColorArrow;
+//    QColor ItemOutlineColorArrow;
+//    QColor ItemFillColorArrow;
 
-    QColor myColor; // Temp for test
+//    QPolygonF ArrowHeadStart;
+//    QPolygonF ArrowHeadEnd;
+
+
+   // QColor myColor; // Temp for test
 
 private slots:
 
