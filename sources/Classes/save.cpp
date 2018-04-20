@@ -24,11 +24,11 @@ Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
 QString Save::verifyExtension(QString fileName)
 {
     QStringList strlist=fileName.split(".");
-    if(strlist[strlist.size()-1]!="clipEdit"){
+    if(strlist[strlist.size()-1]!="ini"){
         if(fileName[fileName.size()-1]!='.'){
             fileName=fileName.append(".");
         }
-        fileName=fileName.append("clipEdit");
+        fileName=fileName.append("ini");
     }
     return fileName;
 }

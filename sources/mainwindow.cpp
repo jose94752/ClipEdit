@@ -24,6 +24,7 @@
 #include "Classes/graphsgraphicsitem.h"
 #include "Forms/resizescenedialog.h"
 #include "Classes/arrowsgraphicsitem.h"
+#include "Forms/dialogfilealreadyexists.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -257,16 +258,16 @@ void MainWindow::save(bool)
 ///
 void MainWindow::saveAs(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.clipEdit",tr("ClipEdit (*.clipEdit)"));
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.ini",tr("Init File (*.ini)"));
     if(fileName!=""){
         QString extfilename=Save::verifyExtension(fileName);
-        QFile fileToSave(fileName);
+        QFile fileToSave(extfilename);
         if(fileName!=extfilename && fileToSave.exists()){
-            //DialogFileAlreadyExists dfae;
-            //dfae.exec();
+            DialogFileAlreadyExists dfae;
+            dfae.exec();
         }else{
             ui->actionSave->setEnabled(true);
-            Save save(this->m_scene.items(),fileName);
+            Save save(this->m_scene.items(),extfilename);
         }
     }
 }
