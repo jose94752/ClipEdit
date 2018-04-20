@@ -72,7 +72,6 @@ void MainWindow::buildMenu()
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
     connect(ui->actionresize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
     connect(ui->actionNew,          SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
-
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionClipart,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
@@ -180,7 +179,7 @@ void MainWindow::slotNumberedBullets()
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
-  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont);
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
   m_scene.addItem(numberedBulletGraphicItem);
 }
 
@@ -287,6 +286,4 @@ void MainWindow::saveAs(bool)
         }
     }
 }
-
-
 

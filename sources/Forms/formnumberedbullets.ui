@@ -95,6 +95,9 @@
                <layout class="QVBoxLayout" name="verticalLayout_8">
                 <item>
                  <widget class="QSpinBox" name="spinBox_From">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -102,11 +105,14 @@
                 </item>
                 <item>
                  <widget class="QSpinBox" name="spinBox_To">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
                   <property name="maximum">
                    <number>10</number>
                   </property>
                   <property name="value">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                  </widget>
                 </item>
@@ -153,7 +159,14 @@
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_3">
                 <item>
-                 <widget class="QSpinBox" name="spinBox_Size"/>
+                 <widget class="QSpinBox" name="spinBox_Size">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>10</number>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QComboBox" name="comboBox_Shape">
@@ -214,13 +227,6 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QLabel" name="label_FontSize">
-                <property name="text">
-                 <string>Font Size</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
             <item>
@@ -237,9 +243,6 @@
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                <item>
-                 <widget class="QSpinBox" name="spinBox_FontSize"/>
-                </item>
                 <item>
                  <spacer name="horizontalSpacer_3">
                   <property name="orientation">
