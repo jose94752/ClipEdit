@@ -28,7 +28,7 @@ QRectF PicturesGraphicsItem::boundingRect() const
 void PicturesGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
-  painter->drawPixmap( 0,0, width, height,path);
+  painter->drawPixmap( 0, 0, width, height,path);
   //painter->drawText( QRectF (0,0, width, height),"coucou");
   // painter->(boundingRect(), m_picture);
 
