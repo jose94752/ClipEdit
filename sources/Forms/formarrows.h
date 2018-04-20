@@ -39,16 +39,20 @@ class FormArrows
         ~FormArrows();
 
         // Method GetInfosArrows
-        void GetInfosArrows();
+        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints);
 
     private:
 
         // UI
         Ui::FormArrows *ui;
+
+        // Colors
         QColor FormOutlineColorArrow;
         QColor FormFillColorArrow;
+
         QColor BeforeFormOutlineColorArrow;
         QColor BeforeFormFillColorArrow;
+
         QColor DefaultFormOutlineColorArrow;
         QColor DefaultFormFillColorArrow;
 
