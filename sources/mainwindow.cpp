@@ -187,10 +187,11 @@ void MainWindow::slotNumberedBullets()
 void MainWindow::slotTextBoxes()
 {
     // Retrieve information from the textboxform
-    QString text = m_formTextboxes.getText();
+//    QString text = m_formTextboxes.getText();
+//    m_formTextboxes.
 
-    if (!text.isEmpty())
-        m_scene.addItem(new TextBoxItem(text));
+//    if (!text.isEmpty())
+//        m_scene.addItem(new TextBoxItem(text));
 }
 
 void MainWindow::slotTextPicture()

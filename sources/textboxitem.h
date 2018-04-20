@@ -56,7 +56,7 @@ class TextBoxItem
         Qt::AlignmentFlag m_alignmentFlags;
 
         // Style
-        QColor m_backgroundColor, m_fontColor;
+        QColor m_backgroundColor, m_fontColor, m_borderColor;
         bool m_hasBorders;
         int m_borderWidth, m_borderRadius;
 };
