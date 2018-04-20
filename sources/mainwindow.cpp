@@ -12,7 +12,7 @@
 
 #include <QDebug>
 #include <QFile>
-#include <QFileDialog> 
+#include <QFileDialog>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -77,7 +77,6 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
     connect(ui->actionresize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
-    connect(ui->actionNew,          SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
 
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
@@ -163,11 +162,6 @@ void MainWindow::resizeTold(bool)
     scenedialog.exec();
 }
 
-void MainWindow::slotNew(bool)
-{
-
-}
-
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
@@ -197,9 +191,10 @@ void MainWindow::slotTextBoxes()
 void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
-    PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem;
-    //m_formPictures.getPictureValues();
-    m_scene.addItem(PictureItem);
+    //PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
+
+
+    //m_scene.addItem(PictureItem);
 
 
 
@@ -237,12 +232,9 @@ void MainWindow::slotArrowsGraphicsItem()
 /* Zone de tests
     //QPainter *arrowPainter(paintRectArrow);
     QPainter *arrowPainter(&paintRectArrow);
-
     QStyleOptionGraphicsItem *arrowQStyleOption;
-
     //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
     ArrowsGraphicsItem::paint(&arrowPainter,&arrowQStyleOption,this);
-
 */
 
     // 3 Methods
