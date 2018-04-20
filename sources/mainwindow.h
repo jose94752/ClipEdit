@@ -101,7 +101,7 @@ private:
         void exportView(bool);
         void actionClicked(bool);
         void resizeTold(bool);
-        void slotNew(bool);
+        //void slotNew(bool);
 
         // SLOTS TEST GRAPHIC ITEM INSERTION
         void slotNumberedBullets();
