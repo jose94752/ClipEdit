@@ -3,9 +3,22 @@
 #include <QRect>
 
 
-PicturesGraphicsItem::PicturesGraphicsItem( QGraphicsItem* parent)
+PicturesGraphicsItem::PicturesGraphicsItem( FormPictures *ptr,QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
+    void getPictureValues(int &heigh, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
+/*
+     height      =
+     width       =
+     shade_grey  =
+     trans       =
+     lg_txt      =
+     lg_font     =
+     lg_size     =
+     lg_color    =
+     lg_pos      =
+
+*/
      srand(time(NULL));
     int range = 300 - (-300) + 1;
     setPos(-300 + (rand() % range) , -300 + (rand() % range));
@@ -18,15 +31,9 @@ PicturesGraphicsItem::PicturesGraphicsItem( QGraphicsItem* parent)
 // Pure virtual methods implementation
 // -----------------------------------
 
+
 QRectF PicturesGraphicsItem::boundingRect() const
 {
-    int     height, width, shade_grey, trans;
-    QString lg_txt;
-    QFont   lg_font;
-    int     lg_size;
-    QColor  lg_color;
-    QString lg_pos;
-
 
     //getPictureValues( height,  width,  shade_grey,  trans,  lg_txt, lg_font, lg_size,  lg_color,  lg_pos);
 
