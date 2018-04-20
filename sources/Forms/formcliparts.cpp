@@ -13,7 +13,8 @@
 #include "formcliparts.h"
 #include "ui_formcliparts.h"
 
-//#include "../Items/item_arrow.h"
+#include <QtWidgets/QFileDialog>
+
 
 // Constructor, destructor
 // -----------------------
@@ -24,26 +25,38 @@ FormCliparts::FormCliparts(QWidget* parent)
 
     ui->setupUi(this);
 
-    connect(ui->test_button, SIGNAL( clicked(bool) ), this, SLOT( event_onClick(bool) ));
+    ui->button_action->setEnabled(false);
+    ui->button_clear->setVisible(false);
+
+    connect(ui->button_browse, SIGNAL( clicked(bool) ), this, SLOT( event_on_click_browse(bool) ));
+    connect(ui->button_clear,  SIGNAL( clicked(bool) ), this, SLOT( event_on_click_clear(bool) ));
 }
 
 
 FormCliparts::~FormCliparts()
 {
     delete ui;
-
-    //list_arrows.clear();
 }
 
 
-void FormCliparts::event_onClick(bool)
-{
-//    ItemArrow* arrow = new ItemArrow();
+void FormCliparts::event_on_click_browse(bool) {
+    QString file_name = QFileDialog::getOpenFileName(this,
+                                                     QStringLiteral("Sélectionner une bibliothèque"),
+                                                     NULL,
+                                                     QStringLiteral("Images (*.png *.jpg)"));
 
-//    if (arrow != NULL)
-//    {
-//        list_arrows.append(arrow);
+    if (!file_name.isEmpty()) {
+        ui->edit_path->setText(file_name);
 
-//        canvas.add_widget(arrow);
-//    }
+        ui->button_action->setEnabled(true);
+        ui->button_clear->setVisible(true);
+    }
+}
+
+
+void FormCliparts::event_on_click_clear(bool) {
+    ui->edit_path->clear();
+
+    ui->button_action->setEnabled(false);
+    ui->button_clear->setVisible(false);
 }
