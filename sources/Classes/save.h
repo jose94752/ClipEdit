@@ -14,6 +14,7 @@ public:
     //QDomElement setLayer()
     static QString verifyExtension(QString);
     static QString current_filename;
+    static bool fileNameExists();
 
     void getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem);
     void getTextBoxItem(TextBoxItem *textBoxItem);

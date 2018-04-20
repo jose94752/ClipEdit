@@ -86,7 +86,7 @@ private:
     QColor ItemOutlineColorArrow;
     QColor ItemFillColorArrow;
 
-
+    QColor myColor; // Temp for test
 
 private slots:
 
