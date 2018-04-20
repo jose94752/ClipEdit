@@ -27,13 +27,6 @@ class TextBoxItem
 {
     public:
 
-        // Alignment types
-        enum TextBoxAlignment {
-            TEXTBOX_ALIGN_LEFT,
-            TEXTBOX_ALIGN_RIGHT,
-            TEXTBOX_ALIGN_CENTER
-        };
-
         // Constructors, destructor
         TextBoxItem(QGraphicsItem* parent = 0);
         TextBoxItem(const QString& text, QGraphicsItem* parent = 0);
@@ -44,7 +37,7 @@ class TextBoxItem
         int type() const;
 
         // Determine the best size from the members
-        QRectF textToRect();
+        void textToRect();
 
         // Setters
         void setText(const QString& text);
@@ -60,14 +53,12 @@ class TextBoxItem
         // Text-related members
         QString m_text;
         QFont m_font;
-        TextBoxAlignment m_alignment;
+        Qt::AlignmentFlag m_alignmentFlags;
 
         // Style
         QColor m_backgroundColor, m_fontColor;
         bool m_hasBorders;
-        int m_borderWidth;
-        int m_borderRadius;
-
+        int m_borderWidth, m_borderRadius;
 };
 
 #endif
