@@ -1,30 +1,59 @@
-#include <QWidget>
-#include <QToolButton>
-#include "colorbutton.h"
+/*
+================================================
+* File:         colorbutton.cpp
+* Project:      ClipEdit
+* Creation:     19/04/2018
+* Brief:        Custom color picker
+================================================
+*/
+
+// Includes
+// --------
+
 #include <QDebug>
 #include <QColorDialog>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QWidget>
+#include <QToolButton>
+#include "colorbutton.h"
 
-ColorButton::ColorButton(QWidget* widget):QToolButton(widget)
+// Constructor
+// -----------
+
+ColorButton::ColorButton(QWidget* parent)
+    :   QToolButton(parent), m_color(Qt::black)
 {
-   color=Qt::black;
-   connect(this,SIGNAL(clicked(bool)),this,SLOT(slotChoiseColor(bool)));
-   this->setText("");
-   //this->resize(150,45);
+   connect(this, SIGNAL(clicked(bool)), this, SLOT(pickColor(bool)));
+   setText("");
 }
 
-QColor ColorButton::getColor()
+// Events
+// ------
+
+void ColorButton::paintEvent(QPaintEvent* event)
 {
-    return color;
+    QToolButton::paintEvent(event);
+
+    QPainter painter(this);
+    painter.setRenderHints(QPainter::Antialiasing);
+
+    QBrush brush(m_color);
+    QPen pen(m_color);
+    painter.setPen(pen);
+    painter.setBrush(brush);
+    painter.drawEllipse(width()/6.0f, height()/8.0f, width() - 2*(width()/6.0f), height()- 2*(height()/8.0f));
 }
 
-void ColorButton::setColor(QColor vcolor)
+// Getters and setters
+// -------------------
+
+QColor ColorButton::getColor() const
 {
-    color=vcolor;
+    return m_color;
 }
 
-void ColorButton::slotChoiseColor(bool)
+void ColorButton::setColor(const QColor& vcolor)
 {
       QColor lcolor = QColorDialog::getColor(color, this );
       if(lcolor.isValid()){
@@ -34,14 +63,13 @@ void ColorButton::slotChoiseColor(bool)
       }
 }
 
-void ColorButton::paintEvent( QPaintEvent *event )
-{
-QToolButton::paintEvent(event) ;
-    QPainter painter(this);
-    QBrush  b(color);
-    QPen p(color);
-    painter.setPen(p);
-    painter.setBrush(b);
-    painter.drawEllipse(this->width()/8,this->height()/8,3*this->width()/4,3*this->height()/4);
+// Slots
+// -----
 
+void ColorButton::pickColor(bool)
+{
+    m_color = QColorDialog::getColor(m_color, this);
+    emit colorChanged(m_color);
+    update();
 }
+

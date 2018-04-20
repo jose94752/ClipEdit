@@ -11,36 +11,56 @@
 #ifndef ARROWSGRAPHICSITEM_H
 #define ARROWSGRAPHICSITEM_H
 
+#include "Items/basegraphicitem.h"
 #include <QGraphicsItem>
 #include <QRectF>
 #include <QPainter>
 #include <QColor>
 
 class ArrowsGraphicsItem
-        : public QGraphicsItem
+        //: public QGraphicsItem
+        : public BaseGraphicItem
 {
 public:
     // 4 Type of Thickness outline lines 4 choices possibilities (1 - 4)
-    //enum { Type = UserType + 4 };
+    enum { Type = UserType + 3 };
 
-    ArrowsGraphicsItem();
+    ArrowsGraphicsItem(BaseGraphicItem *parent = 0);
 
 
 
     // Overriding of the Type
-    //int type() const override { return Type; }
+    int type() const override { return Type; }
 
-    QRectF boundingRect() const;
+    // Virtual method redefinition
+    QRectF boundingRect() const override;
+
+    QPainterPath shape() const override;
+
+    // Set Fill Color of the Arrow
+    //void setColor(const QColor &color) { ItemFillColorArrow = color; }
+
+    // Set Outline Color of the Arrow
+    //void setColorOutline(const QColor &color) { ItemOutlineColorArrow = color; }
+
+    /* // For 2 objects anchors
+    BaseGraphicItem *startItem() const { return m_StartItem; }
+    BaseGraphicItem *endItem() const { return m_EndItem; }
+    */
+
+    void updateArrowPosition();
+
 
 protected:
+    // Virtual method redefinition
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
+               QWidget *widget) override;
 
 
 
 private:
-    //DiagramItem *m_StartItem;
-    //DiagramItem *m_EndItem;
+    BaseGraphicItem *m_StartItem;
+    BaseGraphicItem *m_EndItem;
 
     //PositionItem *m_StartPositionItem;
     //PositionItem *m_EndPositionItem;

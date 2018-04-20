@@ -16,6 +16,9 @@
 #include <QFont>
 #include <QColor>
 #include <QString>
+#include <QPixmap>
+#include <QDebug>
+#include <QFileDialog>
 
 // Constructor, destructor
 // -----------------------
@@ -24,6 +27,11 @@ FormPictures::FormPictures(QWidget *parent)
     :   QWidget(parent), ui(new Ui::FormPictures)
 {
     ui->setupUi(this);
+
+
+    //connect (ui->pushButton_simple, SIGNAL(clicked(bool)), this, SLOT(simple_click(bool)));
+
+      connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
     ui->comboBox_lg_pos->addItem("Above Right");
     ui->comboBox_lg_pos->addItem("Above Middle");
@@ -68,3 +76,28 @@ void FormPictures::getPictureValues(int &heigh, int &width, int &shade_grey, int
 
 
 }
+
+void FormPictures::chose_picture(){
+
+    QString fileName = QFileDialog::getOpenFileName(
+        this,  QString("Ouv. img"), "/home/formation/Images/image_01.jpeg", "Fic img (*.*)"
+
+          );
+
+    ui->lineEdit_pic_path->insert(fileName);
+
+    QPixmap file_image (fileName);
+
+    int h;
+    int w;
+     h = file_image.height();
+     w = file_image.width();
+
+     ui->spinBox_pic_h->setValue(h);
+     ui->spinBox_pic_w->setValue(w);
+
+
+
+
+}
+

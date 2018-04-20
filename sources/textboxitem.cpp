@@ -14,29 +14,36 @@
 
 #include <QDebug>
 #include <QPainter>
-#include <ctime>
-#include <cstdlib>
 
 #include "textboxitem.h"
 
 
-// Constructor, destructor
+// Constructors, destructor
 // -----------------------
+
+TextBoxItem::TextBoxItem(QGraphicsItem* parent)
+    :   BaseGraphicItem(parent)
+{
+    m_font = QFont();
+
+    setText("Sample Text");
+    setPos(0, 0);
+
+}
 
 TextBoxItem::TextBoxItem(const QString& text, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
     m_text = text;
     srand(time(NULL));
-    int range = 300 - (-300) + 1;
-    setPos(-300 + (rand() % range) , -300 + (rand() % range));
+    setPos(0, 0);
 
     setRect(QRectF(-50, -50, 100, 100));
 }
 
 
-// Pure virtual methods implementation
-// -----------------------------------
+// Virtual methods from BaseGraphicItem
+// ------------------------------------
 
 QRectF TextBoxItem::boundingRect() const
 {
@@ -54,3 +61,57 @@ int TextBoxItem::type() const
 {
     return Type::TextBoxGraphicsItem;
 }
+
+// Utils
+// -----
+
+QRectF TextBoxItem::textToRect()
+{
+    return QRectF();
+}
+
+// Setters
+// -------
+
+
+void TextBoxItem::setText(const QString& text)
+{
+    m_text = text;
+
+}
+
+void TextBoxItem::setFont(const QFont& font)
+{
+    m_font = font;
+}
+
+void TextBoxItem::setBackgroundColor(const QColor& color)
+{
+    m_backgroundColor = color;
+    update();
+}
+
+void TextBoxItem::setTextColor(const QColor& color)
+{
+    m_backgroundColor = color;
+    update();
+}
+
+void TextBoxItem::setHasBorders(bool hasBorders)
+{
+    m_hasBorders = hasBorders;
+    update();
+}
+
+void TextBoxItem::setBorderWidth(int width)
+{
+    m_borderWidth = width;
+}
+
+void TextBoxItem::setBorderRadius(int radius)
+{
+    m_borderRadius = radius;
+    update();
+}
+
+
