@@ -7,14 +7,19 @@ QRectF NumberedBulletGraphicItem::boundingRect() const
 }
 
 
-void NumberedBulletGraphicItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-   QPoint A (0, 0), D (100, 100);
-   QRect qrect (A, D);
-   painter->drawText(qrect, "NumberedBullet");
+void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    qDebug () << "\tdans NumberBulletItem::paint\n";
+    qDebug () << "\tm_from == " << m_from << "\n";
+    qDebug () << "\tm_to == " << m_to << "\n";
+    int nb_bullet (m_to + 1 - m_from);
+    qDebug () << "\tnombre de bullet :" << nb_bullet << "\n";
+    int num_bullet (0);
+    for (; num_bullet != nb_bullet; ++num_bullet) {
+    }
 }
 
 NumberedBulletGraphicItem::NumberedBulletGraphicItem(int from, int to, shape_e button_shape, QColor button_color,
-                          QColor numbercolor, const QFont font) : /*QGraphicsItem (*this)*/
+                          QColor numbercolor, const QFont font) :
   m_from (from),
   m_to (to),
   m_shape (button_shape),

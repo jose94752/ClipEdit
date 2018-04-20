@@ -4,6 +4,7 @@
 #include <QRectF>
 #include <qfont.h>
 #include <qpainter.h>
+#include <QGraphicsEllipseItem>
 
 class NumberedBulletGraphicItem : public QGraphicsItem
 {
@@ -13,6 +14,9 @@ public:
       NB_CIRCLE = 0,
       NB_RECTANGLE,
       NB_ROUNDEDRECTANGLE
+    };
+    enum const_e {
+        MAXPUCES = 5
     };
     NumberedBulletGraphicItem(int from = 0, int to = 0, shape_e button_shape = NB_CIRCLE, QColor button_color = QColor (),
                               QColor numbercolor = QColor (), const QFont font = QFont ());

@@ -94,10 +94,18 @@
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_8">
                 <item>
-                 <widget class="QSpinBox" name="spinBox_From"/>
+                 <widget class="QSpinBox" name="spinBox_From">
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="spinBox_To"/>
+                 <widget class="QSpinBox" name="spinBox_To">
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>

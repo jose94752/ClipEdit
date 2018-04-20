@@ -154,8 +154,17 @@ void MainWindow::resizeTold(bool)
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
+  qDebug() << "\tdans slot NumberedBullets\n" ;
+  int from (0), to (0), taille (0);
+  int shape (0);
+  QColor buttoncolor, numbercolor;
+  QFont qfont;
+  m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
+
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
-  numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
+  qDebug () << "\tfrom == " << from << "\n";
+  qDebug () << "\tto == " << to << "\n";
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont);
   m_scene.addItem(numberedBulletGraphicItem);
 }
 
