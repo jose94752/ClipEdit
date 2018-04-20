@@ -38,7 +38,7 @@ class FormPictures: public QWidget
 
         ~FormPictures();
 
-       void getPictureValues(QString path, int &heigh, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
+       void getPictureValues(QString &path, int &height, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
 
 public slots:
     void chose_picture();
@@ -47,6 +47,8 @@ private:
         // Ui
         Ui::FormPictures *ui;
 
+signals:
+        void ImageChoosen();
 
 };
 
