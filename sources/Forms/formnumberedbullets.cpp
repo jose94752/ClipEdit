@@ -33,7 +33,7 @@ void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape,
     shape = ui->comboBox_Shape->currentIndex();
     bulletcolor = ui->ColorButton_NumberColor->getColor();
     numbercolor = ui->ColorButton_NumberColor->getColor();
-
+    font = ui->fontComboBox->font ();
 
 }
 
