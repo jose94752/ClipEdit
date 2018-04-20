@@ -19,7 +19,7 @@ class ItemHandler;
 
 // Class
 // -----
-
+//
 class BaseGraphicItem
     :   public QGraphicsItem
 {
