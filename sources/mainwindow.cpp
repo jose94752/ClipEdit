@@ -25,6 +25,7 @@
 #include "Forms/resizescenedialog.h"
 #include "Classes/arrowsgraphicsitem.h"
 #include "Forms/dialogfilealreadyexists.h"
+#include "Forms/dialogsave.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -67,6 +68,7 @@ void MainWindow::buildMenu()
 {
     // Connects
     connect(ui->actionSave,         SIGNAL( triggered(bool) ), this, SLOT( save(bool) ));
+    ui->actionSave->setDisabled(true);
     connect(ui->actionSaveAs,       SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
     connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
@@ -83,7 +85,7 @@ void MainWindow::buildMenu()
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
-    connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
+    connect(&m_formPictures, SIGNAL(ImageChoosen()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
@@ -158,6 +160,8 @@ void MainWindow::resizeTold(bool)
 
 void MainWindow::slotNew(bool)
 {
+    DialogSave dialogSave(this,m_scene.items());
+    dialogSave.exec();
     ResizeSceneDialog scenedialog(this,&m_scene);
     scenedialog.exec();
     foreach(QGraphicsItem *item,m_scene.items())
@@ -186,10 +190,11 @@ void MainWindow::slotNumberedBullets()
 void MainWindow::slotTextBoxes()
 {
     // Retrieve information from the textboxform
-    QString text = m_formTextboxes.getText();
+//    QString text = m_formTextboxes.getText();
+//    m_formTextboxes.
 
-    if (!text.isEmpty())
-        m_scene.addItem(new TextBoxItem(text));
+//    if (!text.isEmpty())
+//        m_scene.addItem(new TextBoxItem(text));
 }
 
 void MainWindow::slotTextPicture()
@@ -273,7 +278,7 @@ void MainWindow::save(bool)
 ///
 void MainWindow::saveAs(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.ini",tr("Init File (*.ini)"));
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.cle",tr("ClipEdit File (*.cle)"));
     if(fileName!=""){
         QString extfilename=Save::verifyExtension(fileName);
         QFile fileToSave(extfilename);

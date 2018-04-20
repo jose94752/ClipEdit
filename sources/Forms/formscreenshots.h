@@ -19,6 +19,8 @@
 #include<QSpinBox>
 #include<QRadioButton>
 #include<QCheckBox>
+#include<QGraphicsScene>
+#include<QString>
 
 // Forward Declaration
 namespace Ui
@@ -84,6 +86,23 @@ class FormScreenshots
         ///
         QCheckBox *m_hidewindow;
 
+        int m_width;
+        int m_height;
+
+        void mousePressEvent(QMouseEvent *ev);
+        void mouseMoveEvent(QMouseEvent *ev);
+        void mouseReleaseEvent(QMouseEvent *ev);
+
+        bool m_buttonpressed;
+
+        ///
+        /// \brief if m_point0 = point1 this mean the user has
+        ///
+        QPoint m_point0;
+        QPoint m_point1;
+
+
+
      private slots:
         ///
         /// \brief Capture : capture slot in WholeScreen and window
@@ -97,12 +116,22 @@ class FormScreenshots
         /// \brief hide enables or disables the Hide The Window option.
         ///
         void hide();
+        ///
+        /// \brief ChangeHeight
+        ///
+        void ChangeHeight(int);
+        ///
+        /// \brief ChangeWidth
+        ///
+        void ChangeWidth(int);
 
      signals:
         ///
         /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
         ///
         void InsertImageText(QString);
+
+
 
 
 };

@@ -32,7 +32,8 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
 
     m_backgroundColor = QColor(Qt::white);
     m_fontColor = QColor(Qt::black);
-    m_hasBorders  = true;
+    m_borderColor = QColor(Qt::black);
+    m_hasBorders = true;
     m_borderWidth = 1;
     m_borderRadius = 0;
 
@@ -49,6 +50,7 @@ TextBoxItem::TextBoxItem(const QString& text, QGraphicsItem* parent)
 
     m_backgroundColor = QColor(Qt::gray);
     m_fontColor = QColor(Qt::white);
+    m_borderColor = QColor(Qt::green);
     m_hasBorders = true;
     m_borderWidth = 4;
     m_borderRadius = 10;
@@ -73,7 +75,7 @@ void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *optio
     QRectF borderRect = m_rect.adjusted(m_borderWidth/2.0, m_borderWidth/2.0, -m_borderWidth/2.0, -m_borderWidth/2.0);
     QRectF textRect = m_rect.adjusted(m_borderWidth+2, m_borderWidth+2, -m_borderWidth-2, -m_borderWidth-2);
 
-    QPen pen(Qt::black, m_borderWidth);
+    QPen pen(m_borderColor, m_borderWidth);
     painter->setPen(pen);
 
     QPainterPath path;

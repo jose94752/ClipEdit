@@ -111,7 +111,7 @@ void ArrowsGraphicsItem::paint(QPainter *arrowPainter, const QStyleOptionGraphic
 
     arrowPainter->setPen(QPen(Qt::red, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     arrowPainter->drawLine(20,20,200,200);
-   // BaseGraphicItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+    BaseGraphicItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
 
 
 }

@@ -61,9 +61,11 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString path,  int &heigh, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos){
-     path       = ui->lineEdit_pic_path->text();
-     heigh      = ui->spinBox_pic_h->value();
+void FormPictures::getPictureValues(QString &path,  int &height, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos){
+    path = "";
+     qDebug() <<"apres getPicture (1) :  "  <<path;
+    path       = ui->lineEdit_pic_path->text();
+     height     = ui->spinBox_pic_h->value();
      width      = ui->spinBox_pic_w->value();
      shade_grey = ui->spinBox_pic_sh->value();
      trans      = ui->spinBox_pic_t->value();
@@ -71,10 +73,7 @@ void FormPictures::getPictureValues(QString path,  int &heigh, int &width, int &
      lg_font    = ui->fontComboBox_lg_font->font();
      lg_size    = ui->spinBox_lg_size->value();
      lg_color   = ui->toolButton_color->getColor();
-     lg_pos     = ui->comboBox_lg_pos->currentText();
-
-
-
+     lg_pos     = ui->comboBox_lg_pos->currentText(); 
 
 }
 
@@ -85,20 +84,25 @@ void FormPictures::chose_picture(){
 
           );
 
-    ui->lineEdit_pic_path->insert(fileName);
+
 
     QPixmap file_image (fileName);
 
     int h;
     int w;
+    QString s;
      h = file_image.height();
      w = file_image.width();
+     s = fileName;
+
+
+
 
      ui->spinBox_pic_h->setValue(h);
      ui->spinBox_pic_w->setValue(w);
+     ui->lineEdit_pic_path->setText(s);
 
-
-
+     emit ImageChoosen();
 
 }
 
