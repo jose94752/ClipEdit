@@ -48,7 +48,8 @@ SOURCES += \
     picturesgraphicsitem.cpp \
     Items/basegraphicitem.cpp \
     Items/itemhandler.cpp \
-    Forms/resizescenedialog.cpp
+    Forms/resizescenedialog.cpp \
+    Forms/dialogsave.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -71,7 +72,8 @@ HEADERS += \
     picturesgraphicsitem.h \
     Items/basegraphicitem.h \
     Items/itemhandler.h \
-    Forms/resizescenedialog.h
+    Forms/resizescenedialog.h \
+    Forms/dialogsave.h
 
 
 FORMS += \
@@ -85,7 +87,8 @@ FORMS += \
     Forms/formscreenshots.ui \
     Forms/formtextboxes.ui \
     Forms/dialogfilealreadyexists.ui \
-    Forms/resizescenedialog.ui
+    Forms/resizescenedialog.ui \
+    Forms/dialogsave.ui
 
 
 RESOURCES += \

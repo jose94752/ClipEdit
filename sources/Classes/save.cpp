@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QGraphicsItem>
+#include <QRectF>
 #include <mainwindow.h>
 #include "picturesgraphicsitem.h"
 #include "textboxitem.h"
@@ -36,27 +37,38 @@ QString Save::verifyExtension(QString fileName)
 }
 
 void Save::getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem){
-
+    //qDebug()<<"picture graphique item";
 }
 
 void Save::getTextBoxItem(TextBoxItem *textBoxItem){
-
+    //qDebug()<<"text boxes";
 }
 
 void Save::save()
 {
     QSettings settings(current_filename,QSettings::IniFormat);
-    settings.setValue("toto","Hello World");
-    //qDebug()<<"taille liste"<<m_listItems.length();
+    countItems=0;
     foreach(QGraphicsItem *item,m_listItems){
         int type=item->type();
-        if(type==ImageGraphicsItem){
-             getPicturesGraphicsItemData((PicturesGraphicsItem*)item);
-             qDebug()<<"Graphique";
+        QRectF rect=item->boundingRect();
+        double x,y,width,height;
+        rect.getRect(&x,&y,&width,&height);
+        if((type==ImageGraphicsItem || type==TextBoxGraphicsItem) && (x!=0 || y!=0 || width!=0 || height!=0)){
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/type"),QString::number(type));
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/x"),QString::number(x));
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/y"),QString::number(y));
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/width"),QString::number(width));
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/height"),QString::number(height));
         }
-        if(type==TextBoxGraphicsItem){
+
+        if(type==ImageGraphicsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             getPicturesGraphicsItemData((PicturesGraphicsItem*)item);
+        }
+        if(type==TextBoxGraphicsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
              getTextBoxItem((TextBoxItem*)item);
-              qDebug()<<"Image";
+        }
+        if((type==ImageGraphicsItem || type==TextBoxGraphicsItem) && (x!=0 || y!=0 || width!=0 || height!=0)){
+            countItems++;
         }
     }
 }
