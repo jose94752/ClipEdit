@@ -5,6 +5,11 @@
 #include<QRectF>
 #include<QRect>
 
+//add window
+#include<QStyle>
+#include<QApplication>
+#include<QDesktopWidget>
+
 //we subclass QGraphicItem and call the new class ScreenshotsGraphicsItem.
 //The class' constructor accepts a pointer to a QGraphicItem item.
 //This pointer is then passed to the constructor of the QGraphicItem.
@@ -47,6 +52,9 @@ void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphic
 
     painter->fillRect(boundingRect(), Qt::red);
 }
+
+//code: window
+
 
 
 
