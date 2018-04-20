@@ -190,14 +190,8 @@ void MainWindow::slotTextBoxes()
 
 void MainWindow::slotTextPicture()
 {
-    //m_scene.addItem(new PictureItem());
-    //PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
-
-
-    //m_scene.addItem(PictureItem);
-
-
-
+    PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
+    m_scene.addItem(PictureItem);
 }
 
 ///
