@@ -82,9 +82,9 @@ void MainWindow::buildMenu()
     connect(ui->actionLayers,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
-    connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
+    connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
 }
@@ -165,12 +165,18 @@ void MainWindow::resizeTold(bool)
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
-  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
-  numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
-  if (numberedBulletGraphicItem != NULL) {
-    delete numberedBulletGraphicItem;
-  }
+  qDebug() << "\tdans slot NumberedBullets\n" ;
+  int from (0), to (0), taille (0);
+  int shape (0);
+  QColor buttoncolor, numbercolor;
+  QFont qfont;
+  m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
 
+  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
+  qDebug () << "\tfrom == " << from << "\n";
+  qDebug () << "\tto == " << to << "\n";
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont);
+  m_scene.addItem(numberedBulletGraphicItem);
 }
 
 void MainWindow::slotTextBoxes()
