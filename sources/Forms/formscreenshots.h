@@ -16,6 +16,9 @@
 #include <QWidget>
 #include<QPixmap>
 #include<QButtonGroup>
+#include<QSpinBox>
+#include<QRadioButton>
+#include<QCheckBox>
 
 // Forward Declaration
 namespace Ui
@@ -38,7 +41,6 @@ class FormScreenshots
 ///
 /// \brief The TypeCapture enum : enum with the type of capture
 ///
-
     enum TypeCapture {WholeScreen};
 
  ///
@@ -49,12 +51,21 @@ class FormScreenshots
 
         ~FormScreenshots();
 
+//protected:
+//    ///
+//    /// \brief resizeEvent this method function is reimplemented to receive
+//    /// the resize events dispatched to the widget.
+//    /// \param event
+//    ///
+//    void resizeEvent(QResizeEvent *event) override;
+
+
     private:
 
         // Ui
         Ui::FormScreenshots *ui;
         ///
-        /// \brief m_typecapture : WholeScreen and window.
+        /// \brief m_typecapture WholeScreen and window.
         ///
         TypeCapture m_typecapture;
         ///
@@ -62,8 +73,16 @@ class FormScreenshots
         ///
         QPixmap m_pixmap;
         ///
-        /// \brief m_buttongroup : we group the radio button who are included in different frames.
-        QButtonGroup m_buttongroup;
+        /// \brief m_buttongroup we group the radio button who are included in different frames.
+       // QButtonGroup m_buttongroup;
+        ///
+        /// \brief m_delayspinbox it gives the time for a user to rearrange this desktop.
+        ///
+        QSpinBox *m_delayspinbox;
+        ///
+        /// \brief m_hidewindow Hiding the application's window while the screenshot is taken.
+        ///
+        QCheckBox *m_hidewindow;
 
      private slots:
         ///
@@ -74,8 +93,12 @@ class FormScreenshots
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
         void CaptureWholeScreen();
+        ///
+        /// \brief hide enables or disables the Hide The Window option.
+        ///
+        void hide();
 
-    signals:
+     signals:
         ///
         /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
         ///
