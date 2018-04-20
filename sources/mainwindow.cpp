@@ -207,13 +207,12 @@ void MainWindow::slotGraphs()
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
 
-    GraphsInfo infos;
+//    GraphsInfo infos;
+//    m_formCharts.GetChartsValues( infos);
 
-    m_formCharts.GetChartsValues( infos);
-
-    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-    g->setInfos(infos);
-    m_scene.addItem(g);
+//    GraphsGraphicsItem *g = new GraphsGraphicsItem();
+//    g->setInfos(infos);
+//    m_scene.addItem(g);
 
 }
 
