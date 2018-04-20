@@ -92,9 +92,6 @@ private:
         void buildToolBar();
         void buildView();
 
-public:
-        QList<QGraphicsItem *> getGraphicSceneItems();
-
     private slots:
 
         // Menu and toolbar

@@ -41,3 +41,4 @@ QPushButton *FormNumberedBullets::getGoPushButton()
 {
     return ui->pushButtonCreateBullet;
 }
+
