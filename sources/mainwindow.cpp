@@ -207,9 +207,14 @@ void MainWindow::slotGraphs()
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
 
-    //GraphsGraphicsItem *g = new GraphsGraphicsItem();
+    GraphsInfo infos;
 
-    createChart(true);
+    m_formCharts.GetChartsValues( infos);
+
+    GraphsGraphicsItem *g = new GraphsGraphicsItem();
+    g->setInfos(infos);
+    m_scene.addItem(g);
+
 }
 
 
@@ -286,48 +291,3 @@ void MainWindow::saveAs(bool)
 
 
 
-void MainWindow::createChart(bool)
-{
-//![1]
-    QLineSeries *series0 = new QLineSeries();
-    QLineSeries *series1 = new QLineSeries();
-//![1]
-
-//![2]
-    *series0 << QPointF(-1000, 500) << QPointF(-300, 700) << QPointF(700, 600);
-             //<< QPointF(90, 70) << QPointF(120, 600)
-             //<< QPointF(160, 70) << QPointF(180, 50);
-    *series1 << QPointF(-100, 300) << QPointF(-300, 400) << QPointF(700, 300);
-             //<< QPointF(80, 200) << QPointF(120, 300)
-             //<< QPointF(160, 4) << QPointF(180, 300);
-//![2]
-
-//![3]
-    QAreaSeries *series = new QAreaSeries(series0, series1);
-    series->setName("Batman");
-    QPen pen(0x059605);
-    pen.setWidth(3);
-    series->setPen(pen);
-
-    QLinearGradient gradient(QPointF(0, 0), QPointF(0, 1000));
-    gradient.setColorAt(0.0, 0x3cc63c);
-    gradient.setColorAt(1.0, 0x26f626);
-    gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-    series->setBrush(gradient);
-//![3]
-
-//![4]
-    QChart*chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Simple areachart example");
-    chart->createDefaultAxes();
-    chart->axisX()->setRange(-200, 800);
-    chart->axisY()->setRange(-200, 800);
-//4
-
-//    QChartView *qv = new  QChartView();
-//    qv->setChart( chart);
-
-    m_scene.addItem(chart);
-
-}
