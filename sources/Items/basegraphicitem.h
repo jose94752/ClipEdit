@@ -20,6 +20,36 @@ class ItemHandler;
 // Class
 // -----
 
+///
+/// \brief The BaseGraphicItem class
+/// This is the abstract base class for all custom graphic items in ClipEdit
+/// Inheriting from BaseGraphicItem means you have to implement your own type() method.
+/// To do so, you can use the Type enum below which lists all custom graphic types used as return values
+/// for each items that inherits from BaseGraphicItem.
+///
+/// Interactivity
+/// BaseGraphicItem includes ItemHandler's that allows the user to rescale or rotate the item in the scene.
+/// Don't forget to call BaseGraphicItem::paintEvent() in your custom item paintEvent(..) method.
+/// You can disable this behaviour by setting the hasHandler flag to false as so:
+///     item->setHasHandler(false);
+///
+/// Note : You can also set whether or not you want to draw the global bounding rectangle, edit the handlers size or the height
+/// of the rotation handler (this one is displayed a few pixels above the content rect) with the associated setter.
+///
+/// Understanding the bounding rectangle
+/// Due to the implementation of ItemHandler's as described above, dealing with the bounding rect is a bit particular.
+/// The BaseGraphicItem class use a QRectF member called m_rect. This member can be described as the content rectangle.
+/// In other words, this is the member you will use do change the dimensions of your item, as well as the one you should use
+/// for your QPainter calls.
+///
+/// To change the m_rect member please use the setRect() method to also update the handlers position.
+/// To add further explanations, BaseGraphicItem::boundingRect() adjust the m_rect member to include the handlers in order to avoid
+/// draw artifacts without modifying the m_rect itself. As a result, the real bounding rectangle is bigger than than the rectangle m
+/// defined by m_rect but you shouldn't draw outside of the m_rect rectangle.
+/// As a result, in your custom item boundingRect() method you can:
+///     - Use the default implementation (return BaseGraphicsItem::boudingRect()) [RECOMMANDED]
+///     - Use a custom implementation similar to what is done in BaseGraphicItem
+
 class BaseGraphicItem
     :   public QGraphicsItem
 {

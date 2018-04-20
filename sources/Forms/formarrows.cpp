@@ -65,6 +65,11 @@ FormArrows::~FormArrows()
     delete ui;
 }
 
+void FormArrows::GetInfosArrows()
+{
+    //To do
+}
+
 void FormArrows::FillColorArrowChanged()
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
