@@ -83,7 +83,8 @@ void FormPictures::chose_picture(){
         this,  QString("Ouv. img"), "/home/formation/Images/image_01.jpeg", "Fic img (*.*)"
 
           );
-    qDebug () << "file name (1): "  <<fileName;
+
+    ui->lineEdit_pic_path->insert(fileName);
 
     QPixmap file_image (fileName);
 
@@ -91,7 +92,12 @@ void FormPictures::chose_picture(){
     int w;
      h = file_image.height();
      w = file_image.width();
-     qDebug () << "file name (2): "  <<fileName  <<"height:"  <<h  <<"  width:"  <<w;
+
+     ui->spinBox_pic_h->setValue(h);
+     ui->spinBox_pic_w->setValue(w);
+
+
+
 
 }
 

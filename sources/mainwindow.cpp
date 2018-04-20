@@ -204,6 +204,10 @@ void MainWindow::slotGraphs()
 void MainWindow::slotArrowsGraphicsItem()
 {
     //m_scene.addItem(new ArrowsGraphicsItem());
+    //ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem;
+    //m_scene.addItem(ArrowItem);
+
+
     // 3 Methods
     // Without anchor point:
     //          we need 2 points on the scene
