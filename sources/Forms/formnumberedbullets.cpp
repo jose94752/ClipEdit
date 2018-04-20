@@ -21,6 +21,24 @@ FormNumberedBullets::~FormNumberedBullets()
     delete ui;
 }
 
-void FormNumberedBullets::get_info (qint8& from, qint8& to) {
+//for now shape : 0-> circle
+//                1-> rectangle
+//                2-> rounded rectangle
+//TBD enum in NumberedBulletGraphicItem
+void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) {
+    from = ui->spinBox_From->value();
+    to = ui->spinBox_To->value ();
+    taille = ui->spinBox_Size->value();
+    //QString shape_str;
+    shape = ui->comboBox_Shape->currentIndex();
+    bulletcolor = ui->ColorButton_NumberColor->getColor();
+    numbercolor = ui->ColorButton_NumberColor->getColor();
+
 
 }
+
+QPushButton *FormNumberedBullets::getGoPushButton()
+{
+    return ui->pushButtonCreateBullet;
+}
+

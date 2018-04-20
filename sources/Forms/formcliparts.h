@@ -22,8 +22,6 @@ namespace Ui
     class FormCliparts;
 }
 
-class ItemArrow;
-
 
 // Class
 // -----
@@ -40,18 +38,18 @@ class FormCliparts
 
         ~FormCliparts();
 
-    // Event
+
     private slots:
 
-        void event_onClick(bool);
+        void event_on_click_browse(bool);
+
+        void event_on_click_clear(bool);
 
 
-    // Data Members
+    // Data Member
     private:
 
         Ui::FormCliparts* ui;
-
-        //QVector<ItemArrow*> list_arrows;
 };
 
 #endif
