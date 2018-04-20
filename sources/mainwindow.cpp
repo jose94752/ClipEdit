@@ -228,13 +228,14 @@ void MainWindow::slotArrowsGraphicsItem()
     //      to be updated.
     // The region is specified by paintRect.
 
-/* Zone de tests
-    //QPainter *arrowPainter(paintRectArrow);
+ //Zone de tests
+/*    //QPainter *arrowPainter(paintRectArrow);
     QPainter *arrowPainter(&paintRectArrow);
     QStyleOptionGraphicsItem *arrowQStyleOption;
     //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
     ArrowsGraphicsItem::paint(&arrowPainter,&arrowQStyleOption,this);
 */
+ //End Zone tests
 
     // 3 Methods
     // Without anchor point:
