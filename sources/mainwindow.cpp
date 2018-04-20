@@ -23,8 +23,14 @@
 #include "textboxitem.h"
 #include "Classes/graphsgraphicsitem.h"
 #include "Forms/resizescenedialog.h"
+#include "Classes/arrowsgraphicsitem.h"
+
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QAreaSeries>
 
 
+QT_CHARTS_USE_NAMESPACE
 
 // Constructor, destructor
 // -----------------------
@@ -79,7 +85,8 @@ void MainWindow::buildMenu()
     connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
-    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotChart()));
+    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
 }
 
 ///
@@ -180,11 +187,37 @@ void MainWindow::slotTextPicture()
 
 }
 
-
+///
+/// \brief slotGraphs
+/// This slot is called on graphs
 void MainWindow::slotGraphs()
 {
-    //m_scene.addItem(new NumberedBulletGraphicItem());
+    //m_scene.addItem(new GraphsGraphicsItem());
+    //m_scene.addItem(new GraphsGraphicsItem());
+
+    //GraphsGraphicsItem *g = new GraphsGraphicsItem();
+
+    createChart(true);
 }
+
+
+void MainWindow::slotArrowsGraphicsItem()
+{
+    //m_scene.addItem(new ArrowsGraphicsItem());
+    //ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem;
+    //m_scene.addItem(ArrowItem);
+
+
+    // 3 Methods
+    // Without anchor point:
+    //          we need 2 points on the scene
+    // 1 anchor point:
+    //          we need 1 point on the scene and an object of scene
+    //          or an object of scene and 1 point on the scene
+    // 2 anchors points:
+    //          we need 2 objects of scene
+}
+
 
 ///
 /// \brief exportView
@@ -231,4 +264,52 @@ void MainWindow::saveAs(bool)
             Save save(fileName);
         }
     }
+}
+
+
+
+void MainWindow::createChart(bool)
+{
+//![1]
+    QLineSeries *series0 = new QLineSeries();
+    QLineSeries *series1 = new QLineSeries();
+//![1]
+
+//![2]
+    *series0 << QPointF(-1000, 500) << QPointF(-300, 700) << QPointF(700, 600);
+             //<< QPointF(90, 70) << QPointF(120, 600)
+             //<< QPointF(160, 70) << QPointF(180, 50);
+    *series1 << QPointF(-100, 300) << QPointF(-300, 400) << QPointF(700, 300);
+             //<< QPointF(80, 200) << QPointF(120, 300)
+             //<< QPointF(160, 4) << QPointF(180, 300);
+//![2]
+
+//![3]
+    QAreaSeries *series = new QAreaSeries(series0, series1);
+    series->setName("Batman");
+    QPen pen(0x059605);
+    pen.setWidth(3);
+    series->setPen(pen);
+
+    QLinearGradient gradient(QPointF(0, 0), QPointF(0, 1000));
+    gradient.setColorAt(0.0, 0x3cc63c);
+    gradient.setColorAt(1.0, 0x26f626);
+    gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+    series->setBrush(gradient);
+//![3]
+
+//![4]
+    QChart*chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Simple areachart example");
+    chart->createDefaultAxes();
+    chart->axisX()->setRange(-200, 800);
+    chart->axisY()->setRange(-200, 800);
+//4
+
+//    QChartView *qv = new  QChartView();
+//    qv->setChart( chart);
+
+    m_scene.addItem(chart);
+
 }

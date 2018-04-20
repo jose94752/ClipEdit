@@ -43,10 +43,6 @@ class FormTextBoxes
         QString getFontFamily() const;
         int getFontPointSize() const;
 
-    private slots:
-
-        void pickColor(bool);
-
     private:
 
         // Ui

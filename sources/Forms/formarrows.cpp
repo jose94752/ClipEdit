@@ -47,6 +47,8 @@ FormArrows::FormArrows(QWidget *parent)
     BeforeFormOutlineColorArrow = FormOutlineColorArrow;
     BeforeFormFillColorArrow = FormFillColorArrow;
 
+    //ui->comboBoxThicknessOutlineLinesContents->;
+
     // End default values of FormArrows
 
     // Connects for change color of the FormArrow

@@ -13,6 +13,8 @@
 #define FORMCHARTS_H
 
 #include <QWidget>
+#include <QString>
+#include <QColor>
 
 // Forward Declaration
 namespace Ui
@@ -35,7 +37,10 @@ class FormCharts
 
         ~FormCharts();
 
-    private:
+    void GetChartsValues(int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
+                         QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight,
+                         int &vScale, int &vRotate);
+private:
 
         Ui::FormCharts *ui;
 };

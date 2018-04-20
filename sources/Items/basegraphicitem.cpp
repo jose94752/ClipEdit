@@ -33,6 +33,34 @@ BaseGraphicItem::BaseGraphicItem(QGraphicsItem* parent)
     createHandlers();
 }
 
+BaseGraphicItem::BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent)
+    :   QGraphicsItem(parent)
+{
+    m_hasHandlers = true;
+    m_drawBoundingRect = true;
+    m_handlerSize = 10;
+    m_heightForRotationHandler = 30;
+    m_current = 0;
+
+    setRect(rect);
+    setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
+    createHandlers();
+}
+
+BaseGraphicItem::BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool drawBoundingRect, QGraphicsItem* parent)
+    :   QGraphicsItem(parent)
+{
+    m_hasHandlers = hasHandlers;
+    m_drawBoundingRect = drawBoundingRect;
+    m_handlerSize = 10;
+    m_heightForRotationHandler = 30;
+    m_current = 0;
+
+    setRect(rect);
+    setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
+    createHandlers();
+}
+
 BaseGraphicItem::~BaseGraphicItem()
 {
     for (int i = 0; i < m_handlers.size() ; i++)
@@ -41,6 +69,81 @@ BaseGraphicItem::~BaseGraphicItem()
 
 // Getters and setters
 // -------------------
+
+bool BaseGraphicItem::hasHandlers() const
+{
+    return m_hasHandlers;
+}
+
+void BaseGraphicItem::setHasHandlers(bool hasHandlers)
+{
+    m_hasHandlers = hasHandlers;
+
+    // Clear existing handlers if necessary
+    if (!m_hasHandlers)
+    {
+        for (int i = 0; i < m_handlers.size(); i++)
+            delete m_handlers[i];
+
+        m_handlers.clear();
+    }
+    else
+    {
+        // Create handlers
+        createHandlers();
+    }
+
+    update();
+}
+
+bool BaseGraphicItem::drawBoundingRect() const
+{
+    return m_drawBoundingRect;
+}
+
+void BaseGraphicItem::setDrawBoundingRect(bool drawBoundingRect)
+{
+    m_drawBoundingRect = drawBoundingRect;
+    update();
+}
+
+int BaseGraphicItem::handlerSize() const
+{
+    return m_handlerSize;
+}
+
+void BaseGraphicItem::setHandlerSize(int size)
+{
+    m_handlerSize = size;
+
+    for (int i = 0; i < m_handlers.size(); i++)
+        m_handlers[i]->setSize(m_handlerSize);
+
+    update();
+}
+
+int BaseGraphicItem::heightForRotationHandler() const
+{
+    return m_heightForRotationHandler;
+}
+
+void BaseGraphicItem::setHeightForRotationHandler(int height)
+{
+    m_heightForRotationHandler = height;
+
+    for (int i = 0; i < m_handlers.size(); i++)
+    {
+        if (m_handlers[i]->type() == ItemHandler::HANDLER_ROTATION)
+        {
+            QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
+            m_handlers[i]->setPos(rotation);
+            break;
+        }
+    }
+
+    update();
+}
+
 
 void BaseGraphicItem::setRect(const QRectF& rect)
 {
@@ -53,11 +156,23 @@ void BaseGraphicItem::setRect(const QRectF& rect)
 
 void BaseGraphicItem::createHandlers()
 {
+    if (!m_hasHandlers)
+        return;
+
+    // Clear existing items
+    if (m_handlers.size() > 0)
+    {
+        for (int i = 0; i < m_handlers.size() ; i++)
+            delete m_handlers[i];
+
+        m_handlers.clear();
+    }
+
     QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
     QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
     QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
     QPointF right(m_rect.right(), m_rect.top() + m_rect.height() / 2.0);
-    QPoint rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
+    QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
 
     m_handlers.append(new ItemHandler(top, ItemHandler::HANDLER_TOP, ItemHandler::HANDLER_SQUARE, m_handlerSize));
     m_handlers.append(new ItemHandler(bottom, ItemHandler::HANDLER_BOTTOM, ItemHandler::HANDLER_SQUARE, m_handlerSize));
@@ -72,6 +187,9 @@ void BaseGraphicItem::createHandlers()
 
 void BaseGraphicItem::updateHandlers()
 {
+    if (!m_hasHandlers)
+        return;
+
     QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
     QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
     QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);

@@ -40,7 +40,6 @@ SOURCES += \
     Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
     Classes/colorbutton.cpp \
-    Classes/arrow.cpp \
     Classes/arrowsgraphicsitem.cpp \
     Classes/graphsgraphicsitem.cpp \
     textboxitem.cpp \
@@ -65,7 +64,6 @@ HEADERS += \
     Classes/save.h \
     Forms/dialogfilealreadyexists.h \
     Classes/colorbutton.h \
-    Classes/arrow.h \
     Classes/arrowsgraphicsitem.h \
     Classes/graphsgraphicsitem.h \
     textboxitem.h \

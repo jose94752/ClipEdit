@@ -29,5 +29,5 @@ void PicturesGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
 int PicturesGraphicsItem::type() const
 {
-    return BaseGraphicItem::ImageGraphicItem;
+    return Type::ImageGraphicsItem;
 }
