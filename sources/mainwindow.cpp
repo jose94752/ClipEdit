@@ -200,6 +200,7 @@ void MainWindow::slotTextBoxes()
 void MainWindow::slotTextPicture()
 {
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
+    m_scene.clear();
     m_scene.addItem(PictureItem);
 }
 
