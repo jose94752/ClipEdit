@@ -66,12 +66,27 @@ FormArrows::~FormArrows()
 }
 
 // Method GetInfosArrows
-void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints)
+void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
+                                int ArrowWidth, int ArrowHeight,
+                                QColor ArrowOutlineColor, QColor ArrowFillColor)
+                                //To do
+                                // comboBoxThicknessOutlineLinesContents
+                                // comboBoxHeadTypeChoiceContents
 {
    WithoutAnchorPoint = ui->radioButtonWithoutAnchorPoint->isChecked();
    OneAnchorPoint = ui->radioButton1AnchorPoints->isChecked();
    TwoAnchorPoints = ui->radioButton2AnchorPoints->isChecked();
-   //ui->
+
+   ArrowWidth = ui->spinBoxArrowWidthContents->value();
+   ArrowHeight = ui->spinBoxArrowHeightContents->value();
+
+   ArrowOutlineColor = ui->toolButtonOutlineColorContents->getColor();
+   ArrowFillColor = ui->toolButtonFillColorContents->getColor();
+
+   //To do
+   // comboBoxThicknessOutlineLinesContents
+   // comboBoxHeadTypeChoiceContents
+
 }
 
 void FormArrows::FillColorArrowChanged()
