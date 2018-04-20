@@ -6,7 +6,7 @@
 #include <qpainter.h>
 #include <QGraphicsEllipseItem>
 #include "Items/basegraphicitem.h"
-
+#include <qrect.h>
 class NumberedBulletGraphicItem : public BaseGraphicItem
 {
 public:
