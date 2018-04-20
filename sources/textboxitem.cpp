@@ -13,6 +13,8 @@
 // --------
 
 #include <QDebug>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QPainter>
 
 #include "textboxitem.h"
@@ -27,6 +29,9 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
     m_text = "Sample Text";
     m_font = QFont();
     m_alignmentFlags = Qt::AlignLeft;
+
+    m_backgroundColor = QColor(Qt::white);
+    m_fontColor = QColor(Qt::black);
     m_hasBorders = true;
     m_borderWidth = 1;
     m_borderRadius = 0;
@@ -41,8 +46,12 @@ TextBoxItem::TextBoxItem(const QString& text, QGraphicsItem* parent)
     m_text = text;
     m_font = QFont();
     m_alignmentFlags = Qt::AlignLeft;
-    m_borderWidth = 1;
-    m_borderRadius = 0;
+
+    m_backgroundColor = QColor(Qt::gray);
+    m_fontColor = QColor(Qt::white);
+    m_hasBorders = true;
+    m_borderWidth = 4;
+    m_borderRadius = 10;
 
     textToRect();
     setPos(0, 0);
@@ -61,15 +70,28 @@ void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *optio
 {
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
-    // Text
-    QRectF textRect = m_rect.adjusted(m_borderWidth + m_handlerSize/2.0, m_borderWidth + m_handlerSize/2.0, -2*m_borderWidth - m_handlerSize, -2*m_borderWidth - m_handlerSize);
-    painter->drawText(textRect, m_alignmentFlags, m_text);
+    QRectF borderRect = m_rect.adjusted(m_borderWidth/2.0, m_borderWidth/2.0, -m_borderWidth/2.0, -m_borderWidth/2.0);
+    QRectF textRect = m_rect.adjusted(m_borderWidth+2, m_borderWidth+2, -m_borderWidth-2, -m_borderWidth-2);
+
+    QPen pen(Qt::black, m_borderWidth);
+    painter->setPen(pen);
+
+    QPainterPath path;
+    path.addRoundedRect(borderRect, m_borderRadius, m_borderRadius);
+
+    // Background
+    painter->fillPath(path, m_backgroundColor);
 
     // Border
     if (m_hasBorders)
-    {
-        painter->drawRoundedRect(m_rect, m_borderRadius, m_borderRadius);
-    }
+        painter->drawPath(path);
+
+    // Text
+    pen.setColor(m_fontColor);
+    pen.setWidth(1);
+    painter->setFont(m_font);
+    painter->setPen(pen);
+    painter->drawText(textRect, m_alignmentFlags, m_text);
 
     BaseGraphicItem::paint(painter, option, widget);
 }
@@ -85,9 +107,11 @@ int TextBoxItem::type() const
 void TextBoxItem::textToRect()
 {
    QFontMetrics fm(m_font);
-   QRectF rect = fm.boundingRect(m_text);
+   QRectF rect = fm.boundingRect(QApplication::desktop()->geometry(), Qt::AlignLeft | Qt::TextWordWrap | Qt::TextExpandTabs, m_text, 4);
+   //rect.adjust(-m_handlerSize/2.0 - m_borderWidth, -m_handlerSize/2.0 - m_borderWidth, m_handlerSize + 2*m_borderWidth, m_handlerSize + 2*m_borderWidth);
+   rect.adjust(-m_borderWidth - 2, -m_borderWidth - 2, m_borderWidth + 2, m_borderWidth + 2);
 
-   rect.adjust(-m_handlerSize/2.0 - m_borderWidth, -m_handlerSize/2.0 - m_borderWidth, m_handlerSize + 2*m_borderWidth, m_handlerSize + 2*m_borderWidth);
+
    setRect(rect);
 }
 
