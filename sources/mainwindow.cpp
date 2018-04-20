@@ -121,6 +121,11 @@ void MainWindow::buildView()
     ui->graphicsView->setScene(&m_scene);
 }
 
+QMap<MainWindow::e_BUTTON_IDS, int> MainWindow::getListIndexes()
+{
+    return m_listIndexes;
+}
+
 
 // Slots
 // -----

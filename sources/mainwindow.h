@@ -92,6 +92,9 @@ private:
         void buildToolBar();
         void buildView();
 
+public:
+        QMap<e_BUTTON_IDS, int> getListIndexes();
+
     private slots:
 
         // Menu and toolbar
