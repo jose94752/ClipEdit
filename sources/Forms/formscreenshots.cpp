@@ -27,8 +27,14 @@ FormScreenshots::FormScreenshots(QWidget* parent) :
 
     //connect for the firs signal
     connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(Capture()));
-    //
-    m_buttongroup.addButton(ui->radioButton);
+
+    //connect pour tempo
+    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(hide()));
+
+    //the different frames of radioButton
+   // m_buttongroup.addButton(ui->radioButton);
+
+   //m_delayspinbox->setValue(6);
 }
 
 FormScreenshots::~FormScreenshots()
@@ -39,7 +45,8 @@ FormScreenshots::~FormScreenshots()
 void FormScreenshots::Capture()
 {
     if(m_typecapture == WholeScreen) {
-        QTimer::singleShot(200, this, SLOT(CaptureWholeScreen()));
+        QTimer::singleShot(m_delayspinbox->value() * 1000,
+                           this, SLOT(CaptureWholeScreen()));
     }
 
 
@@ -54,6 +61,22 @@ void FormScreenshots::CaptureWholeScreen()
     if(!screen) return;
 
  //  m_pixmap = screen
+
+}
+
+void FormScreenshots::hide()
+{
+    //1
+    m_delayspinbox = new QSpinBox(this);
+    m_delayspinbox->setSuffix(tr("s"));
+    m_delayspinbox->setMaximum(60);
+
+    if (m_delayspinbox->value() == 0) {
+        m_hidewindow->setDisabled(true);
+        m_hidewindow->setChecked(false);
+    } else {
+        m_hidewindow->setDisabled(false);
+    }
 
 }
 
