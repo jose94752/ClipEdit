@@ -13,19 +13,24 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
     qDebug () << "\tm_to == " << m_to << "\n";
     int nb_bullet (m_to + 1 - m_from);
     qDebug () << "\tnombre de bullet :" << nb_bullet << "\n";
-    int num_bullet (0);
+    int num_bullet (m_from);
     QPoint center (100, 100);
     int rx (50), ry (rx), y (50);
     qpainter->setPen(m_bulletcolor);
+
     // pr tests
-    m_shape = NB_ROUNDEDRECTANGLE;
+    //m_shape = NB_ROUNDEDRECTANGLE;
+    m_shape = NB_CIRCLE;
+    QString strnum;
     QRect rect;
-    for (; num_bullet != nb_bullet; ++num_bullet) {
+    qpainter->setFont(m_font);
+    //pas de font size, sur le
+    //passer par un TextLabel ?
+    for (; num_bullet != m_to +1; ++num_bullet) {
+        //qvar = num_bullet;
         switch (m_shape) {
         case NB_CIRCLE :
             qpainter->drawEllipse(center, rx, ry);
-            center.setY(y);
-            y += 2*ry;
             break;
         case NB_RECTANGLE :
             rect.setCoords(center.x() - rx, center.y() - ry, center.x() +rx, center.y() + ry);
@@ -38,7 +43,18 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
         default :
             break;
         }
+        //strnum = qvar.toString();
 
+        //strnum = QString::number(num_bullet);
+        //strnum = tr("%1").arg(myInt);
+
+        qDebug () << "\tnumbullet == " << num_bullet << "\n";
+        strnum = QString::number(num_bullet);
+        qDebug () << "\tstrnum == " << strnum << "\n";
+        qpainter->drawText(center, strnum);
+
+        y += 2*ry;
+        center.setY(y);
     }
     BaseGraphicItem::paint(qpainter, option, widget);
 
