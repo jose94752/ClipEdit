@@ -110,7 +110,6 @@ private:
         void slotGraphs();
         void slotArrowsGraphicsItem();
 
-        void createChart(bool);
 };
 
 #endif

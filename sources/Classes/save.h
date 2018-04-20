@@ -14,11 +14,13 @@ public:
     //QDomElement setLayer()
     static QString verifyExtension(QString);
     static QString current_filename;
+    static bool fileNameExists();
 
     void getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem);
     void getTextBoxItem(TextBoxItem *textBoxItem);
 private:
     QList<QGraphicsItem *> m_listItems;
+    int countItems;
     void save();
 };
 
