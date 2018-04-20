@@ -280,7 +280,7 @@ void MainWindow::createChart(bool)
              //<< QPointF(90, 70) << QPointF(120, 600)
              //<< QPointF(160, 70) << QPointF(180, 50);
     *series1 << QPointF(-100, 300) << QPointF(-300, 400) << QPointF(700, 300);
-             //<< QPointF(80, 200) << QPointF(120, 300)
+             //<< QPointF(80, 200) << QPointF(120, 30000000000)
              //<< QPointF(160, 4) << QPointF(180, 300);
 //![2]
 
@@ -309,6 +309,8 @@ void MainWindow::createChart(bool)
 
 //    QChartView *qv = new  QChartView();
 //    qv->setChart( chart);
+
+    chart->setGeometry(-400,-400,800,800);
 
     m_scene.addItem(chart);
 
