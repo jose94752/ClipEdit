@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>367</width>
-    <height>346</height>
+    <width>384</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,10 +94,18 @@
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_8">
                 <item>
-                 <widget class="QSpinBox" name="spinBox_From"/>
+                 <widget class="QSpinBox" name="spinBox_From">
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="spinBox_To"/>
+                 <widget class="QSpinBox" name="spinBox_To">
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -164,7 +172,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="ColorButton" name="ToolButton_BulletColor">
+                 <widget class="ColorButton" name="ColorButton_BulletColor">
                   <property name="text">
                    <string>...</string>
                   </property>
@@ -247,6 +255,13 @@
              </layout>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonCreateBullet">
+            <property name="text">
+             <string>Go</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer">
