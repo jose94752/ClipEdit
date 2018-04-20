@@ -41,6 +41,7 @@ QPainterPath ArrowsGraphicsItem::shape() const
 
 void ArrowsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    //painter->drawRoundedRect(-10, -10, 20, 20, 5, 5);
     painter->drawRoundedRect(-10, -10, 20, 20, 5, 5);
 }
 
