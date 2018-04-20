@@ -9,7 +9,7 @@
 ================================================
 */
 #include "Classes/arrowsgraphicsitem.h"
-#include "Classes/formarrows.h"
+#include "Forms/formarrows.h"
 #include <QGraphicsItem>
 #include "ui_mainwindow.h"
 
