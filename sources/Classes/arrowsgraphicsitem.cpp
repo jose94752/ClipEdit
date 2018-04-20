@@ -38,6 +38,8 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(QGraphicsItem *parent)
     // 2 anchors points:
     //          we need 2 objects of scene
 
+    //myColor = Qt::black;
+    //setPen(QPen(myColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     setPos(0, 0); // setPos for tests
 
 }
@@ -56,6 +58,10 @@ QRectF ArrowsGraphicsItem::boundingRect() const
 QPainterPath ArrowsGraphicsItem::shape() const
 {
     // To do
+    QPainterPath path = QGraphicsLineItem::shape();
+    path.addPolygon(arrowHead);
+    return path;
+
 }
 
 void ArrowsGraphicsItem::paint(QPainter *arrowPainter, const QStyleOptionGraphicsItem *arrowQStyleOption, QWidget *arrowWidget)
@@ -87,4 +93,7 @@ void ArrowsGraphicsItem::updateArrowPosition()
     setLine(line);
     */
 
+    //Example
+    //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
+    //setLine(line);
 }

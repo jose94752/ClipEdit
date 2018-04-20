@@ -39,10 +39,10 @@ public:
     ArrowsGraphicsItem(QGraphicsItem *parent = 0);
 
     // Constructor Without anchor point
-    //ArrowsGraphicsItem(PositionItem , PositionItem , QGraphicsItem *parent = 0);
+    //ArrowsGraphicsItem(QPointF *m_StartPositionItem, QPointF *m_EndPositionItem, QGraphicsItem *parent = 0);
 
     // Constructor 1 anchor point and Object
-    //ArrowsGraphicsItem(PositionItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
+    //ArrowsGraphicsItem(QPointF *m_StartPositionItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
     // Constructor 2 anchors points
     //ArrowsGraphicsItem(BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
@@ -80,8 +80,8 @@ private:
     BaseGraphicItem *m_StartItem;
     BaseGraphicItem *m_EndItem;
 
-    //PositionItem *m_StartPositionItem;
-    //PositionItem *m_EndPositionItem;
+    QPointF *m_StartPositionItem;
+    QPointF *m_EndPositionItem;
 
     QColor ItemOutlineColorArrow;
     QColor ItemFillColorArrow;
