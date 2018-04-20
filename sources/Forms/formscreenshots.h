@@ -22,8 +22,10 @@ namespace Ui
 }
 
 
-// Class
-// -----
+///
+/// \brief The FormScreenshots class : his charge is to making a Screenshot
+/// of two types:
+///
 
 class FormScreenshots
     :   public QWidget
