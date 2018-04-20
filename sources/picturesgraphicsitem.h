@@ -19,6 +19,7 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     int type() const ;
 
+    QString path;
     int     height, width, shade_grey, trans;
     QString lg_txt;
     QFont   lg_font;
