@@ -36,19 +36,44 @@ class FormArrows
 
         // Constructors, destructor
         explicit FormArrows(QWidget* parent = 0);
-
         ~FormArrows();
 
+        // Method GetInfosArrows
+        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
+                            int ArrowWidth, int ArrowHeight,
+                            QColor ArrowOutlineColor, QColor ArrowFillColor);
+                            //To do
+                            // comboBoxThicknessOutlineLinesContents
+                            // comboBoxHeadTypeChoiceContents
     private:
 
         // UI
         Ui::FormArrows *ui;
+
+        // Colors
         QColor FormOutlineColorArrow;
         QColor FormFillColorArrow;
+
         QColor BeforeFormOutlineColorArrow;
         QColor BeforeFormFillColorArrow;
+
         QColor DefaultFormOutlineColorArrow;
         QColor DefaultFormFillColorArrow;
+
+        // Arrow settings
+        int FormArrowWidth;
+        int FormArrowHeight;
+
+        int BeforeFormArrowWidth;
+        int BeforeFormArrowHeight;
+
+        int DefaultFormArrowWidth;
+        int DefaultFormArrowHeight;
+
+
+        //To do
+        // comboBoxThicknessOutlineLinesContents
+        // comboBoxHeadTypeChoiceContents
 
     private slots:
         void FillColorArrowChanged();

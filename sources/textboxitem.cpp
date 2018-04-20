@@ -24,21 +24,28 @@
 TextBoxItem::TextBoxItem(QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
+    m_text = "Sample Text";
     m_font = QFont();
+    m_alignmentFlags = Qt::AlignLeft;
+    m_hasBorders = true;
+    m_borderWidth = 1;
+    m_borderRadius = 0;
 
-    setText("Sample Text");
+    textToRect();
     setPos(0, 0);
-
 }
 
 TextBoxItem::TextBoxItem(const QString& text, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
     m_text = text;
-    srand(time(NULL));
-    setPos(0, 0);
+    m_font = QFont();
+    m_alignmentFlags = Qt::AlignLeft;
+    m_borderWidth = 1;
+    m_borderRadius = 0;
 
-    setRect(QRectF(-50, -50, 100, 100));
+    textToRect();
+    setPos(0, 0);
 }
 
 
@@ -50,10 +57,20 @@ QRectF TextBoxItem::boundingRect() const
     return BaseGraphicItem::boundingRect();
 }
 
-void TextBoxItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-    painter->drawText(m_rect, m_text);
+
+    // Text
+    QRectF textRect = m_rect.adjusted(m_borderWidth + m_handlerSize/2.0, m_borderWidth + m_handlerSize/2.0, -2*m_borderWidth - m_handlerSize, -2*m_borderWidth - m_handlerSize);
+    painter->drawText(textRect, m_alignmentFlags, m_text);
+
+    // Border
+    if (m_hasBorders)
+    {
+        painter->drawRoundedRect(m_rect, m_borderRadius, m_borderRadius);
+    }
+
     BaseGraphicItem::paint(painter, option, widget);
 }
 
@@ -65,9 +82,13 @@ int TextBoxItem::type() const
 // Utils
 // -----
 
-QRectF TextBoxItem::textToRect()
+void TextBoxItem::textToRect()
 {
-    return QRectF();
+   QFontMetrics fm(m_font);
+   QRectF rect = fm.boundingRect(m_text);
+
+   rect.adjust(-m_handlerSize/2.0 - m_borderWidth, -m_handlerSize/2.0 - m_borderWidth, m_handlerSize + 2*m_borderWidth, m_handlerSize + 2*m_borderWidth);
+   setRect(rect);
 }
 
 // Setters
@@ -77,7 +98,6 @@ QRectF TextBoxItem::textToRect()
 void TextBoxItem::setText(const QString& text)
 {
     m_text = text;
-
 }
 
 void TextBoxItem::setFont(const QFont& font)
@@ -113,5 +133,4 @@ void TextBoxItem::setBorderRadius(int radius)
     m_borderRadius = radius;
     update();
 }
-
 
