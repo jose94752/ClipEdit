@@ -213,8 +213,8 @@ void MainWindow::slotGraphs()
     m_formCharts.GetChartsValues( infos);
 
     GraphsGraphicsItem *g = new GraphsGraphicsItem();
-
     g->setInfos(infos);
+    m_scene.addItem(g);
 
 }
 
