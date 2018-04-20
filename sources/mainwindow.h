@@ -101,6 +101,7 @@ private:
         void exportView(bool);
         void actionClicked(bool);
         void resizeTold(bool);
+        void slotNew(bool);
 
         // SLOTS TEST GRAPHIC ITEM INSERTION
         void slotNumberedBullets();
@@ -109,7 +110,6 @@ private:
         void slotGraphs();
         void slotArrowsGraphicsItem();
 
-        void createChart(bool);
 };
 
 #endif

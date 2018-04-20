@@ -3,6 +3,8 @@
 #include <QString>
 #include <QDomElement>
 #include "mainwindow.h"
+#include "picturesgraphicsitem.h"
+#include "textboxitem.h"
 
 class Save
 {
@@ -13,8 +15,11 @@ public:
     static QString verifyExtension(QString);
     static QString current_filename;
 
+    void getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem);
+    void getTextBoxItem(TextBoxItem *textBoxItem);
 private:
     QList<QGraphicsItem *> m_listItems;
+    int countItems;
     void save();
 };
 

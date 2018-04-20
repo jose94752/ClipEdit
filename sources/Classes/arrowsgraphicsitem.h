@@ -25,9 +25,27 @@ public:
     // 4 Type of Thickness outline lines 4 choices possibilities (1 - 4)
     enum { Type = UserType + 3 };
 
-    ArrowsGraphicsItem(BaseGraphicItem *parent = 0);
+    // 3 Methods
+    // Without anchor point:
+    //          we need 2 points on the scene
+    // 1 anchor point:
+    //          we need 1 point on the scene and an object of scene
+    //          or an object of scene and 1 point on the scene
+    // 2 anchors points:
+    //          we need 2 objects of scene
 
+    // Construtor Test
+    //ArrowsGraphicsItem(BaseGraphicItem *parent = 0);
+    ArrowsGraphicsItem(QGraphicsItem *parent = 0);
 
+    // Constructor Without anchor point
+    //ArrowsGraphicsItem(QPointF *m_StartPositionItem, QPointF *m_EndPositionItem, QGraphicsItem *parent = 0);
+
+    // Constructor 1 anchor point and Object
+    //ArrowsGraphicsItem(QPointF *m_StartPositionItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
+
+    // Constructor 2 anchors points
+    //ArrowsGraphicsItem(BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
     // Overriding of the Type
     int type() const override { return Type; }
@@ -62,8 +80,8 @@ private:
     BaseGraphicItem *m_StartItem;
     BaseGraphicItem *m_EndItem;
 
-    //PositionItem *m_StartPositionItem;
-    //PositionItem *m_EndPositionItem;
+    QPointF *m_StartPositionItem;
+    QPointF *m_EndPositionItem;
 
     QColor ItemOutlineColorArrow;
     QColor ItemFillColorArrow;
