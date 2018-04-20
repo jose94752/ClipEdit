@@ -30,6 +30,11 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QAreaSeries>
 
+//Temp for arrows
+//Includes for paint objects on the mainwindow
+#include <QRect>
+#include <QPainter>
+// End Temp for arrows
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -187,6 +192,7 @@ void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem;
+    //m_formPictures.getPictureValues();
     m_scene.addItem(PictureItem);
 
 
@@ -210,9 +216,28 @@ void MainWindow::slotGraphs()
 void MainWindow::slotArrowsGraphicsItem()
 {
     //m_scene.addItem(new ArrowsGraphicsItem());
-    //ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem;
-    //m_scene.addItem(ArrowItem);
+    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem;
+    m_scene.addItem(ArrowItem);
+    // Examples of QRect:
+    //QRect r1(100, 200, 11, 16);
+    //QRect r2(QPoint(100, 200), QSize(11, 16))
+    QRect *paintRectArrow = new QRect (100,200,11,16);
 
+    // QPaintEvent::QPaintEvent(const QRect &paintRect)
+    // Constructs a paint event object with the rectangle that needs
+    //      to be updated.
+    // The region is specified by paintRect.
+
+/* Zone de tests
+    //QPainter *arrowPainter(paintRectArrow);
+    QPainter *arrowPainter(&paintRectArrow);
+
+    QStyleOptionGraphicsItem *arrowQStyleOption;
+
+    //ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
+    ArrowsGraphicsItem::paint(&arrowPainter,&arrowQStyleOption,this);
+
+*/
 
     // 3 Methods
     // Without anchor point:
