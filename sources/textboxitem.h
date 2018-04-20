@@ -27,18 +27,47 @@ class TextBoxItem
 {
     public:
 
-        // Constructor, destructor
+        // Alignment types
+        enum TextBoxAlignment {
+            TEXTBOX_ALIGN_LEFT,
+            TEXTBOX_ALIGN_RIGHT,
+            TEXTBOX_ALIGN_CENTER
+        };
+
+        // Constructors, destructor
+        TextBoxItem(QGraphicsItem* parent = 0);
         TextBoxItem(const QString& text, QGraphicsItem* parent = 0);
 
-        // Pure virtual methods implementation
+        // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-
         int type() const;
+
+        // Determine the best size from the members
+        QRectF textToRect();
+
+        // Setters
+        void setText(const QString& text);
+        void setFont(const QFont& font);
+        void setBackgroundColor(const QColor& color);
+        void setTextColor(const QColor& color);
+        void setHasBorders(bool hasBorders);
+        void setBorderWidth(int width);
+        void setBorderRadius(int radius);
 
     private:
 
+        // Text-related members
         QString m_text;
+        QFont m_font;
+        TextBoxAlignment m_alignment;
+
+        // Style
+        QColor m_backgroundColor, m_fontColor;
+        bool m_hasBorders;
+        int m_borderWidth;
+        int m_borderRadius;
+
 };
 
 #endif

@@ -1,44 +1,71 @@
+/*
+================================================
+* File:         colorbutton.cpp
+* Project:      ClipEdit
+* Creation:     19/04/2018
+* Brief:        Custom color picker
+================================================
+*/
+
+// Includes
+// --------
+
+#include <QDebug>
+#include <QColorDialog>
+#include <QColor>
+#include <QPaintEvent>
+#include <QPainter>
 #include <QWidget>
 #include <QToolButton>
 #include "colorbutton.h"
-#include <QDebug>
-#include <QColorDialog>
-#include <QPaintEvent>
-#include <QPainter>
 
-ColorButton::ColorButton(QWidget* widget):QToolButton(widget)
+// Constructor
+// -----------
+
+ColorButton::ColorButton(QWidget* parent)
+    :   QToolButton(parent), m_color(Qt::black)
 {
-   color=Qt::black;
-   connect(this,SIGNAL(clicked(bool)),this,SLOT(slotChoiseColor(bool)));
-   this->setText("");
-   //this->resize(150,45);
+   connect(this, SIGNAL(clicked(bool)), this, SLOT(pickColor(bool)));
+   setText("");
 }
 
-QColor ColorButton::getColor()
-{
-    return color;
-}
+// Events
+// ------
 
-void ColorButton::setColor(QColor vcolor)
+void ColorButton::paintEvent(QPaintEvent* event)
 {
-    color=vcolor;
-}
+    QToolButton::paintEvent(event);
 
-void ColorButton::slotChoiseColor(bool)
-{
-      color = QColorDialog::getColor(color, this );
-      emit colorChanged(color);
-      update();
-}
-
-void ColorButton::paintEvent( QPaintEvent *event )
-{
-QToolButton::paintEvent(event) ;
     QPainter painter(this);
-    QBrush  b(color);
-    QPen p(color);
-    painter.setPen(p);
-    painter.setBrush(b);
-    painter.drawEllipse(this->width()/8,this->height()/8,3*this->width()/4,3*this->height()/4);
+    painter.setRenderHints(QPainter::Antialiasing);
 
+    QBrush brush(m_color);
+    QPen pen(m_color);
+    painter.setPen(pen);
+    painter.setBrush(brush);
+    painter.drawEllipse(width()/6.0f, height()/8.0f, width() - 2*(width()/6.0f), height()- 2*(height()/8.0f));
 }
+
+// Getters and setters
+// -------------------
+
+QColor ColorButton::getColor() const
+{
+    return m_color;
+}
+
+void ColorButton::setColor(const QColor& vcolor)
+{
+      m_color=vcolor;
+}
+
+// Slots
+// -----
+
+void ColorButton::pickColor(bool)
+{
+    m_color = QColorDialog::getColor(m_color, this);
+    emit colorChanged(m_color);
+    update();
+}
+

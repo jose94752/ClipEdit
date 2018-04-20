@@ -114,10 +114,18 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <widget class="QSpinBox" name="spinBox_pic_h"/>
+               <widget class="QSpinBox" name="spinBox_pic_h">
+                <property name="maximum">
+                 <number>10000</number>
+                </property>
+               </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox_pic_sh"/>
+               <widget class="QSpinBox" name="spinBox_pic_sh">
+                <property name="maximum">
+                 <number>10000</number>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
@@ -142,10 +150,18 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QSpinBox" name="spinBox_pic_w"/>
+               <widget class="QSpinBox" name="spinBox_pic_w">
+                <property name="maximum">
+                 <number>10000</number>
+                </property>
+               </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox_pic_t"/>
+               <widget class="QSpinBox" name="spinBox_pic_t">
+                <property name="maximum">
+                 <number>10000</number>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
