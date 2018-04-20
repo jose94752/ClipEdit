@@ -24,6 +24,7 @@
 #include "Classes/graphsgraphicsitem.h"
 #include "Forms/resizescenedialog.h"
 #include "Classes/arrowsgraphicsitem.h"
+#include "Forms/dialogfilealreadyexists.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -82,9 +83,9 @@ void MainWindow::buildMenu()
     connect(ui->actionLayers,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
-    connect(ui->actionNumberedBullets, SIGNAL(triggered(bool)), this, SLOT(slotNumberedBullets()));
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionPicture, SIGNAL(triggered(bool)), this, SLOT(slotTextPicture()));
+    connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
 }
@@ -120,7 +121,6 @@ void MainWindow::buildView()
     m_scene.setSceneRect(-400, -400, 800, 800);
     ui->graphicsView->setScene(&m_scene);
 }
-
 
 // Slots
 // -----
@@ -160,12 +160,18 @@ void MainWindow::resizeTold(bool)
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
-  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
-  numberedBulletGraphicItem = new NumberedBulletGraphicItem ();
-  if (numberedBulletGraphicItem != NULL) {
-    delete numberedBulletGraphicItem;
-  }
+  qDebug() << "\tdans slot NumberedBullets\n" ;
+  int from (0), to (0), taille (0);
+  int shape (0);
+  QColor buttoncolor, numbercolor;
+  QFont qfont;
+  m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
 
+  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
+  qDebug () << "\tfrom == " << from << "\n";
+  qDebug () << "\tto == " << to << "\n";
+  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont);
+  m_scene.addItem(numberedBulletGraphicItem);
 }
 
 void MainWindow::slotTextBoxes()
@@ -181,6 +187,7 @@ void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem;
+    //m_formPictures.getPictureValues();
     m_scene.addItem(PictureItem);
 
 
@@ -243,7 +250,7 @@ void MainWindow::openFile(bool)
 ///
 void MainWindow::save(bool)
 {
-    Save save;
+    Save save(this->m_scene.items());
 }
 
 
@@ -252,16 +259,16 @@ void MainWindow::save(bool)
 ///
 void MainWindow::saveAs(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.clipEdit",tr("ClipEdit (*.clipEdit)"));
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.ini",tr("Init File (*.ini)"));
     if(fileName!=""){
         QString extfilename=Save::verifyExtension(fileName);
-        QFile fileToSave(fileName);
+        QFile fileToSave(extfilename);
         if(fileName!=extfilename && fileToSave.exists()){
-            //DialogFileAlreadyExists dfae;
-            //dfae.exec();
+            DialogFileAlreadyExists dfae;
+            dfae.exec();
         }else{
             ui->actionSave->setEnabled(true);
-            Save save(fileName);
+            Save save(this->m_scene.items(),extfilename);
         }
     }
 }

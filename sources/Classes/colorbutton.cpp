@@ -12,6 +12,7 @@
 
 #include <QDebug>
 #include <QColorDialog>
+#include <QColor>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QWidget>
@@ -55,12 +56,7 @@ QColor ColorButton::getColor() const
 
 void ColorButton::setColor(const QColor& vcolor)
 {
-      QColor lcolor = QColorDialog::getColor(color, this );
-      if(lcolor.isValid()){
-          color=lcolor;
-          emit colorChanged(color);
-          update();
-      }
+      m_color=vcolor;
 }
 
 // Slots

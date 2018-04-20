@@ -4,10 +4,37 @@
 #include <QFile>
 #include <QDomDocument>
 #include <QDomElement>
+#include <mainwindow.h>
 
 QString Save::current_filename="";
 
-Save::Save(){
+Save::Save(QList<QGraphicsItem *> v_listItems){
+    m_listItems=v_listItems;
+    save();
+
+}
+
+Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
+{
+    current_filename=filename;
+    m_listItems=v_listItems;
+    save();
+}
+
+QString Save::verifyExtension(QString fileName)
+{
+    QStringList strlist=fileName.split(".");
+    if(strlist[strlist.size()-1]!="ini"){
+        if(fileName[fileName.size()-1]!='.'){
+            fileName=fileName.append(".");
+        }
+        fileName=fileName.append("ini");
+    }
+    return fileName;
+}
+
+void Save::save()
+{
     QDomDocument domDoc;
     QDomElement project=domDoc.createElement("clipEditProject");
     domDoc.appendChild(project);
@@ -17,23 +44,4 @@ Save::Save(){
     QTextStream out(&file);
     out << strdom;
     file.close();
-
-}
-
-Save::Save(QString filename)
-{
-    current_filename=filename;
-    Save();
-}
-
-QString Save::verifyExtension(QString fileName)
-{
-    QStringList strlist=fileName.split(".");
-    if(strlist[strlist.size()-1]!="clipEdit"){
-        if(fileName[fileName.size()-1]!='.'){
-            fileName=fileName.append(".");
-        }
-        fileName=fileName.append("clipEdit");
-    }
-    return fileName;
 }
