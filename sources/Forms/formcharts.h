@@ -16,6 +16,10 @@
 #include <QString>
 #include <QColor>
 
+
+#include "Classes/graphsgraphicsitem.h"
+
+
 // Forward Declaration
 namespace Ui
 {
@@ -40,6 +44,9 @@ class FormCharts
     void GetChartsValues(int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
                          QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight,
                          int &vScale, int &vRotate);
+
+    void GetChartsValues( GraphsInfo &infos);
+
 private:
 
         Ui::FormCharts *ui;
