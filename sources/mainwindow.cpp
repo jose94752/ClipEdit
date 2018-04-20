@@ -181,6 +181,7 @@ void MainWindow::slotTextPicture()
 {
     //m_scene.addItem(new PictureItem());
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem;
+    //m_formPictures.getPictureValues();
     m_scene.addItem(PictureItem);
 
 
