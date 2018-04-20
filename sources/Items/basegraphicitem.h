@@ -29,7 +29,7 @@ class ItemHandler;
 ///
 /// Interactivity
 /// BaseGraphicItem includes ItemHandler's that allows the user to rescale or rotate the item in the scene.
-/// Don't forget to call BaseGraphicItem::paintEvent() in your custom item's paintEvent(..) method.
+/// Don't forget to call BaseGraphicItem::paintEvent() in your custom item paintEvent(..) method.
 /// You can disable this behaviour by setting the hasHandler flag to false as so:
 ///     item->setHasHandler(false);
 ///
