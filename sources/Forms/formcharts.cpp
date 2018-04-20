@@ -21,6 +21,10 @@ FormCharts::FormCharts(QWidget* parent)
     types << "Histogram" << "Pie" << "Area" << "Line";
     ui->qChartType->addItems(types);
 
+
+    //connect(ui->qGo, SIGNAL(clicked(bool)), this, )
+    //connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
+
 }
 
 FormCharts::~FormCharts()
@@ -46,4 +50,24 @@ void FormCharts::GetChartsValues(int &vChartType, QString &vChartTitle, QString 
     vScale = ui->qScale->value();
     vRotate = ui->qRotate->value();
 
+}
+
+
+void FormCharts::GetChartsValues( GraphsInfo &infos)
+{
+
+    infos.m_type = ui->qChartType->currentIndex();
+    infos.m_title = ui->qTitle->text();
+    infos.m_xAxes = ui->qXAxis->text();
+    infos.m_yAxes = ui->qYAxis->text();
+    infos.m_backColor = ui->qBackColor->getColor();
+    infos.m_color = ui->qColor->getColor();
+
+
+    infos.m_scale = ui->qScale->value();
+    infos.m_rotate = ui->qRotate->value();
+
+    //vWidth = ui->qWidth->value();
+    //vHeight = ui->qHeight->value();
+    infos.m_boundingRect.setRect(0,0, ui->qWidth->value(), ui->qHeight->value());
 }

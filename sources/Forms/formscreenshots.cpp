@@ -16,6 +16,9 @@
 #include<QWindow>
 #include<QDesktopWidget>
 #include<QApplication>
+#include<QGraphicsScene>
+#include<QScreen>
+#include<QKeyEvent>
 
 // Constructor, destructor
 // -----------------------
@@ -31,15 +34,42 @@ FormScreenshots::FormScreenshots(QWidget* parent) :
     //connect pour tempo
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(hide()));
 
-    //the different frames of radioButton
-   // m_buttongroup.addButton(ui->radioButton);
+   connect(ui->checkBox_2, SIGNAL(clicked(bool)),
+           this, SLOT(update()));
 
-   //m_delayspinbox->setValue(6);
+
+
 }
 
 FormScreenshots::~FormScreenshots()
 {
     delete ui;
+}
+
+
+
+void FormScreenshots::mousePressEvent(QMouseEvent *ev)
+{
+   //code
+    m_buttonpressed=true;
+    m_point0=ev->pos();
+    m_point1=m_point0;
+}
+
+void FormScreenshots::mouseMoveEvent(QMouseEvent *ev)
+{
+    //code
+    if(m_buttonpressed )
+    {
+        m_point1 =ev->pos();
+
+    }
+}
+
+void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
+{
+    //code
+
 }
 
 void FormScreenshots::Capture()
@@ -56,11 +86,12 @@ void FormScreenshots::CaptureWholeScreen()
 {
     QScreen *screen = QGuiApplication::primaryScreen();
 
-    if(const QWindow *window = windowHandle()) screen = window->screen();
+    if(const QWindow *window = windowHandle())
+        screen = window->screen();
 
     if(!screen) return;
 
- //  m_pixmap = screen
+     m_pixmap = screen->grabWindow(0);
 
 }
 
@@ -77,6 +108,17 @@ void FormScreenshots::hide()
     } else {
         m_hidewindow->setDisabled(false);
     }
+
+}
+
+
+void FormScreenshots::ChangeHeight(int)
+{
+
+}
+
+void FormScreenshots::ChangeWidth(int)
+{
 
 }
 
