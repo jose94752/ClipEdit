@@ -65,9 +65,13 @@ FormArrows::~FormArrows()
     delete ui;
 }
 
-void FormArrows::GetInfosArrows()
+// Method GetInfosArrows
+void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints)
 {
-    //To do
+   WithoutAnchorPoint = ui->radioButtonWithoutAnchorPoint->isChecked();
+   OneAnchorPoint = ui->radioButton1AnchorPoints->isChecked();
+   TwoAnchorPoints = ui->radioButton2AnchorPoints->isChecked();
+   //ui->
 }
 
 void FormArrows::FillColorArrowChanged()
