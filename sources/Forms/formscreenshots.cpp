@@ -182,7 +182,7 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
    //  w->setBackgroundRole(m_pixmap);
     // w->show();
 
-//}
+}
 
 void FormScreenshots::CaptureRegion(bool ok, QRect region)
 {
