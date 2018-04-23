@@ -35,7 +35,6 @@ class FormNumberedBullets: public QWidget
 
         ~FormNumberedBullets();
         void get_info (int& /*from*/, int& /*to*/, int& taille, int& shape, QColor& button_color, QColor& number_color, QFont&);
-
         QPushButton *getGoPushButton();
     private:
 

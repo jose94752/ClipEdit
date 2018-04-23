@@ -19,16 +19,16 @@
 | labelModificationLengthWidth |
 | labelOptionsForArrows        |
 | labelOutlineColor            |
-| labelThicknessOutlineLines   |
+| labelLineThickness           |
 | labelWithoutAnchorPoint      |
 
 
 ## QComboBox
 
-| QComboBox noms objets                   |
-| --------------------------------------- |
-| comboBoxThicknessOutlineLinesContents   |
-| comboBoxHeadTypeChoiceContents          |
+| QComboBox noms objets           |
+| --------------------------------|
+| comboBoxLineThicknessContents   |
+| comboBoxHeadTypeChoiceContents  |
 
 
 ## QSpinBox

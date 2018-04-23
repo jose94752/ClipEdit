@@ -40,9 +40,7 @@ public :
     QString m_yAxes;
     int m_type;
 
-    int m_rotate;
-    int m_scale;
-
+    bool m_transparent;
     //int m_nbPoints;
     //QPointF m_xPoints[NUMBERPOINTS];
     //QPointF m_yPoints[NUMBERPOINTS];
@@ -69,12 +67,13 @@ class GraphsGraphicsItem
         // Getters and setters
         void setInfos(const GraphsInfo& infos);
 
-        // Drawing
-        void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-
     private:
 
         GraphsInfo m_infos;
+
+        // Drawing
+        void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        void drawHisto(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif

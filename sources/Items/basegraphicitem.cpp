@@ -151,6 +151,11 @@ void BaseGraphicItem::setRect(const QRectF& rect)
     updateHandlers();
 }
 
+void BaseGraphicItem::setNuLayer(int nuLayer)
+{
+    m_nuLayer = nuLayer;
+}
+
 // Handlers
 // --------
 
@@ -189,24 +194,6 @@ void BaseGraphicItem::updateHandlers()
 {
     if (!m_hasHandlers)
         return;
-
-
-    // Fix what needs to be fixed
-    if (m_rect.top() > m_rect.bottom())
-    {
-        qreal top = m_rect.top();
-        qreal bottom = m_rect.bottom();
-        m_rect.setTop(bottom);
-        m_rect.setBottom(top);
-    }
-    if (m_rect.right() < m_rect.left())
-    {
-        qreal left = m_rect.left();
-        qreal right = m_rect.right();
-        m_rect.setLeft(right);
-        m_rect.setRight(left);
-    }
-
 
     QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
     QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
@@ -255,6 +242,34 @@ void BaseGraphicItem::updateHandlers()
                 m_handlers[i]->setPos(rotation);
             } break;
         }
+    }
+}
+
+void BaseGraphicItem::restrictPositions()
+{
+    if (!m_current)
+        return;
+
+    if (m_current->type() & ItemHandler::HANDLER_TOP)
+    {
+        if (m_rect.top() > m_rect.bottom())
+            m_rect.setTop(m_rect.bottom());
+    }
+    else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+    {
+        if (m_rect.top() > m_rect.bottom())
+            m_rect.setBottom(m_rect.top());
+    }
+
+    if (m_current->type() & ItemHandler::HANDLER_LEFT)
+    {
+        if (m_rect.left() > m_rect.right())
+            m_rect.setLeft(m_rect.right());
+    }
+    else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+    {
+        if (m_rect.left() > m_rect.right())
+            m_rect.setRight(m_rect.left());
     }
 }
 
@@ -316,6 +331,37 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
         //painter->drawPoint(m_rect.center());
     }
 }
+
+// Shape
+// -----
+
+QPainterPath BaseGraphicItem::shape() const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    if (this->isSelected())
+    {
+        foreach (ItemHandler* handle, m_handlers)
+        {
+            switch (handle->shape())
+            {
+                case ItemHandler::HANDLER_SQUARE:
+                {
+                    path.addRect(handle->boundingRect());
+                } break;
+                case ItemHandler::HANDLER_CIRCLE:
+                {
+                    path.addEllipse(handle->boundingRect());
+                } break;
+            }
+        }
+    }
+
+    path.addRect(m_rect);
+    return path;
+}
+
 
 // Events
 // ------
@@ -406,6 +452,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         }
 
         // Now we need to update the handlers position
+        restrictPositions();
         updateHandlers();
 
         update();

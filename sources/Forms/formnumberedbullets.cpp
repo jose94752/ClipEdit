@@ -14,6 +14,10 @@ FormNumberedBullets::FormNumberedBullets(QWidget *parent)
     :   QWidget(parent), ui(new Ui::FormNumberedBullets)
 {
     ui->setupUi(this);
+    QColor blue (0,0, 255);
+    QColor red (255, 0, 0);
+    ui->ColorButton_BulletColor->setColor(blue);
+    ui->ColorBullet_NumberColor->setColor(red);
 }
 
 FormNumberedBullets::~FormNumberedBullets()
@@ -31,8 +35,9 @@ void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape,
     taille = ui->spinBox_Size->value();
     //QString shape_str;
     shape = ui->comboBox_Shape->currentIndex();
-    bulletcolor = ui->ColorButton_NumberColor->getColor();
-    numbercolor = ui->ColorButton_NumberColor->getColor();
+    bulletcolor = ui->ColorButton_BulletColor->getColor();
+    numbercolor = ui->ColorBullet_NumberColor->getColor();
+
     font = ui->fontComboBox->font ();
 
 }
