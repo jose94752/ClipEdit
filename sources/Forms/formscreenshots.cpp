@@ -1,9 +1,9 @@
 /*
 ================================================
-* File:         formforms.cpp
+* File:         formscreenshots.cpp
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to manage sceenshots capture
 ================================================
 */
 
@@ -23,30 +23,25 @@
 // Constructor, destructor
 // -----------------------
 
-FormScreenshots::FormScreenshots(QWidget* parent) :
-    QWidget(parent), ui(new Ui::FormScreenshots)
+FormScreenshots::FormScreenshots(QWidget* parent)
+    :   QWidget(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
 
-    //connect for the firs signal
-    connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(Capture()));
+    //connect first signal
+    connect(ui->pushButtonGo, SIGNAL(clicked(bool)), this, SLOT(Capture()));
 
-    //connect pour tempo
-    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(hide()));
+    // connect delay
+    connect(ui->spinBoxDelay, SIGNAL(valueChanged(int)), this, SLOT(hide()));
 
-   connect(ui->checkBox_2, SIGNAL(clicked(bool)),
+    connect(ui->checkBoxHideWindow, SIGNAL(clicked(bool)),
            this, SLOT(update()));
-
-
-
 }
 
 FormScreenshots::~FormScreenshots()
 {
     delete ui;
 }
-
-
 
 void FormScreenshots::mousePressEvent(QMouseEvent *ev)
 {
@@ -69,7 +64,6 @@ void FormScreenshots::mouseMoveEvent(QMouseEvent *ev)
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
 {
     //code
-
 }
 
 void FormScreenshots::Capture()
