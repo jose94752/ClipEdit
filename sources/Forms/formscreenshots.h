@@ -110,7 +110,7 @@ private:
         ///
         /// \brief m_formscreenshot is used to display the rectangle region drawed on mouse clicked
         ///
-        FormScreenshots *m_formscreenshot;
+        FormScreenshots *m_formScreenshots;
         ///
         /// \brief m_delayspinbox it gives the time for a user to rearrange this desktop.
         ///
