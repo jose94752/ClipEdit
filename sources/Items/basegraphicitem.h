@@ -101,6 +101,9 @@ class BaseGraphicItem
         virtual QRectF boundingRect() const;
         virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
+        // Shape - Improvement for click selection
+        virtual QPainterPath shape() const;
+
         // Type of the item
         // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
@@ -129,7 +132,6 @@ class BaseGraphicItem
     protected:
 
         // Events
-        //QVariant itemChange(GraphicsItemChange change, const QVariant& value);
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
@@ -145,7 +147,7 @@ class BaseGraphicItem
         int m_handlerSize;
         int m_heightForRotationHandler;
 
-        // Bounding rect (use the setter to modify it)
+        // Bounding rect (use the setRect to modify it)
         QRectF m_rect;
         bool m_drawBoundingRect;
 

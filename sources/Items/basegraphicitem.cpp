@@ -332,6 +332,37 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
     }
 }
 
+// Shape
+// -----
+
+QPainterPath BaseGraphicItem::shape() const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    if (this->isSelected())
+    {
+        foreach (ItemHandler* handle, m_handlers)
+        {
+            switch (handle->shape())
+            {
+                case ItemHandler::HANDLER_SQUARE:
+                {
+                    path.addRect(handle->boundingRect());
+                } break;
+                case ItemHandler::HANDLER_CIRCLE:
+                {
+                    path.addEllipse(handle->boundingRect());
+                } break;
+            }
+        }
+    }
+
+    path.addRect(m_rect);
+    return path;
+}
+
+
 // Events
 // ------
 
