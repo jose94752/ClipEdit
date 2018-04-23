@@ -26,14 +26,6 @@
 
 //#define NUMBERPOINTS  200
 
-
-/*
-int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
-                            QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight,
-                            int &vScale, int &vRotate
-
-*/
-
 // Classes
 // -------
 
