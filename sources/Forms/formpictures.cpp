@@ -80,10 +80,12 @@ void FormPictures::chose_picture()
     QString s;
      h = file_image.height();
      w = file_image.width();
+
      s = fileName;
 
      ui->spinBox_pic_h->setValue(h);
      ui->spinBox_pic_w->setValue(w);
+
      ui->lineEdit_pic_path->setText(s);
 
      emit imageChosen();
