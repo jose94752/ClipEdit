@@ -102,6 +102,7 @@ private:
         void actionClicked(bool);
         void resizeTold(bool);
         void slotNew(bool);
+        void showAboutDialog(bool);
 
         // SLOTS TEST GRAPHIC ITEM INSERTION
         void slotNumberedBullets();

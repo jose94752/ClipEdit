@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QAreaSeries>
@@ -35,8 +36,8 @@ QT_CHARTS_USE_NAMESPACE
 // Constructor, destructor
 // -----------------------
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent)
+    :   QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     init();
@@ -59,28 +60,27 @@ void MainWindow::init()
     buildView();
 }
 
-///
-/// \brief MainWindow::buildMenu
-/// Initializations and methods calls related to the menu
-///
+
 void MainWindow::buildMenu()
 {
     // Connects
-    connect(ui->actionSave,         SIGNAL( triggered(bool) ), this, SLOT( save(bool) ));
+    connect(ui->actionSave,             SIGNAL( triggered(bool) ), this, SLOT( save(bool) ));
+    connect(ui->actionSaveAs,           SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
+    connect(ui->actionOpen,             SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
+    connect(ui->actionExportAs,         SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
+    connect(ui->actionResize,           SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
+    connect(ui->actionNew,              SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
+    connect(ui->actionArrow,            SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionChart,            SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionClipart,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionNumberedBullets,  SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionPicture,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionScreenshot,       SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionTextBox,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionLayers,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
+    connect(ui->actionAbout,            SIGNAL( triggered(bool) ), this, SLOT( showAboutDialog(bool) ));
+
     ui->actionSave->setDisabled(true);
-    connect(ui->actionSaveAs,       SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
-    connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
-    connect(ui->actionExportAs,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
-    connect(ui->actionResize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
-    connect(ui->actionNew,          SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
-    connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionClipart,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionNumberedBullets, SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionPicture,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionScreenshot,      SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionTextBox,         SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionLayers,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
@@ -90,10 +90,6 @@ void MainWindow::buildMenu()
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
 }
 
-///
-/// \brief MainWindow::buildToolBar
-/// Initializations and methods calls related to the toolbar
-///
 void MainWindow::buildToolBar()
 {
     // Remove all useless pages
@@ -125,9 +121,6 @@ void MainWindow::buildView()
 // Slots
 // -----
 
-///
-/// \brief MainWindow::changeLateralForm
-/// Change stacked widget view depending on the action clicked
 void MainWindow::actionClicked(bool)
 {
     if (sender() == ui->actionArrow) {
@@ -142,8 +135,6 @@ void MainWindow::actionClicked(bool)
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_BULLET]);
     } else if (sender() == ui->actionPicture) {
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
-    } else if (sender() == ui->actionExportAs) {
-        //stacked_widget.setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
     } else if (sender() == ui->actionScreenshot) {
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_SCREENSHOT]);
     } else if (sender() == ui->actionTextBox) {
@@ -203,9 +194,7 @@ void MainWindow::slotTextPicture()
     m_scene.addItem(PictureItem);
 }
 
-///
-/// \brief slotGraphs
-/// This slot is called on graphs
+
 void MainWindow::slotGraphs()
 {
     //m_scene.addItem(new GraphsGraphicsItem());
@@ -236,46 +225,27 @@ void MainWindow::slotArrowsGraphicsItem()
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem();
     m_scene.addItem(ArrowItem);
 
-
-
-//    ArrowsGraphicsItem::paint(arrowPainter,arrowQStyleOption,arrowWidget);
-
-
-
 }
 
 
-///
-/// \brief exportView
-/// This slot is called on export
 void MainWindow::exportView(bool)
 {
     // To do
 }
 
 
-///
-/// \brief openFile
-/// This slot is called on file open
 void MainWindow::openFile(bool)
 {
     // To do
 }
 
 
-///
-/// \brief save
-/// This slot is called on save
-///
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
 }
 
 
-///
-/// \brief MainWindow::saveAs
-///
 void MainWindow::saveAs(bool)
 {
     QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.cle",tr("ClipEdit File (*.cle)"));
@@ -290,5 +260,14 @@ void MainWindow::saveAs(bool)
             Save save(this->m_scene.items(),extfilename);
         }
     }
+}
+
+void MainWindow::showAboutDialog(bool)
+{
+    QString content =   "<b>" + QApplication::applicationName() + " " + QApplication::applicationVersion() + "</b><br><br>"
+                        "" + tr("A simple document editor") + "<br>"
+                        "" + tr("Developed by the M2I Team") + "<br>"
+                        "Copyright (c) 2018";
+    QMessageBox::about(this, tr("About ClipEdit"), content);
 }
 

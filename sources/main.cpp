@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     // Defining app name and version
     QApplication::setApplicationName("ClipEdit");
     QApplication::setApplicationVersion("1.0");
+    QApplication::setWindowIcon(QIcon(":/icons/icons/icon-clipedit.ico"));
 
     MainWindow w;
     w.show();
