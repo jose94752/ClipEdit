@@ -1,4 +1,15 @@
-#include "graphsgraphicsitem.h"
+/*
+====================================================
+* File:         graphsgraphicsitem.cpp
+* Project:      ClipEdit
+* Creation:     18/04/2018
+* Brief:        Inherit from BaseGraphicsItem
+*               Define charts and related properties
+====================================================
+*/
+
+// Includes
+// --------
 
 #include <QPainter>
 #include <QGraphicsItem>
@@ -11,7 +22,12 @@
 #include <QPaintDevice>
 #include <QApplication>
 
+#include "graphsgraphicsitem.h"
+
 QT_CHARTS_USE_NAMESPACE
+
+// Constructor
+// -----------
 
 GraphsGraphicsItem::GraphsGraphicsItem(QGraphicsItem* parent) : BaseGraphicItem( parent )
 {
@@ -49,19 +65,20 @@ int GraphsGraphicsItem::type() const
     return BaseGraphicItem::ChartGraphicsItem;
 }
 
+// Getters and setters
+// -------------------
 
-void  GraphsGraphicsItem::setInfos(const GraphsInfo &infos)
+void  GraphsGraphicsItem::setInfos(const GraphsInfo& infos)
 {
     m_infos = infos;
 }
 
+// Drawing
+// -------
 
-void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                               QWidget *widget)
+void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-
     qDebug() << "Draw Pie";
-
 
     QColor col[] = {Qt::red, Qt::darkRed, Qt::green, Qt::darkGreen, Qt::blue, Qt::darkBlue, Qt::cyan,
             Qt::darkCyan, Qt::magenta, Qt::darkMagenta, Qt::yellow, Qt::darkYellow,
@@ -86,5 +103,6 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
         painter->drawPie(m_infos.m_boundingRect, i*360/12*16, 360/12*16);
     }
 
-//    painter->drawPie(m_infos.m_boundingRect, 0, 10);
+    //    painter->drawPie(m_infos.m_boundingRect, 0, 10);
+    BaseGraphicItem::paint(painter, option, widget);
 }

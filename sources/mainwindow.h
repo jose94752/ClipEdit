@@ -29,7 +29,7 @@
 #include "Forms/formpictures.h"
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
-#include "numberedbulletgraphicitem.h"
+#include "Items/numberedbulletgraphicitem.h"
 
 // Forward declaration
 namespace Ui

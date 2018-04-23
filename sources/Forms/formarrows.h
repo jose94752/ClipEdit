@@ -79,12 +79,12 @@ class FormArrows
         // comboBoxHeadTypeChoiceContents
 
     private slots:
-        void FillColorArrowChanged();
-        void OutlineColorArrowChanged();
-        void ClickOnpushButtonChangeOutlineColor(bool);
-        void ClickOnpushButtonChangeFillColor(bool);
+
+        void fillColorArrowChanged(const QColor& color);
+        void outlineColorArrowChanged(const QColor& color);
 
     signals:
+
         void FormFillColorArrowChanged(QColor newFormFillColorArrow);
         void FormOutlineColorArrowChanged(QColor newFormOutlineColorArrow);
 

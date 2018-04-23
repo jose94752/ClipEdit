@@ -4,11 +4,25 @@
 #include<QPainter>
 #include<QRectF>
 #include<QRect>
+/*
+================================================
+* File:         screenshotsgraphicsitem.cpp
+* Project:      ClipEdit
+* Creation:     18/04/2018
+* Brief:        Inherit from BaseGraphicsItem
+*               Manage graphic view screenshots
+================================================
+*/
 
-//add window
+// Includes
+// --------
+
 #include<QStyle>
 #include<QApplication>
 #include<QDesktopWidget>
+
+// Constructor, destructor
+// -----------------------
 
 //we subclass QGraphicItem and call the new class ScreenshotsGraphicsItem.
 //The class' constructor accepts a pointer to a QGraphicItem item.
@@ -20,11 +34,9 @@ ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QGraphicsItem *parent)
     setFlag(QGraphicsItem::ItemIsSelectable, true);
 }
 
-QRectF ScreenshotsGraphicsItem::boundingRect() const
-{
-    return m_rect_sc;
-}
 
+// Getters and setters
+// -------------------
 
 void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
 {
@@ -36,14 +48,19 @@ void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
 }
 
 
-
 QRectF ScreenshotsGraphicsItem::getRect()
 {
     return m_rect_sc;
 }
 
 
-// Second Pure virtual method implementation
+// Pure virtual methods implementation
+// -----------------------------------
+
+QRectF ScreenshotsGraphicsItem::boundingRect() const
+{
+    return m_rect_sc;
+}
 
 void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -53,7 +70,6 @@ void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphic
     painter->fillRect(boundingRect(), Qt::red);
 }
 
-//code: window
 
 
 

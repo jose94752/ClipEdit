@@ -13,23 +13,22 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
-
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "Classes/save.h"
-
-#include "picturesgraphicsitem.h"
-#include "numberedbulletgraphicitem.h"
-#include "textboxitem.h"
-#include "Classes/graphsgraphicsitem.h"
-#include "Forms/resizescenedialog.h"
-#include "Classes/arrowsgraphicsitem.h"
-#include "Forms/dialogfilealreadyexists.h"
-#include "Forms/dialogsave.h"
-
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QAreaSeries>
+
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+#include "Classes/save.h"
+#include "Forms/resizescenedialog.h"
+#include "Forms/dialogfilealreadyexists.h"
+#include "Forms/dialogsave.h"
+#include "Items/picturesgraphicsitem.h"
+#include "Items/numberedbulletgraphicitem.h"
+#include "Items/textboxitem.h"
+#include "Items/graphsgraphicsitem.h"
+#include "Items/arrowsgraphicsitem.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -71,8 +70,8 @@ void MainWindow::buildMenu()
     ui->actionSave->setDisabled(true);
     connect(ui->actionSaveAs,       SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
     connect(ui->actionOpen,         SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
-    connect(ui->actionExports,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
-    connect(ui->actionresize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
+    connect(ui->actionExportAs,      SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
+    connect(ui->actionResize,       SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
     connect(ui->actionNew,          SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
     connect(ui->actionArrow,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionChart,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
@@ -85,7 +84,7 @@ void MainWindow::buildMenu()
 
     // INSERT YOUR GRAPHIC ITEMS SLOT HERE
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
-    connect(&m_formPictures, SIGNAL(ImageChoosen()) , this, SLOT(slotTextPicture()));
+    connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
@@ -143,7 +142,7 @@ void MainWindow::actionClicked(bool)
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_BULLET]);
     } else if (sender() == ui->actionPicture) {
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
-    } else if (sender() == ui->actionExports) {
+    } else if (sender() == ui->actionExportAs) {
         //stacked_widget.setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
     } else if (sender() == ui->actionScreenshot) {
         ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_SCREENSHOT]);

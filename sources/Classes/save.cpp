@@ -4,8 +4,8 @@
 #include <QGraphicsItem>
 #include <QRectF>
 #include <mainwindow.h>
-#include "picturesgraphicsitem.h"
-#include "textboxitem.h"
+#include "../Items/picturesgraphicsitem.h"
+#include "../Items/textboxitem.h"
 
 #define ImageGraphicsItem 65536
 #define TextBoxGraphicsItem 65537

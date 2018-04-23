@@ -3,7 +3,7 @@
 * File:         formtextboxes.cpp
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to manage text boxes
 ================================================
 */
 
@@ -46,7 +46,7 @@ QMap<QString, QVariant> FormTextBoxes::getInfos()
     font.setBold(ui->checkBoxBold->isChecked());
     font.setItalic(ui->checkBoxItalic->isChecked());
 
-    int alignment;
+    int alignment = 0;
     if (ui->radioButtonLeft->isChecked())
         alignment = Qt::AlignCenter;
     else if (ui->radioButtonRight->isChecked())
@@ -58,4 +58,6 @@ QMap<QString, QVariant> FormTextBoxes::getInfos()
     res.insert("font", font.toString());
     res.insert("alignment", alignment);
     // TO CONTINUE
+
+    return res;
 }

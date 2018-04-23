@@ -3,7 +3,7 @@
 * File:         formtextboxes.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to create text boxes
 ================================================
 */
 
@@ -21,7 +21,6 @@ namespace Ui
 {
     class FormTextBoxes;
 }
-
 
 // Class
 // -----
