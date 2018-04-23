@@ -59,7 +59,7 @@ public:
  /// \param parent
  ///
     // explicit FormScreenshots(QWidget* parent = 0, QGraphicsScene*);
-    explicit FormScreenshots(QWidget* parent = 0);
+    explicit FormScreenshots(QWidget* parent = 0) ;
 
    // virtual const char* what() const throw(bad_function_call);
 
@@ -149,7 +149,7 @@ private:
         ///
         /// \brief Capture : capture slot in WholeScreen and window
         ///
-        void Capture();
+        void snapshot();
         ///
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
@@ -158,7 +158,7 @@ private:
         /// \brief hide enables or disables the Hide The Window option.
         ///
        // void CaptureRegion(bool ok, QRect region);
-        void hide();
+        void updatehide();
 
         ///
         /// \brief updateLabel this slot is called whenever the user changes the delay
