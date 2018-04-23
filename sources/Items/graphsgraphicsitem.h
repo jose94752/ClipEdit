@@ -26,14 +26,6 @@
 
 //#define NUMBERPOINTS  200
 
-
-/*
-int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
-                            QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight,
-                            int &vScale, int &vRotate
-
-*/
-
 // Classes
 // -------
 
@@ -48,9 +40,7 @@ public :
     QString m_yAxes;
     int m_type;
 
-    int m_rotate;
-    int m_scale;
-
+    bool m_transparent;
     //int m_nbPoints;
     //QPointF m_xPoints[NUMBERPOINTS];
     //QPointF m_yPoints[NUMBERPOINTS];

@@ -22,7 +22,7 @@ By modifying or moving the object (s), the arrow is also
       
 	- Fill color
          
-	- Thickness outline lines 4 choices possibilities (1 - 4)
+	- Line Thickness 4 choices possibilities (1 - 4)
        
 	- Head type choice
 

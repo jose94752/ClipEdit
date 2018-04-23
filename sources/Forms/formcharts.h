@@ -42,8 +42,7 @@ class FormCharts
         ~FormCharts();
 
     void GetChartsValues(int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
-                         QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight,
-                         int &vScale, int &vRotate);
+                         QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight);
 
     void GetChartsValues( GraphsInfo &infos);
 

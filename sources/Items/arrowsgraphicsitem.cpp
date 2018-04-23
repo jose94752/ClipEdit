@@ -73,28 +73,24 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     /*
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
-
-
     QPointF sourcePoint = m_rect.topLeft(); // Test
     QPointF destPoint = m_rect.bottomRight(); // Test
-
     QLineF line(sourcePoint, destPoint);
     painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
-
     double angle = qAtan2(-line.dy(), line.dx());
-
     QPointF sourceArrowP1 = sourcePoint + QPointF(qSin(angle + M_PI / 3) * 10, qCos(angle + M_PI / 3) * 10);
     QPointF sourceArrowP2 = sourcePoint + QPointF(qSin(angle + M_PI - M_PI / 3) * 10, qCos(angle + M_PI - M_PI / 3) * 10);
     QPointF destArrowP1 = destPoint + QPointF(qSin(angle - M_PI / 3) * 10, qCos(angle - M_PI / 3) * 10);
     QPointF destArrowP2 = destPoint + QPointF(qSin(angle - M_PI + M_PI / 3) * 10, qCos(angle - M_PI + M_PI / 3) * 10);
-
     painter->setBrush(Qt::black);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
     */
     // End Example
+
+
 
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
@@ -106,8 +102,25 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 
     //m_Color = Qt::black; // Test
 
+    // Testing if you have at least the StartPosition and EndPositionItem is one missing
+    // we return and nothing is display.
+    if (!m_StartPositionItem || !m_EndPositionItem)
+        return;
+
+    // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
+    if (m_StartPositionItem->x() >= m_EndPositionItem->x())
+            m_EndPositionItem->setX(m_StartPositionItem->x());
+    if (m_StartPositionItem->y() >= m_EndPositionItem->y())
+            m_EndPositionItem->setY(m_StartPositionItem->y());
+
     // Draw the line
     QLineF line(*m_StartPositionItem, *m_EndPositionItem);
+
+    // Check the length line if is approximately 0 then we return and nothing is display.
+    if (qFuzzyCompare(line.length(), qreal(0.)))
+        return;
+
+    // Draw the line (next step)
     painter->setPen(QPen(m_Color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 
@@ -137,10 +150,10 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 }
 
 void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
-                                        int ArrowWidth, int ArrowHeight,
-                                        QColor ArrowOutlineColor, QColor ArrowFillColor)
-                                        //To do
-                                        // comboBoxThicknessOutlineLinesContents
+                                        int &ArrowWidth, int &ArrowHeight,
+                                        QColor &ArrowOutlineColor, QColor &ArrowFillColor,
+                                        int &LineThickness, int &SizeHeadTypeChoice)
+                                        //To do others HeadTypeChoiceContents
                                         // comboBoxHeadTypeChoiceContents
 {
     m_WithoutAnchorPoint = WithoutAnchorPoint;
@@ -153,8 +166,10 @@ void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAncho
     ItemOutlineColorArrow = new QColor(ArrowOutlineColor);
     ItemFillColorArrow = new QColor(ArrowFillColor);
 
+    m_LineThickness = LineThickness;
+
+
     //To do
-    // comboBoxThicknessOutlineLinesContents
     // comboBoxHeadTypeChoiceContents
 
 }
