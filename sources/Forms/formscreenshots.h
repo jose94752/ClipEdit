@@ -15,12 +15,22 @@
 
 #include <QWidget>
 #include<QPixmap>
-#include<QButtonGroup>
+#include<QGroupBox>
 #include<QSpinBox>
 #include<QRadioButton>
 #include<QCheckBox>
-#include<QGraphicsScene>
 #include<QString>
+#include<QCursor>
+#include<QLabel>
+#include<QPointF>
+#include<QGraphicsPixmapItem>
+#include<QMap>
+#include<QPainter>
+#include<QGraphicsItem>
+#include<exception>
+#include<QMouseEvent>
+#include <QGraphicsScene>
+
 
 // Forward Declaration
 namespace Ui
@@ -31,41 +41,64 @@ namespace Ui
 
 ///
 /// \brief The FormScreenshots class : his charge is to making a Screenshot
-/// of two types: WholeScreenShot and window
+/// of two types: WholeScreenShot and region
 ///
 
-class FormScreenshots
-    :   public QWidget
+class FormScreenshots :   public QWidget
 {
     Q_OBJECT
 
-    public:
+public:
 ///
 /// \brief The TypeCapture enum : enum with the type of capture
 ///
-    enum TypeCapture {WholeScreen};
+    enum TypeCapture { WholeScreen, Region };
 
  ///
  /// \brief FormScreenshots : constructor
  /// \param parent
  ///
-        explicit FormScreenshots(QWidget* parent = 0);
+    // explicit FormScreenshots(QWidget* parent = 0, QGraphicsScene*);
+    explicit FormScreenshots(QWidget* parent = 0);
+
+   // virtual const char* what() const throw(bad_function_call);
 
         ~FormScreenshots();
 
-//protected:
+protected:
 //    ///
 //    /// \brief resizeEvent this method function is reimplemented to receive
 //    /// the resize events dispatched to the widget.
 //    /// \param event
 //    ///
 //    void resizeEvent(QResizeEvent *event) override;
+    ///
+    /// \brief mousePressEvent
+    /// \param event
+    ///
+    void mousePressEvent(QMouseEvent *event) override;
+    ///
+    /// \brief mouseMoveEvent
+    /// \param event
+    ///
+    void mouseMoveEvent(QMouseEvent *event) override;
+    ///
+    /// \brief mouseReleaseEvent
+    /// \param event
+    ///
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 
-    private:
-
+private:
         // Ui
         Ui::FormScreenshots *ui;
+        //QGraphicsScene *scene;
+        ///
+        /// \brief onMouseEvent: method indicating the event involved.
+        ///
+        //void onMouseEvent();
+        int x;
+        int y;
         ///
         /// \brief m_typecapture WholeScreen and window.
         ///
@@ -75,8 +108,9 @@ class FormScreenshots
         ///
         QPixmap m_pixmap;
         ///
-        /// \brief m_buttongroup we group the radio button who are included in different frames.
-       // QButtonGroup m_buttongroup;
+        /// \brief m_formscreenshot is used to display the rectangle region drawed on mouse clicked
+        ///
+        FormScreenshots *m_formScreenshots;
         ///
         /// \brief m_delayspinbox it gives the time for a user to rearrange this desktop.
         ///
@@ -85,29 +119,37 @@ class FormScreenshots
         /// \brief m_hidewindow Hiding the application's window while the screenshot is taken.
         ///
         QCheckBox *m_hidewindow;
-
-        int m_width;
-        int m_height;
-
-        void mousePressEvent(QMouseEvent *ev);
-        void mouseMoveEvent(QMouseEvent *ev);
-        void mouseReleaseEvent(QMouseEvent *ev);
+        ///
+        /// \brief m_label label of our screen shot
+        ///
+        QLabel *m_label;
+        ///
+        /// \brief m_optionsGroupbox the QGroupBox widget provides a group box frame with a title.
+        ///
+        QGroupBox *m_optionsGroupbox;
+        ///
+        /// \brief m_savedcursor class provides a mouse cursor with an arbitrary shape.
+        ///
+        QCursor m_savedcursor;
 
         bool m_buttonpressed;
+        ///
+        /// \brief m_region The QRect class defines a rectangle
+        ///  in the chosen region  in the plane using integer precision.
+        ///
+        QRect m_region;
 
         ///
-        /// \brief if m_point0 = point1 this mean the user has
+        /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
         ///
         QPoint m_point0;
         QPoint m_point1;
-
-
 
      private slots:
         ///
         /// \brief Capture : capture slot in WholeScreen and window
         ///
-        void Capture();
+     //   void Capture();
         ///
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
@@ -115,25 +157,23 @@ class FormScreenshots
         ///
         /// \brief hide enables or disables the Hide The Window option.
         ///
+        void CaptureRegion(bool ok, QRect region);
         void hide();
+
         ///
-        /// \brief ChangeHeight
+        /// \brief updateLabel this slot is called whenever the user changes the delay
+        /// using the Screenshot Delay second option
         ///
-        void ChangeHeight(int);
-        ///
-        /// \brief ChangeWidth
-        ///
-        void ChangeWidth(int);
 
      signals:
         ///
         /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
         ///
         void InsertImageText(QString);
-
-
-
-
+        void dimensionsMade( bool, QRect );
+        void mouseMoveEvent();
+        void mousePressEvent();
+        void mouseReleaseEvent();
 };
 
 #endif // FORMSCREENSHOOTS_H
