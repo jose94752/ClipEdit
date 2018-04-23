@@ -109,7 +109,11 @@ private:
         void slotTextBoxes();
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
+<<<<<<< HEAD
         void slotArrowsGraphicsItem();
+=======
+        void slotArrowsGraphicsItem();        
+>>>>>>> 8ed9e9e82c2c7f4c9cc34fb078e9dc0d51c71485
 };
 
 #endif

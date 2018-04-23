@@ -47,9 +47,22 @@ class FormCharts
 
     void GetChartsValues( GraphsInfo &infos);
 
+public slots:
+
 private:
 
         Ui::FormCharts *ui;
+
+private slots:
+
+   void createChart();
+    //   void fillColorArrowChanged(const QColor& color);
+    //   void outlineColorArrowChanged(const QColor& color);
+
+signals:
+
+    void FormCreateChart( const GraphsInfo & newGraphsInfo);
+
 };
 
 #endif

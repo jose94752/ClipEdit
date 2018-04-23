@@ -1,14 +1,26 @@
-#ifndef SAVE_H
-#define SAVE_H
-#include <QString>
-#include <QDomElement>
+/*
+================================================
+* File:         mainwindow.h
+* Project:      ClipEdit
+* Creation:     17/04/2018
+* Brief:        Application's main window
+================================================
+*/
+
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+// Includes
+// --------
+
+#include <QMainWindow>
+#include <QMap>
 #include <QGraphicsScene>
-#include "mainwindow.h"
-#include "Items/picturesgraphicsitem.h"
-#include "Items/textboxitem.h"
-#include "Items/arrowsgraphicsitem.h"
-#include "Items/numberedbulletgraphicitem.h"
-#include "Items/picturesgraphicsitem.h"
+
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QAreaSeries>
+
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
 #include "Forms/formcliparts.h"
@@ -17,37 +29,87 @@
 #include "Forms/formpictures.h"
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
+#include "Items/numberedbulletgraphicitem.h"
 
-class Save
+// Forward declaration
+namespace Ui
 {
-public:
-    Save(QGraphicsScene*,QString);
-    Save(QList<QGraphicsItem *>);
-    Save(QList<QGraphicsItem *>,QString);
-    //QDomElement setLayer()
-    static QString verifyExtension(QString);
-    static QString current_filename;
-    static bool fileNameExists();
-    void getPicturesGraphicsItemData(PicturesGraphicsItem*);
-    void getTextBoxItem(TextBoxItem*);
-    void getArrowGraphicsItem(ArrowsGraphicsItem*);
-    void getBulletsGraphicsItems(NumberedBulletGraphicItem*);
-    void getPicturesGraphicsItems(PicturesGraphicsItem*);
-    void setFormsPoints(FormArrows*,FormCharts*,FormCliparts*,FormLayers*,FormNumberedBullets *,FormPictures*,FormScreenshots*,FormTextBoxes*);
-    void save();
-    void open();
+    class MainWindow;
+}
+
+
+// Class
+// -----
+
+class MainWindow
+    :   public QMainWindow
+{
+    Q_OBJECT
+
+    public:
+
+        // Constructor & Destructor
+        explicit MainWindow(QWidget* parent = 0);
+        ~MainWindow();
+
+
 private:
-    QList<QGraphicsItem *> m_listItems;
-    QGraphicsScene *m_scene;
-    int countItems;
-    FormArrows *m_formArrows;
-    FormCharts *m_formCharts;
-    FormCliparts *m_formCliparts;
-    FormLayers *m_formLayers;
-    FormNumberedBullets *m_formBullets;
-    FormPictures *m_formPicture;
-    FormScreenshots *m_formScreenshots;
-    FormTextBoxes *m_formTextBoxes;
+
+        // Buttons Ids
+        enum e_BUTTON_IDS {
+            BUTTON_ID_ARROW = 0,
+            BUTTON_ID_CHART,
+            BUTTON_ID_BULLET,
+            BUTTON_ID_CLIPART,
+            BUTTON_ID_PICTURE,
+            BUTTON_ID_TEXTBOX,
+            BUTTON_ID_SCREENSHOT,
+            BUTTON_ID_LAYERS,
+            NB_BUTTONS
+        };
+
+        // UI
+        Ui::MainWindow* ui;
+
+        // Forms
+        FormArrows          m_formArrows;
+        FormCharts          m_formCharts;
+        FormCliparts        m_formCliparts;
+        FormLayers          m_formLayers;
+        FormNumberedBullets m_formBullets;
+        FormPictures        m_formPictures;
+        FormScreenshots     m_formScreenshots;
+        FormTextBoxes       m_formTextboxes;
+
+        QMap<e_BUTTON_IDS, int> m_listIndexes;
+
+        // Scene
+        QGraphicsScene m_scene;
+
+        // Building
+        void init();
+        void buildMenu();
+        void buildToolBar();
+        void buildView();
+
+    private slots:
+
+        // Menu and toolbar
+        void save(bool);
+        void saveAs(bool);
+        void openFile(bool);
+        void exportView(bool);
+        void actionClicked(bool);
+        void resizeTold(bool);
+        void slotNew(bool);
+        void showAboutDialog(bool);
+
+        // SLOTS TEST GRAPHIC ITEM INSERTION
+        void slotNumberedBullets();
+        void slotTextBoxes();
+        void slotTextPicture();
+        void slotGraphs(const GraphsInfo &infos);
+        void slotArrowsGraphicsItem();
 };
 
-#endif // SAVE_H
+#endif
