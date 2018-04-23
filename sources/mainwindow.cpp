@@ -86,8 +86,11 @@ void MainWindow::buildMenu()
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
-    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+//    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
+
+    connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+
 }
 
 void MainWindow::buildToolBar()
@@ -197,8 +200,10 @@ void MainWindow::slotTextPicture()
 }
 
 
-void MainWindow::slotGraphs()
+void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
+    qDebug () << "mainWindow Slot Graphs";
+
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
 
@@ -209,6 +214,10 @@ void MainWindow::slotGraphs()
 //    g->setInfos(infos);
 //    m_scene.addItem(g);
 
+    GraphsGraphicsItem *g = new GraphsGraphicsItem();
+    g->setInfos(infos);
+
+    m_scene.addItem(g);
 }
 
 
