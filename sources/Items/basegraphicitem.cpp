@@ -190,24 +190,6 @@ void BaseGraphicItem::updateHandlers()
     if (!m_hasHandlers)
         return;
 
-
-    // Fix what needs to be fixed
-    if (m_rect.top() > m_rect.bottom())
-    {
-        qreal top = m_rect.top();
-        qreal bottom = m_rect.bottom();
-        m_rect.setTop(bottom);
-        m_rect.setBottom(top);
-    }
-    if (m_rect.right() < m_rect.left())
-    {
-        qreal left = m_rect.left();
-        qreal right = m_rect.right();
-        m_rect.setLeft(right);
-        m_rect.setRight(left);
-    }
-
-
     QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
     QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
     QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
@@ -256,6 +238,38 @@ void BaseGraphicItem::updateHandlers()
             } break;
         }
     }
+}
+
+void BaseGraphicItem::restrictPositions()
+{
+    if (!m_current)
+        return;
+
+    if (m_current->type() & ItemHandler::HANDLER_TOP)
+    {
+        if (m_rect.top() > m_rect.bottom())
+            m_rect.setTop(m_rect.bottom());
+    }
+    else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+    {
+        if (m_rect.top() > m_rect.bottom())
+            m_rect.setBottom(m_rect.top());
+    }
+
+    if (m_current->type() & ItemHandler::HANDLER_LEFT)
+    {
+        if (m_rect.left() > m_rect.right())
+            m_rect.setLeft(m_rect.right());
+    }
+    else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+    {
+        if (m_rect.left() > m_rect.right())
+            m_rect.setRight(m_rect.left());
+    }
+
+    // Emergency edit
+    if (!m_rect.isValid())
+        m_rect.adjust(1,1,1,1);
 }
 
 // Pure virtual methods override
@@ -406,6 +420,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         }
 
         // Now we need to update the handlers position
+        restrictPositions();
         updateHandlers();
 
         update();

@@ -136,6 +136,7 @@ class BaseGraphicItem
         // Handlers methods
         void createHandlers();
         void updateHandlers();
+        void restrictPositions();
 
         // Handlers properties
         QList<ItemHandler*> m_handlers;
