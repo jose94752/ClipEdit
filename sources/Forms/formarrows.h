@@ -43,8 +43,8 @@ class FormArrows
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,
                             QColor &ArrowOutlineColor, QColor &ArrowFillColor,
-                            int &LineThickness);
-                            //To do
+                            int &LineThickness, int &SizeHeadTypeChoice);
+                            //To do others HeadTypeChoiceContents
                             // comboBoxHeadTypeChoiceContents
     private:
 
@@ -76,8 +76,9 @@ class FormArrows
 
         int LineThicknessContents;
 
-        //To do
+        //To do others HeadTypeChoiceContents
         // comboBoxHeadTypeChoiceContents
+        int SizeHeadTypeChoiceContents; // First simple type of ArrowHead from comboBoxHeadTypeChoiceContents
 
     private slots:
 
