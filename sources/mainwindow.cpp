@@ -172,13 +172,16 @@ void MainWindow::slotNumberedBullets()
   QColor bulletcolor, numbercolor;
   QFont qfont;
   m_formBullets.get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
-  int numbullet (0);
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
+  int numbullet (from);
+  qreal posx (0), posy (50), delta (100);
   for (; numbullet != to+1; ++numbullet) {
     numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
+    numberedBulletGraphicItem->setPos(posx, posy);
     m_scene.addItem(numberedBulletGraphicItem);
+    posx += delta;
   }
 }
 
