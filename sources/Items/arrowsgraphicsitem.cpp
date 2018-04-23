@@ -15,6 +15,7 @@
 #include <QPen>
 #include <QPainter>
 
+#include <QtMath>
 #include "arrowsgraphicsitem.h"
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
