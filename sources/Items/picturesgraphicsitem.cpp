@@ -42,6 +42,13 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
   //painter->drawText( QRectF (0,0, width, height),"coucou");
   // painter->(boundingRect(), m_picture);
 
+  const QRect rectangle = QRect(0, 0, 100, 50);
+  QRect boundingRect;
+
+
+  painter->setFont(lg_font);
+  painter->drawText(rectangle, 0, lg_txt, &boundingRect);
+
     BaseGraphicItem::paint(painter, option, widget);
 }
 

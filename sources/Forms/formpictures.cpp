@@ -34,13 +34,15 @@ FormPictures::FormPictures(QWidget *parent)
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
-    ui->comboBox_lg_pos->addItem(tr("Top Left"));
-    ui->comboBox_lg_pos->addItem(tr("Top Center"));
-    ui->comboBox_lg_pos->addItem(tr("Top Right"));
 
-    ui->comboBox_lg_pos->addItem(tr("Bottom Left"));
-    ui->comboBox_lg_pos->addItem(tr("Bottom Center"));
-    ui->comboBox_lg_pos->addItem(tr("Bottom Right"));
+    ui->comboBox_lg_pos->addItem(tr("Left"));
+    ui->comboBox_lg_pos->addItem(tr("Right"));
+    ui->comboBox_lg_pos->addItem(tr("HCenter"));
+    ui->comboBox_lg_pos->addItem(tr("Justify"));
+    ui->comboBox_lg_pos->addItem(tr("Top"));
+    ui->comboBox_lg_pos->addItem(tr("Bottom"));
+    ui->comboBox_lg_pos->addItem(tr("VCenter"));
+    ui->comboBox_lg_pos->addItem(tr("Center"));
 
 }
 
@@ -57,9 +59,9 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
     height     = ui->spinBox_pic_h->value();
     width      = ui->spinBox_pic_w->value();
     grayscale  = ui->checkBox_pic_grayscale->isChecked();
-    opacity      = ui->horizontalSlider_pic_opacity->value();
+    opacity    = ui->horizontalSlider_pic_opacity->value();
     lg_txt     = ui->lineEdit_lg_txt->text();
-    lg_font    = ui->fontComboBox_lg_font->font();
+    lg_font    = ui->fontComboBox_lg_font->currentFont();
     lg_size    = ui->spinBox_lg_size->value();
     lg_color   = ui->toolButton_color->getColor();
     lg_pos     = ui->comboBox_lg_pos->currentText();
