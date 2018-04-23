@@ -149,7 +149,7 @@ private:
         ///
         /// \brief Capture : capture slot in WholeScreen and window
         ///
-        void Capture();
+     //   void Capture();
         ///
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
