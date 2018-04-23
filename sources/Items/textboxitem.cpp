@@ -159,4 +159,3 @@ void TextBoxItem::setBorderRadius(int radius)
     m_borderRadius = radius;
     update();
 }
-
