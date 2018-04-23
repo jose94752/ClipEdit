@@ -82,12 +82,16 @@ void MainWindow::buildMenu()
 
     ui->actionSave->setDisabled(true);
 
-    // INSERT YOUR GRAPHIC ITEMS SLOT HERE
-    connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
+    // Item insertion connects
     connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
+    connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    //connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
+
+    connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+
 }
 
 void MainWindow::buildToolBar()
@@ -179,14 +183,11 @@ void MainWindow::slotNumberedBullets()
   }
 }
 
-void MainWindow::slotTextBoxes()
+void MainWindow::slotTextBoxes(bool)
 {
-    // Retrieve information from the textboxform
-//    QString text = m_formTextboxes.getText();
-//    m_formTextboxes.
-
-//    if (!text.isEmpty())
-//        m_scene.addItem(new TextBoxItem(text));
+    // Retrieve data from the form
+    QMap<QString, QVariant> data = m_formTextboxes.getInfos();
+    m_scene.addItem(new TextBoxItem(data));
 }
 
 void MainWindow::slotTextPicture()
@@ -197,8 +198,10 @@ void MainWindow::slotTextPicture()
 }
 
 
-void MainWindow::slotGraphs()
+void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
+    qDebug () << "mainWindow Slot Graphs";
+
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
 
@@ -209,6 +212,10 @@ void MainWindow::slotGraphs()
 //    g->setInfos(infos);
 //    m_scene.addItem(g);
 
+    GraphsGraphicsItem *g = new GraphsGraphicsItem();
+    g->setInfos(infos);
+
+    m_scene.addItem(g);
 }
 
 
@@ -224,7 +231,8 @@ void MainWindow::slotArrowsGraphicsItem()
     //          we need 2 objects of scene
     //m_scene.addItem(new ArrowsGraphicsItem());
 
-    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem();
+    // Define new ArrowsGraphicsItem on the scene
+    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(&m_formArrows);
     m_scene.addItem(ArrowItem);
 
 }
@@ -238,13 +246,19 @@ void MainWindow::exportView(bool)
 
 void MainWindow::openFile(bool)
 {
-    // To do
+    QString fileName = QFileDialog::getOpenFileName(this,
+          tr("Open ClipEdit Project"), "/home", tr("ClipEdit Files (*.cle)"));
+    if(fileName!=""){
+        Save save(&m_scene,fileName);
+        save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
+    }
 }
 
 
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
+    save.save();
 }
 
 
@@ -260,6 +274,7 @@ void MainWindow::saveAs(bool)
         }else{
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(),extfilename);
+            save.save();
         }
     }
 }
@@ -272,4 +287,3 @@ void MainWindow::showAboutDialog(bool)
                         "Copyright (c) 2018";
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
 }
-

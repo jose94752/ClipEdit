@@ -24,7 +24,7 @@
 // Defines
 // -------
 
-#define NUMBERPOINTS  200
+//#define NUMBERPOINTS  200
 
 
 /*
@@ -39,26 +39,26 @@ int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
 
 class GraphsInfo
 {
-    public:
+public :
+    QString m_title;
+    QRectF m_boundingRect;
+    QColor m_backColor;
+    QColor m_color;
+    QString m_xAxes;
+    QString m_yAxes;
+    int m_type;
 
-        QString m_title;
-        QRectF m_boundingRect;
-        QColor m_backColor;
-        QColor m_color;
-        QString m_xAxes;
-        QString m_yAxes;
-        int m_type;
-        int m_nbPoints;
-        int m_rotate;
-        int m_scale;
-        QPointF m_xPoints[NUMBERPOINTS];
-        QPointF m_yPoints[NUMBERPOINTS];
-        QString m_legends[NUMBERPOINTS];
+    int m_rotate;
+    int m_scale;
 
-        QPointF m_Arcs[NUMBERPOINTS];
+    //int m_nbPoints;
+    //QPointF m_xPoints[NUMBERPOINTS];
+    //QPointF m_yPoints[NUMBERPOINTS];
+    //QString m_legends[NUMBERPOINTS];
+
+    QList<int> m_Arcs;
 
 };
-
 
 class GraphsGraphicsItem
     :   public BaseGraphicItem

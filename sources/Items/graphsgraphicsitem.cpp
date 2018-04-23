@@ -15,24 +15,22 @@
 #include <QGraphicsItem>
 #include <QDebug>
 
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
-
 #include <QPaintDevice>
 #include <QApplication>
 
 #include "graphsgraphicsitem.h"
 
-QT_CHARTS_USE_NAMESPACE
 
 // Constructor
 // -----------
 
 GraphsGraphicsItem::GraphsGraphicsItem(QGraphicsItem* parent) : BaseGraphicItem( parent )
 {
-
     //m_infos.m_boundingRect = {-100,-100,200,200};
+
+    // setRect( QRectF(-50, -50, 100, 100));
+
+    //setRect( QRectF(m_infos.m_boundingRect));
 }
 
 
@@ -43,7 +41,10 @@ QRectF GraphsGraphicsItem::boundingRect() const
 {
     //m_infos.m_boundingRect = {-100,-100,200,200};
     //return QRectF(0,0,500,500);
-    return m_infos.m_boundingRect;
+
+    //return m_infos.m_boundingRect;
+
+    return BaseGraphicItem::boundingRect();
 }
 
 
@@ -70,7 +71,13 @@ int GraphsGraphicsItem::type() const
 
 void  GraphsGraphicsItem::setInfos(const GraphsInfo& infos)
 {
+    qDebug() << "Set Infos";
+
     m_infos = infos;
+
+    setRect( QRectF(m_infos.m_boundingRect));
+
+    qDebug() << "Set Infos title " << m_infos.m_title;
 }
 
 // Drawing
@@ -106,3 +113,4 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
     //    painter->drawPie(m_infos.m_boundingRect, 0, 10);
     BaseGraphicItem::paint(painter, option, widget);
 }
+

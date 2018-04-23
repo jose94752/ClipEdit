@@ -8,7 +8,7 @@
 #include "../Items/picturesgraphicsitem.h"
 #include "../Items/textboxitem.h"
 #include "../Items/numberedbulletgraphicitem.h"
-
+#include "../Items/arrowsgraphicsitem.h"
 #define ImageGraphicsItem 65536
 #define TextBoxGraphicsItem 65537
 #define EdgeItem 65539
@@ -17,16 +17,24 @@
 
 QString Save::current_filename="";
 
+Save::Save(QGraphicsScene* v_scene,QString v_filename)
+{
+    current_filename=v_filename;
+    QList<QGraphicsItem *> l_list;
+    m_listItems=l_list;
+    m_scene=v_scene;
+}
+
 Save::Save(QList<QGraphicsItem *> v_listItems){
     m_listItems=v_listItems;
-    save();
+    m_scene=0;
 }
 
 Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
 {
     current_filename=filename;
     m_listItems=v_listItems;
-    save();
+    m_scene=0;
 }
 
 QString Save::verifyExtension(QString fileName)
@@ -56,6 +64,33 @@ void Save::getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem
 
 void Save::getTextBoxItem(TextBoxItem *textBoxItem){
     //qDebug()<<"text boxes";
+}
+
+void Save::getArrowGraphicsItem(ArrowsGraphicsItem *)
+{
+    //qDebug() arrows graphics items
+}
+
+void Save::getBulletsGraphicsItems(NumberedBulletGraphicItem *)
+{
+    //code
+}
+
+void Save::getPicturesGraphicsItems(PicturesGraphicsItem *)
+{
+    //code
+}
+
+void Save::setFormsPoints(FormArrows *f1, FormCharts *f2, FormCliparts *f3, FormLayers *f4, FormNumberedBullets *f5, FormPictures *f6, FormScreenshots *f7, FormTextBoxes *f8)
+{
+    m_formArrows=f1;
+    m_formCharts=f2;
+    m_formCliparts=f3;
+    m_formLayers=f4;
+    m_formBullets=f5;
+    m_formPicture=f6;
+    m_formScreenshots=f7;
+    m_formTextBoxes=f8;
 }
 
 int isValidIndex(int type){
@@ -104,12 +139,59 @@ void Save::save()
         }
 
         if(type==EdgeItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
-             getPicturesGraphicsItemData((PicturesGraphicsItem*)item);
+             getArrowGraphicsItem((ArrowsGraphicsItem*)item);
         }
 
-        if((type==ImageGraphicsItem || type==TextBoxGraphicsItem) && (x!=0 || y!=0 || width!=0 || height!=0)){
+        if(type==BulletsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            getBulletsGraphicsItems((NumberedBulletGraphicItem *)item);
+        }
+
+        if(type==PicturesItems  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            getPicturesGraphicsItems((PicturesGraphicsItem *)item);
+        }
+
+        if(type>65535 && (x!=0 || y!=0 || width!=0 || height!=0)){
             countItems++;
         }
     }
-    settings.setValue("nbItems",QString::number(countItems));
+    settings.setValue("nbItems",countItems);
+}
+
+void Save::open()
+{
+    int i;
+    QSettings settings(current_filename,QSettings::IniFormat);
+    countItems=settings.value("nbItems").toInt();
+    qDebug()<<QString::number(countItems);
+    for(i=0;i<countItems;i++){
+        QVariant varType=settings.value(QString("item").append(QString::number(i)).append("/type"));
+        QVariant varX=settings.value(QString("item").append(QString::number(i)).append("/rectF/x"));
+        QVariant varY=settings.value(QString("item").append(QString::number(i)).append("/rectF/y"));
+        QVariant varWidth=settings.value(QString("item").append(QString::number(i)).append("/rectF/width"));
+        QVariant varHeight=settings.value(QString("item").append(QString::number(i)).append("/rectF/height"));
+        int type=varType.toInt();
+        double x=varX.toDouble();
+        double y=varY.toDouble();
+        double width=varWidth.toDouble();
+        double height=varHeight.toDouble();
+        QRectF rect(x,y,width,height);
+        if(type==ImageGraphicsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             //PicturesGraphicsItem *picture=new PicturesGraphicsItem();
+        }
+        if(type==TextBoxGraphicsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             //getTextBoxItem((TextBoxItem*)item);
+        }
+
+        if(type==EdgeItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             //getArrowGraphicsItem((ArrowsGraphicsItem*)item);
+        }
+
+        if(type==BulletsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            //getBulletsGraphicsItems((NumberedBulletGraphicItem *)item);
+        }
+
+        if(type==PicturesItems  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            //getPicturesGraphicsItems((PicturesGraphicsItem *)item);
+        }
+    }
 }
