@@ -53,6 +53,9 @@ class FormPictures
 
         void imageChosen();
 
+        void WidtChanged();
+        void HeightChanged();
+
 };
 
 #endif

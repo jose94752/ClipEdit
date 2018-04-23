@@ -27,6 +27,11 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
 
     ui->toolButtonBackgroundColor->setColor(Qt::white);
     ui->toolButtonTextColor->setColor(Qt::black);
+
+    // Build alignment combobox
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-left.png"), tr("Left"), Qt::AlignLeft);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-right.png"), tr("Right"), Qt::AlignRight);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-centered.png"), tr("Centered"), Qt::AlignHCenter);
 }
 
 FormTextBoxes::~FormTextBoxes()
@@ -46,17 +51,17 @@ QMap<QString, QVariant> FormTextBoxes::getInfos()
     font.setBold(ui->checkBoxBold->isChecked());
     font.setItalic(ui->checkBoxItalic->isChecked());
 
-    int alignment = 0;
-    if (ui->radioButtonLeft->isChecked())
-        alignment = Qt::AlignCenter;
-    else if (ui->radioButtonRight->isChecked())
-        alignment = Qt::AlignLeft;
-    else if (ui->radioButtonCentered)
-        alignment = Qt::AlignHCenter;
+//    int alignment = 0;
+//    if (ui->radioButtonLeft->isChecked())
+//        alignment = Qt::AlignCenter;
+//    else if (ui->radioButtonRight->isChecked())
+//        alignment = Qt::AlignLeft;
+//    else if (ui->radioButtonCentered)
+//        alignment = Qt::AlignHCenter;
 
     res.insert("text", ui->plainTextEdit->toPlainText());
     res.insert("font", font.toString());
-    res.insert("alignment", alignment);
+    //res.insert("alignment", alignment);
     // TO CONTINUE
 
     return res;

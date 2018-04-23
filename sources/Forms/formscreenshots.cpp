@@ -59,14 +59,14 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //Go QPushButton
     //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
    // this, SLOT(Capture()));
- //   connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
- //           this, SLOT(Capture()));
+   connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
+            this, SLOT(Capture()));
 
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
 
- //   connect(ui->radioButtonWhole, SIGNAL(clicked(bool)),
- //           this, SLOT(CaptureWholeScreen()));
+    connect(ui->radioButtonWholecapture, SIGNAL(clicked(bool)),
+            this, SLOT(CaptureWholeScreen()));
 
 
 
@@ -93,14 +93,7 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 
-    //connect first signal
-    connect(ui->pushButtonGo, SIGNAL(clicked(bool)), this, SLOT(Capture()));
 
-    // connect delay
-    connect(ui->spinBoxDelay, SIGNAL(valueChanged(int)), this, SLOT(hide()));
-
-    connect(ui->checkBoxHideWindow, SIGNAL(clicked(bool)),
-           this, SLOT(update()));
 
 }
 
@@ -110,51 +103,33 @@ FormScreenshots::~FormScreenshots()
 {
     //delete the object
    setCursor(m_savedcursor);
-    delete ui;
+   delete ui;
 }
 
-
-
-//void FormScreenshots::Capture()
-
-void FormScreenshots::mousePressEvent(QMouseEvent *ev)
-
+void FormScreenshots::Capture()
 {
-     enum TypeCapture { WholeScreen, Region };
+         enum TypeCapture { WholeScreen, Region };
 
-//     switch (WholeScreen) {
-//     case WholeScreen:
-//         if(ui->radioButtonWhole->isChecked()){
+         switch (WholeScreen) {
+         case WholeScreen:
+             if(ui->radioButtonWholecapture->isChecked()){
 
-//                //CaptureWholeScreen();
-//             //m_formscreenshot = new FormScreenshots(0);
-//             connect(m_formscreenshot, SIGNAL(mousePressEvent(QMoveEvent *event(bool))),
-//                     this, SLOT(CaptureWholeScreen()));
+                    //CaptureWholeScreen();
+                 m_formScreenshots = new FormScreenshots(0);
 
-//             QTimer::singleShot(m_delayspinbox->value() * 3000,
-//                                this, SLOT(CaptureWholeScreen()));
-//         }
+                 QTimer::singleShot(m_delayspinbox->value() * 3000,
+                                    this, SLOT(CaptureWholeScreen()));
+             }
 
-//         break;
-//      case Region:
-//         if(ui->radioButtonRegion->isChecked()) {
+             break;
+         default:
+             close();
+             break;
+         }
 
-//               // CaptureRegion();
-//        //      m_formscreenshot = new FormScreenshots(0);
-//              connect(m_formscreenshot, SIGNAL(mouseMoveEvent()),
-//                      this, SLOT(CaptureRegion(bool,QRect)));
-
-//             connect(m_formscreenshot, SIGNAL(dimensionsMade(bool,QRect)),
-//                     this, SLOT(CaptureRegion(bool,QRect)));
-//             m_formscreenshot->show();
-//         }
-
-//         break;
-//     default:
-//         close();
-//         break;
-//     }
 }
+
+
 
 void FormScreenshots::CaptureWholeScreen()
 {
@@ -168,65 +143,51 @@ void FormScreenshots::CaptureWholeScreen()
      //The grabWindow() function grabs pixels from the screen, not from the window.
      m_pixmap = screen->grabWindow(0);
 }
-void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
-{
-    //code
 
 
-    // FormScreenshots *w = new FormScreenshots(this);
-
-    //connect(w, SIGNAL(InsertImageText(QString)),
-      //      this, SIGNAL(InsertImageText(QString)));
-
-     //
-   //  w->setBackgroundRole(m_pixmap);
-    // w->show();
-
-}
-
-void FormScreenshots::CaptureRegion(bool ok, QRect region)
-{
-    //m_formscreenshot->close();
-    if(ok)
-    {
-        m_region=region;
-        QTimer::singleShot(m_delayspinbox->value() * 3000, this,
-                           SLOT(CaptureRegion()));
-    }
-
-    QScreen *screen = QGuiApplication::primaryScreen();
-    if(const QWindow *window = windowHandle())
-        screen = window->screen();
-
-    if(!screen) return;
-    this->hide();
-
-    m_pixmap = screen->grabWindow(0);
-
-    QRect rec(m_region.x()+1,m_region.y()+1,m_region.width()-1,m_region.height()-1);
-    QPixmap pix=m_pixmap.copy(rec);
-    m_pixmap=pix;
-
-    FormScreenshots *w = new FormScreenshots(this);
-
-
-    connect(w,SIGNAL(InsertImageText(QString)),
-            this, SIGNAL(InsertImageText(QString)));
-
-  // w->setBackgroundRole(m_pixmap);
-    w->show();
-
-}
-
-//void FormScreenshots::mousePressEvent(QMouseEvent *event)
+//void FormScreenshots::CaptureRegion(bool ok, QRect region)
 //{
-//   //code: if m_point0 = m_point1 we get the whole screen.
-//    FormScreenshots::mousePressEvent(event);
+//    //m_formscreenshot->close();
+//    if(ok)
+//    {
+//        m_region=region;
+//        QTimer::singleShot(m_delayspinbox->value() * 3000, this,
+//                           SLOT(CaptureRegion()));
+//    }
 
-//    m_buttonpressed=true;
-//    m_point0=event->pos();
-//    m_point1=m_point0;
+//    QScreen *screen = QGuiApplication::primaryScreen();
+//    if(const QWindow *window = windowHandle())
+//        screen = window->screen();
+
+//    if(!screen) return;
+//    this->hide();
+
+//    m_pixmap = screen->grabWindow(0);
+
+//    QRect rec(m_region.x()+1,m_region.y()+1,m_region.width()-1,m_region.height()-1);
+//    QPixmap pix=m_pixmap.copy(rec);
+//    m_pixmap=pix;
+
+//    FormScreenshots *w = new FormScreenshots(this);
+
+
+//    connect(w,SIGNAL(InsertImageText(QString)),
+//            this, SIGNAL(InsertImageText(QString)));
+
+//  // w->setBackgroundRole(m_pixmap);
+//    w->show();
+
 //}
+
+void FormScreenshots::mousePressEvent(QMouseEvent *event)
+{
+   //code: if m_point0 = m_point1 we get the whole screen.
+    FormScreenshots::mousePressEvent(event);
+
+    m_buttonpressed=true;
+    m_point0=event->pos();
+    m_point1=m_point0;
+}
 
 void FormScreenshots::mouseMoveEvent(QMouseEvent *event)
 {
@@ -245,22 +206,18 @@ void FormScreenshots::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-//void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
-//{
-//    //code
-//    //FormScreenshots::mouseReleaseEvent(event);
+void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
+{
+    //code
+    //FormScreenshots::mouseReleaseEvent(event);
 
-//    emit mouseReleaseEvent();
+    emit mouseReleaseEvent();
 
-//    m_buttonpressed=false;
-//    emit dimensionsMade(true, m_region);
-//    close();
-//}
+    m_buttonpressed=false;
+    emit dimensionsMade(true, m_region);
+    close();
+}
 
-//void FormScreenshots::onMouseEvent(const QString &eventName, const QPoint &pos)
-//{
-
-//}
 
 void FormScreenshots::hide()
 {

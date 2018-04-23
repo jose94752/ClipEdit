@@ -14,8 +14,8 @@
 #include <QRect>
 #include <QPen>
 #include <QPainter>
-
 #include <QtMath>
+
 #include "arrowsgraphicsitem.h"
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
@@ -72,6 +72,7 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     QLineF line(sourcePoint, destPoint);
     painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
+
     double angle = qAtan2(-line.dy(), line.dx());
 
     QPointF sourceArrowP1 = sourcePoint + QPointF(qSin(angle + M_PI / 3) * 10, qCos(angle + M_PI / 3) * 10);
