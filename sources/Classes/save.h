@@ -3,8 +3,8 @@
 #include <QString>
 #include <QDomElement>
 #include "mainwindow.h"
-#include "../Items/picturesgraphicsitem.h"
-#include "../Items/textboxitem.h"
+#include "Items/picturesgraphicsitem.h"
+#include "Items/textboxitem.h"
 
 class Save
 {
