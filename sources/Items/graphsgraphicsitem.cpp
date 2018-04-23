@@ -56,8 +56,15 @@ void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     BaseGraphicItem::paint(painter, option, widget);
 
-    this->drawPie(painter, option, widget);
-
+    if(m_infos.m_type == 0)
+    {
+        this->drawPie(painter, option, widget);
+    }
+    else
+    {
+        if(m_infos.m_type == 1)
+            this->drawHisto(painter, option, widget);
+    }
 }
 
 
@@ -74,6 +81,7 @@ void  GraphsGraphicsItem::setInfos(const GraphsInfo& infos)
     qDebug() << "Set Infos";
 
     m_infos = infos;
+    m_rect = m_infos.m_boundingRect;
     setRect( QRectF(m_infos.m_boundingRect));
     qDebug() << "Set Infos title " << m_infos.m_title;
 }
@@ -188,3 +196,68 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
     BaseGraphicItem::paint(painter, option, widget);
 }
 
+
+
+void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+    qDebug() << "Draw Histo";
+
+    QColor col[] = {Qt::red, Qt::darkRed, Qt::green, Qt::darkGreen, Qt::blue, Qt::darkBlue, Qt::cyan,
+            Qt::darkCyan, Qt::magenta, Qt::darkMagenta, Qt::yellow, Qt::darkYellow,
+            Qt::gray, Qt::darkGray };
+
+    //m_infos.m_boundingRect = {-100,-100,200,200};
+
+    int nbPoints = m_infos.m_Arcs.size();
+    //QRectF pictRect = m_infos.m_boundingRect;
+    QRectF pictRect = m_rect;
+
+    QFont font("times", 14);
+    QFontMetrics fm(font);
+    //pictRect.setWidth(pictRect.width()-fm.width());
+    pictRect.setHeight(pictRect.height()-fm.height());
+
+    //Qt::NoBrush
+    Qt::BrushStyle style = Qt::SolidPattern; ;
+    if( m_infos.m_transparent)
+    {
+        style = Qt::NoBrush;
+
+    }
+    QBrush brush( m_infos.m_backColor, style);     //Qt::yellow
+
+    painter->setBackground(m_infos.m_backColor);
+    painter->fillRect( pictRect, brush);
+
+    int i = 0;
+    if( m_infos.m_transparent)
+    {
+        style = Qt::Dense3Pattern;
+
+    }
+
+   // int yAxe = pictRect.bottom();
+    int widLine = 10;
+    int space = 10;
+    for( i = 0; i < nbPoints; i++)
+    {
+        //QPen pen(0x059605);
+        QPen pen( col[i]);
+        pen.setWidth(0);
+        painter->setPen(pen);
+        //QBrush brush(0x059605);
+        QBrush brush( col[i], style);
+        painter->setBrush(brush);
+        QRect rect( pictRect.x()+i*(widLine+space), pictRect.bottomLeft().y()- m_infos.m_Arcs.at(i), widLine, m_infos.m_Arcs.at(i) );
+        painter->drawRect(rect);
+    }
+
+    QPen pen( m_infos.m_color);
+    painter->setPen(pen);
+    painter->setFont(font);
+
+    QPoint tp ( pictRect.x()+pictRect.width()/2 - fm.width( m_infos.m_title)/2, pictRect.bottomRight().y()+fm.height());
+    painter->drawText(tp, m_infos.m_title);
+
+    BaseGraphicItem::paint(painter, option, widget);
+}
