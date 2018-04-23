@@ -49,6 +49,31 @@ class ItemHandler;
 /// As a result, in your custom item boundingRect() method you can:
 ///     - Use the default implementation (return BaseGraphicsItem::boudingRect()) [RECOMMANDED]
 ///     - Use a custom implementation similar to what is done in BaseGraphicItem
+///
+/// Basic example:
+/// ==============
+///
+/// MyCustomItem::MyCustomItem(QGraphicsItem* parent) : BaseGraphicItem(parent)
+/// {
+///     // Let's fix a size here
+///     setRect(-50, -50, 100, 100);
+/// }
+///
+/// QRectF MyCustomItem::boundingRect() const
+/// {
+///     return BaseGraphicItem::boundingRect();
+/// }
+///
+/// void MyCustomItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+/// {
+///     // Insert your draw calls here
+///     // Make sure to draw inside m_rect (defined by the setRect method)
+///     painter->setRenderingHint(QPainter::Antialiasing);
+///     painter->drawLine(m_rect.topLeft(), m_rect.bottomRight());
+///
+///     // Call the base paint method to draw handlers on top of your item
+///     BaseGraphicItem::paint(painter, option, widget);
+/// }
 
 class BaseGraphicItem
     :   public QGraphicsItem

@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
         <file>icons/textbox-icon.png</file>
-        <file>icons/arrow-icon.png</file>
         <file>icons/chart-icon.png</file>
         <file>icons/numbered-bullet-icon.png</file>
         <file>icons/picture-icon.png</file>
@@ -20,6 +19,9 @@
         <file>icons/resize-icon.png</file>
         <file>icons/icon-clipedit.ico</file>
         <file>icons/icon-clipedit.png</file>
+        <file>icons/icon-align-centered.png</file>
+        <file>icons/icon-align-left.png</file>
+        <file>icons/icon-align-right.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>
