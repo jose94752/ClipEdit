@@ -8,7 +8,7 @@
 #include "../Items/picturesgraphicsitem.h"
 #include "../Items/textboxitem.h"
 #include "../Items/numberedbulletgraphicitem.h"
-
+#include "../Items/arrowsgraphicsitem.h"
 #define ImageGraphicsItem 65536
 #define TextBoxGraphicsItem 65537
 #define EdgeItem 65539
@@ -17,16 +17,24 @@
 
 QString Save::current_filename="";
 
+Save::Save(QGraphicsScene* v_scene,QString v_filename)
+{
+    current_filename=v_filename;
+    QList<QGraphicsItem *> l_list;
+    m_listItems=l_list;
+    m_scene=v_scene;
+}
+
 Save::Save(QList<QGraphicsItem *> v_listItems){
     m_listItems=v_listItems;
-    save();
+    m_scene=0;
 }
 
 Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
 {
     current_filename=filename;
     m_listItems=v_listItems;
-    save();
+    m_scene=0;
 }
 
 QString Save::verifyExtension(QString fileName)
@@ -56,6 +64,21 @@ void Save::getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem
 
 void Save::getTextBoxItem(TextBoxItem *textBoxItem){
     //qDebug()<<"text boxes";
+}
+
+void Save::getArrowGraphicsItem(ArrowsGraphicsItem *)
+{
+    //qDebug() arrows graphics items
+}
+
+void Save::getBulletsGraphicsItems(NumberedBulletGraphicItem *)
+{
+    //code
+}
+
+void Save::getPicturesGraphicsItems(PicturesGraphicsItem *)
+{
+    //code
 }
 
 int isValidIndex(int type){
@@ -104,10 +127,18 @@ void Save::save()
         }
 
         if(type==EdgeItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
-             getPicturesGraphicsItemData((PicturesGraphicsItem*)item);
+             getArrowGraphicsItem((ArrowsGraphicsItem*)item);
         }
 
-        if((type==ImageGraphicsItem || type==TextBoxGraphicsItem) && (x!=0 || y!=0 || width!=0 || height!=0)){
+        if(type==BulletsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            getBulletsGraphicsItems((NumberedBulletGraphicItem *)item);
+        }
+
+        if(type==PicturesItems  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            getPicturesGraphicsItems((PicturesGraphicsItem *)item);
+        }
+
+        if(type>65535 && (x!=0 || y!=0 || width!=0 || height!=0)){
             countItems++;
         }
     }

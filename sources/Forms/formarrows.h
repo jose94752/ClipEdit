@@ -41,8 +41,8 @@ class FormArrows
 
         // Method GetInfosArrows
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
-                            int ArrowWidth, int ArrowHeight,
-                            QColor ArrowOutlineColor, QColor ArrowFillColor);
+                            int &ArrowWidth, int &ArrowHeight,
+                            QColor &ArrowOutlineColor, QColor &ArrowFillColor);
                             //To do
                             // comboBoxThicknessOutlineLinesContents
                             // comboBoxHeadTypeChoiceContents
