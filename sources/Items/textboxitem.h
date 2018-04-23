@@ -29,7 +29,7 @@ class TextBoxItem
 
         // Constructors, destructor
         TextBoxItem(QGraphicsItem* parent = 0);
-        TextBoxItem(const QString& text, QGraphicsItem* parent = 0);
+        TextBoxItem(const QMap<QString, QVariant>& data, QGraphicsItem* parent = 0);
 
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
