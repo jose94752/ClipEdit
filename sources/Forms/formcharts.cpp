@@ -81,19 +81,31 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     for (int i = 0; i < sl.size(); ++i)
     {
        int arc = sl.at(i).toInt();
- //       infos.m_Arcs.append(arc);
+       infos.m_Arcs.append(arc);
     }
    // sl.
-
 }
+
+
 
  void FormCharts::createChart()
  {
      qDebug() << "charts" ;
 
-     //emit
+     GraphsInfo newGraphsInfo;
+     GetChartsValues( newGraphsInfo);
+
+     qDebug() << "charts"  << newGraphsInfo.m_title ;
+
+     emit FormCreateChart( newGraphsInfo);
 
  }
 
+/*
+ QPushButton *FormCharts::getGoPushButton()
+ {
+     return ui->qGo;
+ }
+*/
 
 
