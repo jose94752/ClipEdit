@@ -1,10 +1,10 @@
 /*
-================================================
+====================================================
 * File:         formpictures.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
-================================================
+* Brief:        Form to create PicturesGraphicsItem
+====================================================
 */
 
 #ifndef FORMPICTURES_H
@@ -26,10 +26,10 @@ namespace Ui
 // Class
 // -----
 
-class FormPictures: public QWidget
+class FormPictures
+    :   public QWidget
 {
     Q_OBJECT
-
 
     public:
 
@@ -38,17 +38,20 @@ class FormPictures: public QWidget
 
         ~FormPictures();
 
-       void getPictureValues(QString &path, int &height, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
+        void getPictureValues(QString &path, int &height, int &width, bool &grayscale, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
 
-public slots:
-    void chose_picture();
-private:
+    public slots:
+
+        void chose_picture();
+
+    private:
 
         // Ui
         Ui::FormPictures *ui;
 
-signals:
-        void ImageChoosen();
+    signals:
+
+        void imageChosen();
 
         void WidtChanged();
         void HeightChanged();

@@ -23,10 +23,11 @@
 // -----------
 
 ColorButton::ColorButton(QWidget* parent)
-    :   QToolButton(parent), m_color(Qt::black)
+    :   QPushButton(parent), m_color(Qt::black)
 {
    connect(this, SIGNAL(clicked(bool)), this, SLOT(pickColor(bool)));
-   setText("");
+   setText(" ");
+   setFixedWidth(50);
 }
 
 // Events
@@ -34,7 +35,7 @@ ColorButton::ColorButton(QWidget* parent)
 
 void ColorButton::paintEvent(QPaintEvent* event)
 {
-    QToolButton::paintEvent(event);
+    QPushButton::paintEvent(event);
 
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing);
@@ -43,7 +44,10 @@ void ColorButton::paintEvent(QPaintEvent* event)
     QPen pen(m_color);
     painter.setPen(pen);
     painter.setBrush(brush);
-    painter.drawEllipse(width()/6.0f, height()/8.0f, width() - 2*(width()/6.0f), height()- 2*(height()/8.0f));
+
+    QRect box = rect();
+    box.adjust(5, 5, -5, -5);
+    painter.fillRect(box, m_color);
 }
 
 // Getters and setters

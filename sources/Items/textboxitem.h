@@ -17,7 +17,7 @@
 
 #include <QGraphicsItem>
 
-#include "Items/basegraphicitem.h"
+#include "basegraphicitem.h"
 
 // Class
 // -----

@@ -37,19 +37,20 @@ SOURCES += \
     Forms/formpictures.cpp \
     Forms/formscreenshots.cpp \
     Forms/formtextboxes.cpp \
-    Classes/save.cpp \
     Forms/dialogfilealreadyexists.cpp \
+    Forms/resizescenedialog.cpp \
+    Forms/dialogsave.cpp \
+    Classes/save.cpp \
     Classes/colorbutton.cpp \
-    Classes/arrowsgraphicsitem.cpp \
-    Classes/graphsgraphicsitem.cpp \
-    textboxitem.cpp \
-    screenshotsgraphicsitem.cpp \
-    numberedbulletgraphicitem.cpp \
-    picturesgraphicsitem.cpp \
     Items/basegraphicitem.cpp \
     Items/itemhandler.cpp \
-    Forms/resizescenedialog.cpp \
-    Forms/dialogsave.cpp
+    Items/numberedbulletgraphicitem.cpp \
+    Items/picturesgraphicsitem.cpp \
+    Items/screenshotsgraphicsitem.cpp \
+    Items/textboxitem.cpp \
+    Items/arrowsgraphicsitem.cpp \
+    Items/graphsgraphicsitem.cpp
+
 
 HEADERS += \
     mainwindow.h \
@@ -61,19 +62,19 @@ HEADERS += \
     Forms/formpictures.h \
     Forms/formscreenshots.h \
     Forms/formtextboxes.h \
-    Classes/save.h \
+    Forms/resizescenedialog.h \
+    Forms/dialogsave.h \
     Forms/dialogfilealreadyexists.h \
+    Classes/save.h \
     Classes/colorbutton.h \
-    Classes/arrowsgraphicsitem.h \
-    Classes/graphsgraphicsitem.h \
-    textboxitem.h \
-    screenshotsgraphicsitem.h \
-    numberedbulletgraphicitem.h \
-    picturesgraphicsitem.h \
     Items/basegraphicitem.h \
     Items/itemhandler.h \
-    Forms/resizescenedialog.h \
-    Forms/dialogsave.h
+    Items/numberedbulletgraphicitem.h \
+    Items/picturesgraphicsitem.h \
+    Items/screenshotsgraphicsitem.h \
+    Items/textboxitem.h \
+    Items/arrowsgraphicsitem.h \
+    Items/graphsgraphicsitem.h
 
 
 FORMS += \
