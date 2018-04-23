@@ -37,7 +37,8 @@ public :
     QPointF m_yPoints[NUMBERPOINTS];
     QString m_legends[NUMBERPOINTS];
 
-    QPointF m_Arcs[NUMBERPOINTS];
+    QList<int> m_Arcs;
+    QStringList kk;
 
 };
 
