@@ -20,16 +20,9 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-<<<<<<< HEAD:sources/picturesgraphicsitem.cpp
 
-    ptr->getPictureValues   (path, height,width,shade_grey,trans,lg_txt,lg_font,lg_size,lg_color,lg_pos);
-
-
-    setRect(QRectF(0, 0, 300  , 300));
-=======
     ptr->getPictureValues(path, height, width, grayscale, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
     setRect(QRectF(0, 0, 2000, 2000));
->>>>>>> b433c96ad64c2f15f3ede207b4f041a16ca4a28c:sources/Items/picturesgraphicsitem.cpp
 }
 
 
@@ -49,33 +42,6 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
   //painter->drawText( QRectF (0,0, width, height),"coucou");
   // painter->(boundingRect(), m_picture);
 
-<<<<<<< HEAD:sources/picturesgraphicsitem.cpp
-
-      const QRect rectangle = QRect(0, 0, 100, 50);
-      QRect boundingRect;
-
-
-      painter->setFont(lg_font);
-
-      painter->drawText(rectangle, 0, lg_txt, &boundingRect);
-/*
-      QPen pen = painter->pen();
-      pen.setStyle(Qt::DotLine);
-      painter->setPen(pen);
-      painter->drawRect(boundingRect.adjusted(0, 0, -pen.width(), -pen.width()));
-
-      pen.setStyle(Qt::DashLine);
-      painter->setPen(pen);
-      painter->drawRect(rectangle.adjusted(0, 0, -pen.width(), -pen.width()));
-
-*/
-
-
-
-
-
-=======
->>>>>>> b433c96ad64c2f15f3ede207b4f041a16ca4a28c:sources/Items/picturesgraphicsitem.cpp
     BaseGraphicItem::paint(painter, option, widget);
 }
 

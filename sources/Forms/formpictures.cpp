@@ -42,12 +42,6 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom Center"));
     ui->comboBox_lg_pos->addItem(tr("Bottom Right"));
 
-<<<<<<< HEAD
-
-=======
-    ui->comboBox_lg_pos->addItem(tr("Left"));
-    ui->comboBox_lg_pos->addItem(tr("Right"));
->>>>>>> b433c96ad64c2f15f3ede207b4f041a16ca4a28c
 }
 
 
@@ -57,20 +51,6 @@ FormPictures::~FormPictures()
 }
 
 
-<<<<<<< HEAD
-void FormPictures::getPictureValues(QString &path,  int &height, int &width, int &shade_grey, int &trans, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos){
-
-    path       = ui->lineEdit_pic_path->text();
-     height     = ui->spinBox_pic_h->value();
-     width      = ui->spinBox_pic_w->value();
-     shade_grey = ui->spinBox_pic_sh->value();
-     trans      = ui->spinBox_pic_t->value();
-     lg_txt     = ui->lineEdit_lg_txt->text();
-     lg_font    = ui->fontComboBox_lg_font->currentFont();
-     lg_size    = ui->spinBox_lg_size->value();
-     lg_color   = ui->toolButton_color->getColor();
-     lg_pos     = ui->comboBox_lg_pos->currentText(); 
-=======
 void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &grayscale, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
 {
     path       = ui->lineEdit_pic_path->text();
@@ -83,7 +63,6 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
     lg_size    = ui->spinBox_lg_size->value();
     lg_color   = ui->toolButton_color->getColor();
     lg_pos     = ui->comboBox_lg_pos->currentText();
->>>>>>> b433c96ad64c2f15f3ede207b4f041a16ca4a28c
 
 }
 
