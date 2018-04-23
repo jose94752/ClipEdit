@@ -120,6 +120,8 @@ class BaseGraphicItem
 
         void setRect(const QRectF& rect);
 
+        //void QMap<QString,QVariant> getInfos()=0;
+
     protected:
 
         // Events
