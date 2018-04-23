@@ -47,6 +47,8 @@ class FormCharts
 
     void GetChartsValues( GraphsInfo &infos);
 
+public slots:
+    void createChart();
 private:
 
         Ui::FormCharts *ui;
