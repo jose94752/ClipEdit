@@ -157,7 +157,7 @@ private:
         ///
         /// \brief hide enables or disables the Hide The Window option.
         ///
-        void CaptureRegion(bool ok, QRect region);
+       // void CaptureRegion(bool ok, QRect region);
         void hide();
 
         ///
