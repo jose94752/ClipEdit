@@ -154,7 +154,7 @@
   <action name="actionArrow">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
-     <normaloff>:/icons/icons/arrow-icon.png</normaloff>:/icons/icons/arrow-icon.png</iconset>
+     <normaloff>:/icons/icons/arrow-icon-2.png</normaloff>:/icons/icons/arrow-icon-2.png</iconset>
    </property>
    <property name="text">
     <string>Arrow</string>
