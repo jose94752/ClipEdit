@@ -23,10 +23,6 @@ FormCharts::FormCharts(QWidget* parent)
     types << "Histogram" << "Pie" << "Area" << "Line";
     ui->qChartType->addItems(types);
 
-    //connect(ui->qGo, SIGNAL(clicked(bool)), this, )
-
-    //connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-
     connect(ui->qGo, SIGNAL(clicked(bool)), this, SLOT( createChart() ) );
 
 }
@@ -83,7 +79,6 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
        int arc = sl.at(i).toInt();
        infos.m_Arcs.append(arc);
     }
-   // sl.
 }
 
 
@@ -101,11 +96,5 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
  }
 
-/*
- QPushButton *FormCharts::getGoPushButton()
- {
-     return ui->qGo;
- }
-*/
 
 

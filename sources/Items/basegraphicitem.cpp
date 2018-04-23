@@ -190,6 +190,7 @@ void BaseGraphicItem::updateHandlers()
     if (!m_hasHandlers)
         return;
 
+
     // Fix what needs to be fixed
     if (m_rect.top() > m_rect.bottom())
     {
@@ -205,6 +206,7 @@ void BaseGraphicItem::updateHandlers()
         m_rect.setLeft(right);
         m_rect.setRight(left);
     }
+
 
     QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
     QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
@@ -273,8 +275,10 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
 
     if (isSelected())
     {
+        QBrush brush(Qt::NoBrush);
         QPen pen(Qt::blue);
         painter->setPen(pen);
+        painter->setBrush(brush);
         painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
         // Bounding rectangle
@@ -350,6 +354,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     if ((event->buttons() == Qt::LeftButton) && m_current)
     {
         prepareGeometryChange();
+
         switch(m_current->type())
         {
             case ItemHandler::HANDLER_TOP:
