@@ -3,7 +3,7 @@
 * File:         formlayers.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to create Layers
 ================================================
 */
 
@@ -13,7 +13,9 @@
 // Includes
 // --------
 
+#include <QLabel>
 #include <QWidget>
+#include <QGraphicsScene>
 
 // Forward Declaration
 namespace Ui
@@ -35,10 +37,31 @@ class FormLayers: public QWidget
 
         ~FormLayers();
 
+        void setScene(QGraphicsScene & scene);
+
     private:
 
         // Ui
         Ui::FormLayers *ui;
+
+        ///
+        /// \brief m_zvalue for each GraphicsItem
+        ///
+        qreal m_zvalue;
+
+        QLabel *Icon(QIcon icon);
+        ///
+        /// \brief ShowLayers : show the layers in layers stacked
+        ///
+        void ShowLayers();
+        ///
+        /// \brief updateLayers increment m_zvalue and update list of layerswidget
+        ///
+        void updateLayers();
+
+private:
+
+    QGraphicsScene * m_scene;
 
 };
 

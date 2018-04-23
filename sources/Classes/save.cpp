@@ -9,11 +9,6 @@
 #include "../Items/textboxitem.h"
 #include "../Items/numberedbulletgraphicitem.h"
 #include "../Items/arrowsgraphicsitem.h"
-#define ImageGraphicsItem 65536
-#define TextBoxGraphicsItem 65537
-#define EdgeItem 65539
-#define BulletsItem 65542
-#define PicturesItems 65538
 
 QString Save::current_filename="";
 

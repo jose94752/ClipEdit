@@ -17,21 +17,29 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
     //QFontMetrics fm(font);
     //int pixelsWide = fm.width("What's the width of this text?");
     //qDebug () << "\tnombre de bullet :" << nb_bullet << "\n";
-    QPoint center (10, 10); //milieu
-    QPoint textPos;
-    int rx (50), ry (rx), y (50);
+    //QPoint center (10, 10); //milieu
+    QPointF center (m_rect.center());
+    QPointF textPos;
+    //int rx (50), ry (rx), y (50);
+    int rx(m_rect.width()/2);
+    //int ry(m_rect.height()/3);
+    int ry (rx);
+    qDebug () << "m_bulletcolor == " << m_bulletcolor.name() << "\n";
     qpainter->setPen(m_bulletcolor);
     //qpainter->
     // pr tests
     //m_shape = NB_ROUNDEDRECTANGLE;
-    m_shape = NB_CIRCLE;
+    //m_shape = NB_CIRCLE;
     QString strnum;
     QRect rect;
+    int zoom (4);
     //m_font.setPixelSize (6* (m_taille >1?m_taille -1: 0));
-    m_font.setPixelSize (4* (m_taille >1?m_taille -1: 0));
+    //m_font.setPixelSize (4* (m_taille >1?m_taille -1: 0));
+    m_font.setPixelSize(zoom * m_taille);
     QFontMetrics fontmetrix (m_font);
     int strwidth (0), strheight;
     qpainter->setFont(m_font);
+    qpainter->setBrush(m_bulletcolor);
     {
         //qvar = num_bullet;
         switch (m_shape) {
@@ -44,6 +52,7 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
             break;
         case NB_ROUNDEDRECTANGLE :
             rect.setCoords(center.x() - rx, center.y() - ry, center.x() +rx, center.y() + ry);
+
             qpainter->drawRoundedRect(rect, 10, 10);
             break;
         default :
@@ -57,13 +66,14 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
         strnum = QString::number(m_num);
         strwidth = fontmetrix.width (strnum);
         strheight = fontmetrix.height();
-
+        qDebug () << "m_numbercolor == " << m_bulletcolor.name() << "\n";
+        qpainter->setPen(m_numbercolor);
         textPos.setX (center.x () - strwidth/2);
         textPos.setY (center.y () /*- strheight/2*/);
+        //textPos.setY (strheight > m_taille/2 ?)
         qpainter->drawText(textPos, strnum);
-
         //y += 2*ry;
-        center.setY(y);
+        //center.setY(y);
 
     }
     BaseGraphicItem::paint(qpainter, option, widget);
@@ -84,13 +94,18 @@ NumberedBulletGraphicItem::NumberedBulletGraphicItem(int num, shape_e bullet_sha
     //QFontMetrics qmf (m_font);
     eval_width (compwidth);
     eval_height (compheight);
+
+    compwidth *= m_taille;
+    compheight *= m_taille;
     qDebug () << "NB : compwidth == " << compwidth << "\n";
     qDebug () << "NB : compheigth == " << compheight << "\n";
     //...setRect
-    QPoint A (0, 0), D (compwidth, compheight);
-    QRectF qrectf(A, D);
-    setRect(qrectf);
-
+    QRectF qrect(0, 0, compwidth, compheight);
+    setRect(qrect);
+    //static QPointF pos (0, 0);
+    //static QPoint decal (100, 0);
+    //setPos()
+    //pos.operator +=(decal);
 }
 
 void NumberedBulletGraphicItem::eval_height(int& height) {

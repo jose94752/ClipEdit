@@ -40,13 +40,13 @@ class ArrowsGraphicsItem
         ArrowsGraphicsItem(FormArrows* ptrFormArrows, QGraphicsItem* parent = 0);
 
         // Constructor Without anchor point
-        //ArrowsGraphicsItem(QPointF *m_StartPositionItem, QPointF *m_EndPositionItem, QGraphicsItem *parent = 0);
+        //ArrowsGraphicsItem(FormArrows* ptrFormArrows, QPointF *m_StartPositionItem, QPointF *m_EndPositionItem, QGraphicsItem *parent = 0);
 
         // Constructor 1 anchor point and Object
-        //ArrowsGraphicsItem(QPointF *m_StartPositionItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
+        //ArrowsGraphicsItem(FormArrows* ptrFormArrows, QPointF *m_StartPositionItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
         // Constructor 2 anchors points
-        //ArrowsGraphicsItem(BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
+        //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
         // Overriding of the Type
         int type() const { return Type::ArrowGraphicsItem; }
@@ -67,10 +67,10 @@ class ArrowsGraphicsItem
         */
 
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
-                            int ArrowWidth, int ArrowHeight,
-                            QColor ArrowOutlineColor, QColor ArrowFillColor);
-                            //To do
-                            // comboBoxThicknessOutlineLinesContents
+                            int &ArrowWidth, int &ArrowHeight,
+                            QColor &ArrowOutlineColor, QColor &ArrowFillColor,
+                             int &LineThickness, int &SizeHeadTypeChoice);
+                            //To do others HeadTypeChoiceContents
                             // comboBoxHeadTypeChoiceContents
 
         void updateArrowPosition();
@@ -90,6 +90,8 @@ class ArrowsGraphicsItem
 
         int m_ArrowWidth;
         int m_ArrowHeight;
+
+        int m_LineThickness;
 
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;

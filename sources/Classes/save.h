@@ -17,6 +17,11 @@
 #include "Forms/formpictures.h"
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
+#define ImageGraphicsItem 65536
+#define TextBoxGraphicsItem 65537
+#define EdgeItem 65539
+#define BulletsItem 65542
+#define PicturesItems 65538
 
 class Save
 {

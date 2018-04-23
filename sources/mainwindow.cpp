@@ -92,6 +92,9 @@ void MainWindow::buildMenu()
 
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
 
+    //
+    connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
+
 }
 
 void MainWindow::buildToolBar()
@@ -158,7 +161,7 @@ void MainWindow::slotNew(bool)
     dialogSave.exec();
     ResizeSceneDialog scenedialog(this,&m_scene);
     scenedialog.exec();
-    foreach(QGraphicsItem *item,m_scene.items())
+    foreach(QGraphicsItem *item, m_scene.items())
     {
         m_scene.removeItem(item);
     }
@@ -170,16 +173,19 @@ void MainWindow::slotNumberedBullets()
   qDebug() << "\tdans slot NumberedBullets\n" ;
   int from (0), to (0), taille (0);
   int shape (0);
-  QColor buttoncolor, numbercolor;
+  QColor bulletcolor, numbercolor;
   QFont qfont;
-  m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
-  int numbullet (0);
+  m_formBullets.get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
+  int numbullet (from);
+  qreal posx (0), posy (50), delta (100);
   for (; numbullet != to+1; ++numbullet) {
-    numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
+    numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
+    numberedBulletGraphicItem->setPos(posx, posy);
     m_scene.addItem(numberedBulletGraphicItem);
+    posx += delta;
   }
 }
 
@@ -235,6 +241,13 @@ void MainWindow::slotArrowsGraphicsItem()
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(&m_formArrows);
     m_scene.addItem(ArrowItem);
 
+}
+
+void MainWindow::slotLayers()
+{
+//    qDebug() << "MainWindow::slotLayers()" ;
+
+    m_formLayers.setScene(m_scene);
 }
 
 
