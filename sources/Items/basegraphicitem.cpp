@@ -271,10 +271,6 @@ void BaseGraphicItem::restrictPositions()
         if (m_rect.left() > m_rect.right())
             m_rect.setRight(m_rect.left());
     }
-
-    // Emergency edit
-    if (!m_rect.isValid())
-        m_rect.adjust(1,1,1,1);
 }
 
 // Pure virtual methods override
