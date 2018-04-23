@@ -81,7 +81,7 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     for (int i = 0; i < sl.size(); ++i)
     {
        int arc = sl.at(i).toInt();
-       infos.m_Arcs.append(arc);
+ //       infos.m_Arcs.append(arc);
     }
    // sl.
 

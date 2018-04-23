@@ -17,7 +17,7 @@
 #include <QColor>
 
 
-#include "Classes/graphsgraphicsitem.h"
+#include "../Items/graphsgraphicsitem.h"
 
 
 // Forward Declaration
