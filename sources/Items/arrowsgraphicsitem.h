@@ -67,10 +67,10 @@ class ArrowsGraphicsItem
         */
 
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
-                            int ArrowWidth, int ArrowHeight,
-                            QColor ArrowOutlineColor, QColor ArrowFillColor);
+                            int &ArrowWidth, int &ArrowHeight,
+                            QColor &ArrowOutlineColor, QColor &ArrowFillColor,
+                             int &LineThickness);
                             //To do
-                            // comboBoxThicknessOutlineLinesContents
                             // comboBoxHeadTypeChoiceContents
 
         void updateArrowPosition();
@@ -90,6 +90,8 @@ class ArrowsGraphicsItem
 
         int m_ArrowWidth;
         int m_ArrowHeight;
+
+        int m_LineThickness;
 
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;
