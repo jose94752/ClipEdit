@@ -39,13 +39,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< HEAD
-     <width>516</width>
-     <height>22</height>
-=======
      <width>439</width>
      <height>21</height>
->>>>>>> eb4b02ad596d4b9c1c47509320e890b9b2e6be8c
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
