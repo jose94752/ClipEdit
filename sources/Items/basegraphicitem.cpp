@@ -151,6 +151,11 @@ void BaseGraphicItem::setRect(const QRectF& rect)
     updateHandlers();
 }
 
+void BaseGraphicItem::setNuLayer(int nuLayer)
+{
+    m_nuLayer = nuLayer;
+}
+
 // Handlers
 // --------
 
@@ -240,6 +245,34 @@ void BaseGraphicItem::updateHandlers()
     }
 }
 
+void BaseGraphicItem::restrictPositions()
+{
+    if (!m_current)
+        return;
+
+    if (m_current->type() & ItemHandler::HANDLER_TOP)
+    {
+        if (m_rect.top() > m_rect.bottom())
+            m_rect.setTop(m_rect.bottom());
+    }
+    else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+    {
+        if (m_rect.top() > m_rect.bottom())
+            m_rect.setBottom(m_rect.top());
+    }
+
+    if (m_current->type() & ItemHandler::HANDLER_LEFT)
+    {
+        if (m_rect.left() > m_rect.right())
+            m_rect.setLeft(m_rect.right());
+    }
+    else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+    {
+        if (m_rect.left() > m_rect.right())
+            m_rect.setRight(m_rect.left());
+    }
+}
+
 // Pure virtual methods override
 // -----------------------------
 
@@ -257,8 +290,10 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
 
     if (isSelected())
     {
+        QBrush brush(Qt::NoBrush);
         QPen pen(Qt::blue);
         painter->setPen(pen);
+        painter->setBrush(brush);
         painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
         // Bounding rectangle
@@ -297,6 +332,37 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
     }
 }
 
+// Shape
+// -----
+
+QPainterPath BaseGraphicItem::shape() const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    if (this->isSelected())
+    {
+        foreach (ItemHandler* handle, m_handlers)
+        {
+            switch (handle->shape())
+            {
+                case ItemHandler::HANDLER_SQUARE:
+                {
+                    path.addRect(handle->boundingRect());
+                } break;
+                case ItemHandler::HANDLER_CIRCLE:
+                {
+                    path.addEllipse(handle->boundingRect());
+                } break;
+            }
+        }
+    }
+
+    path.addRect(m_rect);
+    return path;
+}
+
+
 // Events
 // ------
 
@@ -334,6 +400,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     if ((event->buttons() == Qt::LeftButton) && m_current)
     {
         prepareGeometryChange();
+
         switch(m_current->type())
         {
             case ItemHandler::HANDLER_TOP:
@@ -385,6 +452,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         }
 
         // Now we need to update the handlers position
+        restrictPositions();
         updateHandlers();
 
         update();

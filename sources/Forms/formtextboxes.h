@@ -16,6 +16,8 @@
 #include <QWidget>
 #include <QMap>
 
+class QPushButton;
+
 // Forward Declaration
 namespace Ui
 {
@@ -38,7 +40,7 @@ class FormTextBoxes
         ~FormTextBoxes();
 
         // Getters
-        QString getText() const;
+        const QPushButton* getAddButton();
         QMap<QString, QVariant> getInfos();
 
     private:

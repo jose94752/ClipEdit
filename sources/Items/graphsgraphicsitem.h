@@ -24,41 +24,31 @@
 // Defines
 // -------
 
-#define NUMBERPOINTS  200
-
-
-/*
-int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
-                            QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight,
-                            int &vScale, int &vRotate
-
-*/
+//#define NUMBERPOINTS  200
 
 // Classes
 // -------
 
 class GraphsInfo
 {
-    public:
+public :
+    QString m_title;
+    QRectF m_boundingRect;
+    QColor m_backColor;
+    QColor m_color;
+    QString m_xAxes;
+    QString m_yAxes;
+    int m_type;
 
-        QString m_title;
-        QRectF m_boundingRect;
-        QColor m_backColor;
-        QColor m_color;
-        QString m_xAxes;
-        QString m_yAxes;
-        int m_type;
-        int m_nbPoints;
-        int m_rotate;
-        int m_scale;
-        QPointF m_xPoints[NUMBERPOINTS];
-        QPointF m_yPoints[NUMBERPOINTS];
-        QString m_legends[NUMBERPOINTS];
+    bool m_transparent;
+    //int m_nbPoints;
+    //QPointF m_xPoints[NUMBERPOINTS];
+    //QPointF m_yPoints[NUMBERPOINTS];
+    //QString m_legends[NUMBERPOINTS];
 
-        QPointF m_Arcs[NUMBERPOINTS];
+    QList<int> m_Arcs;
 
 };
-
 
 class GraphsGraphicsItem
     :   public BaseGraphicItem
@@ -77,12 +67,13 @@ class GraphsGraphicsItem
         // Getters and setters
         void setInfos(const GraphsInfo& infos);
 
-        // Drawing
-        void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-
     private:
 
         GraphsInfo m_infos;
+
+        // Drawing
+        void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        void drawHisto(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif

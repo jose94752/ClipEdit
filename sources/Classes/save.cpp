@@ -9,11 +9,6 @@
 #include "../Items/textboxitem.h"
 #include "../Items/numberedbulletgraphicitem.h"
 #include "../Items/arrowsgraphicsitem.h"
-#define ImageGraphicsItem 65536
-#define TextBoxGraphicsItem 65537
-#define EdgeItem 65539
-#define BulletsItem 65542
-#define PicturesItems 65538
 
 QString Save::current_filename="";
 
@@ -81,6 +76,18 @@ void Save::getPicturesGraphicsItems(PicturesGraphicsItem *)
     //code
 }
 
+void Save::setFormsPoints(FormArrows *f1, FormCharts *f2, FormCliparts *f3, FormLayers *f4, FormNumberedBullets *f5, FormPictures *f6, FormScreenshots *f7, FormTextBoxes *f8)
+{
+    m_formArrows=f1;
+    m_formCharts=f2;
+    m_formCliparts=f3;
+    m_formLayers=f4;
+    m_formBullets=f5;
+    m_formPicture=f6;
+    m_formScreenshots=f7;
+    m_formTextBoxes=f8;
+}
+
 int isValidIndex(int type){
     int res=0;
     if(type==ImageGraphicsItem){
@@ -142,5 +149,44 @@ void Save::save()
             countItems++;
         }
     }
-    settings.setValue("nbItems",QString::number(countItems));
+    settings.setValue("nbItems",countItems);
+}
+
+void Save::open()
+{
+    int i;
+    QSettings settings(current_filename,QSettings::IniFormat);
+    countItems=settings.value("nbItems").toInt();
+    qDebug()<<QString::number(countItems);
+    for(i=0;i<countItems;i++){
+        QVariant varType=settings.value(QString("item").append(QString::number(i)).append("/type"));
+        QVariant varX=settings.value(QString("item").append(QString::number(i)).append("/rectF/x"));
+        QVariant varY=settings.value(QString("item").append(QString::number(i)).append("/rectF/y"));
+        QVariant varWidth=settings.value(QString("item").append(QString::number(i)).append("/rectF/width"));
+        QVariant varHeight=settings.value(QString("item").append(QString::number(i)).append("/rectF/height"));
+        int type=varType.toInt();
+        double x=varX.toDouble();
+        double y=varY.toDouble();
+        double width=varWidth.toDouble();
+        double height=varHeight.toDouble();
+        QRectF rect(x,y,width,height);
+        if(type==ImageGraphicsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             //PicturesGraphicsItem *picture=new PicturesGraphicsItem();
+        }
+        if(type==TextBoxGraphicsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             //getTextBoxItem((TextBoxItem*)item);
+        }
+
+        if(type==EdgeItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+             //getArrowGraphicsItem((ArrowsGraphicsItem*)item);
+        }
+
+        if(type==BulletsItem  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            //getBulletsGraphicsItems((NumberedBulletGraphicItem *)item);
+        }
+
+        if(type==PicturesItems  && (x!=0 || y!=0 || width!=0 || height!=0)){
+            //getPicturesGraphicsItems((PicturesGraphicsItem *)item);
+        }
+    }
 }

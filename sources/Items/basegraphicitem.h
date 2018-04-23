@@ -101,9 +101,15 @@ class BaseGraphicItem
         virtual QRectF boundingRect() const;
         virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
+        // Shape - Improvement for click selection
+        virtual QPainterPath shape() const;
+
         // Type of the item
         // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
+
+        // Item information for storage
+        //QMap<QString, QVariant> infos() = 0;
 
         // Getters and setters
         bool hasHandlers() const;
@@ -119,13 +125,13 @@ class BaseGraphicItem
         void setHeightForRotationHandler(int height);
 
         void setRect(const QRectF& rect);
+        void setNuLayer(int nuLayer);
 
         //void QMap<QString,QVariant> getInfos()=0;
 
     protected:
 
         // Events
-        //QVariant itemChange(GraphicsItemChange change, const QVariant& value);
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
@@ -133,6 +139,7 @@ class BaseGraphicItem
         // Handlers methods
         void createHandlers();
         void updateHandlers();
+        void restrictPositions();
 
         // Handlers properties
         QList<ItemHandler*> m_handlers;
@@ -140,11 +147,13 @@ class BaseGraphicItem
         int m_handlerSize;
         int m_heightForRotationHandler;
 
-        // Bounding rect (use the setter to modify it)
+        // Bounding rect (use the setRect to modify it)
         QRectF m_rect;
         bool m_drawBoundingRect;
 
     private:
+
+        int m_nuLayer;
 
         ItemHandler* m_current;
 };
