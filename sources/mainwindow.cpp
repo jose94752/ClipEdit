@@ -268,6 +268,6 @@ void MainWindow::showAboutDialog(bool)
                         "" + tr("A simple document editor") + "<br>"
                         "" + tr("Developed by the M2I Team") + "<br>"
                         "Copyright (c) 2018";
-    QMessageBox::about(this, tr("About ClipEdit"), content);
+    QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
 }
 
