@@ -171,7 +171,7 @@ void FormScreenshots::CaptureWholeScreen()
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
 {
     //code
-}
+
 
      FormScreenshots *w = new FormScreenshots(this);
 
