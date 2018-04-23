@@ -34,6 +34,12 @@ FormArrows::FormArrows(QWidget *parent)
     ui->spinBoxArrowHeightContents->setMinimumHeight(20);
     ui->spinBoxArrowHeightContents->setMaximum(500);
 
+    // Fill the Size of the Thickness outline
+     for(int i = 1; i < 5; i++)
+     {
+         ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
+     }
+
     // Get start default color Qt::black on the Class ColorButton we use others Colors
     ui->toolButtonOutlineColorContents->setColor(Qt::darkCyan);
     ui->toolButtonFillColorContents->setColor(Qt::darkBlue);
@@ -64,9 +70,9 @@ FormArrows::~FormArrows()
 // Method GetInfosArrows
 void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                                 int &ArrowWidth, int &ArrowHeight,
-                                QColor &ArrowOutlineColor, QColor &ArrowFillColor)
+                                QColor &ArrowOutlineColor, QColor &ArrowFillColor,
+                                int &LineThickness)
                                 //To do
-                                // comboBoxThicknessOutlineLinesContents
                                 // comboBoxHeadTypeChoiceContents
 {
    WithoutAnchorPoint = ui->radioButtonWithoutAnchorPoint->isChecked();
@@ -79,8 +85,11 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
    ArrowOutlineColor = ui->toolButtonOutlineColorContents->getColor();
    ArrowFillColor = ui->toolButtonFillColorContents->getColor();
 
+   LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+   //qDebug() << "LineThicknessContents = " << LineThicknessContents;
+   LineThickness = LineThicknessContents;
+
    //To do
-   // comboBoxThicknessOutlineLinesContents
    // comboBoxHeadTypeChoiceContents
 
 }
