@@ -34,10 +34,16 @@ FormArrows::FormArrows(QWidget *parent)
     ui->spinBoxArrowHeightContents->setMinimumHeight(20);
     ui->spinBoxArrowHeightContents->setMaximum(500);
 
-    // Fill the Size of the Thickness outline
+    // Fill the Size of the Line Thickness
      for(int i = 1; i < 5; i++)
      {
          ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
+     }
+
+     // Fill the Simple Arrow Head size 10 to 50
+     for (int i = 10; i < 51; i++)
+     {
+        ui->comboBoxHeadTypeChoiceContents->addItem("Simple Arrow Head size " + QString::number(i));
      }
 
     // Get start default color Qt::black on the Class ColorButton we use others Colors
@@ -52,8 +58,6 @@ FormArrows::FormArrows(QWidget *parent)
 
     BeforeFormOutlineColorArrow = FormOutlineColorArrow;
     BeforeFormFillColorArrow = FormFillColorArrow;
-
-    //ui->comboBoxThicknessOutlineLinesContents->;
 
     // End default values of FormArrows
 
@@ -71,8 +75,8 @@ FormArrows::~FormArrows()
 void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                                 int &ArrowWidth, int &ArrowHeight,
                                 QColor &ArrowOutlineColor, QColor &ArrowFillColor,
-                                int &LineThickness)
-                                //To do
+                                int &LineThickness, int &SizeHeadTypeChoice)
+                                //To do others HeadTypeChoiceContents
                                 // comboBoxHeadTypeChoiceContents
 {
    WithoutAnchorPoint = ui->radioButtonWithoutAnchorPoint->isChecked();
@@ -89,8 +93,11 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
    //qDebug() << "LineThicknessContents = " << LineThicknessContents;
    LineThickness = LineThicknessContents;
 
-   //To do
+   //To do others HeadTypeChoiceContents
    // comboBoxHeadTypeChoiceContents
+   SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
+   //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
+   SizeHeadTypeChoice = SizeHeadTypeChoiceContents;
 
 }
 

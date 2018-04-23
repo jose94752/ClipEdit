@@ -152,8 +152,8 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                                         int &ArrowWidth, int &ArrowHeight,
                                         QColor &ArrowOutlineColor, QColor &ArrowFillColor,
-                                        int &LineThickness)
-                                        //To do
+                                        int &LineThickness, int &SizeHeadTypeChoice)
+                                        //To do others HeadTypeChoiceContents
                                         // comboBoxHeadTypeChoiceContents
 {
     m_WithoutAnchorPoint = WithoutAnchorPoint;
