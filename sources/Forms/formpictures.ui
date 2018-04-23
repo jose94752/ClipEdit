@@ -242,7 +242,11 @@
            <widget class="QFontComboBox" name="fontComboBox_lg_font"/>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox_lg_size"/>
+           <widget class="QSpinBox" name="spinBox_lg_size">
+            <property name="minimum">
+             <number>6</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="ColorButton" name="toolButton_color">

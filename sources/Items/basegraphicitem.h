@@ -49,6 +49,31 @@ class ItemHandler;
 /// As a result, in your custom item boundingRect() method you can:
 ///     - Use the default implementation (return BaseGraphicsItem::boudingRect()) [RECOMMANDED]
 ///     - Use a custom implementation similar to what is done in BaseGraphicItem
+///
+/// Basic example:
+/// ==============
+///
+/// MyCustomItem::MyCustomItem(QGraphicsItem* parent) : BaseGraphicItem(parent)
+/// {
+///     // Let's fix a size here
+///     setRect(-50, -50, 100, 100);
+/// }
+///
+/// QRectF MyCustomItem::boundingRect() const
+/// {
+///     return BaseGraphicItem::boundingRect();
+/// }
+///
+/// void MyCustomItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+/// {
+///     // Insert your draw calls here
+///     // Make sure to draw inside m_rect (defined by the setRect method)
+///     painter->setRenderingHint(QPainter::Antialiasing);
+///     painter->drawLine(m_rect.topLeft(), m_rect.bottomRight());
+///
+///     // Call the base paint method to draw handlers on top of your item
+///     BaseGraphicItem::paint(painter, option, widget);
+/// }
 
 class BaseGraphicItem
     :   public QGraphicsItem
@@ -76,9 +101,15 @@ class BaseGraphicItem
         virtual QRectF boundingRect() const;
         virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
+        // Shape - Improvement for click selection
+        virtual QPainterPath shape() const;
+
         // Type of the item
         // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
+
+        // Item information for storage
+        //QMap<QString, QVariant> infos() = 0;
 
         // Getters and setters
         bool hasHandlers() const;
@@ -94,11 +125,13 @@ class BaseGraphicItem
         void setHeightForRotationHandler(int height);
 
         void setRect(const QRectF& rect);
+        void setNuLayer(int nuLayer);
+
+        //void QMap<QString,QVariant> getInfos()=0;
 
     protected:
 
         // Events
-        //QVariant itemChange(GraphicsItemChange change, const QVariant& value);
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
@@ -106,6 +139,7 @@ class BaseGraphicItem
         // Handlers methods
         void createHandlers();
         void updateHandlers();
+        void restrictPositions();
 
         // Handlers properties
         QList<ItemHandler*> m_handlers;
@@ -113,11 +147,13 @@ class BaseGraphicItem
         int m_handlerSize;
         int m_heightForRotationHandler;
 
-        // Bounding rect (use the setter to modify it)
+        // Bounding rect (use the setRect to modify it)
         QRectF m_rect;
         bool m_drawBoundingRect;
 
     private:
+
+        int m_nuLayer;
 
         ItemHandler* m_current;
 };

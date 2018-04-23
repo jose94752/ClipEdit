@@ -104,13 +104,14 @@ private:
         void slotNew(bool);
         void showAboutDialog(bool);
 
-        // SLOTS TEST GRAPHIC ITEM INSERTION
+        // Item insertions
         void slotNumberedBullets();
-        void slotTextBoxes();
+        void slotTextBoxes(bool);
         void slotTextPicture();
-        void slotGraphs();
-        void slotArrowsGraphicsItem();
+        void slotGraphs(const GraphsInfo &infos);
+        void slotArrowsGraphicsItem();        
 
+        void slotLayers();
 };
 
 #endif

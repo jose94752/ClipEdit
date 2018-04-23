@@ -25,8 +25,13 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->toolButtonBackgroundColor->setColor(Qt::white);
-    ui->toolButtonTextColor->setColor(Qt::black);
+    ui->pushButtonBackgroundColor->setColor(Qt::white);
+    ui->pushButtonTextColor->setColor(Qt::black);
+
+    // Build alignment combobox
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-left.png"), tr("Left"), Qt::AlignLeft);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-right.png"), tr("Right"), Qt::AlignRight);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-centered.png"), tr("Centered"), Qt::AlignHCenter);
 }
 
 FormTextBoxes::~FormTextBoxes()
@@ -37,6 +42,11 @@ FormTextBoxes::~FormTextBoxes()
 // Getters
 // -------
 
+const QPushButton* FormTextBoxes::getAddButton()
+{
+    return ui->pushButtonAdd;
+}
+
 QMap<QString, QVariant> FormTextBoxes::getInfos()
 {
     QMap<QString, QVariant> res;
@@ -46,18 +56,15 @@ QMap<QString, QVariant> FormTextBoxes::getInfos()
     font.setBold(ui->checkBoxBold->isChecked());
     font.setItalic(ui->checkBoxItalic->isChecked());
 
-    int alignment = 0;
-    if (ui->radioButtonLeft->isChecked())
-        alignment = Qt::AlignCenter;
-    else if (ui->radioButtonRight->isChecked())
-        alignment = Qt::AlignLeft;
-    else if (ui->radioButtonCentered)
-        alignment = Qt::AlignHCenter;
-
     res.insert("text", ui->plainTextEdit->toPlainText());
     res.insert("font", font.toString());
-    res.insert("alignment", alignment);
-    // TO CONTINUE
+    res.insert("alignment", ui->comboBoxAlignment->currentData());
+    res.insert("background-color", ui->pushButtonBackgroundColor->getColor().name());
+    res.insert("font-color", ui->pushButtonTextColor->getColor().name());
+    res.insert("border-color", ui->pushButtonBorderColor->getColor().name());
+    res.insert("border-visible", ui->checkBoxHasBorders->isChecked());
+    res.insert("border-width", ui->spinBoxBorderWidth->value());
+    res.insert("border-radius", ui->spinBoxBorderRadius->value());
 
     return res;
 }

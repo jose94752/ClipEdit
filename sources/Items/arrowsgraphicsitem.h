@@ -12,6 +12,7 @@
 #define ARROWSGRAPHICSITEM_H
 
 #include "basegraphicitem.h"
+#include "../Forms/formarrows.h"
 #include <QGraphicsItem>
 #include <QRectF>
 #include <QPainter>
@@ -36,16 +37,16 @@ class ArrowsGraphicsItem
 
         // Construtor Test
         //ArrowsGraphicsItem(BaseGraphicItem *parent = 0);
-        ArrowsGraphicsItem(QGraphicsItem* parent = 0);
+        ArrowsGraphicsItem(FormArrows* ptrFormArrows, QGraphicsItem* parent = 0);
 
         // Constructor Without anchor point
-        //ArrowsGraphicsItem(QPointF *m_StartPositionItem, QPointF *m_EndPositionItem, QGraphicsItem *parent = 0);
+        //ArrowsGraphicsItem(FormArrows* ptrFormArrows, QPointF *m_StartPositionItem, QPointF *m_EndPositionItem, QGraphicsItem *parent = 0);
 
         // Constructor 1 anchor point and Object
-        //ArrowsGraphicsItem(QPointF *m_StartPositionItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
+        //ArrowsGraphicsItem(FormArrows* ptrFormArrows, QPointF *m_StartPositionItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
         // Constructor 2 anchors points
-        //ArrowsGraphicsItem(BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
+        //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
         // Overriding of the Type
         int type() const { return Type::ArrowGraphicsItem; }
@@ -65,6 +66,13 @@ class ArrowsGraphicsItem
         BaseGraphicItem *endItem() const { return m_EndItem; }
         */
 
+        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
+                            int &ArrowWidth, int &ArrowHeight,
+                            QColor &ArrowOutlineColor, QColor &ArrowFillColor,
+                             int &LineThickness, int &SizeHeadTypeChoice);
+                            //To do others HeadTypeChoiceContents
+                            // comboBoxHeadTypeChoiceContents
+
         void updateArrowPosition();
 
 
@@ -76,20 +84,29 @@ class ArrowsGraphicsItem
 
     private:
 
+        bool m_WithoutAnchorPoint;
+        bool m_OneAnchorPoint;
+        bool m_TwoAnchorPoints;
+
+        int m_ArrowWidth;
+        int m_ArrowHeight;
+
+        int m_LineThickness;
+
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;
 
-    //    QPointF *m_StartPositionItem;
-    //    QPointF *m_EndPositionItem;
+        QPointF *m_StartPositionItem;
+        QPointF *m_EndPositionItem;
 
-    //    QColor ItemOutlineColorArrow;
-    //    QColor ItemFillColorArrow;
+        QColor *ItemOutlineColorArrow;
+        QColor *ItemFillColorArrow;
 
-    //    QPolygonF ArrowHeadStart;
-    //    QPolygonF ArrowHeadEnd;
+        QPolygonF ArrowHeadStart;
+        QPolygonF ArrowHeadEnd;
 
 
-       // QColor myColor; // Temp for test
+        QColor m_Color; // Temp for test
 
     private slots:
 

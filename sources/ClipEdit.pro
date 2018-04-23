@@ -49,7 +49,8 @@ SOURCES += \
     Items/screenshotsgraphicsitem.cpp \
     Items/textboxitem.cpp \
     Items/arrowsgraphicsitem.cpp \
-    Items/graphsgraphicsitem.cpp
+    Items/graphsgraphicsitem.cpp \
+    Classes/layers.cpp
 
 
 HEADERS += \
@@ -74,7 +75,8 @@ HEADERS += \
     Items/screenshotsgraphicsitem.h \
     Items/textboxitem.h \
     Items/arrowsgraphicsitem.h \
-    Items/graphsgraphicsitem.h
+    Items/graphsgraphicsitem.h \
+    Classes/layers.h
 
 
 FORMS += \
