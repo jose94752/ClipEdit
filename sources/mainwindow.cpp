@@ -175,12 +175,14 @@ void MainWindow::slotNumberedBullets()
   QColor buttoncolor, numbercolor;
   QFont qfont;
   m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
-
+  int numbullet (0);
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
-  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
-  m_scene.addItem(numberedBulletGraphicItem);
+  for (; numbullet != to+1; ++numbullet) {
+    numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
+    m_scene.addItem(numberedBulletGraphicItem);
+  }
 }
 
 void MainWindow::slotTextBoxes()
