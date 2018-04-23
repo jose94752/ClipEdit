@@ -3,7 +3,7 @@
 * File:         formtextboxes.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to create text boxes
 ================================================
 */
 
@@ -14,14 +14,13 @@
 // --------
 
 #include <QWidget>
-
+#include <QMap>
 
 // Forward Declaration
 namespace Ui
 {
     class FormTextBoxes;
 }
-
 
 // Class
 // -----
@@ -40,9 +39,7 @@ class FormTextBoxes
 
         // Getters
         QString getText() const;
-        QString getFontFamily() const;
-        int getFontPointSize() const;
-
+        QMap<QString, QVariant> getInfos();
 
     private:
 

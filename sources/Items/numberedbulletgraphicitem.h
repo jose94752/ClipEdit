@@ -5,8 +5,11 @@
 #include <qfont.h>
 #include <qpainter.h>
 #include <QGraphicsEllipseItem>
-#include "Items/basegraphicitem.h"
 #include <qrect.h>
+
+#include "basegraphicitem.h"
+
+
 class NumberedBulletGraphicItem : public BaseGraphicItem
 {
 public:

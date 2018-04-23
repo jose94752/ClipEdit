@@ -3,7 +3,7 @@
 * File:         formtextboxes.cpp
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to manage text boxes
 ================================================
 */
 
@@ -37,17 +37,27 @@ FormTextBoxes::~FormTextBoxes()
 // Getters
 // -------
 
-QString FormTextBoxes::getText() const
+QMap<QString, QVariant> FormTextBoxes::getInfos()
 {
-    return ui->plainTextEdit->toPlainText();
-}
+    QMap<QString, QVariant> res;
+    QFont font;
+    font.setFamily(ui->fontComboBox->currentText());
+    font.setPointSize(ui->spinBoxPointSize->value());
+    font.setBold(ui->checkBoxBold->isChecked());
+    font.setItalic(ui->checkBoxItalic->isChecked());
 
-QString FormTextBoxes::getFontFamily() const
-{
-    return ui->fontComboBox->currentText();
-}
+    int alignment = 0;
+    if (ui->radioButtonLeft->isChecked())
+        alignment = Qt::AlignCenter;
+    else if (ui->radioButtonRight->isChecked())
+        alignment = Qt::AlignLeft;
+    else if (ui->radioButtonCentered)
+        alignment = Qt::AlignHCenter;
 
-int FormTextBoxes::getFontPointSize() const
-{
-    return ui->spinBoxPointSize->value();
+    res.insert("text", ui->plainTextEdit->toPlainText());
+    res.insert("font", font.toString());
+    res.insert("alignment", alignment);
+    // TO CONTINUE
+
+    return res;
 }

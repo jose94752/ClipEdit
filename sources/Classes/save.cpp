@@ -4,8 +4,8 @@
 #include <QGraphicsItem>
 #include <QRectF>
 #include <mainwindow.h>
-#include "picturesgraphicsitem.h"
-#include "textboxitem.h"
+#include "../Items/picturesgraphicsitem.h"
+#include "../Items/textboxitem.h"
 
 #define ImageGraphicsItem 65536
 #define TextBoxGraphicsItem 65537
@@ -27,13 +27,22 @@ Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
 QString Save::verifyExtension(QString fileName)
 {
     QStringList strlist=fileName.split(".");
-    if(strlist[strlist.size()-1]!="ini"){
+    if(strlist[strlist.size()-1]!="cle"){
         if(fileName[fileName.size()-1]!='.'){
             fileName=fileName.append(".");
         }
-        fileName=fileName.append("ini");
+        fileName=fileName.append("cle");
     }
     return fileName;
+}
+
+bool Save::fileNameExists()
+{
+    if(current_filename==""){
+        return false;
+    }else{
+        return true;
+    }
 }
 
 void Save::getPicturesGraphicsItemData(PicturesGraphicsItem *pictureGraphicsItem){

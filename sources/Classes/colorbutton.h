@@ -13,7 +13,7 @@
 // Includes
 // --------
 
-#include <QToolButton>
+#include <QPushButton>
 #include <QWidget>
 #include <QColor>
 
@@ -21,7 +21,7 @@
 // -----
 
 class ColorButton
-    :   public QToolButton
+    :   public QPushButton
 {
     Q_OBJECT
 

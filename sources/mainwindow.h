@@ -29,7 +29,7 @@
 #include "Forms/formpictures.h"
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
-#include "numberedbulletgraphicitem.h"
+#include "Items/numberedbulletgraphicitem.h"
 
 // Forward declaration
 namespace Ui
@@ -102,6 +102,7 @@ private:
         void actionClicked(bool);
         void resizeTold(bool);
         void slotNew(bool);
+        void showAboutDialog(bool);
 
         // SLOTS TEST GRAPHIC ITEM INSERTION
         void slotNumberedBullets();
