@@ -50,6 +50,9 @@ private:
 signals:
         void ImageChoosen();
 
+        void WidtChanged();
+        void HeightChanged();
+
 };
 
 #endif

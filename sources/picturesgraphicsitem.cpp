@@ -11,7 +11,7 @@ PicturesGraphicsItem::PicturesGraphicsItem( FormPictures *ptr,QGraphicsItem* par
     ptr->getPictureValues   (path, height,width,shade_grey,trans,lg_txt,lg_font,lg_size,lg_color,lg_pos);
 
 
-    setRect(QRectF(0, 0, 2000, 2000));
+    setRect(QRectF(0, 0, 300  , 300));
 }
 
 
@@ -31,6 +31,28 @@ void PicturesGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
   painter->drawPixmap( 0, 0, width, height,path);
   //painter->drawText( QRectF (0,0, width, height),"coucou");
   // painter->(boundingRect(), m_picture);
+
+
+      const QRect rectangle = QRect(0, 0, 100, 50);
+      QRect boundingRect;
+
+
+      painter->setFont(lg_font);
+
+      painter->drawText(rectangle, 0, lg_txt, &boundingRect);
+/*
+      QPen pen = painter->pen();
+      pen.setStyle(Qt::DotLine);
+      painter->setPen(pen);
+      painter->drawRect(boundingRect.adjusted(0, 0, -pen.width(), -pen.width()));
+
+      pen.setStyle(Qt::DashLine);
+      painter->setPen(pen);
+      painter->drawRect(rectangle.adjusted(0, 0, -pen.width(), -pen.width()));
+
+*/
+
+
 
 
 
