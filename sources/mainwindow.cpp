@@ -238,13 +238,18 @@ void MainWindow::exportView(bool)
 
 void MainWindow::openFile(bool)
 {
-    // To do
+    QString fileName = QFileDialog::getOpenFileName(this,
+          tr("Open ClipEdit Project"), "/home", tr("ClipEdit Files (*.cle)"));
+    if(fileName!=""){
+        Save save(&m_scene,fileName);
+    }
 }
 
 
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
+    save.save();
 }
 
 
@@ -260,6 +265,7 @@ void MainWindow::saveAs(bool)
         }else{
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(),extfilename);
+            save.save();
         }
     }
 }
