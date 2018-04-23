@@ -59,14 +59,14 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //Go QPushButton
     //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
    // this, SLOT(Capture()));
-    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-            this, SLOT(Capture()));
+//    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
+//            this, SLOT(Capture()));
 
-    connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
-            this, SLOT(CaptureRegion()));
+//    connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
+//            this, SLOT(CaptureRegion()));
 
-    connect(ui->radioButtonWhole, SIGNAL(clicked(bool)),
-            this, SLOT(CaptureWholeScreen()));
+//    connect(ui->radioButtonWhole, SIGNAL(clicked(bool)),
+//            this, SLOT(CaptureWholeScreen()));
 
 
 
@@ -79,15 +79,15 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
 
 
-    ui->spinBox->setSuffix(" s "); //OK it works
-    ui->spinBox->setMaximum(60);   //idem
+    ui->spinBoxDelay->setSuffix(" s "); //OK it works
+    ui->spinBoxDelay->setMaximum(60);   //idem
 
     //connect pour tempo: option
   //  connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(Capture()));
 
     //connect for cancel button: hide this window: OK
-    connect(ui->checkBox, SIGNAL(clicked(bool)),
-            this, SLOT(hide()));
+//    connect(ui->checkBox, SIGNAL(clicked(bool)),
+//            this, SLOT(hide()));
 
     //OK
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
@@ -116,6 +116,8 @@ FormScreenshots::~FormScreenshots()
 
 
 void FormScreenshots::Capture()
+{
+}
 
 void FormScreenshots::mousePressEvent(QMouseEvent *ev)
 
@@ -124,11 +126,11 @@ void FormScreenshots::mousePressEvent(QMouseEvent *ev)
 
      switch (WholeScreen) {
      case WholeScreen:
-         if(ui->radioButtonWhole->isChecked()){
+         if(ui->checkBoxWholeScreen->isChecked()){
 
                 //CaptureWholeScreen();
-             m_formscreenshot = new FormScreenshots(0);
-             connect(m_formscreenshot, SIGNAL(mousePressEvent(QMoveEvent *event(bool))),
+             m_formScreenshots = new FormScreenshots(0);
+             connect(m_formScreenshots, SIGNAL(mousePressEvent(QMoveEvent *event(bool))),
                      this, SLOT(CaptureWholeScreen()));
 
              QTimer::singleShot(m_delayspinbox->value() * 3000,
@@ -136,18 +138,18 @@ void FormScreenshots::mousePressEvent(QMouseEvent *ev)
          }
 
          break;
-      case Region:
-         if(ui->radioButtonRegion->isChecked()) {
+//      case Region:
+//         if(ui->radioButtonRegion->isChecked()) {
 
-               // CaptureRegion();
-              m_formscreenshot = new FormScreenshots(0);
-              connect(m_formscreenshot, SIGNAL(mouseMoveEvent()),
-                      this, SLOT(CaptureRegion(bool,QRect)));
+//               // CaptureRegion();
+//              m_formscreenshot = new FormScreenshots(0);
+//              connect(m_formscreenshot, SIGNAL(mouseMoveEvent()),
+//                      this, SLOT(CaptureRegion(bool,QRect)));
 
-             connect(m_formscreenshot, SIGNAL(dimensionsMade(bool,QRect)),
-                     this, SLOT(CaptureRegion(bool,QRect)));
-             m_formscreenshot->show();
-         }
+//             connect(m_formscreenshot, SIGNAL(dimensionsMade(bool,QRect)),
+//                     this, SLOT(CaptureRegion(bool,QRect)));
+//             m_formscreenshot->show();
+//         }
 
          break;
      default:
@@ -171,7 +173,6 @@ void FormScreenshots::CaptureWholeScreen()
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
 {
     //code
-}
 
      FormScreenshots *w = new FormScreenshots(this);
 
@@ -186,7 +187,7 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
 
 void FormScreenshots::CaptureRegion(bool ok, QRect region)
 {
-    m_formscreenshot->close();
+    m_formScreenshots->close();
     if(ok)
     {
         m_region=region;
