@@ -42,8 +42,6 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom Center"));
     ui->comboBox_lg_pos->addItem(tr("Bottom Right"));
 
-    ui->comboBox_lg_pos->addItem(tr("Left"));
-    ui->comboBox_lg_pos->addItem(tr("Right"));
 }
 
 
@@ -73,7 +71,6 @@ void FormPictures::chose_picture()
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), "/home/formation/Images/image_01.jpeg", tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
 
-
     QPixmap file_image (fileName);
 
     int h;
@@ -82,9 +79,6 @@ void FormPictures::chose_picture()
      h = file_image.height();
      w = file_image.width();
      s = fileName;
-
-
-
 
      ui->spinBox_pic_h->setValue(h);
      ui->spinBox_pic_w->setValue(w);

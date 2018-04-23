@@ -108,9 +108,8 @@ private:
         void slotNumberedBullets();
         void slotTextBoxes(bool);
         void slotTextPicture();
-        void slotGraphs();
-        void slotArrowsGraphicsItem();
-
+        void slotGraphs(const GraphsInfo &infos);
+        void slotArrowsGraphicsItem();        
 };
 
 #endif
