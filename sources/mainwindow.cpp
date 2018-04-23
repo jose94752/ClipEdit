@@ -222,7 +222,8 @@ void MainWindow::slotArrowsGraphicsItem()
     //          we need 2 objects of scene
     //m_scene.addItem(new ArrowsGraphicsItem());
 
-    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem();
+    // Define new ArrowsGraphicsItem on the scene
+    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(&m_formArrows);
     m_scene.addItem(ArrowItem);
 
 }
