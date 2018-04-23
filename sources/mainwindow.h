@@ -109,7 +109,7 @@ private:
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
-        void slotArrowsGraphicsItem();        
+        void slotArrowsGraphicsItem();
 };
 
 #endif

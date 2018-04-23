@@ -286,4 +286,3 @@ void MainWindow::showAboutDialog(bool)
                         "Copyright (c) 2018";
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
 }
-
