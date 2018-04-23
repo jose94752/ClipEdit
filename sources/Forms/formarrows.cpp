@@ -52,12 +52,8 @@ FormArrows::FormArrows(QWidget *parent)
     // End default values of FormArrows
 
     // Connects for change color of the FormArrow
-    connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(bool)),this,SLOT(OutlineColorArrowChange()));
-    connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(bool)),this,SLOT(FillColorArrowChange()));
-
-    // Connects for pushButtonChangeOutlineColor and pushButtonChangeFillColor
-    connect(ui->pushButtonChangeOutlineColor,SIGNAL(clicked(bool)),this,SLOT(ClickOnpushButtonChangeOutlineColor(bool)));
-    connect(ui->pushButtonChangeFillColor,SIGNAL(clicked(bool)),this,SLOT(ClickOnpushButtonChangeFillColor(bool)));
+    connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(outlineColorArrowChanged(QColor)));
+    connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
 }
 
 FormArrows::~FormArrows()
@@ -89,26 +85,17 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
 
 }
 
-void FormArrows::FillColorArrowChanged()
+void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
-    FormFillColorArrow = ui->toolButtonFillColorContents->getColor();
+    FormFillColorArrow = color;
     emit FormFillColorArrowChanged(FormFillColorArrow);
 }
 
-void FormArrows::OutlineColorArrowChanged()
+void FormArrows::outlineColorArrowChanged(const QColor& color)
 {
     BeforeFormOutlineColorArrow = FormOutlineColorArrow;
-    FormOutlineColorArrow = ui->toolButtonOutlineColorContents->getColor();
+    FormOutlineColorArrow = color;
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
-void FormArrows::ClickOnpushButtonChangeOutlineColor(bool)
-{
-    ui->toolButtonOutlineColorContents->click();
-}
-
-void FormArrows::ClickOnpushButtonChangeFillColor(bool)
-{
-    ui->toolButtonFillColorContents->click();
-}

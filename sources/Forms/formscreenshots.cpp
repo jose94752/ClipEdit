@@ -1,9 +1,9 @@
 /*
 ================================================
-* File:         formforms.cpp
+* File:         formscreenshots.cpp
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
+* Brief:        Form to manage sceenshots capture
 ================================================
 */
 
@@ -29,8 +29,8 @@
 // Constructor, destructor
 // -----------------------
 
-FormScreenshots::FormScreenshots(QWidget* parent) :
-    QWidget(parent), ui(new Ui::FormScreenshots)
+FormScreenshots::FormScreenshots(QWidget* parent)
+    :   QWidget(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
 
@@ -93,6 +93,15 @@ FormScreenshots::FormScreenshots(QWidget* parent) :
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 
+    //connect first signal
+    connect(ui->pushButtonGo, SIGNAL(clicked(bool)), this, SLOT(Capture()));
+
+    // connect delay
+    connect(ui->spinBoxDelay, SIGNAL(valueChanged(int)), this, SLOT(hide()));
+
+    connect(ui->checkBoxHideWindow, SIGNAL(clicked(bool)),
+           this, SLOT(update()));
+
 }
 
 
@@ -107,6 +116,9 @@ FormScreenshots::~FormScreenshots()
 
 
 void FormScreenshots::Capture()
+
+void FormScreenshots::mousePressEvent(QMouseEvent *ev)
+
 {
      enum TypeCapture { WholeScreen, Region };
 
@@ -155,6 +167,11 @@ void FormScreenshots::CaptureWholeScreen()
 
      //The grabWindow() function grabs pixels from the screen, not from the window.
      m_pixmap = screen->grabWindow(0);
+}
+void FormScreenshots::mouseReleaseEvent(QMouseEvent *ev)
+{
+    //code
+}
 
      FormScreenshots *w = new FormScreenshots(this);
 

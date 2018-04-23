@@ -1,10 +1,10 @@
 /*
-================================================
+=================================================
 * File:         formscreenshots.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
-================================================
+* Brief:        Form to manage sceenshots capture
+=================================================
 */
 
 #ifndef FORMSCREENSHOOTS_H

@@ -28,7 +28,7 @@
       </font>
      </property>
      <property name="text">
-      <string>TextBox</string>
+      <string>TextBoxes</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -191,7 +191,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="labelBorders">
         <property name="text">
          <string>&amp;Borders</string>
@@ -201,7 +201,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="3" column="1">
        <widget class="QCheckBox" name="checkBox">
         <property name="text">
          <string>Visible</string>
@@ -211,18 +211,18 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Round &amp;radius</string>
+         <string>Border &amp;radius</string>
         </property>
         <property name="buddy">
-         <cstring>spinBox</cstring>
+         <cstring>spinBoxBorderRadius</cstring>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QSpinBox" name="spinBox">
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="spinBoxBorderRadius">
         <property name="suffix">
          <string>px</string>
         </property>
@@ -231,18 +231,21 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="4" column="0">
+       <widget class="QLabel" name="labelBorderWidth">
         <property name="text">
          <string>Border &amp;width</string>
         </property>
         <property name="buddy">
-         <cstring>spinBox_2</cstring>
+         <cstring>spinBoxBorderWidth</cstring>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="spinBox_2">
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="spinBoxBorderWidth">
+        <property name="suffix">
+         <string>px</string>
+        </property>
         <property name="minimum">
          <number>1</number>
         </property>
@@ -260,6 +263,23 @@
       </item>
       <item row="1" column="1">
        <widget class="ColorButton" name="toolButtonTextColor">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelBorderColor">
+        <property name="text">
+         <string>B&amp;order color</string>
+        </property>
+        <property name="buddy">
+         <cstring>toolButtonBorderColor</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="ColorButton" name="toolButtonBorderColor">
         <property name="text">
          <string>...</string>
         </property>
