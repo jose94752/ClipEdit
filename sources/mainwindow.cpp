@@ -166,15 +166,15 @@ void MainWindow::slotNumberedBullets()
   qDebug() << "\tdans slot NumberedBullets\n" ;
   int from (0), to (0), taille (0);
   int shape (0);
-  QColor buttoncolor, numbercolor;
+  QColor bulletcolor, numbercolor;
   QFont qfont;
-  m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
+  m_formBullets.get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
   int numbullet (0);
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
   for (; numbullet != to+1; ++numbullet) {
-    numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
+    numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
     m_scene.addItem(numberedBulletGraphicItem);
   }
 }

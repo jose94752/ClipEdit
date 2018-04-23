@@ -20,6 +20,7 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
     QPoint center (10, 10); //milieu
     QPoint textPos;
     int rx (50), ry (rx), y (50);
+    qDebug () << "m_bulletcolor == " << m_bulletcolor.name() << "\n";
     qpainter->setPen(m_bulletcolor);
     //qpainter->
     // pr tests
@@ -57,11 +58,11 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
         strnum = QString::number(m_num);
         strwidth = fontmetrix.width (strnum);
         strheight = fontmetrix.height();
-
+        qDebug () << "m_numbercolor == " << m_bulletcolor.name() << "\n";
+        qpainter->setPen(m_numbercolor);
         textPos.setX (center.x () - strwidth/2);
         textPos.setY (center.y () /*- strheight/2*/);
         qpainter->drawText(textPos, strnum);
-
         //y += 2*ry;
         center.setY(y);
 
