@@ -42,9 +42,9 @@ class FormArrows
         // Method GetInfosArrows
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,
-                            QColor &ArrowOutlineColor, QColor &ArrowFillColor);
+                            QColor &ArrowOutlineColor, QColor &ArrowFillColor,
+                            int &LineThickness);
                             //To do
-                            // comboBoxThicknessOutlineLinesContents
                             // comboBoxHeadTypeChoiceContents
     private:
 
@@ -74,8 +74,9 @@ class FormArrows
         int DefaultFormArrowHeight;
         QPolygonF DefaultFormArrowHeadType;
 
+        int LineThicknessContents;
+
         //To do
-        // comboBoxThicknessOutlineLinesContents
         // comboBoxHeadTypeChoiceContents
 
     private slots:
