@@ -14,6 +14,8 @@
 #include <QRect>
 #include <QPen>
 #include <QPainter>
+#include <QColor>
+
 #include <QtMath>
 
 #include "arrowsgraphicsitem.h"
@@ -21,9 +23,10 @@
 #include "ui_mainwindow.h"
 
 
-ArrowsGraphicsItem::ArrowsGraphicsItem(QGraphicsItem *parent)
+ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
+
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
@@ -44,9 +47,12 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(QGraphicsItem *parent)
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_m_EndPositionItem =  endItem.{à définir}scenePos();
 
-   // myColor = Qt::black; // Temp for test
+   m_Color = Qt::black; // Temp for test
 
-    setRect(QRectF(-50, -50, 100, 100));
+   //ItemOutlineColorArrow = new QColor(Qt::black); // For test you must use a color because the default new QColor(); constructor Constructs an invalid color with the RGB value (0, 0, 0).
+
+
+    setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 }
 
 
@@ -63,29 +69,107 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     // Je pense pas que tu en as besoin d'ailleurs, shape() ça sert surtout à redéfinir une forme plus précise pour ton item, notamment quand tu veux faire de la
     // détection de collision / click, la forme de base étant un rectangle. Après tu peux le faire si tu veux hein !
 
-
+    // Example
+    /*
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
     QPointF sourcePoint = m_rect.topLeft(); // Test
     QPointF destPoint = m_rect.bottomRight(); // Test
-
     QLineF line(sourcePoint, destPoint);
     painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
-
     double angle = qAtan2(-line.dy(), line.dx());
-
     QPointF sourceArrowP1 = sourcePoint + QPointF(qSin(angle + M_PI / 3) * 10, qCos(angle + M_PI / 3) * 10);
     QPointF sourceArrowP2 = sourcePoint + QPointF(qSin(angle + M_PI - M_PI / 3) * 10, qCos(angle + M_PI - M_PI / 3) * 10);
     QPointF destArrowP1 = destPoint + QPointF(qSin(angle - M_PI / 3) * 10, qCos(angle - M_PI / 3) * 10);
     QPointF destArrowP2 = destPoint + QPointF(qSin(angle - M_PI + M_PI / 3) * 10, qCos(angle - M_PI + M_PI / 3) * 10);
-
     painter->setBrush(Qt::black);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
+    */
+    // End Example
+
+
+
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->save();
+
+    m_StartPositionItem = new QPointF();
+    *m_StartPositionItem = m_rect.topLeft(); // Test
+    m_EndPositionItem = new QPointF();
+    *m_EndPositionItem = m_rect.bottomRight(); // Test
+
+    //m_Color = Qt::black; // Test
+
+    // Testing if you have at least the StartPosition and EndPositionItem is one missing
+    // we return and nothing is display.
+    if (!m_StartPositionItem || !m_EndPositionItem)
+        return;
+
+    // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
+    if (m_StartPositionItem->x() >= m_EndPositionItem->x())
+            m_EndPositionItem->setX(m_StartPositionItem->x());
+    if (m_StartPositionItem->y() >= m_EndPositionItem->y())
+            m_EndPositionItem->setY(m_StartPositionItem->y());
+
+    // Draw the line
+    QLineF line(*m_StartPositionItem, *m_EndPositionItem);
+
+    // Check the length line if is approximately 0 then we return and nothing is display.
+    if (qFuzzyCompare(line.length(), qreal(0.)))
+        return;
+
+    // Draw the line (next step)
+    painter->setPen(QPen(m_Color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->drawLine(line);
+
+    // Draw the arrows
+    double angle = qAtan2(-line.dy(), line.dx());
+
+    int arrowSize = 10;
+
+    QPointF sourceArrowP1 = *m_StartPositionItem + QPointF(qSin(angle + M_PI / 3) * arrowSize,
+                                                           qCos(angle + M_PI / 3) * arrowSize);
+    QPointF sourceArrowP2 = *m_StartPositionItem + QPointF(qSin(angle + M_PI - M_PI / 3) * arrowSize,
+                                                           qCos(angle + M_PI - M_PI / 3) * arrowSize);
+    QPointF destArrowP1 = *m_EndPositionItem + QPointF(qSin(angle - M_PI / 3) * arrowSize,
+                                                       qCos(angle - M_PI / 3) * arrowSize);
+    QPointF destArrowP2 = *m_EndPositionItem + QPointF(qSin(angle - M_PI + M_PI / 3) * arrowSize,
+                                                       qCos(angle - M_PI + M_PI / 3) * arrowSize);
+
+    painter->setBrush(m_Color);
+    painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
+    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
+    painter->restore();
+
+
+
 
     BaseGraphicItem::paint(painter,option,widget);
+}
+
+void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
+                                        int ArrowWidth, int ArrowHeight,
+                                        QColor ArrowOutlineColor, QColor ArrowFillColor)
+                                        //To do
+                                        // comboBoxThicknessOutlineLinesContents
+                                        // comboBoxHeadTypeChoiceContents
+{
+    m_WithoutAnchorPoint = WithoutAnchorPoint;
+    m_OneAnchorPoint = OneAnchorPoint;
+    m_TwoAnchorPoints = TwoAnchorPoints;
+
+    m_ArrowWidth  = ArrowWidth;
+    m_ArrowHeight = ArrowHeight;
+
+    ItemOutlineColorArrow = new QColor(ArrowOutlineColor);
+    ItemFillColorArrow = new QColor(ArrowFillColor);
+
+    //To do
+    // comboBoxThicknessOutlineLinesContents
+    // comboBoxHeadTypeChoiceContents
+
 }
 
 void ArrowsGraphicsItem::updateArrowPosition()

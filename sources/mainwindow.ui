@@ -166,7 +166,7 @@
   <action name="actionChart">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
-     <normaloff>:/icons/icons/chart-icon.png</normaloff>:/icons/icons/chart-icon.png</iconset>
+     <normaloff>:/icons/icons/chart-icon-2.png</normaloff>:/icons/icons/chart-icon-2.png</iconset>
    </property>
    <property name="text">
     <string>Chart</string>
