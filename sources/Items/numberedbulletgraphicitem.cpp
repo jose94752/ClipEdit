@@ -29,19 +29,21 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
     //qpainter->
     // pr tests
     //m_shape = NB_ROUNDEDRECTANGLE;
-    m_shape = NB_CIRCLE;
+    //m_shape = NB_CIRCLE;
     QString strnum;
     QRect rect;
+    int zoom (4);
     //m_font.setPixelSize (6* (m_taille >1?m_taille -1: 0));
-    m_font.setPixelSize (4* (m_taille >1?m_taille -1: 0));
+    //m_font.setPixelSize (4* (m_taille >1?m_taille -1: 0));
+    m_font.setPixelSize(zoom * m_taille);
     QFontMetrics fontmetrix (m_font);
     int strwidth (0), strheight;
     qpainter->setFont(m_font);
+    qpainter->setBrush(m_bulletcolor);
     {
         //qvar = num_bullet;
         switch (m_shape) {
         case NB_CIRCLE :
-            qpainter->setBrush(m_bulletcolor);
             qpainter->drawEllipse(center, rx, ry);
             break;
         case NB_RECTANGLE :
@@ -50,6 +52,7 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
             break;
         case NB_ROUNDEDRECTANGLE :
             rect.setCoords(center.x() - rx, center.y() - ry, center.x() +rx, center.y() + ry);
+
             qpainter->drawRoundedRect(rect, 10, 10);
             break;
         default :
