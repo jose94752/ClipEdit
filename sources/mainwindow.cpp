@@ -86,8 +86,11 @@ void MainWindow::buildMenu()
     connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
     connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
-    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+//    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
+
+    connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+
 }
 
 void MainWindow::buildToolBar()
@@ -169,12 +172,14 @@ void MainWindow::slotNumberedBullets()
   QColor buttoncolor, numbercolor;
   QFont qfont;
   m_formBullets.get_info(from, to, taille,  shape, buttoncolor, numbercolor, qfont);
-
+  int numbullet (0);
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
-  numberedBulletGraphicItem = new NumberedBulletGraphicItem (from, to, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
-  m_scene.addItem(numberedBulletGraphicItem);
+  for (; numbullet != to+1; ++numbullet) {
+    numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, buttoncolor, numbercolor, qfont, taille);
+    m_scene.addItem(numberedBulletGraphicItem);
+  }
 }
 
 void MainWindow::slotTextBoxes()
@@ -195,8 +200,10 @@ void MainWindow::slotTextPicture()
 }
 
 
-void MainWindow::slotGraphs()
+void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
+    qDebug () << "mainWindow Slot Graphs";
+
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
 
@@ -207,6 +214,10 @@ void MainWindow::slotGraphs()
 //    g->setInfos(infos);
 //    m_scene.addItem(g);
 
+    GraphsGraphicsItem *g = new GraphsGraphicsItem();
+    g->setInfos(infos);
+
+    m_scene.addItem(g);
 }
 
 
@@ -237,13 +248,18 @@ void MainWindow::exportView(bool)
 
 void MainWindow::openFile(bool)
 {
-    // To do
+    QString fileName = QFileDialog::getOpenFileName(this,
+          tr("Open ClipEdit Project"), "/home", tr("ClipEdit Files (*.cle)"));
+    if(fileName!=""){
+        Save save(&m_scene,fileName);
+    }
 }
 
 
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
+    save.save();
 }
 
 
@@ -259,6 +275,7 @@ void MainWindow::saveAs(bool)
         }else{
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(),extfilename);
+            save.save();
         }
     }
 }

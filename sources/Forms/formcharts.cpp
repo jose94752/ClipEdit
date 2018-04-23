@@ -9,6 +9,8 @@
 ================================================
 */
 
+#include "QDebug"
+
 #include "formcharts.h"
 #include "ui_formcharts.h"
 
@@ -21,9 +23,11 @@ FormCharts::FormCharts(QWidget* parent)
     types << "Histogram" << "Pie" << "Area" << "Line";
     ui->qChartType->addItems(types);
 
-
     //connect(ui->qGo, SIGNAL(clicked(bool)), this, )
+
     //connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
+
+    connect(ui->qGo, SIGNAL(clicked(bool)), this, SLOT( createChart() ) );
 
 }
 
@@ -70,4 +74,38 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     //vWidth = ui->qWidth->value();
     //vHeight = ui->qHeight->value();
     infos.m_boundingRect.setRect(0,0, ui->qWidth->value(), ui->qHeight->value());
+
+    QString val = ui->qData->text();
+    QStringList sl = val.split(",");
+
+    for (int i = 0; i < sl.size(); ++i)
+    {
+       int arc = sl.at(i).toInt();
+       infos.m_Arcs.append(arc);
+    }
+   // sl.
 }
+
+
+
+ void FormCharts::createChart()
+ {
+     qDebug() << "charts" ;
+
+     GraphsInfo newGraphsInfo;
+     GetChartsValues( newGraphsInfo);
+
+     qDebug() << "charts"  << newGraphsInfo.m_title ;
+
+     emit FormCreateChart( newGraphsInfo);
+
+ }
+
+/*
+ QPushButton *FormCharts::getGoPushButton()
+ {
+     return ui->qGo;
+ }
+*/
+
+

@@ -76,17 +76,17 @@ protected:
     /// \brief mousePressEvent
     /// \param event
     ///
-    void mousePressEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event);
     ///
     /// \brief mouseMoveEvent
     /// \param event
     ///
-    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) ;
     ///
     /// \brief mouseReleaseEvent
     /// \param event
     ///
-    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event);
 
 
 private:
@@ -149,7 +149,7 @@ private:
         ///
         /// \brief Capture : capture slot in WholeScreen and window
         ///
-     //   void Capture();
+        void Capture();
         ///
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
@@ -157,7 +157,7 @@ private:
         ///
         /// \brief hide enables or disables the Hide The Window option.
         ///
-        void CaptureRegion(bool ok, QRect region);
+       // void CaptureRegion(bool ok, QRect region);
         void hide();
 
         ///
