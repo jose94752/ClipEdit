@@ -82,11 +82,12 @@ void MainWindow::buildMenu()
 
     ui->actionSave->setDisabled(true);
 
-    // INSERT YOUR GRAPHIC ITEMS SLOT HERE
-    connect(ui->actionTextBox, SIGNAL(triggered(bool)), this, SLOT(slotTextBoxes()));
+    // Item insertion connects
     connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
-//    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
+    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    //connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
 
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
@@ -182,14 +183,11 @@ void MainWindow::slotNumberedBullets()
   }
 }
 
-void MainWindow::slotTextBoxes()
+void MainWindow::slotTextBoxes(bool)
 {
-    // Retrieve information from the textboxform
-//    QString text = m_formTextboxes.getText();
-//    m_formTextboxes.
-
-//    if (!text.isEmpty())
-//        m_scene.addItem(new TextBoxItem(text));
+    // Retrieve data from the form
+    QMap<QString, QVariant> data = m_formTextboxes.getInfos();
+    m_scene.addItem(new TextBoxItem(data));
 }
 
 void MainWindow::slotTextPicture()
