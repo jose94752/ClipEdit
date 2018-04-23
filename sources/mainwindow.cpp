@@ -91,6 +91,9 @@ void MainWindow::buildMenu()
 
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
 
+    //
+    connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
+
 }
 
 void MainWindow::buildToolBar()
@@ -157,7 +160,7 @@ void MainWindow::slotNew(bool)
     dialogSave.exec();
     ResizeSceneDialog scenedialog(this,&m_scene);
     scenedialog.exec();
-    foreach(QGraphicsItem *item,m_scene.items())
+    foreach(QGraphicsItem *item, m_scene.items())
     {
         m_scene.removeItem(item);
     }
@@ -237,6 +240,13 @@ void MainWindow::slotArrowsGraphicsItem()
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(&m_formArrows);
     m_scene.addItem(ArrowItem);
 
+}
+
+void MainWindow::slotLayers()
+{
+//    qDebug() << "MainWindow::slotLayers()" ;
+
+    m_formLayers.setScene(m_scene);
 }
 
 
