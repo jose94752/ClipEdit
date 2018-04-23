@@ -151,6 +151,11 @@ void BaseGraphicItem::setRect(const QRectF& rect)
     updateHandlers();
 }
 
+void BaseGraphicItem::setNuLayer(int nuLayer)
+{
+    m_nuLayer = nuLayer;
+}
+
 // Handlers
 // --------
 

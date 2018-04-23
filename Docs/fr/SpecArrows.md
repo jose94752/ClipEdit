@@ -22,7 +22,7 @@ En modifiant ou déplacant le(s)objet(s), la flèche l'est également
       
 	- Couleur remplissage
          
-	- Epaisseur traits contour 4 choix possibilités (1 - 4)
+	- Epaisseur trait 4 choix possibilités (1 - 4)
        
 	- Choix type tête
 	

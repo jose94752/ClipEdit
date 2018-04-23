@@ -136,20 +136,33 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
     //pictRect.setWidth(pictRect.width()-fm.width());
     pictRect.setHeight(pictRect.height()-fm.height());
 
-    QBrush brush( m_infos.m_backColor);     //Qt::yellow
+    //Qt::NoBrush
+    Qt::BrushStyle style = Qt::SolidPattern; ;
+    if( m_infos.m_transparent)
+    {
+        style = Qt::NoBrush;
+
+    }
+    QBrush brush( m_infos.m_backColor, style);     //Qt::yellow
+
     painter->setBackground(m_infos.m_backColor);
     painter->fillRect( pictRect, brush);
 
     int localArc = 0;
     int i = 0;
+    if( m_infos.m_transparent)
+    {
+        style = Qt::Dense3Pattern;
+
+    }
     for( i = 0; i < nbPoints; i++)
     {
         //QPen pen(0x059605);
         QPen pen( col[i]);
-        pen.setWidth(3);
+        pen.setWidth(0);
         painter->setPen(pen);
         //QBrush brush(0x059605);
-        QBrush brush( col[i]);
+        QBrush brush( col[i], style);
         painter->setBrush(brush);
         painter->drawPie( pictRect, localArc*16, m_infos.m_Arcs.at(i)*16);
         localArc += m_infos.m_Arcs.at(i);
@@ -157,10 +170,10 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
     if( localArc < 360)
     {
         QPen pen( col[i]);
-        pen.setWidth(3);
+        pen.setWidth(0);
         painter->setPen(pen);
         //QBrush brush(0x059605);
-        QBrush brush( col[i]);
+        QBrush brush( col[i], style);
         painter->setBrush(brush);
         painter->drawPie( pictRect, localArc*16, (360-localArc)*16);
     }

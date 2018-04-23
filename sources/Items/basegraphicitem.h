@@ -122,6 +122,7 @@ class BaseGraphicItem
         void setHeightForRotationHandler(int height);
 
         void setRect(const QRectF& rect);
+        void setNuLayer(int nuLayer);
 
         //void QMap<QString,QVariant> getInfos()=0;
 
@@ -149,6 +150,8 @@ class BaseGraphicItem
         bool m_drawBoundingRect;
 
     private:
+
+        int m_nuLayer;
 
         ItemHandler* m_current;
 };
