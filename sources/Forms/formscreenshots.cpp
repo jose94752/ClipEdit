@@ -25,6 +25,8 @@
 #include<QPainter>
 #include<QDebug>
 #include<exception>
+#include<QRect>
+
 
 // Constructor, destructor
 // -----------------------
@@ -54,13 +56,13 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     setAttribute(Qt::WA_TranslucentBackground);
 
     //Shows the widget in full-screen mode.
-     this->showFullScreen();
+     //this->showFullScreen();
 
     //Go QPushButton
     //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
    // this, SLOT(Capture()));
    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-            this, SLOT(Capture()));
+            this, SLOT(CaptureWholeScreen()));
 
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
@@ -71,23 +73,22 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
 
     //This property holds the cursor shape for this widget.
-    m_savedcursor=cursor();
+    //m_savedcursor=cursor();
 
     //A crosshair cursor is used to help the user accurately
     //select a point on the screen.
-    setCursor(Qt::CrossCursor);
+    //setCursor(Qt::CrossCursor);
 
 
 
-    //ui->spinBox->setSuffix(" s "); //OK it works
-    //ui->spinBox->setMaximum(60);   //idem
+    ui->spinBoxDelay->setSuffix(" s "); //OK it works
+    ui->spinBoxDelay->setMaximum(60);   //idem
+    ui->spinBoxDelay->setValue(3);
 
     //connect pour tempo: option
-  //  connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(Capture()));
+//    connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
+//            this, &FormScreenshots::updatehide);
 
-    //connect for cancel button: hide this window: OK
-    //connect(ui->checkBox, SIGNAL(clicked(bool)),
-    //        this, SLOT(hide()));
 
     //OK
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
@@ -102,46 +103,61 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 FormScreenshots::~FormScreenshots()
 {
     //delete the object
-   setCursor(m_savedcursor);
+   //setCursor(m_savedcursor);
    delete ui;
 }
 
-void FormScreenshots::Capture()
-{
-         enum TypeCapture { WholeScreen, Region };
+//void FormScreenshots::Capture()
+//{
+//         enum TypeCapture { WholeScreen, Region };
 
-         switch (WholeScreen) {
-         case WholeScreen:
-             if(ui->radioButtonWholecapture->isChecked()){
+//         switch (WholeScreen) {
+//         case WholeScreen:
+//             if(ui->radioButtonWholecapture->isChecked()){
 
-                    //CaptureWholeScreen();
-                 m_formScreenshots = new FormScreenshots(0);
+//                    //CaptureWholeScreen();
+//                 m_formScreenshots = new FormScreenshots(0);
 
-                 QTimer::singleShot(m_delayspinbox->value() * 3000,
-                                    this, SLOT(CaptureWholeScreen()));
-             }
+//               // QTimer::singleShot(m_delayspinbox->value() * 3000,
+//                //                    this, SLOT(CaptureWholeScreen()));
+//             }
 
-             break;
-         default:
-             close();
-             break;
-         }
+//             break;
+//         default:
+//             close();
+//             break;
+//         }
 
-}
+//}
 
 
 
 void FormScreenshots::CaptureWholeScreen()
 {
-    QScreen *screen = QGuiApplication::primaryScreen();
+    //step0:
+    hide();
+    QTimer::singleShot(500, this, SLOT(snapshot()));  // long enough for window manager effects
 
-    if(const QWindow *window = windowHandle())
-        screen = window->screen();
+    //step1
 
-    if(!screen) return;
+//    QScreen *screen = QApplication::primaryScreen();
 
-     //The grabWindow() function grabs pixels from the screen, not from the window.
-     m_pixmap = screen->grabWindow(0);
+//    if(const QWindow *window = windowHandle())
+//        screen = window->screen();
+
+//    if(!screen) return;
+
+//     //The grabWindow() function grabs pixels from the screen, not from the window.
+//      m_pixmap = screen->grabWindow(0);
+
+    //step2
+//    m_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//    m_label->setAlignment(Qt::AlignCenter);
+
+//   const QRect screenGeometry = QApplication::desktop()->screenGeometry(this);
+//    m_label->setMinimumSize(screenGeometry.width() / 8, screenGeometry.height() / 8);
+
+
 }
 
 
@@ -182,7 +198,7 @@ void FormScreenshots::CaptureWholeScreen()
 void FormScreenshots::mousePressEvent(QMouseEvent *event)
 {
    //code: if m_point0 = m_point1 we get the whole screen.
-    FormScreenshots::mousePressEvent(event);
+   // FormScreenshots::mousePressEvent(event);
 
     m_buttonpressed=true;
     m_point0=event->pos();
@@ -201,7 +217,8 @@ void FormScreenshots::mouseMoveEvent(QMouseEvent *event)
         //Returns the position of the mouse cursor,
         //relative to the widget that received the event.
         //A widget that is not embedded in a parent widget is called a window.
-        m_point1 =event->pos();
+
+         m_point1 =event->pos();
         update();
     }
 }
@@ -218,20 +235,28 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
     close();
 }
 
-
-void FormScreenshots::hide()
+void FormScreenshots::snapshot()
 {
-    //
-    m_delayspinbox = new QSpinBox(this);
-    if (m_delayspinbox->value()== 0) {
-       m_hidewindow->setDisabled(true);
-        m_hidewindow->setChecked(false);
-    } else {
-        m_hidewindow->setDisabled(false);
-    }
+    QPixmap p = QPixmap::grabWindow(QApplication::desktop()->winId());
+    p.save("/home/formation/screenshot.png");
+    show();
+
+    //qApp is global pointer referring to the unique application object.
+    QTimer::singleShot(3000, qApp, SLOT(quit())); // close the app in 3 secs
 }
 
 
+void FormScreenshots::updatehide()
+{
+        m_delayspinbox = new QSpinBox(this);
+        if (m_delayspinbox->value()== 0) {
+           m_hidewindow->setDisabled(true);
+            m_hidewindow->setChecked(false);
+        } else {
+            m_hidewindow->setDisabled(false);
+        }
+
+}
 
 
 

@@ -250,6 +250,7 @@ void MainWindow::openFile(bool)
           tr("Open ClipEdit Project"), "/home", tr("ClipEdit Files (*.cle)"));
     if(fileName!=""){
         Save save(&m_scene,fileName);
+        save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
     }
 }
 

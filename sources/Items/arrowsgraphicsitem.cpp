@@ -90,6 +90,8 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     */
     // End Example
 
+
+
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
 
@@ -100,8 +102,25 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 
     //m_Color = Qt::black; // Test
 
+    // Testing if you have at least the StartPosition and EndPositionItem is one missing
+    // we return and nothing is display.
+    if (!m_StartPositionItem || !m_EndPositionItem)
+        return;
+
+    // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
+    if (m_StartPositionItem->x() >= m_EndPositionItem->x())
+            m_EndPositionItem->setX(m_StartPositionItem->x());
+    if (m_StartPositionItem->y() >= m_EndPositionItem->y())
+            m_EndPositionItem->setY(m_StartPositionItem->y());
+
     // Draw the line
     QLineF line(*m_StartPositionItem, *m_EndPositionItem);
+
+    // Check the length line if is approximately 0 then we return and nothing is display.
+    if (qFuzzyCompare(line.length(), qreal(0.)))
+        return;
+
+    // Draw the line (next step)
     painter->setPen(QPen(m_Color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 
