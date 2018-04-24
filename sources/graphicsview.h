@@ -33,6 +33,7 @@ class GraphicsView
         void clear();
         void contentToView();
         void setZoomLevel(int zoom);
+        void changeBackgroundColor(bool);
 
     protected:
 

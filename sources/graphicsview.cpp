@@ -104,3 +104,8 @@ void GraphicsView::setZoomLevel(int zoom)
     // Rescale
     scale(zoom/100, zoom/100);
 }
+
+void GraphicsView::changeBackgroundColor(bool)
+{
+
+}
