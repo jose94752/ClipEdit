@@ -254,7 +254,8 @@ void MainWindow::slotLayers()
 
 void MainWindow::exportView(bool)
 {
-    // To do
+    QPainter painter;
+    m_scene.render(&painter);
 }
 
 
@@ -264,8 +265,8 @@ void MainWindow::openFile(bool)
           tr("Open ClipEdit Project"), "/home", tr("ClipEdit Files (*.cle)"));
     if(fileName!=""){
         Save save(&m_scene,fileName);
-        save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
-        save.open();
+        //save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
+        //save.open();
     }
 }
 
@@ -273,7 +274,7 @@ void MainWindow::openFile(bool)
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
-    save.save();
+    //save.save();
 }
 
 
@@ -289,7 +290,7 @@ void MainWindow::saveAs(bool)
         }else{
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(),extfilename);
-            save.save();
+            //save.save();
         }
     }
 }

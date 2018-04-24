@@ -30,7 +30,7 @@ public:
     static QString verifyExtension(QString);
     static QString current_filename;
     static bool fileNameExists();
-    void getTextBoxItem(TextBoxItem*,QSettings*);
+    /*void getTextBoxItem(TextBoxItem*,QSettings*);
     void getArrowGraphicsItem(ArrowsGraphicsItem*,QSettings*);
     void getBulletsGraphicsItems(NumberedBulletGraphicItem*,QSettings*);
     void getPicturesGraphicsItems(PicturesGraphicsItem*,QSettings*);
@@ -41,7 +41,7 @@ public:
     PicturesGraphicsItem* setPicturesGraphicsItems(QSettings*,int);
     GraphsGraphicsItem* setCharts(QSettings*,int);
     void save();
-    void open();
+    void open();*/
 private:
     QList<QGraphicsItem *> m_listItems;
     QGraphicsScene *m_scene;

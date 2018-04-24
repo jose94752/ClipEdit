@@ -63,7 +63,7 @@ bool Save::fileNameExists()
 }
 
 ///transform TextBoxItem for saving
-void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
+/*void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
     qDebug()<<"text boxes";
 }
 
@@ -288,6 +288,6 @@ void Save::open()
                 m_scene->addItem(graphsItem);
             break;
         }
-    }
-}
+    }*/
+//}
 

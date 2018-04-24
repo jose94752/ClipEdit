@@ -33,7 +33,7 @@ void DialogSave::slotSaveApproved()
                 dfae.exec();
             }else{
                 Save save(m_items,extfilename);
-                save.save();
+                //save.save();
             }
         }
     }
