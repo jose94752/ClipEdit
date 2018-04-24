@@ -40,14 +40,14 @@ Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
 }
 
 ///complete file extension .cle if extension is not present in the file name
-QString Save::verifyExtension(QString fileName)
+QString Save::verifyExtension(QString fileName,QString ext)
 {
     QStringList strlist=fileName.split(".");
-    if(strlist[strlist.size()-1]!="cle"){
+    if(strlist[strlist.size()-1]!=ext){
         if(fileName[fileName.size()-1]!='.'){
             fileName=fileName.append(".");
         }
-        fileName=fileName.append("cle");
+        fileName=fileName.append(ext);
     }
     return fileName;
 }
@@ -63,7 +63,7 @@ bool Save::fileNameExists()
 }
 
 ///transform TextBoxItem for saving
-void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
+/*void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
     qDebug()<<"text boxes";
 }
 
@@ -288,6 +288,6 @@ void Save::open()
                 m_scene->addItem(graphsItem);
             break;
         }
-    }
-}
+    }*/
+//}
 
