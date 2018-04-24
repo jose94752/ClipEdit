@@ -79,6 +79,7 @@ void MainWindow::buildMenu()
     connect(ui->actionTextBox,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionLayers,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionAbout,            SIGNAL( triggered(bool) ), this, SLOT( showAboutDialog(bool) ));
+    connect(ui->actionclear,            SIGNAL( triggered(bool) ), this, SLOT( clear(bool) ));
 
     ui->actionSave->setDisabled(true);
 
@@ -300,4 +301,9 @@ void MainWindow::showAboutDialog(bool)
                         "" + tr("Developed by the M2I Team") + "<br>"
                         "Copyright (c) 2018";
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
+}
+
+void MainWindow::clear(bool)
+{
+    m_scene.clear();
 }

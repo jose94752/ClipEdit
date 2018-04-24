@@ -103,6 +103,7 @@ private:
         void resizeTold(bool);
         void slotNew(bool);
         void showAboutDialog(bool);
+        void clear(bool);
 
         // Item insertions
         void slotNumberedBullets();
