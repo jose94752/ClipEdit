@@ -13,9 +13,16 @@
 // Includes
 // --------
 
-#include <QLabel>
+
 #include <QWidget>
 #include <QGraphicsScene>
+
+class QLabel;
+class QPushButton;
+
+//#include <QLabel>
+//#include <QWidget>
+//#include <QGraphicsScene>
 
 // Forward Declaration
 namespace Ui
@@ -39,7 +46,12 @@ class FormLayers: public QWidget
 
         void setScene(QGraphicsScene & scene);
 
-    private:
+private slots:
+        void on_buttonUp_clicked();
+
+        void on_pushDown_clicked();
+
+private:
 
         // Ui
         Ui::FormLayers *ui;
