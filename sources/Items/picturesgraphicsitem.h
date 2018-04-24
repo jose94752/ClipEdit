@@ -38,7 +38,7 @@ class PicturesGraphicsItem
 
         QString path;
         int     height, width, opacity;
-        bool    grayscale;
+        bool    black_white;
         QString lg_txt;
         QFont   lg_font;
         int     lg_size;
