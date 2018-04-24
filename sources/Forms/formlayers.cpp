@@ -74,7 +74,7 @@ void FormLayers::ShowLayers()
         {
             int row=ui->tableWidgetLayers->rowCount()+1;
             ui->tableWidgetLayers->setRowCount(row);
-//            ui->tableWidgetLayers->setCellWidget(row-1, 0, Icon(":/Icons/about-icon.png"));
+            ui->tableWidgetLayers->setCellWidget(row-1, 1, Icon(QIcon(":/icons/icons/icon-align-right.png")));
 //            ui->tableWidgetLayers->setCellWidget(row-1, 0, Icon(":/Icons/eye.png"));
 //            ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
 //            ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
