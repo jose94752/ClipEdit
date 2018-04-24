@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>516</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
@@ -67,6 +67,7 @@
      <string>Edit</string>
     </property>
     <addaction name="actionResize"/>
+    <addaction name="actionSet_Background_Color"/>
     <addaction name="actionContentToView"/>
     <addaction name="actionClear"/>
    </widget>
@@ -327,6 +328,11 @@
    </property>
    <property name="toolTip">
     <string>Scale the scene to show all items</string>
+   </property>
+  </action>
+  <action name="actionSet_Background_Color">
+   <property name="text">
+    <string>Set Background Color</string>
    </property>
   </action>
  </widget>
