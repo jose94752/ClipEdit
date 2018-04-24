@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include <QScrollBar>
+#include <QColorDialog>
 
 #include "graphicsview.h"
 
@@ -22,7 +23,7 @@
 GraphicsView::GraphicsView(QWidget* parent)
     :   QGraphicsView(parent)
 {
-
+    m_backgroundColor=Qt::white;
 }
 
 // Events
@@ -106,4 +107,13 @@ void GraphicsView::setZoomLevel(int zoom)
     // Rescale
     resetMatrix();
     scale(s, s);
+}
+
+void GraphicsView::changeBackgroundColor(bool)
+{
+   QColor color= QColorDialog::getColor(m_backgroundColor, this);
+   if(color.isValid()){
+       m_backgroundColor=color;
+       this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
+   }
 }

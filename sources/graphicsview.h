@@ -33,6 +33,7 @@ class GraphicsView
         void clear();
         void contentToView();
         void setZoomLevel(int zoom);
+        void changeBackgroundColor(bool);
 
     protected:
 
@@ -50,6 +51,9 @@ class GraphicsView
 
         // Pos for panning
         QPointF m_oldPos;
+
+        //color de fond
+        QColor m_backgroundColor;
 };
 
 #endif
