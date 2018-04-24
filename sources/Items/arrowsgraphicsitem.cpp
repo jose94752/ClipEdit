@@ -26,7 +26,7 @@
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
-
+    m_formArrows=ptrFormArrows;
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
@@ -191,4 +191,9 @@ void ArrowsGraphicsItem::updateArrowPosition()
     //Example
     //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
     //setLine(line);
+}
+
+FormArrows* ArrowsGraphicsItem::getFormArrow()
+{
+    return m_formArrows;
 }
