@@ -144,6 +144,11 @@ void BaseGraphicItem::setHeightForRotationHandler(int height)
     update();
 }
 
+const QRectF& BaseGraphicItem::rect() const
+{
+    return m_rect;
+}
+
 
 void BaseGraphicItem::setRect(const QRectF& rect)
 {

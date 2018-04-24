@@ -102,8 +102,11 @@ void GraphicsView::contentToView()
 
 void GraphicsView::setZoomLevel(int zoom)
 {
+    qreal s = zoom / 100.f;
+
     // Rescale
-    scale(zoom/100, zoom/100);
+    resetMatrix();
+    scale(s, s);
 }
 
 void GraphicsView::changeBackgroundColor(bool)

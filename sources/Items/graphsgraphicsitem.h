@@ -42,11 +42,11 @@ public :
     //values for pie and histogram
     QList<int> m_Arcs;
 
-    //values for line and area
+    //values for line
     QList<QPoint> m_Points;
 
     //second serie for area
-    QList<QPoint> m_Points2;
+    //QList<QPoint> m_Points2;
 
 };
 
@@ -74,7 +74,8 @@ class GraphsGraphicsItem : public BaseGraphicItem
         void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         void drawHisto(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
         void drawLine(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-        void drawArea(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+        //void drawArea(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif

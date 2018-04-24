@@ -24,7 +24,11 @@
         <file>icons/icon-align-right.png</file>
         <file>icons/clear-icon.png</file>
         <file>icons/icon-fit-in-view.png</file>
+<<<<<<< HEAD
         <file>icons/eye.png</file>
+=======
+        <file>icons/icon-background-color.png</file>
+>>>>>>> 51132979aa52440c22ca9b4db1ad178effecdbf8
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>
