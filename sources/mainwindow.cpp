@@ -180,7 +180,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this,&m_scene);
+    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
     scenedialog.exec();
 }
 
@@ -188,7 +188,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this,m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(this,&m_scene);
+    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
