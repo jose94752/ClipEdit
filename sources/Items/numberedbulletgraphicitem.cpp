@@ -10,7 +10,22 @@ QRectF NumberedBulletGraphicItem::boundingRect() const
 void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     qpainter->setRenderHint(QPainter::Antialiasing);
     qpainter->setBrush(m_bulletcolor);
-    qpainter->drawEllipse(m_rect);
+
+    switch (m_shape) {
+    case NB_CIRCLE :
+        qpainter->drawEllipse(m_rect);
+        break;
+    case NB_RECTANGLE :
+        qpainter->drawRect(m_rect);
+        break;
+    case NB_ROUNDEDRECTANGLE :
+        qpainter->drawRoundedRect(m_rect, 10, 10);
+        break;
+    default :
+        break;
+    }
+
+
     QString strnum;
     strnum = QString::number(m_num);
     QTextOption qto;
@@ -43,8 +58,14 @@ NumberedBulletGraphicItem::NumberedBulletGraphicItem(int num, shape_e bullet_sha
     int cote = (compwidth < compheight ? compheight:compheight);
     qDebug () << "NB : compwidth == " << compwidth << "\n";
     qDebug () << "NB : compheigth == " << compheight << "\n";
+    //...setRect
+    //QRectF qrect(0, 0, compwidth, compheight);
     QRectF qrect (0, 0, cote, cote);
     setRect(qrect);
+    //static QPointF pos (0, 0);
+    //static QPoint decal (100, 0);
+    //setPos()
+    //pos.operator +=(decal);
 }
 
 void NumberedBulletGraphicItem::eval_height(int& height) {
