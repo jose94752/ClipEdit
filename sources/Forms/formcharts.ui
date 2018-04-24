@@ -59,7 +59,28 @@
               <item>
                <widget class="QLabel" name="label_2">
                 <property name="text">
-                 <string>Data</string>
+                 <string>Data X</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Data Y</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Data X 2 </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>Data Y 2</string>
                 </property>
                </widget>
               </item>
@@ -99,6 +120,15 @@
               </item>
               <item>
                <widget class="QLineEdit" name="qData"/>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="qDataY"/>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="qDataX2"/>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="qDataY2"/>
               </item>
               <item>
                <widget class="QTableView" name="gGraphColors"/>

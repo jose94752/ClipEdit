@@ -20,7 +20,7 @@ FormCharts::FormCharts(QWidget* parent)
     ui->setupUi(this);
 
     QStringList types;
-    types  << "Pie" << "Histogram" ;    // << "Area" << "Line";
+    types  << "Pie" << "Histogram" << "Line" << "Area" ;
     ui->qChartType->addItems(types);
 
     ui->qColor->setColor( Qt::darkBlue);
@@ -54,12 +54,42 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
     QString val = ui->qData->text();
     QStringList sl = val.split(",");
-
     for (int i = 0; i < sl.size(); ++i)
     {
        int arc = sl.at(i).toInt();
        infos.m_Arcs.append(arc);
+
+       //qDebug() << "points arcs added " << arc;
     }
+
+    //Y values for line et area
+    val = ui->qDataY->text();
+    sl = val.split(",");
+
+    for (int i = 0; i < sl.size(); ++i)
+    {
+       //qDebug() << "points Y added " << sl.at(i) ;
+
+       QPoint p( infos.m_Arcs.at(i), sl.at(i).toInt() );
+       infos.m_Points.append(p);
+       //qDebug() << "points added " << p.x() << " " << p.y();
+    }
+
+    //second points series for area chart
+    QString valX2 = ui->qDataX2->text();
+    QStringList slX2 = valX2.split(",");
+
+    QString valY2 = ui->qDataY2->text();
+    QStringList slY2 = valY2.split(",");
+
+    for (int i = 0; i < slX2.size(); ++i)
+    {
+       QPoint p( slX2.at(i).toInt(), slY2.at(i).toInt() );
+       infos.m_Points2.append(p);
+       qDebug() << "points added second serie" << p.x() << " " << p.y();
+    }
+
+
 }
 
 
