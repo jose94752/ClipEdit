@@ -30,6 +30,7 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
+#include "Classes/layers.h"
 
 class QToolButton;
 
@@ -91,6 +92,9 @@ private:
         // Scene
         QGraphicsScene m_scene;
 
+        // Layers
+        Layers m_Layers;
+
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
@@ -120,7 +124,9 @@ private:
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
 
+        // Modif Layers
         void slotLayers();
+
 };
 
 #endif

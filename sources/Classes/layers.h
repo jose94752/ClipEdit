@@ -6,11 +6,12 @@
 class Layers
 {
 public:
-    explicit Layers(QGraphicsScene * scene);
-    ~Layers();
+    Layers();
+////    explicit Layers(QGraphicsScene * scene);
+//    ~Layers();
 
-private:
-    QGraphicsScene *m_scene;
+//private:
+//    QGraphicsScene *m_scene;
 
 };
 

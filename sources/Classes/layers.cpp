@@ -1,6 +1,11 @@
 #include "layers.h"
 
-Layers::Layers(QGraphicsScene * scene)
+Layers::Layers()
 {
 
 }
+
+//Layers::Layers(QGraphicsScene * scene)
+//{
+
+//}
