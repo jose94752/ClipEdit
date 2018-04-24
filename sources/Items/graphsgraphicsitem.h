@@ -24,11 +24,8 @@
 // Defines
 // -------
 
-//#define NUMBERPOINTS  200
-
 // Classes
 // -------
-
 class GraphsInfo
 {
 public :
@@ -41,22 +38,24 @@ public :
     int m_type;
 
     bool m_transparent;
-    //int m_nbPoints;
-    //QPointF m_xPoints[NUMBERPOINTS];
-    //QPointF m_yPoints[NUMBERPOINTS];
-    //QString m_legends[NUMBERPOINTS];
 
+    //values for pie and histogram
     QList<int> m_Arcs;
+
+    //values for line and area
+    QList<QPoint> m_Points;
+
+    //second serie for area
+    QList<QPoint> m_Points2;
 
 };
 
-class GraphsGraphicsItem
-    :   public BaseGraphicItem
+class GraphsGraphicsItem : public BaseGraphicItem
 {
     public:
 
         // Constructor
-        GraphsGraphicsItem(QGraphicsItem* parent = 0);
+        GraphsGraphicsItem( QGraphicsItem* parent = 0);
 
         // Pure virtual methods implementation
         QRectF boundingRect() const;
@@ -74,6 +73,8 @@ class GraphsGraphicsItem
         // Drawing
         void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         void drawHisto(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void drawLine(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void drawArea(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif
