@@ -27,7 +27,7 @@ public:
     Save(QList<QGraphicsItem *>);
     Save(QList<QGraphicsItem *>,QString);
     //QDomElement setLayer()
-    static QString verifyExtension(QString);
+    static QString verifyExtension(QString,QString);
     static QString current_filename;
     static bool fileNameExists();
     /*void getTextBoxItem(TextBoxItem*,QSettings*);

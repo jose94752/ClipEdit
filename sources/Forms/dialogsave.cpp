@@ -26,7 +26,7 @@ void DialogSave::slotSaveApproved()
     }else{
         QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.cle",tr("ClipEdit File (*.cle)"));
         if(fileName!=""){
-            QString extfilename=Save::verifyExtension(fileName);
+            QString extfilename=Save::verifyExtension(fileName,"cle");
             QFile fileToSave(extfilename);
             if(fileName!=extfilename && fileToSave.exists()){
                 DialogFileAlreadyExists dfae;

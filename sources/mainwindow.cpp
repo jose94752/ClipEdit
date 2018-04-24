@@ -254,8 +254,22 @@ void MainWindow::slotLayers()
 
 void MainWindow::exportView(bool)
 {
-    QPainter painter;
-    m_scene.render(&painter);
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Export Image"),"project.png",tr("Image File (*.png)"));
+    if(fileName!=""){
+        QString extfilename=Save::verifyExtension(fileName,"png");
+        QFile fileToSave(extfilename);
+        if(fileName!=extfilename && fileToSave.exists()){
+            DialogFileAlreadyExists dfae;
+            dfae.exec();
+        }else{
+            QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
+            image.fill(Qt::white);                                              // Start all pixels transparent
+
+            QPainter painter(&image);
+            m_scene.render(&painter);
+            image.save(extfilename);
+        }
+    }
 }
 
 
@@ -282,7 +296,7 @@ void MainWindow::saveAs(bool)
 {
     QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.cle",tr("ClipEdit File (*.cle)"));
     if(fileName!=""){
-        QString extfilename=Save::verifyExtension(fileName);
+        QString extfilename=Save::verifyExtension(fileName,"cle");
         QFile fileToSave(extfilename);
         if(fileName!=extfilename && fileToSave.exists()){
             DialogFileAlreadyExists dfae;
