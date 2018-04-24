@@ -124,10 +124,10 @@ class BaseGraphicItem
         int heightForRotationHandler() const;
         void setHeightForRotationHandler(int height);
 
+        const QRectF& rect() const;
         void setRect(const QRectF& rect);
-        void setNuLayer(int nuLayer);
 
-        //void QMap<QString,QVariant> getInfos()=0;
+        void setNuLayer(int nuLayer);
 
     protected:
 

@@ -13,15 +13,20 @@ class ResizeSceneDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ResizeSceneDialog(QWidget *parent,QGraphicsScene*);
+    explicit ResizeSceneDialog(QWidget *parent,QGraphicsScene*,int*,int*);//(parent,precedent width,precedent height)
     ~ResizeSceneDialog();
 
 public slots:
     void sizeChanged();
+    void unityChanged(QString);
 
 private:
     Ui::ResizeSceneDialog *ui;
     QGraphicsScene *scene;
+    int *m_width;
+    int *m_height;
+    int dpix;
+    int dpiy;
 };
 
 #endif // RESIZESCENEDIALOG_H

@@ -102,15 +102,19 @@ void GraphicsView::contentToView()
 
 void GraphicsView::setZoomLevel(int zoom)
 {
+    qreal s = zoom / 100.f;
+
     // Rescale
-    scale(zoom/100, zoom/100);
+    resetMatrix();
+    scale(s, s);
 }
 
-void GraphicsView::changeBackgroundColor(bool)
+void GraphicsView::changeBackgroundColor()
 {
-   QColor color= QColorDialog::getColor(m_backgroundColor, this);
-   if(color.isValid()){
-       m_backgroundColor=color;
+   QColor color = QColorDialog::getColor(m_backgroundColor, this);
+   if(color.isValid())
+   {
+       m_backgroundColor = color;
        this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
    }
 }
