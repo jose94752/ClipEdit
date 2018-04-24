@@ -28,6 +28,7 @@
 #include<QRect>
 
 
+
 // Constructor, destructor
 // -----------------------
 
@@ -73,7 +74,7 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
 
     //This property holds the cursor shape for this widget.
-    //m_savedcursor=cursor();
+   // m_savedcursor=cursor();
 
     //A crosshair cursor is used to help the user accurately
     //select a point on the screen.
@@ -83,22 +84,20 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
     ui->spinBoxDelay->setSuffix(" s "); //OK it works
     ui->spinBoxDelay->setMaximum(60);   //idem
-    ui->spinBoxDelay->setValue(3);
+    ui->spinBoxDelay->setValue(1);
 
     //connect pour tempo: option
 //    connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
 //            this, &FormScreenshots::updatehide);
 
 
+
+
     //OK
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 
-
-
 }
-
-
 
 FormScreenshots::~FormScreenshots()
 {
@@ -107,38 +106,13 @@ FormScreenshots::~FormScreenshots()
    delete ui;
 }
 
-//void FormScreenshots::Capture()
-//{
-//         enum TypeCapture { WholeScreen, Region };
-
-//         switch (WholeScreen) {
-//         case WholeScreen:
-//             if(ui->radioButtonWholecapture->isChecked()){
-
-//                    //CaptureWholeScreen();
-//                 m_formScreenshots = new FormScreenshots(0);
-
-//               // QTimer::singleShot(m_delayspinbox->value() * 3000,
-//                //                    this, SLOT(CaptureWholeScreen()));
-//             }
-
-//             break;
-//         default:
-//             close();
-//             break;
-//         }
-
-//}
-
-
-
 void FormScreenshots::CaptureWholeScreen()
 {
-    //step0:
+    //step1:
     hide();
     QTimer::singleShot(500, this, SLOT(snapshot()));  // long enough for window manager effects
 
-    //step1
+    //step2
 
 //    QScreen *screen = QApplication::primaryScreen();
 
@@ -150,7 +124,7 @@ void FormScreenshots::CaptureWholeScreen()
 //     //The grabWindow() function grabs pixels from the screen, not from the window.
 //      m_pixmap = screen->grabWindow(0);
 
-    //step2
+    //step3
 //    m_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 //    m_label->setAlignment(Qt::AlignCenter);
 
@@ -203,6 +177,9 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
     m_buttonpressed=true;
     m_point0=event->pos();
     m_point1=m_point0;
+    //Whole screen capture
+    CaptureWholeScreen();
+
 }
 
 void FormScreenshots::mouseMoveEvent(QMouseEvent *event)
@@ -212,37 +189,61 @@ void FormScreenshots::mouseMoveEvent(QMouseEvent *event)
     this->x = event->x();
     this->y = event->y();
 
-    if(m_buttonpressed )
-    {
-        //Returns the position of the mouse cursor,
-        //relative to the widget that received the event.
-        //A widget that is not embedded in a parent widget is called a window.
+//    if(m_buttonpressed )
+//    {
+//        //Returns the position of the mouse cursor,
+//        //relative to the widget that received the event.
+//        //A widget that is not embedded in a parent widget is called a window.
 
-         m_point1 =event->pos();
-        update();
-    }
+//         m_point1 =event->pos();
+//        update();
+//    }
+
+    //new
+
+
 }
 
-void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
-{
-    //code
-    //FormScreenshots::mouseReleaseEvent(event);
+//void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
+//{
+//    //code
+//    //FormScreenshots::mouseReleaseEvent(event);
 
-    emit mouseReleaseEvent();
+//    emit mouseReleaseEvent();
 
-    m_buttonpressed=false;
-    emit dimensionsMade(true, m_region);
-    close();
-}
+//    m_buttonpressed=false;
+//    emit dimensionsMade(true, m_region);
+//    close();
+//}
 
 void FormScreenshots::snapshot()
 {
+
+    //step1
+    static int count = 0;
+
     QPixmap p = QPixmap::grabWindow(QApplication::desktop()->winId());
-    p.save("/home/formation/screenshot.png");
+    p.save(QString("/home/formation/doCapture/screenshot%1.png").arg(count));
+    count++;
     show();
 
     //qApp is global pointer referring to the unique application object.
-    QTimer::singleShot(3000, qApp, SLOT(quit())); // close the app in 3 secs
+    QTimer::singleShot(300, qApp, SLOT(quit())); // close the app in 0,3 secs
+
+
+    //step2:
+//    FormScreenshots *w = QApplication::activeWindow();
+
+//    if(w) {
+//      static int count = 0;
+
+//    QPixmap p = QPixmap::grabWindow(w);
+//    p.save(QString ("/home/formation/doCapture/screenshot%1.png").arg(count);
+//    count++;
+
+//    }
+
+
 }
 
 
