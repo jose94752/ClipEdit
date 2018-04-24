@@ -11,6 +11,7 @@
 // --------
 
 #include <QDebug>
+#include <QtWidgets>
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -57,6 +58,7 @@ void MainWindow::init()
 {
     buildMenu();
     buildToolBar();
+    buildStackedWidget();
     buildView();
     m_width=800;
     m_height=800;
@@ -66,26 +68,26 @@ void MainWindow::init()
 void MainWindow::buildMenu()
 {
     // Connects
-    connect(ui->actionSave,                 SIGNAL( triggered(bool) ),  this,   SLOT( save(bool) ));
-    connect(ui->actionSaveAs,               SIGNAL( triggered(bool) ),  this,   SLOT( saveAs(bool) ));
-    connect(ui->actionOpen,                 SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
-    connect(ui->actionExportAs,             SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
-    connect(ui->actionNew,                  SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    connect(ui->actionSet_Background_Color, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor(bool)));
+    connect(ui->actionSave,             SIGNAL( triggered(bool) ),  this,   SLOT( save(bool) ));
+    connect(ui->actionSaveAs,           SIGNAL( triggered(bool) ),  this,   SLOT( saveAs(bool) ));
+    connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
+    connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
+    connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
+    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor(bool)));
 
-    connect(ui->actionArrow,                SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionChart,                SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionClipart,              SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionNumberedBullets,      SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionPicture,              SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionScreenshot,           SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionTextBox,              SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionLayers,               SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionAbout,                SIGNAL( triggered(bool) ),  this,   SLOT( showAboutDialog(bool) ));
+    connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionClipart,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionNumberedBullets,  SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionPicture,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionScreenshot,       SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionTextBox,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionLayers,           SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionAbout,            SIGNAL( triggered(bool) ),  this,   SLOT( showAboutDialog(bool) ));
 
-    connect(ui->actionResize,               SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
-    connect(ui->actionContentToView,        SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
-    connect(ui->actionClear,                SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
+    connect(ui->actionResize,           SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
+    connect(ui->actionContentToView,    SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
+    connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
 
     ui->actionSave->setDisabled(true);
 
@@ -101,6 +103,30 @@ void MainWindow::buildMenu()
 }
 
 void MainWindow::buildToolBar()
+{
+    // Left side built from the designer
+
+    // Inserting a spacer widget
+    QWidget* spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->toolBar->addWidget(spacer);
+
+    // Zoom
+    m_spinBoxZoom = new QSpinBox(this);
+    m_spinBoxZoom->setMinimum(10);
+    m_spinBoxZoom->setMaximum(400);
+    m_spinBoxZoom->setValue(100);
+    m_spinBoxZoom->setSingleStep(10);
+    m_spinBoxZoom->setSuffix("%");
+    m_spinBoxZoom->setAlignment(Qt::AlignHCenter);
+    m_spinBoxZoom->setToolTip(tr("Zoom level"));
+    //m_spinBoxZoom->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    connect(m_spinBoxZoom, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setZoomLevel(int)));
+
+    ui->toolBar->addWidget(m_spinBoxZoom);
+}
+
+void MainWindow::buildStackedWidget()
 {
     // Remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)

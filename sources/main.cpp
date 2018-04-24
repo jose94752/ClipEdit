@@ -12,6 +12,7 @@
 
 #include "mainwindow.h"
 #include <QApplication>
+#include <QDesktopWidget>
 
 // Main
 // ----
@@ -19,6 +20,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QDesktopWidget *desktop=a.desktop();
 
     // Defining app name and version
     QApplication::setApplicationName("ClipEdit");
