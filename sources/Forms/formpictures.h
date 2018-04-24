@@ -55,7 +55,7 @@ class FormPictures
 
     signals:
 
-        void picture_changed();
+        void picture_changed(char w_h);
 
 
 

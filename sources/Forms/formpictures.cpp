@@ -61,7 +61,7 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
     height      = ui->spinBox_pic_h->value();
     width       = ui->spinBox_pic_w->value();
     w_h_fixed   = ui->checkBox_pic_fx->isChecked();
-    w_h         = ' ';
+
     black_white = ui->checkBox_pic_black_white->isChecked();
     opacity     = ui->horizontalSlider_pic_opacity->value();
     lg_txt      = ui->lineEdit_lg_txt->text();
@@ -92,7 +92,7 @@ void FormPictures::chose_picture()
 
      ui->lineEdit_pic_path->setText(s);
 
-     emit picture_changed();
+     emit picture_changed(w_h);
 
 }
 
@@ -100,17 +100,22 @@ void FormPictures::chose_picture()
 void FormPictures::picture_modification()
 {
 
-     emit picture_changed();
+     emit picture_changed(w_h);
 }
 
 void FormPictures::picture_modification_w()
 {
      w_h = 'w';
-     emit picture_changed();
+     emit picture_changed( w_h);
+
+     qDebug() <<"form  W : w_h:"  <<w_h  ;
 }
 
 void FormPictures::picture_modification_h()
 {
      w_h = 'h';
-     emit picture_changed();
+     emit picture_changed( w_h);
+
+
+     qDebug() <<" form H : w_h:"  <<w_h ;
 }

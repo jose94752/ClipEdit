@@ -12,6 +12,8 @@
 #include <QGraphicsRectItem>
 #include <QRect>
 #include <QFontMetrics>
+#include <QPixmap>
+#include <QPainter>
 
 #include "picturesgraphicsitem.h"
 
@@ -21,10 +23,14 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
+    SIGNAL(picture_changed( w_h)), this, SLOT(change_w_h(w_h));
+    qDebug() <<"apres SIGNAL, w_h = " <<w_h;
 
     ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
     setRect(QRectF(0, 0, width, height));
+
+
 }
 
 
@@ -39,25 +45,37 @@ QRectF PicturesGraphicsItem::boundingRect() const
 
 void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    if(w_h_fixed) {
-        switch ( w_h )
-              {case 'w':
-               modification_width();
-               break;
-
-               case 'h':
-               modification_height();
-               break;
-
-               //default:
-              }
-    }
 
 
 
-  painter->drawPixmap(0, 0, width, height, path);
-  //painter->drawText( QRectF (0,0, width, height),"coucou");
+ //painter->drawPixmap(0, 0, width, height, path);
+ //painter->drawText( QRectF (0,0, width, height),"coucou");
  // painter->(boundingRect(), m_picture);
+
+     qDebug() <<"picturegrahic  : w_h:"  <<w_h  ;
+
+  if (w_h != ' ')  {
+      if (w_h_fixed) {
+
+         switch ( w_h )
+            {case 'w':
+             modification_width(painter);
+
+             case 'h':
+             modification_height(painter);
+
+
+             //default:
+        }
+      }
+  }
+  else  painter->drawPixmap(0, 0, width, height, path);
+
+
+
+    w_h = ' ';
+    w_h_fixed = false;
+
 
     lg_font.setPointSize(lg_size);
 
@@ -131,14 +149,29 @@ int PicturesGraphicsItem::type() const
     return Type::ImageGraphicsItem;
 }
 
-void PicturesGraphicsItem::modification_width (){
+void PicturesGraphicsItem::modification_width (QPainter* p){
 
+     QPixmap pixmap(path);
+     pixmap = pixmap.scaledToWidth( width );
+
+     p->drawPixmap(0,0,pixmap );
 }
 
-void PicturesGraphicsItem::modification_height (){
 
+void PicturesGraphicsItem::modification_height (QPainter* p){
+
+        QPixmap pixmap(path);
+        pixmap = pixmap.scaledToHeight( height );
+
+        p->drawPixmap(0,0,pixmap );
 }
 
+
+
+
+void PicturesGraphicsItem::change_w_h(char w_h){
+      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;
+}
 /*
 
  QGraphicsRectItem *rectItem = new QGraphicsRectItem( QRect( -25, 25, 200, 40 ), 0, &scene );

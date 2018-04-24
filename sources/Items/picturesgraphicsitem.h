@@ -49,11 +49,16 @@ class PicturesGraphicsItem
         QString lg_pos;
 
 
-        void modification_width();
-        void modification_height();
+        void modification_width (QPainter* painter);
+
+        void modification_height(QPainter* painter);
 private:
 
         QPainter  m_picture;
+
+
+private slots:
+   void change_w_h(char w_h);
 };
 
 #endif
