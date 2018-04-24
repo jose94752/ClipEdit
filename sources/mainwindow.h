@@ -17,9 +17,9 @@
 #include <QMap>
 #include <QGraphicsScene>
 
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
+//#include <QtCharts/QChartView>
+//#include <QtCharts/QLineSeries>
+//#include <QtCharts/QAreaSeries>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -30,6 +30,8 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
+
+class QToolButton;
 
 // Forward declaration
 namespace Ui
@@ -86,10 +88,14 @@ private:
         // Scene
         QGraphicsScene m_scene;
 
+        // Zoom
+        QSpinBox* m_spinBoxZoom;
+
         // Building
         void init();
         void buildMenu();
         void buildToolBar();
+        void buildStackedWidget();
         void buildView();
 
     private slots:
