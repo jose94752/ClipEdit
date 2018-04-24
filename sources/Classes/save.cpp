@@ -11,11 +11,6 @@
 #include "../Items/arrowsgraphicsitem.h"
 #include "../Forms/formarrows.h"
 #include "../Items/graphsgraphicsitem.h"
-/*#define ImageGraphicsItem 65536
-#define TextBoxGraphicsItem 65537
-#define EdgeItem 65539
-#define BulletsItem 65542
-#define PicturesItems 65538*/
 
 ///class to save user projects to a file and to open a project from a file
 
@@ -45,14 +40,14 @@ Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
 }
 
 ///complete file extension .cle if extension is not present in the file name
-QString Save::verifyExtension(QString fileName)
+QString Save::verifyExtension(QString fileName,QString ext)
 {
     QStringList strlist=fileName.split(".");
-    if(strlist[strlist.size()-1]!="cle"){
+    if(strlist[strlist.size()-1]!=ext){
         if(fileName[fileName.size()-1]!='.'){
             fileName=fileName.append(".");
         }
-        fileName=fileName.append("cle");
+        fileName=fileName.append(ext);
     }
     return fileName;
 }
@@ -68,7 +63,7 @@ bool Save::fileNameExists()
 }
 
 ///transform TextBoxItem for saving
-void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
+/*void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
     qDebug()<<"text boxes";
 }
 
@@ -82,9 +77,11 @@ void Save::getArrowGraphicsItem(ArrowsGraphicsItem *arrow,QSettings* settings)
     int ArrowWidth;
     int ArrowHeight;
     int r,g,b,a;
+    int LineThickness, SizeHeadTypeChoice;
     QColor ArrowOutlineColor;
     QColor ArrowFillColor;
-    /*arrow->GetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor);
+    FormArrows *formArrows=arrow->getFormArrow();
+    formArrows->GetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
     settings->setValue(QString("item").append(QString::number(countItems)).append("/WithoutAnchorPoint"),QString::number(WithoutAnchorPoint));
     settings->setValue(QString("item").append(QString::number(countItems)).append("/OneAnchorPoint"),QString::number(OneAnchorPoint));
     settings->setValue(QString("item").append(QString::number(countItems)).append("/TwoAnchorPoints"),QString::number(TwoAnchorPoints));
@@ -99,7 +96,9 @@ void Save::getArrowGraphicsItem(ArrowsGraphicsItem *arrow,QSettings* settings)
     settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/r"),QString::number(r));
     settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/g"),QString::number(g));
     settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/b"),QString::number(b));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/a"),QString::number(a));*/
+    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/a"),QString::number(a));
+    settings->setValue(QString("item").append(QString::number(countItems)).append("LineThickness"),QString::number(LineThickness));
+    settings->setValue(QString("item").append(QString::number(countItems)).append("SizeHeadTypeChoice"),QString::number(SizeHeadTypeChoice));
 }
 
 ///transform NumberedBulletGraphicItem for saving
@@ -136,12 +135,13 @@ TextBoxItem* Save::setTextBoxItem(QSettings *settings,int i)
 
 ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
 {
-    /*bool WithoutAnchorPoint;
+    bool WithoutAnchorPoint;
     bool OneAnchorPoint;
     bool TwoAnchorPoints;
     int ArrowWidth;
     int ArrowHeight;
     int r,g,b,a;
+    int LineThickness, SizeHeadTypeChoice;
     WithoutAnchorPoint=settings->value(QString("item").append(QString::number(countItems)).append("/WithoutAnchorPoint")).toBool();
     OneAnchorPoint=settings->value(QString("item").append(QString::number(countItems)).append("/OneAnchorPoint")).toBool();
     TwoAnchorPoints=settings->value(QString("item").append(QString::number(countItems)).append("/TwoAnchorPoints")).toBool();
@@ -157,7 +157,9 @@ ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
     b=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/b")).toInt();
     a=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/a")).toInt();
     QColor ArrowFillColor(r,g,b,a);
-    FormArrows formArrows();*/
+    LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("LineThickness")).toInt();
+    SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("SizeHeadTypeChoice")).toInt();
+    FormArrows formArrows();
     //formArrows.fillColorArrowChanged(ArrowFillColo);
     //formArrows.outlineColorArrowChanged(ArrowOutlineColor);
     //ArrowsGraphicsItem *ArrowsGraphicsItem=new ArrowsGraphicsItem(formArrows());
@@ -286,6 +288,6 @@ void Save::open()
                 m_scene->addItem(graphsItem);
             break;
         }
-    }
-}
+    }*/
+//}
 
