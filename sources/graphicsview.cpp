@@ -89,7 +89,7 @@ void GraphicsView::clear()
     }
 }
 
-void GraphicsView::adaptView()
+void GraphicsView::contentToView()
 {
     if (scene())
     {

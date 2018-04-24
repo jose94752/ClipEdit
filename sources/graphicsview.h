@@ -31,7 +31,7 @@ class GraphicsView
     public slots:
 
         void clear();
-        void adaptView();
+        void contentToView();
         void setZoomLevel(int zoom);
 
     protected:
@@ -50,7 +50,6 @@ class GraphicsView
 
         // Pos for panning
         QPointF m_oldPos;
-
 };
 
 #endif

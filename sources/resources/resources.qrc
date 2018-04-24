@@ -23,6 +23,7 @@
         <file>icons/icon-align-left.png</file>
         <file>icons/icon-align-right.png</file>
         <file>icons/clear-icon.png</file>
+        <file>icons/icon-fit-in-view.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>
