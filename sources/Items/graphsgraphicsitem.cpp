@@ -70,11 +70,13 @@ void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     {
         this->drawLine(painter, option, widget);
     }
+/*
     else
     if(m_infos.m_type == 3)
     {
         this->drawArea(painter, option, widget);
     }
+*/
 }
 
 
@@ -356,7 +358,7 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
 }
 
 
-
+/*
 void GraphsGraphicsItem::drawArea(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     qDebug() << "Draw Area";
@@ -430,3 +432,4 @@ void GraphsGraphicsItem::drawArea(QPainter *painter, const QStyleOptionGraphicsI
 
     BaseGraphicItem::paint(painter, option, widget);
 }
+*/
