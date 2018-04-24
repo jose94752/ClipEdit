@@ -138,6 +138,10 @@ private:
         ///  in the chosen region  in the plane using integer precision.
         ///
         QRect m_region;
+        ///
+        /// \brief m_captureTimer is an instance of class provides repetitive and single-shot timers.
+        ///
+        QTimer  *m_captureTimer;
 
         ///
         /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
