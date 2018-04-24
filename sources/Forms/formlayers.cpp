@@ -32,6 +32,12 @@ FormLayers::~FormLayers()
     delete ui;
 }
 
+// Getters
+// -------
+
+// Setters
+// -------
+
 void FormLayers::setScene(QGraphicsScene& scene)
 {
     m_scene = &scene;
@@ -68,11 +74,49 @@ void FormLayers::ShowLayers()
         {
             int row=ui->tableWidgetLayers->rowCount()+1;
             ui->tableWidgetLayers->setRowCount(row);
-//            ui->tableWidgetLayers->setCellWidget(row-1, 0, Icon(":/Icons/about-icon.png"));
-//            ui->tableWidgetLayers->setCellWidget(row-1, 0, Icon(":/Icons/eye.png"));
-//            ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
+
+            // 1ere colonne
+            ui->tableWidgetLayers->setCellWidget(row - 1, 0, Icon(QIcon(":/icons/icons/eye.png")));
+
+            // 2eme colonne
+            switch (item->type())
+            {
+                case BaseGraphicItem::Type::TextBoxGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/textbox-icon.png")));
+                } break;
+            case BaseGraphicItem::Type::ArrowGraphicsItem:
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/arrow-icon-2.png")));
+            } break;
+            case BaseGraphicItem::Type::ChartGraphicsItem:
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/chart-icon-2.png")));
+            } break;
+            case BaseGraphicItem::Type::ImageGraphicsItem:
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/clipart-icon.png")));
+            } break;
+            case BaseGraphicItem::Type::NumberedBulletGraphicsItem:
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/numbered-bullet-icon.png")));
+            } break;
+            case BaseGraphicItem::Type::ScreenshotGraphicsItem:
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/screenshot-icon.png")));
+            } break;
+                default:
+                {
+                    // Default
+                } break;
+            }
+
+            // switch type: icon qui va bien
+            // ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
+
 //            ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
 //            ui->tableWidgetLayers->setCellWidget(row-1,2,IconReduced(item->getImage(m_scene,item)));
+
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
             ui->tableWidgetLayers->setCellWidget(row-1,4,new QLabel("Label itemx")); // item->getName()));
         }
@@ -85,4 +129,44 @@ void FormLayers::updateLayers()
 {
     m_zvalue++;
     ShowLayers();
+}
+
+void FormLayers::on_buttonUp_clicked()
+{
+    qDebug() << "FormLayers::on_buttonUp_clicked()";
+
+    if (m_scene->selectedItems().isEmpty())
+        return;
+
+    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
+    if (!selectedItem)
+        return;
+
+    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+
+    qreal zValue = 0;
+    foreach (QGraphicsItem *item, overlapItems) {
+        if (item->zValue() >= zValue && item->type() >= BaseGraphicItem::Type::TextBoxGraphicsItem)
+            zValue = item->zValue() + 0.1;
+    }
+    selectedItem->setZValue(zValue);
+}
+
+void FormLayers::on_pushDown_clicked()
+{
+    if (m_scene->selectedItems().isEmpty())
+        return;
+
+    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
+    if (!selectedItem)
+        return;
+
+    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+
+    qreal zValue = 0;
+    foreach (QGraphicsItem *item, overlapItems) {
+        if (item->zValue() <= zValue && item->type() >= BaseGraphicItem::Type::TextBoxGraphicsItem)
+            zValue = item->zValue() - 0.1;
+    }
+    selectedItem->setZValue(zValue);
 }

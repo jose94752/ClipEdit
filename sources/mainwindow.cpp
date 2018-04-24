@@ -98,6 +98,8 @@ void MainWindow::buildMenu()
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+
+    // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
 }
@@ -182,7 +184,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this,&m_scene);
+    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
     scenedialog.exec();
 }
 
@@ -190,7 +192,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this,m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(this,&m_scene);
+    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -211,12 +213,22 @@ void MainWindow::slotNumberedBullets()
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
   int numbullet (from);
-  qreal posx (0), posy (50), delta (100);
+  QPointF scene_topleft (m_scene.sceneRect().topLeft());
+  QPointF scene_topright (m_scene.sceneRect().topRight());
+  QPointF bulletpos (scene_topleft);
+  qreal delta (0);
+  delta = scene_topright.y() - scene_topleft.y();
+  bulletpos.setY(scene_topleft.y () + delta /5);
+  //qreal posx (0), posy (50), delta (100);
   for (; numbullet != to+1; ++numbullet) {
     numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
-    numberedBulletGraphicItem->setPos(posx, posy);
+    //numberedBulletGraphicItem->setPos(posx, posy);
+    numberedBulletGraphicItem->setPos (bulletpos);
     m_scene.addItem(numberedBulletGraphicItem);
-    posx += delta;
+    delta = numberedBulletGraphicItem->rect ().width ();
+    if (bulletpos.x () + delta < scene_topright.x ()) {
+      bulletpos.setX(bulletpos.x() + delta);
+    }
   }
 }
 
@@ -301,7 +313,6 @@ void MainWindow::itemSelected(QGraphicsItem* item)
 
     }
 }
-
 
 void MainWindow::exportView(bool)
 {
