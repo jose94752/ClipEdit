@@ -45,9 +45,13 @@ class FormLayers: public QWidget
         ~FormLayers();
 
         void setScene(QGraphicsScene & scene);
-        const QPushButton* getUpButton();
 
-    private:
+private slots:
+        void on_buttonUp_clicked();
+
+        void on_pushDown_clicked();
+
+private:
 
         // Ui
         Ui::FormLayers *ui;

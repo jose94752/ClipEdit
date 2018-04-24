@@ -35,11 +35,6 @@ FormLayers::~FormLayers()
 // Getters
 // -------
 
-const QPushButton* FormLayers::getUpButton()
-{
-    return ui->buttonUp;
-}
-
 // Setters
 // -------
 
@@ -94,16 +89,46 @@ void FormLayers::ShowLayers()
 
 void FormLayers::updateLayers()
 {
-//    QGraphicsItem *selectedItem = scene->selectedItems().first();
-//    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
-
-//    qreal zValue = 0;
-//    foreach (QGraphicsItem *item, overlapItems) {
-//        if (item->zValue() >= zValue && item->type() == DiagramItem::Type)
-//            zValue = item->zValue() + 0.1;
-//    }
-//    selectedItem->setZValue(zValue);
-
     m_zvalue++;
     ShowLayers();
+}
+
+void FormLayers::on_buttonUp_clicked()
+{
+    qDebug() << "FormLayers::on_buttonUp_clicked()";
+
+    if (m_scene->selectedItems().isEmpty())
+        return;
+
+    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
+    if (!selectedItem)
+        return;
+
+    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+
+    qreal zValue = 0;
+    foreach (QGraphicsItem *item, overlapItems) {
+        if (item->zValue() >= zValue && item->type() >= BaseGraphicItem::Type::TextBoxGraphicsItem)
+            zValue = item->zValue() + 0.1;
+    }
+    selectedItem->setZValue(zValue);
+}
+
+void FormLayers::on_pushDown_clicked()
+{
+    if (m_scene->selectedItems().isEmpty())
+        return;
+
+    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
+    if (!selectedItem)
+        return;
+
+    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+
+    qreal zValue = 0;
+    foreach (QGraphicsItem *item, overlapItems) {
+        if (item->zValue() <= zValue && item->type() >= BaseGraphicItem::Type::TextBoxGraphicsItem)
+            zValue = item->zValue() - 0.1;
+    }
+    selectedItem->setZValue(zValue);
 }

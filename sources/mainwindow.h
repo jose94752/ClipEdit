@@ -84,6 +84,9 @@ private:
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
 
+        int m_width;
+        int m_height;
+
         // Scene
         QGraphicsScene m_scene;
 
@@ -113,11 +116,11 @@ private:
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
-        void slotArrowsGraphicsItem();        
+        void slotArrowsGraphicsItem();
 
         // Modif Layers
         void slotLayers();
-        void slotLayersUp();
+
 };
 
 #endif

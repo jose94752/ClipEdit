@@ -75,6 +75,9 @@ class ArrowsGraphicsItem
 
         void updateArrowPosition();
 
+        //renvoie du pointeur sur la form arrow
+        FormArrows* getFormArrow();
+
 
     protected:
 
@@ -107,6 +110,8 @@ class ArrowsGraphicsItem
 
 
         QColor m_Color; // Temp for test
+
+        FormArrows *m_formArrows;
 
     private slots:
 
