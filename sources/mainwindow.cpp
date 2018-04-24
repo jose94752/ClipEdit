@@ -292,9 +292,6 @@ void MainWindow::slotLayers()
 
     m_formLayers.setScene(m_scene);
 }
-
-<<<<<<< HEAD
-=======
 void MainWindow::itemSelected(QGraphicsItem* item)
 {
     // An item have been selected
@@ -316,7 +313,6 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     }
 }
 
->>>>>>> d6bb77a4c1fc2e4fd8ca408971b41d9d5cdf0510
 void MainWindow::exportView(bool)
 {
     QString fileName=QFileDialog::getSaveFileName(this,tr("Export Image"),"project.png",tr("Image File (*.png)"));

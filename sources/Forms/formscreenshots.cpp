@@ -110,7 +110,7 @@ void FormScreenshots::CaptureWholeScreen()
 {
     //step1:
     hide();
-    QTimer::singleShot(500, this, SLOT(snapshot()));  // long enough for window manager effects
+    QTimer::singleShot(300, this, SLOT(snapshot()));  // long enough for window manager effects
 
     //step2
 
@@ -178,7 +178,7 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
     m_point0=event->pos();
     m_point1=m_point0;
     //Whole screen capture
-    CaptureWholeScreen();
+   //CaptureWholeScreen();
 
 }
 
@@ -223,7 +223,7 @@ void FormScreenshots::snapshot()
     static int count = 0;
 
     QPixmap p = QPixmap::grabWindow(QApplication::desktop()->winId());
-    p.save(QString("/home/formation/doCapture/screenshot%1.png").arg(count));
+    p.save(QString("/home/toumi/doCapture/screenshot%1.png").arg(count));
     count++;
     show();
 

@@ -13,6 +13,8 @@
 
 // Includes
 // --------
+#include "basegraphicitem.h"
+#include "../Forms/formscreenshots.h"
 
 #include <QGraphicsItem>
 #include <QRectF>
