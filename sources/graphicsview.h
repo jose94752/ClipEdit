@@ -50,6 +50,9 @@ class GraphicsView
 
         // Pos for panning
         QPointF m_oldPos;
+
+        //color de fond
+        QColor m_backgroundColor;
 };
 
 #endif
