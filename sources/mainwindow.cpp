@@ -80,6 +80,7 @@ void MainWindow::buildMenu()
     connect(ui->actionLayers,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
     connect(ui->actionAbout,            SIGNAL( triggered(bool) ), this, SLOT( showAboutDialog(bool) ));
     connect(ui->actionclear,            SIGNAL( triggered(bool) ), this, SLOT( clear(bool) ));
+    connect(ui->actionBackground_Color,  SIGNAL( triggered(bool) ), this, SLOT(changeBackgroundColor(bool)));
 
     ui->actionSave->setDisabled(true);
 
@@ -321,4 +322,9 @@ void MainWindow::showAboutDialog(bool)
 void MainWindow::clear(bool)
 {
     m_scene.clear();
+}
+
+void MainWindow::changeBackgroundColor(bool)
+{
+
 }
