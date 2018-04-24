@@ -109,11 +109,12 @@ void GraphicsView::setZoomLevel(int zoom)
     scale(s, s);
 }
 
-void GraphicsView::changeBackgroundColor(bool)
+void GraphicsView::changeBackgroundColor()
 {
-   QColor color= QColorDialog::getColor(m_backgroundColor, this);
-   if(color.isValid()){
-       m_backgroundColor=color;
+   QColor color = QColorDialog::getColor(m_backgroundColor, this);
+   if(color.isValid())
+   {
+       m_backgroundColor = color;
        this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
    }
 }

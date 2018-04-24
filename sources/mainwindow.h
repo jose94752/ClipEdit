@@ -113,14 +113,14 @@ private:
         void slotNew(bool);
         void showAboutDialog(bool);
 
-        // Item insertions
+        // Items
         void slotNumberedBullets();
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
-
         void slotLayers();
+        void itemSelected(QGraphicsItem* item);
 };
 
 #endif

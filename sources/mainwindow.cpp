@@ -152,6 +152,8 @@ void MainWindow::buildView()
 {
     m_scene.setSceneRect(-400, -400, 800, 800);
     ui->graphicsView->setScene(&m_scene);
+
+    connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
 
 // Slots
@@ -277,6 +279,27 @@ void MainWindow::slotLayers()
 //    qDebug() << "MainWindow::slotLayers()" ;
 
     m_formLayers.setScene(m_scene);
+}
+
+void MainWindow::itemSelected(QGraphicsItem* item)
+{
+    // An item have been selected
+    // Three steps from now
+    // 1. Check type
+    // 2. Load associated form
+    // 3. Fill the form
+    switch (item->type())
+    {
+        case BaseGraphicItem::Type::TextBoxGraphicsItem:
+        {
+
+        } break;
+        case BaseGraphicItem::Type::ArrowGraphicsItem:
+        {
+
+        } break;
+
+    }
 }
 
 
