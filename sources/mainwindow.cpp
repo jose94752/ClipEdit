@@ -58,6 +58,8 @@ void MainWindow::init()
     buildMenu();
     buildToolBar();
     buildView();
+    m_width=800;
+    m_height=800;
 }
 
 
