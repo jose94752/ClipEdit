@@ -92,8 +92,9 @@ void MainWindow::buildMenu()
 
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
 
-    //
+    // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
+    connect(m_formLayers.getUpButton(), SIGNAL(triggered(bool)), this, SLOT(slotLayersUp()));
 
 }
 
@@ -250,6 +251,20 @@ void MainWindow::slotLayers()
     m_formLayers.setScene(m_scene);
 }
 
+void MainWindow::slotLayersUp()
+{
+    qDebug() << "MainWindow::slotLayersUp()" ;
+
+    QGraphicsItem *selectedItem = m_scene.selectedItems().first();
+    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+
+    qreal zValue = 0;
+    foreach (QGraphicsItem *item, overlapItems) {
+        if (item->zValue() >= zValue && item->type() == TextBoxGraphicsItem::Type)
+            zValue = item->zValue() + 0.1;
+    }
+    selectedItem->setZValue(zValue);
+}
 
 void MainWindow::exportView(bool)
 {

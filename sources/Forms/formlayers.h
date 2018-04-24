@@ -13,9 +13,16 @@
 // Includes
 // --------
 
-#include <QLabel>
+
 #include <QWidget>
 #include <QGraphicsScene>
+
+class QLabel;
+class QPushButton;
+
+//#include <QLabel>
+//#include <QWidget>
+//#include <QGraphicsScene>
 
 // Forward Declaration
 namespace Ui
@@ -38,6 +45,7 @@ class FormLayers: public QWidget
         ~FormLayers();
 
         void setScene(QGraphicsScene & scene);
+        const QPushButton* getUpButton();
 
     private:
 

@@ -32,6 +32,17 @@ FormLayers::~FormLayers()
     delete ui;
 }
 
+// Getters
+// -------
+
+const QPushButton* FormLayers::getUpButton()
+{
+    return ui->buttonUp;
+}
+
+// Setters
+// -------
+
 void FormLayers::setScene(QGraphicsScene& scene)
 {
     m_scene = &scene;
@@ -83,6 +94,16 @@ void FormLayers::ShowLayers()
 
 void FormLayers::updateLayers()
 {
+//    QGraphicsItem *selectedItem = scene->selectedItems().first();
+//    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+
+//    qreal zValue = 0;
+//    foreach (QGraphicsItem *item, overlapItems) {
+//        if (item->zValue() >= zValue && item->type() == DiagramItem::Type)
+//            zValue = item->zValue() + 0.1;
+//    }
+//    selectedItem->setZValue(zValue);
+
     m_zvalue++;
     ShowLayers();
 }

@@ -30,6 +30,7 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
+#include "Classes/layers.h"
 
 // Forward declaration
 namespace Ui
@@ -86,6 +87,9 @@ private:
         // Scene
         QGraphicsScene m_scene;
 
+        // Layers
+        Layers m_Layers;
+
         // Building
         void init();
         void buildMenu();
@@ -111,7 +115,9 @@ private:
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();        
 
+        // Modif Layers
         void slotLayers();
+        void slotLayersUp();
 };
 
 #endif
