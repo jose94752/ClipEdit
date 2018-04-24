@@ -76,17 +76,18 @@ protected:
     /// \brief mousePressEvent
     /// \param event
     ///
-    void mousePressEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
     ///
     /// \brief mouseMoveEvent
     /// \param event
     ///
-    void mouseMoveEvent(QMouseEvent *event) ;
+    void mouseMoveEvent(QMouseEvent *event) override ;
     ///
     /// \brief mouseReleaseEvent
     /// \param event
     ///
-    void mouseReleaseEvent(QMouseEvent *event);
+   // void mouseReleaseEvent(QMouseEvent *event) override;
+
 
 
 private:
@@ -148,6 +149,8 @@ private:
         ///
         QPoint m_point0;
         QPoint m_point1;
+
+
 
      private slots:
         ///
