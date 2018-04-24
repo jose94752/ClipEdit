@@ -23,7 +23,8 @@ PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* par
 {
 
     ptr->getPictureValues(path, height, width, grayscale, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
-    setRect(QRectF(0, 0, 2000, 2000));
+
+    setRect(QRectF(0, 0, width, height));
 }
 
 
@@ -53,11 +54,11 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
     QPen penHText(lg_color);
     painter->setPen(penHText);
-
+/*
     int pixelsWide = fm.width(lg_txt);
     int pixelsHigh = fm.height();
   const QRect rect_txt = QRect(0, 0, pixelsWide,  pixelsHigh);
-
+*/
   const QRect rect     = QRect(0, 0, width, height);
 
   QRect boundingRect;
@@ -73,11 +74,7 @@ Qt::AlignBottom
 Qt::AlignVCenter
 Qt::AlignCenter
 */
-
-
-
    //painter->drawText(rect, 0, lg_txt, &boundingRect);
-
 
 
          if (lg_pos == "Left")    {
@@ -105,8 +102,6 @@ Qt::AlignCenter
              painter->drawText(rect,  Qt::AlignRight  , lg_txt);
              }
     else qDebug()  <<"choix alignement  invalide"  << lg_pos;
-
-
 
 
   // painter.drawText(5, 50 - (5*(i+1)) - 10, 20, 30, Qt::AlignHCenter | Qt::AlignVCenter, strNumber);

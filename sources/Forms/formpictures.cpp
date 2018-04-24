@@ -34,6 +34,8 @@ FormPictures::FormPictures(QWidget *parent)
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
+      connect (ui->spinBox_pic_w, SIGNAL(valueChanged(int)), this, SLOT(picture_modification()));
+      connect (ui->spinBox_pic_h, SIGNAL(valueChanged(int)), this, SLOT(picture_modification()));
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
     ui->comboBox_lg_pos->addItem(tr("Right"));
@@ -88,7 +90,12 @@ void FormPictures::chose_picture()
 
      ui->lineEdit_pic_path->setText(s);
 
-     emit imageChosen();
+     emit picture_changed();
 
 }
 
+void FormPictures::picture_modification()
+{
+
+     emit picture_changed();
+}

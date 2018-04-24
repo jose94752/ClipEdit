@@ -83,7 +83,7 @@ void MainWindow::buildMenu()
     ui->actionSave->setDisabled(true);
 
     // Item insertion connects
-    connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
+    connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));

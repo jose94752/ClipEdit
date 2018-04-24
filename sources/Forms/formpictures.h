@@ -43,6 +43,7 @@ class FormPictures
     public slots:
 
         void chose_picture();
+        void picture_modification();
 
     private:
 
@@ -51,10 +52,9 @@ class FormPictures
 
     signals:
 
-        void imageChosen();
+        void picture_changed();
 
-        void WidtChanged();
-        void HeightChanged();
+
 
 };
 
