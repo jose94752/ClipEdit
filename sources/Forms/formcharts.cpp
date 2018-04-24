@@ -58,10 +58,23 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     {
        int arc = sl.at(i).toInt();
        infos.m_Arcs.append(arc);
-
        //qDebug() << "points arcs added " << arc;
     }
 
+    //points values for lines
+    //space on x axis for points
+    int dist =20;
+
+    for (int i = 0; i < sl.size(); ++i)
+    {
+       //qDebug() << "points Y added " << sl.at(i) ;
+
+       QPoint p( dist*i, infos.m_Arcs.at(i) );
+       infos.m_Points.append(p);
+       //qDebug() << "points added " << p.x() << " " << p.y();
+    }
+
+/*
     //Y values for line et area
     val = ui->qDataY->text();
     sl = val.split(",");
@@ -88,7 +101,7 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
        infos.m_Points2.append(p);
        qDebug() << "points added second serie" << p.x() << " " << p.y();
     }
-
+*/
 
 }
 

@@ -70,11 +70,13 @@ void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     {
         this->drawLine(painter, option, widget);
     }
+/*
     else
     if(m_infos.m_type == 3)
     {
         this->drawArea(painter, option, widget);
     }
+*/
 }
 
 
@@ -338,6 +340,17 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
     }
     painter->drawPolyline(poly );
 
+    //draw litle cercles around the points
+
+    int radius = 5;
+    pen.setColor(Qt::red);
+    pen.setWidth(1);
+    painter->setPen(pen);
+    for( int i=0; i<poly.size(); i++)
+    {
+        painter->drawEllipse( poly.at(i) ,radius, radius);
+    }
+
 /*
 //  debug
     qDebug() << "Nb points poligon" << vect.size();
@@ -348,6 +361,10 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
         qDebug() << "coords p1" << p1.x() << "  " << p1.y() << " coords p2 " << p2.x() << "  " << p2.y() ;
     }
 */
+
+    pen.setColor( m_infos.m_color);
+
+    painter->setPen(pen);
     painter->setFont(font);
     QPoint tp ( pictRect.x()+pictRect.width()/2 - fm.width( m_infos.m_title)/2, pictRect.bottomRight().y()+fm.height());
     painter->drawText(tp, m_infos.m_title);
@@ -356,7 +373,7 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
 }
 
 
-
+/*
 void GraphsGraphicsItem::drawArea(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     qDebug() << "Draw Area";
@@ -430,3 +447,4 @@ void GraphsGraphicsItem::drawArea(QPainter *painter, const QStyleOptionGraphicsI
 
     BaseGraphicItem::paint(painter, option, widget);
 }
+*/
