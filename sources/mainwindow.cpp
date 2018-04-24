@@ -64,26 +64,26 @@ void MainWindow::init()
 void MainWindow::buildMenu()
 {
     // Connects
-    connect(ui->actionSave,             SIGNAL( triggered(bool) ),  this,   SLOT( save(bool) ));
-    connect(ui->actionSaveAs,           SIGNAL( triggered(bool) ),  this,   SLOT( saveAs(bool) ));
-    connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
-    connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
-    connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    //connect(ui->action,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
+    connect(ui->actionSave,                 SIGNAL( triggered(bool) ),  this,   SLOT( save(bool) ));
+    connect(ui->actionSaveAs,               SIGNAL( triggered(bool) ),  this,   SLOT( saveAs(bool) ));
+    connect(ui->actionOpen,                 SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
+    connect(ui->actionExportAs,             SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
+    connect(ui->actionNew,                  SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
+    connect(ui->actionSet_Background_Color, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor(bool)));
 
-    connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionClipart,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionNumberedBullets,  SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionPicture,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionScreenshot,       SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionTextBox,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionLayers,           SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionAbout,            SIGNAL( triggered(bool) ),  this,   SLOT( showAboutDialog(bool) ));
+    connect(ui->actionArrow,                SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionChart,                SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionClipart,              SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionNumberedBullets,      SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionPicture,              SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionScreenshot,           SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionTextBox,              SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionLayers,               SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionAbout,                SIGNAL( triggered(bool) ),  this,   SLOT( showAboutDialog(bool) ));
 
-    connect(ui->actionResize,           SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
-    connect(ui->actionContentToView,      SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
-    connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
+    connect(ui->actionResize,               SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
+    connect(ui->actionContentToView,        SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
+    connect(ui->actionClear,                SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
 
     ui->actionSave->setDisabled(true);
 
