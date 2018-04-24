@@ -34,8 +34,8 @@ FormPictures::FormPictures(QWidget *parent)
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
-      connect (ui->spinBox_pic_w, SIGNAL(valueChanged(int)), this, SLOT(picture_modification_w(int)));
-      connect (ui->spinBox_pic_h, SIGNAL(valueChanged(int)), this, SLOT(picture_modification_h(int)));
+      connect (ui->spinBox_pic_w, SIGNAL(valueChanged(int)), this, SLOT(picture_modification_w()));
+      connect (ui->spinBox_pic_h, SIGNAL(valueChanged(int)), this, SLOT(picture_modification_h()));
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
     ui->comboBox_lg_pos->addItem(tr("Right"));
@@ -55,11 +55,13 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
+void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &w_h_fixed, char &w_h, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
 {
     path        = ui->lineEdit_pic_path->text();
     height      = ui->spinBox_pic_h->value();
     width       = ui->spinBox_pic_w->value();
+    w_h_fixed   = ui->checkBox_pic_fx->isChecked();
+    w_h         = ' ';
     black_white = ui->checkBox_pic_black_white->isChecked();
     opacity     = ui->horizontalSlider_pic_opacity->value();
     lg_txt      = ui->lineEdit_lg_txt->text();
@@ -93,24 +95,22 @@ void FormPictures::chose_picture()
      emit picture_changed();
 
 }
-void FormPictures::picture_modification_w(int w)
-{
-    if (ui->checkBox_pic_fx->isChecked()) {
 
-    }
-
-
-     emit picture_changed();
-}
-
-void FormPictures::picture_modification_h(int h)
-{
-
-     emit picture_changed();
-}
 
 void FormPictures::picture_modification()
 {
 
+     emit picture_changed();
+}
+
+void FormPictures::picture_modification_w()
+{
+     w_h = 'w';
+     emit picture_changed();
+}
+
+void FormPictures::picture_modification_h()
+{
+     w_h = 'h';
      emit picture_changed();
 }

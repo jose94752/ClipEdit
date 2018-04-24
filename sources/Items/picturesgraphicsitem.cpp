@@ -22,7 +22,7 @@ PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* par
     :   BaseGraphicItem(parent)
 {
 
-    ptr->getPictureValues(path, height, width, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
+    ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
     setRect(QRectF(0, 0, width, height));
 }
@@ -39,6 +39,21 @@ QRectF PicturesGraphicsItem::boundingRect() const
 
 void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    if(w_h_fixed) {
+        switch ( w_h )
+              {case 'w':
+               modification_width();
+               break;
+
+               case 'h':
+               modification_height();
+               break;
+
+               //default:
+              }
+    }
+
+
 
   painter->drawPixmap(0, 0, width, height, path);
   //painter->drawText( QRectF (0,0, width, height),"coucou");
@@ -116,7 +131,13 @@ int PicturesGraphicsItem::type() const
     return Type::ImageGraphicsItem;
 }
 
+void PicturesGraphicsItem::modification_width (){
 
+}
+
+void PicturesGraphicsItem::modification_height (){
+
+}
 
 /*
 
