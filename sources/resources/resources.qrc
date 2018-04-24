@@ -24,6 +24,7 @@
         <file>icons/icon-align-right.png</file>
         <file>icons/clear-icon.png</file>
         <file>icons/icon-fit-in-view.png</file>
+        <file>icons/eye.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>
