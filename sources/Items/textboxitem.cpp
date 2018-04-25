@@ -28,10 +28,10 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
 {
     m_text = "Sample Text";
     m_font = QFont();
-    m_alignmentFlags = Qt::AlignLeft;
+    m_alignmentFlag = Qt::AlignLeft;
 
     m_backgroundColor = QColor(Qt::white);
-    m_fontColor = QColor(Qt::black);
+    m_textColor = QColor(Qt::black);
     m_borderColor = QColor(Qt::black);
     m_hasBorders = true;
     m_borderWidth = 1;
@@ -40,54 +40,6 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
     textToRect();
     setPos(0, 0);
 }
-
-TextBoxItem::TextBoxItem(const QMap<QString, QVariant>& data, QGraphicsItem* parent)
-    :   BaseGraphicItem(parent)
-{
-    if (data.contains("text"))
-        m_text = data["text"].toString();
-
-    if (data.contains("font"))
-        m_font.fromString(data["font"].toString());
-
-    if (data.contains("alignment"))
-        m_alignmentFlags = (Qt::AlignmentFlag)data["alignment"].toInt();
-    else
-        m_alignmentFlags = Qt::AlignLeft;
-
-    if (data.contains("background-color"))
-        m_backgroundColor = QColor(data["background-color"].toString());
-
-
-    if (data.contains("font-color"))
-        m_fontColor = QColor(data["font-color"].toString());
-
-
-    if (data.contains("border-color"))
-        m_borderColor = QColor(data["border-color"].toString());
-
-
-    if (data.contains("border-visible"))
-        m_hasBorders = data["border-visible"].toBool();
-    else
-        m_hasBorders = true;
-
-
-    if (data.contains("border-width"))
-        m_borderWidth = data["border-width"].toInt();
-    else
-        m_borderWidth = 1;
-
-
-    if (data.contains("border-radius"))
-        m_borderRadius = data["border-radius"].toInt();
-    else
-        m_borderRadius = 5;
-
-    textToRect();
-    setPos(0, 0);
-}
-
 
 // Virtual methods from BaseGraphicItem
 // ------------------------------------
@@ -118,11 +70,11 @@ void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *optio
         painter->drawPath(path);
 
     // Text
-    pen.setColor(m_fontColor);
+    pen.setColor(m_textColor);
     pen.setWidth(1);
     painter->setFont(m_font);
     painter->setPen(pen);
-    painter->drawText(textRect, m_alignmentFlags, m_text);
+    painter->drawText(textRect, m_alignmentFlag, m_text);
 
     BaseGraphicItem::paint(painter, option, widget);
 }
@@ -144,45 +96,42 @@ void TextBoxItem::textToRect()
    setRect(rect);
 }
 
-// Setters
-// -------
+// Getters and setters
+// -------------------
 
-
-void TextBoxItem::setText(const QString& text)
+QVariant TextBoxItem::getItemData()
 {
-    m_text = text;
+    QVariantHash data;
+
+    data["text"] = m_text;
+    data["font"] = m_font.toString();
+    data["alignment"] = m_alignmentFlag;
+    data["background-color"] = m_backgroundColor.name();
+    data["text-color"] = m_textColor.name();
+    data["border-color"] = m_borderColor.name();
+    data["border-visible"] = m_hasBorders;
+    data["border-width"] = m_borderWidth;
+    data["border-radius"] = m_borderRadius;
+
+    return data;
 }
 
-void TextBoxItem::setFont(const QFont& font)
+void TextBoxItem::setItemData(const QVariant& data)
 {
-    m_font = font;
-}
+    QVariantHash vh = data.toHash();
 
-void TextBoxItem::setBackgroundColor(const QColor& color)
-{
-    m_backgroundColor = color;
-    update();
-}
+    m_text = vh["text"].toString();
+    m_font.fromString(vh["font"].toString());
+    m_alignmentFlag = (Qt::AlignmentFlag)vh["alignment"].toInt();
 
-void TextBoxItem::setTextColor(const QColor& color)
-{
-    m_backgroundColor = color;
-    update();
-}
+    m_backgroundColor = QColor(vh["background-color"].toString());
+    m_textColor = QColor(vh["text-color"].toString());
+    m_borderColor = QColor(vh["border-color"].toString());
 
-void TextBoxItem::setHasBorders(bool hasBorders)
-{
-    m_hasBorders = hasBorders;
-    update();
-}
+    m_hasBorders = vh["border-visible"].toBool();
+    m_borderWidth = vh["border-width"].toInt();
+    m_borderRadius = vh["border-radius"].toInt();
 
-void TextBoxItem::setBorderWidth(int width)
-{
-    m_borderWidth = width;
-}
-
-void TextBoxItem::setBorderRadius(int radius)
-{
-    m_borderRadius = radius;
+    textToRect();
     update();
 }
