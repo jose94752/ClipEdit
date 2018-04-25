@@ -43,6 +43,9 @@ class FormTextBoxes
         const QPushButton* getAddButton();
         QMap<QString, QVariant> getInfos();
 
+        QVariant getItemData();
+        void setItemData(const QVariant& data);
+
     private:
 
         // Ui

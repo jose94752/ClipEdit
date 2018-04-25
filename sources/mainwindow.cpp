@@ -333,17 +333,21 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     {
         case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
-            qgraphicsitem_cast<TextBoxItem*>(item);
-            ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+            TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
 
-            // Load item properties into the form
-
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+                //m_formTextboxes.setItemData(item->itemData());
+            }
         } break;
         case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
         {
 
         } break;
-
+        case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+        {
+        }
     }
 }
 

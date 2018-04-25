@@ -68,3 +68,36 @@ QMap<QString, QVariant> FormTextBoxes::getInfos()
 
     return res;
 }
+
+QVariant FormTextBoxes::getItemData()
+{
+    QVariant data;
+
+    return data;
+}
+
+void FormTextBoxes::setItemData(const QVariant& data)
+{
+    // Set the field from the stored data
+    QVariantHash vh = data.toHash();
+
+    QFont f;
+    f.fromString(vh["font"].toString());
+
+    ui->plainTextEdit->setPlainText(vh["text"].toString());
+    ui->fontComboBox->setCurrentFont(f);
+    ui->spinBoxPointSize->setValue(f.pointSize());
+    ui->checkBoxBold->setChecked(f.bold());
+    ui->checkBoxItalic->setChecked(f.italic());
+
+    int idx = ui->comboBoxAlignment->findData(vh["alignment"].toInt());
+    ui->comboBoxAlignment->setCurrentIndex(idx);
+
+    ui->pushButtonBackgroundColor->setColor(QColor(vh["background-color"].toString()));
+    ui->pushButtonTextColor->setColor(QColor(vh["text-color"].toString()));
+    ui->pushButtonBorderColor->setColor(QColor(vh["border-color"].toString()));
+
+    ui->checkBoxHasBorders->setChecked(vh["border-visible"].toBool());
+    ui->spinBoxBorderWidth->setValue(vh["border-width"].toInt());
+    ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
+}
