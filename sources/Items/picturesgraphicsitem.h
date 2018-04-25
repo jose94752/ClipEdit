@@ -51,9 +51,11 @@ class PicturesGraphicsItem
         QString lg_pos;
 
 
-        void modification_width (QPainter* painter);
+        void modification_width ();
 
-        void modification_height(QPainter* painter);
+        void modification_height();
+
+
 private:
 
         QPainter  m_picture;

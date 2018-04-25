@@ -44,8 +44,8 @@ class FormPictures
 
         void chose_picture();
         void picture_modification();
-        void picture_modification_w(int);
-        void picture_modification_h(int);
+        void picture_modification_w();
+        void picture_modification_h();
 
 
     private:
