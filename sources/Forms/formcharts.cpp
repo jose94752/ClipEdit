@@ -86,7 +86,9 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.m_legendFont.setFamily("times");
     infos.m_legendFont.setPointSize(10);
 
-    infos.m_Legends = ui->qLegends->text().split(",");
+    infos.m_Legends = ui->qLegends->text().split(",", QString::SkipEmptyParts);
+
+    qDebug() << "Legends numero" << infos.m_Legends.size();
 
 
     /*
