@@ -26,6 +26,9 @@
 #include<QDebug>
 #include<exception>
 #include<QRect>
+#include<QPointF>
+#include<QGraphicsView>
+
 
 
 // Constructor, destructor
@@ -35,6 +38,7 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     :   QWidget(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
+
 
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
@@ -73,7 +77,7 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
 
     //This property holds the cursor shape for this widget.
-    //m_savedcursor=cursor();
+   // m_savedcursor=cursor();
 
     //A crosshair cursor is used to help the user accurately
     //select a point on the screen.
@@ -83,22 +87,20 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
     ui->spinBoxDelay->setSuffix(" s "); //OK it works
     ui->spinBoxDelay->setMaximum(60);   //idem
-    ui->spinBoxDelay->setValue(3);
+    ui->spinBoxDelay->setValue(1);
 
     //connect pour tempo: option
 //    connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
 //            this, &FormScreenshots::updatehide);
 
 
+
+
     //OK
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 
-
-
 }
-
-
 
 FormScreenshots::~FormScreenshots()
 {
@@ -107,57 +109,21 @@ FormScreenshots::~FormScreenshots()
    delete ui;
 }
 
-//void FormScreenshots::Capture()
-//{
-//         enum TypeCapture { WholeScreen, Region };
-
-//         switch (WholeScreen) {
-//         case WholeScreen:
-//             if(ui->radioButtonWholecapture->isChecked()){
-
-//                    //CaptureWholeScreen();
-//                 m_formScreenshots = new FormScreenshots(0);
-
-//               // QTimer::singleShot(m_delayspinbox->value() * 3000,
-//                //                    this, SLOT(CaptureWholeScreen()));
-//             }
-
-//             break;
-//         default:
-//             close();
-//             break;
-//         }
-
-//}
-
-
-
 void FormScreenshots::CaptureWholeScreen()
 {
-    //step0:
+    //step1:
     hide();
     QTimer::singleShot(500, this, SLOT(snapshot()));  // long enough for window manager effects
+}
 
-    //step1
+void FormScreenshots::CaptureRegion(bool val, QRect r)
+{
+   m_formScreenshots->close();
 
-//    QScreen *screen = QApplication::primaryScreen();
-
-//    if(const QWindow *window = windowHandle())
-//        screen = window->screen();
-
-//    if(!screen) return;
-
-//     //The grabWindow() function grabs pixels from the screen, not from the window.
-//      m_pixmap = screen->grabWindow(0);
-
-    //step2
-//    m_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-//    m_label->setAlignment(Qt::AlignCenter);
-
-//   const QRect screenGeometry = QApplication::desktop()->screenGeometry(this);
-//    m_label->setMinimumSize(screenGeometry.width() / 8, screenGeometry.height() / 8);
-
-
+   if(val) {
+       m_region =r;
+       QTimer::singleShot(200, this, SLOT(CaptureArea()));
+   }
 }
 
 
@@ -196,55 +162,96 @@ void FormScreenshots::CaptureWholeScreen()
 //}
 
 void FormScreenshots::mousePressEvent(QMouseEvent *event)
-{
-   //code: if m_point0 = m_point1 we get the whole screen.
-   // FormScreenshots::mousePressEvent(event);
+{    QPoint point1;
+     point1 = event->globalPos();
 
+
+    // Q_UNUSED(event)
+    /**
+   //code: if m_point0 = m_point1 we get the whole screen.
     m_buttonpressed=true;
     m_point0=event->pos();
     m_point1=m_point0;
-}
+    */
+    //Whole screen capture
+   // CaptureWholeScreen();
 
-void FormScreenshots::mouseMoveEvent(QMouseEvent *event)
-{
-    //code
-    //FormScreenshots::mouseMoveEvent(event);
-    this->x = event->x();
-    this->y = event->y();
-
-    if(m_buttonpressed )
-    {
-        //Returns the position of the mouse cursor,
-        //relative to the widget that received the event.
-        //A widget that is not embedded in a parent widget is called a window.
-
-         m_point1 =event->pos();
-        update();
-    }
+//    if(event->MouseButtonPress) {
+//        qDebug() << "is clicked";
+//        QPoint point;
+//        x=point.x();
+//        qDebug()<<x;
+//        y= point.y();
+//        qDebug()<<y;
+//        qDebug()<<point;
+//    }
+   //CaptureWholeScreen();
 }
 
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 {
-    //code
-    //FormScreenshots::mouseReleaseEvent(event);
 
-    emit mouseReleaseEvent();
+//    QPoint m_point1;
+//    m_point1 = event->globalPos();//get global position according to ur parent-child relationship
+//    QPainter m_painter(this);
 
-    m_buttonpressed=false;
-    emit dimensionsMade(true, m_region);
-    close();
+    //m_painter->
+   // p->drawRect(point1, point2);
+
+
+ //   Q_UNUSED(event)
+//    emit mouseReleaseEvent();
+//    m_buttonpressed=false;
+//    emit dimensionsMade(true, m_region);
+//    close();
+
+//    if(event->MouseButtonRelease)
+//     {
+//         qDebug () << "released";
+//        // QPointF point1= ui->graphicsView->mapFromScene(e->posF());
+//         QPoint point1;
+//         x1=point1.x();
+//         qDebug()<<x1;
+//         y1= point1.y();
+//         qDebug()<<y1;
+//         qDebug()<<point1;
+//     }
 }
+
 
 void FormScreenshots::snapshot()
 {
+
+    //step1
+    static int count = 0;
+
     QPixmap p = QPixmap::grabWindow(QApplication::desktop()->winId());
-    p.save("/home/formation/screenshot.png");
+    p.save(QString("/home/toumi/doCapture/screenshot%1.png").arg(count));
+    count++;
     show();
 
     //qApp is global pointer referring to the unique application object.
-    QTimer::singleShot(3000, qApp, SLOT(quit())); // close the app in 3 secs
+    QTimer::singleShot(300, qApp, SLOT(quit())); // close the app in 0,3 secs
 }
 
+void FormScreenshots::CaptureArea()
+{
+    //code
+//    QScreen *screen = QGuiApplication::primaryScreen();
+//    if (const QWindow *window = windowHandle())
+//         screen = window->screen();
+//    if (!screen)
+//           return;
+//    this->hide();
+//    m_pixmap = screen->grabWindow(0);
+//    QRect rec(m_region.x()+1,m_region.y()+1,m_region.width()-1,m_region.height()-1);
+//    QPixmap pix=m_pixmap.copy(rec);
+//    m_pixmap=pix;
+
+//   FormScreenshots *w = new FormScreenshots(this);
+//    connect (w,SIGNAL(InsertImageText(QString)),this,SIGNAL(InsertImageText(QString)));
+//    w->show();
+}
 
 void FormScreenshots::updatehide()
 {

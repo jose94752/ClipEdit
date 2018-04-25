@@ -11,6 +11,7 @@
 // --------
 
 #include <QDebug>
+#include <QtWidgets>
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -30,6 +31,9 @@
 #include "Items/textboxitem.h"
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
+#include "Items/screenshotsgraphicsitem.h"
+#include <QApplication>
+#include <QDesktopWidget>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -57,6 +61,7 @@ void MainWindow::init()
 {
     buildMenu();
     buildToolBar();
+    buildStackedWidget();
     buildView();
 }
 
@@ -64,40 +69,72 @@ void MainWindow::init()
 void MainWindow::buildMenu()
 {
     // Connects
-    connect(ui->actionSave,             SIGNAL( triggered(bool) ), this, SLOT( save(bool) ));
-    connect(ui->actionSaveAs,           SIGNAL( triggered(bool) ), this, SLOT( saveAs(bool) ));
-    connect(ui->actionOpen,             SIGNAL( triggered(bool) ), this, SLOT( openFile(bool) ));
-    connect(ui->actionExportAs,         SIGNAL( triggered(bool) ), this, SLOT( exportView(bool) ));
-    connect(ui->actionResize,           SIGNAL( triggered(bool) ), this, SLOT( resizeTold(bool) ));
-    connect(ui->actionNew,              SIGNAL( triggered(bool) ), this, SLOT( slotNew(bool) ));
-    connect(ui->actionArrow,            SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionChart,            SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionClipart,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionNumberedBullets,  SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionPicture,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionScreenshot,       SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionTextBox,          SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionLayers,           SIGNAL( triggered(bool) ), this, SLOT( actionClicked(bool) ));
-    connect(ui->actionAbout,            SIGNAL( triggered(bool) ), this, SLOT( showAboutDialog(bool) ));
+    connect(ui->actionSave,             SIGNAL( triggered(bool) ),  this,   SLOT( save(bool) ));
+    connect(ui->actionSaveAs,           SIGNAL( triggered(bool) ),  this,   SLOT( saveAs(bool) ));
+    connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
+    connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
+    connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
+    connect(ui->actionQuit,             SIGNAL( triggered(bool) ),  this,   SLOT( close() ));
+
+    connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionClipart,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionNumberedBullets,  SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionPicture,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionScreenshot,       SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionTextBox,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionLayers,           SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
+    connect(ui->actionAbout,            SIGNAL( triggered(bool) ),  this,   SLOT( showAboutDialog(bool) ));
+
+    connect(ui->actionResize,           SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
+    connect(ui->actionContentToView,    SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
+    connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
+    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
     ui->actionSave->setDisabled(true);
 
     // Item insertion connects
-    connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
+    connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
+    connect(m_formBullets.getToolButton_saveBulletConfig(),SIGNAL(clicked(bool)), SLOT(slotNumberedBulletsSaveConfig()));
+
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
-    //connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenshot()));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
-    //
+    // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-
+    //retriving saved values
 }
 
 void MainWindow::buildToolBar()
+{
+    // Left side built from the designer
+
+    // Inserting a spacer widget
+    QWidget* spacer = new QWidget();
+    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->toolBar->addWidget(spacer);
+
+    // Zoom
+    m_spinBoxZoom = new QSpinBox(this);
+    m_spinBoxZoom->setMinimum(10);
+    m_spinBoxZoom->setMaximum(400);
+    m_spinBoxZoom->setValue(100);
+    m_spinBoxZoom->setSingleStep(10);
+    m_spinBoxZoom->setSuffix("%");
+    m_spinBoxZoom->setAlignment(Qt::AlignHCenter);
+    m_spinBoxZoom->setToolTip(tr("Zoom level"));
+    //m_spinBoxZoom->setButtonSymbols(QAbstractSpinBox::NoButtons);
+    connect(m_spinBoxZoom, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setZoomLevel(int)));
+
+    ui->toolBar->addWidget(m_spinBoxZoom);
+}
+
+void MainWindow::buildStackedWidget()
 {
     // Remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
@@ -121,8 +158,16 @@ void MainWindow::buildToolBar()
 
 void MainWindow::buildView()
 {
-    m_scene.setSceneRect(-400, -400, 800, 800);
+    QDesktopWidget *deskWidget=QApplication::desktop();
+    int dpix=deskWidget->logicalDpiX();
+    int dpiy=deskWidget->logicalDpiY();
+    m_width=210*dpix/25.4;
+    m_height=297*dpiy/25.4;
+    m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
+    ui->graphicsView->setGraphicsRectItem((QGraphicsRectItem*)m_borderSceneItem);
     ui->graphicsView->setScene(&m_scene);
+
+    connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
 
 // Slots
@@ -151,15 +196,15 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this,&m_scene);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
 }
 
 void MainWindow::slotNew(bool)
 {
-    DialogSave dialogSave(this,m_scene.items());
+    DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(this,&m_scene);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -167,6 +212,9 @@ void MainWindow::slotNew(bool)
     }
 }
 
+///
+/// \brief MainWindow::slotNumberedBullets
+///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
@@ -179,25 +227,45 @@ void MainWindow::slotNumberedBullets()
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
+  if (to < from) {
+      qDebug () << "invalid interval\n";
+      return;
+  }
   int numbullet (from);
-  qreal posx (0), posy (50), delta (100);
+  QPointF scene_topleft (m_scene.sceneRect().topLeft());
+  QPointF scene_topright (m_scene.sceneRect().topRight());
+  QPointF bulletpos (scene_topleft);
+  qreal delta (0);
+  delta = scene_topright.y() - scene_topleft.y();
+  bulletpos.setY(scene_topleft.y () + delta /5);
+  //qreal posx (0), posy (50), delta (100);
   for (; numbullet != to+1; ++numbullet) {
     numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
-    numberedBulletGraphicItem->setPos(posx, posy);
+    //numberedBulletGraphicItem->setPos(posx, posy);
+    numberedBulletGraphicItem->setPos (bulletpos);
     m_scene.addItem(numberedBulletGraphicItem);
-    posx += delta;
+    delta = numberedBulletGraphicItem->rect ().width ();
+    if (bulletpos.x () + delta < scene_topright.x ()) {
+      bulletpos.setX(bulletpos.x() + delta);
+    }
   }
+}
+
+void MainWindow::slotNumberedBulletsSaveConfig () {
+  m_formBullets.save_config ();
 }
 
 void MainWindow::slotTextBoxes(bool)
 {
     // Retrieve data from the form
-    QMap<QString, QVariant> data = m_formTextboxes.getInfos();
-    m_scene.addItem(new TextBoxItem(data));
+    QVariant data = m_formTextboxes.getItemData();
+    TextBoxItem* item = new TextBoxItem();
+    item->setItemData(data);
+    m_scene.addItem(item);
 }
 
 void MainWindow::slotTextPicture()
-{
+{   qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
     m_scene.clear();
     m_scene.addItem(PictureItem);
@@ -243,6 +311,53 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
+
+void MainWindow::slotScreenshot()
+{
+     //Get screen capture
+
+    qDebug () << "mainWindow slot of the Screenshot";
+
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    m_scene.clear();
+    m_scene.addItem(sc);
+}
+
+void MainWindow::itemSelected(QGraphicsItem* item)
+{
+    // An item have been selected
+    // Three steps from now
+    // 1. Check type
+    // 2. Load associated form
+    // 3. Fill the form
+
+    // Really dirty, would like to make it cleaner in the future
+    if (!item)
+        return;
+
+    switch (item->type())
+    {
+        case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
+        {
+            TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+                m_formTextboxes.setItemData(castedItem->getItemData());
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        {
+
+        } break;
+        case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+        {
+        }
+    }
+}
+
+// Layers
 void MainWindow::slotLayers()
 {
 //    qDebug() << "MainWindow::slotLayers()" ;
@@ -250,10 +365,34 @@ void MainWindow::slotLayers()
     m_formLayers.setScene(m_scene);
 }
 
+void MainWindow::layerSelected()
+{
+}
 
 void MainWindow::exportView(bool)
 {
-    // To do
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export as image"), "output.png" , tr("Image File (*.png)"));
+
+    if (fileName.isEmpty())
+        return;
+
+    QString extfilename = Save::verifyExtension(fileName, "png");
+    QFile fileToSave(extfilename);
+
+    if (fileName != extfilename && fileToSave.exists())
+    {
+        DialogFileAlreadyExists d;
+        d.exec();
+    }
+    else
+    {
+        QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);
+        image.fill(Qt::white);
+
+        QPainter painter(&image);
+        m_scene.render(&painter);
+        image.save(extfilename);
+    }
 }
 
 
@@ -263,7 +402,8 @@ void MainWindow::openFile(bool)
           tr("Open ClipEdit Project"), "/home", tr("ClipEdit Files (*.cle)"));
     if(fileName!=""){
         Save save(&m_scene,fileName);
-        save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
+        //save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
+        //save.open();
     }
 }
 
@@ -271,7 +411,7 @@ void MainWindow::openFile(bool)
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
-    save.save();
+    //save.save();
 }
 
 
@@ -279,7 +419,7 @@ void MainWindow::saveAs(bool)
 {
     QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"project.cle",tr("ClipEdit File (*.cle)"));
     if(fileName!=""){
-        QString extfilename=Save::verifyExtension(fileName);
+        QString extfilename=Save::verifyExtension(fileName,"cle");
         QFile fileToSave(extfilename);
         if(fileName!=extfilename && fileToSave.exists()){
             DialogFileAlreadyExists dfae;
@@ -287,7 +427,7 @@ void MainWindow::saveAs(bool)
         }else{
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(),extfilename);
-            save.save();
+            //save.save();
         }
     }
 }

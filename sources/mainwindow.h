@@ -17,9 +17,10 @@
 #include <QMap>
 #include <QGraphicsScene>
 
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
+//#include <QtCharts/QChartView>
+//#include <QtCharts/QLineSeries>
+//#include <QtCharts/QAreaSeries>
+#include <QRectF>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -30,6 +31,9 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
+#include "Classes/layers.h"
+
+class QToolButton;
 
 // Forward declaration
 namespace Ui
@@ -83,13 +87,25 @@ private:
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
 
+        int m_width;
+        int m_height;
+
         // Scene
         QGraphicsScene m_scene;
+
+        QGraphicsRectItem *m_borderSceneItem;
+
+        // Layers
+        Layers m_Layers;
+
+        // Zoom
+        QSpinBox* m_spinBoxZoom;
 
         // Building
         void init();
         void buildMenu();
         void buildToolBar();
+        void buildStackedWidget();
         void buildView();
 
     private slots:
@@ -104,14 +120,20 @@ private:
         void slotNew(bool);
         void showAboutDialog(bool);
 
-        // Item insertions
+        // Items
         void slotNumberedBullets();
+        void slotNumberedBulletsSaveConfig();
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
-        void slotArrowsGraphicsItem();        
+        void slotArrowsGraphicsItem();
+        void slotScreenshot();
 
+        void itemSelected(QGraphicsItem* item);
+
+        // Layers
         void slotLayers();
+        void layerSelected();
 };
 
 #endif

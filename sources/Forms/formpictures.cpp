@@ -34,6 +34,8 @@ FormPictures::FormPictures(QWidget *parent)
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
+      connect (ui->spinBox_pic_w, SIGNAL(editingFinished())  , this, SLOT(picture_modification_w()));
+      connect (ui->spinBox_pic_h, SIGNAL(editingFinished())  , this, SLOT(picture_modification_h()));
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
     ui->comboBox_lg_pos->addItem(tr("Right"));
@@ -53,24 +55,26 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &grayscale, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
+void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &w_h_fixed, char &w_h, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
 {
-    path       = ui->lineEdit_pic_path->text();
-    height     = ui->spinBox_pic_h->value();
-    width      = ui->spinBox_pic_w->value();
-    grayscale  = ui->checkBox_pic_grayscale->isChecked();
-    opacity    = ui->horizontalSlider_pic_opacity->value();
-    lg_txt     = ui->lineEdit_lg_txt->text();
-    lg_font    = ui->fontComboBox_lg_font->currentFont();
-    lg_size    = ui->spinBox_lg_size->value();
-    lg_color   = ui->toolButton_color->getColor();
-    lg_pos     = ui->comboBox_lg_pos->currentText();
+    path        = ui->lineEdit_pic_path->text();
+    height      = ui->spinBox_pic_h->value();
+    width       = ui->spinBox_pic_w->value();
+    w_h_fixed   = ui->checkBox_pic_fx->isChecked();
+    w_h         = w_h1;
+    black_white = ui->checkBox_pic_black_white->isChecked();
+    opacity     = ui->horizontalSlider_pic_opacity->value();
+    lg_txt      = ui->lineEdit_lg_txt->text();
+    lg_font     = ui->fontComboBox_lg_font->currentFont();
+    lg_size     = ui->spinBox_lg_size->value();
+    lg_color    = ui->toolButton_color->getColor();
+    lg_pos      = ui->comboBox_lg_pos->currentText();
 
 }
 
 void FormPictures::chose_picture()
 {
-
+     qDebug()<<"FORM: picture  changed";
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), "/home/formation/Images/image_01.jpeg", tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
 
     QPixmap file_image (fileName);
@@ -88,7 +92,31 @@ void FormPictures::chose_picture()
 
      ui->lineEdit_pic_path->setText(s);
 
-     emit imageChosen();
+  qDebug()<<"FORM: picture  changed";
+     emit picture_changed();
 
 }
 
+
+void FormPictures::picture_modification()
+{
+     emit picture_changed();
+}
+
+void FormPictures::picture_modification_w()
+{
+    emit picture_changed();
+    w_h1 = 'w';
+    emit picture_changed_w_h(w_h1);
+
+     qDebug() <<"form  W : w_h:"  <<w_h1  ;
+}
+
+void FormPictures::picture_modification_h()
+{
+    emit picture_changed();
+    w_h1 = 'h';
+    emit picture_changed_w_h(w_h1);
+
+    qDebug() <<" form H : w_h:"  <<w_h1 ;
+}

@@ -12,7 +12,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-
+#include <QToolButton>
 
 // Forward Declaration
 namespace Ui
@@ -34,8 +34,12 @@ class FormNumberedBullets: public QWidget
         explicit FormNumberedBullets(QWidget* parent = 0);
 
         ~FormNumberedBullets();
-        void get_info (int& /*from*/, int& /*to*/, int& taille, int& shape, QColor& button_color, QColor& number_color, QFont&);
+        void get_info (int& /*from*/, int& /*to*/, int& taille, int& shape, QColor& button_color, QColor& number_color, QFont&) const;
         QPushButton *getGoPushButton();
+        QToolButton *getToolButton_saveBulletConfig ();
+        void setFrom (const int&);
+        void save_config () const;
+        void load_config ();
     private:
 
         // UI

@@ -31,14 +31,19 @@ class PicturesGraphicsItem
         // Constructor
         PicturesGraphicsItem (FormPictures* ptr, QGraphicsItem* parent = 0);
 
+
+
         // Pure virtual methods implementation
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         int type() const ;
 
         QString path;
-        int     height, width, opacity;
-        bool    grayscale;
+        int     height, width;
+        bool    w_h_fixed;
+        char    w_h;
+        int     opacity;
+        bool    black_white;
         QString lg_txt;
         QFont   lg_font;
         int     lg_size;
@@ -46,9 +51,19 @@ class PicturesGraphicsItem
         QString lg_pos;
 
 
-    private:
+        void modification_width ();
+
+        void modification_height();
+
+
+private:
 
         QPainter  m_picture;
+        FormPictures* ptr_1;
+
+
+private slots:
+   void change_w_h(char w_h);
 };
 
 #endif

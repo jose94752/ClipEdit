@@ -24,11 +24,8 @@
 // Defines
 // -------
 
-//#define NUMBERPOINTS  200
-
 // Classes
 // -------
-
 class GraphsInfo
 {
 public :
@@ -36,27 +33,37 @@ public :
     QRectF m_boundingRect;
     QColor m_backColor;
     QColor m_color;
-    QString m_xAxes;
-    QString m_yAxes;
+
     int m_type;
 
     bool m_transparent;
-    //int m_nbPoints;
-    //QPointF m_xPoints[NUMBERPOINTS];
-    //QPointF m_yPoints[NUMBERPOINTS];
-    //QString m_legends[NUMBERPOINTS];
 
+    //values for pie and histogram
     QList<int> m_Arcs;
+
+    //values for line
+    QList<QPoint> m_Points;
+
+    QFont m_titleFont;
+    QFont m_legendFont;
+
+    QList<QString> m_Legends;
+    QList<QColor> m_Colors;
+
+
+    QString m_xAxes;
+    QString m_yAxes;
+    //second serie for area
+    //QList<QPoint> m_Points2;
 
 };
 
-class GraphsGraphicsItem
-    :   public BaseGraphicItem
+class GraphsGraphicsItem : public BaseGraphicItem
 {
     public:
 
         // Constructor
-        GraphsGraphicsItem(QGraphicsItem* parent = 0);
+        GraphsGraphicsItem( QGraphicsItem* parent = 0);
 
         // Pure virtual methods implementation
         QRectF boundingRect() const;
@@ -71,9 +78,24 @@ class GraphsGraphicsItem
 
         GraphsInfo m_infos;
 
+        // local variables for drawing
+        QRectF m_titleRect;
+        QRectF m_legendRect;
+        QRectF m_pictRect;
+
         // Drawing
         void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         void drawHisto(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void drawLine(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+
+        //void drawArea(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void drawTitle(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+        void drawLegend(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+        void calculRects();
+
+        void drawAxis(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif

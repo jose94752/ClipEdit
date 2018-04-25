@@ -13,9 +13,13 @@
 // Includes
 // --------
 
-#include <QLabel>
+
 #include <QWidget>
 #include <QGraphicsScene>
+
+class QLabel;
+class QPushButton;
+class QTableWidgetItem;
 
 // Forward Declaration
 namespace Ui
@@ -39,29 +43,27 @@ class FormLayers: public QWidget
 
         void setScene(QGraphicsScene & scene);
 
-    private:
+private slots:
 
-        // Ui
-        Ui::FormLayers *ui;
+        void cellActivated(int row, int column);
+        void contextMenu(const QPoint &pos);
 
-        ///
-        /// \brief m_zvalue for each GraphicsItem
-        ///
-        qreal m_zvalue;
-
-        QLabel *Icon(QIcon icon);
-        ///
-        /// \brief ShowLayers : show the layers in layers stacked
-        ///
-        void ShowLayers();
-        ///
-        /// \brief updateLayers increment m_zvalue and update list of layerswidget
-        ///
-        void updateLayers();
+        void on_buttonUp_clicked();
+        void on_pushDown_clicked();
 
 private:
 
-    QGraphicsScene * m_scene;
+        // Ui
+        Ui::FormLayers *ui;
+        QGraphicsScene * m_scene;
+
+        qreal m_zvalue;
+
+        QLabel *Icon(QIcon icon);
+
+        void initForm();
+        void ShowLayers();
+        void updateLayers();
 
 };
 

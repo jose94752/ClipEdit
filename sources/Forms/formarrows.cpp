@@ -101,6 +101,29 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
 
 }
 
+/*void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth, int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness, int SizeHeadTypeChoice)
+{
+    //ui->radioButtonWithoutAnchorPoint->isChecked()=WithoutAnchorPoint;
+    //ui->radioButton1AnchorPoints->isChecked()=OneAnchorPoint;
+    //TwoAnchorPoints = ui->radioButton2AnchorPoints->isChecked();
+
+    ui->spinBoxArrowWidthContents->setValue(ArrowWidth);
+    ui->spinBoxArrowHeightContents->setValue(ArrowHeight);
+
+    ui->toolButtonOutlineColorContents->setColor(ArrowOutlineColor);
+    ui->toolButtonFillColorContents->setColor(ArrowFillColor);
+
+    //LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+
+    LineThicknessContents=LineThickness;
+
+    //To do others HeadTypeChoiceContents
+    // comboBoxHeadTypeChoiceContents
+    //SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
+    //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
+     SizeHeadTypeChoiceContents=SizeHeadTypeChoice;
+}*/
+
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
