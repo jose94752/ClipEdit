@@ -257,8 +257,10 @@ void MainWindow::slotNumberedBulletsSaveConfig () {
 void MainWindow::slotTextBoxes(bool)
 {
     // Retrieve data from the form
-    QMap<QString, QVariant> data = m_formTextboxes.getInfos();
-    m_scene.addItem(new TextBoxItem(data));
+    QVariant data = m_formTextboxes.getItemData();
+    TextBoxItem* item = new TextBoxItem();
+    item->setItemData(data);
+    m_scene.addItem(item);
 }
 
 void MainWindow::slotTextPicture()
@@ -347,7 +349,7 @@ void MainWindow::itemSelected(QGraphicsItem* item)
             if (castedItem)
             {
                 ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
-                //m_formTextboxes.setItemData(item->itemData());
+                m_formTextboxes.setItemData(castedItem->getItemData());
             }
         } break;
         case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:

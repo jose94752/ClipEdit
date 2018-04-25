@@ -39,39 +39,41 @@ FormTextBoxes::~FormTextBoxes()
     delete ui;
 }
 
-// Getters
-// -------
+// Slots
+// -----
+
+void FormTextBoxes::saveDefaultTheme()
+{
+    // TO DO
+}
+
+// Getters and setters
+// -------------------
 
 const QPushButton* FormTextBoxes::getAddButton()
 {
     return ui->pushButtonAdd;
 }
 
-QMap<QString, QVariant> FormTextBoxes::getInfos()
+QVariant FormTextBoxes::getItemData()
 {
-    QMap<QString, QVariant> res;
+    QVariantHash data;
+
     QFont font;
     font.setFamily(ui->fontComboBox->currentText());
     font.setPointSize(ui->spinBoxPointSize->value());
     font.setBold(ui->checkBoxBold->isChecked());
     font.setItalic(ui->checkBoxItalic->isChecked());
 
-    res.insert("text", ui->plainTextEdit->toPlainText());
-    res.insert("font", font.toString());
-    res.insert("alignment", ui->comboBoxAlignment->currentData());
-    res.insert("background-color", ui->pushButtonBackgroundColor->getColor().name());
-    res.insert("font-color", ui->pushButtonTextColor->getColor().name());
-    res.insert("border-color", ui->pushButtonBorderColor->getColor().name());
-    res.insert("border-visible", ui->checkBoxHasBorders->isChecked());
-    res.insert("border-width", ui->spinBoxBorderWidth->value());
-    res.insert("border-radius", ui->spinBoxBorderRadius->value());
-
-    return res;
-}
-
-QVariant FormTextBoxes::getItemData()
-{
-    QVariant data;
+    data["text"] = ui->plainTextEdit->toPlainText();
+    data["font"] = font.toString();
+    data["alignment"] = ui->comboBoxAlignment->currentData();
+    data["background-color"] = ui->pushButtonBackgroundColor->getColor().name();
+    data["text-color"] = ui->pushButtonTextColor->getColor().name();
+    data["border-color"] = ui->pushButtonBorderColor->getColor().name();
+    data["border-visible"] = ui->checkBoxHasBorders->isChecked();
+    data["border-width"] = ui->spinBoxBorderWidth->value();
+    data["border-radius"] = ui->spinBoxBorderRadius->value();
 
     return data;
 }
@@ -101,3 +103,4 @@ void FormTextBoxes::setItemData(const QVariant& data)
     ui->spinBoxBorderWidth->setValue(vh["border-width"].toInt());
     ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
 }
+
