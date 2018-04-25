@@ -36,7 +36,7 @@ public:
     void getPicturesGraphicsItems(PicturesGraphicsItem*,QSettings*);
     void setFormsPoints(FormArrows*,FormCharts*,FormCliparts*,FormLayers*,FormNumberedBullets *,FormPictures*,FormScreenshots*,FormTextBoxes*);
     TextBoxItem* setTextBoxItem(QSettings*,int);
-    ArrowsGraphicsItem* setArrowGraphicsItem(QSettings*,int);
+    ArrowsGraphicsItem* setArrowGraphicsItem(QSettings*,QRectF,int);
     NumberedBulletGraphicItem* setBulletsGraphicsItems(QSettings*,int);
     PicturesGraphicsItem* setPicturesGraphicsItems(QSettings*,int);
     GraphsGraphicsItem* setCharts(QSettings*,int);

@@ -32,6 +32,8 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
+#include <QApplication>
+#include <QDesktopWidget>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -61,8 +63,6 @@ void MainWindow::init()
     buildToolBar();
     buildStackedWidget();
     buildView();
-    m_width=800;
-    m_height=800;
 }
 
 
@@ -100,6 +100,7 @@ void MainWindow::buildMenu()
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenshot()));
     connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
     // Layers
@@ -155,8 +156,14 @@ void MainWindow::buildStackedWidget()
 
 void MainWindow::buildView()
 {
-    m_scene.setSceneRect(-400, -400, 800, 800);
+    QDesktopWidget *deskWidget=QApplication::desktop();
+    int dpix=deskWidget->logicalDpiX();
+    int dpiy=deskWidget->logicalDpiY();
+    m_width=210*dpix/25.4;
+    m_height=297*dpiy/25.4;
+    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
     ui->graphicsView->setScene(&m_scene);
+    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
@@ -289,15 +296,17 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
-void MainWindow::slotScreenShot()
+
+void MainWindow::slotScreenshot()
 {
      //Get screen capture
 
     qDebug () << "mainWindow slot of the Screenshot";
 
-   // ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
     m_scene.clear();
-   // m_scene.addItem(sc);
+    m_scene.addItem(sc);
+
 
 }
 

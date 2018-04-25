@@ -80,6 +80,7 @@ void Save::getArrowGraphicsItem(ArrowsGraphicsItem *arrow,QSettings* settings)
     int LineThickness, SizeHeadTypeChoice;
     QColor ArrowOutlineColor;
     QColor ArrowFillColor;
+
     FormArrows *formArrows=arrow->getFormArrow();
     formArrows->GetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
     settings->setValue(QString("item").append(QString::number(countItems)).append("/WithoutAnchorPoint"),QString::number(WithoutAnchorPoint));
@@ -133,7 +134,7 @@ TextBoxItem* Save::setTextBoxItem(QSettings *settings,int i)
     //m_scene.addItem(new TextBoxItem(data));
 }
 
-ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
+ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,QRectF rectf,int i)
 {
     bool WithoutAnchorPoint;
     bool OneAnchorPoint;
@@ -157,11 +158,13 @@ ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
     b=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/b")).toInt();
     a=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/a")).toInt();
     QColor ArrowFillColor(r,g,b,a);
-    LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("LineThickness")).toInt();
-    SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("SizeHeadTypeChoice")).toInt();
+    LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("/LineThickness")).toInt();
+    SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("/SizeHeadTypeChoice")).toInt();
     FormArrows *formArrows=new FormArrows();
-    formArrows->SetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
-    return new ArrowsGraphicsItem(formArrows);
+    formArrows->GetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
+    ArrowsGraphicsItem *arrow=new ArrowsGraphicsItem(formArrows);
+    arrow->setRect(rectf);
+    return arrow;
 }
 
 NumberedBulletGraphicItem* Save::setBulletsGraphicsItems(QSettings *settings,int i)
@@ -204,7 +207,10 @@ void Save::save()
     countItems=0;
     foreach(QGraphicsItem *item,m_listItems){
         int type=item->type();
-        qDebug()<<type;
+        if(type>65535){
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/type"),QString::number(type));
+        }
+        //qDebug()<<type;
         QRectF rect=item->boundingRect();
         double x,y,width,height;
         rect.getRect(&x,&y,&width,&height);
@@ -232,7 +238,7 @@ void Save::save()
             break;
         }
 
-        if(type>65535 && (x!=0 || y!=0 || width!=0 || height!=0)){
+        if(type>65535){
             countItems++;
         }
     }
@@ -270,7 +276,7 @@ void Save::open()
                 m_scene->addItem(texteBox);
             break;
             case BaseGraphicItem::Type::ArrowGraphicsItem:
-                arrow=setArrowGraphicsItem(&settings,i);
+                arrow=setArrowGraphicsItem(&settings,rect,i);
                 m_scene->addItem(arrow);
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:

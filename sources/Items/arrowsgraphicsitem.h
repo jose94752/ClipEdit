@@ -78,6 +78,10 @@ class ArrowsGraphicsItem
         //renvoie du pointeur sur la form arrow
         FormArrows* getFormArrow();
 
+        //renvoie des positions de début et de fin de flèches
+        QPointF getStartPosition();
+        QPointF getEndPosition();
+
 
     protected:
 
