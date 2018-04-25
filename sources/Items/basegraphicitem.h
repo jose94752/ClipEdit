@@ -81,7 +81,7 @@ class BaseGraphicItem
     public:
 
         // Item types to be use as return value for the type() method
-        enum Type
+        enum CustomTypes
         {
             TextBoxGraphicsItem = UserType+1,
             ImageGraphicsItem,

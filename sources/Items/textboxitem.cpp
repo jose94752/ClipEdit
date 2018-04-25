@@ -129,7 +129,7 @@ void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *optio
 
 int TextBoxItem::type() const
 {
-    return Type::TextBoxGraphicsItem;
+    return CustomTypes::TextBoxGraphicsItem;
 }
 
 // Utils
