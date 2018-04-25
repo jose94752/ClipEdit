@@ -40,114 +40,81 @@
      <property name="title">
       <string>Data</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_12">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_3">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>Chart Type</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>Data X</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_13">
-                <property name="text">
-                 <string>Colors</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>Chart Title</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <item>
-               <widget class="QComboBox" name="qChartType"/>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="qData"/>
-              </item>
-              <item>
-               <widget class="QTableView" name="gGraphColors"/>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="qTitle"/>
-              </item>
-             </layout>
-            </item>
-           </layout>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Chart Type</string>
+            </property>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>X Axis</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="qXAxis">
-              <property name="text">
-               <string>X</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Y Axis</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="qYAxis">
-              <property name="text">
-               <string>Y</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Data</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Colors</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Chart Title</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Legends</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_11">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+           <widget class="QComboBox" name="qChartType"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="qData"/>
+          </item>
+          <item>
+           <widget class="QTableView" name="gGraphColors"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="qTitle"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="qLegends">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -319,8 +286,7 @@
  </customwidgets>
  <tabstops>
   <tabstop>qChartType</tabstop>
-  <tabstop>qXAxis</tabstop>
-  <tabstop>qYAxis</tabstop>
+  <tabstop>qLegends</tabstop>
  </tabstops>
  <resources/>
  <connections/>

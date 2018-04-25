@@ -20,7 +20,7 @@ FormCharts::FormCharts(QWidget* parent)
     ui->setupUi(this);
 
     QStringList types;
-    types  << "Pie" << "Histogram" << "Line" << "Area" ;
+    types  << "Pie" << "Histogram" << "Line" ;
     ui->qChartType->addItems(types);
 
     ui->qColor->setColor( Qt::darkBlue);
@@ -41,8 +41,6 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
     infos.m_type = ui->qChartType->currentIndex();
     infos.m_title = ui->qTitle->text();
-    infos.m_xAxes = ui->qXAxis->text();
-    infos.m_yAxes = ui->qYAxis->text();
     infos.m_backColor = ui->qBackColor->getColor();
     infos.m_color = ui->qColor->getColor();
 
@@ -74,7 +72,24 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
        //qDebug() << "points added " << p.x() << " " << p.y();
     }
 
-/*
+    //colors
+    infos.m_Colors << Qt::red << Qt::darkRed << Qt::green << Qt::darkGreen
+                   << Qt::blue << Qt::darkBlue << Qt::cyan
+            << Qt::darkCyan << Qt::magenta << Qt::darkMagenta
+            << Qt::yellow << Qt::darkYellow
+            << Qt::gray<< Qt::darkGray ;
+
+
+    infos.m_titleFont.setFamily("times");
+    infos.m_titleFont.setPointSize(18);
+
+    infos.m_legendFont.setFamily("times");
+    infos.m_legendFont.setPointSize(10);
+
+    infos.m_Legends = ui->qLegends->text().split(",");
+
+
+    /*
     //Y values for line et area
     val = ui->qDataY->text();
     sl = val.split(",");
