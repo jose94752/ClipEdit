@@ -74,7 +74,7 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
     connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
     connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor(bool)));
+    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
     connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
     connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
@@ -316,10 +316,17 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     // 1. Check type
     // 2. Load associated form
     // 3. Fill the form
+
+    // Really dirty, would like to make it cleaner in the future
+
     switch (item->type())
     {
         case BaseGraphicItem::Type::TextBoxGraphicsItem:
         {
+            //TextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
+            //ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+
+            // Load item info into the form
 
         } break;
         case BaseGraphicItem::Type::ArrowGraphicsItem:
