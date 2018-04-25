@@ -320,7 +320,6 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
                 p2 = m_handlers[i]->pos();
             }
 
-            // Move to the handler position
             if (m_handlers[i]->shape() == ItemHandler::HANDLER_SQUARE)
             {
                 painter->drawRect(m_handlers[i]->boundingRect());
