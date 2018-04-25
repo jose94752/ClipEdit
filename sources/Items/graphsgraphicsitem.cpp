@@ -136,8 +136,13 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
 }
 */
 
+
 void GraphsGraphicsItem::drawTitle(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     QPen pen( m_infos.m_color);
     painter->setPen(pen);
 
@@ -150,13 +155,16 @@ void GraphsGraphicsItem::drawTitle(QPainter *painter, const QStyleOptionGraphics
 
 void GraphsGraphicsItem::drawLegend(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     QPen pen( m_infos.m_color);
     painter->setPen(pen);
 
     painter->setFont( m_infos.m_legendFont);
 
     QFontMetrics fmL( m_infos.m_legendFont);
-    int legendHeight = fmL.height();
+    //int legendHeight = fmL.height();
     int size = 14;
     int space = size;
 
@@ -195,6 +203,9 @@ void GraphsGraphicsItem::drawLegend(QPainter *painter, const QStyleOptionGraphic
 
 void GraphsGraphicsItem::drawAxis(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+
     QPen pen( m_infos.m_color);
     painter->setPen(pen);
 

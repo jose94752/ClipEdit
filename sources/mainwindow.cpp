@@ -96,6 +96,8 @@ void MainWindow::buildMenu()
     // Item insertion connects
     connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
+    connect(m_formBullets.getToolButton_saveBulletConfig(),SIGNAL(clicked(bool)), SLOT(slotNumberedBulletsSaveConfig()));
+
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
@@ -105,7 +107,7 @@ void MainWindow::buildMenu()
 
     // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-
+    //retriving saved values
 }
 
 void MainWindow::buildToolBar()
@@ -210,6 +212,9 @@ void MainWindow::slotNew(bool)
     }
 }
 
+///
+/// \brief MainWindow::slotNumberedBullets
+///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
@@ -222,6 +227,10 @@ void MainWindow::slotNumberedBullets()
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
+  if (to < from) {
+      qDebug () << "invalid interval\n";
+      return;
+  }
   int numbullet (from);
   QPointF scene_topleft (m_scene.sceneRect().topLeft());
   QPointF scene_topright (m_scene.sceneRect().topRight());
@@ -240,6 +249,10 @@ void MainWindow::slotNumberedBullets()
       bulletpos.setX(bulletpos.x() + delta);
     }
   }
+}
+
+void MainWindow::slotNumberedBulletsSaveConfig () {
+  m_formBullets.save_config ();
 }
 
 void MainWindow::slotTextBoxes(bool)
