@@ -117,7 +117,7 @@ private:
         void slotNew(bool);
         void showAboutDialog(bool);
 
-        // Item insertions
+        // Items
         void slotNumberedBullets();
         void slotTextBoxes(bool);
         void slotTextPicture();
@@ -126,7 +126,7 @@ private:
         void slotScreenshot();
         // Modif Layers
         void slotLayers();
-
+        void itemSelected(QGraphicsItem* item);
 };
 
 #endif

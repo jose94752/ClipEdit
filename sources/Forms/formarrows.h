@@ -46,6 +46,11 @@ class FormArrows
                             int &LineThickness, int &SizeHeadTypeChoice);
                             //To do others HeadTypeChoiceContents
                             // comboBoxHeadTypeChoiceContents
+
+        void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints,
+                            int ArrowWidth, int ArrowHeight,
+                            QColor ArrowOutlineColor, QColor ArrowFillColor,
+                            int LineThickness, int SizeHeadTypeChoice);
     private:
 
         // UI

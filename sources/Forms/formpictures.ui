@@ -82,7 +82,7 @@
             <item>
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>Grayscale</string>
+               <string>black / white</string>
               </property>
              </widget>
             </item>
@@ -98,7 +98,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_pic_grayscale">
+             <widget class="QCheckBox" name="checkBox_pic_black_white">
               <property name="text">
                <string/>
               </property>

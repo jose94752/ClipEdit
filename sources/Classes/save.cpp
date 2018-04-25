@@ -159,11 +159,9 @@ ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
     QColor ArrowFillColor(r,g,b,a);
     LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("LineThickness")).toInt();
     SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("SizeHeadTypeChoice")).toInt();
-    FormArrows formArrows();
-    //formArrows.fillColorArrowChanged(ArrowFillColo);
-    //formArrows.outlineColorArrowChanged(ArrowOutlineColor);
-    //ArrowsGraphicsItem *ArrowsGraphicsItem=new ArrowsGraphicsItem(formArrows());
-    return new ArrowsGraphicsItem(new FormArrows());
+    FormArrows *formArrows=new FormArrows();
+    formArrows->SetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
+    return new ArrowsGraphicsItem(formArrows);
 }
 
 NumberedBulletGraphicItem* Save::setBulletsGraphicsItems(QSettings *settings,int i)
@@ -288,6 +286,6 @@ void Save::open()
                 m_scene->addItem(graphsItem);
             break;
         }
-    }*/
-//}
+    }
+}*/
 

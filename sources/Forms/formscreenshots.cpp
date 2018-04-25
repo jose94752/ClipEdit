@@ -185,6 +185,7 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
 //        qDebug()<<y;
 //        qDebug()<<point;
 //    }
+   //CaptureWholeScreen();
 }
 
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
@@ -225,7 +226,7 @@ void FormScreenshots::snapshot()
     static int count = 0;
 
     QPixmap p = QPixmap::grabWindow(QApplication::desktop()->winId());
-    p.save(QString("/home/formation/doCapture/screenshot%1.png").arg(count));
+    p.save(QString("/home/toumi/doCapture/screenshot%1.png").arg(count));
     count++;
     show();
 

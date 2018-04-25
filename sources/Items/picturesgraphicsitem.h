@@ -37,8 +37,11 @@ class PicturesGraphicsItem
         int type() const ;
 
         QString path;
-        int     height, width, opacity;
-        bool    grayscale;
+        int     height, width;
+        bool    w_h_fixed;
+        char    w_h;
+        int     opacity;
+        bool    black_white;
         QString lg_txt;
         QFont   lg_font;
         int     lg_size;
@@ -46,9 +49,16 @@ class PicturesGraphicsItem
         QString lg_pos;
 
 
-    private:
+        void modification_width (QPainter* painter);
+
+        void modification_height(QPainter* painter);
+private:
 
         QPainter  m_picture;
+
+
+private slots:
+   void change_w_h(char w_h);
 };
 
 #endif

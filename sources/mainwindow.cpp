@@ -31,6 +31,7 @@
 #include "Items/textboxitem.h"
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
+#include "Items/screenshotsgraphicsitem.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -92,13 +93,14 @@ void MainWindow::buildMenu()
     ui->actionSave->setDisabled(true);
 
     // Item insertion connects
-    connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
+    connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenshot()));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
     // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
@@ -155,6 +157,8 @@ void MainWindow::buildView()
 {
     m_scene.setSceneRect(-400, -400, 800, 800);
     ui->graphicsView->setScene(&m_scene);
+
+    connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
 
 // Slots
@@ -212,12 +216,22 @@ void MainWindow::slotNumberedBullets()
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
   int numbullet (from);
-  qreal posx (0), posy (50), delta (100);
+  QPointF scene_topleft (m_scene.sceneRect().topLeft());
+  QPointF scene_topright (m_scene.sceneRect().topRight());
+  QPointF bulletpos (scene_topleft);
+  qreal delta (0);
+  delta = scene_topright.y() - scene_topleft.y();
+  bulletpos.setY(scene_topleft.y () + delta /5);
+  //qreal posx (0), posy (50), delta (100);
   for (; numbullet != to+1; ++numbullet) {
     numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
-    numberedBulletGraphicItem->setPos(posx, posy);
+    //numberedBulletGraphicItem->setPos(posx, posy);
+    numberedBulletGraphicItem->setPos (bulletpos);
     m_scene.addItem(numberedBulletGraphicItem);
-    posx += delta;
+    delta = numberedBulletGraphicItem->rect ().width ();
+    if (bulletpos.x () + delta < scene_topright.x ()) {
+      bulletpos.setX(bulletpos.x() + delta);
+    }
   }
 }
 
@@ -275,8 +289,16 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
+
 void MainWindow::slotScreenshot()
 {
+     //Get screen capture
+
+    qDebug () << "mainWindow slot of the Screenshot";
+
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    m_scene.clear();
+    m_scene.addItem(sc);
 
 
 }
@@ -286,6 +308,26 @@ void MainWindow::slotLayers()
 //    qDebug() << "MainWindow::slotLayers()" ;
 
     m_formLayers.setScene(m_scene);
+}
+void MainWindow::itemSelected(QGraphicsItem* item)
+{
+    // An item have been selected
+    // Three steps from now
+    // 1. Check type
+    // 2. Load associated form
+    // 3. Fill the form
+    switch (item->type())
+    {
+        case BaseGraphicItem::Type::TextBoxGraphicsItem:
+        {
+
+        } break;
+        case BaseGraphicItem::Type::ArrowGraphicsItem:
+        {
+
+        } break;
+
+    }
 }
 
 void MainWindow::exportView(bool)
