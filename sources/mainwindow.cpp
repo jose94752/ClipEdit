@@ -74,7 +74,7 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
     connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
     connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
+    connect(ui->actionQuit,             SIGNAL( triggered(bool) ),  this,   SLOT( close() ));
 
     connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
     connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
@@ -89,6 +89,7 @@ void MainWindow::buildMenu()
     connect(ui->actionResize,           SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
     connect(ui->actionContentToView,    SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
     connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
+    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
     ui->actionSave->setDisabled(true);
 
@@ -162,7 +163,6 @@ void MainWindow::buildView()
     m_height=297*dpiy/25.4;
     m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
     ui->graphicsView->setScene(&m_scene);
-    //ui->graphicsView->setMaximumSize(1.01*m_width,1.01*m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
@@ -193,15 +193,15 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height,&m_borderSceneItem);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem);
     scenedialog.exec();
 }
 
 void MainWindow::slotNew(bool)
 {
-    DialogSave dialogSave(this,m_scene.items());
+    DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height,&m_borderSceneItem);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -249,7 +249,7 @@ void MainWindow::slotTextBoxes(bool)
 }
 
 void MainWindow::slotTextPicture()
-{
+{   qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
     m_scene.clear();
     m_scene.addItem(PictureItem);
@@ -305,8 +305,6 @@ void MainWindow::slotScreenshot()
     ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
     m_scene.clear();
     m_scene.addItem(sc);
-
-
 }
 
 void MainWindow::slotLayers()
@@ -330,7 +328,7 @@ void MainWindow::itemSelected(QGraphicsItem* item)
         case BaseGraphicItem::Type::TextBoxGraphicsItem:
         {
             //TextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
-            //ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+            ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
 
             // Load item info into the form
 
@@ -345,21 +343,27 @@ void MainWindow::itemSelected(QGraphicsItem* item)
 
 void MainWindow::exportView(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this,tr("Export Image"),"project.png",tr("Image File (*.png)"));
-    if(fileName!=""){
-        QString extfilename=Save::verifyExtension(fileName,"png");
-        QFile fileToSave(extfilename);
-        if(fileName!=extfilename && fileToSave.exists()){
-            DialogFileAlreadyExists dfae;
-            dfae.exec();
-        }else{
-            QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
-            image.fill(Qt::white);                                              // Start all pixels transparent
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export as image"), "output.png" , tr("Image File (*.png)"));
 
-            QPainter painter(&image);
-            m_scene.render(&painter);
-            image.save(extfilename);
-        }
+    if (fileName.isEmpty())
+        return;
+
+    QString extfilename = Save::verifyExtension(fileName, "png");
+    QFile fileToSave(extfilename);
+
+    if (fileName != extfilename && fileToSave.exists())
+    {
+        DialogFileAlreadyExists d;
+        d.exec();
+    }
+    else
+    {
+        QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);
+        image.fill(Qt::white);
+
+        QPainter painter(&image);
+        m_scene.render(&painter);
+        image.save(extfilename);
     }
 }
 

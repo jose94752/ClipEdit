@@ -31,6 +31,8 @@ class PicturesGraphicsItem
         // Constructor
         PicturesGraphicsItem (FormPictures* ptr, QGraphicsItem* parent = 0);
 
+
+
         // Pure virtual methods implementation
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
@@ -55,6 +57,7 @@ class PicturesGraphicsItem
 private:
 
         QPainter  m_picture;
+        FormPictures* ptr_1;
 
 
 private slots:
