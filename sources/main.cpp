@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     // App properties
     QApplication::setApplicationName("ClipEdit");
-    QApplication::setOrganizationDomain("M2I");
+    QApplication::setOrganizationDomain("ClipEdit");
     QApplication::setApplicationVersion("1.0");
     QApplication::setWindowIcon(QIcon(":/icons/icons/icon-clipedit.ico"));
 

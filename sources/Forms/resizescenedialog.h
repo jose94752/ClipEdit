@@ -15,6 +15,8 @@
 
 #include <QGraphicsScene>
 #include <QDialog>
+#include <QRectF>
+#include <QGraphicsItem>
 
 namespace Ui
 {
@@ -29,26 +31,22 @@ class ResizeSceneDialog
 {
     Q_OBJECT
 
-    public:
+public:
+    explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**);
+    ~ResizeSceneDialog();
 
-        // Constructor, destructor
-        explicit ResizeSceneDialog(QGraphicsScene*, QWidget* parent = 0);//(parent,precedent width,precedent height)
-        ~ResizeSceneDialog();
+public slots:
+    void sizeChanged();
+    void unitChanged(const QString&);
 
-    public slots:
-
-        // Slots
-        void sizeChanged();
-        void unitChanged(const QString& unit);
-
-    private:
-
-        Ui::ResizeSceneDialog* ui;
-        QGraphicsScene* m_scene;
-        int* m_width;
-        int* m_height;
-        int m_dpix;
-        int m_dpiy;
+private:
+    Ui::ResizeSceneDialog *ui;
+    QGraphicsScene *m_scene;
+    int *m_width;
+    int *m_height;
+    int m_dpix;
+    int m_dpiy;
+    QGraphicsRectItem **m_borderSceneItem;
 };
 
 #endif
