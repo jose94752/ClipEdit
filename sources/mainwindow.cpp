@@ -32,6 +32,8 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
+#include <QApplication>
+#include <QDesktopWidget>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -61,8 +63,6 @@ void MainWindow::init()
     buildToolBar();
     buildStackedWidget();
     buildView();
-    m_width=800;
-    m_height=800;
 }
 
 
@@ -155,8 +155,14 @@ void MainWindow::buildStackedWidget()
 
 void MainWindow::buildView()
 {
-    m_scene.setSceneRect(-400, -400, 800, 800);
+    QDesktopWidget *deskWidget=QApplication::desktop();
+    int dpix=deskWidget->logicalDpiX();
+    int dpiy=deskWidget->logicalDpiY();
+    m_width=210*dpix/25.4;
+    m_height=297*dpiy/25.4;
+    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
     ui->graphicsView->setScene(&m_scene);
+    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
