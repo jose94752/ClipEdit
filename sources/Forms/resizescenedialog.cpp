@@ -12,6 +12,7 @@
 
 #include <QDebug>
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 #include <QStringList>
 #include <QApplication>
 #include <QDesktopWidget>
@@ -104,9 +105,20 @@ void ResizeSceneDialog::sizeChanged()
         height = ui->doubleSpinBoxHeight->value();
     }
     m_scene->removeItem(*m_borderSceneItem);
+    QGraphicsScene scene2;
+    QList<QGraphicsItem *> items=m_scene->items();
+    //m_scene->clear();
+    //*m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
+    //(*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
+    foreach(QGraphicsItem* item,items){
+        scene2.addItem(item);
+    }
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
     (*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
-
+    items=scene2.items();
+    foreach(QGraphicsItem* item,items){
+        m_scene->addItem(item);
+    }
 }
 
 void ResizeSceneDialog::unitChanged(const QString& unit)
