@@ -123,7 +123,7 @@ private:
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
-
+        void slotScreenshot();
         // Modif Layers
         void slotLayers();
 

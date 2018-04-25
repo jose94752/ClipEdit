@@ -23,6 +23,7 @@
 #include<QCursor>
 #include<QLabel>
 #include<QPointF>
+#include<QPoint>
 #include<QGraphicsPixmapItem>
 #include<QMap>
 #include<QPainter>
@@ -66,40 +67,23 @@ public:
         ~FormScreenshots();
 
 protected:
-//    ///
-//    /// \brief resizeEvent this method function is reimplemented to receive
-//    /// the resize events dispatched to the widget.
-//    /// \param event
-//    ///
-//    void resizeEvent(QResizeEvent *event) override;
     ///
     /// \brief mousePressEvent
     /// \param event
     ///
-    void mousePressEvent(QMouseEvent *event) override;
-    ///
-    /// \brief mouseMoveEvent
-    /// \param event
-    ///
-    void mouseMoveEvent(QMouseEvent *event) override ;
+    void mousePressEvent(QMouseEvent *event);
     ///
     /// \brief mouseReleaseEvent
     /// \param event
     ///
-   // void mouseReleaseEvent(QMouseEvent *event) override;
-
+    void mouseReleaseEvent(QMouseEvent *event);
 
 
 private:
         // Ui
         Ui::FormScreenshots *ui;
         //QGraphicsScene *scene;
-        ///
-        /// \brief onMouseEvent: method indicating the event involved.
-        ///
-        //void onMouseEvent();
-        int x;
-        int y;
+
         ///
         /// \brief m_typecapture WholeScreen and window.
         ///
@@ -147,10 +131,10 @@ private:
         ///
         /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
         ///
-        QPoint m_point0;
-        QPoint m_point1;
-
-
+        QPoint *m_point0;
+        QPoint *m_point1;
+        float x,y,x1,y1;
+        QPainter *m_painter;
 
      private slots:
         ///
@@ -158,15 +142,18 @@ private:
         ///
         void snapshot();
         ///
+        /// \brief CaptureArea this method take an area selected by he user.
+        ///
+        void CaptureArea();
+        ///
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
         void CaptureWholeScreen();
         ///
         /// \brief hide enables or disables the Hide The Window option.
         ///
-       // void CaptureRegion(bool ok, QRect region);
+        void CaptureRegion(bool ok, QRect region);
         void updatehide();
-
         ///
         /// \brief updateLabel this slot is called whenever the user changes the delay
         /// using the Screenshot Delay second option
@@ -178,7 +165,6 @@ private:
         ///
         void InsertImageText(QString);
         void dimensionsMade( bool, QRect );
-        void mouseMoveEvent();
         void mousePressEvent();
         void mouseReleaseEvent();
 };

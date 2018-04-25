@@ -13,7 +13,8 @@
 
 // Includes
 // --------
-
+#include "basegraphicitem.h"
+#include "../Forms/formscreenshots.h"
 #include <QGraphicsItem>
 #include <QRectF>
 #include <QPointF>
@@ -22,12 +23,12 @@
 // -----
 
 class ScreenshotsGraphicsItem
-    :   public QGraphicsItem
+    :   public BaseGraphicItem
 {
     public:
 
         // Constructor, destructor
-        explicit ScreenshotsGraphicsItem(QGraphicsItem *parent = 0);
+        explicit ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent = 0);
 
 
         // The virtual destructor makes sure that it gets called even if the class
@@ -39,6 +40,7 @@ class ScreenshotsGraphicsItem
         // Pure virtual methods implementation
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        //int type() const ;
 
         // Getters and setters
         QRectF getRect();

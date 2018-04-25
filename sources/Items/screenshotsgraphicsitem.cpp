@@ -1,9 +1,3 @@
-#include "screenshotsgraphicsitem.h"
-
-#include<QGraphicsItem>
-#include<QPainter>
-#include<QRectF>
-#include<QRect>
 /*
 ================================================
 * File:         screenshotsgraphicsitem.cpp
@@ -16,6 +10,14 @@
 
 // Includes
 // --------
+#include "screenshotsgraphicsitem.h"
+
+#include<QGraphicsItem>
+#include <QGraphicsRectItem>
+#include<QRect>
+#include<QPainter>
+#include<QRectF>
+#include<QRect>
 
 #include<QStyle>
 #include<QApplication>
@@ -27,11 +29,14 @@
 //we subclass QGraphicItem and call the new class ScreenshotsGraphicsItem.
 //The class' constructor accepts a pointer to a QGraphicItem item.
 //This pointer is then passed to the constructor of the QGraphicItem.
-ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QGraphicsItem *parent)
-        : QGraphicsItem(parent)
-        , m_rect_sc(0,0,75,25){//m_rect_sc(0,0,75,25) : default value.
+ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(FormScreenshots* ptr,    QGraphicsItem *parent)
+        : BaseGraphicItem(parent)
+ {
+    Q_UNUSED(ptr)
 
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(BaseGraphicItem::ItemIsSelectable, true);
+    //m_rect_sc(0,0,100,100) : default value.
+    setRect(QRectF(0, 0, 100, 100));
 }
 
 
