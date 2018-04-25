@@ -9,15 +9,14 @@
 
 #include "formnumberedbullets.h"
 #include "ui_formnumberedbullets.h"
-
+#include <qdebug.h>
+#include <qsettings.h>
+#include <qcolor.h>
 FormNumberedBullets::FormNumberedBullets(QWidget *parent)
     :   QWidget(parent), ui(new Ui::FormNumberedBullets)
 {
     ui->setupUi(this);
-    QColor blue (0,0, 255);
-    QColor red (255, 0, 0);
-    ui->ColorButton_BulletColor->setColor(blue);
-    ui->ColorBullet_NumberColor->setColor(red);
+    load_config ();
 }
 
 FormNumberedBullets::~FormNumberedBullets()
@@ -29,7 +28,7 @@ FormNumberedBullets::~FormNumberedBullets()
 //                1-> rectangle
 //                2-> rounded rectangle
 //TBD enum in NumberedBulletGraphicItem
-void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) {
+void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) const {
     from = ui->spinBox_From->value();
     to = ui->spinBox_To->value ();
     taille = ui->spinBox_Size->value();
@@ -47,3 +46,43 @@ QPushButton *FormNumberedBullets::getGoPushButton()
     return ui->pushButtonCreateBullet;
 }
 
+QToolButton *FormNumberedBullets::getToolButton_saveBulletConfig () {
+     return ui->toolButton_saveBulletConfig;
+}
+
+void FormNumberedBullets::save_config () const {
+    QSettings s;
+    int from(0), to(0), taille (0);
+    int shape;
+    QFont qf;
+    QColor numbercolor, bulletcolor;
+    get_info(from, to, taille,  shape, bulletcolor, numbercolor, qf);
+    s.setValue("FormNumberedBullets/from", from);
+    s.setValue("FormNumberedBullets/to", to);
+    s.setValue("FormNumberedBullets/size",taille );
+    s.setValue("FormNumberedBullets/bulletcolor",bulletcolor.name ());
+    s.setValue("FormNumberedBullets/numbercolor",numbercolor.name ());
+    s.setValue("FormNumberedBullets/font",qf.toString());
+}
+
+void FormNumberedBullets::load_config() {
+    QSettings q;
+    int from (1), to (1), taille (1);
+    from = q.value ("FormNumberedBullets/from", from).toInt();
+    to = q.value ("FormNumberedBullets/to", to).toInt ();
+    taille = q.value ("FormNumberedBullets/size", taille).toInt ();
+    ui->spinBox_From->setValue(from);
+    ui->spinBox_To->setValue (to);
+    ui->spinBox_Size->setValue (taille);
+    QColor bulletcolor (0,0, 255), //blue
+           numbercolor (255, 0, 0);
+    QString str_bulletcolor, str_numbercolor;
+    str_bulletcolor = q.value ("FormNumberedBullets/bulletcolor", str_bulletcolor).toString();
+    str_numbercolor = q.value ("FormNumberedBullets/numbercolor", str_numbercolor).toString ();
+    bulletcolor.setNamedColor(str_bulletcolor);
+    numbercolor.setNamedColor(str_numbercolor);
+
+    ui->ColorButton_BulletColor->setColor(bulletcolor);
+    ui->ColorBullet_NumberColor->setColor(numbercolor);
+
+}

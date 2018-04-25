@@ -74,7 +74,7 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
     connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
     connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor(bool)));
+    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
     connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
     connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
@@ -95,15 +95,18 @@ void MainWindow::buildMenu()
     // Item insertion connects
     connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
+    connect(m_formBullets.getToolButton_saveBulletConfig(),SIGNAL(clicked(bool)), SLOT(slotNumberedBulletsSaveConfig()));
+
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenshot()));
     connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
     // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-
+    //retriving saved values
 }
 
 void MainWindow::buildToolBar()
@@ -217,6 +220,10 @@ void MainWindow::slotNumberedBullets()
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
+  if (to < from) {
+      qDebug () << "invalid interval\n";
+      return;
+  }
   int numbullet (from);
   QPointF scene_topleft (m_scene.sceneRect().topLeft());
   QPointF scene_topright (m_scene.sceneRect().topRight());
@@ -235,6 +242,10 @@ void MainWindow::slotNumberedBullets()
       bulletpos.setX(bulletpos.x() + delta);
     }
   }
+}
+
+void MainWindow::slotNumberedBulletsSaveConfig () {
+  m_formBullets.save_config ();
 }
 
 void MainWindow::slotTextBoxes(bool)
@@ -291,16 +302,16 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
-void MainWindow::slotScreenShot()
+
+void MainWindow::slotScreenshot()
 {
      //Get screen capture
 
     qDebug () << "mainWindow slot of the Screenshot";
 
-    //ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
-    //m_scene.clear();
-    //m_scene.addItem(sc);
-
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    m_scene.clear();
+    m_scene.addItem(sc);
 }
 
 void MainWindow::slotLayers()

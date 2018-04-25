@@ -119,11 +119,13 @@ private:
 
         // Items
         void slotNumberedBullets();
+        void slotNumberedBulletsSaveConfig();
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
-        void slotScreenShot();
+        void slotScreenshot();
+        // Modif Layers
         void slotLayers();
         void itemSelected(QGraphicsItem* item);
 };
