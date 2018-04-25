@@ -63,6 +63,7 @@ void FormNumberedBullets::save_config () const {
     s.setValue("FormNumberedBullets/bulletcolor",bulletcolor.name ());
     s.setValue("FormNumberedBullets/numbercolor",numbercolor.name ());
     s.setValue("FormNumberedBullets/font",qf.toString());
+    s.setValue("FormNumberedBullets/shape", (int) shape);
 }
 
 void FormNumberedBullets::load_config() {
@@ -84,5 +85,11 @@ void FormNumberedBullets::load_config() {
 
     ui->ColorButton_BulletColor->setColor(bulletcolor);
     ui->ColorBullet_NumberColor->setColor(numbercolor);
+    QString qfontname;
+    qfontname = q.value ("FormNumberedBullets/font", qfontname).toString ();
+    //ui->fontComboBox->setCurrentFont();
+    int index_shape (0);
+    index_shape = q.value ("FormNumberedBullets/shape", index_shape).toInt();
+    ui->comboBox_Shape->setCurrentIndex(index_shape);
 
 }
