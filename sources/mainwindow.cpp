@@ -156,14 +156,17 @@ void MainWindow::buildStackedWidget()
 
 void MainWindow::buildView()
 {
-    QDesktopWidget *deskWidget=QApplication::desktop();
-    int dpix=deskWidget->logicalDpiX();
-    int dpiy=deskWidget->logicalDpiY();
-    m_width=210*dpix/25.4;
-    m_height=297*dpiy/25.4;
-    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
+//    QDesktopWidget *deskWidget=QApplication::desktop();
+//    int dpix=deskWidget->logicalDpiX();
+//    int dpiy=deskWidget->logicalDpiY();
+//    m_width=210*dpix/25.4;
+//    m_height=297*dpiy/25.4;
+//    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
+//    ui->graphicsView->setScene(&m_scene);
+//    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
+
+    m_scene.setSceneRect(-400, -400, 800, 800);
     ui->graphicsView->setScene(&m_scene);
-    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
@@ -194,7 +197,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(&m_scene, &m_width, &m_height, this);
+    ResizeSceneDialog scenedialog(&m_scene, this);
     scenedialog.exec();
 }
 
@@ -202,7 +205,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(&m_scene, &m_width, &m_height, this);
+    ResizeSceneDialog scenedialog(&m_scene, this);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -306,8 +309,6 @@ void MainWindow::slotScreenshot()
     ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
     m_scene.clear();
     m_scene.addItem(sc);
-
-
 }
 
 void MainWindow::slotLayers()
@@ -330,7 +331,7 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     {
         case BaseGraphicItem::Type::TextBoxGraphicsItem:
         {
-            //aTextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
+            //TextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
             ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
 
             // Load item info into the form
@@ -346,21 +347,27 @@ void MainWindow::itemSelected(QGraphicsItem* item)
 
 void MainWindow::exportView(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this,tr("Export Image"),"project.png",tr("Image File (*.png)"));
-    if(fileName!=""){
-        QString extfilename=Save::verifyExtension(fileName,"png");
-        QFile fileToSave(extfilename);
-        if(fileName!=extfilename && fileToSave.exists()){
-            DialogFileAlreadyExists dfae;
-            dfae.exec();
-        }else{
-            QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
-            image.fill(Qt::white);                                              // Start all pixels transparent
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export as image"), "output.png" , tr("Image File (*.png)"));
 
-            QPainter painter(&image);
-            m_scene.render(&painter);
-            image.save(extfilename);
-        }
+    if (fileName.isEmpty())
+        return;
+
+    QString extfilename = Save::verifyExtension(fileName, "png");
+    QFile fileToSave(extfilename);
+
+    if (fileName != extfilename && fileToSave.exists())
+    {
+        DialogFileAlreadyExists d;
+        d.exec();
+    }
+    else
+    {
+        QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);
+        image.fill(Qt::white);
+
+        QPainter painter(&image);
+        m_scene.render(&painter);
+        image.save(extfilename);
     }
 }
 

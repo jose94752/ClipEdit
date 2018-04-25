@@ -32,7 +32,7 @@ class ResizeSceneDialog
     public:
 
         // Constructor, destructor
-        explicit ResizeSceneDialog(QGraphicsScene*, int*, int*, QWidget* parent = 0);//(parent,precedent width,precedent height)
+        explicit ResizeSceneDialog(QGraphicsScene*, QWidget* parent = 0);//(parent,precedent width,precedent height)
         ~ResizeSceneDialog();
 
     public slots:
