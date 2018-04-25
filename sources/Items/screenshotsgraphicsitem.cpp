@@ -20,6 +20,7 @@
 #include<QStyle>
 #include<QApplication>
 #include<QDesktopWidget>
+#include<QDebug>
 
 // Constructor, destructor
 // -----------------------
@@ -27,11 +28,16 @@
 //we subclass QGraphicItem and call the new class ScreenshotsGraphicsItem.
 //The class' constructor accepts a pointer to a QGraphicItem item.
 //This pointer is then passed to the constructor of the QGraphicItem.
-ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QGraphicsItem *parent)
-        : QGraphicsItem(parent)
-        , m_rect_sc(0,0,75,25){//m_rect_sc(0,0,75,25) : default value.
+ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent)
+        : BaseGraphicItem(parent)
+{
+    Q_UNUSED(ptr)
 
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    //default values
+    setRect(QRectF(0, 0, width, height));
+
+
+
 }
 
 

@@ -31,6 +31,7 @@
 #include "Items/textboxitem.h"
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
+#include "Items/screenshotsgraphicsitem.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -98,6 +99,7 @@ void MainWindow::buildMenu()
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
     // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
@@ -283,6 +285,18 @@ void MainWindow::slotArrowsGraphicsItem()
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(&m_formArrows);
     m_scene.addItem(ArrowItem);
+
+}
+
+void MainWindow::slotScreenShot()
+{
+     //Get screen capture
+
+    qDebug () << "mainWindow slot of the Screenshot";
+
+   // ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    m_scene.clear();
+   // m_scene.addItem(sc);
 
 }
 
