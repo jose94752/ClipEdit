@@ -288,7 +288,7 @@
      <normaloff>:/icons/icons/resize-icon.png</normaloff>:/icons/icons/resize-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Resize view</string>
+    <string>Resize scene</string>
    </property>
    <property name="toolTip">
     <string>Resize the scene</string>

@@ -20,6 +20,7 @@
 //#include <QtCharts/QChartView>
 //#include <QtCharts/QLineSeries>
 //#include <QtCharts/QAreaSeries>
+#include <QRectF>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -91,6 +92,8 @@ private:
 
         // Scene
         QGraphicsScene m_scene;
+
+        QGraphicsRectItem *m_borderSceneItem;
 
         // Layers
         Layers m_Layers;
