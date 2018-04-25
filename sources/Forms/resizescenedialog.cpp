@@ -15,13 +15,14 @@
 #include <QStringList>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QBrush>
 #include "resizescenedialog.h"
 #include "ui_resizescenedialog.h"
 
 // Constructor, destructor
 // -----------------------
 
-ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem)
+ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem,QColor v_backgroundColor)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
 {
@@ -33,6 +34,8 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     m_scene = vscene;
 
     m_borderSceneItem=v_borderSceneItem;
+
+    m_backGroundColor=v_backgroundColor;
 
     // Get monitor dpi
     QDesktopWidget* desktop = QApplication::desktop();
@@ -102,6 +105,8 @@ void ResizeSceneDialog::sizeChanged()
     }
     m_scene->removeItem(*m_borderSceneItem);
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
+    (*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
+
 }
 
 void ResizeSceneDialog::unitChanged(const QString& unit)

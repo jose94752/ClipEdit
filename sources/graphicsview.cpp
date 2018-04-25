@@ -28,6 +28,11 @@ GraphicsView::GraphicsView(QWidget* parent)
     m_backgroundColor=Qt::white;
 }
 
+void GraphicsView::setGraphicsRectItem(QGraphicsRectItem *v_graphRectItem)
+{
+    m_graphRectItem=v_graphRectItem;
+}
+
 // Events
 // ------
 
@@ -123,6 +128,7 @@ void GraphicsView::changeBackgroundColor()
    if(color.isValid())
    {
        m_backgroundColor = color;
-       this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
+       //this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
+       this->m_graphRectItem->setBrush(QBrush(m_backgroundColor));
    }
 }

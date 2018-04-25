@@ -162,6 +162,7 @@ void MainWindow::buildView()
     m_width=210*dpix/25.4;
     m_height=297*dpiy/25.4;
     m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
+    ui->graphicsView->setGraphicsRectItem((QGraphicsRectItem*)m_borderSceneItem);
     ui->graphicsView->setScene(&m_scene);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
@@ -193,7 +194,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
 }
 
@@ -201,7 +202,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {

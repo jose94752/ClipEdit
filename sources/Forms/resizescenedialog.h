@@ -32,7 +32,7 @@ class ResizeSceneDialog
     Q_OBJECT
 
 public:
-    explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**);
+    explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**,QColor);
     ~ResizeSceneDialog();
 
 public slots:
@@ -47,6 +47,7 @@ private:
     int m_dpix;
     int m_dpiy;
     QGraphicsRectItem **m_borderSceneItem;
+    QColor m_backGroundColor;
 };
 
 #endif
