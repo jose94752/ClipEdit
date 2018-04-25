@@ -253,7 +253,7 @@ void MainWindow::slotTextBoxes(bool)
 }
 
 void MainWindow::slotTextPicture()
-{
+{   qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
     m_scene.clear();
     m_scene.addItem(PictureItem);
