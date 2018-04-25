@@ -313,10 +313,17 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     // 1. Check type
     // 2. Load associated form
     // 3. Fill the form
+
+    // Really dirty, would like to make it cleaner in the future
+
     switch (item->type())
     {
         case BaseGraphicItem::Type::TextBoxGraphicsItem:
         {
+            //TextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
+            //ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+
+            // Load item info into the form
 
         } break;
         case BaseGraphicItem::Type::ArrowGraphicsItem:
