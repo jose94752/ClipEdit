@@ -49,7 +49,7 @@ class ArrowsGraphicsItem
         //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
         // Overriding of the Type
-        int type() const { return Type::ArrowGraphicsItem; }
+        int type() const { return CustomTypes::ArrowGraphicsItem; }
 
         // Virtual method redefinition
         QRectF boundingRect() const;

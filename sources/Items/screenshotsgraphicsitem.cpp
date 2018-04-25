@@ -68,7 +68,7 @@ void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphic
 
 int ScreenshotsGraphicsItem::type() const{
 
-    return Type::ImageGraphicsItem;
+    return CustomTypes::ImageGraphicsItem;
 }
 
 

@@ -154,7 +154,7 @@ Qt::AlignCenter
 
 int PicturesGraphicsItem::type() const
 {
-    return Type::ImageGraphicsItem;
+    return CustomTypes::ImageGraphicsItem;
 }
 
 void PicturesGraphicsItem::modification_width (QPainter* p){

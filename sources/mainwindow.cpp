@@ -326,18 +326,20 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     // 3. Fill the form
 
     // Really dirty, would like to make it cleaner in the future
+    if (!item)
+        return;
 
     switch (item->type())
     {
-        case BaseGraphicItem::Type::TextBoxGraphicsItem:
+        case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
-            //TextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
+            qgraphicsitem_cast<TextBoxItem*>(item);
             ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
 
-            // Load item info into the form
+            // Load item properties into the form
 
         } break;
-        case BaseGraphicItem::Type::ArrowGraphicsItem:
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
         {
 
         } break;
