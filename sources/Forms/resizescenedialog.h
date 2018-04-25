@@ -1,32 +1,54 @@
+/*
+==================================================
+* File:         resizescenedialog.h
+* Project:      ClipEdit
+* Creation:     24/04/2018
+* Brief:        Dialog to edit the scene dimension
+==================================================
+*/
+
 #ifndef RESIZESCENEDIALOG_H
 #define RESIZESCENEDIALOG_H
-#include <QGraphicsScene>
 
+// Includes
+// --------
+
+#include <QGraphicsScene>
 #include <QDialog>
 
-namespace Ui {
-class ResizeSceneDialog;
+namespace Ui
+{
+    class ResizeSceneDialog;
 }
 
-class ResizeSceneDialog : public QDialog
+// Class
+// -----
+
+class ResizeSceneDialog
+    :   public QDialog
 {
     Q_OBJECT
 
-public:
-    explicit ResizeSceneDialog(QWidget *parent,QGraphicsScene*,int*,int*);//(parent,precedent width,precedent height)
-    ~ResizeSceneDialog();
+    public:
 
-public slots:
-    void sizeChanged();
-    void unityChanged(QString);
+        // Constructor, destructor
+        explicit ResizeSceneDialog(QGraphicsScene*, int*, int*, QWidget* parent = 0);//(parent,precedent width,precedent height)
+        ~ResizeSceneDialog();
 
-private:
-    Ui::ResizeSceneDialog *ui;
-    QGraphicsScene *scene;
-    int *m_width;
-    int *m_height;
-    int dpix;
-    int dpiy;
+    public slots:
+
+        // Slots
+        void sizeChanged();
+        void unitChanged(const QString& unit);
+
+    private:
+
+        Ui::ResizeSceneDialog* ui;
+        QGraphicsScene* m_scene;
+        int* m_width;
+        int* m_height;
+        int m_dpix;
+        int m_dpiy;
 };
 
-#endif // RESIZESCENEDIALOG_H
+#endif
