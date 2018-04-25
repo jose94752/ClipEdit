@@ -32,7 +32,7 @@ class FormPictures
     Q_OBJECT
 
     public:
-        char w_h;
+        char w_h1;
         // Constructor, destructor
         explicit FormPictures(QWidget* parent = 0);
 
@@ -44,8 +44,8 @@ class FormPictures
 
         void chose_picture();
         void picture_modification();
-        void picture_modification_w();
-        void picture_modification_h();
+        void picture_modification_w(int);
+        void picture_modification_h(int);
 
 
     private:
@@ -55,9 +55,8 @@ class FormPictures
 
     signals:
 
-        void picture_changed(char w_h);
-
-
+        void picture_changed();
+        void picture_changed_w_h(char w_h1);
 
 };
 

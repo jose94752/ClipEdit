@@ -14,6 +14,8 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include <QColorDialog>
+#include <QApplication>
+#include <QDesktopWidget>
 
 #include "graphicsview.h"
 
@@ -107,6 +109,12 @@ void GraphicsView::setZoomLevel(int zoom)
     // Rescale
     resetMatrix();
     scale(s, s);
+    QDesktopWidget *deskWidget=QApplication::desktop();
+    int dpix=deskWidget->logicalDpiX();
+    int dpiy=deskWidget->logicalDpiY();
+    int width=210*dpix/25.4;
+    int height=297*dpiy/25.4;
+    setSceneRect(-width/2, -height/2,width,height);
 }
 
 void GraphicsView::changeBackgroundColor()
