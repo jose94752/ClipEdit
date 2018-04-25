@@ -31,6 +31,7 @@
 #include "Items/textboxitem.h"
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
+#include "Items/screenshotsgraphicsitem.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -92,12 +93,13 @@ void MainWindow::buildMenu()
     ui->actionSave->setDisabled(true);
 
     // Item insertion connects
-    connect(&m_formPictures, SIGNAL(imageChosen()) , this, SLOT(slotTextPicture()));
+    connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
     // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
@@ -286,15 +288,24 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
+void MainWindow::slotScreenShot()
+{
+     //Get screen capture
+
+    qDebug () << "mainWindow slot of the Screenshot";
+
+   // ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    m_scene.clear();
+   // m_scene.addItem(sc);
+
+}
+
 void MainWindow::slotLayers()
 {
 //    qDebug() << "MainWindow::slotLayers()" ;
 
     m_formLayers.setScene(m_scene);
 }
-
-<<<<<<< HEAD
-=======
 void MainWindow::itemSelected(QGraphicsItem* item)
 {
     // An item have been selected
@@ -316,7 +327,6 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     }
 }
 
->>>>>>> d6bb77a4c1fc2e4fd8ca408971b41d9d5cdf0510
 void MainWindow::exportView(bool)
 {
     QString fileName=QFileDialog::getSaveFileName(this,tr("Export Image"),"project.png",tr("Image File (*.png)"));

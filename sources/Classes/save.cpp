@@ -62,8 +62,8 @@ bool Save::fileNameExists()
     }
 }
 
-///transform TextBoxItem for saving
-/*void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
+/*///transform TextBoxItem for saving
+void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
     qDebug()<<"text boxes";
 }
 
@@ -135,7 +135,7 @@ TextBoxItem* Save::setTextBoxItem(QSettings *settings,int i)
 
 ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
 {
-    bool WithoutAnchorPoint;
+    /*bool WithoutAnchorPoint;
     bool OneAnchorPoint;
     bool TwoAnchorPoints;
     int ArrowWidth;
@@ -157,8 +157,8 @@ ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,int i)
     b=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/b")).toInt();
     a=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/a")).toInt();
     QColor ArrowFillColor(r,g,b,a);
-    LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("LineThickness")).toInt();
-    SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("SizeHeadTypeChoice")).toInt();
+    LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("/LineThickness")).toInt();
+    SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("/SizeHeadTypeChoice")).toInt();
     FormArrows *formArrows=new FormArrows();
     formArrows->SetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
     return new ArrowsGraphicsItem(formArrows);
