@@ -124,9 +124,12 @@ private:
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
         void slotScreenshot();
-        // Modif Layers
-        void slotLayers();
+
         void itemSelected(QGraphicsItem* item);
+
+        // Layers
+        void slotLayers();
+        void layerSelected();
 };
 
 #endif

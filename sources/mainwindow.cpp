@@ -310,12 +310,6 @@ void MainWindow::slotScreenshot()
 
 }
 
-void MainWindow::slotLayers()
-{
-//    qDebug() << "MainWindow::slotLayers()" ;
-
-    m_formLayers.setScene(m_scene);
-}
 void MainWindow::itemSelected(QGraphicsItem* item)
 {
     // An item have been selected
@@ -342,6 +336,18 @@ void MainWindow::itemSelected(QGraphicsItem* item)
         } break;
 
     }
+}
+
+// Layers
+void MainWindow::slotLayers()
+{
+//    qDebug() << "MainWindow::slotLayers()" ;
+
+    m_formLayers.setScene(m_scene);
+}
+
+void MainWindow::layerSelected()
+{
 }
 
 void MainWindow::exportView(bool)
