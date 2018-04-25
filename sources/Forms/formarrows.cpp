@@ -101,7 +101,7 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
 
 }
 
-void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth, int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness, int SizeHeadTypeChoice)
+/*void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth, int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness, int SizeHeadTypeChoice)
 {
     //ui->radioButtonWithoutAnchorPoint->isChecked()=WithoutAnchorPoint;
     //ui->radioButton1AnchorPoints->isChecked()=OneAnchorPoint;
@@ -122,7 +122,7 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
     //SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
     //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
      SizeHeadTypeChoiceContents=SizeHeadTypeChoice;
-}
+}*/
 
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {

@@ -16,6 +16,12 @@ ResizeSceneDialog::ResizeSceneDialog(QWidget *parent,QGraphicsScene *vscene,int 
     QDesktopWidget *app_widget=QApplication::desktop();
     dpix=app_widget->logicalDpiX();
     dpiy=app_widget->logicalDpiY();
+    if(dpix==0){
+        dpix=25;
+    }
+    if(dpiy==0){
+        dpiy=25;
+    }
     //unities list
     QStringList unities={"mm","cm","inch","px"};
     //connects
