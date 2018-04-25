@@ -47,6 +47,7 @@ class FormTextBoxes
     private slots:
 
         void saveDefaultTheme();
+        void loadDefaultTheme();
 
     private:
 

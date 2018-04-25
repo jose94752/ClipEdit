@@ -35,7 +35,7 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
     ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-centered.png"), tr("Centered"), Qt::AlignHCenter);
 
     // Load default theme
-    // TO DO
+    loadDefaultTheme();
 
     // Connect
     connect(ui->pushButtonSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
@@ -67,6 +67,31 @@ void FormTextBoxes::saveDefaultTheme()
     s.setValue("FormTextBoxes/border-visible", ui->checkBoxHasBorders->isChecked());
     s.setValue("FormTextBoxes/border-width", ui->spinBoxBorderWidth->value());
     s.setValue("FormTextBoxes/border-radius", ui->spinBoxBorderRadius->value());
+}
+
+void FormTextBoxes::loadDefaultTheme()
+{
+    QSettings s;
+
+    QFont f;
+    f.fromString(s.value("FormTextBoxes/font").toString());
+
+    ui->plainTextEdit->setPlainText(s.value("FormTextBoxes/text").toString());
+    ui->fontComboBox->setCurrentFont(f);
+    ui->spinBoxPointSize->setValue(f.pointSize());
+    ui->checkBoxBold->setChecked(f.bold());
+    ui->checkBoxItalic->setChecked(f.italic());
+
+    int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment").toInt());
+    ui->comboBoxAlignment->setCurrentIndex(idx);
+
+    ui->pushButtonBackgroundColor->setColor(QColor(s.value("FormTextBoxes/background-color").toString()));
+    ui->pushButtonTextColor->setColor(QColor(s.value("FormTextBoxes/text-color").toString()));
+    ui->pushButtonBorderColor->setColor(QColor(s.value("FormTextBoxes/border-color").toString()));
+
+    ui->checkBoxHasBorders->setChecked(s.value("FormTextBoxes/border-visible").toBool());
+    ui->spinBoxBorderWidth->setValue(s.value("FormTextBoxes/border-width").toInt());
+    ui->spinBoxBorderRadius->setValue(s.value("FormTextBoxes/border-radius").toInt());
 }
 
 // Getters and setters
