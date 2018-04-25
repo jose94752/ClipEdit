@@ -84,27 +84,27 @@ void FormLayers::ShowLayers()
             // 2eme colonne
             switch (item->type())
             {
-                case BaseGraphicItem::Type::TextBoxGraphicsItem:
+                case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
                 {
                     ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/textbox-icon.png")));
                 } break;
-            case BaseGraphicItem::Type::ArrowGraphicsItem:
+            case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/arrow-icon-2.png")));
             } break;
-            case BaseGraphicItem::Type::ChartGraphicsItem:
+            case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/chart-icon-2.png")));
             } break;
-            case BaseGraphicItem::Type::ImageGraphicsItem:
+            case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/clipart-icon.png")));
             } break;
-            case BaseGraphicItem::Type::NumberedBulletGraphicsItem:
+            case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/numbered-bullet-icon.png")));
             } break;
-            case BaseGraphicItem::Type::ScreenshotGraphicsItem:
+            case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/screenshot-icon.png")));
             } break;
@@ -195,7 +195,7 @@ void FormLayers::on_buttonUp_clicked()
 
     qreal zValue = 0;
     foreach (QGraphicsItem *item, overlapItems) {
-        if (item->zValue() >= zValue && item->type() >= BaseGraphicItem::Type::TextBoxGraphicsItem)
+        if (item->zValue() >= zValue && item->type() >= BaseGraphicItem::CustomTypes::TextBoxGraphicsItem)
             zValue = item->zValue() + 0.1;
     }
     selectedItem->setZValue(zValue);
@@ -214,7 +214,7 @@ void FormLayers::on_pushDown_clicked()
 
     qreal zValue = 0;
     foreach (QGraphicsItem *item, overlapItems) {
-        if (item->zValue() <= zValue && item->type() >= BaseGraphicItem::Type::TextBoxGraphicsItem)
+        if (item->zValue() <= zValue && item->type() >= BaseGraphicItem::CustomTypes::TextBoxGraphicsItem)
             zValue = item->zValue() - 0.1;
     }
     selectedItem->setZValue(zValue);

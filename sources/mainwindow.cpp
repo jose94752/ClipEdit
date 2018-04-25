@@ -96,6 +96,8 @@ void MainWindow::buildMenu()
     // Item insertion connects
     connect(&m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets.getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
+    connect(m_formBullets.getToolButton_saveBulletConfig(),SIGNAL(clicked(bool)), SLOT(slotNumberedBulletsSaveConfig()));
+
     connect(m_formTextboxes.getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
@@ -105,7 +107,7 @@ void MainWindow::buildMenu()
 
     // Layers
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-
+    //retriving saved values
 }
 
 void MainWindow::buildToolBar()
@@ -161,9 +163,9 @@ void MainWindow::buildView()
     int dpiy=deskWidget->logicalDpiY();
     m_width=210*dpix/25.4;
     m_height=297*dpiy/25.4;
-    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
+    m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
+    ui->graphicsView->setGraphicsRectItem((QGraphicsRectItem*)m_borderSceneItem);
     ui->graphicsView->setScene(&m_scene);
-    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
@@ -194,7 +196,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(&m_scene, &m_width, &m_height, this);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
 }
 
@@ -202,7 +204,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(&m_scene, &m_width, &m_height, this);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -210,6 +212,9 @@ void MainWindow::slotNew(bool)
     }
 }
 
+///
+/// \brief MainWindow::slotNumberedBullets
+///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
@@ -222,6 +227,10 @@ void MainWindow::slotNumberedBullets()
   NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
   qDebug () << "\tfrom == " << from << "\n";
   qDebug () << "\tto == " << to << "\n";
+  if (to < from) {
+      qDebug () << "invalid interval\n";
+      return;
+  }
   int numbullet (from);
   QPointF scene_topleft (m_scene.sceneRect().topLeft());
   QPointF scene_topright (m_scene.sceneRect().topRight());
@@ -242,15 +251,21 @@ void MainWindow::slotNumberedBullets()
   }
 }
 
+void MainWindow::slotNumberedBulletsSaveConfig () {
+  m_formBullets.save_config ();
+}
+
 void MainWindow::slotTextBoxes(bool)
 {
     // Retrieve data from the form
-    QMap<QString, QVariant> data = m_formTextboxes.getInfos();
-    m_scene.addItem(new TextBoxItem(data));
+    QVariant data = m_formTextboxes.getItemData();
+    TextBoxItem* item = new TextBoxItem();
+    item->setItemData(data);
+    m_scene.addItem(item);
 }
 
 void MainWindow::slotTextPicture()
-{
+{   qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
     m_scene.clear();
     m_scene.addItem(PictureItem);
@@ -306,8 +321,6 @@ void MainWindow::slotScreenshot()
     ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
     m_scene.clear();
     m_scene.addItem(sc);
-
-
 }
 
 void MainWindow::itemSelected(QGraphicsItem* item)
@@ -319,22 +332,28 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     // 3. Fill the form
 
     // Really dirty, would like to make it cleaner in the future
+    if (!item)
+        return;
 
     switch (item->type())
     {
-        case BaseGraphicItem::Type::TextBoxGraphicsItem:
+        case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
-            //aTextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
-            ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+            TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
 
-            // Load item info into the form
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+                m_formTextboxes.setItemData(castedItem->getItemData());
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        {
 
         } break;
-        case BaseGraphicItem::Type::ArrowGraphicsItem:
+        case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
         {
-
-        } break;
-
+        }
     }
 }
 
@@ -352,21 +371,27 @@ void MainWindow::layerSelected()
 
 void MainWindow::exportView(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this,tr("Export Image"),"project.png",tr("Image File (*.png)"));
-    if(fileName!=""){
-        QString extfilename=Save::verifyExtension(fileName,"png");
-        QFile fileToSave(extfilename);
-        if(fileName!=extfilename && fileToSave.exists()){
-            DialogFileAlreadyExists dfae;
-            dfae.exec();
-        }else{
-            QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
-            image.fill(Qt::white);                                              // Start all pixels transparent
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export as image"), "output.png" , tr("Image File (*.png)"));
 
-            QPainter painter(&image);
-            m_scene.render(&painter);
-            image.save(extfilename);
-        }
+    if (fileName.isEmpty())
+        return;
+
+    QString extfilename = Save::verifyExtension(fileName, "png");
+    QFile fileToSave(extfilename);
+
+    if (fileName != extfilename && fileToSave.exists())
+    {
+        DialogFileAlreadyExists d;
+        d.exec();
+    }
+    else
+    {
+        QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);
+        image.fill(Qt::white);
+
+        QPainter painter(&image);
+        m_scene.render(&painter);
+        image.save(extfilename);
     }
 }
 

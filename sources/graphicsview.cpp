@@ -28,6 +28,11 @@ GraphicsView::GraphicsView(QWidget* parent)
     m_backgroundColor=Qt::white;
 }
 
+void GraphicsView::setGraphicsRectItem(QGraphicsRectItem *v_graphRectItem)
+{
+    m_graphRectItem=v_graphRectItem;
+}
+
 // Events
 // ------
 
@@ -109,12 +114,12 @@ void GraphicsView::setZoomLevel(int zoom)
     // Rescale
     resetMatrix();
     scale(s, s);
-    QDesktopWidget *deskWidget=QApplication::desktop();
+    /*QDesktopWidget *deskWidget=QApplication::desktop();
     int dpix=deskWidget->logicalDpiX();
     int dpiy=deskWidget->logicalDpiY();
-    int width=210*dpix/25.4;
-    int height=297*dpiy/25.4;
-    setSceneRect(-width/2, -height/2,width,height);
+    int width=210*dpix/25.4*s*1.01;
+    int height=297*dpiy/25.4*s*1.01;
+    setMaximumSize(width,height);*/
 }
 
 void GraphicsView::changeBackgroundColor()
@@ -123,6 +128,7 @@ void GraphicsView::changeBackgroundColor()
    if(color.isValid())
    {
        m_backgroundColor = color;
-       this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
+       //this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
+       this->m_graphRectItem->setBrush(QBrush(m_backgroundColor));
    }
 }

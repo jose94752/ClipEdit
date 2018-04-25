@@ -23,10 +23,16 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    SIGNAL(picture_changed( w_h)), this, SLOT(change_w_h(w_h));
-    qDebug() <<"apres SIGNAL, w_h = " <<w_h;
+    //connect (  , SIGNAL(picture_changed_w_h( w_h)), this, SLOT(change_w_h(w_h)));
+
 
     ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
+
+    ptr_1 = ptr;
+
+    qDebug() <<"PicturesGraphicsItem (1), height ="  <<height  <<",  w_h = "  <<w_h  ;
+
+
 
     setRect(QRectF(0, 0, width, height));
 
@@ -47,16 +53,22 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 {
 
 
-
  //painter->drawPixmap(0, 0, width, height, path);
  //painter->drawText( QRectF (0,0, width, height),"coucou");
  // painter->(boundingRect(), m_picture);
 
-     qDebug() <<"picturegrahic  : w_h:"  <<w_h  ;
 
-  if (w_h != ' ')  {
+ ptr_1->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
+
+ qDebug() <<"PicturesGraphicsItem (2), height = "  <<height <<",  width =" <<width  <<", w_h=" <<w_h;
+
+  if (w_h == ' ')
+  {
+      painter->drawPixmap(0, 0, width, height, path);
+      qDebug() <<"PicturesGraphicsItem (2a) (blanc) , Fixed="  <<w_h_fixed    <<", w_h = " <<w_h   ;
+  }
+  else {
       if (w_h_fixed) {
-
          switch ( w_h )
             {case 'w':
              modification_width(painter);
@@ -64,14 +76,10 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
              case 'h':
              modification_height(painter);
 
-
              //default:
-        }
+         }
       }
   }
-  else  painter->drawPixmap(0, 0, width, height, path);
-
-
 
     w_h = ' ';
     w_h_fixed = false;
@@ -146,11 +154,11 @@ Qt::AlignCenter
 
 int PicturesGraphicsItem::type() const
 {
-    return Type::ImageGraphicsItem;
+    return CustomTypes::ImageGraphicsItem;
 }
 
 void PicturesGraphicsItem::modification_width (QPainter* p){
-
+     qDebug() <<"modification_width, 2w";
      QPixmap pixmap(path);
      pixmap = pixmap.scaledToWidth( width );
 
@@ -159,13 +167,12 @@ void PicturesGraphicsItem::modification_width (QPainter* p){
 
 
 void PicturesGraphicsItem::modification_height (QPainter* p){
-
+        qDebug() <<"modification_height 2h";
         QPixmap pixmap(path);
         pixmap = pixmap.scaledToHeight( height );
 
         p->drawPixmap(0,0,pixmap );
 }
-
 
 
 

@@ -10,6 +10,8 @@
 #ifndef GRAPHICSVIEW_H
 #define GRAPHICSVIEW_H
 
+#include <QGraphicsRectItem>
+
 // Includes
 // --------
 
@@ -27,6 +29,11 @@ class GraphicsView
 
         // Constructor
         GraphicsView(QWidget* parent = 0);
+
+        //couleur de fond
+        QColor m_backgroundColor;
+
+        void setGraphicsRectItem(QGraphicsRectItem*);
 
     public slots:
 
@@ -51,9 +58,8 @@ class GraphicsView
 
         // Pos for panning
         QPointF m_oldPos;
+        QGraphicsRectItem *m_graphRectItem;
 
-        //color de fond
-        QColor m_backgroundColor;
 };
 
 #endif
