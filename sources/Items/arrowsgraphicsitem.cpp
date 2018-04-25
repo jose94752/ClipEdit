@@ -197,3 +197,13 @@ FormArrows* ArrowsGraphicsItem::getFormArrow()
 {
     return m_formArrows;
 }
+
+QPointF ArrowsGraphicsItem::getStartPosition()
+{
+    return *m_StartPositionItem;
+}
+
+QPointF ArrowsGraphicsItem::getEndPosition()
+{
+    return *m_EndPositionItem;
+}
