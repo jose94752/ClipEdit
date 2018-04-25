@@ -37,8 +37,7 @@ void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape,
     bulletcolor = ui->ColorButton_BulletColor->getColor();
     numbercolor = ui->ColorBullet_NumberColor->getColor();
 
-    font = ui->fontComboBox->font ();
-
+    font = ui->fontComboBox->currentFont();
 }
 
 QPushButton *FormNumberedBullets::getGoPushButton()
@@ -62,7 +61,8 @@ void FormNumberedBullets::save_config () const {
     s.setValue("FormNumberedBullets/size",taille );
     s.setValue("FormNumberedBullets/bulletcolor",bulletcolor.name ());
     s.setValue("FormNumberedBullets/numbercolor",numbercolor.name ());
-    s.setValue("FormNumberedBullets/font",qf.toString());
+    s.setValue("FormNumberedBullets/font",ui->fontComboBox->currentIndex());
+    s.setValue("FormNumberedBullets/shape", (int) shape);
 }
 
 void FormNumberedBullets::load_config() {
@@ -84,5 +84,11 @@ void FormNumberedBullets::load_config() {
 
     ui->ColorButton_BulletColor->setColor(bulletcolor);
     ui->ColorBullet_NumberColor->setColor(numbercolor);
+    int qfont_index (0);
+    qfont_index = q.value ("FormNumberedBullets/font", qfont_index).toInt ();
+    ui->fontComboBox->setCurrentIndex(qfont_index);
+    int index_shape (0);
+    index_shape = q.value ("FormNumberedBullets/shape", index_shape).toInt();
+    ui->comboBox_Shape->setCurrentIndex(index_shape);
 
 }
