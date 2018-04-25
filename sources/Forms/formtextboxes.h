@@ -41,7 +41,7 @@ class FormTextBoxes
         // Getters and setters
         const QPushButton* getAddButton();
 
-        QVariant getItemData();
+        QVariant getItemData() const;
         void setItemData(const QVariant& data);
 
     private slots:

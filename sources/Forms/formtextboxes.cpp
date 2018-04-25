@@ -12,6 +12,7 @@
 
 #include <QColorDialog>
 #include <QColor>
+#include <QSettings>
 
 #include "formtextboxes.h"
 #include "ui_formtextboxes.h"
@@ -32,6 +33,12 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
     ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-left.png"), tr("Left"), Qt::AlignLeft);
     ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-right.png"), tr("Right"), Qt::AlignRight);
     ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-centered.png"), tr("Centered"), Qt::AlignHCenter);
+
+    // Load default theme
+    // TO DO
+
+    // Connect
+    connect(ui->pushButtonSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
 }
 
 FormTextBoxes::~FormTextBoxes()
@@ -44,7 +51,22 @@ FormTextBoxes::~FormTextBoxes()
 
 void FormTextBoxes::saveDefaultTheme()
 {
-    // TO DO
+    QSettings s;
+
+    QFont font;
+    font.setFamily(ui->fontComboBox->currentText());
+    font.setPointSize(ui->spinBoxPointSize->value());
+    font.setBold(ui->checkBoxBold->isChecked());
+    font.setItalic(ui->checkBoxItalic->isChecked());
+
+    s.setValue("FormTextBoxes/font", font);
+    s.setValue("FormTextBoxes/alignment", ui->comboBoxAlignment->currentData());
+    s.setValue("FormTextBoxes/background-color", ui->pushButtonBackgroundColor->getColor().name());
+    s.setValue("FormTextBoxes/text-color", ui->pushButtonTextColor->getColor().name());
+    s.setValue("FormTextBoxes/border-color", ui->pushButtonBorderColor->getColor().name());
+    s.setValue("FormTextBoxes/border-visible", ui->checkBoxHasBorders->isChecked());
+    s.setValue("FormTextBoxes/border-width", ui->spinBoxBorderWidth->value());
+    s.setValue("FormTextBoxes/border-radius", ui->spinBoxBorderRadius->value());
 }
 
 // Getters and setters
@@ -55,7 +77,7 @@ const QPushButton* FormTextBoxes::getAddButton()
     return ui->pushButtonAdd;
 }
 
-QVariant FormTextBoxes::getItemData()
+QVariant FormTextBoxes::getItemData() const
 {
     QVariantHash data;
 
