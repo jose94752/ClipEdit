@@ -156,16 +156,12 @@ void MainWindow::buildStackedWidget()
 
 void MainWindow::buildView()
 {
-//    QDesktopWidget *deskWidget=QApplication::desktop();
-//    int dpix=deskWidget->logicalDpiX();
-//    int dpiy=deskWidget->logicalDpiY();
-//    m_width=210*dpix/25.4;
-//    m_height=297*dpiy/25.4;
-//    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
-//    ui->graphicsView->setScene(&m_scene);
-//    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
-
-    m_scene.setSceneRect(-400, -400, 800, 800);
+    QDesktopWidget *deskWidget=QApplication::desktop();
+    int dpix=deskWidget->logicalDpiX();
+    int dpiy=deskWidget->logicalDpiY();
+    m_width=210*dpix/25.4;
+    m_height=297*dpiy/25.4;
+    m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
     ui->graphicsView->setScene(&m_scene);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
@@ -197,7 +193,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(&m_scene, this);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem);
     scenedialog.exec();
 }
 
@@ -205,7 +201,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(&m_scene, this);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -326,18 +322,20 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     // 3. Fill the form
 
     // Really dirty, would like to make it cleaner in the future
+    if (!item)
+        return;
 
     switch (item->type())
     {
-        case BaseGraphicItem::Type::TextBoxGraphicsItem:
+        case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
-            //TextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
+            qgraphicsitem_cast<TextBoxItem*>(item);
             ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
 
-            // Load item info into the form
+            // Load item properties into the form
 
         } break;
-        case BaseGraphicItem::Type::ArrowGraphicsItem:
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
         {
 
         } break;

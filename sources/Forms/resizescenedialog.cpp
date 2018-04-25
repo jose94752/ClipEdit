@@ -15,14 +15,13 @@
 #include <QStringList>
 #include <QApplication>
 #include <QDesktopWidget>
-
 #include "resizescenedialog.h"
 #include "ui_resizescenedialog.h"
 
 // Constructor, destructor
 // -----------------------
 
-ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent)
+ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
 {
@@ -32,6 +31,8 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent)
     ui->setupUi(this);
 
     m_scene = vscene;
+
+    m_borderSceneItem=v_borderSceneItem;
 
     // Get monitor dpi
     QDesktopWidget* desktop = QApplication::desktop();
@@ -56,7 +57,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent)
     ui->doubleSpinBoxWidth->setValue(m_scene->width());
     ui->doubleSpinBoxHeight->setValue(m_scene->height());
     ui->comboBoxUnit->setCurrentText("px");
-    unitChanged("px");
+    //unitChanged("px");
 
     // Connects
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(sizeChanged()));
@@ -74,6 +75,7 @@ ResizeSceneDialog::~ResizeSceneDialog()
 
 void ResizeSceneDialog::sizeChanged()
 {
+
     if (!m_scene)
         return;
 
@@ -98,11 +100,8 @@ void ResizeSceneDialog::sizeChanged()
         width = ui->doubleSpinBoxWidth->value();
         height = ui->doubleSpinBoxHeight->value();
     }
-
-    int x = -width/2;
-    int y = -height/2;
-
-    m_scene->setSceneRect(x, y, width, height);
+    m_scene->removeItem(*m_borderSceneItem);
+    *m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
 }
 
 void ResizeSceneDialog::unitChanged(const QString& unit)
