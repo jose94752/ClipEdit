@@ -6,12 +6,13 @@
 #include <QDesktopWidget>
 #include <QDebug>
 
-ResizeSceneDialog::ResizeSceneDialog(QWidget *parent,QGraphicsScene *vscene,int *v_width,int *v_height) :
+ResizeSceneDialog::ResizeSceneDialog(QWidget *parent,QGraphicsScene *vscene,int *v_width,int *v_height,QGraphicsRectItem **v_borderSceneItem) :
     QDialog(parent),
     ui(new Ui::ResizeSceneDialog)
 {
     ui->setupUi(this);
     scene=vscene;
+    m_borderSceneItem=v_borderSceneItem;
     //Pixels by dpi
     QDesktopWidget *app_widget=QApplication::desktop();
     dpix=app_widget->logicalDpiX();
@@ -64,7 +65,9 @@ void ResizeSceneDialog::sizeChanged()
     }
     int x=-width/2;
     int y=-height/2;
-    scene->setSceneRect(x,y,width,height);
+
+    scene->removeItem(*m_borderSceneItem);
+    *m_borderSceneItem=scene->addRect(QRectF(x,y,width,height));
     *m_width=width;
     *m_height=height;
 }

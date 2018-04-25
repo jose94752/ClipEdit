@@ -160,9 +160,9 @@ void MainWindow::buildView()
     int dpiy=deskWidget->logicalDpiY();
     m_width=210*dpix/25.4;
     m_height=297*dpiy/25.4;
-    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
+    m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
     ui->graphicsView->setScene(&m_scene);
-    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
+    //ui->graphicsView->setMaximumSize(1.01*m_width,1.01*m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
@@ -193,7 +193,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
+    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height,&m_borderSceneItem);
     scenedialog.exec();
 }
 
@@ -201,7 +201,7 @@ void MainWindow::slotNew(bool)
 {
     DialogSave dialogSave(this,m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
+    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height,&m_borderSceneItem);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
