@@ -32,6 +32,8 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
+#include <QApplication>
+#include <QDesktopWidget>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -61,8 +63,6 @@ void MainWindow::init()
     buildToolBar();
     buildStackedWidget();
     buildView();
-    m_width=800;
-    m_height=800;
 }
 
 
@@ -74,7 +74,7 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
     connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
     connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor(bool)));
+    connect(ui->actionQuit,             SIGNAL( triggered(bool) ),  this,   SLOT( close() ));
 
     connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
     connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
@@ -89,6 +89,7 @@ void MainWindow::buildMenu()
     connect(ui->actionResize,           SIGNAL( triggered(bool) ),  this,               SLOT( resizeTold(bool) ));
     connect(ui->actionContentToView,    SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
     connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
+    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
     ui->actionSave->setDisabled(true);
 
@@ -99,6 +100,7 @@ void MainWindow::buildMenu()
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+    connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenshot()));
     connect(&m_formScreenshots, SIGNAL(InsertImageText(QString)), this, SLOT(slotScreenShot()));
 
     // Layers
@@ -154,8 +156,14 @@ void MainWindow::buildStackedWidget()
 
 void MainWindow::buildView()
 {
-    m_scene.setSceneRect(-400, -400, 800, 800);
+    QDesktopWidget *deskWidget=QApplication::desktop();
+    int dpix=deskWidget->logicalDpiX();
+    int dpiy=deskWidget->logicalDpiY();
+    m_width=210*dpix/25.4;
+    m_height=297*dpiy/25.4;
+    m_scene.setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
     ui->graphicsView->setScene(&m_scene);
+    ui->graphicsView->setSceneRect(-m_width/2, -m_height/2,m_width,m_height);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
 }
@@ -186,15 +194,15 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
+    ResizeSceneDialog scenedialog(&m_scene, &m_width, &m_height, this);
     scenedialog.exec();
 }
 
 void MainWindow::slotNew(bool)
 {
-    DialogSave dialogSave(this,m_scene.items());
+    DialogSave dialogSave(this, m_scene.items());
     dialogSave.exec();
-    ResizeSceneDialog scenedialog(this,&m_scene,&m_width,&m_height);
+    ResizeSceneDialog scenedialog(&m_scene, &m_width, &m_height, this);
     scenedialog.exec();
     foreach(QGraphicsItem *item, m_scene.items())
     {
@@ -288,15 +296,17 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
-void MainWindow::slotScreenShot()
+
+void MainWindow::slotScreenshot()
 {
      //Get screen capture
 
     qDebug () << "mainWindow slot of the Screenshot";
 
-   // ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
     m_scene.clear();
-   // m_scene.addItem(sc);
+    m_scene.addItem(sc);
+
 
 }
 
@@ -313,10 +323,17 @@ void MainWindow::itemSelected(QGraphicsItem* item)
     // 1. Check type
     // 2. Load associated form
     // 3. Fill the form
+
+    // Really dirty, would like to make it cleaner in the future
+
     switch (item->type())
     {
         case BaseGraphicItem::Type::TextBoxGraphicsItem:
         {
+            //aTextBoxItem* textItem = qgraphicsitem_cast<TextBoxItem*>(item);
+            ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+
+            // Load item info into the form
 
         } break;
         case BaseGraphicItem::Type::ArrowGraphicsItem:
