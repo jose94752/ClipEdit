@@ -202,6 +202,9 @@ void MainWindow::slotNew(bool)
     }
 }
 
+///
+/// \brief MainWindow::slotNumberedBullets
+///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
   //checker le new ok
@@ -294,9 +297,9 @@ void MainWindow::slotScreenShot()
 
     qDebug () << "mainWindow slot of the Screenshot";
 
-   // ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
-    m_scene.clear();
-   // m_scene.addItem(sc);
+    //ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+    //m_scene.clear();
+    //m_scene.addItem(sc);
 
 }
 
