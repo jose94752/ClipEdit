@@ -40,6 +40,17 @@ class TextBoxItem
         // Determine the best size from the members
         void textToRect();
 
+        // Getters
+        const QString& text() const;
+        const QFont& font() const;
+        Qt::AlignmentFlag alignment() const;
+        const QColor& backgroundColor() const;
+        const QColor& textColor() const;
+        const QColor& borderColor() const;
+        bool hasBorders();
+        int borderWidth();
+        int borderRadius();
+
     private:
 
         // Text-related members

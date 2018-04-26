@@ -133,3 +133,52 @@ void TextBoxItem::textToRect()
 
    setRect(rect);
 }
+
+
+// Getters
+// -------
+
+const QString& TextBoxItem::text() const
+{
+    return m_text;
+}
+
+const QFont& TextBoxItem::font() const
+{
+    return m_font;
+}
+
+Qt::AlignmentFlag TextBoxItem::alignment() const
+{
+    return m_alignmentFlag;
+}
+
+const QColor& TextBoxItem::backgroundColor() const
+{
+    return m_backgroundColor;
+}
+
+const QColor& TextBoxItem::textColor() const
+{
+    return m_textColor;
+}
+
+const QColor& TextBoxItem::borderColor() const
+{
+    return m_borderColor;
+}
+
+bool TextBoxItem::hasBorders()
+{
+    return m_hasBorders;
+}
+
+int TextBoxItem::borderWidth()
+{
+    return m_borderWidth;
+}
+
+int TextBoxItem::borderRadius()
+{
+    return m_borderRadius;
+}

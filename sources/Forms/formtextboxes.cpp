@@ -153,8 +153,8 @@ void FormTextBoxes::setItemData(const QVariant& data)
     ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
 }
 
-// Pure virtual method implementation
-// ----------------------------------
+// Load data
+// ---------
 
 void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
 {
@@ -163,5 +163,21 @@ void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
         TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
 
         // Load data into the form
+        QFont f = castedItem->font();
+
+        ui->plainTextEdit->setPlainText(castedItem->text());
+        ui->fontComboBox->setCurrentText(f.family());
+        ui->spinBoxPointSize->setValue(f.pointSize());
+        ui->checkBoxBold->setChecked(f.bold());
+        ui->checkBoxItalic->setChecked(f.italic());
+        ui->comboBoxAlignment->setCurrentIndex(castedItem->alignment());
+
+        ui->pushButtonBackgroundColor->setColor(castedItem->backgroundColor());
+        ui->pushButtonTextColor->setColor(castedItem->textColor());
+        ui->pushButtonBorderColor->setColor(castedItem->borderColor());
+
+        ui->checkBoxHasBorders->setChecked(castedItem->hasBorders());
+        ui->spinBoxBorderWidth->setValue(castedItem->borderWidth());
+        ui->spinBoxBorderRadius->setValue(castedItem->borderRadius());
     }
 }

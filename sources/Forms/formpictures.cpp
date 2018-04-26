@@ -21,12 +21,13 @@
 #include "formpictures.h"
 #include "formpictures.h"
 #include "ui_formpictures.h"
+#include "../Items/picturesgraphicsitem.h"
 
 // Constructor, destructor
 // -----------------------
 
 FormPictures::FormPictures(QWidget *parent)
-    :   QWidget(parent), ui(new Ui::FormPictures)
+    :   BaseForm(parent), ui(new Ui::FormPictures)
 {
     ui->setupUi(this);
 
@@ -130,4 +131,17 @@ void FormPictures::picture_modification_h()
     emit picture_changed_w_h(w_h1);
 
     qDebug() <<" form H : w_h:"  <<w_h1 ;
+}
+
+// Load data
+// ---------
+
+void FormPictures::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<PicturesGraphicsItem*>(item))
+    {
+        PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
+
+        // Load data into the form
+    }
 }

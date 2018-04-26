@@ -14,6 +14,8 @@
 #include <QPushButton>
 #include <QToolButton>
 
+#include "baseform.h"
+
 // Forward Declaration
 namespace Ui
 {
@@ -24,7 +26,7 @@ namespace Ui
 // Class
 // -----
 
-class FormNumberedBullets: public QWidget
+class FormNumberedBullets: public BaseForm
 {
     Q_OBJECT
 
@@ -40,6 +42,10 @@ class FormNumberedBullets: public QWidget
         void setFrom (const int&);
         void save_config () const;
         void load_config ();
+
+        // Load data
+        void loadFromItem(BaseGraphicItem* item) const;
+
     private:
 
         // UI
