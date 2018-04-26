@@ -48,8 +48,19 @@ private slots:
         void cellActivated(int row, int column);
         void contextMenu(const QPoint &pos);
 
-        void on_buttonUp_clicked();
-        void on_pushDown_clicked();
+//        void on_buttonUp_clicked();
+//        void on_pushDown_clicked();
+
+//        void on_pushSupp_clicked();
+
+//        void on_pushAdd_clicked();
+
+        void ActionClicked(int line, int col);
+
+        void ActionUp();
+        void ActionDown();
+        void ActionAdd();
+        void ActionSupp();
 
 private:
 
@@ -60,11 +71,14 @@ private:
         qreal m_zvalue;
 
         QLabel *Icon(QIcon icon);
+        QLabel *Icon(QString filename);
 
         void initForm();
         void ShowLayers();
         void updateLayers();
 
+        int m_lineselected;
+        int m_columnselected;
 };
 
 #endif

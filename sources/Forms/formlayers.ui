@@ -73,17 +73,17 @@
         <string>Up</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushDown">
+      <widget class="QPushButton" name="buttonDown">
        <property name="text">
         <string>Down</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushAdd">
+      <widget class="QPushButton" name="buttonAdd">
        <property name="text">
         <string>Add</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushSupp">
+      <widget class="QPushButton" name="buttonSupp">
        <property name="text">
         <string>Supp</string>
        </property>
