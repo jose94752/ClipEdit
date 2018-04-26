@@ -10,6 +10,7 @@
 
 #include "formscreenshots.h"
 #include "ui_formscreenshots.h"
+#include "../Items/screenshotsgraphicsitem.h"
 
 //add
 #include<QTimer>
@@ -35,7 +36,7 @@
 // -----------------------
 
 FormScreenshots::FormScreenshots(QWidget* parent)
-    :   QWidget(parent), ui(new Ui::FormScreenshots)
+    :   BaseForm(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
 
@@ -269,8 +270,18 @@ void FormScreenshots::updatehide()
 
 }
 
+// Load data
+// ---------
 
+void FormScreenshots::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item))
+    {
+        ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
 
+        // Load data into the form
+    }
+}
 
 
 

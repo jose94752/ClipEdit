@@ -6,7 +6,6 @@ QRectF NumberedBulletGraphicItem::boundingRect() const
   return BaseGraphicItem::boundingRect();
 }
 
-
 void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     qpainter->setRenderHint(QPainter::Antialiasing);
     qpainter->setBrush(m_bulletcolor);

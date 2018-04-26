@@ -59,7 +59,8 @@ SOURCES += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
-    graphicsview.cpp
+    graphicsview.cpp \
+    Forms/baseform.cpp
 
 
 HEADERS += \
@@ -87,7 +88,8 @@ HEADERS += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.h \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
     $${ITEM_DIRECTORY}/textboxitem.h \
-    graphicsview.h
+    graphicsview.h \
+    Forms/baseform.h
 
 
 FORMS += \
