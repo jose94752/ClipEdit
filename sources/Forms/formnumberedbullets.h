@@ -1,14 +1,17 @@
 /*
-================================================
+=========================================================
 * File:         formnumberedbullets.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create TextBoxItem
-================================================
+* Brief:        Form to create NumberedBulletGraphicItem
+=========================================================
 */
 
 #ifndef FORMNUMBEREDBULLETS_H
 #define FORMNUMBEREDBULLETS_H
+
+// Includes
+// --------
 
 #include <QWidget>
 #include <QPushButton>
@@ -22,34 +25,37 @@ namespace Ui
     class FormNumberedBullets;
 }
 
-
 // Class
 // -----
 
-class FormNumberedBullets: public BaseForm
+class FormNumberedBullets
+    :   public BaseForm
 {
     Q_OBJECT
-
 
     public:
 
         explicit FormNumberedBullets(QWidget* parent = 0);
-
         ~FormNumberedBullets();
+
+        // Getters and setters
         void get_info (int& /*from*/, int& /*to*/, int& taille, int& shape, QColor& button_color, QColor& number_color, QFont&) const;
-        QPushButton *getGoPushButton();
-        QToolButton *getToolButton_saveBulletConfig ();
-        void setFrom (const int&);
-        void save_config () const;
-        void load_config ();
+        QPushButton* getGoPushButton();
+        //void setFrom (const int&);
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+    private slots:
+
+        // Default theme
+        void saveDefaultTheme() const;
+        void loadDefaultTheme();
+
     private:
 
         // UI
-        Ui::FormNumberedBullets *ui;
+        Ui::FormNumberedBullets* ui;
 };
 
 #endif

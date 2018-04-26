@@ -86,18 +86,16 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
      QImage  image1(img.toImage());
      QColor  color(image1.pixel(0, 1));
-     QRgb    color1;
 
      qDebug() <<"picturegraphics ; color  pixel 0-1 =" <<color;
 
 
      if (black_white) {
          qDebug() <<"black - white (1)";
-         int ii, jj;
-         for (int ii = 0; ii < width; ii++) {
-             for (int jj = 0; jj < height; jj++) {
-                 int gray = qGray(image1.pixel(ii, jj));
-                 image1.setPixel(ii, jj, QColor(gray, gray, gray).rgb());
+         for (int i = 0; i < width; i++) {
+             for (int j = 0; j < height; j++) {
+                 int gray = qGray(image1.pixel(i, j));
+                 image1.setPixel(i, j, QColor(gray, gray, gray).rgb());
              }
          }
 

@@ -81,9 +81,6 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
 
 void FormPictures::chose_picture()
 {
-
-
-
     QString grp     = "m2i_patrol";
     QString prj     = "clipart_picture";
     QString grp_prj = grp + "/" + prj;
@@ -91,10 +88,6 @@ void FormPictures::chose_picture()
     QSettings setting;
 
     QString s_path = setting.value(grp_prj).toString();
-
-
-
-
 
     //QSettings(const QString &fileName, Format format, QObject *parent = Q_NULLPTR)
     //QColor color = settings.value("DataPump/bgcolor").value<QColor>();
@@ -121,7 +114,6 @@ void FormPictures::chose_picture()
   qDebug()<<"FORM: picture  changed";
      emit picture_changed();
   //    ui->lineEdit_pic_path->setText(" ");
-
 }
 
 
@@ -148,13 +140,12 @@ void FormPictures::picture_modification_h()
     qDebug() <<" form H : w_h:"  <<w_h1 ;
 }
 
-<<<<<<< HEAD
-void FormPictures::legend_ok(bool b)
+
+void FormPictures::legend_ok(bool)
 {
     emit picture_changed();
+}
 
-    qDebug() <<" form Legend OK";
-=======
 // Load data
 // ---------
 
@@ -166,5 +157,4 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
 
         // Load data into the form
     }
->>>>>>> 930331032d63532b01b017869fec7ae0ef454e37
 }

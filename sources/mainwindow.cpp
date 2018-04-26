@@ -109,18 +109,12 @@ void MainWindow::buildForms()
     // Item connects
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
-    connect(m_formBullets->getToolButton_saveBulletConfig(),SIGNAL(clicked(bool)), SLOT(slotNumberedBulletsSaveConfig()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-<<<<<<< HEAD
-    connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
-
-    //put a parameter inside the setBackground() method.
-    connect(&m_formScreenshots, SIGNAL(setBackground(QPixmap pix)), this, SLOT(setBackground(QPixmap pix)));
-=======
-    connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
-    //connect(&m_formScreenshots, SIGNAL(InsertImageText(QPixmap p)), this, SLOT(slotScreenshot(QPixmap p)));
+    connect(m_formCharts, SIGNAL(FormCreateChart(const GraphsInfo&)), this, SLOT(slotGraphs(const GraphsInfo&)));
+    connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
+    connect(m_formCharts, SIGNAL(FormCreateChart(const GraphsInfo&)), this, SLOT(slotGraphs(const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Remove all useless pages
@@ -130,17 +124,16 @@ void MainWindow::buildForms()
         ui->stackedWidgetForms->removeWidget(widget);
         widget->deleteLater();
     }
->>>>>>> e2077ab499f424c1e590b0eb8ebd309bd63b8e2f
 
     // Store forms
-    m_listIndexes.insert(BUTTON_ID_ARROW,       ui->stackedWidgetForms->addWidget(m_formArrows));
-    m_listIndexes.insert(BUTTON_ID_CHART,       ui->stackedWidgetForms->addWidget(m_formCharts));
-    m_listIndexes.insert(BUTTON_ID_BULLET,      ui->stackedWidgetForms->addWidget(m_formBullets));
-    m_listIndexes.insert(BUTTON_ID_CLIPART,     ui->stackedWidgetForms->addWidget(m_formCliparts));
-    m_listIndexes.insert(BUTTON_ID_PICTURE,     ui->stackedWidgetForms->addWidget(m_formPictures));
-    m_listIndexes.insert(BUTTON_ID_TEXTBOX,     ui->stackedWidgetForms->addWidget(m_formTextboxes));
-    m_listIndexes.insert(BUTTON_ID_SCREENSHOT,  ui->stackedWidgetForms->addWidget(m_formScreenshots));
-    m_listIndexes.insert(BUTTON_ID_LAYERS,      ui->stackedWidgetForms->addWidget(m_formLayers));
+    m_listIndexes.insert(BUTTON_ID_ARROW, ui->stackedWidgetForms->addWidget(m_formArrows));
+    m_listIndexes.insert(BUTTON_ID_CHART, ui->stackedWidgetForms->addWidget(m_formCharts));
+    m_listIndexes.insert(BUTTON_ID_BULLET, ui->stackedWidgetForms->addWidget(m_formBullets));
+    m_listIndexes.insert(BUTTON_ID_CLIPART, ui->stackedWidgetForms->addWidget(m_formCliparts));
+    m_listIndexes.insert(BUTTON_ID_PICTURE, ui->stackedWidgetForms->addWidget(m_formPictures));
+    m_listIndexes.insert(BUTTON_ID_TEXTBOX, ui->stackedWidgetForms->addWidget(m_formTextboxes));
+    m_listIndexes.insert(BUTTON_ID_SCREENSHOT, ui->stackedWidgetForms->addWidget(m_formScreenshots));
+    m_listIndexes.insert(BUTTON_ID_LAYERS, ui->stackedWidgetForms->addWidget(m_formLayers));
 
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ArrowGraphicsItem, m_formArrows);
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ChartGraphicsItem, m_formCharts);
@@ -279,10 +272,6 @@ void MainWindow::slotNumberedBullets()
       bulletpos.setX(bulletpos.x() + delta);
     }
   }
-}
-
-void MainWindow::slotNumberedBulletsSaveConfig () {
-  m_formBullets->save_config ();
 }
 
 void MainWindow::slotTextBoxes(bool)

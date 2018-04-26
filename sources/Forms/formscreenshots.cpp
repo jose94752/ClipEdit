@@ -248,23 +248,20 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
 
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 {
-
+    Q_UNUSED(event)
 //    QPoint m_point1;
 //    m_point1 = event->globalPos();//get global position according to ur parent-child relationship
 //    QPainter m_painter(this);
 
-    //m_painter->
-   // p->drawRect(point1, point2);
+//    p->drawRect(point1, point2);
 
-
- //   Q_UNUSED(event)
 //    emit mouseReleaseEvent();
 //    m_buttonpressed=false;
 //    emit dimensionsMade(true, m_region);
 //    close();
 
 //    if(event->MouseButtonRelease)
-//     {
+//    {
 //         qDebug () << "released";
 //        // QPointF point1= ui->graphicsView->mapFromScene(e->posF());
 //         QPoint point1;
@@ -273,20 +270,22 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 //         y1= point1.y();
 //         qDebug()<<y1;
 //         qDebug()<<point1;
-//     }
-
-
+//    }
 }
 
 void FormScreenshots::updatehide()
 {
-        m_delayspinbox = new QSpinBox(this);
-        if (m_delayspinbox->value()== 0) {
-           m_hidewindow->setDisabled(true);
-            m_hidewindow->setChecked(false);
-        } else {
-            m_hidewindow->setDisabled(false);
-        }
+    m_delayspinbox = new QSpinBox(this);
+
+    if (m_delayspinbox->value()== 0)
+    {
+       m_hidewindow->setDisabled(true);
+       m_hidewindow->setChecked(false);
+    }
+    else
+    {
+        m_hidewindow->setDisabled(false);
+    }
 }
 
 void FormScreenshots::setBackground(QPixmap pix)
