@@ -11,7 +11,7 @@ My_Img_Button::My_Img_Button(QWidget* parent): QWidget(parent),
 //  setMouseTracking(true);
 
     setMinimumSize( QSize((int) img_width, (int) img_height) );
-    setMaximumSize( QSize(0xFFFFFF, 0xFFFFFF) );
+    setMaximumSize( QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX) );
 
     setCursor(Qt::PointingHandCursor);
 }
