@@ -20,6 +20,7 @@
 //#include <QtCharts/QChartView>
 //#include <QtCharts/QLineSeries>
 //#include <QtCharts/QAreaSeries>
+#include <QRectF>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -92,6 +93,8 @@ private:
         // Scene
         QGraphicsScene m_scene;
 
+        QGraphicsRectItem *m_borderSceneItem;
+
         // Layers
         Layers m_Layers;
 
@@ -119,14 +122,24 @@ private:
 
         // Items
         void slotNumberedBullets();
+        void slotNumberedBulletsSaveConfig();
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
+<<<<<<< HEAD
        // void slotScreenshot(QPixmap p);
         // Modif Layers
         void slotLayers();
+=======
+        void slotScreenshot();
+
+>>>>>>> f297578903f7adb8137c044e96a96f0462a644d8
         void itemSelected(QGraphicsItem* item);
+
+        // Layers
+        void slotLayers();
+        void layerSelected();
 };
 
 #endif

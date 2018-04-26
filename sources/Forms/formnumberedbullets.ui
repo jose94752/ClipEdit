@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
+    <width>418</width>
     <height>442</height>
    </rect>
   </property>
@@ -249,6 +249,20 @@
            </layout>
           </item>
           <item>
+           <widget class="QToolButton" name="toolButton_saveBulletConfig">
+            <property name="toolTip">
+             <string>save as default</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources/resources.qrc">
+              <normaloff>:/icons/icons/save-icon.png</normaloff>:/icons/icons/save-icon.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -284,6 +298,8 @@
    <header>Classes/colorbutton.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

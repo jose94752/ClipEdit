@@ -36,12 +36,18 @@ class FormTextBoxes
 
         // Constructor, destructor
         explicit FormTextBoxes(QWidget* parent = 0);
-
         ~FormTextBoxes();
 
-        // Getters
+        // Getters and setters
         const QPushButton* getAddButton();
-        QMap<QString, QVariant> getInfos();
+
+        QVariant getItemData() const;
+        void setItemData(const QVariant& data);
+
+    private slots:
+
+        void saveDefaultTheme();
+        void loadDefaultTheme();
 
     private:
 

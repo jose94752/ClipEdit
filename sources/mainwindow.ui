@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>516</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
@@ -288,7 +288,7 @@
      <normaloff>:/icons/icons/resize-icon.png</normaloff>:/icons/icons/resize-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Resize view</string>
+    <string>Resize scene</string>
    </property>
    <property name="toolTip">
     <string>Resize the scene</string>
@@ -321,7 +321,7 @@
   <action name="actionContentToView">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
-     <normaloff>:/icons/icons/icon-fit-in-view.png</normaloff>:/icons/icons/icon-fit-in-view.png</iconset>
+     <normaloff>:/icons/icons/fit-in-view-icon.png</normaloff>:/icons/icons/fit-in-view-icon.png</iconset>
    </property>
    <property name="text">
     <string>Content to view</string>
@@ -333,7 +333,7 @@
   <action name="actionSetBackgroundColor">
    <property name="icon">
     <iconset resource="resources/resources.qrc">
-     <normaloff>:/icons/icons/icon-background-color.png</normaloff>:/icons/icons/icon-background-color.png</iconset>
+     <normaloff>:/icons/icons/background-color-icon.png</normaloff>:/icons/icons/background-color-icon.png</iconset>
    </property>
    <property name="text">
     <string>Set background color</string>

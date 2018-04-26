@@ -14,6 +14,8 @@
 #include <QFontMetrics>
 #include <QPixmap>
 #include <QPainter>
+#include <QImage>
+#include <QRgb>
 
 #include "picturesgraphicsitem.h"
 
@@ -23,13 +25,14 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    SIGNAL(picture_changed( w_h)), this, SLOT(change_w_h(w_h));
-    qDebug() <<"apres SIGNAL, w_h = " <<w_h;
+    //connect (  , SIGNAL(picture_changed_w_h( w_h)), this, SLOT(change_w_h(w_h)));
+
 
     ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
-    setRect(QRectF(0, 0, width, height));
+    ptr_1 = ptr;
 
+    setRect(QRectF(0, 0, width, height));
 
 }
 
@@ -47,35 +50,61 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 {
 
 
-
  //painter->drawPixmap(0, 0, width, height, path);
  //painter->drawText( QRectF (0,0, width, height),"coucou");
  // painter->(boundingRect(), m_picture);
 
-     qDebug() <<"picturegrahic  : w_h:"  <<w_h  ;
 
-  if (w_h != ' ')  {
-      if (w_h_fixed) {
+     ptr_1->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
-         switch ( w_h )
-            {case 'w':
-             modification_width(painter);
+     if (w_h != ' ') {
+         if (w_h_fixed) {
+                 switch (w_h) {
+                    case 'w':
+                    modification_width();
+                    break;
 
-             case 'h':
-             modification_height(painter);
+                    case 'h':
+                    modification_height();
+                    break;
 
-
-             //default:
-        }
-      }
-  }
-  else  painter->drawPixmap(0, 0, width, height, path);
-
+                 }
+         }
+     }
 
 
-    w_h = ' ';
-    w_h_fixed = false;
 
+
+  //   Pixmap qPix = QPixmap::grabWidget(ui->myWidget);
+  //       QImage image(qPix.toImage());
+  //       QColor color(image.pixel(0, 1));
+
+
+     QPixmap img(path);
+     QImage  image1(img.toImage());
+     QColor  color(image1.pixel(0, 1));
+
+   //  qDebug() <<"color  pixel 0-1 =" <<color;
+
+
+     if (black_white) {
+         QRgb color;
+         int  f1, f2;
+
+         for (int f1=0; f1<width; f1++) {
+             for (int f2=0; f2<height; f2++) {
+                 color = image1.pixel(f1, f2);
+                 image1.setPixel(f1, f2, QColor((qRed(color) + qGreen(color) + qBlue(color))/3).rgb());
+             }
+         }
+     }
+
+
+    painter->drawPixmap(m_rect.toRect(),img);
+
+    w_h         = ' ';
+    w_h_fixed   = false;
+    black_white = false;
 
     lg_font.setPointSize(lg_size);
 
@@ -137,8 +166,7 @@ Qt::AlignCenter
     else qDebug()  <<"choix alignement  invalide"  << lg_pos;
 
 
-  // painter.drawText(5, 50 - (5*(i+1)) - 10, 20, 30, Qt::AlignHCenter | Qt::AlignVCenter, strNumber);
-    BaseGraphicItem::paint(painter, option, widget);
+  BaseGraphicItem::paint(painter, option, widget);
 }
 
 // Type
@@ -146,32 +174,31 @@ Qt::AlignCenter
 
 int PicturesGraphicsItem::type() const
 {
-    return Type::ImageGraphicsItem;
+    return CustomTypes::ImageGraphicsItem;
 }
 
-void PicturesGraphicsItem::modification_width (QPainter* p){
-
+void PicturesGraphicsItem::modification_width () {
+     qDebug() <<"modification_width, 2w";
      QPixmap pixmap(path);
      pixmap = pixmap.scaledToWidth( width );
 
-     p->drawPixmap(0,0,pixmap );
+
 }
 
 
-void PicturesGraphicsItem::modification_height (QPainter* p){
-
+void PicturesGraphicsItem::modification_height () {
+        qDebug() <<"modification_height 2h";
         QPixmap pixmap(path);
         pixmap = pixmap.scaledToHeight( height );
 
-        p->drawPixmap(0,0,pixmap );
+
 }
 
 
 
-
-void PicturesGraphicsItem::change_w_h(char w_h){
-      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;
-}
+//void PicturesGraphicsItem::change_w_h(char w_h){
+//      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;
+//}
 /*
 
  QGraphicsRectItem *rectItem = new QGraphicsRectItem( QRect( -25, 25, 200, 40 ), 0, &scene );
