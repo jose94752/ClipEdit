@@ -127,14 +127,8 @@ private:
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
-<<<<<<< HEAD
-       // void slotScreenshot(QPixmap p);
-        // Modif Layers
-        void slotLayers();
-=======
-        void slotScreenshot();
 
->>>>>>> f297578903f7adb8137c044e96a96f0462a644d8
+       // void slotScreenshot();
         void itemSelected(QGraphicsItem* item);
 
         // Layers
