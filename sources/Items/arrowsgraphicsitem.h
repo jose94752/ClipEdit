@@ -48,12 +48,10 @@ class ArrowsGraphicsItem
         // Constructor 2 anchors points
         //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
-        // Overriding of the Type
-        int type() const { return CustomTypes::ArrowGraphicsItem; }
-
-        // Virtual method redefinition
+        // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
-
+        void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        int type() const { return CustomTypes::ArrowGraphicsItem; }
 
         // Set Fill Color of the Arrow
         //void setColor(const QColor &color) { ItemFillColorArrow = color; }
@@ -81,12 +79,6 @@ class ArrowsGraphicsItem
         //renvoie des positions de début et de fin de flèches
         QPointF getStartPosition();
         QPointF getEndPosition();
-
-
-    protected:
-
-        // Virtual method redefinition
-        void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
 
     private:

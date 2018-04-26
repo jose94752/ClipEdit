@@ -31,9 +31,7 @@ class PicturesGraphicsItem
         // Constructor
         PicturesGraphicsItem (FormPictures* ptr, QGraphicsItem* parent = 0);
 
-
-
-        // Pure virtual methods implementation
+        // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         int type() const ;

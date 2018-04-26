@@ -15,9 +15,10 @@
 // Includes
 // --------
 
-#include <QWidget>
 #include <QColor>
 #include <QPolygonF>
+
+#include "baseform.h"
 
 // Forward Declaration
 namespace Ui
@@ -29,7 +30,7 @@ namespace Ui
 // -----
 
 class FormArrows
-    :   public QWidget
+    :   public BaseForm
 {
     Q_OBJECT
 
@@ -38,6 +39,9 @@ class FormArrows
         // Constructors, destructor
         explicit FormArrows(QWidget* parent = 0);
         ~FormArrows();
+
+        // Load data
+        void loadFromItem(BaseGraphicItem* item) const;
 
         // Method GetInfosArrows
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,

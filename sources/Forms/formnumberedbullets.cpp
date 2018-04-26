@@ -9,11 +9,15 @@
 
 #include "formnumberedbullets.h"
 #include "ui_formnumberedbullets.h"
+#include "../Items/numberedbulletgraphicitem.h"
+
 #include <qdebug.h>
 #include <qsettings.h>
 #include <qcolor.h>
+
+
 FormNumberedBullets::FormNumberedBullets(QWidget *parent)
-    :   QWidget(parent), ui(new Ui::FormNumberedBullets)
+    :   BaseForm(parent), ui(new Ui::FormNumberedBullets)
 {
     ui->setupUi(this);
     load_config ();
@@ -76,7 +80,7 @@ void FormNumberedBullets::load_config() {
     ui->spinBox_Size->setValue (taille);
     QColor bulletcolor (0,0, 255), //blue
            numbercolor (255, 0, 0);
-    QString str_bulletcolor, str_numbercolor;
+    QString str_bulletcolor (bulletcolor.name ()), str_numbercolor (numbercolor.name ());
     str_bulletcolor = q.value ("FormNumberedBullets/bulletcolor", str_bulletcolor).toString();
     str_numbercolor = q.value ("FormNumberedBullets/numbercolor", str_numbercolor).toString ();
     bulletcolor.setNamedColor(str_bulletcolor);
@@ -91,4 +95,17 @@ void FormNumberedBullets::load_config() {
     index_shape = q.value ("FormNumberedBullets/shape", index_shape).toInt();
     ui->comboBox_Shape->setCurrentIndex(index_shape);
 
+}
+
+// Load data
+// ---------
+
+void FormNumberedBullets::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<NumberedBulletGraphicItem*>(item))
+    {
+        NumberedBulletGraphicItem* castedItem = qgraphicsitem_cast<NumberedBulletGraphicItem*>(item);
+
+        // Load data into the form
+    }
 }

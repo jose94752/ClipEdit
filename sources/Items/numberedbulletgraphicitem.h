@@ -26,8 +26,9 @@ public:
                               QColor numbercolor = QColor (), const QFont font = QFont (), int taille = 12, BaseGraphicItem *parent = NULL);
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void print_debug () const;
     int type() const;
+
+    void print_debug () const;
 private :
     int m_num;
     shape_e m_shape;

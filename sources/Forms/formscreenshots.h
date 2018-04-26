@@ -31,6 +31,8 @@
 #include <QGraphicsScene>
 #include<QRect>
 
+#include "baseform.h"
+
 
 // Forward Declaration
 namespace Ui
@@ -44,7 +46,7 @@ namespace Ui
 /// of two types: WholeScreenShot and region
 ///
 
-class FormScreenshots :   public QWidget
+class FormScreenshots :   public BaseForm
 {
     Q_OBJECT
 
@@ -64,6 +66,10 @@ public:
    // virtual const char* what() const throw(bad_function_call);
 
         ~FormScreenshots();
+
+
+    // Load data
+    void loadFromItem(BaseGraphicItem* item) const;
 
 protected:
     ///

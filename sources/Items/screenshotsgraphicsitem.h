@@ -36,7 +36,7 @@ class ScreenshotsGraphicsItem
         // is getting deleted through a base class pointer.
         virtual ~ScreenshotsGraphicsItem() {}
 
-        // Pure virtual methods implementation
+        // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         int type() const ;
