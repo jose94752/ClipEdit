@@ -165,7 +165,7 @@ void MainWindow::buildView()
     m_width=210*dpix/25.4;
     m_height=297*dpiy/25.4;
     m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
-    ui->graphicsView->setGraphicsRectItem((QGraphicsRectItem*)m_borderSceneItem);
+    ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setScene(&m_scene);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
@@ -268,7 +268,7 @@ void MainWindow::slotTextBoxes(bool)
 void MainWindow::slotTextPicture()
 {   qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
-    m_scene.clear();
+    //m_scene.clear();
     m_scene.addItem(PictureItem);
 }
 
@@ -355,6 +355,24 @@ void MainWindow::itemSelected(QGraphicsItem* item)
 
     switch (item->type())
     {
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        {
+            ArrowsGraphicsItem* castedItem = qgraphicsitem_cast<ArrowsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_ARROW]);
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
+        {
+            GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_CHART]);
+            }
+        } break;
         case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
             TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
@@ -365,12 +383,32 @@ void MainWindow::itemSelected(QGraphicsItem* item)
                 m_formTextboxes.setItemData(castedItem->getItemData());
             }
         } break;
-        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
         {
+            PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
 
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
+            }
         } break;
-        case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+        case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
         {
+            NumberedBulletGraphicItem* castedItem = qgraphicsitem_cast<NumberedBulletGraphicItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_BULLET]);
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
+        {
+            ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_SCREENSHOT]);
+            }
         }
     }
 }

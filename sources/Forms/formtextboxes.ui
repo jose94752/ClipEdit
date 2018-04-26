@@ -275,7 +275,21 @@
        </property>
        <property name="icon">
         <iconset resource="../resources/resources.qrc">
-         <normaloff>:/icons/icons/save-icon.png</normaloff>:/icons/icons/save-icon.png</iconset>
+         <normaloff>:/icons/icons/save-theme-icon.png</normaloff>:/icons/icons/save-theme-icon.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonApplyTheme">
+       <property name="toolTip">
+        <string>Apply default theme</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../resources/resources.qrc">
+         <normaloff>:/icons/icons/apply-theme-icon.png</normaloff>:/icons/icons/apply-theme-icon.png</iconset>
        </property>
       </widget>
      </item>

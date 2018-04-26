@@ -26,6 +26,8 @@
         <file>icons/eye.png</file>
         <file>icons/background-color-icon.png</file>
         <file>icons/fit-in-view-icon.png</file>
+        <file>icons/apply-theme-icon.png</file>
+        <file>icons/save-theme-icon.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>

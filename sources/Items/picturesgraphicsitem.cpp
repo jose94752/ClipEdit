@@ -17,6 +17,7 @@
 #include <QImage>
 #include <QRgb>
 
+
 #include "picturesgraphicsitem.h"
 
 // Constructor
@@ -81,30 +82,42 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
 
      QPixmap img(path);
+     QPixmap pixmap_img;
+
      QImage  image1(img.toImage());
      QColor  color(image1.pixel(0, 1));
+     QRgb    color1;
 
-   //  qDebug() <<"color  pixel 0-1 =" <<color;
+     qDebug() <<"picturegraphics ; color  pixel 0-1 =" <<color;
 
 
      if (black_white) {
-         QRgb color;
+         qDebug() <<"black - white (1)";
          int  f1, f2;
 
          for (int f1=0; f1<width; f1++) {
-             for (int f2=0; f2<height; f2++) {
-                 color = image1.pixel(f1, f2);
-                 image1.setPixel(f1, f2, QColor((qRed(color) + qGreen(color) + qBlue(color))/3).rgb());
+             for (int f2=0; f2<height; f2++) {                
+                 color1 = image1.pixel(f1,f2);
+                 image1.setPixel(f1,f2, qGray(color1));
              }
          }
+           qDebug() <<"black - white (2)";
+
+           pixmap_img.convertFromImage(image1);
+           painter->drawPixmap(m_rect.toRect(),pixmap_img);
      }
+      else {
+           painter->drawPixmap(m_rect.toRect(),img);
+      }
 
 
-    painter->drawPixmap(m_rect.toRect(),img);
+ //    qDebug() <<"picturegraphics: avt paint drawPixmap ===";
+ //    painter->drawPixmap(m_rect.toRect(),img);
 
     w_h         = ' ';
     w_h_fixed   = false;
     black_white = false;
+    path        = " ";
 
     lg_font.setPointSize(lg_size);
 
@@ -174,7 +187,7 @@ Qt::AlignCenter
 
 int PicturesGraphicsItem::type() const
 {
-    return CustomTypes::ImageGraphicsItem;
+    return CustomTypes::PictureGraphicsItem;
 }
 
 void PicturesGraphicsItem::modification_width () {

@@ -56,8 +56,7 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-
-private:
+    private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -128,7 +127,7 @@ private:
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
 
-        void slotScreenshot();
+        //void slotScreenshot();
 
         void itemSelected(QGraphicsItem* item);
 
