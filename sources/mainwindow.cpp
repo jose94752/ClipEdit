@@ -217,6 +217,7 @@ void MainWindow::slotNew(bool)
     m_scene.clear();
     m_borderSceneItem=m_scene.addRect(rectf);
     m_borderSceneItem->setBrush(brush);
+    ui->graphicsView->changeBackgroundColor();
     nbSceneElts=0;
 }
 

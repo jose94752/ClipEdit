@@ -23,6 +23,8 @@
 // Constructor, destructor
 // -----------------------
 
+QString ResizeSceneDialog::m_format="A4";
+
 ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem,QColor v_backgroundColor)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
@@ -54,9 +56,9 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
 
     // Units list
     QStringList formatNames;
-    formatNames <<"None"<<"A3"<<"A4"<<"A5";
+    formatNames <<"None"<<"A0"<<"A1"<<"A2"<<"A3"<<"A4"<<"A5"<<"A6"<<"A7"<<"A8";
     ui->comboBox_format->addItems(formatNames);
-    ui->comboBox_format->setCurrentText("A4");
+    ui->comboBox_format->setCurrentText(m_format);
 
 
     QStringList unitNames;
@@ -64,8 +66,10 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     ui->comboBoxUnit->addItems(unitNames);
 
     // Init from scene (size in pixels)
-    ui->doubleSpinBoxWidth->setValue(m_scene->width());
-    ui->doubleSpinBoxHeight->setValue(m_scene->height());
+    m_width=m_scene->width();
+    m_height=m_scene->height();
+    ui->doubleSpinBoxWidth->setValue(m_width);
+    ui->doubleSpinBoxHeight->setValue(m_height);
     ui->comboBoxUnit->setCurrentText("px");
     ui->doubleSpinBoxWidth->setDecimals(0);
     ui->doubleSpinBoxHeight->setDecimals(0);
@@ -76,6 +80,8 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     connect(ui->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
     connect(ui->comboBoxUnit, SIGNAL(currentTextChanged(QString)), this, SLOT(unitChanged(QString)));
     connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
+    connect(ui->doubleSpinBoxWidth,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
+    connect(ui->doubleSpinBoxHeight,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
 }
 
 ResizeSceneDialog::~ResizeSceneDialog()
@@ -92,26 +98,23 @@ void ResizeSceneDialog::sizeChanged()
     if (!m_scene)
         return;
 
-    int width=0;
-    int height=0;
-
     QString name = ui->comboBoxUnit->currentText();
 
     if (name == "mm"){
-        width = ui->doubleSpinBoxWidth->value() * m_dpix/25.4;
-        height = ui->doubleSpinBoxHeight->value() * m_dpiy/25.4;
+        m_width = (int)ui->doubleSpinBoxWidth->value() * m_dpix/25.4;
+        m_height = (int)ui->doubleSpinBoxHeight->value() * m_dpiy/25.4;
     }
     if (name == "cm"){
-        width = ui->doubleSpinBoxWidth->value() * m_dpix/2.54;
-        height = ui->doubleSpinBoxHeight->value() * m_dpiy/2.54;
+        m_width = (int)ui->doubleSpinBoxWidth->value() * m_dpix/2.54;
+        m_height = (int)ui->doubleSpinBoxHeight->value() * m_dpiy/2.54;
     }
     if (name == "inch"){
-        width = ui->doubleSpinBoxWidth->value() * m_dpix;
-        height = ui->doubleSpinBoxHeight->value() * m_dpiy;
+        m_width = (int)ui->doubleSpinBoxWidth->value() * m_dpix;
+        m_height = (int)ui->doubleSpinBoxHeight->value() * m_dpiy;
     }
     if (name == "px"){
-        width = ui->doubleSpinBoxWidth->value();
-        height = ui->doubleSpinBoxHeight->value();
+        m_width = (int)ui->doubleSpinBoxWidth->value();
+        m_height = (int)ui->doubleSpinBoxHeight->value();
     }
     m_scene->removeItem(*m_borderSceneItem);
     QGraphicsScene scene2;
@@ -119,8 +122,8 @@ void ResizeSceneDialog::sizeChanged()
     foreach(QGraphicsItem* item,items){
         scene2.addItem(item);
     }
-    m_scene->setSceneRect(QRectF(0,0,width+2,height+2));
-    *m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
+    m_scene->setSceneRect(QRectF(0,0,m_width+2,m_height+2));
+    *m_borderSceneItem=m_scene->addRect(QRectF(0,0,m_width,m_height));
     (*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
     items=scene2.items();
     foreach(QGraphicsItem* item,items){
@@ -130,11 +133,10 @@ void ResizeSceneDialog::sizeChanged()
 
 void ResizeSceneDialog::unitChanged(const QString& unit)
 {
+    int width=m_width;
+    int height=m_height;
     if (unit.isEmpty() || !m_scene)
         return;
-
-    int width = m_scene->width();
-    int height = m_scene->height();
 
     if (unit == "mm"){
         ui->doubleSpinBoxWidth->setValue(width * 25.4/m_dpix);
@@ -162,18 +164,98 @@ void ResizeSceneDialog::unitChanged(const QString& unit)
     }
 }
 
+void ResizeSceneDialog::valuesChanged()
+{
+    QString unit=ui->comboBoxUnit->currentText();
+    if (unit == "mm"){
+        m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/25.4);
+        m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/25.4);
+    }
+    if (unit == "cm"){
+        m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/2.54);
+        m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/2.54);
+    }
+    if (unit == "inch"){
+        m_width=(int)ui->doubleSpinBoxWidth->value()*m_dpix;
+        m_height=(int)ui->doubleSpinBoxHeight->value()*m_dpiy;
+    }
+    if (unit == "px"){
+        m_width=(int)ui->doubleSpinBoxWidth->value();
+        m_height=(int)ui->doubleSpinBoxHeight->value();
+    }
+    m_format="None";
+    ui->comboBox_format->setCurrentText("None");
+}
+
 void ResizeSceneDialog::formatChanged(QString format)
 {
-    if(format=="None"){
-        //nothing to do
-    }
-    if(format=="A3"){
-        //code A3
-    }
-    if(format=="A4"){
-        //code A4
-    }
-    if(format=="A5"){
-        //code A5
+    m_format=format;
+    QString v_unit=ui->comboBoxUnit->currentText();
+    if(format!="None"){
+        if(format=="A0"){
+            m_width = 841 * m_dpix/25.4;
+            m_height = 1189 * m_dpiy/25.4;
+        }
+        if(format=="A1"){
+            m_width = 594 * m_dpix/25.4;
+            m_height = 841 * m_dpiy/25.4;
+        }
+        if(format=="A2"){
+            m_width = 420 * m_dpix/25.4;
+            m_height = 594 * m_dpiy/25.4;
+        }
+        if(format=="A3"){
+            m_width = 297 * m_dpix/25.4;
+            m_height = 420 * m_dpiy/25.4;
+        }
+        if(format=="A4"){
+            m_width = 210 * m_dpix/25.4;
+            m_height = 297 * m_dpiy/25.4;
+        }
+        if(format=="A5"){
+            m_width = 148 * m_dpix/25.4;
+            m_height = 210 * m_dpiy/25.4;
+        }
+        if(format=="A6"){
+            m_width = 105 * m_dpix/25.4;
+            m_height = 148 * m_dpiy/25.4;
+        }
+        if(format=="A7"){
+            m_width = 74 * m_dpix/25.4;
+            m_height = 105 * m_dpiy/25.4;
+        }
+        if(format=="A8"){
+            m_width = 52 * m_dpix/25.4;
+            m_height = 74 * m_dpiy/25.4;
+        }
+        int width=m_width;
+        int height=m_height;
+        if (v_unit.isEmpty() || !m_scene)
+            return;
+
+        if (v_unit == "mm"){
+            ui->doubleSpinBoxWidth->setValue(width * 25.4/m_dpix);
+            ui->doubleSpinBoxHeight->setValue(height * 25.4/m_dpiy);
+            ui->doubleSpinBoxWidth->setDecimals(0);
+            ui->doubleSpinBoxHeight->setDecimals(0);
+        }
+        if (v_unit == "cm"){
+            ui->doubleSpinBoxWidth->setValue(width * 2.54/m_dpix);
+            ui->doubleSpinBoxHeight->setValue(height * 2.54/m_dpiy);
+            ui->doubleSpinBoxWidth->setDecimals(1);
+            ui->doubleSpinBoxHeight->setDecimals(1);
+        }
+        if (v_unit == "inch"){
+            ui->doubleSpinBoxWidth->setValue(width/m_dpix);
+            ui->doubleSpinBoxHeight->setValue(height/m_dpiy);
+            ui->doubleSpinBoxWidth->setDecimals(1);
+            ui->doubleSpinBoxHeight->setDecimals(1);
+        }
+        if (v_unit == "px"){
+            ui->doubleSpinBoxWidth->setValue(width);
+            ui->doubleSpinBoxHeight->setValue(height);
+            ui->doubleSpinBoxWidth->setDecimals(0);
+            ui->doubleSpinBoxHeight->setDecimals(0);
+        }
     }
 }
