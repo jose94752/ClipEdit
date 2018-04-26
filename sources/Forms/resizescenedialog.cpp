@@ -61,6 +61,8 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     ui->doubleSpinBoxWidth->setValue(m_scene->width());
     ui->doubleSpinBoxHeight->setValue(m_scene->height());
     ui->comboBoxUnit->setCurrentText("px");
+    ui->doubleSpinBoxWidth->setDecimals(0);
+    ui->doubleSpinBoxHeight->setDecimals(0);
     //unitChanged("px");
 
     // Connects
@@ -110,6 +112,7 @@ void ResizeSceneDialog::sizeChanged()
     foreach(QGraphicsItem* item,items){
         scene2.addItem(item);
     }
+    m_scene->setSceneRect(QRectF(0,0,width+2,height+2));
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
     (*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
     items=scene2.items();
