@@ -43,6 +43,7 @@ class FormPictures
     public slots:
 
         void chose_picture();
+        void legend_ok(bool);
         void picture_modification();
         void picture_modification_w();
         void picture_modification_h();

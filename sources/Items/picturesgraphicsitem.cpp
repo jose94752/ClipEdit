@@ -93,14 +93,15 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
      if (black_white) {
          qDebug() <<"black - white (1)";
-         int  f1, f2;
-
-         for (int f1=0; f1<width; f1++) {
-             for (int f2=0; f2<height; f2++) {                
-                 color1 = image1.pixel(f1,f2);
-                 image1.setPixel(f1,f2, qGray(color1));
+         int ii, jj;
+         for (int ii = 0; ii < width; ii++) {
+             for (int jj = 0; jj < height; jj++) {
+                 int gray = qGray(image1.pixel(ii, jj));
+                 image1.setPixel(ii, jj, QColor(gray, gray, gray).rgb());
              }
          }
+
+
            qDebug() <<"black - white (2)";
 
            pixmap_img.convertFromImage(image1);
