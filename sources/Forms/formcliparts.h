@@ -43,7 +43,7 @@ class FormCliparts
 
         void event_on_click_browse(bool);
 
-        void event_on_click_clear(bool);
+        void event_on_click_clear();
 
 
     // Data Member

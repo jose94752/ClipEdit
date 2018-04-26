@@ -14,6 +14,7 @@
 #include "ui_formcliparts.h"
 
 #include <QtWidgets/QFileDialog>
+#include "../Classes/cpn_img_button.h"
 
 
 // Constructor, destructor
@@ -26,10 +27,13 @@ FormCliparts::FormCliparts(QWidget* parent)
     ui->setupUi(this);
 
     ui->button_action->setEnabled(false);
+
+    ui->button_clear->set_image(My_Img_Button::IMG_ERASER);
+    ui->button_clear->setToolTip("Clear path");
     ui->button_clear->setVisible(false);
 
     connect(ui->button_browse, SIGNAL( clicked(bool) ), this, SLOT( event_on_click_browse(bool) ));
-    connect(ui->button_clear,  SIGNAL( clicked(bool) ), this, SLOT( event_on_click_clear(bool) ));
+    connect(ui->button_clear,  SIGNAL( on_click() ),    this, SLOT( event_on_click_clear() ));
 }
 
 
@@ -54,7 +58,7 @@ void FormCliparts::event_on_click_browse(bool) {
 }
 
 
-void FormCliparts::event_on_click_clear(bool) {
+void FormCliparts::event_on_click_clear() {
     ui->edit_path->clear();
 
     ui->button_action->setEnabled(false);
