@@ -127,7 +127,8 @@ private:
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
-        void slotScreenshot();
+
+        //void slotScreenshot();
 
         void itemSelected(QGraphicsItem* item);
 

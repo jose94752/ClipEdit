@@ -48,7 +48,8 @@ ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(FormScreenshots* ptr,    QGraph
 
 QRectF ScreenshotsGraphicsItem::boundingRect() const
 {
-    return BaseGraphicItem::boundingRect();
+   // return BaseGraphicItem::boundingRect();
+   return QRectF(0, 0, 75, 75);
 
 }
 
@@ -70,13 +71,6 @@ int ScreenshotsGraphicsItem::type() const{
 
     return CustomTypes::ImageGraphicsItem;
 }
-
-
-
-
-
-
-
 
 
 
