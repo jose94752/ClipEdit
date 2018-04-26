@@ -17,6 +17,7 @@
 #include <QImage>
 #include <QRgb>
 
+
 #include "picturesgraphicsitem.h"
 
 // Constructor

@@ -16,6 +16,7 @@
 #include <QPixmap>
 #include <QDebug>
 #include <QFileDialog>
+#include <QDir>
 
 #include "formpictures.h"
 #include "formpictures.h"
