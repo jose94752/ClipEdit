@@ -7,7 +7,7 @@
 #include <QSize>
 
 
-// Forward declarations
+// Forward Declarations
 class QMouseEvent;
 class QPaintEvent;
 
@@ -44,9 +44,9 @@ signals:
 // QWidget
 protected:
 
-    void mouseReleaseEvent(QMouseEvent*);
-
     QSize minimumSizeHint() const { return QSize((int) img_width, (int) img_height); }
+
+    void mouseReleaseEvent(QMouseEvent*);
 
     void paintEvent(QPaintEvent*);
 
