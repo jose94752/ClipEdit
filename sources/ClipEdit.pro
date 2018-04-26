@@ -33,7 +33,6 @@ FORM_DIRECTORY      = Forms
 RESOURCE_DIRECTORY  = resources
 
 
-
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
@@ -97,7 +96,6 @@ FORMS += \
     $${FORM_DIRECTORY}/dialogsave.ui \
     $${FORM_DIRECTORY}/formarrows.ui \
     $${FORM_DIRECTORY}/formcharts.ui \
-    $${FORM_DIRECTORY}/formcliparts.ui \
     $${FORM_DIRECTORY}/formlayers.ui \
     $${FORM_DIRECTORY}/formnumberedbullets.ui \
     $${FORM_DIRECTORY}/formpictures.ui \
