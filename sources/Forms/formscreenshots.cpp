@@ -70,7 +70,7 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
    // this, SLOT(Capture()));
    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-            this, SLOT(CaptureWholeScreen()));
+            this, SLOT(snapshot()));
 
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
@@ -244,7 +244,7 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 
 void FormScreenshots::snapshot()
 {
-
+ /**
     //step1
     static int count = 0;
 
@@ -255,6 +255,15 @@ void FormScreenshots::snapshot()
 
     //qApp is global pointer referring to the unique application object.
     QTimer::singleShot(300, qApp, SLOT(quit())); // close the app in 0,3 secs
+*/
+
+/**
+    //new test
+    QScreen *QSCREEN = QGuiApplication::primaryScreen();
+    QPixmap qpix = QSCREEN->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
+                  QApplication::desktop()->height());
+    qpix.save("/home/formation/doCapture/Hello.png");
+ */
 }
 
 void FormScreenshots::updatehide()

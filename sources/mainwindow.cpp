@@ -103,7 +103,7 @@ void MainWindow::buildMenu()
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
-    //connect(&m_formScreenshots, SIGNAL(InsertImageText(QPixmap p)), this, SLOT(slotScreenshot(QPixmap p)));
+    connect(&m_formScreenshots, SIGNAL(), this, SLOT(slotScreenshot()));
 
 
     // Layers
@@ -312,15 +312,13 @@ void MainWindow::slotArrowsGraphicsItem()
 
 }
 
-/**
-void MainWindow::slotScreenshot(QPixmap p)
+
+void MainWindow::slotScreenshot()
 {
-    Q_UNUSED(p)
      //Get screen capture
 
     qDebug () << "mainWindow slot of the Screenshot";
 
-<<<<<<< HEAD
 //    QRect m_area;
 //    QPixmap m_pixmap ;
 
@@ -337,13 +335,11 @@ void MainWindow::slotScreenshot(QPixmap p)
 //    ScreenshotsGraphicsItem  sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
 //    m_scene.clear();
 //    m_scene.addItem(sc);
-=======
     ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
     m_scene.clear();
     m_scene.addItem(sc);
->>>>>>> f297578903f7adb8137c044e96a96f0462a644d8
 }
-*/
+
 
 void MainWindow::itemSelected(QGraphicsItem* item)
 {
