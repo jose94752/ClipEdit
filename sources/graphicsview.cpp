@@ -28,6 +28,7 @@ GraphicsView::GraphicsView(QWidget* parent)
     :   QGraphicsView(parent)
 {
     m_backgroundColor = Qt::white;
+    connect(this->scene(),SIGNAL(changed(QList<QRectF>)),this,SLOT(sceneModified()));
 }
 
 void GraphicsView::setGraphicsRectItem(QGraphicsRectItem **v_graphRectItem)
@@ -145,4 +146,9 @@ void GraphicsView::changeBackgroundColor()
        //this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
        (*m_graphRectItem)->setBrush(QBrush(m_backgroundColor));
    }
+}
+
+void GraphicsView::sceneModified()
+{
+    //code
 }

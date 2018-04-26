@@ -38,6 +38,7 @@ public:
 public slots:
     void sizeChanged();
     void unitChanged(const QString&);
+    void formatChanged(QString);
 
 private:
     Ui::ResizeSceneDialog *ui;

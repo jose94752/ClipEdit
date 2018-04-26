@@ -41,6 +41,7 @@ class GraphicsView
         void contentToView();
         void setZoomLevel(int scale);
         void changeBackgroundColor();
+        void sceneModified();
 
     protected:
 

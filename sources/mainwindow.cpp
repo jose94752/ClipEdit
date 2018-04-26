@@ -208,10 +208,11 @@ void MainWindow::slotNew(bool)
     dialogSave.exec();
     ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
-    foreach(QGraphicsItem *item, m_scene.items())
-    {
-        m_scene.removeItem(item);
-    }
+    QRectF rectf=m_borderSceneItem->rect();
+    QBrush brush=m_borderSceneItem->brush();
+    m_scene.clear();
+    m_borderSceneItem=m_scene.addRect(rectf);
+    m_borderSceneItem->setBrush(brush);
 }
 
 ///

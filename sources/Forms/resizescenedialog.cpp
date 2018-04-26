@@ -53,6 +53,12 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     }
 
     // Units list
+    QStringList formatNames;
+    formatNames <<"None"<<"A3"<<"A4"<<"A5";
+    ui->comboBox_format->addItems(formatNames);
+    ui->comboBox_format->setCurrentText("A4");
+
+
     QStringList unitNames;
     unitNames << "mm" << "cm" << "inch" << "px";
     ui->comboBoxUnit->addItems(unitNames);
@@ -69,6 +75,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(sizeChanged()));
     connect(ui->buttonBox, SIGNAL(rejected()), this, SLOT(close()));
     connect(ui->comboBoxUnit, SIGNAL(currentTextChanged(QString)), this, SLOT(unitChanged(QString)));
+    connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
 }
 
 ResizeSceneDialog::~ResizeSceneDialog()
@@ -152,5 +159,21 @@ void ResizeSceneDialog::unitChanged(const QString& unit)
         ui->doubleSpinBoxHeight->setValue(height);
         ui->doubleSpinBoxWidth->setDecimals(0);
         ui->doubleSpinBoxHeight->setDecimals(0);
+    }
+}
+
+void ResizeSceneDialog::formatChanged(QString format)
+{
+    if(format=="None"){
+        //nothing to do
+    }
+    if(format=="A3"){
+        //code A3
+    }
+    if(format=="A4"){
+        //code A4
+    }
+    if(format=="A5"){
+        //code A5
     }
 }
