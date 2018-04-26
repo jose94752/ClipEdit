@@ -38,17 +38,19 @@ public:
 public slots:
     void sizeChanged();
     void unitChanged(const QString&);
+    void valuesChanged();
     void formatChanged(QString);
 
 private:
     Ui::ResizeSceneDialog *ui;
     QGraphicsScene *m_scene;
-    int *m_width;
-    int *m_height;
+    int m_width;
+    int m_height;
     int m_dpix;
     int m_dpiy;
     QGraphicsRectItem **m_borderSceneItem;
     QColor m_backGroundColor;
+    static QString m_format;
 };
 
 #endif

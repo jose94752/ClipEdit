@@ -38,7 +38,7 @@ PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* par
 }
 
 
-// Pure virtual methods implementation
+// Virtual methods from BaseGraphicItem
 // -----------------------------------
 
 
@@ -184,12 +184,14 @@ Qt::AlignCenter
 }
 
 // Type
-// ----
 
 int PicturesGraphicsItem::type() const
 {
     return CustomTypes::PictureGraphicsItem;
 }
+
+// Utils
+// -----
 
 void PicturesGraphicsItem::modification_width () {
      qDebug() <<"modification_width, 2w";
@@ -207,8 +209,6 @@ void PicturesGraphicsItem::modification_height () {
 
 
 }
-
-
 
 //void PicturesGraphicsItem::change_w_h(char w_h){
 //      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;

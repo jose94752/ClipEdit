@@ -16,7 +16,7 @@
 #include <QString>
 #include <QColor>
 
-
+#include "baseform.h"
 #include "../Items/graphsgraphicsitem.h"
 
 
@@ -31,7 +31,7 @@ namespace Ui
 // -----
 
 class FormCharts
-    :   public QWidget
+    :   public BaseForm
 {
     Q_OBJECT
 
@@ -45,6 +45,9 @@ class FormCharts
                          QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight);
 
     void GetChartsValues( GraphsInfo &infos);
+
+    // Load data
+    void loadFromItem(BaseGraphicItem* item) const;
 
 public slots:
 

@@ -28,7 +28,7 @@
 // Constructor, destructor
 // -----------------------
 
-FormCliparts::FormCliparts(QWidget* parent):   QWidget(parent) {
+FormCliparts::FormCliparts(QWidget* parent):   BaseForm(parent) {
 //  <- setupUi
     if ( objectName().isEmpty() ) {
         setObjectName(QStringLiteral("FormCliparts"));
@@ -216,4 +216,13 @@ void FormCliparts::event_on_click_clear() {
 
     button_action->setEnabled(false);
     button_clear->setVisible(false);
+}
+
+// Load data
+// ---------
+
+void FormCliparts::loadFromItem(BaseGraphicItem* item) const
+{
+    // TO DO : Cast the base item to your item
+    // Then, import data from the casted item
 }

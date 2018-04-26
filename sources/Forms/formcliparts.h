@@ -16,8 +16,9 @@
 #include <QVector>
 #include <QWidget>
 
-
 #include <QtWidgets/QWidget>
+
+#include "baseform.h"
 
 
 // Forward Declarations
@@ -35,7 +36,7 @@ class My_Img_Button;
 // -----
 
 class FormCliparts
-    :   public QWidget
+    :   public BaseForm
 {
     Q_OBJECT
 
@@ -45,6 +46,9 @@ class FormCliparts
         explicit FormCliparts(QWidget* parent = 0);
 
 //      ~FormCliparts() {]}
+
+    // Load data
+    void loadFromItem(BaseGraphicItem* item) const;
 
 
     private slots:
