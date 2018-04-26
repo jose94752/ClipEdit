@@ -44,7 +44,7 @@ void FormLayers::initForm()
     ui->tableWidgetLayers->setColumnWidth(0,30);
     ui->tableWidgetLayers->setColumnWidth(1,30);
     ui->tableWidgetLayers->setColumnWidth(2,60);
-    ui->tableWidgetLayers->setColumnWidth(3,60);
+    ui->tableWidgetLayers->setColumnWidth(3,20);
 
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
 
@@ -70,6 +70,9 @@ void FormLayers::ShowLayers()
     if (!m_scene)
         return;
 
+    ui->tableWidgetLayers->clear();
+    ui->tableWidgetLayers->setRowCount(0);
+
     foreach (QGraphicsItem *it, m_scene->items(Qt::AscendingOrder))
     {
         BaseGraphicItem *item = dynamic_cast<BaseGraphicItem*>(it);
@@ -88,26 +91,26 @@ void FormLayers::ShowLayers()
                 {
                     ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/textbox-icon.png")));
                 } break;
-            case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
-            {
-                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/arrow-icon-2.png")));
-            } break;
-            case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
-            {
-                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/chart-icon-2.png")));
-            } break;
-            case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
-            {
-                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/clipart-icon.png")));
-            } break;
-            case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
-            {
-                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/numbered-bullet-icon.png")));
-            } break;
-            case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
-            {
-                ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/screenshot-icon.png")));
-            } break;
+                case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/arrow-icon-2.png")));
+                } break;
+                case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/chart-icon-2.png")));
+                } break;
+                case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/clipart-icon.png")));
+                } break;
+                case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/numbered-bullet-icon.png")));
+                } break;
+                case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/screenshot-icon.png")));
+                } break;
                 default:
                 {
                     // Default
@@ -152,14 +155,18 @@ QLabel *FormLayers::Icon(QIcon icon)
 }
 
 
-void FormLayers::cellActivated(int row, int /* column */)
+void FormLayers::cellActivated(int row, int column)
 {
+    qDebug() << "FormLayers::cellActivated()" << row << column;
+
 //    const QTableWidgetItem *item = filesTable->item(row, 0);
 //    openFile(fileNameOfItem(item));
 }
 
 void FormLayers::contextMenu(const QPoint &pos)
 {
+    qDebug() << "FormLayers::contextMenu()" << pos;
+
 //    const QTableWidgetItem *item = filesTable->itemAt(pos);
 //    if (!item)
 //        return;
