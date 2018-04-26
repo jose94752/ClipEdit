@@ -123,7 +123,7 @@ private:
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
-        void slotScreenshot();
+       // void slotScreenshot(QPixmap p);
         // Modif Layers
         void slotLayers();
         void itemSelected(QGraphicsItem* item);

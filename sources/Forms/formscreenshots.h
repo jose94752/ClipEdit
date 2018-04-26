@@ -23,14 +23,13 @@
 #include<QCursor>
 #include<QLabel>
 #include<QPointF>
-#include<QPoint>
 #include<QGraphicsPixmapItem>
-#include<QMap>
 #include<QPainter>
 #include<QGraphicsItem>
 #include<exception>
 #include<QMouseEvent>
 #include <QGraphicsScene>
+#include<QRect>
 
 
 // Forward Declaration
@@ -82,7 +81,8 @@ protected:
 private:
         // Ui
         Ui::FormScreenshots *ui;
-        //QGraphicsScene *scene;
+        QGraphicsScene *m_scene;
+
 
         ///
         /// \brief m_typecapture WholeScreen and window.
@@ -122,7 +122,7 @@ private:
         /// \brief m_region The QRect class defines a rectangle
         ///  in the chosen region  in the plane using integer precision.
         ///
-        QRect m_region;
+        QRect m_area;
         ///
         /// \brief m_captureTimer is an instance of class provides repetitive and single-shot timers.
         ///
@@ -131,9 +131,10 @@ private:
         ///
         /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
         ///
-        QPoint *m_point0;
-        QPoint *m_point1;
-        float x,y,x1,y1;
+        QPointF *m_point0;
+        QPointF *m_point1;
+        QPointF *m_point;
+        qreal x,y,x1,y1;
         QPainter *m_painter;
 
      private slots:
@@ -141,30 +142,26 @@ private:
         /// \brief Capture : capture slot in WholeScreen and window
         ///
         void snapshot();
-        ///
-        /// \brief CaptureArea this method take an area selected by he user.
-        ///
-        void CaptureArea();
+//        ///
+//        /// \brief CaptureArea this method take an area selected by he user.
+//        ///
+//        void CaptureArea();
         ///
         /// \brief CaptureWholeScreen : this method take all Desktop
         ///
         void CaptureWholeScreen();
-        ///
-        /// \brief hide enables or disables the Hide The Window option.
-        ///
-        void CaptureRegion(bool ok, QRect region);
+ //       void CaptureRegion(bool val, QRect r);
         void updatehide();
         ///
         /// \brief updateLabel this slot is called whenever the user changes the delay
         /// using the Screenshot Delay second option
-        ///
+        //void slotScreenshot(QPixmap p);
 
      signals:
         ///
         /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
         ///
-        void InsertImageText(QString);
-        void dimensionsMade( bool, QRect );
+      //  void InsertImageText(QPixmap pix);
         void mousePressEvent();
         void mouseReleaseEvent();
 };
