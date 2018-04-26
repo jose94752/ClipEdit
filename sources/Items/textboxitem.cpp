@@ -79,27 +79,7 @@ void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *optio
     BaseGraphicItem::paint(painter, option, widget);
 }
 
-int TextBoxItem::type() const
-{
-    return CustomTypes::TextBoxGraphicsItem;
-}
-
-// Utils
-// -----
-
-void TextBoxItem::textToRect()
-{
-   QFontMetrics fm(m_font);
-   QRectF rect = fm.boundingRect(QApplication::desktop()->geometry(), Qt::AlignLeft | Qt::TextWordWrap | Qt::TextExpandTabs, m_text, 4);
-   rect.adjust(-m_borderWidth - 2, -m_borderWidth - 2, m_borderWidth + 2, m_borderWidth + 2);
-
-   setRect(rect);
-}
-
-// Getters and setters
-// -------------------
-
-QVariant TextBoxItem::getItemData()
+const QVariant TextBoxItem::itemData() const
 {
     QVariantHash data;
 
@@ -134,4 +114,22 @@ void TextBoxItem::setItemData(const QVariant& data)
 
     textToRect();
     update();
+}
+
+
+int TextBoxItem::type() const
+{
+    return CustomTypes::TextBoxGraphicsItem;
+}
+
+// Utils
+// -----
+
+void TextBoxItem::textToRect()
+{
+   QFontMetrics fm(m_font);
+   QRectF rect = fm.boundingRect(QApplication::desktop()->geometry(), Qt::AlignLeft | Qt::TextWordWrap | Qt::TextExpandTabs, m_text, 4);
+   rect.adjust(-m_borderWidth - 2, -m_borderWidth - 2, m_borderWidth + 2, m_borderWidth + 2);
+
+   setRect(rect);
 }

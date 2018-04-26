@@ -88,7 +88,8 @@ class BaseGraphicItem
             ArrowGraphicsItem,
             ChartGraphicsItem,
             ScreenshotGraphicsItem,
-            NumberedBulletGraphicsItem
+            NumberedBulletGraphicsItem,
+            ClipartGraphicsItem,
         };
 
         // Constructors, destructor

@@ -18,12 +18,13 @@
 #include "formtextboxes.h"
 #include "ui_formtextboxes.h"
 #include "Classes/colorbutton.h"
+#include "../Items/textboxitem.h"
 
 // Constructor, destructor
 // -----------------------
 
 FormTextBoxes::FormTextBoxes(QWidget *parent)
-    :   QWidget(parent), ui(new Ui::FormTextBoxes)
+    :   BaseForm(parent), ui(new Ui::FormTextBoxes)
 {
     ui->setupUi(this);
 
@@ -152,3 +153,15 @@ void FormTextBoxes::setItemData(const QVariant& data)
     ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
 }
 
+// Pure virtual method implementation
+// ----------------------------------
+
+void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<TextBoxItem*>(item))
+    {
+        TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
+
+        // Load data into the form
+    }
+}

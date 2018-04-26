@@ -64,15 +64,13 @@ void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphic
 
 }
 
-//Define the Type
-//---------------
+// Type
+// ----
 
 int ScreenshotsGraphicsItem::type() const{
 
     return CustomTypes::ScreenshotGraphicsItem;
 }
-
-
 
 // Getters and setters
 // -------------------
