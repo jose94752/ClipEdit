@@ -108,9 +108,6 @@ class BaseGraphicItem
         // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
 
-        // Item information for storage
-        //QMap<QString, QVariant> infos() = 0;
-
         // Getters and setters
         bool hasHandlers() const;
         void setHasHandlers(bool hasHandlers);

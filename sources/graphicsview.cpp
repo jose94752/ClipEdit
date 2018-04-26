@@ -27,12 +27,12 @@
 GraphicsView::GraphicsView(QWidget* parent)
     :   QGraphicsView(parent)
 {
-    m_backgroundColor=Qt::white;
+    m_backgroundColor = Qt::white;
 }
 
 void GraphicsView::setGraphicsRectItem(QGraphicsRectItem **v_graphRectItem)
 {
-    m_graphRectItem=v_graphRectItem;
+    m_graphRectItem = v_graphRectItem;
 }
 
 // Events
@@ -53,10 +53,16 @@ void GraphicsView::mouseDoubleClickEvent(QMouseEvent* event)
 
 void GraphicsView::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::RightButton)
+//    if (event->button() == Qt::RightButton)
+//    {
+//        setCursor(Qt::ClosedHandCursor);
+//        m_oldPos = event->pos();
+//    }
+
+    if (event->button() == Qt::LeftButton)
     {
-        setCursor(Qt::ClosedHandCursor);
-        m_oldPos = event->pos();
+        // Enter drag mode
+        setDragMode(QGraphicsView::ScrollHandDrag);
     }
 
     QGraphicsView::mousePressEvent(event);
@@ -64,9 +70,15 @@ void GraphicsView::mousePressEvent(QMouseEvent* event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::RightButton)
+//    if (event->button() == Qt::RightButton)
+//    {
+//        setCursor(Qt::ArrowCursor);
+//    }
+
+    if (event->button() == Qt::LeftButton)
     {
-        setCursor(Qt::ArrowCursor);
+        // Leave drag mode
+        setDragMode(QGraphicsView::NoDrag);
     }
 
     QGraphicsView::mouseReleaseEvent(event);
@@ -74,17 +86,16 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent* event)
 
 void GraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
-    if (event->buttons() & Qt::RightButton)
-    {
-        QPointF delta = event->pos() - m_oldPos;
-        horizontalScrollBar()->setValue(horizontalScrollBar()->value() + delta.x());
-        verticalScrollBar()->setValue(verticalScrollBar()->value() + delta.y());
+//    if (event->buttons() & Qt::RightButton)
+//    {
+//        QPointF delta = event->pos() - m_oldPos;
+//        horizontalScrollBar()->setValue(horizontalScrollBar()->value() + delta.x());
+//        verticalScrollBar()->setValue(verticalScrollBar()->value() + delta.y());
 
-        m_oldPos = event->pos();
-    }
+//        m_oldPos = event->pos();
+//    }
 
     QGraphicsView::mouseMoveEvent(event);
-
 }
 
 // Slots
@@ -115,17 +126,13 @@ void GraphicsView::contentToView()
 
 void GraphicsView::setZoomLevel(int zoom)
 {
-    qreal s = zoom / 100.f;
+    qreal newScale = zoom / 100.f;
 
-    // Rescale
+    // Rescale according from the current pos
+    QMatrix oldMatrix = matrix();
     resetMatrix();
-    scale(s, s);
-    /*QDesktopWidget *deskWidget=QApplication::desktop();
-    int dpix=deskWidget->logicalDpiX();
-    int dpiy=deskWidget->logicalDpiY();
-    int width=210*dpix/25.4*s*1.01;
-    int height=297*dpiy/25.4*s*1.01;
-    setMaximumSize(width,height);*/
+    translate(oldMatrix.dx(), oldMatrix.dy());
+    scale(newScale, newScale);
 }
 
 void GraphicsView::changeBackgroundColor()
