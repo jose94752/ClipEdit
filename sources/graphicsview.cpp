@@ -16,6 +16,8 @@
 #include <QColorDialog>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QRectF>
+#include <QBrush>
 
 #include "graphicsview.h"
 
@@ -28,7 +30,7 @@ GraphicsView::GraphicsView(QWidget* parent)
     m_backgroundColor=Qt::white;
 }
 
-void GraphicsView::setGraphicsRectItem(QGraphicsRectItem *v_graphRectItem)
+void GraphicsView::setGraphicsRectItem(QGraphicsRectItem **v_graphRectItem)
 {
     m_graphRectItem=v_graphRectItem;
 }
@@ -93,7 +95,11 @@ void GraphicsView::clear()
     if (scene())
     {
         // Remove all items from the scene
+        QRectF rect=(*m_graphRectItem)->rect();
+        QBrush brush=(*m_graphRectItem)->brush();
         scene()->clear();
+        *m_graphRectItem=scene()->addRect(rect);
+        (*m_graphRectItem)->setBrush(brush);
     }
 }
 
@@ -129,6 +135,6 @@ void GraphicsView::changeBackgroundColor()
    {
        m_backgroundColor = color;
        //this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
-       this->m_graphRectItem->setBrush(QBrush(m_backgroundColor));
+       (*m_graphRectItem)->setBrush(QBrush(m_backgroundColor));
    }
 }

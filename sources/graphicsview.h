@@ -33,7 +33,7 @@ class GraphicsView
         //couleur de fond
         QColor m_backgroundColor;
 
-        void setGraphicsRectItem(QGraphicsRectItem*);
+        void setGraphicsRectItem(QGraphicsRectItem**);
 
     public slots:
 
@@ -58,7 +58,7 @@ class GraphicsView
 
         // Pos for panning
         QPointF m_oldPos;
-        QGraphicsRectItem *m_graphRectItem;
+        QGraphicsRectItem **m_graphRectItem;
 
 };
 

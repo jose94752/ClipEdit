@@ -165,7 +165,7 @@ void MainWindow::buildView()
     m_width=210*dpix/25.4;
     m_height=297*dpiy/25.4;
     m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
-    ui->graphicsView->setGraphicsRectItem((QGraphicsRectItem*)m_borderSceneItem);
+    ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setScene(&m_scene);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
@@ -268,7 +268,7 @@ void MainWindow::slotTextBoxes(bool)
 void MainWindow::slotTextPicture()
 {   qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
-    m_scene.clear();
+    //m_scene.clear();
     m_scene.addItem(PictureItem);
 }
 
