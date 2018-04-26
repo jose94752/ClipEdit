@@ -84,7 +84,7 @@ class BaseGraphicItem
         enum CustomTypes
         {
             TextBoxGraphicsItem = UserType+1,
-            ImageGraphicsItem,
+            PictureGraphicsItem,
             ArrowGraphicsItem,
             ChartGraphicsItem,
             ScreenshotGraphicsItem,

@@ -96,7 +96,7 @@ void FormLayers::ShowLayers()
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/chart-icon-2.png")));
             } break;
-            case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+            case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/clipart-icon.png")));
             } break;
