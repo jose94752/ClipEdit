@@ -10,6 +10,7 @@
 // Includes
 // --------
 
+#include <QDebug>
 #include <QColorDialog>
 #include <QColor>
 #include <QSettings>
@@ -39,6 +40,7 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
 
     // Connect
     connect(ui->pushButtonSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
+    connect(ui->pushButtonApplyTheme, SIGNAL(clicked(bool)), this, SLOT(loadDefaultTheme()));
 }
 
 FormTextBoxes::~FormTextBoxes()
@@ -59,7 +61,7 @@ void FormTextBoxes::saveDefaultTheme()
     font.setBold(ui->checkBoxBold->isChecked());
     font.setItalic(ui->checkBoxItalic->isChecked());
 
-    s.setValue("FormTextBoxes/font", font);
+    s.setValue("FormTextBoxes/font", font.toString());
     s.setValue("FormTextBoxes/alignment", ui->comboBoxAlignment->currentData());
     s.setValue("FormTextBoxes/background-color", ui->pushButtonBackgroundColor->getColor().name());
     s.setValue("FormTextBoxes/text-color", ui->pushButtonTextColor->getColor().name());
@@ -76,8 +78,7 @@ void FormTextBoxes::loadDefaultTheme()
     QFont f;
     f.fromString(s.value("FormTextBoxes/font").toString());
 
-    ui->plainTextEdit->setPlainText(s.value("FormTextBoxes/text").toString());
-    ui->fontComboBox->setCurrentFont(f);
+    ui->fontComboBox->setCurrentText(f.family());
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
@@ -134,7 +135,7 @@ void FormTextBoxes::setItemData(const QVariant& data)
     f.fromString(vh["font"].toString());
 
     ui->plainTextEdit->setPlainText(vh["text"].toString());
-    ui->fontComboBox->setCurrentFont(f);
+    ui->fontComboBox->setCurrentText(f.family());
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());

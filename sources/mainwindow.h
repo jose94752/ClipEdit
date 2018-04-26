@@ -56,8 +56,7 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-
-private:
+    private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -87,13 +86,15 @@ private:
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
 
-        int m_width;
-        int m_height;
+        /*int m_width;
+        int m_height;*/
 
         // Scene
         QGraphicsScene m_scene;
 
         QGraphicsRectItem *m_borderSceneItem;
+
+        int nbSceneElts;
 
         // Layers
         Layers m_Layers;

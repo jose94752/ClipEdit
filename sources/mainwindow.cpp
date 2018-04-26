@@ -160,12 +160,15 @@ void MainWindow::buildStackedWidget()
 void MainWindow::buildView()
 {
     QDesktopWidget *deskWidget=QApplication::desktop();
+    nbSceneElts=0;
     int dpix=deskWidget->logicalDpiX();
     int dpiy=deskWidget->logicalDpiY();
-    m_width=210*dpix/25.4;
-    m_height=297*dpiy/25.4;
-    m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
+    int width=210*dpix/25.4;
+    int height=297*dpiy/25.4;
+    m_scene.setSceneRect(QRectF(0,0,width+1,height+1));
+    m_borderSceneItem=m_scene.addRect(QRectF(0,0,width,height));
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
+    ui->graphicsView->setNbElts(&nbSceneElts);
     ui->graphicsView->setScene(&m_scene);
 
     connect(ui->graphicsView, SIGNAL(itemSelected(QGraphicsItem*)), this, SLOT(itemSelected(QGraphicsItem*)));
@@ -203,14 +206,18 @@ void MainWindow::resizeTold(bool)
 
 void MainWindow::slotNew(bool)
 {
-    DialogSave dialogSave(this, m_scene.items());
-    dialogSave.exec();
+    if(nbSceneElts!=0){
+        DialogSave dialogSave(this, m_scene.items());
+        dialogSave.exec();
+    }
     ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
     scenedialog.exec();
-    foreach(QGraphicsItem *item, m_scene.items())
-    {
-        m_scene.removeItem(item);
-    }
+    QRectF rectf=m_borderSceneItem->rect();
+    QBrush brush=m_borderSceneItem->brush();
+    m_scene.clear();
+    m_borderSceneItem=m_scene.addRect(rectf);
+    m_borderSceneItem->setBrush(brush);
+    nbSceneElts=0;
 }
 
 ///
@@ -245,6 +252,7 @@ void MainWindow::slotNumberedBullets()
     //numberedBulletGraphicItem->setPos(posx, posy);
     numberedBulletGraphicItem->setPos (bulletpos);
     m_scene.addItem(numberedBulletGraphicItem);
+    nbSceneElts++;
     delta = numberedBulletGraphicItem->rect ().width ();
     if (bulletpos.x () + delta < scene_topright.x ()) {
       bulletpos.setX(bulletpos.x() + delta);
@@ -263,6 +271,7 @@ void MainWindow::slotTextBoxes(bool)
     TextBoxItem* item = new TextBoxItem();
     item->setItemData(data);
     m_scene.addItem(item);
+    nbSceneElts++;
 }
 
 void MainWindow::slotTextPicture()
@@ -270,6 +279,7 @@ void MainWindow::slotTextPicture()
     PicturesGraphicsItem  * PictureItem = new PicturesGraphicsItem (&m_formPictures);
     //m_scene.clear();
     m_scene.addItem(PictureItem);
+    nbSceneElts++;
 }
 
 
@@ -291,6 +301,7 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
     g->setInfos(infos);
 
     m_scene.addItem(g);
+    nbSceneElts++;
 }
 
 
@@ -309,7 +320,7 @@ void MainWindow::slotArrowsGraphicsItem()
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(&m_formArrows);
     m_scene.addItem(ArrowItem);
-
+    nbSceneElts++;
 }
 
 /**
@@ -359,6 +370,24 @@ void MainWindow::itemSelected(QGraphicsItem* item)
 
     switch (item->type())
     {
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        {
+            ArrowsGraphicsItem* castedItem = qgraphicsitem_cast<ArrowsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_ARROW]);
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
+        {
+            GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_CHART]);
+            }
+        } break;
         case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
             TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
@@ -369,12 +398,32 @@ void MainWindow::itemSelected(QGraphicsItem* item)
                 m_formTextboxes.setItemData(castedItem->getItemData());
             }
         } break;
-        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
         {
+            PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
 
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
+            }
         } break;
-        case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+        case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
         {
+            NumberedBulletGraphicItem* castedItem = qgraphicsitem_cast<NumberedBulletGraphicItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_BULLET]);
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
+        {
+            ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_SCREENSHOT]);
+            }
         }
     }
 }
@@ -408,8 +457,13 @@ void MainWindow::exportView(bool)
     }
     else
     {
-        QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);
+        QSize size=m_scene.sceneRect().size().toSize();
+        QImage image(size, QImage::Format_ARGB32);
         image.fill(Qt::white);
+        /*QImage cropped(size, QImage::Format_ARGB32);
+        cropped=image.copy(-400,-579,799,1158);
+        QRect rect=image.rect();
+        qDebug()<<rect.x()<<" "<<rect.y()<<" "<<rect.width()<<" "<<rect.height();*/
 
         QPainter painter(&image);
         m_scene.render(&painter);
