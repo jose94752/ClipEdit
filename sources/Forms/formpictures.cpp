@@ -81,8 +81,17 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
 void FormPictures::chose_picture()
 {
 
-    QSettings settings("m2i_patrol", "clipart_picture");
-   // settings.setValue(path);
+
+
+    QString grp     = "m2i_patrol";
+    QString prj     = "clipart_picture";
+    QString grp_prj = grp + "/" + prj;
+
+    QSettings setting;
+
+    QString s_path = setting.value(grp_prj).toString();
+
+
 
 
 
