@@ -57,11 +57,11 @@ static const uint qt_meta_data_FormCliparts[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    1,   24,    2, 0x08 /* Private */,
-       3,    1,   27,    2, 0x08 /* Private */,
+       3,    0,   27,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    2,
-    QMetaType::Void, QMetaType::Bool,    2,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -73,7 +73,7 @@ void FormCliparts::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->event_on_click_browse((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 1: _t->event_on_click_clear((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 1: _t->event_on_click_clear(); break;
         default: ;
         }
     }

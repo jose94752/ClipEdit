@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -39,43 +40,29 @@ public:
     QRadioButton *radioButton1AnchorPoints;
     QRadioButton *radioButton2AnchorPoints;
     QGroupBox *groupBoxArrowSettings;
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_8;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_3;
+    QFormLayout *formLayout;
     QLabel *labelArrowWidth;
     QSpinBox *spinBoxArrowWidthContents;
-    QHBoxLayout *horizontalLayout_4;
     QLabel *labelArrowHeight;
-    QSpinBox *spinBoxArrowHeightContents;
-    QSpacerItem *horizontalSpacer_2;
-    QHBoxLayout *horizontalLayout_7;
     QLabel *labelOutlineColor;
-    ColorButton *toolButtonOutlineColorContents;
-    QSpacerItem *horizontalSpacer_3;
-    QHBoxLayout *horizontalLayout_5;
     QLabel *labelFillColor;
-    ColorButton *toolButtonFillColorContents;
-    QSpacerItem *horizontalSpacer_4;
-    QHBoxLayout *horizontalLayout;
     QLabel *labelLineThickness;
-    QComboBox *comboBoxLineThicknessContents;
-    QSpacerItem *horizontalSpacer_5;
-    QHBoxLayout *horizontalLayout_2;
     QLabel *labelHeadTypeChoice;
+    QSpinBox *spinBoxArrowHeightContents;
+    ColorButton *toolButtonOutlineColorContents;
+    ColorButton *toolButtonFillColorContents;
+    QComboBox *comboBoxLineThicknessContents;
     QComboBox *comboBoxHeadTypeChoiceContents;
-    QSpacerItem *horizontalSpacer_6;
-    QHBoxLayout *horizontalLayout_6;
+    QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonBeforeShape;
     QPushButton *pushButtonDefaultShape;
-    QSpacerItem *horizontalSpacer;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *FormArrows)
     {
         if (FormArrows->objectName().isEmpty())
             FormArrows->setObjectName(QStringLiteral("FormArrows"));
-        FormArrows->resize(450, 577);
+        FormArrows->resize(253, 614);
         verticalLayout_4 = new QVBoxLayout(FormArrows);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         labelOptionsForArrows = new QLabel(FormArrows);
@@ -116,146 +103,82 @@ public:
 
         groupBoxArrowSettings = new QGroupBox(FormArrows);
         groupBoxArrowSettings->setObjectName(QStringLiteral("groupBoxArrowSettings"));
-        verticalLayout_2 = new QVBoxLayout(groupBoxArrowSettings);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        formLayout = new QFormLayout(groupBoxArrowSettings);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
         labelArrowWidth = new QLabel(groupBoxArrowSettings);
         labelArrowWidth->setObjectName(QStringLiteral("labelArrowWidth"));
 
-        horizontalLayout_3->addWidget(labelArrowWidth);
+        formLayout->setWidget(0, QFormLayout::LabelRole, labelArrowWidth);
 
         spinBoxArrowWidthContents = new QSpinBox(groupBoxArrowSettings);
         spinBoxArrowWidthContents->setObjectName(QStringLiteral("spinBoxArrowWidthContents"));
 
-        horizontalLayout_3->addWidget(spinBoxArrowWidthContents);
+        formLayout->setWidget(0, QFormLayout::FieldRole, spinBoxArrowWidthContents);
 
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         labelArrowHeight = new QLabel(groupBoxArrowSettings);
         labelArrowHeight->setObjectName(QStringLiteral("labelArrowHeight"));
 
-        horizontalLayout_4->addWidget(labelArrowHeight);
+        formLayout->setWidget(1, QFormLayout::LabelRole, labelArrowHeight);
+
+        labelOutlineColor = new QLabel(groupBoxArrowSettings);
+        labelOutlineColor->setObjectName(QStringLiteral("labelOutlineColor"));
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, labelOutlineColor);
+
+        labelFillColor = new QLabel(groupBoxArrowSettings);
+        labelFillColor->setObjectName(QStringLiteral("labelFillColor"));
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, labelFillColor);
+
+        labelLineThickness = new QLabel(groupBoxArrowSettings);
+        labelLineThickness->setObjectName(QStringLiteral("labelLineThickness"));
+
+        formLayout->setWidget(4, QFormLayout::LabelRole, labelLineThickness);
+
+        labelHeadTypeChoice = new QLabel(groupBoxArrowSettings);
+        labelHeadTypeChoice->setObjectName(QStringLiteral("labelHeadTypeChoice"));
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, labelHeadTypeChoice);
 
         spinBoxArrowHeightContents = new QSpinBox(groupBoxArrowSettings);
         spinBoxArrowHeightContents->setObjectName(QStringLiteral("spinBoxArrowHeightContents"));
 
-        horizontalLayout_4->addWidget(spinBoxArrowHeightContents);
-
-
-        verticalLayout->addLayout(horizontalLayout_4);
-
-
-        horizontalLayout_8->addLayout(verticalLayout);
-
-        horizontalSpacer_2 = new QSpacerItem(158, 17, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_8->addItem(horizontalSpacer_2);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_8);
-
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        labelOutlineColor = new QLabel(groupBoxArrowSettings);
-        labelOutlineColor->setObjectName(QStringLiteral("labelOutlineColor"));
-
-        horizontalLayout_7->addWidget(labelOutlineColor);
+        formLayout->setWidget(1, QFormLayout::FieldRole, spinBoxArrowHeightContents);
 
         toolButtonOutlineColorContents = new ColorButton(groupBoxArrowSettings);
         toolButtonOutlineColorContents->setObjectName(QStringLiteral("toolButtonOutlineColorContents"));
 
-        horizontalLayout_7->addWidget(toolButtonOutlineColorContents);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_7->addItem(horizontalSpacer_3);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_7);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        labelFillColor = new QLabel(groupBoxArrowSettings);
-        labelFillColor->setObjectName(QStringLiteral("labelFillColor"));
-
-        horizontalLayout_5->addWidget(labelFillColor);
+        formLayout->setWidget(2, QFormLayout::FieldRole, toolButtonOutlineColorContents);
 
         toolButtonFillColorContents = new ColorButton(groupBoxArrowSettings);
         toolButtonFillColorContents->setObjectName(QStringLiteral("toolButtonFillColorContents"));
 
-        horizontalLayout_5->addWidget(toolButtonFillColorContents);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_5->addItem(horizontalSpacer_4);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_5);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        labelLineThickness = new QLabel(groupBoxArrowSettings);
-        labelLineThickness->setObjectName(QStringLiteral("labelLineThickness"));
-
-        horizontalLayout->addWidget(labelLineThickness);
+        formLayout->setWidget(3, QFormLayout::FieldRole, toolButtonFillColorContents);
 
         comboBoxLineThicknessContents = new QComboBox(groupBoxArrowSettings);
         comboBoxLineThicknessContents->setObjectName(QStringLiteral("comboBoxLineThicknessContents"));
 
-        horizontalLayout->addWidget(comboBoxLineThicknessContents);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_5);
-
-
-        verticalLayout_2->addLayout(horizontalLayout);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        labelHeadTypeChoice = new QLabel(groupBoxArrowSettings);
-        labelHeadTypeChoice->setObjectName(QStringLiteral("labelHeadTypeChoice"));
-
-        horizontalLayout_2->addWidget(labelHeadTypeChoice);
+        formLayout->setWidget(4, QFormLayout::FieldRole, comboBoxLineThicknessContents);
 
         comboBoxHeadTypeChoiceContents = new QComboBox(groupBoxArrowSettings);
         comboBoxHeadTypeChoiceContents->setObjectName(QStringLiteral("comboBoxHeadTypeChoiceContents"));
 
-        horizontalLayout_2->addWidget(comboBoxHeadTypeChoiceContents);
+        formLayout->setWidget(5, QFormLayout::FieldRole, comboBoxHeadTypeChoiceContents);
 
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_6);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_2);
-
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         pushButtonBeforeShape = new QPushButton(groupBoxArrowSettings);
         pushButtonBeforeShape->setObjectName(QStringLiteral("pushButtonBeforeShape"));
 
-        horizontalLayout_6->addWidget(pushButtonBeforeShape);
+        horizontalLayout->addWidget(pushButtonBeforeShape);
 
         pushButtonDefaultShape = new QPushButton(groupBoxArrowSettings);
         pushButtonDefaultShape->setObjectName(QStringLiteral("pushButtonDefaultShape"));
 
-        horizontalLayout_6->addWidget(pushButtonDefaultShape);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_6->addItem(horizontalSpacer);
+        horizontalLayout->addWidget(pushButtonDefaultShape);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_6);
+        formLayout->setLayout(6, QFormLayout::SpanningRole, horizontalLayout);
 
 
         verticalLayout_4->addWidget(groupBoxArrowSettings);
@@ -282,11 +205,11 @@ public:
         labelArrowWidth->setText(QApplication::translate("FormArrows", "Width", nullptr));
         labelArrowHeight->setText(QApplication::translate("FormArrows", "Height", nullptr));
         labelOutlineColor->setText(QApplication::translate("FormArrows", "Outline color", nullptr));
-        toolButtonOutlineColorContents->setText(QApplication::translate("FormArrows", "...", nullptr));
         labelFillColor->setText(QApplication::translate("FormArrows", "Fill color", nullptr));
-        toolButtonFillColorContents->setText(QApplication::translate("FormArrows", "...", nullptr));
         labelLineThickness->setText(QApplication::translate("FormArrows", "Line Thickness", nullptr));
         labelHeadTypeChoice->setText(QApplication::translate("FormArrows", "Head type choice", nullptr));
+        toolButtonOutlineColorContents->setText(QApplication::translate("FormArrows", "...", nullptr));
+        toolButtonFillColorContents->setText(QApplication::translate("FormArrows", "...", nullptr));
         pushButtonBeforeShape->setText(QApplication::translate("FormArrows", "Before shape", nullptr));
         pushButtonDefaultShape->setText(QApplication::translate("FormArrows", "Default shape", nullptr));
     } // retranslateUi

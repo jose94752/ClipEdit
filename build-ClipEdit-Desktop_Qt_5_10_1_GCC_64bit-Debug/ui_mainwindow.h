@@ -173,6 +173,11 @@ public:
         splitter->setOrientation(Qt::Horizontal);
         graphicsView = new GraphicsView(splitter);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(graphicsView->sizePolicy().hasHeightForWidth());
+        graphicsView->setSizePolicy(sizePolicy);
         graphicsView->setMinimumSize(QSize(400, 0));
         splitter->addWidget(graphicsView);
         stackedWidgetForms = new QStackedWidget(splitter);
@@ -187,7 +192,7 @@ public:
         MainWindow->setStatusBar(statusBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 516, 21));
+        menuBar->setGeometry(QRect(0, 0, 516, 22));
         menufile = new QMenu(menuBar);
         menufile->setObjectName(QStringLiteral("menufile"));
         menuHelp = new QMenu(menuBar);

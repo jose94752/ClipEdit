@@ -127,7 +127,8 @@ class MainWindow
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
 
-        //void slotScreenshot();
+        //
+        void setBackground(QPixmap pix);
 
         void itemSelected(QGraphicsItem* item);
 

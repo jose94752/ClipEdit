@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[24];
-    char stringdata0[297];
+    QByteArrayData data[25];
+    char stringdata0[300];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,12 +49,13 @@ QT_MOC_LITERAL(14, 173, 10), // "slotGraphs"
 QT_MOC_LITERAL(15, 184, 10), // "GraphsInfo"
 QT_MOC_LITERAL(16, 195, 5), // "infos"
 QT_MOC_LITERAL(17, 201, 22), // "slotArrowsGraphicsItem"
-QT_MOC_LITERAL(18, 224, 14), // "slotScreenshot"
-QT_MOC_LITERAL(19, 239, 12), // "itemSelected"
-QT_MOC_LITERAL(20, 252, 14), // "QGraphicsItem*"
-QT_MOC_LITERAL(21, 267, 4), // "item"
-QT_MOC_LITERAL(22, 272, 10), // "slotLayers"
-QT_MOC_LITERAL(23, 283, 13) // "layerSelected"
+QT_MOC_LITERAL(18, 224, 13), // "setBackground"
+QT_MOC_LITERAL(19, 238, 3), // "pix"
+QT_MOC_LITERAL(20, 242, 12), // "itemSelected"
+QT_MOC_LITERAL(21, 255, 14), // "QGraphicsItem*"
+QT_MOC_LITERAL(22, 270, 4), // "item"
+QT_MOC_LITERAL(23, 275, 10), // "slotLayers"
+QT_MOC_LITERAL(24, 286, 13) // "layerSelected"
 
     },
     "MainWindow\0save\0\0saveAs\0openFile\0"
@@ -63,8 +64,9 @@ QT_MOC_LITERAL(23, 283, 13) // "layerSelected"
     "slotNumberedBulletsSaveConfig\0"
     "slotTextBoxes\0slotTextPicture\0slotGraphs\0"
     "GraphsInfo\0infos\0slotArrowsGraphicsItem\0"
-    "slotScreenshot\0itemSelected\0QGraphicsItem*\0"
-    "item\0slotLayers\0layerSelected"
+    "setBackground\0pix\0itemSelected\0"
+    "QGraphicsItem*\0item\0slotLayers\0"
+    "layerSelected"
 };
 #undef QT_MOC_LITERAL
 
@@ -96,10 +98,10 @@ static const uint qt_meta_data_MainWindow[] = {
       13,    0,  133,    2, 0x08 /* Private */,
       14,    1,  134,    2, 0x08 /* Private */,
       17,    0,  137,    2, 0x08 /* Private */,
-      18,    0,  138,    2, 0x08 /* Private */,
-      19,    1,  139,    2, 0x08 /* Private */,
-      22,    0,  142,    2, 0x08 /* Private */,
-      23,    0,  143,    2, 0x08 /* Private */,
+      18,    1,  138,    2, 0x08 /* Private */,
+      20,    1,  141,    2, 0x08 /* Private */,
+      23,    0,  144,    2, 0x08 /* Private */,
+      24,    0,  145,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    2,
@@ -116,8 +118,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 15,   16,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 20,   21,
+    QMetaType::Void, QMetaType::QPixmap,   19,
+    QMetaType::Void, 0x80000000 | 21,   22,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -144,7 +146,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->slotTextPicture(); break;
         case 12: _t->slotGraphs((*reinterpret_cast< const GraphsInfo(*)>(_a[1]))); break;
         case 13: _t->slotArrowsGraphicsItem(); break;
-        case 14: _t->slotScreenshot(); break;
+        case 14: _t->setBackground((*reinterpret_cast< QPixmap(*)>(_a[1]))); break;
         case 15: _t->itemSelected((*reinterpret_cast< QGraphicsItem*(*)>(_a[1]))); break;
         case 16: _t->slotLayers(); break;
         case 17: _t->layerSelected(); break;

@@ -66,6 +66,7 @@ public:
     ColorButton *pushButtonBorderColor;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButtonSaveTheme;
+    QPushButton *pushButtonApplyTheme;
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButtonAdd;
     QSpacerItem *verticalSpacer;
@@ -238,10 +239,18 @@ public:
         pushButtonSaveTheme = new QPushButton(FormTextBoxes);
         pushButtonSaveTheme->setObjectName(QStringLiteral("pushButtonSaveTheme"));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/icons/icons/save-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/icons/icons/save-theme-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButtonSaveTheme->setIcon(icon);
 
         horizontalLayout_2->addWidget(pushButtonSaveTheme);
+
+        pushButtonApplyTheme = new QPushButton(FormTextBoxes);
+        pushButtonApplyTheme->setObjectName(QStringLiteral("pushButtonApplyTheme"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/icons/icons/apply-theme-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonApplyTheme->setIcon(icon1);
+
+        horizontalLayout_2->addWidget(pushButtonApplyTheme);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -308,6 +317,10 @@ public:
         pushButtonSaveTheme->setToolTip(QApplication::translate("FormTextBoxes", "Save as default theme", nullptr));
 #endif // QT_NO_TOOLTIP
         pushButtonSaveTheme->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        pushButtonApplyTheme->setToolTip(QApplication::translate("FormTextBoxes", "Apply default theme", nullptr));
+#endif // QT_NO_TOOLTIP
+        pushButtonApplyTheme->setText(QString());
         pushButtonAdd->setText(QApplication::translate("FormTextBoxes", "Add", nullptr));
     } // retranslateUi
 

@@ -103,7 +103,9 @@ void MainWindow::buildMenu()
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
-    connect(&m_formScreenshots, SIGNAL(), this, SLOT(slotScreenshot()));
+
+    //put a parameter inside the setBackground() method.
+    connect(&m_formScreenshots, SIGNAL(setBackground(QPixmap pix)), this, SLOT(setBackground(QPixmap pix)));
 
 
     // Layers
@@ -314,31 +316,16 @@ void MainWindow::slotArrowsGraphicsItem()
 }
 
 
-void MainWindow::slotScreenshot()
+void MainWindow::setBackground(QPixmap pix)
 {
      //Get screen capture
 
     qDebug () << "mainWindow slot of the Screenshot";
 
-//    QRect m_area;
-//    QPixmap m_pixmap ;
-
-
-//    QRect rec(m_area.x()+1,
-//              m_area.y()+1,
-//              m_area.width()-1,
-//              m_area.height()-1);
-
-//    p=m_pixmap.copy(rec);
-
-//    m_pixmap=p;
-
-//    ScreenshotsGraphicsItem  sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
+//    ScreenshotsGraphicsItem  sc = new ScreenshotsGraphicsItem (sc, pix);
 //    m_scene.clear();
 //    m_scene.addItem(sc);
-    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (&m_formScreenshots);
-    m_scene.clear();
-    m_scene.addItem(sc);
+
 }
 
 

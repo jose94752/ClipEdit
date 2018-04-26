@@ -28,7 +28,9 @@ class ScreenshotsGraphicsItem
     public:
 
         // Constructor, destructor
-        explicit ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent = 0);
+        //explicit ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent = 0);
+         explicit ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent = 0);
+
 
         // The virtual destructor makes sure that it gets called even if the class
         // is getting deleted through a base class pointer.

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_GraphicsView_t {
     QByteArrayData data[10];
-    char stringdata0[107];
+    char stringdata0[108];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,13 +39,13 @@ QT_MOC_LITERAL(4, 42, 4), // "item"
 QT_MOC_LITERAL(5, 47, 5), // "clear"
 QT_MOC_LITERAL(6, 53, 13), // "contentToView"
 QT_MOC_LITERAL(7, 67, 12), // "setZoomLevel"
-QT_MOC_LITERAL(8, 80, 4), // "zoom"
-QT_MOC_LITERAL(9, 85, 21) // "changeBackgroundColor"
+QT_MOC_LITERAL(8, 80, 5), // "scale"
+QT_MOC_LITERAL(9, 86, 21) // "changeBackgroundColor"
 
     },
     "GraphicsView\0itemSelected\0\0QGraphicsItem*\0"
     "item\0clear\0contentToView\0setZoomLevel\0"
-    "zoom\0changeBackgroundColor"
+    "scale\0changeBackgroundColor"
 };
 #undef QT_MOC_LITERAL
 
