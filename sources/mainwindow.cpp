@@ -360,6 +360,24 @@ void MainWindow::itemSelected(QGraphicsItem* item)
 
     switch (item->type())
     {
+        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        {
+            ArrowsGraphicsItem* castedItem = qgraphicsitem_cast<ArrowsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_ARROW]);
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
+        {
+            GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_CHART]);
+            }
+        } break;
         case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
         {
             TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
@@ -370,12 +388,32 @@ void MainWindow::itemSelected(QGraphicsItem* item)
                 m_formTextboxes.setItemData(castedItem->getItemData());
             }
         } break;
-        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+        case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
         {
+            PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
 
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
+            }
         } break;
-        case BaseGraphicItem::CustomTypes::ImageGraphicsItem:
+        case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
         {
+            NumberedBulletGraphicItem* castedItem = qgraphicsitem_cast<NumberedBulletGraphicItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_BULLET]);
+            }
+        } break;
+        case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
+        {
+            ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
+
+            if (castedItem)
+            {
+                ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_SCREENSHOT]);
+            }
         }
     }
 }

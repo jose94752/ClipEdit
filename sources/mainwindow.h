@@ -56,8 +56,7 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-
-private:
+    private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
