@@ -162,9 +162,10 @@ void MainWindow::buildView()
     QDesktopWidget *deskWidget=QApplication::desktop();
     int dpix=deskWidget->logicalDpiX();
     int dpiy=deskWidget->logicalDpiY();
-    m_width=210*dpix/25.4;
-    m_height=297*dpiy/25.4;
-    m_borderSceneItem=m_scene.addRect(QRectF(0,0,m_width,m_height));
+    int width=210*dpix/25.4;
+    int height=297*dpiy/25.4;
+    m_scene.setSceneRect(QRectF(0,0,width+1,height+1));
+    m_borderSceneItem=m_scene.addRect(QRectF(0,0,width,height));
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setScene(&m_scene);
 
@@ -446,8 +447,13 @@ void MainWindow::exportView(bool)
     }
     else
     {
-        QImage image(m_scene.sceneRect().size().toSize(), QImage::Format_ARGB32);
+        QSize size=m_scene.sceneRect().size().toSize();
+        QImage image(size, QImage::Format_ARGB32);
         image.fill(Qt::white);
+        /*QImage cropped(size, QImage::Format_ARGB32);
+        cropped=image.copy(-400,-579,799,1158);
+        QRect rect=image.rect();
+        qDebug()<<rect.x()<<" "<<rect.y()<<" "<<rect.width()<<" "<<rect.height();*/
 
         QPainter painter(&image);
         m_scene.render(&painter);

@@ -86,8 +86,8 @@ class MainWindow
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
 
-        int m_width;
-        int m_height;
+        /*int m_width;
+        int m_height;*/
 
         // Scene
         QGraphicsScene m_scene;

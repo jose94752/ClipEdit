@@ -109,6 +109,7 @@ void GraphicsView::clear()
         QRectF rect=(*m_graphRectItem)->rect();
         QBrush brush=(*m_graphRectItem)->brush();
         scene()->clear();
+        scene()->setSceneRect(QRectF(0,0,rect.width()+1,rect.height()+1));
         *m_graphRectItem=scene()->addRect(rect);
         (*m_graphRectItem)->setBrush(brush);
     }
