@@ -82,16 +82,16 @@ void FormTextBoxes::loadDefaultTheme()
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
 
-    int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment").toInt());
+    int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment", Qt::AlignLeft).toInt());
     ui->comboBoxAlignment->setCurrentIndex(idx);
 
-    ui->pushButtonBackgroundColor->setColor(QColor(s.value("FormTextBoxes/background-color").toString()));
-    ui->pushButtonTextColor->setColor(QColor(s.value("FormTextBoxes/text-color").toString()));
-    ui->pushButtonBorderColor->setColor(QColor(s.value("FormTextBoxes/border-color").toString()));
+    ui->pushButtonBackgroundColor->setColor(QColor(s.value("FormTextBoxes/background-color", QColor(Qt::white).name()).toString()));
+    ui->pushButtonTextColor->setColor(QColor(s.value("FormTextBoxes/text-color", QColor(Qt::black).name()).toString()));
+    ui->pushButtonBorderColor->setColor(QColor(s.value("FormTextBoxes/border-color", QColor(Qt::black).name()).toString()));
 
-    ui->checkBoxHasBorders->setChecked(s.value("FormTextBoxes/border-visible").toBool());
-    ui->spinBoxBorderWidth->setValue(s.value("FormTextBoxes/border-width").toInt());
-    ui->spinBoxBorderRadius->setValue(s.value("FormTextBoxes/border-radius").toInt());
+    ui->checkBoxHasBorders->setChecked(s.value("FormTextBoxes/border-visible", true).toBool());
+    ui->spinBoxBorderWidth->setValue(s.value("FormTextBoxes/border-width", 1).toInt());
+    ui->spinBoxBorderRadius->setValue(s.value("FormTextBoxes/border-radius", 0).toInt());
 }
 
 // Getters and setters
