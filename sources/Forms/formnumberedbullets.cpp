@@ -76,7 +76,7 @@ void FormNumberedBullets::load_config() {
     ui->spinBox_Size->setValue (taille);
     QColor bulletcolor (0,0, 255), //blue
            numbercolor (255, 0, 0);
-    QString str_bulletcolor, str_numbercolor;
+    QString str_bulletcolor (bulletcolor.name ()), str_numbercolor (numbercolor.name ());
     str_bulletcolor = q.value ("FormNumberedBullets/bulletcolor", str_bulletcolor).toString();
     str_numbercolor = q.value ("FormNumberedBullets/numbercolor", str_numbercolor).toString ();
     bulletcolor.setNamedColor(str_bulletcolor);

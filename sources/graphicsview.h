@@ -34,6 +34,7 @@ class GraphicsView
         QColor m_backgroundColor;
 
         void setGraphicsRectItem(QGraphicsRectItem**);
+        void setNbElts(int*);
 
     public slots:
 
@@ -61,6 +62,7 @@ class GraphicsView
 
         // Rect
         QGraphicsRectItem **m_graphRectItem;
+        int *nbSceneElts;
 
 };
 
