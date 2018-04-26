@@ -107,9 +107,6 @@ void ResizeSceneDialog::sizeChanged()
     m_scene->removeItem(*m_borderSceneItem);
     QGraphicsScene scene2;
     QList<QGraphicsItem *> items=m_scene->items();
-    //m_scene->clear();
-    //*m_borderSceneItem=m_scene->addRect(QRectF(0,0,width,height));
-    //(*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
     foreach(QGraphicsItem* item,items){
         scene2.addItem(item);
     }
