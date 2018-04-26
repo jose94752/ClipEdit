@@ -34,6 +34,7 @@ class GraphicsView
         QColor m_backgroundColor;
 
         void setGraphicsRectItem(QGraphicsRectItem**);
+        void setNbElts(int*);
 
     public slots:
 
@@ -41,7 +42,6 @@ class GraphicsView
         void contentToView();
         void setZoomLevel(int scale);
         void changeBackgroundColor();
-        void sceneModified();
 
     protected:
 
@@ -62,6 +62,7 @@ class GraphicsView
 
         // Rect
         QGraphicsRectItem **m_graphRectItem;
+        int *nbSceneElts;
 
 };
 
