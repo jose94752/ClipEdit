@@ -34,6 +34,9 @@ FormPictures::FormPictures(QWidget *parent)
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
+      connect (ui->checkBox_pic_black_white, SIGNAL(released()), this, SLOT(picture_modification()));
+
+
       connect (ui->spinBox_pic_w, SIGNAL(editingFinished())  , this, SLOT(picture_modification_w()));
       connect (ui->spinBox_pic_h, SIGNAL(editingFinished())  , this, SLOT(picture_modification_h()));
 
@@ -70,12 +73,18 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
     lg_color    = ui->toolButton_color->getColor();
     lg_pos      = ui->comboBox_lg_pos->currentText();
 
+
+
 }
 
 void FormPictures::chose_picture()
 {
-     qDebug()<<"FORM: picture  changed";
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), "/home/formation/Images/image_01.jpeg", tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
+
+//    QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), "/home", tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
+
+    QString home_path = QDir::homePath();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), home_path, tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
 
     QPixmap file_image (fileName);
 
@@ -94,6 +103,7 @@ void FormPictures::chose_picture()
 
   qDebug()<<"FORM: picture  changed";
      emit picture_changed();
+  //    ui->lineEdit_pic_path->setText(" ");
 
 }
 
