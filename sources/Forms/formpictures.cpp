@@ -32,16 +32,19 @@ FormPictures::FormPictures(QWidget *parent)
 {
     ui->setupUi(this);
 
-
-
       connect (ui->pushButton_ok,            SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
 
       connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
+<<<<<<< HEAD
+      connect (ui->toolButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
+      connect (ui->toolButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
+=======
      // connect (ui->checkBox_pic_black_white, SIGNAL(released()),    this, SLOT(picture_modification()));
 
     connect (ui->pushButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
     connect (ui->pushButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
+>>>>>>> 1325108afc461c3fcdc3e5778994d1e9b1ec7e60
 
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
@@ -52,6 +55,10 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
+<<<<<<< HEAD
+
+=======
+>>>>>>> 1325108afc461c3fcdc3e5778994d1e9b1ec7e60
 }
 
 
@@ -104,8 +111,7 @@ void FormPictures::chose_picture()
      setting.setValue("path_name", s);
 
   qDebug()<<"FORM: picture  changed, path ="  <<s;
-     emit picture_changed();
-  //    ui->lineEdit_pic_path->setText(" ");
+
 }
 
 
@@ -119,6 +125,9 @@ void FormPictures::save_settings(bool)
 {
     s_black_white = ui->checkBox_pic_black_white->isChecked();
     setting.setValue("FormPictures/black_white", s_black_white);
+
+    s_lg_txt      = ui->lineEdit_lg_txt->text();
+    setting.setValue("FormPictures/text", s_lg_font);
 
     s_lg_font     = ui->fontComboBox_lg_font->currentFont().family();
     setting.setValue("FormPictures/font", s_lg_font);
@@ -141,19 +150,21 @@ void FormPictures::restore_settings(bool)
     s_black_white = setting.value("FormPictures/black_white").toBool();
     ui->checkBox_pic_black_white->setChecked(s_black_white);
 
-    s_lg_font  =  setting.value("FormPictures/font").toString() ;
+    s_lg_txt   = setting.value("FormPictures/text").toString() ;
+    ui->lineEdit_lg_txt->setText(s_lg_txt);
 
+    s_lg_font  =  setting.value("FormPictures/font").toString() ;
     ui->fontComboBox_lg_font->setCurrentText(s_lg_font);
 
     s_lg_size  = setting.value("FormPictures/size").toInt() ;
     ui->spinBox_lg_size->setValue(s_lg_size);
 
 
-    s_lg_color =   setting.value("FormPicures/color").toString() ;
+    s_lg_color =   setting.value("FormPictures/color").toString() ;
     ui->toolButton_color->setColor(s_lg_color);
 
 
-    s_lg_pos   =  setting.value("FormPicures/position").toString() ;
+    s_lg_pos   =  setting.value("FormPictures/position").toString() ;
     ui->comboBox_lg_pos->setCurrentText(s_lg_pos);
 
 
