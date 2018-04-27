@@ -15,8 +15,6 @@
 // Includes
 // --------
 
-#include <QGraphicsItem>
-
 #include "basegraphicitem.h"
 
 // Class

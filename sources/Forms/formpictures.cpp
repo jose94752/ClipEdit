@@ -17,6 +17,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QDir>
+#include <QSettings>
 
 #include "formpictures.h"
 #include "formpictures.h"
@@ -32,7 +33,8 @@ FormPictures::FormPictures(QWidget *parent)
     ui->setupUi(this);
 
 
-    //connect (ui->pushButton_simple, SIGNAL(clicked(bool)), this, SLOT(simple_click(bool)));
+
+      connect (ui->pushButton_lg_ok,  SIGNAL(clicked(bool)), this, SLOT(legend_ok(bool)));
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
@@ -75,14 +77,20 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
     lg_color    = ui->toolButton_color->getColor();
     lg_pos      = ui->comboBox_lg_pos->currentText();
 
-
-
 }
 
 void FormPictures::chose_picture()
 {
+    QString grp     = "m2i_patrol";
+    QString prj     = "clipart_picture";
+    QString grp_prj = grp + "/" + prj;
 
-//    QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), "/home", tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
+    QSettings setting;
+
+    QString s_path = setting.value(grp_prj).toString();
+
+    //QSettings(const QString &fileName, Format format, QObject *parent = Q_NULLPTR)
+    //QColor color = settings.value("DataPump/bgcolor").value<QColor>();
 
     QString home_path = QDir::homePath();
 
@@ -106,7 +114,6 @@ void FormPictures::chose_picture()
   qDebug()<<"FORM: picture  changed";
      emit picture_changed();
   //    ui->lineEdit_pic_path->setText(" ");
-
 }
 
 
@@ -131,6 +138,12 @@ void FormPictures::picture_modification_h()
     emit picture_changed_w_h(w_h1);
 
     qDebug() <<" form H : w_h:"  <<w_h1 ;
+}
+
+
+void FormPictures::legend_ok(bool)
+{
+    emit picture_changed();
 }
 
 // Load data

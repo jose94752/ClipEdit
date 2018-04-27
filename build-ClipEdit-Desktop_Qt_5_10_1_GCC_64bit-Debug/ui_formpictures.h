@@ -61,7 +61,8 @@ public:
     QCheckBox *checkBox_pic_fx;
     QPushButton *pushButton_pic_crop;
     QGroupBox *groupBox_legend;
-    QVBoxLayout *verticalLayout_10;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_11;
     QHBoxLayout *horizontalLayout;
     QLabel *label_10;
     QLineEdit *lineEdit_lg_txt;
@@ -78,6 +79,9 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QComboBox *comboBox_lg_pos;
     QSpacerItem *horizontalSpacer;
+    QVBoxLayout *verticalLayout_10;
+    QSpacerItem *verticalSpacer;
+    QPushButton *pushButton_lg_ok;
 
     void setupUi(QWidget *FormPictures)
     {
@@ -226,43 +230,47 @@ public:
 
         groupBox_legend = new QGroupBox(FormPictures);
         groupBox_legend->setObjectName(QStringLiteral("groupBox_legend"));
-        verticalLayout_10 = new QVBoxLayout(groupBox_legend);
-        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
+        widget = new QWidget(groupBox_legend);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(12, 32, 621, 159));
+        verticalLayout_11 = new QVBoxLayout(widget);
+        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
+        verticalLayout_11->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label_10 = new QLabel(groupBox_legend);
+        label_10 = new QLabel(widget);
         label_10->setObjectName(QStringLiteral("label_10"));
 
         horizontalLayout->addWidget(label_10);
 
-        lineEdit_lg_txt = new QLineEdit(groupBox_legend);
+        lineEdit_lg_txt = new QLineEdit(widget);
         lineEdit_lg_txt->setObjectName(QStringLiteral("lineEdit_lg_txt"));
 
         horizontalLayout->addWidget(lineEdit_lg_txt);
 
 
-        verticalLayout_10->addLayout(horizontalLayout);
+        verticalLayout_11->addLayout(horizontalLayout);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         verticalLayout_7 = new QVBoxLayout();
         verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
-        label_13 = new QLabel(groupBox_legend);
+        label_13 = new QLabel(widget);
         label_13->setObjectName(QStringLiteral("label_13"));
 
         verticalLayout_7->addWidget(label_13);
 
-        label_11 = new QLabel(groupBox_legend);
+        label_11 = new QLabel(widget);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         verticalLayout_7->addWidget(label_11);
 
-        label_7 = new QLabel(groupBox_legend);
+        label_7 = new QLabel(widget);
         label_7->setObjectName(QStringLiteral("label_7"));
 
         verticalLayout_7->addWidget(label_7);
 
-        label_8 = new QLabel(groupBox_legend);
+        label_8 = new QLabel(widget);
         label_8->setObjectName(QStringLiteral("label_8"));
 
         verticalLayout_7->addWidget(label_8);
@@ -272,25 +280,25 @@ public:
 
         verticalLayout_9 = new QVBoxLayout();
         verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
-        fontComboBox_lg_font = new QFontComboBox(groupBox_legend);
+        fontComboBox_lg_font = new QFontComboBox(widget);
         fontComboBox_lg_font->setObjectName(QStringLiteral("fontComboBox_lg_font"));
 
         verticalLayout_9->addWidget(fontComboBox_lg_font);
 
-        spinBox_lg_size = new QSpinBox(groupBox_legend);
+        spinBox_lg_size = new QSpinBox(widget);
         spinBox_lg_size->setObjectName(QStringLiteral("spinBox_lg_size"));
         spinBox_lg_size->setMinimum(6);
 
         verticalLayout_9->addWidget(spinBox_lg_size);
 
-        toolButton_color = new ColorButton(groupBox_legend);
+        toolButton_color = new ColorButton(widget);
         toolButton_color->setObjectName(QStringLiteral("toolButton_color"));
 
         verticalLayout_9->addWidget(toolButton_color);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        comboBox_lg_pos = new QComboBox(groupBox_legend);
+        comboBox_lg_pos = new QComboBox(widget);
         comboBox_lg_pos->setObjectName(QStringLiteral("comboBox_lg_pos"));
 
         horizontalLayout_6->addWidget(comboBox_lg_pos);
@@ -305,8 +313,22 @@ public:
 
         horizontalLayout_5->addItem(horizontalSpacer);
 
+        verticalLayout_10 = new QVBoxLayout();
+        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_10->addLayout(horizontalLayout_5);
+        verticalLayout_10->addItem(verticalSpacer);
+
+        pushButton_lg_ok = new QPushButton(widget);
+        pushButton_lg_ok->setObjectName(QStringLiteral("pushButton_lg_ok"));
+
+        verticalLayout_10->addWidget(pushButton_lg_ok);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_10);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_5);
 
 
         verticalLayout_8->addWidget(groupBox_legend);
@@ -338,6 +360,7 @@ public:
         label_7->setText(QApplication::translate("FormPictures", "Font Color", nullptr));
         label_8->setText(QApplication::translate("FormPictures", "Position", nullptr));
         toolButton_color->setText(QApplication::translate("FormPictures", "...", nullptr));
+        pushButton_lg_ok->setText(QApplication::translate("FormPictures", "Legend", nullptr));
     } // retranslateUi
 
 };

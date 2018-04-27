@@ -27,6 +27,7 @@
 #include "Forms/resizescenedialog.h"
 #include "Forms/dialogfilealreadyexists.h"
 #include "Forms/dialogsave.h"
+#include "Forms/formscreenshots.h"
 #include "Items/picturesgraphicsitem.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/textboxitem.h"
@@ -109,16 +110,14 @@ void MainWindow::buildForms()
     // Item connects
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
-    connect(m_formBullets->getToolButton_saveBulletConfig(),SIGNAL(clicked(bool)), SLOT(slotNumberedBulletsSaveConfig()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-    connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
+  //  connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
 
     //put a parameter inside the setBackground() method.
-    connect(&m_formScreenshots, SIGNAL(setBackground(QPixmap pix)), this, SLOT(setBackground(QPixmap pix)));
+    connect(m_formScreenshots,SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
     connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
-    //connect(&m_formScreenshots, SIGNAL(InsertImageText(QPixmap p)), this, SLOT(slotScreenshot(QPixmap p)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Remove all useless pages
@@ -130,14 +129,14 @@ void MainWindow::buildForms()
     }
 
     // Store forms
-    m_listIndexes.insert(BUTTON_ID_ARROW,       ui->stackedWidgetForms->addWidget(m_formArrows));
-    m_listIndexes.insert(BUTTON_ID_CHART,       ui->stackedWidgetForms->addWidget(m_formCharts));
-    m_listIndexes.insert(BUTTON_ID_BULLET,      ui->stackedWidgetForms->addWidget(m_formBullets));
-    m_listIndexes.insert(BUTTON_ID_CLIPART,     ui->stackedWidgetForms->addWidget(m_formCliparts));
-    m_listIndexes.insert(BUTTON_ID_PICTURE,     ui->stackedWidgetForms->addWidget(m_formPictures));
-    m_listIndexes.insert(BUTTON_ID_TEXTBOX,     ui->stackedWidgetForms->addWidget(m_formTextboxes));
-    m_listIndexes.insert(BUTTON_ID_SCREENSHOT,  ui->stackedWidgetForms->addWidget(m_formScreenshots));
-    m_listIndexes.insert(BUTTON_ID_LAYERS,      ui->stackedWidgetForms->addWidget(m_formLayers));
+    m_listIndexes.insert(BUTTON_ID_ARROW, ui->stackedWidgetForms->addWidget(m_formArrows));
+    m_listIndexes.insert(BUTTON_ID_CHART, ui->stackedWidgetForms->addWidget(m_formCharts));
+    m_listIndexes.insert(BUTTON_ID_BULLET, ui->stackedWidgetForms->addWidget(m_formBullets));
+    m_listIndexes.insert(BUTTON_ID_CLIPART, ui->stackedWidgetForms->addWidget(m_formCliparts));
+    m_listIndexes.insert(BUTTON_ID_PICTURE, ui->stackedWidgetForms->addWidget(m_formPictures));
+    m_listIndexes.insert(BUTTON_ID_TEXTBOX, ui->stackedWidgetForms->addWidget(m_formTextboxes));
+    m_listIndexes.insert(BUTTON_ID_SCREENSHOT, ui->stackedWidgetForms->addWidget(m_formScreenshots));
+    m_listIndexes.insert(BUTTON_ID_LAYERS, ui->stackedWidgetForms->addWidget(m_formLayers));
 
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ArrowGraphicsItem, m_formArrows);
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ChartGraphicsItem, m_formCharts);
@@ -278,10 +277,6 @@ void MainWindow::slotNumberedBullets()
   }
 }
 
-void MainWindow::slotNumberedBulletsSaveConfig () {
-  m_formBullets->save_config ();
-}
-
 void MainWindow::slotTextBoxes(bool)
 {
     // Retrieve data from the form
@@ -344,13 +339,11 @@ void MainWindow::slotArrowsGraphicsItem()
 
 void MainWindow::setBackground(QPixmap pix)
 {
-     //Get screen capture
-
+     //Get screen background.
     qDebug () << "mainWindow slot of the Screenshot";
 
-//    ScreenshotsGraphicsItem  sc = new ScreenshotsGraphicsItem (sc, pix);
-//    m_scene.clear();
-//    m_scene.addItem(sc);
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
+    m_scene.addItem(sc);
 
 }
 

@@ -114,7 +114,7 @@ void FormArrows::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormArrows::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_FormArrows.data,
+    { &BaseForm::staticMetaObject, qt_meta_stringdata_FormArrows.data,
       qt_meta_data_FormArrows,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -129,12 +129,12 @@ void *FormArrows::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_FormArrows.stringdata0))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return BaseForm::qt_metacast(_clname);
 }
 
 int FormArrows::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = BaseForm::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

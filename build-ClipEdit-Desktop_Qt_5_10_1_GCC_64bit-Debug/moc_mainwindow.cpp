@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[25];
-    char stringdata0[300];
+    QByteArrayData data[24];
+    char stringdata0[270];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,26 +42,24 @@ QT_MOC_LITERAL(7, 58, 10), // "resizeTold"
 QT_MOC_LITERAL(8, 69, 7), // "slotNew"
 QT_MOC_LITERAL(9, 77, 15), // "showAboutDialog"
 QT_MOC_LITERAL(10, 93, 19), // "slotNumberedBullets"
-QT_MOC_LITERAL(11, 113, 29), // "slotNumberedBulletsSaveConfig"
-QT_MOC_LITERAL(12, 143, 13), // "slotTextBoxes"
-QT_MOC_LITERAL(13, 157, 15), // "slotTextPicture"
-QT_MOC_LITERAL(14, 173, 10), // "slotGraphs"
-QT_MOC_LITERAL(15, 184, 10), // "GraphsInfo"
-QT_MOC_LITERAL(16, 195, 5), // "infos"
-QT_MOC_LITERAL(17, 201, 22), // "slotArrowsGraphicsItem"
-QT_MOC_LITERAL(18, 224, 13), // "setBackground"
-QT_MOC_LITERAL(19, 238, 3), // "pix"
-QT_MOC_LITERAL(20, 242, 12), // "itemSelected"
-QT_MOC_LITERAL(21, 255, 14), // "QGraphicsItem*"
-QT_MOC_LITERAL(22, 270, 4), // "item"
-QT_MOC_LITERAL(23, 275, 10), // "slotLayers"
-QT_MOC_LITERAL(24, 286, 13) // "layerSelected"
+QT_MOC_LITERAL(11, 113, 13), // "slotTextBoxes"
+QT_MOC_LITERAL(12, 127, 15), // "slotTextPicture"
+QT_MOC_LITERAL(13, 143, 10), // "slotGraphs"
+QT_MOC_LITERAL(14, 154, 10), // "GraphsInfo"
+QT_MOC_LITERAL(15, 165, 5), // "infos"
+QT_MOC_LITERAL(16, 171, 22), // "slotArrowsGraphicsItem"
+QT_MOC_LITERAL(17, 194, 13), // "setBackground"
+QT_MOC_LITERAL(18, 208, 3), // "pix"
+QT_MOC_LITERAL(19, 212, 12), // "itemSelected"
+QT_MOC_LITERAL(20, 225, 14), // "QGraphicsItem*"
+QT_MOC_LITERAL(21, 240, 4), // "item"
+QT_MOC_LITERAL(22, 245, 10), // "slotLayers"
+QT_MOC_LITERAL(23, 256, 13) // "layerSelected"
 
     },
     "MainWindow\0save\0\0saveAs\0openFile\0"
     "exportView\0actionClicked\0resizeTold\0"
     "slotNew\0showAboutDialog\0slotNumberedBullets\0"
-    "slotNumberedBulletsSaveConfig\0"
     "slotTextBoxes\0slotTextPicture\0slotGraphs\0"
     "GraphsInfo\0infos\0slotArrowsGraphicsItem\0"
     "setBackground\0pix\0itemSelected\0"
@@ -76,7 +74,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -84,24 +82,23 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  104,    2, 0x08 /* Private */,
-       3,    1,  107,    2, 0x08 /* Private */,
-       4,    1,  110,    2, 0x08 /* Private */,
-       5,    1,  113,    2, 0x08 /* Private */,
-       6,    1,  116,    2, 0x08 /* Private */,
-       7,    1,  119,    2, 0x08 /* Private */,
-       8,    1,  122,    2, 0x08 /* Private */,
-       9,    1,  125,    2, 0x08 /* Private */,
-      10,    0,  128,    2, 0x08 /* Private */,
-      11,    0,  129,    2, 0x08 /* Private */,
-      12,    1,  130,    2, 0x08 /* Private */,
-      13,    0,  133,    2, 0x08 /* Private */,
-      14,    1,  134,    2, 0x08 /* Private */,
-      17,    0,  137,    2, 0x08 /* Private */,
-      18,    1,  138,    2, 0x08 /* Private */,
-      20,    1,  141,    2, 0x08 /* Private */,
-      23,    0,  144,    2, 0x08 /* Private */,
-      24,    0,  145,    2, 0x08 /* Private */,
+       1,    1,   99,    2, 0x08 /* Private */,
+       3,    1,  102,    2, 0x08 /* Private */,
+       4,    1,  105,    2, 0x08 /* Private */,
+       5,    1,  108,    2, 0x08 /* Private */,
+       6,    1,  111,    2, 0x08 /* Private */,
+       7,    1,  114,    2, 0x08 /* Private */,
+       8,    1,  117,    2, 0x08 /* Private */,
+       9,    1,  120,    2, 0x08 /* Private */,
+      10,    0,  123,    2, 0x08 /* Private */,
+      11,    1,  124,    2, 0x08 /* Private */,
+      12,    0,  127,    2, 0x08 /* Private */,
+      13,    1,  128,    2, 0x08 /* Private */,
+      16,    0,  131,    2, 0x08 /* Private */,
+      17,    1,  132,    2, 0x08 /* Private */,
+      19,    1,  135,    2, 0x08 /* Private */,
+      22,    0,  138,    2, 0x08 /* Private */,
+      23,    0,  139,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    2,
@@ -113,13 +110,12 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 15,   16,
+    QMetaType::Void, 0x80000000 | 14,   15,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QPixmap,   19,
-    QMetaType::Void, 0x80000000 | 21,   22,
+    QMetaType::Void, QMetaType::QPixmap,   18,
+    QMetaType::Void, 0x80000000 | 20,   21,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -141,21 +137,20 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->slotNew((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 7: _t->showAboutDialog((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 8: _t->slotNumberedBullets(); break;
-        case 9: _t->slotNumberedBulletsSaveConfig(); break;
-        case 10: _t->slotTextBoxes((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 11: _t->slotTextPicture(); break;
-        case 12: _t->slotGraphs((*reinterpret_cast< const GraphsInfo(*)>(_a[1]))); break;
-        case 13: _t->slotArrowsGraphicsItem(); break;
-        case 14: _t->setBackground((*reinterpret_cast< QPixmap(*)>(_a[1]))); break;
-        case 15: _t->itemSelected((*reinterpret_cast< QGraphicsItem*(*)>(_a[1]))); break;
-        case 16: _t->slotLayers(); break;
-        case 17: _t->layerSelected(); break;
+        case 9: _t->slotTextBoxes((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 10: _t->slotTextPicture(); break;
+        case 11: _t->slotGraphs((*reinterpret_cast< const GraphsInfo(*)>(_a[1]))); break;
+        case 12: _t->slotArrowsGraphicsItem(); break;
+        case 13: _t->setBackground((*reinterpret_cast< QPixmap(*)>(_a[1]))); break;
+        case 14: _t->itemSelected((*reinterpret_cast< QGraphicsItem*(*)>(_a[1]))); break;
+        case 15: _t->slotLayers(); break;
+        case 16: _t->layerSelected(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 15:
+        case 14:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -191,13 +186,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 17;
     }
     return _id;
 }

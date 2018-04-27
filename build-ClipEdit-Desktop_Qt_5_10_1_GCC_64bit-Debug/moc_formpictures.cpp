@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormPictures_t {
-    QByteArrayData data[9];
-    char stringdata0[136];
+    QByteArrayData data[10];
+    char stringdata0[146];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,15 +37,16 @@ QT_MOC_LITERAL(2, 29, 0), // ""
 QT_MOC_LITERAL(3, 30, 19), // "picture_changed_w_h"
 QT_MOC_LITERAL(4, 50, 4), // "w_h1"
 QT_MOC_LITERAL(5, 55, 13), // "chose_picture"
-QT_MOC_LITERAL(6, 69, 20), // "picture_modification"
-QT_MOC_LITERAL(7, 90, 22), // "picture_modification_w"
-QT_MOC_LITERAL(8, 113, 22) // "picture_modification_h"
+QT_MOC_LITERAL(6, 69, 9), // "legend_ok"
+QT_MOC_LITERAL(7, 79, 20), // "picture_modification"
+QT_MOC_LITERAL(8, 100, 22), // "picture_modification_w"
+QT_MOC_LITERAL(9, 123, 22) // "picture_modification_h"
 
     },
     "FormPictures\0picture_changed\0\0"
     "picture_changed_w_h\0w_h1\0chose_picture\0"
-    "picture_modification\0picture_modification_w\0"
-    "picture_modification_h"
+    "legend_ok\0picture_modification\0"
+    "picture_modification_w\0picture_modification_h"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +56,7 @@ static const uint qt_meta_data_FormPictures[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,14 +64,15 @@ static const uint qt_meta_data_FormPictures[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x06 /* Public */,
-       3,    1,   45,    2, 0x06 /* Public */,
+       1,    0,   49,    2, 0x06 /* Public */,
+       3,    1,   50,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   48,    2, 0x0a /* Public */,
-       6,    0,   49,    2, 0x0a /* Public */,
-       7,    0,   50,    2, 0x0a /* Public */,
-       8,    0,   51,    2, 0x0a /* Public */,
+       5,    0,   53,    2, 0x0a /* Public */,
+       6,    1,   54,    2, 0x0a /* Public */,
+       7,    0,   57,    2, 0x0a /* Public */,
+       8,    0,   58,    2, 0x0a /* Public */,
+       9,    0,   59,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -78,6 +80,7 @@ static const uint qt_meta_data_FormPictures[] = {
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -94,9 +97,10 @@ void FormPictures::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->picture_changed(); break;
         case 1: _t->picture_changed_w_h((*reinterpret_cast< char(*)>(_a[1]))); break;
         case 2: _t->chose_picture(); break;
-        case 3: _t->picture_modification(); break;
-        case 4: _t->picture_modification_w(); break;
-        case 5: _t->picture_modification_h(); break;
+        case 3: _t->legend_ok((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 4: _t->picture_modification(); break;
+        case 5: _t->picture_modification_w(); break;
+        case 6: _t->picture_modification_h(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -119,7 +123,7 @@ void FormPictures::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormPictures::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_FormPictures.data,
+    { &BaseForm::staticMetaObject, qt_meta_stringdata_FormPictures.data,
       qt_meta_data_FormPictures,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -134,22 +138,22 @@ void *FormPictures::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_FormPictures.stringdata0))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return BaseForm::qt_metacast(_clname);
 }
 
 int FormPictures::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = BaseForm::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

@@ -122,7 +122,6 @@ class MainWindow
 
         // Items
         void slotNumberedBullets();
-        void slotNumberedBulletsSaveConfig();
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);

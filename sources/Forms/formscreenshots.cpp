@@ -29,6 +29,8 @@
 #include<QRect>
 #include<QPointF>
 #include<QGraphicsView>
+#include<QDir>
+#include<QFileDialog>
 
 
 
@@ -39,12 +41,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     :   BaseForm(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
-
-    //put here the signal that point to the mainwindow class
-    //create a pixmap
-
-
-
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -67,11 +63,10 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //Shows the widget in full-screen mode.
      //this->showFullScreen();
 
-    //Go QPushButton
-    //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-   // this, SLOT(Capture()));
-   connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-            this, SLOT(CaptureDesktop()));
+    //put here the signal that point to the mainwindow class
+    //create a pixmap
+
+    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT(choose_screenshot()));
 
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
@@ -190,6 +185,7 @@ void FormScreenshots::snapshot()
     m_pix=pix;
 
 
+    //?
     FormScreenshots *w= new FormScreenshots(this);
 
 
@@ -248,23 +244,20 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
 
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 {
-
+    Q_UNUSED(event)
 //    QPoint m_point1;
 //    m_point1 = event->globalPos();//get global position according to ur parent-child relationship
 //    QPainter m_painter(this);
 
-    //m_painter->
-   // p->drawRect(point1, point2);
+//    p->drawRect(point1, point2);
 
-
- //   Q_UNUSED(event)
 //    emit mouseReleaseEvent();
 //    m_buttonpressed=false;
 //    emit dimensionsMade(true, m_region);
 //    close();
 
 //    if(event->MouseButtonRelease)
-//     {
+//    {
 //         qDebug () << "released";
 //        // QPointF point1= ui->graphicsView->mapFromScene(e->posF());
 //         QPoint point1;
@@ -273,30 +266,38 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 //         y1= point1.y();
 //         qDebug()<<y1;
 //         qDebug()<<point1;
-//     }
+    //    }
+}
 
+void FormScreenshots::choose_screenshot()
+{
+
+
+    QString homepath = QDir::homePath();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open ClipEdit Project"), homepath, tr("ClipEdit Files (*.png)"));
+
+    if(fileName.isEmpty())
+        return;
+    QPixmap pix (fileName);
+
+    emit setBackground(pix);
 
 }
 
 void FormScreenshots::updatehide()
 {
-        m_delayspinbox = new QSpinBox(this);
-        if (m_delayspinbox->value()== 0) {
-           m_hidewindow->setDisabled(true);
-            m_hidewindow->setChecked(false);
-        } else {
-            m_hidewindow->setDisabled(false);
-        }
-}
+    m_delayspinbox = new QSpinBox(this);
 
-void FormScreenshots::setBackground(QPixmap pix)
-{
-//    m_background=pix;
-//    QGraphicsPixmapItem*item=m_scene->addPixmap(pix);
-
-//    m_height=pix.height();
-//    m_width=pix.width();
-
+    if (m_delayspinbox->value()== 0)
+    {
+       m_hidewindow->setDisabled(true);
+       m_hidewindow->setChecked(false);
+    }
+    else
+    {
+        m_hidewindow->setDisabled(false);
+    }
 }
 
 // Load data

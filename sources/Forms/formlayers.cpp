@@ -83,12 +83,26 @@ void FormLayers::ActionUp()
 {
     qDebug() << "FormLayers::ActionUp()";
 
+    if (!m_scene)
+        return;
+
+    qreal zValue = m_scene->items(Qt::AscendingOrder)[m_lineselected]->zValue() + 0.1;
+    m_scene->items(Qt::AscendingOrder)[m_lineselected]->setZValue(zValue);
+
+    ShowLayers();
 }
 
 void FormLayers::ActionDown()
 {
     qDebug() << "FormLayers::ActionDown()";
 
+    if (!m_scene)
+        return;
+
+    qreal zValue = m_scene->items(Qt::AscendingOrder)[m_lineselected]->zValue() - 0.1;
+    m_scene->items(Qt::AscendingOrder)[m_lineselected]->setZValue(zValue);
+
+    ShowLayers();
 }
 
 void FormLayers::ActionAdd()
