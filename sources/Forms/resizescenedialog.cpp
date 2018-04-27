@@ -91,6 +91,61 @@ ResizeSceneDialog::~ResizeSceneDialog()
     delete ui;
 }
 
+void ResizeSceneDialog::detectFormat()
+{
+    QString detectedFormat="None";
+    int Ax,Ay;
+    Ax=841 * m_dpix/25.4;
+    Ay=1189 * m_dpiy/25.4;
+    //if(m_width >= Ax-3 && m_width <= Ax+3 && m_height >= Ay-3 && m_height <= Ay+3){
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A0";
+    }
+    Ax=594 * m_dpix/25.4;
+    Ay=841 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A1";
+    }
+    Ax=420 * m_dpix/25.4;
+    Ay=594 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A2";
+    }
+    Ax=297 * m_dpix/25.4;
+    Ay=420 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A3";
+    }
+    Ax=210 * m_dpix/25.4;
+    Ay=297 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A4";
+    }
+    Ax=148 * m_dpix/25.4;
+    Ay=210 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A5";
+    }
+    Ax=105 * m_dpix/25.4;
+    Ay=148 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A6";
+    }
+    Ax=74 * m_dpix/25.4;
+    Ay=105 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A7";
+    }
+    Ax=52 * m_dpix/25.4;
+    Ay=74 * m_dpiy/25.4;
+    if(m_width==Ax && m_height==Ay){
+        detectedFormat="A8";
+    }
+    if(m_format=="None"){
+        m_format=detectedFormat;
+    }
+}
+
 // Slots
 // -----
 
@@ -189,6 +244,10 @@ void ResizeSceneDialog::valuesChanged()
         }
         m_format="None";
         ui->comboBox_format->setCurrentText("None");
+        detectFormat();
+        if(m_format!="None"){
+            ui->comboBox_format->setCurrentText(m_format);
+        }
     }
 }
 

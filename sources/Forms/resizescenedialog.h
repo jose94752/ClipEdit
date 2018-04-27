@@ -34,6 +34,7 @@ class ResizeSceneDialog
 public:
     explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**,QColor);
     ~ResizeSceneDialog();
+    void detectFormat();
 
 public slots:
     void sizeChanged();
