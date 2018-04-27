@@ -257,7 +257,7 @@
      <item>
       <widget class="QPushButton" name="pushButtonCreateBullet">
        <property name="text">
-        <string>Go</string>
+        <string>Add</string>
        </property>
       </widget>
      </item>

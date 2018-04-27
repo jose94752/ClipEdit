@@ -291,7 +291,7 @@
      <item>
       <widget class="QPushButton" name="qGo">
        <property name="text">
-        <string>Go</string>
+        <string>Add</string>
        </property>
       </widget>
      </item>
