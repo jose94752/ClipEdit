@@ -114,7 +114,6 @@ void MainWindow::buildForms()
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formCharts, SIGNAL(FormCreateChart(const GraphsInfo&)), this, SLOT(slotGraphs(const GraphsInfo&)));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
-    connect(m_formCharts, SIGNAL(FormCreateChart(const GraphsInfo&)), this, SLOT(slotGraphs(const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Remove all useless pages
@@ -295,7 +294,6 @@ void MainWindow::slotTextPicture()
 
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
-    qDebug () << "mainWindow Slot Graphs";
 
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
@@ -307,11 +305,18 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
 //    g->setInfos(infos);
 //    m_scene.addItem(g);
 
-    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-    g->setInfos(infos);
+    //do not add graphs if no points
+    int nbPoints = infos.m_Arcs.size();
+    if( nbPoints > 0 )
+    {
+        qDebug() << "added graph mainWindow Slot Graphs";
 
-    m_scene.addItem(g);
-    nbSceneElts++;
+        GraphsGraphicsItem *g = new GraphsGraphicsItem();
+        g->setInfos(infos);
+
+        m_scene.addItem(g);
+        nbSceneElts++;
+     }
 }
 
 
