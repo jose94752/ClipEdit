@@ -40,9 +40,9 @@
    <item row="1" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QRadioButton" name="radioButtonWholecapture">
+      <widget class="QRadioButton" name="radioButtonDeskcapture">
        <property name="text">
-        <string>Whole screen capture</string>
+        <string>Desk screen capture</string>
        </property>
       </widget>
      </item>
@@ -175,6 +175,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonCapture">
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{
+	color: yellow;
+	backgroud-color:  #27a9c3
+	border-whidth: 0px
+	border-raduis: 3px
+}</string>
+       </property>
        <property name="text">
         <string>Go</string>
        </property>

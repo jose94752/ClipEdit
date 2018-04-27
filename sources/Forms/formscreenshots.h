@@ -133,7 +133,7 @@ private:
         /// \brief m_region The QRect class defines a rectangle
         ///  in the chosen region  in the plane using integer precision.
         ///
-        QRect m_area;
+        QRectF m_area;
         ///
         /// \brief m_captureTimer is an instance of class provides repetitive and single-shot timers.
         ///
@@ -159,7 +159,7 @@ private:
         /// \brief CaptureDesktop : this method take all Desktop
         ///
         void CaptureDesktop();
-        void CaptureArea(bool val, QRect a);
+        void CaptureArea(bool val, QRectF a);
         void updatehide();
 
      signals:

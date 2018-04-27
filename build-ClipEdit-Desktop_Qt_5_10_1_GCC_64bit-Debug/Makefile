@@ -300,6 +300,7 @@ DIST          = ../../Qt/5.10.1/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/spec_post.prf \
+		../sources/.qmake.stash \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -379,7 +380,7 @@ TARGET        = ClipEdit
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_dialogfilealreadyexists.h ui_dialogsave.h ui_formarrows.h ui_formcharts.h ui_formlayers.h ui_formnumberedbullets.h ui_formpictures.h ui_formscreenshots.h ui_formtextboxes.h ui_resizescenedialog.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_dialogfilealreadyexists.h ui_dialogsave.h ui_formarrows.h ui_formcharts.h ui_formlayers.h ui_formnumberedbullets.h ui_formpictures.h ui_formscreenshots.h ui_formtextboxes.h ui_resizescenedialog.h ui_preferencesdialog.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../sources/ClipEdit.pro ../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf ../../Qt/5.10.1/gcc_64/mkspecs/features/spec_pre.prf \
@@ -545,6 +546,7 @@ Makefile: ../sources/ClipEdit.pro ../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake
 		../../Qt/5.10.1/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.10.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -735,6 +737,7 @@ Makefile: ../sources/ClipEdit.pro ../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake
 ../../Qt/5.10.1/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.10.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.10.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.10.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.10.1/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.10.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -779,7 +782,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../../Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../sources/mainwindow.h ../sources/Forms/dialogfilealreadyexists.h ../sources/Forms/dialogsave.h ../sources/Forms/formarrows.h ../sources/Forms/formcharts.h ../sources/Forms/formcliparts.h ../sources/Forms/formlayers.h ../sources/Forms/formnumberedbullets.h ../sources/Forms/formpictures.h ../sources/Forms/formscreenshots.h ../sources/Forms/formtextboxes.h ../sources/Forms/resizescenedialog.h ../sources/Classes/colorbutton.h ../sources/Classes/layers.h ../sources/Classes/save.h ../sources/Classes/cpn_img_button.h ../sources/Items/basegraphicitem.h ../sources/Items/arrowsgraphicsitem.h ../sources/Items/graphsgraphicsitem.h ../sources/Items/itemhandler.h ../sources/Items/numberedbulletgraphicitem.h ../sources/Items/picturesgraphicsitem.h ../sources/Items/screenshotsgraphicsitem.h ../sources/Items/textboxitem.h ../sources/graphicsview.h ../sources/Forms/baseform.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../sources/main.cpp ../sources/mainwindow.cpp ../sources/Forms/dialogfilealreadyexists.cpp ../sources/Forms/dialogsave.cpp ../sources/Forms/formarrows.cpp ../sources/Forms/formcharts.cpp ../sources/Forms/formcliparts.cpp ../sources/Forms/formlayers.cpp ../sources/Forms/formnumberedbullets.cpp ../sources/Forms/formpictures.cpp ../sources/Forms/formscreenshots.cpp ../sources/Forms/formtextboxes.cpp ../sources/Forms/resizescenedialog.cpp ../sources/Classes/colorbutton.cpp ../sources/Classes/layers.cpp ../sources/Classes/save.cpp ../sources/Classes/cpn_img_button.cpp ../sources/Items/basegraphicitem.cpp ../sources/Items/arrowsgraphicsitem.cpp ../sources/Items/graphsgraphicsitem.cpp ../sources/Items/itemhandler.cpp ../sources/Items/numberedbulletgraphicitem.cpp ../sources/Items/picturesgraphicsitem.cpp ../sources/Items/screenshotsgraphicsitem.cpp ../sources/Items/textboxitem.cpp ../sources/graphicsview.cpp ../sources/Forms/baseform.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../sources/mainwindow.ui ../sources/Forms/dialogfilealreadyexists.ui ../sources/Forms/dialogsave.ui ../sources/Forms/formarrows.ui ../sources/Forms/formcharts.ui ../sources/Forms/formlayers.ui ../sources/Forms/formnumberedbullets.ui ../sources/Forms/formpictures.ui ../sources/Forms/formscreenshots.ui ../sources/Forms/formtextboxes.ui ../sources/Forms/resizescenedialog.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../sources/mainwindow.ui ../sources/Forms/dialogfilealreadyexists.ui ../sources/Forms/dialogsave.ui ../sources/Forms/formarrows.ui ../sources/Forms/formcharts.ui ../sources/Forms/formlayers.ui ../sources/Forms/formnumberedbullets.ui ../sources/Forms/formpictures.ui ../sources/Forms/formscreenshots.ui ../sources/Forms/formtextboxes.ui ../sources/Forms/resizescenedialog.ui ../sources/preferencesdialog.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -2742,9 +2745,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_dialogfilealreadyexists.h ui_dialogsave.h ui_formarrows.h ui_formcharts.h ui_formlayers.h ui_formnumberedbullets.h ui_formpictures.h ui_formscreenshots.h ui_formtextboxes.h ui_resizescenedialog.h
+compiler_uic_make_all: ui_mainwindow.h ui_dialogfilealreadyexists.h ui_dialogsave.h ui_formarrows.h ui_formcharts.h ui_formlayers.h ui_formnumberedbullets.h ui_formpictures.h ui_formscreenshots.h ui_formtextboxes.h ui_resizescenedialog.h ui_preferencesdialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_dialogfilealreadyexists.h ui_dialogsave.h ui_formarrows.h ui_formcharts.h ui_formlayers.h ui_formnumberedbullets.h ui_formpictures.h ui_formscreenshots.h ui_formtextboxes.h ui_resizescenedialog.h
+	-$(DEL_FILE) ui_mainwindow.h ui_dialogfilealreadyexists.h ui_dialogsave.h ui_formarrows.h ui_formcharts.h ui_formlayers.h ui_formnumberedbullets.h ui_formpictures.h ui_formscreenshots.h ui_formtextboxes.h ui_resizescenedialog.h ui_preferencesdialog.h
 ui_mainwindow.h: ../sources/mainwindow.ui \
 		../../Qt/5.10.1/gcc_64/bin/uic \
 		../sources/graphicsview.h \
@@ -3447,6 +3450,10 @@ ui_formtextboxes.h: ../sources/Forms/formtextboxes.ui \
 ui_resizescenedialog.h: ../sources/Forms/resizescenedialog.ui \
 		../../Qt/5.10.1/gcc_64/bin/uic
 	/home/formation/Qt/5.10.1/gcc_64/bin/uic ../sources/Forms/resizescenedialog.ui -o ui_resizescenedialog.h
+
+ui_preferencesdialog.h: ../sources/preferencesdialog.ui \
+		../../Qt/5.10.1/gcc_64/bin/uic
+	/home/formation/Qt/5.10.1/gcc_64/bin/uic ../sources/preferencesdialog.ui -o ui_preferencesdialog.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -4151,6 +4158,19 @@ mainwindow.o: ../sources/mainwindow.cpp ../../Qt/5.10.1/gcc_64/include/QtCore/QD
 		../../Qt/5.10.1/gcc_64/include/QtGui/QFontMetrics \
 		../sources/Classes/layers.h \
 		ui_mainwindow.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QMenu \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QMenuBar \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSplitter \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QStackedWidget \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QStatusBar \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QToolBar \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../sources/graphicsview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		../sources/Classes/save.h \
 		../../Qt/5.10.1/gcc_64/include/QtXml/QDomElement \
 		../../Qt/5.10.1/gcc_64/include/QtXml/qdom.h \
@@ -4165,7 +4185,6 @@ mainwindow.o: ../sources/mainwindow.cpp ../../Qt/5.10.1/gcc_64/include/QtCore/QD
 		../sources/Forms/dialogfilealreadyexists.h \
 		../sources/Forms/dialogsave.h \
 		../sources/Items/screenshotsgraphicsitem.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QDesktopWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../sources/mainwindow.cpp
 
@@ -4274,7 +4293,50 @@ dialogfilealreadyexists.o: ../sources/Forms/dialogfilealreadyexists.cpp ../sourc
 		../../Qt/5.10.1/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_dialogfilealreadyexists.h
+		ui_dialogfilealreadyexists.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogfilealreadyexists.o ../sources/Forms/dialogfilealreadyexists.cpp
 
 dialogsave.o: ../sources/Forms/dialogsave.cpp ../../Qt/5.10.1/gcc_64/include/QtWidgets/QFileDialog \
@@ -4390,6 +4452,50 @@ dialogsave.o: ../sources/Forms/dialogsave.cpp ../../Qt/5.10.1/gcc_64/include/QtW
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsItem \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		ui_dialogsave.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QWidget \
 		../sources/Classes/save.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QString \
 		../../Qt/5.10.1/gcc_64/include/QtXml/QDomElement \
@@ -4402,15 +4508,12 @@ dialogsave.o: ../sources/Forms/dialogsave.cpp ../../Qt/5.10.1/gcc_64/include/QtW
 		../sources/mainwindow.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qmainwindow.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QMap \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QRectF \
 		../sources/Forms/formarrows.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QColor \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QPolygonF \
 		../sources/Forms/baseform.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/QWidget \
 		../sources/Items/basegraphicitem.h \
 		../sources/Forms/formcharts.h \
 		../sources/Items/graphsgraphicsitem.h \
@@ -4418,9 +4521,6 @@ dialogsave.o: ../sources/Forms/dialogsave.cpp ../../Qt/5.10.1/gcc_64/include/QtW
 		../../Qt/5.10.1/gcc_64/include/QtCore/QVector \
 		../sources/Forms/formlayers.h \
 		../sources/Forms/formnumberedbullets.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QToolButton \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtoolbutton.h \
 		../sources/Forms/formpictures.h \
@@ -4428,19 +4528,13 @@ dialogsave.o: ../sources/Forms/dialogsave.cpp ../../Qt/5.10.1/gcc_64/include/QtW
 		../../Qt/5.10.1/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGroupBox \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgroupbox.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpinBox \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qspinbox.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
-		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QRadioButton \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qradiobutton.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcheckbox.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QCursor \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QPointF \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QPainter \
@@ -4573,6 +4667,62 @@ formarrows.o: ../sources/Forms/formarrows.cpp ../../Qt/5.10.1/gcc_64/include/QtC
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsItem \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		ui_formarrows.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFormLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qformlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QRadioButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpacerItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../sources/Classes/colorbutton.h \
 		../sources/Items/arrowsgraphicsitem.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QRectF \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QPainter \
@@ -4693,7 +4843,68 @@ formcharts.o: ../sources/Forms/formcharts.cpp ../../Qt/5.10.1/gcc_64/include/QtC
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsItem \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		../sources/Items/graphsgraphicsitem.h \
-		ui_formcharts.h
+		ui_formcharts.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLineEdit \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlineedit.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpacerItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QTableView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtableview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../sources/Classes/colorbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o formcharts.o ../sources/Forms/formcharts.cpp
 
 formcliparts.o: ../sources/Forms/formcliparts.cpp ../sources/Forms/formcliparts.h \
@@ -5125,6 +5336,59 @@ formnumberedbullets.o: ../sources/Forms/formnumberedbullets.cpp ../../Qt/5.10.1/
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsItem \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		ui_formnumberedbullets.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFontComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qfontcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qfontdatabase.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFormLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qformlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpacerItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../sources/Classes/colorbutton.h \
 		../sources/Items/numberedbulletgraphicitem.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QFont \
@@ -5253,11 +5517,74 @@ formpictures.o: ../sources/Forms/formpictures.cpp ../../Qt/5.10.1/gcc_64/include
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsItem \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		ui_formpictures.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFontComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qfontcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qfontdatabase.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLineEdit \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlineedit.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSlider \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpacerItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QToolButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtoolbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../sources/Classes/colorbutton.h \
 		../sources/Items/picturesgraphicsitem.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QPainter \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qpainter.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qtextoption.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qpen.h
+		../../Qt/5.10.1/gcc_64/include/QtGui/qpainter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o formpictures.o ../sources/Forms/formpictures.cpp
 
 formscreenshots.o: ../sources/Forms/formscreenshots.cpp ../sources/Forms/formscreenshots.h \
@@ -5398,6 +5725,43 @@ formscreenshots.o: ../sources/Forms/formscreenshots.cpp ../sources/Forms/formscr
 		../sources/Forms/baseform.h \
 		../sources/Items/basegraphicitem.h \
 		ui_formscreenshots.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGridLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpacerItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
 		../sources/Items/screenshotsgraphicsitem.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QRectF \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QTimer \
@@ -5411,13 +5775,6 @@ formscreenshots.o: ../sources/Forms/formscreenshots.cpp ../sources/Forms/formscr
 		../../Qt/5.10.1/gcc_64/include/QtGui/qsurface.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/qsurfaceformat.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QDesktopWidget \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
-		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/QScreen \
 		../../Qt/5.10.1/gcc_64/include/QtGui/qscreen.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QList \
@@ -5429,7 +5786,12 @@ formscreenshots.o: ../sources/Forms/formscreenshots.cpp ../sources/Forms/formscr
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsview.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qscrollarea.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h
+		../../Qt/5.10.1/gcc_64/include/QtCore/QDir \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qdir.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qfileinfo.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFileDialog \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qfiledialog.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o formscreenshots.o ../sources/Forms/formscreenshots.cpp
 
 formtextboxes.o: ../sources/Forms/formtextboxes.cpp ../../Qt/5.10.1/gcc_64/include/QtCore/QDebug \
@@ -5549,11 +5911,77 @@ formtextboxes.o: ../sources/Forms/formtextboxes.cpp ../../Qt/5.10.1/gcc_64/inclu
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsItem \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		ui_formtextboxes.h \
-		../sources/Classes/colorbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFontComboBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qfontcombobox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qfontdatabase.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QFormLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qformlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPlainTextEdit \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qplaintextedit.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtextedit.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextdocument.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qtextlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qglyphrun.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qrawfont.h \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/QPushButton \
 		../../Qt/5.10.1/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpacerItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../sources/Classes/colorbutton.h \
 		../sources/Items/textboxitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o formtextboxes.o ../sources/Forms/formtextboxes.cpp
 
@@ -6446,7 +6874,64 @@ arrowsgraphicsitem.o: ../sources/Items/arrowsgraphicsitem.cpp ../../Qt/5.10.1/gc
 		../../Qt/5.10.1/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.10.1/gcc_64/include/QtGui/qtouchdevice.h \
 		../../Qt/5.10.1/gcc_64/include/QtCore/QRectF \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.10.1/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.10.1/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QMainWindow \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qmainwindow.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QMenu \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qmenu.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QMenuBar \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qmenubar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QSplitter \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qsplitter.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QStackedWidget \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstackedwidget.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QStatusBar \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QToolBar \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qtoolbar.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayout.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		../sources/graphicsview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsRectItem \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/QGraphicsView \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../Qt/5.10.1/gcc_64/include/QtWidgets/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrowsgraphicsitem.o ../sources/Items/arrowsgraphicsitem.cpp
 
 graphsgraphicsitem.o: ../sources/Items/graphsgraphicsitem.cpp ../../Qt/5.10.1/gcc_64/include/QtGui/QPainter \

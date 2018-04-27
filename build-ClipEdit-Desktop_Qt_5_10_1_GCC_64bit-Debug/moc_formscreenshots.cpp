@@ -91,7 +91,7 @@ static const uint qt_meta_data_FormScreenshots[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool, QMetaType::QRect,   11,   12,
+    QMetaType::Void, QMetaType::Bool, QMetaType::QRectF,   11,   12,
     QMetaType::Void,
 
        0        // eod
@@ -110,7 +110,7 @@ void FormScreenshots::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 4: _t->choose_screenshot(); break;
         case 5: _t->snapshot(); break;
         case 6: _t->CaptureDesktop(); break;
-        case 7: _t->CaptureArea((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QRect(*)>(_a[2]))); break;
+        case 7: _t->CaptureArea((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QRectF(*)>(_a[2]))); break;
         case 8: _t->updatehide(); break;
         default: ;
         }

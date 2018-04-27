@@ -34,7 +34,7 @@ public:
     QGridLayout *gridLayout;
     QLabel *labelScreenshots;
     QHBoxLayout *horizontalLayout_2;
-    QRadioButton *radioButtonWholecapture;
+    QRadioButton *radioButtonDeskcapture;
     QSpacerItem *horizontalSpacer_2;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_3;
@@ -79,10 +79,10 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        radioButtonWholecapture = new QRadioButton(FormScreenshots);
-        radioButtonWholecapture->setObjectName(QStringLiteral("radioButtonWholecapture"));
+        radioButtonDeskcapture = new QRadioButton(FormScreenshots);
+        radioButtonDeskcapture->setObjectName(QStringLiteral("radioButtonDeskcapture"));
 
-        horizontalLayout_2->addWidget(radioButtonWholecapture);
+        horizontalLayout_2->addWidget(radioButtonDeskcapture);
 
         horizontalSpacer_2 = new QSpacerItem(148, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -157,6 +157,13 @@ public:
 
         pushButtonCapture = new QPushButton(FormScreenshots);
         pushButtonCapture->setObjectName(QStringLiteral("pushButtonCapture"));
+        pushButtonCapture->setStyleSheet(QLatin1String("QPushButton\n"
+"{\n"
+"	color: yellow;\n"
+"	backgroud-color:  #27a9c3\n"
+"	border-whidth: 0px\n"
+"	border-raduis: 3px\n"
+"}"));
 
         horizontalLayout_3->addWidget(pushButtonCapture);
 
@@ -177,7 +184,7 @@ public:
     {
         FormScreenshots->setWindowTitle(QApplication::translate("FormScreenshots", "Form", nullptr));
         labelScreenshots->setText(QApplication::translate("FormScreenshots", "<html><head/><body><p align=\"center\">Screenshots</p></body></html>", nullptr));
-        radioButtonWholecapture->setText(QApplication::translate("FormScreenshots", "Whole screen capture", nullptr));
+        radioButtonDeskcapture->setText(QApplication::translate("FormScreenshots", "Desk screen capture", nullptr));
         groupBox->setTitle(QApplication::translate("FormScreenshots", "Options", nullptr));
         labelDelay->setText(QApplication::translate("FormScreenshots", "Screenshot delay second", nullptr));
         checkBoxHideWindow->setText(QApplication::translate("FormScreenshots", "Hide this window", nullptr));

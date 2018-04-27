@@ -65,6 +65,9 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
+    //new signals
+    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
+    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
 }
 
 
@@ -340,10 +343,14 @@ void MainWindow::slotArrowsGraphicsItem()
 void MainWindow::setBackground(QPixmap pix)
 {
      //Get screen background.
-    qDebug () << "mainWindow slot of the Screenshot";
+    qDebug () << "msg from the mainWindow slot of the Screenshot";
 
     ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
     m_scene.addItem(sc);
+
+    m_height=pix.height();
+    m_width=pix.width();
+    this->adjustSize();
 
 }
 
