@@ -6,5 +6,7 @@
 - Pictures : crop property
 - TextBoxes : horizontal an vertical margin
 - TextBoxes : vertical centering, top , bottom
+- Scene : Control ++ and Control -- make zoom
+
 
 
