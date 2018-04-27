@@ -27,6 +27,7 @@
 #include "Forms/resizescenedialog.h"
 #include "Forms/dialogfilealreadyexists.h"
 #include "Forms/dialogsave.h"
+#include "Forms/formscreenshots.h"
 #include "Items/picturesgraphicsitem.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/textboxitem.h"
@@ -112,9 +113,8 @@ void MainWindow::buildForms()
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-    connect(m_formCharts, SIGNAL(FormCreateChart(const GraphsInfo&)), this, SLOT(slotGraphs(const GraphsInfo&)));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
-    connect(m_formCharts, SIGNAL(FormCreateChart(const GraphsInfo&)), this, SLOT(slotGraphs(const GraphsInfo&)));
+    connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Remove all useless pages
@@ -216,7 +216,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeScene()
 {
-    ResizeSceneDialog scenedialog(&m_scene, this, &m_borderSceneItem, ui->graphicsView->m_backgroundColor);
+    ResizeSceneDialog scenedialog(&m_scene, this, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false);
     scenedialog.exec();
 }
 
@@ -226,14 +226,13 @@ void MainWindow::slotNew(bool)
         DialogSave dialogSave(this, m_scene.items());
         dialogSave.exec();
     }
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor,true);
     scenedialog.exec();
     QRectF rectf=m_borderSceneItem->rect();
     QBrush brush=m_borderSceneItem->brush();
     m_scene.clear();
     m_borderSceneItem=m_scene.addRect(rectf);
     m_borderSceneItem->setBrush(brush);
-    ui->graphicsView->changeBackgroundColor();
     nbSceneElts=0;
 }
 
@@ -299,7 +298,6 @@ void MainWindow::slotTextPicture()
 
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
-    qDebug () << "mainWindow Slot Graphs";
 
     //m_scene.addItem(new GraphsGraphicsItem());
     //m_scene.addItem(new GraphsGraphicsItem());
@@ -311,11 +309,18 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
 //    g->setInfos(infos);
 //    m_scene.addItem(g);
 
-    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-    g->setInfos(infos);
+    //do not add graphs if no points
+    int nbPoints = infos.m_Arcs.size();
+    if( nbPoints > 0 )
+    {
+        qDebug() << "added graph mainWindow Slot Graphs";
 
-    m_scene.addItem(g);
-    nbSceneElts++;
+        GraphsGraphicsItem *g = new GraphsGraphicsItem();
+        g->setInfos(infos);
+
+        m_scene.addItem(g);
+        nbSceneElts++;
+     }
 }
 
 
@@ -340,13 +345,11 @@ void MainWindow::slotArrowsGraphicsItem()
 
 void MainWindow::setBackground(const QPixmap& pix)
 {
-     //Get screen capture
-
+     //Get screen background.
     qDebug () << "mainWindow slot of the Screenshot";
 
-//    ScreenshotsGraphicsItem  sc = new ScreenshotsGraphicsItem (sc, pix);
-//    m_scene.clear();
-//    m_scene.addItem(sc);
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
+    m_scene.addItem(sc);
 
 }
 
@@ -379,10 +382,6 @@ void MainWindow::itemSelected()
 void MainWindow::slotLayers()
 {
     m_formLayers->setScene(m_scene);
-}
-
-void MainWindow::layerSelected()
-{
 }
 
 void MainWindow::exportView(bool)
@@ -434,6 +433,10 @@ void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
     //save.save();
+    QList<QGraphicsItem*> items =m_scene.items();
+    foreach(QGraphicsItem *item,items){
+        //code
+    }
 }
 
 

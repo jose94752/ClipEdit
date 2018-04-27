@@ -73,22 +73,26 @@ public:
 
 protected:
     ///
-    /// \brief mousePressEvent
+    /// \brief mousePressEvent This event handler, for event event, can be reimplemented
+    ///  in a subclass to receive mouse press events for the widget
     /// \param event
     ///
     void mousePressEvent(QMouseEvent *event);
     ///
-    /// \brief mouseReleaseEvent
+    /// \brief mouseReleaseEvent This event handler, for event event, can be reimplemented
+    /// in a subclass to receive mouse release events for the widget.
     /// \param event
     ///
     void mouseReleaseEvent(QMouseEvent *event);
 
+public slots:
+
+    void choose_screenshot();
 
 private:
         // Ui
         Ui::FormScreenshots *ui;
         QGraphicsScene *m_scene;
-        QPixmap m_background;
 
 
         ///
@@ -157,20 +161,18 @@ private:
         void CaptureDesktop();
         void CaptureArea(bool val, QRect a);
         void updatehide();
-        void setBackground(QPixmap pix);
-
-
 
      signals:
         ///
-        /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
+        /// \brief setBackground : QPixmap class is an off-screen image representation
+        /// that can be used as a paint device.
+        /// \param pix
         ///
-      //  void InsertImageText(QPixmap pix);
+        void setBackground(QPixmap pix);
         ///
         /// \brief dimensionsMade signal
         ///
         void dimensionsMade( bool, QRect );
-        void itemInserted();
         void mousePressEvent();
         void mouseReleaseEvent();
 };

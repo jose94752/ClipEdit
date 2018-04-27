@@ -29,7 +29,8 @@ class ScreenshotsGraphicsItem
 
         // Constructor, destructor
         //explicit ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent = 0);
-         explicit ScreenshotsGraphicsItem(FormScreenshots* ptr,  QGraphicsItem *parent = 0);
+        //explicite means we can't cast it
+         explicit ScreenshotsGraphicsItem(QPixmap pix, QGraphicsItem *parent = 0);
 
 
         // The virtual destructor makes sure that it gets called even if the class
