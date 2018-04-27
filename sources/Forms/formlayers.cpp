@@ -78,7 +78,6 @@ void FormLayers::ActionClicked( int line , int col )
     m_columnSelected = col;
 
     m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
-//    m_itemSelected = m_scene->items(Qt::AscendingOrder)[m_lineSelected];
 
     if (m_columnSelected == 0)
     {
@@ -90,6 +89,8 @@ void FormLayers::ActionClicked( int line , int col )
         {
             m_itemSelected->setVisible(true);
         }
+
+        ShowLayers();
     }
 }
 
@@ -164,7 +165,7 @@ void FormLayers::ShowLayers()
             ui->tableWidgetLayers->setRowCount(row);
 
             // 1ere colonne
-            if (item->isVisible())
+            if (item->isVisible() == true)
             {
                 ui->tableWidgetLayers->setCellWidget(row - 1, 0, Icon(QIcon(":/icons/icons/eye.png")));
             }
