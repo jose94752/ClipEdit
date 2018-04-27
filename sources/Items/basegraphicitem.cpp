@@ -161,6 +161,16 @@ void BaseGraphicItem::setNuLayer(int nuLayer)
     m_nuLayer = nuLayer;
 }
 
+void BaseGraphicItem::getParameters(QSettings *, int)
+{
+
+}
+
+void BaseGraphicItem::setParameters(QSettings *, int)
+{
+
+}
+
 // Handlers
 // --------
 

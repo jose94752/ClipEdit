@@ -93,7 +93,7 @@ class MainWindow
 
         QGraphicsRectItem *m_borderSceneItem;
 
-        int nbSceneElts;
+        //int nbSceneElts;
 
         // Layers
         Layers m_Layers;
