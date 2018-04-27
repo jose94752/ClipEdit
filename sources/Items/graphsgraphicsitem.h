@@ -20,6 +20,8 @@
 
 #include "basegraphicitem.h"
 
+#define BAR     15        //pour les histogrames, la larguer d'une bare et la distance entre deux bares
+#define SPACE   BAR/3
 
 // Defines
 // -------
@@ -39,22 +41,16 @@ public :
     bool m_transparent;
 
     //values for pie and histogram
-    QList<int> m_Arcs;
+    QList<double> m_Arcs;
 
     //values for line
-    QList<QPoint> m_Points;
+    QList<QPointF> m_Points;
 
     QFont m_titleFont;
     QFont m_legendFont;
 
     QList<QString> m_Legends;
     QList<QColor> m_Colors;
-
-
-    QString m_xAxes;
-    QString m_yAxes;
-    //second serie for area
-    //QList<QPoint> m_Points2;
 
 };
 
@@ -81,7 +77,18 @@ class GraphsGraphicsItem : public BaseGraphicItem
         // local variables for drawing
         QRectF m_titleRect;
         QRectF m_legendRect;
-        QRectF m_pictRect;
+
+        QRectF m_pictRect;  //le rectangle a afficher, a l'ecran
+        QRectF m_graphRect; //les coordonnes a afficher
+
+        double m_heightBar;        //pour les histogrames, la larguer d'une bare et la distance entre deux bares
+        double m_heightSpace;
+
+        //values for pie
+        QList< double> m_GraphArcs;
+
+        //values for line and histogram
+        QList<QPointF> m_GraphPoints;
 
         // Drawing
         void drawPie(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
@@ -96,6 +103,18 @@ class GraphsGraphicsItem : public BaseGraphicItem
         void calculRects();
 
         void drawAxis(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+        void calcSizesLine();
+        void calcSizesHisto();
+
+        //pour les lignes et histogrames
+        QPointF transformPoint( const QPointF &pointGraph) const;
+        void transformPointsLine();
+
+        //pour les pies
+        void transformArcsPie();
+
+        void transformPointsHisto();
 };
 
 #endif
