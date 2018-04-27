@@ -106,3 +106,6 @@ FORMS += \
 
 RESOURCES += \
     $${RESOURCE_DIRECTORY}/resources.qrc
+
+DISTFILES += \
+    Bugs.txt
