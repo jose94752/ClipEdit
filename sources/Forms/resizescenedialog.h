@@ -51,6 +51,7 @@ private:
     QGraphicsRectItem **m_borderSceneItem;
     QColor m_backGroundColor;
     static QString m_format;
+    bool m_format_changed;
 };
 
 #endif

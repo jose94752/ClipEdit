@@ -40,6 +40,8 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
 
     m_backGroundColor=v_backgroundColor;
 
+    m_format_changed=false;
+
     // Get monitor dpi
     QDesktopWidget* desktop = QApplication::desktop();
 
@@ -166,29 +168,34 @@ void ResizeSceneDialog::unitChanged(const QString& unit)
 
 void ResizeSceneDialog::valuesChanged()
 {
-    QString unit=ui->comboBoxUnit->currentText();
-    if (unit == "mm"){
-        m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/25.4);
-        m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/25.4);
+    if(!m_format_changed)
+    {
+        QString unit=ui->comboBoxUnit->currentText();
+        if (unit == "mm"){
+            m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/25.4);
+            m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/25.4);
+        }
+        if (unit == "cm"){
+            m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/2.54);
+            m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/2.54);
+        }
+        if (unit == "inch"){
+            m_width=(int)ui->doubleSpinBoxWidth->value()*m_dpix;
+            m_height=(int)ui->doubleSpinBoxHeight->value()*m_dpiy;
+        }
+        if (unit == "px"){
+            m_width=(int)ui->doubleSpinBoxWidth->value();
+            m_height=(int)ui->doubleSpinBoxHeight->value();
+        }
+        m_format="None";
+        ui->comboBox_format->setCurrentText("None");
     }
-    if (unit == "cm"){
-        m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/2.54);
-        m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/2.54);
-    }
-    if (unit == "inch"){
-        m_width=(int)ui->doubleSpinBoxWidth->value()*m_dpix;
-        m_height=(int)ui->doubleSpinBoxHeight->value()*m_dpiy;
-    }
-    if (unit == "px"){
-        m_width=(int)ui->doubleSpinBoxWidth->value();
-        m_height=(int)ui->doubleSpinBoxHeight->value();
-    }
-    m_format="None";
-    ui->comboBox_format->setCurrentText("None");
 }
 
 void ResizeSceneDialog::formatChanged(QString format)
 {
+    m_format_changed=true;
+    QString unit=ui->comboBoxUnit->currentText();
     m_format=format;
     QString v_unit=ui->comboBoxUnit->currentText();
     if(format!="None"){
@@ -228,34 +235,7 @@ void ResizeSceneDialog::formatChanged(QString format)
             m_width = 52 * m_dpix/25.4;
             m_height = 74 * m_dpiy/25.4;
         }
-        int width=m_width;
-        int height=m_height;
-        if (v_unit.isEmpty() || !m_scene)
-            return;
-
-        if (v_unit == "mm"){
-            ui->doubleSpinBoxWidth->setValue(width * 25.4/m_dpix);
-            ui->doubleSpinBoxHeight->setValue(height * 25.4/m_dpiy);
-            ui->doubleSpinBoxWidth->setDecimals(0);
-            ui->doubleSpinBoxHeight->setDecimals(0);
-        }
-        if (v_unit == "cm"){
-            ui->doubleSpinBoxWidth->setValue(width * 2.54/m_dpix);
-            ui->doubleSpinBoxHeight->setValue(height * 2.54/m_dpiy);
-            ui->doubleSpinBoxWidth->setDecimals(1);
-            ui->doubleSpinBoxHeight->setDecimals(1);
-        }
-        if (v_unit == "inch"){
-            ui->doubleSpinBoxWidth->setValue(width/m_dpix);
-            ui->doubleSpinBoxHeight->setValue(height/m_dpiy);
-            ui->doubleSpinBoxWidth->setDecimals(1);
-            ui->doubleSpinBoxHeight->setDecimals(1);
-        }
-        if (v_unit == "px"){
-            ui->doubleSpinBoxWidth->setValue(width);
-            ui->doubleSpinBoxHeight->setValue(height);
-            ui->doubleSpinBoxWidth->setDecimals(0);
-            ui->doubleSpinBoxHeight->setDecimals(0);
-        }
+        unitChanged(unit);
     }
+    m_format_changed=false;
 }
