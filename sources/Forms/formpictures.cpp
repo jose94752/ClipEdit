@@ -32,19 +32,13 @@ FormPictures::FormPictures(QWidget *parent)
 {
     ui->setupUi(this);
 
-      connect (ui->pushButton_ok,            SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
+    connect (ui->pushButton_ok,            SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
 
-      connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
-
-<<<<<<< HEAD
-      connect (ui->toolButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
-      connect (ui->toolButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
-=======
-     // connect (ui->checkBox_pic_black_white, SIGNAL(released()),    this, SLOT(picture_modification()));
+    connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
     connect (ui->pushButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
     connect (ui->pushButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
->>>>>>> 1325108afc461c3fcdc3e5778994d1e9b1ec7e60
+
 
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
@@ -55,10 +49,6 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
-<<<<<<< HEAD
-
-=======
->>>>>>> 1325108afc461c3fcdc3e5778994d1e9b1ec7e60
 }
 
 
