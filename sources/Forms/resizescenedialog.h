@@ -56,6 +56,7 @@ private:
     QColor m_backGroundColor;
     static QString m_format;
     bool m_format_changed;
+    bool m_isNew;
 };
 
 #endif

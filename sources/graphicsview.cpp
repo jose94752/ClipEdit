@@ -35,9 +35,9 @@ void GraphicsView::setGraphicsRectItem(QGraphicsRectItem **v_graphRectItem)
     m_graphRectItem = v_graphRectItem;
 }
 
-void GraphicsView::setNbElts(int *v_nbElts)
+void GraphicsView::setNbElts(int v_nbElts)
 {
-    nbSceneElts=v_nbElts;
+    m_nbSceneElts=v_nbElts;
 }
 
 // Events
@@ -117,7 +117,6 @@ void GraphicsView::clear()
         scene()->setSceneRect(QRectF(0,0,rect.width()+1,rect.height()+1));
         *m_graphRectItem=scene()->addRect(rect);
         (*m_graphRectItem)->setBrush(brush);
-        *nbSceneElts=0;
     }
 }
 

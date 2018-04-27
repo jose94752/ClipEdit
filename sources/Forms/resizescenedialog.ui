@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>198</width>
-    <height>263</height>
+    <width>416</width>
+    <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -108,6 +108,13 @@
       </layout>
      </item>
      <item>
+      <widget class="QPushButton" name="pushButtonSaveTheme">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -124,7 +131,7 @@
  <customwidgets>
   <customwidget>
    <class>ColorButton</class>
-   <extends>QPushButton</extends>
+   <extends>QToolButton</extends>
    <header>Classes/colorbutton.h</header>
   </customwidget>
  </customwidgets>

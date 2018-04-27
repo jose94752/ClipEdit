@@ -32,7 +32,6 @@ class BaseForm
 
         // Load
         virtual void loadFromItem(BaseGraphicItem* item) const = 0;
-
 };
 
 #endif

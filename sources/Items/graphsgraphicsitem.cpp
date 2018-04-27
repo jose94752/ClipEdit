@@ -68,7 +68,7 @@ void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
         this->drawLine(painter, option, widget);
     }
     else
-    if(m_infos.m_type == 2)     //to do
+    if(m_infos.m_type == 2)
     {
        this->drawHisto(painter, option, widget);
     }
@@ -119,6 +119,8 @@ void GraphsGraphicsItem::calcSizesLine()
     }
 
  //   qDebug() << " calcSizesLine tailles" << minx << miny << maxx << maxy;
+    maxy=11*maxy/10;
+    maxx=11*maxx/10;
     m_graphRect = QRectF ( QPointF (minx, miny), QPointF (maxx, maxy));
 }
 
@@ -130,8 +132,7 @@ void GraphsGraphicsItem::calcSizesHisto()
     double miny = 0, maxy = 0;
     double minx = 0, maxx = 0;
 
-    maxx = nbPoints * ( BAR+SPACE );
-
+    maxx = nbPoints*BAR+(nbPoints-1)*SPACE;
     for ( int i=0; i < nbPoints; i++)
     {
         if ( m_infos.m_Points.at(i).y() < miny )
@@ -141,12 +142,13 @@ void GraphsGraphicsItem::calcSizesHisto()
             maxy = m_infos.m_Points.at(i).y();
 
     }
-     m_graphRect = QRectF ( QPointF (minx, miny), QPointF (maxx, maxy));
+    maxy=11*maxy/10;
+    maxx=11*maxx/10;
+    m_graphRect = QRectF ( QPointF (minx, miny), QPointF (maxx, maxy));
 }
 
 
 //QPoint transformPoint( const QPointF &pointGraph) const;
-
 //height y
 //width x
 QPointF GraphsGraphicsItem::transformPoint( const QPointF &pointGraph) const
@@ -162,7 +164,7 @@ QPointF GraphsGraphicsItem::transformPoint( const QPointF &pointGraph) const
  //   double y = translationY + pointGraph.y() * scaleY;
 
     double x = m_pictRect.topLeft().x() + pointGraph.x() * scaleX;
-    double y =  m_pictRect.bottomLeft().y() - pointGraph.y() * scaleY;
+    double y = m_pictRect.bottomLeft().y() - pointGraph.y() * scaleY;
 
 /*
  //debug
@@ -393,52 +395,6 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
 }
 
 
-/*
-void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
-{
-    qDebug() << "Draw Histo";
-
-    calculRects();
-
-    int nbPoints = m_infos.m_Arcs.size();
-    Qt::BrushStyle style = Qt::SolidPattern;
-    if( m_infos.m_transparent)
-    {
-        style = Qt::NoBrush;
-
-    }
-    QBrush brush( m_infos.m_backColor, style);     //Qt::yellow
-
-    painter->setBackground(m_infos.m_backColor);
-    painter->fillRect( m_pictRect, brush);
-
-    int i = 0;
-
-   // int yAxe = pictRect.bottom();
-    int widLine = 10;
-    int space = 10;
-    style = Qt::SolidPattern;
-    for( i = 0; i < nbPoints; i++)
-    {
-
-        QPen pen( m_infos.m_Colors.at(i));
-        pen.setWidth(0);
-        painter->setPen(pen);
-        QBrush brush( m_infos.m_Colors.at(i), style);
-        painter->setBrush(brush);
-        QRect rect( m_pictRect.x()+i*(widLine+space), m_pictRect.bottomLeft().y()- m_infos.m_Arcs.at(i), widLine, m_infos.m_Arcs.at(i) );
-        painter->drawRect(rect);
-    }
-
-    drawTitle(painter, option, widget);
-    drawLegend(painter, option, widget);
-
-    drawAxis(painter, option, widget);
-
-    BaseGraphicItem::paint(painter, option, widget);
-}
-*/
-
 
 void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
@@ -449,7 +405,7 @@ void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphics
     transformPointsHisto( );
     //transformPointsLine( );
 
-    int nbPoints = m_infos.m_Points.size();
+    int nbPoints = m_GraphPoints.size();
     Qt::BrushStyle style = Qt::SolidPattern;
     if( m_infos.m_transparent)
     {
@@ -474,13 +430,10 @@ void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphics
         QBrush brush( m_infos.m_Colors.at(i), style);
         painter->setBrush(brush);
 
-        //QRect rect( m_pictRect.x()+i*(widLine+space), m_pictRect.bottomLeft().y()- m_infos.m_Arcs.at(i), widLine, m_infos.m_Arcs.at(i) );
-        //double x1rect = i*(widLine+space)
-        //QPointF
-        //QRect rect( m_pictRect.x()+i*(widLine+space), m_pictRect.bottomLeft().y()-
-        //           m_infos.m_Arcs.at(i), widLine, m_infos.m_Arcs.at(i) );
-
-        QRect rect;
+        QPointF p1( m_GraphPoints.at(i).x()+i*(m_heightBar+m_heightSpace), m_pictRect.bottomLeft().y());
+        QPointF p2 (m_GraphPoints.at(i).x()+i*(m_heightBar+m_heightSpace)+m_heightBar,
+                    m_GraphPoints.at(i).y() );
+        QRectF rect (p1,p2);
         painter->drawRect(rect);
     }
 
@@ -572,11 +525,66 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
 */
 
    drawTitle(painter, option, widget);
-
    drawAxis(painter, option, widget);
 
    BaseGraphicItem::paint(painter, option, widget);
 }
 
 
+void GraphsGraphicsItem::getParameters( QSettings *s, int itemIndex)
+{
+    //settings->setValue("item"+QString::number(itemIndex)+"/parameterName",vale);
+    QString stritem = "item";
+    QString propr = stritem + QString::number(itemIndex)+ KChartsTitle;
+    s->setValue( propr, m_infos.m_title);
+
+    propr = stritem + QString::number(itemIndex)+ KChartsType;
+    s->setValue( propr, m_infos.m_type);
+
+    propr = stritem + QString::number(itemIndex)+ KChartsWidth;
+    s->setValue( propr, m_infos.m_boundingRect.width() );
+
+    propr = stritem + QString::number(itemIndex)+ KChartsHeight;
+    s->setValue( propr, m_infos.m_boundingRect.height());
+
+    propr = stritem + QString::number(itemIndex)+ KChartsColor;
+    s->setValue( propr, m_infos.m_color.name());
+
+    propr = stritem + QString::number(itemIndex)+ KChartsBackgroundcolor;
+    s->setValue( propr, m_infos.m_backColor.name());
+
+    propr = stritem + QString::number(itemIndex)+ KChartsTransparent;
+    s->setValue( propr, m_infos.m_transparent);
+
+    //to do data
+}
+
+void GraphsGraphicsItem::setParameters( QSettings *s, int itemIndex)
+{
+    GraphsInfo infos;
+    QString stritem = "item";
+    QColor color(Qt::blue), backcolor(Qt::yellow);
+
+    QString propr = stritem + QString::number(itemIndex)+ KChartsTitle;
+    infos.m_title = s->value(propr).toString();
+
+    propr = stritem + QString::number(itemIndex)+ KChartsType;
+    infos.m_type = s->value( propr, 0).toInt();
+
+    propr = stritem + QString::number(itemIndex)+ KChartsWidth;
+    infos.m_boundingRect.setWidth( s->value(propr, 200).toInt() );
+
+    propr = stritem + QString::number(itemIndex)+ KChartsHeight;
+    infos.m_boundingRect.setHeight( s->value(propr, 200).toInt() );
+
+    propr = stritem + QString::number(itemIndex)+ KChartsColor;
+    infos.m_color.setNamedColor( s->value( propr, color).toString() );
+
+    propr = stritem + QString::number(itemIndex)+ KChartsBackgroundcolor;
+    infos.m_backColor.setNamedColor( s->value( propr, color).toString() );
+
+    propr = stritem + QString::number(itemIndex)+ KChartsTransparent;
+    infos.m_transparent = s->value( propr, 1).toBool();
+
+}
 

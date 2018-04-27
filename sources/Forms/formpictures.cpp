@@ -32,17 +32,11 @@ FormPictures::FormPictures(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect (ui->pushButton_ok,         SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
+    connect (ui->toolButton_path,       SIGNAL(pressed()),     this, SLOT(chose_picture()));
+    connect (ui->pushButton_save,       SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
+    connect (ui->pushButton_restore,    SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
 
-
-      connect (ui->pushButton_lg_ok,  SIGNAL(clicked(bool)), this, SLOT(legend_ok(bool)));
-
-      connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
-
-      connect (ui->checkBox_pic_black_white, SIGNAL(released()), this, SLOT(picture_modification()));
-
-
-      connect (ui->spinBox_pic_w, SIGNAL(editingFinished())  , this, SLOT(picture_modification_w()));
-      connect (ui->spinBox_pic_h, SIGNAL(editingFinished())  , this, SLOT(picture_modification_h()));
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
     ui->comboBox_lg_pos->addItem(tr("Right"));
@@ -52,7 +46,6 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
-
 }
 
 
@@ -62,13 +55,11 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &w_h_fixed, char &w_h, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
+void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
 {
     path        = ui->lineEdit_pic_path->text();
     height      = ui->spinBox_pic_h->value();
     width       = ui->spinBox_pic_w->value();
-    w_h_fixed   = ui->checkBox_pic_fx->isChecked();
-    w_h         = w_h1;
     black_white = ui->checkBox_pic_black_white->isChecked();
     opacity     = ui->horizontalSlider_pic_opacity->value();
     lg_txt      = ui->lineEdit_lg_txt->text();
@@ -81,18 +72,11 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
 
 void FormPictures::chose_picture()
 {
-    QString grp     = "m2i_patrol";
-    QString prj     = "clipart_picture";
-    QString grp_prj = grp + "/" + prj;
-
-    QSettings setting;
-
-    QString s_path = setting.value(grp_prj).toString();
-
-    //QSettings(const QString &fileName, Format format, QObject *parent = Q_NULLPTR)
-    //QColor color = settings.value("DataPump/bgcolor").value<QColor>();
 
     QString home_path = QDir::homePath();
+
+    QString s_path = setting.value("path_name").toString();
+    if (s_path != "")  home_path = s_path;
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), home_path, tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
 
@@ -111,40 +95,70 @@ void FormPictures::chose_picture()
 
      ui->lineEdit_pic_path->setText(s);
 
-  qDebug()<<"FORM: picture  changed";
-     emit picture_changed();
-  //    ui->lineEdit_pic_path->setText(" ");
+     setting.setValue("path_name", s);
+
+  qDebug()<<"FORM: picture  changed, path ="  <<s;
+
 }
 
 
-void FormPictures::picture_modification()
-{
-     emit picture_changed();
-}
-
-void FormPictures::picture_modification_w()
-{
-    emit picture_changed();
-    w_h1 = 'w';
-    emit picture_changed_w_h(w_h1);
-
-     qDebug() <<"form  W : w_h:"  <<w_h1  ;
-}
-
-void FormPictures::picture_modification_h()
-{
-    emit picture_changed();
-    w_h1 = 'h';
-    emit picture_changed_w_h(w_h1);
-
-    qDebug() <<" form H : w_h:"  <<w_h1 ;
-}
-
-
-void FormPictures::legend_ok(bool)
-{
+void FormPictures::validation_ok(bool) {
     emit picture_changed();
 }
+
+
+
+void FormPictures::save_settings(bool)
+{
+    s_black_white = ui->checkBox_pic_black_white->isChecked();
+    setting.setValue("FormPictures/black_white", s_black_white);
+
+    s_lg_txt      = ui->lineEdit_lg_txt->text();
+    setting.setValue("FormPictures/text", s_lg_font);
+
+    s_lg_font     = ui->fontComboBox_lg_font->currentFont().family();
+    setting.setValue("FormPictures/font", s_lg_font);
+
+    s_lg_size     = ui->spinBox_lg_size->value();
+    setting.setValue("FormPictures/size", s_lg_size);
+
+    s_lg_color    = ui->toolButton_color->getColor();
+    setting.setValue("FormPictures/color", s_lg_color);
+
+    s_lg_pos      = ui->comboBox_lg_pos->currentText();
+    setting.setValue("FormPictures/position", s_lg_pos);
+
+}
+
+void FormPictures::restore_settings(bool)
+{
+
+
+    s_black_white = setting.value("FormPictures/black_white").toBool();
+    ui->checkBox_pic_black_white->setChecked(s_black_white);
+
+    s_lg_txt   = setting.value("FormPictures/text").toString() ;
+    ui->lineEdit_lg_txt->setText(s_lg_txt);
+
+    s_lg_font  =  setting.value("FormPictures/font").toString() ;
+    ui->fontComboBox_lg_font->setCurrentText(s_lg_font);
+
+    s_lg_size  = setting.value("FormPictures/size").toInt() ;
+    ui->spinBox_lg_size->setValue(s_lg_size);
+
+
+    s_lg_color =   setting.value("FormPictures/color").toString() ;
+    ui->toolButton_color->setColor(s_lg_color);
+
+
+    s_lg_pos   =  setting.value("FormPictures/position").toString() ;
+    ui->comboBox_lg_pos->setCurrentText(s_lg_pos);
+
+
+
+}
+
+
 
 // Load data
 // ---------
@@ -156,5 +170,45 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
         PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
 
         // Load data into the form
+        QFont f = castedItem->getFont();
+
+        ui->lineEdit_pic_path->setText(castedItem->getPath());
+        ui->spinBox_pic_w->setValue(castedItem->getWidth());
+        ui->spinBox_pic_h->setValue(castedItem->getHeight());
+        ui->checkBox_pic_black_white->setChecked(castedItem->isGrayscale());
+        ui->horizontalSlider_pic_opacity->setValue(castedItem->getOpacity());
+        ui->lineEdit_lg_txt->setText(castedItem->getLegend());
+        ui->fontComboBox_lg_font->setCurrentText(f.family());
+        ui->spinBox_lg_size->setValue(f.pointSize());
+        ui->toolButton_color->setColor(castedItem->getFontColor());
+
+        QString pos = castedItem->getPosition();
+        if (pos == "Left") {
+            ui->comboBox_lg_pos->setCurrentIndex(0);
+        }
+        else if (pos == "Right")   {
+            ui->comboBox_lg_pos->setCurrentIndex(1);
+        }
+        else if (pos == "HCenter") {
+            ui->comboBox_lg_pos->setCurrentIndex(2);
+        }
+        else if (pos == "Justify") {
+             ui->comboBox_lg_pos->setCurrentIndex(3);
+        }
+        else if (pos == "Top")     {
+            ui->comboBox_lg_pos->setCurrentIndex(4);
+        }
+        else if (pos == "Bottom")  {
+            ui->comboBox_lg_pos->setCurrentIndex(5);
+        }
+        else if (pos == "VCenter") {
+            ui->comboBox_lg_pos->setCurrentIndex(6);
+        }
+        else if (pos == "Center")  {
+            ui->comboBox_lg_pos->setCurrentIndex(7);
+        }
+
     }
 }
+
+// emit picture_changed();
