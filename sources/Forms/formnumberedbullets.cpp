@@ -32,11 +32,12 @@ void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape,
     from = ui->spinBox_From->value();
     to = ui->spinBox_To->value ();
     taille = ui->spinBox_Size->value();
+    qDebug () << "\tNB::get_info () : taille == " << taille << "\n";
     //QString shape_str;
     shape = ui->comboBox_Shape->currentIndex();
     bulletcolor = ui->ColorButton_BulletColor->getColor();
     numbercolor = ui->ColorBullet_NumberColor->getColor();
-
+    //ui->spinBox_Size->setSpecialValueText("");
     font = ui->fontComboBox->currentFont();
 }
 

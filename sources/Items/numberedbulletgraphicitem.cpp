@@ -30,7 +30,8 @@ void NumberedBulletGraphicItem::paint(QPainter *qpainter, const QStyleOptionGrap
     strnum = QString::number(m_num);
     QTextOption qto;
     qto.setAlignment(Qt::AlignCenter);
-    m_font.setPixelSize(/*m_taille*/m_rect.height());
+    qDebug () << "m_taille == " << m_taille << "\n";
+    m_font.setPixelSize(m_taille /*m_rect.height()*/);
     qpainter->setFont(m_font);
     qpainter->setPen(m_numbercolor);
     qpainter->drawText(m_rect, strnum, qto);
@@ -52,12 +53,8 @@ NumberedBulletGraphicItem::NumberedBulletGraphicItem(int num, shape_e bullet_sha
     eval_width (compwidth);
     eval_height (compheight);
 
-    compwidth *= m_taille;
-    compheight *= m_taille;
-
+    qDebug () << "NB () : m_taille == " << m_taille << "\n";
     int cote = (compwidth < compheight ? compheight:compheight);
-    qDebug () << "NB : compwidth == " << compwidth << "\n";
-    qDebug () << "NB : compheigth == " << compheight << "\n";
     //...setRect
     //QRectF qrect(0, 0, compwidth, compheight);
     QRectF qrect (0, 0, cote, cote);
@@ -66,6 +63,7 @@ NumberedBulletGraphicItem::NumberedBulletGraphicItem(int num, shape_e bullet_sha
     //static QPoint decal (100, 0);
     //setPos()
     //pos.operator +=(decal);
+
 }
 
 void NumberedBulletGraphicItem::eval_height(int& height) {

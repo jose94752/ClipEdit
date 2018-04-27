@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>418</width>
-    <height>442</height>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -164,7 +164,10 @@
                    <number>1</number>
                   </property>
                   <property name="value">
-                   <number>10</number>
+                   <number>12</number>
+                  </property>
+                  <property name="displayIntegerBase">
+                   <number>4</number>
                   </property>
                  </widget>
                 </item>

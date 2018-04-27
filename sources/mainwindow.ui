@@ -97,6 +97,8 @@
     <addaction name="actionScreenshot"/>
     <addaction name="separator"/>
     <addaction name="actionLayers"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferences_2"/>
    </widget>
    <addaction name="menufile"/>
    <addaction name="menuEdit"/>
@@ -343,6 +345,16 @@
    </property>
    <property name="text">
     <string>Set background color</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionPreferences_2">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>
