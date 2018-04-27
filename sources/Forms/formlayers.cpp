@@ -3,7 +3,7 @@
 * File:         formlayers.cpp
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create Layers
+* Brief:        Form to manage Layers
 ================================================
 */
 
@@ -74,20 +74,34 @@ void FormLayers::ActionClicked( int line , int col )
 {
     qDebug() << "FormLayers::ActionClicked()" << line << col;
 
-    m_lineselected=line;
-    m_columnselected= col;
+    m_lineSelected = line;
+    m_columnSelected = col;
 
+    m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
+//    m_itemSelected = m_scene->items(Qt::AscendingOrder)[m_lineSelected];
+
+    if (m_columnSelected == 0)
+    {
+        if (m_itemSelected->isVisible())
+        {
+            m_itemSelected->setVisible(false);
+        }
+        else
+        {
+            m_itemSelected->setVisible(true);
+        }
+    }
 }
 
 void FormLayers::ActionUp()
 {
     qDebug() << "FormLayers::ActionUp()";
 
-    if (!m_scene)
+    if (!m_itemSelected)
         return;
 
-    qreal zValue = m_scene->items(Qt::AscendingOrder)[m_lineselected]->zValue() + 0.1;
-    m_scene->items(Qt::AscendingOrder)[m_lineselected]->setZValue(zValue);
+    qreal zValue = m_itemSelected->zValue() + 0.1;
+    m_itemSelected->setZValue(zValue);
 
     ShowLayers();
 }
@@ -96,11 +110,11 @@ void FormLayers::ActionDown()
 {
     qDebug() << "FormLayers::ActionDown()";
 
-    if (!m_scene)
+    if (!m_itemSelected)
         return;
 
-    qreal zValue = m_scene->items(Qt::AscendingOrder)[m_lineselected]->zValue() - 0.1;
-    m_scene->items(Qt::AscendingOrder)[m_lineselected]->setZValue(zValue);
+    qreal zValue = m_itemSelected->zValue() - 0.1;
+    m_itemSelected->setZValue(zValue);
 
     ShowLayers();
 }
@@ -109,11 +123,11 @@ void FormLayers::ActionAdd()
 {
     qDebug() << "FormLayers::ActionAdd()";
 
-    if (!m_scene)
+    if (!m_itemSelected)
         return;
 
-//    m_scene->addItem(new BaseGraphicItem(m_scene->items(Qt::AscendingOrder)[m_lineselected]));
-//    m_scene->addItem(new QGraphicsItem(m_scene->items(Qt::AscendingOrder)[m_lineselected]));
+//    m_scene->addItem(new BaseGraphicItem(m_itemSelected));
+//    m_scene->addItem(new QGraphicsItem(m_itemSelected));
 
     ShowLayers();
 }
@@ -122,11 +136,11 @@ void FormLayers::ActionSupp()
 {
     qDebug() << "FormLayers::ActionSupp()";
 
-    if (!m_scene)
+    if (!m_itemSelected)
         return;
 
-    m_scene->removeItem(m_scene->items(Qt::AscendingOrder)[m_lineselected]);
-    ui->tableWidgetLayers->removeRow(m_lineselected);
+    m_scene->removeItem(m_itemSelected);
+    ui->tableWidgetLayers->removeRow(m_lineSelected);
 
     ShowLayers();
 }
@@ -150,7 +164,14 @@ void FormLayers::ShowLayers()
             ui->tableWidgetLayers->setRowCount(row);
 
             // 1ere colonne
-            ui->tableWidgetLayers->setCellWidget(row - 1, 0, Icon(QIcon(":/icons/icons/eye.png")));
+            if (item->isVisible())
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 0, Icon(QIcon(":/icons/icons/eye.png")));
+            }
+            else
+            {
+                ui->tableWidgetLayers->setCellWidget(row - 1, 0, new QLabel("    "));
+            }
 
             // 2eme colonne
             switch (item->type())
@@ -191,16 +212,10 @@ void FormLayers::ShowLayers()
 //            ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
 //            ui->tableWidgetLayers->setCellWidget(row-1,2,IconReduced(item->getImage(m_scene,item)));
 
-            ui->tableWidgetLayers->setCellWidget(row-1,2,new QLabel("Label itemx")); // item->getName()));
+            ui->tableWidgetLayers->setCellWidget(row-1,2,new QLabel("Label itemx"+QString::number(row))); // item->getName()));
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
     }
-}
-
-void FormLayers::updateLayers()
-{
-    m_zvalue++;
-    ShowLayers();
 }
 
 // Getters
@@ -263,76 +278,4 @@ void FormLayers::contextMenu(const QPoint &pos)
 //#endif
 }
 
-//void FormLayers::on_buttonUp_clicked()
-//{
-//    qDebug() << "FormLayers::on_buttonUp_clicked()";
 
-//    if (m_scene->selectedItems().isEmpty())
-//        return;
-
-//    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
-//    if (!selectedItem)
-//        return;
-
-//    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
-
-//    qreal zValue = 0;
-//    foreach (QGraphicsItem *item, overlapItems) {
-//        if (item->zValue() >= zValue && item->type() >= BaseGraphicItem::CustomTypes::TextBoxGraphicsItem)
-//            zValue = item->zValue() + 0.1;
-//    }
-//    selectedItem->setZValue(zValue);
-
-//    ShowLayers();
-//}
-
-//void FormLayers::on_pushDown_clicked()
-//{
-//    if (m_scene->selectedItems().isEmpty())
-//        return;
-
-//    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
-//    if (!selectedItem)
-//        return;
-
-//    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
-
-//    qreal zValue = 0;
-//    foreach (QGraphicsItem *item, overlapItems) {
-//        if (item->zValue() <= zValue && item->type() >= BaseGraphicItem::CustomTypes::TextBoxGraphicsItem)
-//            zValue = item->zValue() - 0.1;
-//    }
-//    selectedItem->setZValue(zValue);
-
-//    ShowLayers();
-//}
-
-//void FormLayers::on_pushSupp_clicked()
-//{
-//    if (m_scene->selectedItems().isEmpty())
-//        return;
-
-//    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
-//    if (!selectedItem)
-//        return;
-
-//    // selectedItem->setVisible(false);
-
-//    m_scene->removeItem(selectedItem);
-
-//    ShowLayers();
-//}
-
-//void FormLayers::on_pushAdd_clicked()
-//{
-//    if (m_scene->selectedItems().isEmpty())
-//        return;
-
-//    QGraphicsItem *selectedItem = m_scene->selectedItems().first();
-//    if (!selectedItem)
-//        return;
-
-//    m_scene->addItem(selectedItem);
-
-//    ShowLayers();
-//}

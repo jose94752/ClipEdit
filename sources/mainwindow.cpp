@@ -374,10 +374,6 @@ void MainWindow::slotLayers()
     m_formLayers->setScene(m_scene);
 }
 
-void MainWindow::layerSelected()
-{
-}
-
 void MainWindow::exportView(bool)
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export as image"), "output.png" , tr("Image File (*.png)"));

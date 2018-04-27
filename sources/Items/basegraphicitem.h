@@ -125,8 +125,6 @@ class BaseGraphicItem
         const QRectF& rect() const;
         void setRect(const QRectF& rect);
 
-        void setNuLayer(int nuLayer);
-
     protected:
 
         // Events
@@ -150,8 +148,6 @@ class BaseGraphicItem
         bool m_drawBoundingRect;
 
     private:
-
-        int m_nuLayer;
 
         ItemHandler* m_current;
 };
