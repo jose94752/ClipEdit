@@ -12,6 +12,8 @@
 
 #include "mainwindow.h"
 #include <QApplication>
+#include <QDesktopWidget>
+#include <QSettings>
 
 // Main
 // ----
@@ -20,11 +22,16 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // Defining app name and version
+    // App properties
     QApplication::setApplicationName("ClipEdit");
+    QApplication::setOrganizationDomain("ClipEdit");
     QApplication::setApplicationVersion("1.0");
     QApplication::setWindowIcon(QIcon(":/icons/icons/icon-clipedit.ico"));
 
+    // Ini as default settings format
+    QSettings::setDefaultFormat(QSettings::IniFormat);
+
+    // Main window building and loop
     MainWindow w;
     w.show();
 

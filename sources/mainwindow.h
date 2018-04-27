@@ -17,9 +17,10 @@
 #include <QMap>
 #include <QGraphicsScene>
 
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
+//#include <QtCharts/QChartView>
+//#include <QtCharts/QLineSeries>
+//#include <QtCharts/QAreaSeries>
+#include <QRectF>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -30,6 +31,9 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
+#include "Items/basegraphicitem.h"
+
+class QToolButton;
 
 // Forward declaration
 namespace Ui
@@ -52,8 +56,7 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-
-private:
+    private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -72,24 +75,33 @@ private:
         Ui::MainWindow* ui;
 
         // Forms
-        FormArrows          m_formArrows;
-        FormCharts          m_formCharts;
-        FormCliparts        m_formCliparts;
-        FormLayers          m_formLayers;
-        FormNumberedBullets m_formBullets;
-        FormPictures        m_formPictures;
-        FormScreenshots     m_formScreenshots;
-        FormTextBoxes       m_formTextboxes;
+        FormArrows*          m_formArrows;
+        FormCharts*          m_formCharts;
+        FormCliparts*        m_formCliparts;
+        FormLayers*          m_formLayers;
+        FormNumberedBullets* m_formBullets;
+        FormPictures*        m_formPictures;
+        FormScreenshots*     m_formScreenshots;
+        FormTextBoxes*       m_formTextboxes;
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
+        QMap<BaseGraphicItem::CustomTypes, BaseForm*> m_itemForms;
 
         // Scene
         QGraphicsScene m_scene;
+
+        QGraphicsRectItem *m_borderSceneItem;
+
+        //int nbSceneElts;
+
+        // Zoom
+        QSpinBox* m_spinBoxZoom;
 
         // Building
         void init();
         void buildMenu();
         void buildToolBar();
+        void buildForms();
         void buildView();
 
     private slots:
@@ -100,17 +112,23 @@ private:
         void openFile(bool);
         void exportView(bool);
         void actionClicked(bool);
-        void resizeTold(bool);
+        void resizeScene();
         void slotNew(bool);
         void showAboutDialog(bool);
 
-        // Item insertions
+        // Items
         void slotNumberedBullets();
-        void slotTextBoxes(bool);
+        void slotTextBoxes();
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
-        void slotArrowsGraphicsItem();        
+        void slotArrowsGraphicsItem();
 
+        //
+        void setBackground(const QPixmap& pix);
+
+        void itemSelected();
+
+        // Layers
         void slotLayers();
 };
 

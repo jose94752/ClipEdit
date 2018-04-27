@@ -20,7 +20,13 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QGraphicsView" name="graphicsView">
+      <widget class="GraphicsView" name="graphicsView">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
          <width>400</width>
@@ -67,6 +73,9 @@
      <string>Edit</string>
     </property>
     <addaction name="actionResize"/>
+    <addaction name="actionSetBackgroundColor"/>
+    <addaction name="actionContentToView"/>
+    <addaction name="actionClear"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -88,6 +97,7 @@
     <addaction name="actionScreenshot"/>
     <addaction name="separator"/>
     <addaction name="actionLayers"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menufile"/>
    <addaction name="menuEdit"/>
@@ -141,6 +151,9 @@
    <property name="text">
     <string>Export as</string>
    </property>
+   <property name="toolTip">
+    <string>Export the view as a file</string>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="icon">
@@ -149,6 +162,9 @@
    </property>
    <property name="text">
     <string>About</string>
+   </property>
+   <property name="toolTip">
+    <string>Show about dialog</string>
    </property>
   </action>
   <action name="actionArrow">
@@ -239,6 +255,9 @@
    <property name="text">
     <string>Quit</string>
    </property>
+   <property name="toolTip">
+    <string>Quit ClipEdit</string>
+   </property>
   </action>
   <action name="actionSaveAs">
    <property name="icon">
@@ -276,7 +295,10 @@
      <normaloff>:/icons/icons/resize-icon.png</normaloff>:/icons/icons/resize-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Resize view</string>
+    <string>Resize scene</string>
+   </property>
+   <property name="toolTip">
+    <string>Resize the scene</string>
    </property>
   </action>
   <action name="actionNew">
@@ -287,9 +309,62 @@
    <property name="text">
     <string>New</string>
    </property>
+   <property name="toolTip">
+    <string>Create a new document</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/clear-icon.png</normaloff>:/icons/icons/clear-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete all items from the scene</string>
+   </property>
+  </action>
+  <action name="actionContentToView">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/fit-in-view-icon.png</normaloff>:/icons/icons/fit-in-view-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Content to view</string>
+   </property>
+   <property name="toolTip">
+    <string>Scale the scene to show all items</string>
+   </property>
+  </action>
+  <action name="actionSetBackgroundColor">
+   <property name="icon">
+    <iconset resource="resources/resources.qrc">
+     <normaloff>:/icons/icons/background-color-icon.png</normaloff>:/icons/icons/background-color-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Set background color</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionPreferences_2">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>graphicsview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources/resources.qrc"/>
  </resources>

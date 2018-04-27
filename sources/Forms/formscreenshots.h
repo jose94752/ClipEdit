@@ -24,12 +24,14 @@
 #include<QLabel>
 #include<QPointF>
 #include<QGraphicsPixmapItem>
-#include<QMap>
 #include<QPainter>
 #include<QGraphicsItem>
 #include<exception>
 #include<QMouseEvent>
 #include <QGraphicsScene>
+#include<QRect>
+
+#include "baseform.h"
 
 
 // Forward Declaration
@@ -44,7 +46,7 @@ namespace Ui
 /// of two types: WholeScreenShot and region
 ///
 
-class FormScreenshots :   public QWidget
+class FormScreenshots :   public BaseForm
 {
     Q_OBJECT
 
@@ -52,7 +54,7 @@ public:
 ///
 /// \brief The TypeCapture enum : enum with the type of capture
 ///
-    enum TypeCapture { WholeScreen, Region };
+    enum TypeCapture { Desktop, Area };
 
  ///
  /// \brief FormScreenshots : constructor
@@ -65,48 +67,42 @@ public:
 
         ~FormScreenshots();
 
+
+    // Load data
+    void loadFromItem(BaseGraphicItem* item) const;
+
 protected:
-//    ///
-//    /// \brief resizeEvent this method function is reimplemented to receive
-//    /// the resize events dispatched to the widget.
-//    /// \param event
-//    ///
-//    void resizeEvent(QResizeEvent *event) override;
     ///
-    /// \brief mousePressEvent
+    /// \brief mousePressEvent This event handler, for event event, can be reimplemented
+    ///  in a subclass to receive mouse press events for the widget
     /// \param event
     ///
     void mousePressEvent(QMouseEvent *event);
     ///
-    /// \brief mouseMoveEvent
-    /// \param event
-    ///
-    void mouseMoveEvent(QMouseEvent *event) ;
-    ///
-    /// \brief mouseReleaseEvent
+    /// \brief mouseReleaseEvent This event handler, for event event, can be reimplemented
+    /// in a subclass to receive mouse release events for the widget.
     /// \param event
     ///
     void mouseReleaseEvent(QMouseEvent *event);
 
+public slots:
+
+    void choose_screenshot();
 
 private:
         // Ui
         Ui::FormScreenshots *ui;
-        //QGraphicsScene *scene;
+        QGraphicsScene *m_scene;
+
+
         ///
-        /// \brief onMouseEvent: method indicating the event involved.
-        ///
-        //void onMouseEvent();
-        int x;
-        int y;
-        ///
-        /// \brief m_typecapture WholeScreen and window.
+        /// \brief m_typecapture Desktop and window.
         ///
         TypeCapture m_typecapture;
         ///
         /// \brief m_pixmap : the pixmap of the window screenshoted.
         ///
-        QPixmap m_pixmap;
+        QPixmap m_pix;
         ///
         /// \brief m_formscreenshot is used to display the rectangle region drawed on mouse clicked
         ///
@@ -137,41 +133,46 @@ private:
         /// \brief m_region The QRect class defines a rectangle
         ///  in the chosen region  in the plane using integer precision.
         ///
-        QRect m_region;
+        QRect m_area;
+        ///
+        /// \brief m_captureTimer is an instance of class provides repetitive and single-shot timers.
+        ///
+        QTimer  *m_captureTimer;
 
         ///
         /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
         ///
-        QPoint m_point0;
-        QPoint m_point1;
+        QPointF *m_point0;
+        QPointF *m_point1;
+        QPointF *m_point;
+        qreal x,y,x1,y1;
+        int m_width;
+        int m_height;
+        QPainter *m_painter;
 
      private slots:
         ///
-        /// \brief Capture : capture slot in WholeScreen and window
+        /// \brief snapshot : snapshot slot in Desktop and window
         ///
         void snapshot();
         ///
-        /// \brief CaptureWholeScreen : this method take all Desktop
+        /// \brief CaptureDesktop : this method take all Desktop
         ///
-        void CaptureWholeScreen();
-        ///
-        /// \brief hide enables or disables the Hide The Window option.
-        ///
-       // void CaptureRegion(bool ok, QRect region);
+        void CaptureDesktop();
+        void CaptureArea(bool val, QRect a);
         void updatehide();
-
-        ///
-        /// \brief updateLabel this slot is called whenever the user changes the delay
-        /// using the Screenshot Delay second option
-        ///
 
      signals:
         ///
-        /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
+        /// \brief setBackground : QPixmap class is an off-screen image representation
+        /// that can be used as a paint device.
+        /// \param pix
         ///
-        void InsertImageText(QString);
+        void setBackground(QPixmap pix);
+        ///
+        /// \brief dimensionsMade signal
+        ///
         void dimensionsMade( bool, QRect );
-        void mouseMoveEvent();
         void mousePressEvent();
         void mouseReleaseEvent();
 };

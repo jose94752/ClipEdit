@@ -26,7 +26,7 @@
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
-
+    m_formArrows=ptrFormArrows;
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
@@ -143,11 +143,11 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
 
-
-
-
     BaseGraphicItem::paint(painter,option,widget);
 }
+
+// Getters
+// -------
 
 void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                                         int &ArrowWidth, int &ArrowHeight,
@@ -191,4 +191,19 @@ void ArrowsGraphicsItem::updateArrowPosition()
     //Example
     //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
     //setLine(line);
+}
+
+FormArrows* ArrowsGraphicsItem::getFormArrow()
+{
+    return m_formArrows;
+}
+
+QPointF ArrowsGraphicsItem::getStartPosition()
+{
+    return *m_StartPositionItem;
+}
+
+QPointF ArrowsGraphicsItem::getEndPosition()
+{
+    return *m_EndPositionItem;
 }

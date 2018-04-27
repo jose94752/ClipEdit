@@ -1,43 +1,79 @@
+/*
+==========================================================
+* File:         numberedbulletgraphicitem.h
+* Project:      ClipEdit
+* Creation:     18/04/2018
+* Brief:        Inherit from BaseGraphicsItem
+*               Define a set of bubbles containing numbers
+==========================================================
+*/
+
 #ifndef NUMBEREDBULLETGRAPHICITEM_H
 #define NUMBEREDBULLETGRAPHICITEM_H
 
-#include <QRectF>
-#include <qfont.h>
-#include <qpainter.h>
+// Includes
+// --------
+
 #include <QGraphicsEllipseItem>
-#include <qrect.h>
+#include <QFont>
+#include <QFontMetrics>
 
 #include "basegraphicitem.h"
+#include <qsettings.h>
+// Class
+// -----
 
-
-class NumberedBulletGraphicItem : public BaseGraphicItem
+class NumberedBulletGraphicItem
+    :   public BaseGraphicItem
 {
-public:
-    QRectF boundingRect() const;
-    enum shape_e {
-      NB_CIRCLE = 0,
-      NB_RECTANGLE,
-      NB_ROUNDEDRECTANGLE
-    };
-    enum const_e {
-        MAXPUCES = 5
-    };
-    NumberedBulletGraphicItem(int m_num = 0, shape_e bullet_shape = NB_CIRCLE, QColor bullet_color = QColor (),
-                              QColor numbercolor = QColor (), const QFont font = QFont (), int taille = 12, BaseGraphicItem *parent = NULL);
+    public:
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void print_debug () const;
-    int type() const;
-private :
-    int m_num;
-    shape_e m_shape;
-    QColor m_bulletcolor;
-    QColor m_numbercolor;
-    QFont m_font;
-    int m_taille;
-    QFontMetrics m_qfm;
-    void eval_width (int&);
-    void eval_height (int&);
+        enum shape_e
+        {
+          NB_CIRCLE = 0,
+          NB_RECTANGLE,
+          NB_ROUNDEDRECTANGLE
+        };
+
+        enum const_e
+        {
+            MAXPUCES = 5
+        };
+
+        // Constructor
+        NumberedBulletGraphicItem(int m_num = 0, shape_e bullet_shape = NB_CIRCLE, QColor bullet_color = QColor(),
+                                  QColor numbercolor = QColor(), const QFont font = QFont(), int size = 12, BaseGraphicItem* parent = NULL);
+
+        // Virtual methods from BaseGraphicItem
+        QRectF boundingRect() const;
+        void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        int type() const;
+
+        // Getters
+        int getNum() const;
+        shape_e getShape() const;
+        const QColor& getBulletColor() const;
+        const QColor& getNumberColor() const;
+        const QFont& getFont() const;
+        int getSize() const;
+
+        // Debug
+        void print_debug() const;
+        void setParameters(QSettings *settings,int itemIndex);
+        void getParameters(QSettings *settings,int itemIndex);
+    private :
+
+        // Properties
+        int m_num;
+        shape_e m_shape;
+        QColor m_bulletcolor;
+        QColor m_numbercolor;
+        QFont m_font;
+        int m_size;
+
+        // Size calculations
+        void eval_width(int&);
+        void eval_height(int&);
 };
 
-#endif // NUMBEREDBULLETGRAPHICITEM_H
+#endif

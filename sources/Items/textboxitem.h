@@ -15,8 +15,6 @@
 // Includes
 // --------
 
-#include <QGraphicsItem>
-
 #include "basegraphicitem.h"
 
 // Class
@@ -29,34 +27,37 @@ class TextBoxItem
 
         // Constructors, destructor
         TextBoxItem(QGraphicsItem* parent = 0);
-        TextBoxItem(const QMap<QString, QVariant>& data, QGraphicsItem* parent = 0);
 
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        const QVariant itemData() const;
+        void setItemData(const QVariant& data);
         int type() const;
 
         // Determine the best size from the members
         void textToRect();
 
-        // Setters
-        void setText(const QString& text);
-        void setFont(const QFont& font);
-        void setBackgroundColor(const QColor& color);
-        void setTextColor(const QColor& color);
-        void setHasBorders(bool hasBorders);
-        void setBorderWidth(int width);
-        void setBorderRadius(int radius);
+        // Getters
+        const QString& text() const;
+        const QFont& font() const;
+        Qt::AlignmentFlag alignment() const;
+        const QColor& backgroundColor() const;
+        const QColor& textColor() const;
+        const QColor& borderColor() const;
+        bool hasBorders();
+        int borderWidth();
+        int borderRadius();
 
     private:
 
         // Text-related members
         QString m_text;
         QFont m_font;
-        Qt::AlignmentFlag m_alignmentFlags;
+        Qt::AlignmentFlag m_alignmentFlag;
 
         // Style
-        QColor m_backgroundColor, m_fontColor, m_borderColor;
+        QColor m_backgroundColor, m_textColor, m_borderColor;
         bool m_hasBorders;
         int m_borderWidth, m_borderRadius;
 };

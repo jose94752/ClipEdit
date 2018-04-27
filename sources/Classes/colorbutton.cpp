@@ -60,7 +60,8 @@ QColor ColorButton::getColor() const
 
 void ColorButton::setColor(const QColor& vcolor)
 {
-      m_color=vcolor;
+    m_color = vcolor;
+    update();
 }
 
 // Slots

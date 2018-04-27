@@ -14,6 +14,7 @@
 // --------
 
 #include <QGraphicsItem>
+#include <QSettings>
 
 class ItemHandler;
 
@@ -81,14 +82,15 @@ class BaseGraphicItem
     public:
 
         // Item types to be use as return value for the type() method
-        enum Type
+        enum CustomTypes
         {
             TextBoxGraphicsItem = UserType+1,
-            ImageGraphicsItem,
+            PictureGraphicsItem,
             ArrowGraphicsItem,
             ChartGraphicsItem,
             ScreenshotGraphicsItem,
-            NumberedBulletGraphicsItem
+            NumberedBulletGraphicsItem,
+            ClipartGraphicsItem,
         };
 
         // Constructors, destructor
@@ -108,9 +110,6 @@ class BaseGraphicItem
         // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
 
-        // Item information for storage
-        //QMap<QString, QVariant> infos() = 0;
-
         // Getters and setters
         bool hasHandlers() const;
         void setHasHandlers(bool hasHandlers);
@@ -124,16 +123,31 @@ class BaseGraphicItem
         int heightForRotationHandler() const;
         void setHeightForRotationHandler(int height);
 
+        const QRectF& rect() const;
         void setRect(const QRectF& rect);
+
         void setNuLayer(int nuLayer);
 
-        //void QMap<QString,QVariant> getInfos()=0;
+        virtual void getParameters(QSettings*,int);
+        virtual void setParameters(QSettings*,int);
 
     protected:
 
         // Events
+        ///
+        /// \brief mousePressEvent
+        /// \param event
+        ///
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
+        ///
+        /// \brief mouseReleaseEvent
+        /// \param event
+        ///
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+        ///
+        /// \brief mouseMoveEvent
+        /// \param event
+        ///
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 
         // Handlers methods
@@ -152,8 +166,6 @@ class BaseGraphicItem
         bool m_drawBoundingRect;
 
     private:
-
-        int m_nuLayer;
 
         ItemHandler* m_current;
 };

@@ -16,18 +16,27 @@
 #include <QVector>
 #include <QWidget>
 
+#include <QtWidgets/QWidget>
+
+#include "baseform.h"
+
+
 // Forward Declarations
-namespace Ui
-{
-    class FormCliparts;
-}
+class QFrame;
+class QHBoxLayout;
+class QLabel;
+class QPushButton;
+class QSpacerItem;
+class QTextEdit;
+class QVBoxLayout;
+class My_Img_Button;
 
 
 // Class
 // -----
 
 class FormCliparts
-    :   public QWidget
+    :   public BaseForm
 {
     Q_OBJECT
 
@@ -36,20 +45,42 @@ class FormCliparts
 
         explicit FormCliparts(QWidget* parent = 0);
 
-        ~FormCliparts();
+//      ~FormCliparts() {]}
+
+    // Load data
+    void loadFromItem(BaseGraphicItem* item) const;
 
 
     private slots:
 
         void event_on_click_browse(bool);
 
-        void event_on_click_clear(bool);
+        void event_on_click_clear();
 
 
-    // Data Member
     private:
+//      ui
+        My_Img_Button* button_clear;
 
-        Ui::FormCliparts* ui;
+        QVBoxLayout *verticalLayout;
+        QLabel *main_title;
+        QSpacerItem *spacer01;
+        QFrame *frame_path;
+        QHBoxLayout *frame_path_layout;
+        QLabel *label_path;
+        QSpacerItem *frame_path_spacer01;
+        QSpacerItem *frame_path_spacer02;
+        QPushButton *button_browse;
+        QSpacerItem *frame_path_spacer03;
+        QSpacerItem *spacer02;
+        QTextEdit *edit_path;
+        QSpacerItem *spacer03;
+        QFrame *frame_action;
+        QHBoxLayout *frame_button_layout;
+        QSpacerItem *frame_action_spacer01;
+        QPushButton *button_action;
+        QSpacerItem *frame_action_spacer02;
+        QSpacerItem *bottom_spacer;
 };
 
 #endif

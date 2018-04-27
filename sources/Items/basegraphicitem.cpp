@@ -144,6 +144,11 @@ void BaseGraphicItem::setHeightForRotationHandler(int height)
     update();
 }
 
+const QRectF& BaseGraphicItem::rect() const
+{
+    return m_rect;
+}
+
 
 void BaseGraphicItem::setRect(const QRectF& rect)
 {
@@ -153,7 +158,19 @@ void BaseGraphicItem::setRect(const QRectF& rect)
 
 void BaseGraphicItem::setNuLayer(int nuLayer)
 {
-    m_nuLayer = nuLayer;
+    //m_nuLayer = nuLayer;
+}
+
+void BaseGraphicItem::getParameters(QSettings *settings, int itemIndex)
+{
+    //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
+}
+
+void BaseGraphicItem::setParameters(QSettings *settings, int itemIndex)
+{
+    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
+    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
+    //éventuellement fonction de rafraichissement graphique
 }
 
 // Handlers
@@ -315,7 +332,6 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
                 p2 = m_handlers[i]->pos();
             }
 
-            // Move to the handler position
             if (m_handlers[i]->shape() == ItemHandler::HANDLER_SQUARE)
             {
                 painter->drawRect(m_handlers[i]->boundingRect());
