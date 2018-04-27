@@ -39,10 +39,6 @@ FormNumberedBullets::~FormNumberedBullets()
 // Getters
 // -------
 
-//for now shape : 0-> circle
-//                1-> rectangle
-//                2-> rounded rectangle
-//TBD enum in NumberedBulletGraphicItem
 void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) const
 {
     from = ui->spinBox_From->value();
@@ -128,13 +124,13 @@ void FormNumberedBullets::loadFromItem(BaseGraphicItem* item) const
         {
         case NumberedBulletGraphicItem::shape_e::NB_CIRCLE:
             ui->comboBox_Shape->setCurrentIndex(0);
-        break;
+            break;
         case NumberedBulletGraphicItem::shape_e::NB_RECTANGLE:
             ui->comboBox_Shape->setCurrentIndex(1);
-        break;
+            break;
         case NumberedBulletGraphicItem::shape_e::NB_ROUNDEDRECTANGLE:
             ui->comboBox_Shape->setCurrentIndex(2);
-        break;
+            break;
         }
 
         ui->ColorButton_BulletColor->setColor(castedItem->getBulletColor());
