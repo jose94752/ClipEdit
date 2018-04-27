@@ -63,6 +63,7 @@ void FormTextBoxes::saveDefaultTheme()
     font.setItalic(ui->checkBoxItalic->isChecked());
 
     s.setValue("FormTextBoxes/font", font.toString());
+    s.setValue("FormTextBoxes/margin", ui->spinBoxMargin->value());
     s.setValue("FormTextBoxes/alignment", ui->comboBoxAlignment->currentData());
     s.setValue("FormTextBoxes/background-color", ui->pushButtonBackgroundColor->getColor().name());
     s.setValue("FormTextBoxes/text-color", ui->pushButtonTextColor->getColor().name());
@@ -83,6 +84,8 @@ void FormTextBoxes::loadDefaultTheme()
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
+
+    ui->spinBoxMargin->setValue(s.value("FormTextBoxes/margin", 5).toInt());
 
     int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment", Qt::AlignLeft).toInt());
     ui->comboBoxAlignment->setCurrentIndex(idx);
@@ -116,6 +119,7 @@ QVariant FormTextBoxes::getItemData() const
 
     data["text"] = ui->plainTextEdit->toPlainText();
     data["font"] = font.toString();
+    data["margin"] = ui->spinBoxMargin->value();
     data["alignment"] = ui->comboBoxAlignment->currentData();
     data["background-color"] = ui->pushButtonBackgroundColor->getColor().name();
     data["text-color"] = ui->pushButtonTextColor->getColor().name();
@@ -140,6 +144,8 @@ void FormTextBoxes::setItemData(const QVariant& data)
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
+
+    ui->spinBoxMargin->setValue(vh["margin"].toInt());
 
     int idx = ui->comboBoxAlignment->findData(vh["alignment"].toInt());
     ui->comboBoxAlignment->setCurrentIndex(idx);
@@ -170,6 +176,7 @@ void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
         ui->spinBoxPointSize->setValue(f.pointSize());
         ui->checkBoxBold->setChecked(f.bold());
         ui->checkBoxItalic->setChecked(f.italic());
+        ui->spinBoxMargin->setValue(castedItem->margin());
         ui->comboBoxAlignment->setCurrentIndex(castedItem->alignment());
 
         ui->pushButtonBackgroundColor->setColor(castedItem->backgroundColor());
