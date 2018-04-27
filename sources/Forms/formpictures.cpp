@@ -32,13 +32,10 @@ FormPictures::FormPictures(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect (ui->pushButton_ok,            SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
-
-    connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
-
-    connect (ui->pushButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
-    connect (ui->pushButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
-
+    connect (ui->pushButton_ok,         SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
+    connect (ui->toolButton_path,       SIGNAL(pressed()),     this, SLOT(chose_picture()));
+    connect (ui->pushButton_save,       SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
+    connect (ui->pushButton_restore,    SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
 
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
