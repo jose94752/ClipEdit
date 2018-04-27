@@ -47,5 +47,5 @@ settings is a pointeur to the settings list object
 name is the name of your item given by the save method
 
 Each parameter is got by the method
-QVariant variantVar=settings->value(item/name/parameterName);
+QVariant variantVar=settings->value(itemName/parameterName);
 MyType var=variantVar.toMyType();

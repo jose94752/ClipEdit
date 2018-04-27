@@ -103,7 +103,8 @@ FORMS += \
     $${FORM_DIRECTORY}/formpictures.ui \
     $${FORM_DIRECTORY}/formscreenshots.ui \
     $${FORM_DIRECTORY}/formtextboxes.ui \
-    $${FORM_DIRECTORY}/resizescenedialog.ui
+    $${FORM_DIRECTORY}/resizescenedialog.ui \
+    preferencesdialog.ui
 
 
 RESOURCES += \
