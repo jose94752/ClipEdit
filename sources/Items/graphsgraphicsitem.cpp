@@ -530,15 +530,6 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
    BaseGraphicItem::paint(painter, option, widget);
 }
 
-#define KChartsTitle    "/title"
-#define KChartsType     "/type"
-#define KChartsWidth    "/width"
-#define KChartsHeight   "/height"
-#define KChartsColor    "/color"
-#define KChartsBackgroundcolor    "/backgroundcolor"
-#define KChartsTransparent    "/transparent"
-#define KChartsData    "/data"
-
 
 void GraphsGraphicsItem::getParameters( QSettings *s, int itemIndex)
 {
