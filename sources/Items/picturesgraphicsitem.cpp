@@ -27,14 +27,12 @@ PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* par
     :   BaseGraphicItem(parent)
 {
     ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
-
     setRect(QRectF(0, 0, width, height));
 }
 
 
 // Virtual methods from BaseGraphicItem
 // -----------------------------------
-
 
 QRectF PicturesGraphicsItem::boundingRect() const
 {
@@ -43,48 +41,34 @@ QRectF PicturesGraphicsItem::boundingRect() const
 
 void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    painter->setRenderHint(QPainter::Antialiasing);
 
+    QPixmap img(path);
+    QPixmap pixmap_img;
+    QImage  image1(img.toImage());
 
+    if (black_white) {
+        qDebug() <<"black - white (1)";
 
-     QPixmap img(path);
-     QPixmap pixmap_img;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int gray = qGray(image1.pixel(i, j));
+                image1.setPixel(i, j, QColor(gray, gray, gray).rgb());
+            }
+        }
 
-     QImage  image1(img.toImage());
-     QColor  color(image1.pixel(0, 1));
+        qDebug() <<"black - white (2)";
 
-     qDebug() <<"picturegraphics ; color  pixel 0-1 =" <<color;
-
-
-     if (black_white) {
-         qDebug() <<"black - white (1)";
-         for (int i = 0; i < width; i++) {
-             for (int j = 0; j < height; j++) {
-                 int gray = qGray(image1.pixel(i, j));
-                 image1.setPixel(i, j, QColor(gray, gray, gray).rgb());
-             }
-         }
-
-           pixmap_img.convertFromImage(image1);
-           painter->drawPixmap(m_rect.toRect(),pixmap_img);
-     }
-      else {
-           painter->drawPixmap(m_rect.toRect(),img);
-      }
-
-
- //    qDebug() <<"picturegraphics: avt paint drawPixmap ===";
- //    painter->drawPixmap(m_rect.toRect(),img);
-
-
-
+        pixmap_img.convertFromImage(image1);
+        painter->drawPixmap(m_rect.toRect(),pixmap_img);
+    }
+    else {
+        painter->drawPixmap(m_rect.toRect(),img);
+    }
 
     lg_font.setPointSize(lg_size);
 
-   //painter->setFont(QFont("times",22));
     painter->setFont(QFont(lg_font));
-
-
-    QFontMetrics fm(lg_font);
 
     QPen penHText(lg_color);
     painter->setPen(penHText);
@@ -93,72 +77,111 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
     int pixelsHigh = fm.height();
   const QRect rect_txt = QRect(0, 0, pixelsWide,  pixelsHigh);
 */
-  const QRect rect     = QRect(0, 0, width, height);
-
-  QRect boundingRect;
-
-  /*
-   *
-Qt::AlignLeft
-Qt::AlignRight
-Qt::AlignHCenter
-Qt::AlignJustify
-Qt::AlignTop
-Qt::AlignBottom
-Qt::AlignVCenter
-Qt::AlignCenter
-*/
-   //painter->drawText(rect, 0, lg_txt, &boundingRect);
+    const QRect rect = QRect(0, 0, width, height);
 
 
-         if (lg_pos == "Left")    {
-             painter->drawText(rect,  Qt::AlignLeft   , lg_txt);
-             }
+    if (lg_pos == "Left") {
+        painter->drawText(rect,  Qt::AlignLeft   , lg_txt);
+    }
     else if (lg_pos == "Right")   {
-             painter->drawText(rect,  Qt::AlignRight  , lg_txt);
-             }
+        painter->drawText(rect,  Qt::AlignRight  , lg_txt);
+    }
     else if (lg_pos == "HCenter") {
-             painter->drawText(rect,  Qt::AlignHCenter, lg_txt);
-             }
+        painter->drawText(rect,  Qt::AlignHCenter, lg_txt);
+    }
     else if (lg_pos == "Justify") {
-             painter->drawText(rect,  Qt::AlignJustify, lg_txt);
-             }
+         painter->drawText(rect,  Qt::AlignJustify, lg_txt);
+    }
     else if (lg_pos == "Top")     {
-             painter->drawText(rect,  Qt::AlignTop    , lg_txt);
-             }
+        painter->drawText(rect,  Qt::AlignTop    , lg_txt);
+    }
     else if (lg_pos == "Bottom")  {
-             painter->drawText(rect,  Qt::AlignBottom , lg_txt);
-             }
+        painter->drawText(rect,  Qt::AlignBottom , lg_txt);
+    }
     else if (lg_pos == "VCenter") {
-             painter->drawText(rect,  Qt::AlignVCenter, lg_txt);
-             }
+        painter->drawText(rect,  Qt::AlignVCenter, lg_txt);
+    }
     else if (lg_pos == "Center")  {
-             painter->drawText(rect,  Qt::AlignRight  , lg_txt);
-             }
+        painter->drawText(rect,  Qt::AlignRight  , lg_txt);
+    }
     else qDebug()  <<"choix alignement  invalide"  << lg_pos;
 
 
-  BaseGraphicItem::paint(painter, option, widget);
+    BaseGraphicItem::paint(painter, option, widget);
 }
-
-// Type
 
 int PicturesGraphicsItem::type() const
 {
     return CustomTypes::PictureGraphicsItem;
 }
 
+// Getters
+// -------
+
+const QString& PicturesGraphicsItem::getPath() const
+{
+    return path;
+}
+
+const QString& PicturesGraphicsItem::getLegend() const
+{
+    return lg_txt;
+}
+
+const QString& PicturesGraphicsItem::getPosition() const
+{
+    return lg_pos;
+}
+
+const QColor& PicturesGraphicsItem::getFontColor() const
+{
+    return lg_color;
+}
+
+const QFont& PicturesGraphicsItem::getFont() const
+{
+    return lg_font;
+}
+
+bool PicturesGraphicsItem::isGrayscale() const
+{
+    return black_white;
+}
+
+int PicturesGraphicsItem::getWidth() const
+{
+    return width;
+}
+
+int PicturesGraphicsItem::getHeight() const
+{
+    return height;
+}
+
+int PicturesGraphicsItem::getOpacity() const
+{
+    return opacity;
+}
+
+int PicturesGraphicsItem::getFontSize() const
+{
+    return lg_size;
+}
+
+
 // Utils
 // -----
 
+void PicturesGraphicsItem::modification_width()
+{
+    QPixmap pixmap(path);
+    pixmap = pixmap.scaledToWidth(width);
+}
 
-//void PicturesGraphicsItem::change_w_h(char w_h){
-//      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;
-//}
-/*
 
- QGraphicsRectItem *rectItem = new QGraphicsRectItem( QRect( -25, 25, 200, 40 ), 0, &scene );
-  rectItem->setPen( QPen( Qt::red, 3, Qt::DashDotLine ) );
-  rectItem->setBrush( Qt::gray );
+void PicturesGraphicsItem::modification_height()
+{
+    QPixmap pixmap(path);
+    pixmap = pixmap.scaledToHeight(height);
+}
 
- */

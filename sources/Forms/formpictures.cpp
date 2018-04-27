@@ -36,8 +36,15 @@ FormPictures::FormPictures(QWidget *parent)
 
       connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
+<<<<<<< HEAD
       connect (ui->toolButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
       connect (ui->toolButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
+=======
+     // connect (ui->checkBox_pic_black_white, SIGNAL(released()),    this, SLOT(picture_modification()));
+
+    connect (ui->pushButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
+    connect (ui->pushButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
+>>>>>>> 1325108afc461c3fcdc3e5778994d1e9b1ec7e60
 
 
     ui->comboBox_lg_pos->addItem(tr("Left"));
@@ -48,7 +55,10 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1325108afc461c3fcdc3e5778994d1e9b1ec7e60
 }
 
 
@@ -173,6 +183,44 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
         PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
 
         // Load data into the form
+        QFont f = castedItem->getFont();
+
+        ui->lineEdit_pic_path->setText(castedItem->getPath());
+        ui->spinBox_pic_w->setValue(castedItem->getWidth());
+        ui->spinBox_pic_h->setValue(castedItem->getHeight());
+        ui->checkBox_pic_black_white->setChecked(castedItem->isGrayscale());
+        ui->horizontalSlider_pic_opacity->setValue(castedItem->getOpacity());
+        ui->lineEdit_lg_txt->setText(castedItem->getLegend());
+        ui->fontComboBox_lg_font->setCurrentText(f.family());
+        ui->spinBox_lg_size->setValue(f.pointSize());
+        ui->toolButton_color->setColor(castedItem->getFontColor());
+
+        QString pos = castedItem->getPosition();
+        if (pos == "Left") {
+            ui->comboBox_lg_pos->setCurrentIndex(0);
+        }
+        else if (pos == "Right")   {
+            ui->comboBox_lg_pos->setCurrentIndex(1);
+        }
+        else if (pos == "HCenter") {
+            ui->comboBox_lg_pos->setCurrentIndex(2);
+        }
+        else if (pos == "Justify") {
+             ui->comboBox_lg_pos->setCurrentIndex(3);
+        }
+        else if (pos == "Top")     {
+            ui->comboBox_lg_pos->setCurrentIndex(4);
+        }
+        else if (pos == "Bottom")  {
+            ui->comboBox_lg_pos->setCurrentIndex(5);
+        }
+        else if (pos == "VCenter") {
+            ui->comboBox_lg_pos->setCurrentIndex(6);
+        }
+        else if (pos == "Center")  {
+            ui->comboBox_lg_pos->setCurrentIndex(7);
+        }
+
     }
 }
 

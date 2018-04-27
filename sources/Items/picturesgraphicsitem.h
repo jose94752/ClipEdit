@@ -36,6 +36,23 @@ class PicturesGraphicsItem
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
         int type() const ;
 
+        // Getters
+        const QString& getPath() const;
+        const QString& getLegend() const;
+        const QString& getPosition() const;
+        const QColor& getFontColor() const;
+        const QFont& getFont() const;
+        bool isGrayscale() const;
+        int getWidth() const;
+        int getHeight() const;
+        int getOpacity() const;
+        int getFontSize() const;
+
+        // Edit size (@Laurent : They do nothing)
+        void modification_width ();
+        void modification_height();
+
+        // Properties (@Laurent: MUST BE SET TO PRIVATE LATER)
         QString path;
         int     height, width;
         int     opacity;
@@ -45,14 +62,6 @@ class PicturesGraphicsItem
         int     lg_size;
         QColor  lg_color;
         QString lg_pos;
-
-
-private:
-
-        QPainter  m_picture;
-
-
-
 };
 
 #endif
