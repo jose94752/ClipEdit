@@ -52,13 +52,13 @@ QRectF GraphsGraphicsItem::boundingRect() const
 void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                                QWidget *widget)
 {
-    qDebug () << "paint GraphsGraphicsItem"  << endl;
+    //qDebug () << "paint GraphsGraphicsItem"  << endl;
 
     BaseGraphicItem::paint(painter, option, widget);
 
     if(m_infos.m_type == 0)
     {
-        qDebug () << "paint GraphsGraphicsItem pie"  << endl;
+        //qDebug () << "paint GraphsGraphicsItem pie"  << endl;
 
         this->drawPie(painter, option, widget);
     }
@@ -84,13 +84,13 @@ int GraphsGraphicsItem::type() const
 
 void  GraphsGraphicsItem::setInfos(const GraphsInfo& infos)
 {
-    qDebug() << "Set Infos";
+    //qDebug() << "Set Infos";
 
     m_infos = infos;
     m_rect = m_infos.m_boundingRect;
     setRect( QRectF(m_infos.m_boundingRect));
 
-    //qDebug() << "Set Infos title " << m_infos.m_title;
+    qDebug() << "Set Infos title " << m_infos.m_title;
 }
 
 
@@ -118,7 +118,7 @@ void GraphsGraphicsItem::calcSizesLine()
             maxy = m_infos.m_Points.at(i).y();
     }
 
-    qDebug() << " calcSizesLine tailles" << minx << miny << maxx << maxy;
+ //   qDebug() << " calcSizesLine tailles" << minx << miny << maxx << maxy;
     m_graphRect = QRectF ( QPointF (minx, miny), QPointF (maxx, maxy));
 }
 
@@ -261,7 +261,7 @@ void GraphsGraphicsItem::calculRects()
     m_pictRect.setWidth(m_pictRect.width()-textHeight-legendHeight);
     m_pictRect.setHeight(m_pictRect.height()-textHeight-legendHeight);
 
-    qDebug() << "calcul rects pictrect " << m_pictRect.width() << m_pictRect.height();
+//    qDebug() << "calcul rects pictrect " << m_pictRect.width() << m_pictRect.height();
 }
 
 
@@ -349,14 +349,14 @@ void GraphsGraphicsItem::drawAxis(QPainter *painter, const QStyleOptionGraphicsI
 
 void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    qDebug() << "Draw Pie";
+    //qDebug() << "Draw Pie";
 
     calculRects();
     transformArcsPie();
 
     int nbPoints = m_GraphArcs.size();
 
-    qDebug() << "nb points" << nbPoints;
+    //qDebug() << "nb points" << nbPoints;
     //Qt::NoBrush
     Qt::BrushStyle style = Qt::SolidPattern ;
     if( m_infos.m_transparent)
@@ -496,7 +496,7 @@ void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphics
 
 void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    qDebug() << "Draw Line";
+    //qDebug() << "Draw Line";
 
     //int nbPoints = m_GraphPoints.size();
     calculRects();
@@ -577,4 +577,6 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
 
    BaseGraphicItem::paint(painter, option, widget);
 }
+
+
 

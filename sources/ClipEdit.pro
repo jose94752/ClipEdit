@@ -48,7 +48,6 @@ SOURCES += \
     $${FORM_DIRECTORY}/formtextboxes.cpp \
     $${FORM_DIRECTORY}/resizescenedialog.cpp \
     $${CLASS_DIRECTORY}/colorbutton.cpp \
-    $${CLASS_DIRECTORY}/layers.cpp \
     $${CLASS_DIRECTORY}/save.cpp \
     $${COMPONENT_DIRECTORY}/cpn_img_button.cpp \
     $${ITEM_DIRECTORY}/basegraphicitem.cpp \

@@ -29,6 +29,8 @@
 #include<QRect>
 #include<QPointF>
 #include<QGraphicsView>
+#include<QDir>
+#include<QFileDialog>
 
 
 
@@ -39,12 +41,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     :   BaseForm(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
-
-    //put here the signal that point to the mainwindow class
-    //create a pixmap
-
-
-
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -67,11 +63,10 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //Shows the widget in full-screen mode.
      //this->showFullScreen();
 
-    //Go QPushButton
-    //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-   // this, SLOT(Capture()));
-   connect(ui->pushButtonCapture, SIGNAL(clicked(bool)),
-            this, SLOT(CaptureDesktop()));
+    //put here the signal that point to the mainwindow class
+    //create a pixmap
+
+    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT(choose_screenshot()));
 
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
@@ -190,6 +185,7 @@ void FormScreenshots::snapshot()
     m_pix=pix;
 
 
+    //?
     FormScreenshots *w= new FormScreenshots(this);
 
 
@@ -270,7 +266,23 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 //         y1= point1.y();
 //         qDebug()<<y1;
 //         qDebug()<<point1;
-//    }
+    //    }
+}
+
+void FormScreenshots::choose_screenshot()
+{
+
+
+    QString homepath = QDir::homePath();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open ClipEdit Project"), homepath, tr("ClipEdit Files (*.png)"));
+
+    if(fileName.isEmpty())
+        return;
+    QPixmap pix (fileName);
+
+    emit setBackground(pix);
+
 }
 
 void FormScreenshots::updatehide()
@@ -286,16 +298,6 @@ void FormScreenshots::updatehide()
     {
         m_hidewindow->setDisabled(false);
     }
-}
-
-void FormScreenshots::setBackground(QPixmap pix)
-{
-//    m_background=pix;
-//    QGraphicsPixmapItem*item=m_scene->addPixmap(pix);
-
-//    m_height=pix.height();
-//    m_width=pix.width();
-
 }
 
 // Load data

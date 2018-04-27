@@ -51,7 +51,6 @@ public :
 
     QList<QString> m_Legends;
     QList<QColor> m_Colors;
-
 };
 
 class GraphsGraphicsItem : public BaseGraphicItem

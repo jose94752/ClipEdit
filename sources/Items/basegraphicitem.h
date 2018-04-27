@@ -125,13 +125,23 @@ class BaseGraphicItem
         const QRectF& rect() const;
         void setRect(const QRectF& rect);
 
-        void setNuLayer(int nuLayer);
-
     protected:
 
         // Events
+        ///
+        /// \brief mousePressEvent
+        /// \param event
+        ///
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
+        ///
+        /// \brief mouseReleaseEvent
+        /// \param event
+        ///
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+        ///
+        /// \brief mouseMoveEvent
+        /// \param event
+        ///
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 
         // Handlers methods
@@ -150,8 +160,6 @@ class BaseGraphicItem
         bool m_drawBoundingRect;
 
     private:
-
-        int m_nuLayer;
 
         ItemHandler* m_current;
 };
