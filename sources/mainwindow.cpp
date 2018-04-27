@@ -213,7 +213,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeTold(bool)
 {
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor,false);
     scenedialog.exec();
 }
 
@@ -223,14 +223,13 @@ void MainWindow::slotNew(bool)
         DialogSave dialogSave(this, m_scene.items());
         dialogSave.exec();
     }
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor);
+    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor,true);
     scenedialog.exec();
     QRectF rectf=m_borderSceneItem->rect();
     QBrush brush=m_borderSceneItem->brush();
     m_scene.clear();
     m_borderSceneItem=m_scene.addRect(rectf);
     m_borderSceneItem->setBrush(brush);
-    ui->graphicsView->changeBackgroundColor();
     nbSceneElts=0;
 }
 
@@ -426,6 +425,10 @@ void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
     //save.save();
+    QList<QGraphicsItem*> items =m_scene.items();
+    foreach(QGraphicsItem *item,items){
+        //code
+    }
 }
 
 
