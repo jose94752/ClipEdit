@@ -128,8 +128,20 @@ class BaseGraphicItem
     protected:
 
         // Events
+        ///
+        /// \brief mousePressEvent
+        /// \param event
+        ///
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
+        ///
+        /// \brief mouseReleaseEvent
+        /// \param event
+        ///
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+        ///
+        /// \brief mouseMoveEvent
+        /// \param event
+        ///
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 
         // Handlers methods

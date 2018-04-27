@@ -30,13 +30,19 @@ NumberedBulletGraphicItem::NumberedBulletGraphicItem(int num, shape_e bullet_sha
     m_size(size)
 {
     int compwidth (0), compheight (0);
+    m_font.setPixelSize(m_size);
+
     eval_width (compwidth);
     eval_height (compheight);
 
-    compwidth *= m_size;
-    compheight *= m_size;
+    //compwidth *= m_size;
+    //compheight *= m_size;
 
-    int cote = (compwidth < compheight ? compheight:compheight);
+    int cote = (compwidth < compheight ? compheight:compwidth);
+    //cote du rectangle entourant le carre entourant la chaine du chiffre
+    //cote *= 1/0.785; //1 / (pi/4)
+    cote *= 1.2;
+    //cote *=2;
     //qDebug () << "NB : compwidth == " << compwidth << "\n";
     //qDebug () << "NB : compheigth == " << compheight << "\n";
 
@@ -76,7 +82,7 @@ void NumberedBulletGraphicItem::paint(QPainter* qpainter, const QStyleOptionGrap
     QString strnum = QString::number(m_num);
     QTextOption qto;
     qto.setAlignment(Qt::AlignCenter);
-    m_font.setPixelSize(m_rect.height());
+    //m_font.setPixelSize(m_rect.height());
     qpainter->setFont(m_font);
 
     qpainter->drawText(m_rect, strnum, qto);
