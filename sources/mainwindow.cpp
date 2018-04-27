@@ -174,7 +174,6 @@ void MainWindow::buildToolBar()
 void MainWindow::buildView()
 {
     QDesktopWidget *deskWidget=QApplication::desktop();
-    nbSceneElts=0;
     int dpix=deskWidget->logicalDpiX();
     int dpiy=deskWidget->logicalDpiY();
     int width=210*dpix/25.4;
@@ -184,7 +183,7 @@ void MainWindow::buildView()
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
-    ui->graphicsView->setNbElts(&nbSceneElts);
+    ui->graphicsView->setNbElts(m_scene.items().count());
     ui->graphicsView->setScene(&m_scene);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
@@ -222,7 +221,7 @@ void MainWindow::resizeScene()
 
 void MainWindow::slotNew(bool)
 {
-    if(nbSceneElts!=0){
+    if(m_scene.items().count()>1){
         DialogSave dialogSave(this, m_scene.items());
         dialogSave.exec();
     }
@@ -233,7 +232,6 @@ void MainWindow::slotNew(bool)
     m_scene.clear();
     m_borderSceneItem=m_scene.addRect(rectf);
     m_borderSceneItem->setBrush(brush);
-    nbSceneElts=0;
 }
 
 ///
@@ -268,7 +266,6 @@ void MainWindow::slotNumberedBullets()
     //numberedBulletGraphicItem->setPos(posx, posy);
     numberedBulletGraphicItem->setPos (bulletpos);
     m_scene.addItem(numberedBulletGraphicItem);
-    nbSceneElts++;
     delta = numberedBulletGraphicItem->rect ().width ();
     if (bulletpos.x () + delta < scene_topright.x ()) {
       bulletpos.setX(bulletpos.x() + delta);
@@ -283,7 +280,6 @@ void MainWindow::slotTextBoxes()
     TextBoxItem* item = new TextBoxItem();
     item->setItemData(data);
     m_scene.addItem(item);
-    nbSceneElts++;
 }
 
 void MainWindow::slotTextPicture()
@@ -292,7 +288,6 @@ void MainWindow::slotTextPicture()
     PicturesGraphicsItem* PictureItem = new PicturesGraphicsItem (m_formPictures);
     //m_scene.clear();
     m_scene.addItem(PictureItem);
-    nbSceneElts++;
 }
 
 
@@ -319,7 +314,6 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
         g->setInfos(infos);
 
         m_scene.addItem(g);
-        nbSceneElts++;
      }
 }
 
@@ -339,7 +333,6 @@ void MainWindow::slotArrowsGraphicsItem()
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(m_formArrows);
     m_scene.addItem(ArrowItem);
-    nbSceneElts++;
 }
 
 
