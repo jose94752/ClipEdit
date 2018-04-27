@@ -74,11 +74,21 @@ void FormLayers::ActionClicked( int line , int col )
 {
     qDebug() << "FormLayers::ActionClicked()" << line << col;
 
+    if (!m_scene)
+        return;
+
     m_lineSelected = line;
     m_columnSelected = col;
 
     m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
+
+    if (!m_itemSelected)
+        return;
+
+    m_scene->clearSelection();
     m_itemSelected->setSelected(true);
+
+    qDebug() << "FormLayers::ActionClicked()" << m_itemSelected;
 
     if (m_columnSelected == 0)
     {
@@ -212,13 +222,13 @@ void FormLayers::ShowLayers()
                 } break;
             }
 
-            // switch type: icon qui va bien
-            // ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
-
-//            ui->tableWidgetLayers->setCellWidget(row-1,1,Icon(item->icon()));
-//            ui->tableWidgetLayers->setCellWidget(row-1,2,IconReduced(item->getImage(m_scene,item)));
-
-            ui->tableWidgetLayers->setCellWidget(row-1,2,new QLabel("Label itemx"+QString::number(row))); // item->getName()));
+            static const int ObjectName = 0;
+            if (item->data(ObjectName).toString().isEmpty())
+            {
+                item->setData(ObjectName, "Itemx"+QString::number(row));
+            }
+            // ui->tableWidgetLayers->setCellWidget(row-1,2,new QLabel("Label itemx"+QString::number(row))); // item->getName()));
+            ui->tableWidgetLayers->setCellWidget(row-1,2, new QLabel(item->data(ObjectName).toString()));
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
     }
