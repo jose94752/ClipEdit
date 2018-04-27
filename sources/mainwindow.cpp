@@ -113,12 +113,10 @@ void MainWindow::buildForms()
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes(bool)));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-<<<<<<< HEAD
     connect(&m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
 
     //put a parameter inside the setBackground() method.
     connect(&m_formScreenshots, SIGNAL(setBackground(QPixmap pix)), this, SLOT(setBackground(QPixmap pix)));
-=======
     connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     //connect(&m_formScreenshots, SIGNAL(InsertImageText(QPixmap p)), this, SLOT(slotScreenshot(QPixmap p)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
@@ -130,7 +128,6 @@ void MainWindow::buildForms()
         ui->stackedWidgetForms->removeWidget(widget);
         widget->deleteLater();
     }
->>>>>>> e2077ab499f424c1e590b0eb8ebd309bd63b8e2f
 
     // Store forms
     m_listIndexes.insert(BUTTON_ID_ARROW,       ui->stackedWidgetForms->addWidget(m_formArrows));

@@ -17,7 +17,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QDoubleSpinBox>
-#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QVBoxLayout>
@@ -27,59 +27,92 @@ QT_BEGIN_NAMESPACE
 class Ui_ResizeSceneDialog
 {
 public:
+    QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
-    QFormLayout *formLayout;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_format;
+    QComboBox *comboBox_format;
+    QHBoxLayout *horizontalLayout_2;
     QLabel *labelWidth;
     QDoubleSpinBox *doubleSpinBoxWidth;
-    QDoubleSpinBox *doubleSpinBoxHeight;
+    QHBoxLayout *horizontalLayout_3;
     QLabel *labelHeight;
-    QComboBox *comboBoxUnit;
+    QDoubleSpinBox *doubleSpinBoxHeight;
+    QHBoxLayout *horizontalLayout_4;
     QLabel *labelUnit;
+    QComboBox *comboBoxUnit;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *ResizeSceneDialog)
     {
         if (ResizeSceneDialog->objectName().isEmpty())
             ResizeSceneDialog->setObjectName(QStringLiteral("ResizeSceneDialog"));
-        ResizeSceneDialog->resize(187, 152);
-        verticalLayout = new QVBoxLayout(ResizeSceneDialog);
+        ResizeSceneDialog->resize(208, 219);
+        verticalLayout_2 = new QVBoxLayout(ResizeSceneDialog);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        formLayout = new QFormLayout();
-        formLayout->setObjectName(QStringLiteral("formLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        label_format = new QLabel(ResizeSceneDialog);
+        label_format->setObjectName(QStringLiteral("label_format"));
+
+        horizontalLayout->addWidget(label_format);
+
+        comboBox_format = new QComboBox(ResizeSceneDialog);
+        comboBox_format->setObjectName(QStringLiteral("comboBox_format"));
+
+        horizontalLayout->addWidget(comboBox_format);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         labelWidth = new QLabel(ResizeSceneDialog);
         labelWidth->setObjectName(QStringLiteral("labelWidth"));
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, labelWidth);
+        horizontalLayout_2->addWidget(labelWidth);
 
         doubleSpinBoxWidth = new QDoubleSpinBox(ResizeSceneDialog);
         doubleSpinBoxWidth->setObjectName(QStringLiteral("doubleSpinBoxWidth"));
         doubleSpinBoxWidth->setMaximum(1500);
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, doubleSpinBoxWidth);
+        horizontalLayout_2->addWidget(doubleSpinBoxWidth);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        labelHeight = new QLabel(ResizeSceneDialog);
+        labelHeight->setObjectName(QStringLiteral("labelHeight"));
+
+        horizontalLayout_3->addWidget(labelHeight);
 
         doubleSpinBoxHeight = new QDoubleSpinBox(ResizeSceneDialog);
         doubleSpinBoxHeight->setObjectName(QStringLiteral("doubleSpinBoxHeight"));
         doubleSpinBoxHeight->setMaximum(1500);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, doubleSpinBoxHeight);
+        horizontalLayout_3->addWidget(doubleSpinBoxHeight);
 
-        labelHeight = new QLabel(ResizeSceneDialog);
-        labelHeight->setObjectName(QStringLiteral("labelHeight"));
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, labelHeight);
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        labelUnit = new QLabel(ResizeSceneDialog);
+        labelUnit->setObjectName(QStringLiteral("labelUnit"));
+
+        horizontalLayout_4->addWidget(labelUnit);
 
         comboBoxUnit = new QComboBox(ResizeSceneDialog);
         comboBoxUnit->setObjectName(QStringLiteral("comboBoxUnit"));
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, comboBoxUnit);
-
-        labelUnit = new QLabel(ResizeSceneDialog);
-        labelUnit->setObjectName(QStringLiteral("labelUnit"));
-
-        formLayout->setWidget(2, QFormLayout::LabelRole, labelUnit);
+        horizontalLayout_4->addWidget(comboBoxUnit);
 
 
-        verticalLayout->addLayout(formLayout);
+        verticalLayout->addLayout(horizontalLayout_4);
 
         buttonBox = new QDialogButtonBox(ResizeSceneDialog);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
@@ -87,6 +120,9 @@ public:
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
         verticalLayout->addWidget(buttonBox);
+
+
+        verticalLayout_2->addLayout(verticalLayout);
 
 #ifndef QT_NO_SHORTCUT
         labelWidth->setBuddy(doubleSpinBoxWidth);
@@ -104,6 +140,7 @@ public:
     void retranslateUi(QDialog *ResizeSceneDialog)
     {
         ResizeSceneDialog->setWindowTitle(QApplication::translate("ResizeSceneDialog", "Resize scene", nullptr));
+        label_format->setText(QApplication::translate("ResizeSceneDialog", "Format", nullptr));
         labelWidth->setText(QApplication::translate("ResizeSceneDialog", "&Width", nullptr));
         labelHeight->setText(QApplication::translate("ResizeSceneDialog", "&Height", nullptr));
         labelUnit->setText(QApplication::translate("ResizeSceneDialog", "&Unit", nullptr));

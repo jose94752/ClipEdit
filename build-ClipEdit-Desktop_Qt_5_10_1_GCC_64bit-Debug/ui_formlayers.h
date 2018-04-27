@@ -18,6 +18,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,23 +26,25 @@ QT_BEGIN_NAMESPACE
 class Ui_FormLayers
 {
 public:
+    QVBoxLayout *verticalLayout;
     QSplitter *splitter_2;
     QLabel *labelTextBox;
     QTableWidget *tableWidgetLayers;
     QSplitter *splitter;
     QPushButton *buttonUp;
-    QPushButton *pushDown;
-    QPushButton *pushAdd;
-    QPushButton *pushSupp;
+    QPushButton *buttonDown;
+    QPushButton *buttonAdd;
+    QPushButton *buttonSupp;
 
     void setupUi(QWidget *FormLayers)
     {
         if (FormLayers->objectName().isEmpty())
             FormLayers->setObjectName(QStringLiteral("FormLayers"));
-        FormLayers->resize(341, 269);
+        FormLayers->resize(350, 438);
+        verticalLayout = new QVBoxLayout(FormLayers);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         splitter_2 = new QSplitter(FormLayers);
         splitter_2->setObjectName(QStringLiteral("splitter_2"));
-        splitter_2->setGeometry(QRect(10, 10, 320, 247));
         splitter_2->setOrientation(Qt::Vertical);
         labelTextBox = new QLabel(splitter_2);
         labelTextBox->setObjectName(QStringLiteral("labelTextBox"));
@@ -72,16 +75,19 @@ public:
         buttonUp = new QPushButton(splitter);
         buttonUp->setObjectName(QStringLiteral("buttonUp"));
         splitter->addWidget(buttonUp);
-        pushDown = new QPushButton(splitter);
-        pushDown->setObjectName(QStringLiteral("pushDown"));
-        splitter->addWidget(pushDown);
-        pushAdd = new QPushButton(splitter);
-        pushAdd->setObjectName(QStringLiteral("pushAdd"));
-        splitter->addWidget(pushAdd);
-        pushSupp = new QPushButton(splitter);
-        pushSupp->setObjectName(QStringLiteral("pushSupp"));
-        splitter->addWidget(pushSupp);
+        buttonDown = new QPushButton(splitter);
+        buttonDown->setObjectName(QStringLiteral("buttonDown"));
+        splitter->addWidget(buttonDown);
+        buttonAdd = new QPushButton(splitter);
+        buttonAdd->setObjectName(QStringLiteral("buttonAdd"));
+        splitter->addWidget(buttonAdd);
+        buttonSupp = new QPushButton(splitter);
+        buttonSupp->setObjectName(QStringLiteral("buttonSupp"));
+        splitter->addWidget(buttonSupp);
         splitter_2->addWidget(splitter);
+
+        verticalLayout->addWidget(splitter_2);
+
 
         retranslateUi(FormLayers);
 
@@ -93,9 +99,9 @@ public:
         FormLayers->setWindowTitle(QApplication::translate("FormLayers", "Form", nullptr));
         labelTextBox->setText(QApplication::translate("FormLayers", "Layers", nullptr));
         buttonUp->setText(QApplication::translate("FormLayers", "Up", nullptr));
-        pushDown->setText(QApplication::translate("FormLayers", "Down", nullptr));
-        pushAdd->setText(QApplication::translate("FormLayers", "Add", nullptr));
-        pushSupp->setText(QApplication::translate("FormLayers", "Supp", nullptr));
+        buttonDown->setText(QApplication::translate("FormLayers", "Down", nullptr));
+        buttonAdd->setText(QApplication::translate("FormLayers", "Add", nullptr));
+        buttonSupp->setText(QApplication::translate("FormLayers", "Supp", nullptr));
     } // retranslateUi
 
 };
