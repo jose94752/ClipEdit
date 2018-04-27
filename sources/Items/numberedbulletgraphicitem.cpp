@@ -170,10 +170,11 @@ void NumberedBulletGraphicItem::print_debug() const
 
 //on recoit param ext
 void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex) {
-    QString path = "Items";
+    QString path;// = "Items";
     {
-        QVariant temp = (int) NumberedBulletGraphicsItem;
-        path += temp.toString();
+        //QVariant temp = (int) NumberedBulletGraphicsItem;
+        //path += temp.toString();
+        path = "item"+QString::number(itemIndex);
     }
     path += QString ("/");
     //num
@@ -237,10 +238,12 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
 
 //on ecrit dans Msettinr les params
 void NumberedBulletGraphicItem::getParameters(QSettings *settings,int itemIndex) {
-    QString path = "Items";
+
+    QString path;// = "Items";
     {
-        QVariant temp = (int) NumberedBulletGraphicsItem;
-        path += temp.toString();
+        //QVariant temp = (int) NumberedBulletGraphicsItem;
+        //path += temp.toString();
+        path = "item"+QString::number(itemIndex);
     }
     path += QString ("/");
     //num
