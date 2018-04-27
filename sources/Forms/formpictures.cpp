@@ -113,11 +113,13 @@ void FormPictures::save_settings(bool)
     s_black_white = ui->checkBox_pic_black_white->isChecked();
     setting.setValue("FormPictures/black_white", s_black_white);
 
-    s_lg_txt      = ui->lineEdit_lg_txt->text();
-    setting.setValue("FormPictures/text", s_lg_font);
+
 
     s_lg_font     = ui->fontComboBox_lg_font->currentFont().family();
     setting.setValue("FormPictures/font", s_lg_font);
+
+    s_lg_txt      = ui->lineEdit_lg_txt->text();
+    setting.setValue("FormPictures/text", s_lg_txt);
 
     s_lg_size     = ui->spinBox_lg_size->value();
     setting.setValue("FormPictures/size", s_lg_size);
@@ -137,11 +139,12 @@ void FormPictures::restore_settings(bool)
     s_black_white = setting.value("FormPictures/black_white").toBool();
     ui->checkBox_pic_black_white->setChecked(s_black_white);
 
-    s_lg_txt   = setting.value("FormPictures/text").toString() ;
-    ui->lineEdit_lg_txt->setText(s_lg_txt);
 
     s_lg_font  =  setting.value("FormPictures/font").toString() ;
     ui->fontComboBox_lg_font->setCurrentText(s_lg_font);
+
+    s_lg_txt   = setting.value("FormPictures/text").toString() ;
+    ui->lineEdit_lg_txt->setText(s_lg_txt);
 
     s_lg_size  = setting.value("FormPictures/size").toInt() ;
     ui->spinBox_lg_size->setValue(s_lg_size);
