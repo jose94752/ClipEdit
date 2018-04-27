@@ -167,8 +167,6 @@ class BaseGraphicItem
 
     private:
 
-        int m_nuLayer;
-
         ItemHandler* m_current;
 };
 

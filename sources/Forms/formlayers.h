@@ -3,7 +3,7 @@
 * File:         formlayers.h
 * Project:      ClipEdit
 * Creation:     17/04/2018
-* Brief:        Form to create Layers
+* Brief:        Form to manage Layers
 ================================================
 */
 
@@ -20,6 +20,7 @@
 class QLabel;
 class QPushButton;
 class QTableWidgetItem;
+class BaseGraphicItem;
 
 // Forward Declaration
 namespace Ui
@@ -75,10 +76,12 @@ private:
 
         void initForm();
         void ShowLayers();
-        void updateLayers();
 
-        int m_lineselected;
-        int m_columnselected;
+        int m_lineSelected;
+        int m_columnSelected;
+
+        BaseGraphicItem * m_itemSelected;
+//        QGraphicsItem * m_itemSelected;
 };
 
 #endif

@@ -36,6 +36,7 @@ RESOURCE_DIRECTORY  = resources
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    $${FORM_DIRECTORY}/baseform.cpp \
     $${FORM_DIRECTORY}/dialogfilealreadyexists.cpp \
     $${FORM_DIRECTORY}/dialogsave.cpp \
     $${FORM_DIRECTORY}/formarrows.cpp \
@@ -48,7 +49,6 @@ SOURCES += \
     $${FORM_DIRECTORY}/formtextboxes.cpp \
     $${FORM_DIRECTORY}/resizescenedialog.cpp \
     $${CLASS_DIRECTORY}/colorbutton.cpp \
-    $${CLASS_DIRECTORY}/layers.cpp \
     $${CLASS_DIRECTORY}/save.cpp \
     $${COMPONENT_DIRECTORY}/cpn_img_button.cpp \
     $${ITEM_DIRECTORY}/basegraphicitem.cpp \
@@ -59,12 +59,12 @@ SOURCES += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
-    graphicsview.cpp \
-    Forms/baseform.cpp
+    graphicsview.cpp
 
 
 HEADERS += \
     mainwindow.h \
+    $${FORM_DIRECTORY}/baseform.h \
     $${FORM_DIRECTORY}/dialogfilealreadyexists.h \
     $${FORM_DIRECTORY}/dialogsave.h \
     $${FORM_DIRECTORY}/formarrows.h \
@@ -77,7 +77,6 @@ HEADERS += \
     $${FORM_DIRECTORY}/formtextboxes.h \
     $${FORM_DIRECTORY}/resizescenedialog.h \
     $${CLASS_DIRECTORY}/colorbutton.h \
-    $${CLASS_DIRECTORY}/layers.h \
     $${CLASS_DIRECTORY}/save.h \
     $${COMPONENT_DIRECTORY}/cpn_img_button.h \
     $${ITEM_DIRECTORY}/basegraphicitem.h \
@@ -88,8 +87,7 @@ HEADERS += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.h \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
     $${ITEM_DIRECTORY}/textboxitem.h \
-    graphicsview.h \
-    Forms/baseform.h
+    graphicsview.h
 
 
 FORMS += \
@@ -103,8 +101,7 @@ FORMS += \
     $${FORM_DIRECTORY}/formpictures.ui \
     $${FORM_DIRECTORY}/formscreenshots.ui \
     $${FORM_DIRECTORY}/formtextboxes.ui \
-    $${FORM_DIRECTORY}/resizescenedialog.ui \
-    preferencesdialog.ui
+    $${FORM_DIRECTORY}/resizescenedialog.ui
 
 
 RESOURCES += \

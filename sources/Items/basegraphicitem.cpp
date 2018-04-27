@@ -158,7 +158,7 @@ void BaseGraphicItem::setRect(const QRectF& rect)
 
 void BaseGraphicItem::setNuLayer(int nuLayer)
 {
-    m_nuLayer = nuLayer;
+    //m_nuLayer = nuLayer;
 }
 
 void BaseGraphicItem::getParameters(QSettings *, int)
