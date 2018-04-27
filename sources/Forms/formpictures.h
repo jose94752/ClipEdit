@@ -60,8 +60,9 @@ private:
 
         QSettings setting;
         bool      s_black_white;
-        QString     s_lg_font;
+        QString   s_lg_txt;
         int       s_lg_size;
+        QString   s_lg_font;
         QColor    s_lg_color;
         QString   s_lg_pos;
 
