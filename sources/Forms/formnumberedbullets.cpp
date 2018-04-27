@@ -79,7 +79,7 @@ void FormNumberedBullets::saveDefaultTheme () const
 void FormNumberedBullets::loadDefaultTheme()
 {
     QSettings q;
-    int from(1), to(1), taille(1);
+    int from(1), to(1), taille(12);
     from = q.value("FormNumberedBullets/from", from).toInt();
     to = q.value("FormNumberedBullets/to", to).toInt ();
     taille = q.value("FormNumberedBullets/size", taille).toInt ();

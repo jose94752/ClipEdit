@@ -19,7 +19,7 @@
 #include <QFontMetrics>
 
 #include "basegraphicitem.h"
-
+#include <qsettings.h>
 // Class
 // -----
 
@@ -59,7 +59,8 @@ class NumberedBulletGraphicItem
 
         // Debug
         void print_debug() const;
-
+        void setParameters(QSettings *settings,int itemIndex);
+        void getParameters(QSettings *settings,int itemIndex);
     private :
 
         // Properties
