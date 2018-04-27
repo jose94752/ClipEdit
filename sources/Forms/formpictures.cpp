@@ -34,16 +34,11 @@ FormPictures::FormPictures(QWidget *parent)
 
 
 
-      connect (ui->pushButton_lg_ok,  SIGNAL(clicked(bool)), this, SLOT(legend_ok(bool)));
+      connect (ui->pushButton_ok,            SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
 
-      connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
+      connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
 
-      connect (ui->checkBox_pic_black_white, SIGNAL(released()), this, SLOT(picture_modification()));
-
-
-      connect (ui->spinBox_pic_w, SIGNAL(editingFinished())  , this, SLOT(picture_modification_w()));
-      connect (ui->spinBox_pic_h, SIGNAL(editingFinished())  , this, SLOT(picture_modification_h()));
-
+     // connect (ui->checkBox_pic_black_white, SIGNAL(released()),    this, SLOT(picture_modification()));
 
       connect (ui->toolButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
       connect (ui->toolButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
@@ -68,13 +63,11 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width, bool &w_h_fixed, char &w_h, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
+void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
 {
     path        = ui->lineEdit_pic_path->text();
     height      = ui->spinBox_pic_h->value();
     width       = ui->spinBox_pic_w->value();
-    w_h_fixed   = ui->checkBox_pic_fx->isChecked();
-    w_h         = w_h1;
     black_white = ui->checkBox_pic_black_white->isChecked();
     opacity     = ui->horizontalSlider_pic_opacity->value();
     lg_txt      = ui->lineEdit_lg_txt->text();
@@ -87,15 +80,6 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
 
 void FormPictures::chose_picture()
 {
-   //   QSettings settings;
-   //   settings.setValue("animal/snake", 58);
-   //   settings.value("animal/snake", 1024).toInt();   // returns 58
-   //   settings.value("animal/zebra", 1024).toInt();   // returns 1024
-   //   settings.value("animal/zebra").toInt();         // returns 0
-
-
-    //QSettings(const QString &fileName, Format format, QObject *parent = Q_NULLPTR)
-    //QColor color = settings.value("DataPump/bgcolor").value<QColor>();
 
     QString home_path = QDir::homePath();
 
@@ -127,34 +111,11 @@ void FormPictures::chose_picture()
 }
 
 
-void FormPictures::picture_modification()
-{
-     emit picture_changed();
-}
-
-void FormPictures::picture_modification_w()
-{
-    emit picture_changed();
-    w_h1 = 'w';
-    emit picture_changed_w_h(w_h1);
-
-     qDebug() <<"form  W : w_h:"  <<w_h1  ;
-}
-
-void FormPictures::picture_modification_h()
-{
-    emit picture_changed();
-    w_h1 = 'h';
-    emit picture_changed_w_h(w_h1);
-
-    qDebug() <<" form H : w_h:"  <<w_h1 ;
-}
-
-
-void FormPictures::legend_ok(bool)
-{
+void FormPictures::validation_ok(bool) {
     emit picture_changed();
 }
+
+
 
 void FormPictures::save_settings(bool)
 {
@@ -177,11 +138,7 @@ void FormPictures::save_settings(bool)
 
 void FormPictures::restore_settings(bool)
 {
-    // bool      s_black_white;
-    // QFont     s_lg_font;
-    // int       s_lg_size;
-    // QColor    s_lg_color;
-    // QString   s_lg_pos;
+
 
     s_black_white = setting.value("FormPictures/black_white").toBool();
     ui->checkBox_pic_black_white->setChecked(s_black_white);
@@ -220,3 +177,4 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
     }
 }
 
+// emit picture_changed();

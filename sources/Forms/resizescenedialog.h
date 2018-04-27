@@ -32,14 +32,18 @@ class ResizeSceneDialog
     Q_OBJECT
 
 public:
-    explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**,QColor);
+    explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**,QColor,bool);
     ~ResizeSceneDialog();
+    void detectFormat();
 
 public slots:
     void sizeChanged();
     void unitChanged(const QString&);
     void valuesChanged();
     void formatChanged(QString);
+
+protected:
+    void resizeEvent(QResizeEvent*);
 
 private:
     Ui::ResizeSceneDialog *ui;

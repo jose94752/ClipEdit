@@ -31,10 +31,10 @@
 //The class' constructor accepts a pointer to a QGraphicItem item.
 //This pointer is then passed to the constructor of the BaseGraphicItem.
 
-ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(FormScreenshots* ptr,    QGraphicsItem *parent)
+ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QPixmap pix, QGraphicsItem *parent)
         : BaseGraphicItem(parent)
  {
-    Q_UNUSED(ptr)
+    Q_UNUSED(pix)
 
     setFlag(BaseGraphicItem::ItemIsSelectable, true);
 

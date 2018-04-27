@@ -38,7 +38,11 @@ settings is a pointeur to the settings list object
 name is the name of your item given by the save method
 
 Each parameter is stored in the follow form 
+<<<<<<< HEAD
 settings->setValue("item"+QString::number(itemIndex)+"/parameterName",parameterName);
+=======
+settings->setValue("item"+QString::number(itemIndex)+"/parameterName",QVariant);
+>>>>>>> a717d86a49acd2f89b82a63618397fd7c3c2ae53
 
 
 #The Setter

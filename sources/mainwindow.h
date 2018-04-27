@@ -31,7 +31,6 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
-#include "Classes/layers.h"
 #include "Items/basegraphicitem.h"
 
 class QToolButton;
@@ -95,9 +94,6 @@ class MainWindow
 
         int nbSceneElts;
 
-        // Layers
-        Layers m_Layers;
-
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
@@ -134,7 +130,6 @@ class MainWindow
 
         // Layers
         void slotLayers();
-        void layerSelected();
 };
 
 #endif

@@ -26,14 +26,9 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    //connect (  , SIGNAL(picture_changed_w_h( w_h)), this, SLOT(change_w_h(w_h)));
-
-
-    ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
-
+    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
     setRect(QRectF(0, 0, width, height));
-
 }
 
 
@@ -49,34 +44,6 @@ QRectF PicturesGraphicsItem::boundingRect() const
 void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 
-
- //painter->drawPixmap(0, 0, width, height, path);
- //painter->drawText( QRectF (0,0, width, height),"coucou");
- // painter->(boundingRect(), m_picture);
-
-
-
-     if (w_h != ' ') {
-         if (w_h_fixed) {
-                 switch (w_h) {
-                    case 'w':
-                    modification_width();
-                    break;
-
-                    case 'h':
-                    modification_height();
-                    break;
-
-                 }
-         }
-     }
-
-
-
-
-  //   Pixmap qPix = QPixmap::grabWidget(ui->myWidget);
-  //       QImage image(qPix.toImage());
-  //       QColor color(image.pixel(0, 1));
 
 
      QPixmap img(path);
@@ -97,9 +64,6 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
              }
          }
 
-
-           qDebug() <<"black - white (2)";
-
            pixmap_img.convertFromImage(image1);
            painter->drawPixmap(m_rect.toRect(),pixmap_img);
      }
@@ -111,9 +75,8 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
  //    qDebug() <<"picturegraphics: avt paint drawPixmap ===";
  //    painter->drawPixmap(m_rect.toRect(),img);
 
-    w_h         = ' ';
-    w_h_fixed   = false;
-    black_white = false;
+
+
 
     lg_font.setPointSize(lg_size);
 
@@ -188,22 +151,6 @@ int PicturesGraphicsItem::type() const
 // Utils
 // -----
 
-void PicturesGraphicsItem::modification_width () {
-     qDebug() <<"modification_width, 2w";
-     QPixmap pixmap(path);
-     pixmap = pixmap.scaledToWidth( width );
-
-
-}
-
-
-void PicturesGraphicsItem::modification_height () {
-        qDebug() <<"modification_height 2h";
-        QPixmap pixmap(path);
-        pixmap = pixmap.scaledToHeight( height );
-
-
-}
 
 //void PicturesGraphicsItem::change_w_h(char w_h){
 //      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;
