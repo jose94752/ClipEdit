@@ -92,7 +92,7 @@ class MainWindow
 
         QGraphicsRectItem *m_borderSceneItem;
 
-        int nbSceneElts;
+        //int nbSceneElts;
 
         // Zoom
         QSpinBox* m_spinBoxZoom;

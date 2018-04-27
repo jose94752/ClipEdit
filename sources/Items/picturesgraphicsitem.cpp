@@ -26,9 +26,7 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
-    ptr_1 = ptr;
-
+    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
     setRect(QRectF(0, 0, width, height));
 }
 
@@ -45,35 +43,19 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 {
     painter->setRenderHint(QPainter::Antialiasing);
 
-    if (w_h != ' ') {
-        if (w_h_fixed) {
-             switch (w_h) {
-                case 'w':
-                modification_width();
-                break;
-
-                case 'h':
-                modification_height();
-                break;
-
-             }
-        }
-    }
-
     QPixmap img(path);
     QPixmap pixmap_img;
     QImage  image1(img.toImage());
 
     if (black_white) {
-         qDebug() <<"black - white (1)";
+        qDebug() <<"black - white (1)";
 
-         for (int i = 0; i < width; i++) {
-             for (int j = 0; j < height; j++) {
-                 int gray = qGray(image1.pixel(i, j));
-                 image1.setPixel(i, j, QColor(gray, gray, gray).rgb());
-             }
-         }
-
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int gray = qGray(image1.pixel(i, j));
+                image1.setPixel(i, j, QColor(gray, gray, gray).rgb());
+            }
+        }
 
         qDebug() <<"black - white (2)";
 
@@ -159,11 +141,6 @@ const QColor& PicturesGraphicsItem::getFontColor() const
 const QFont& PicturesGraphicsItem::getFont() const
 {
     return lg_font;
-}
-
-bool PicturesGraphicsItem::hasFixedRatio() const
-{
-    return w_h_fixed;
 }
 
 bool PicturesGraphicsItem::isGrayscale() const

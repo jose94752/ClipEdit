@@ -78,6 +78,7 @@ void FormLayers::ActionClicked( int line , int col )
     m_columnSelected = col;
 
     m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
+    m_itemSelected->setSelected(true);
 
     if (m_columnSelected == 0)
     {
@@ -189,11 +190,15 @@ void FormLayers::ShowLayers()
                 {
                     ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/chart-icon-2.png")));
                 } break;
-                case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
+                case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:
                 {
                     ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/clipart-icon.png")));
                 } break;
-                case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
+                case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
+                {
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/picture-icon.png")));
+                } break;
+               case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
                 {
                     ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/numbered-bullet-icon.png")));
                 } break;
@@ -217,6 +222,13 @@ void FormLayers::ShowLayers()
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
     }
+
+    // Init
+    m_lineSelected = -1;
+    m_columnSelected = -1;
+
+    m_itemSelected = NULL;
+
 }
 
 // Getters

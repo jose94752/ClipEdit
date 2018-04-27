@@ -42,7 +42,6 @@ class PicturesGraphicsItem
         const QString& getPosition() const;
         const QColor& getFontColor() const;
         const QFont& getFont() const;
-        bool hasFixedRatio() const;
         bool isGrayscale() const;
         int getWidth() const;
         int getHeight() const;
@@ -56,8 +55,6 @@ class PicturesGraphicsItem
         // Properties (@Laurent: MUST BE SET TO PRIVATE LATER)
         QString path;
         int     height, width;
-        bool    w_h_fixed;
-        char    w_h;
         int     opacity;
         bool    black_white;
         QString lg_txt;
@@ -65,11 +62,6 @@ class PicturesGraphicsItem
         int     lg_size;
         QColor  lg_color;
         QString lg_pos;
-
-
-    private:
-
-        FormPictures* ptr_1;
 };
 
 #endif
