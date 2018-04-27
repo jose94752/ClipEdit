@@ -26,75 +26,85 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
+CLASS_DIRECTORY     = Classes
+COMPONENT_DIRECTORY = Classes
+ITEM_DIRECTORY      = Items
+FORM_DIRECTORY      = Forms
+RESOURCE_DIRECTORY  = resources
+
+
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    Forms/formarrows.cpp \
-    Forms/formcharts.cpp \
-    Forms/formcliparts.cpp \
-    Forms/formlayers.cpp \
-    Forms/formnumberedbullets.cpp \
-    Forms/formpictures.cpp \
-    Forms/formscreenshots.cpp \
-    Forms/formtextboxes.cpp \
-    Forms/dialogfilealreadyexists.cpp \
-    Forms/resizescenedialog.cpp \
-    Forms/dialogsave.cpp \
-    Classes/save.cpp \
-    Classes/colorbutton.cpp \
-    Items/basegraphicitem.cpp \
-    Items/itemhandler.cpp \
-    Items/numberedbulletgraphicitem.cpp \
-    Items/picturesgraphicsitem.cpp \
-    Items/screenshotsgraphicsitem.cpp \
-    Items/textboxitem.cpp \
-    Items/arrowsgraphicsitem.cpp \
-    Items/graphsgraphicsitem.cpp \
-    Classes/layers.cpp \
-    graphicsview.cpp
+    $${FORM_DIRECTORY}/dialogfilealreadyexists.cpp \
+    $${FORM_DIRECTORY}/dialogsave.cpp \
+    $${FORM_DIRECTORY}/formarrows.cpp \
+    $${FORM_DIRECTORY}/formcharts.cpp \
+    $${FORM_DIRECTORY}/formcliparts.cpp \
+    $${FORM_DIRECTORY}/formlayers.cpp \
+    $${FORM_DIRECTORY}/formnumberedbullets.cpp \
+    $${FORM_DIRECTORY}/formpictures.cpp \
+    $${FORM_DIRECTORY}/formscreenshots.cpp \
+    $${FORM_DIRECTORY}/formtextboxes.cpp \
+    $${FORM_DIRECTORY}/resizescenedialog.cpp \
+    $${CLASS_DIRECTORY}/colorbutton.cpp \
+    $${CLASS_DIRECTORY}/layers.cpp \
+    $${CLASS_DIRECTORY}/save.cpp \
+    $${COMPONENT_DIRECTORY}/cpn_img_button.cpp \
+    $${ITEM_DIRECTORY}/basegraphicitem.cpp \
+    $${ITEM_DIRECTORY}/arrowsgraphicsitem.cpp \
+    $${ITEM_DIRECTORY}/graphsgraphicsitem.cpp \
+    $${ITEM_DIRECTORY}/itemhandler.cpp \
+    $${ITEM_DIRECTORY}/numberedbulletgraphicitem.cpp \
+    $${ITEM_DIRECTORY}/picturesgraphicsitem.cpp \
+    $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
+    $${ITEM_DIRECTORY}/textboxitem.cpp \
+    graphicsview.cpp \
+    Forms/baseform.cpp
 
 
 HEADERS += \
     mainwindow.h \
-    Forms/formarrows.h \
-    Forms/formcharts.h \
-    Forms/formcliparts.h \
-    Forms/formlayers.h \
-    Forms/formnumberedbullets.h \
-    Forms/formpictures.h \
-    Forms/formscreenshots.h \
-    Forms/formtextboxes.h \
-    Forms/resizescenedialog.h \
-    Forms/dialogsave.h \
-    Forms/dialogfilealreadyexists.h \
-    Classes/save.h \
-    Classes/colorbutton.h \
-    Items/basegraphicitem.h \
-    Items/itemhandler.h \
-    Items/numberedbulletgraphicitem.h \
-    Items/picturesgraphicsitem.h \
-    Items/screenshotsgraphicsitem.h \
-    Items/textboxitem.h \
-    Items/arrowsgraphicsitem.h \
-    Items/graphsgraphicsitem.h \
-    Classes/layers.h \
-    graphicsview.h
+    $${FORM_DIRECTORY}/dialogfilealreadyexists.h \
+    $${FORM_DIRECTORY}/dialogsave.h \
+    $${FORM_DIRECTORY}/formarrows.h \
+    $${FORM_DIRECTORY}/formcharts.h \
+    $${FORM_DIRECTORY}/formcliparts.h \
+    $${FORM_DIRECTORY}/formlayers.h \
+    $${FORM_DIRECTORY}/formnumberedbullets.h \
+    $${FORM_DIRECTORY}/formpictures.h \
+    $${FORM_DIRECTORY}/formscreenshots.h \
+    $${FORM_DIRECTORY}/formtextboxes.h \
+    $${FORM_DIRECTORY}/resizescenedialog.h \
+    $${CLASS_DIRECTORY}/colorbutton.h \
+    $${CLASS_DIRECTORY}/layers.h \
+    $${CLASS_DIRECTORY}/save.h \
+    $${COMPONENT_DIRECTORY}/cpn_img_button.h \
+    $${ITEM_DIRECTORY}/basegraphicitem.h \
+    $${ITEM_DIRECTORY}/arrowsgraphicsitem.h \
+    $${ITEM_DIRECTORY}/graphsgraphicsitem.h \
+    $${ITEM_DIRECTORY}/itemhandler.h \
+    $${ITEM_DIRECTORY}/numberedbulletgraphicitem.h \
+    $${ITEM_DIRECTORY}/picturesgraphicsitem.h \
+    $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
+    $${ITEM_DIRECTORY}/textboxitem.h \
+    graphicsview.h \
+    Forms/baseform.h
 
 
 FORMS += \
     mainwindow.ui \
-    Forms/formarrows.ui \
-    Forms/formcharts.ui \
-    Forms/formcliparts.ui \
-    Forms/formlayers.ui \
-    Forms/formnumberedbullets.ui \
-    Forms/formpictures.ui \
-    Forms/formscreenshots.ui \
-    Forms/formtextboxes.ui \
-    Forms/dialogfilealreadyexists.ui \
-    Forms/resizescenedialog.ui \
-    Forms/dialogsave.ui
+    $${FORM_DIRECTORY}/dialogfilealreadyexists.ui \
+    $${FORM_DIRECTORY}/dialogsave.ui \
+    $${FORM_DIRECTORY}/formarrows.ui \
+    $${FORM_DIRECTORY}/formcharts.ui \
+    $${FORM_DIRECTORY}/formlayers.ui \
+    $${FORM_DIRECTORY}/formnumberedbullets.ui \
+    $${FORM_DIRECTORY}/formpictures.ui \
+    $${FORM_DIRECTORY}/formscreenshots.ui \
+    $${FORM_DIRECTORY}/formtextboxes.ui \
+    $${FORM_DIRECTORY}/resizescenedialog.ui
 
 
 RESOURCES += \
-    resources/resources.qrc
+    $${RESOURCE_DIRECTORY}/resources.qrc

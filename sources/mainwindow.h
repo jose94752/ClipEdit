@@ -32,6 +32,7 @@
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Classes/layers.h"
+#include "Items/basegraphicitem.h"
 
 class QToolButton;
 
@@ -56,8 +57,7 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-
-private:
+    private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -76,24 +76,24 @@ private:
         Ui::MainWindow* ui;
 
         // Forms
-        FormArrows          m_formArrows;
-        FormCharts          m_formCharts;
-        FormCliparts        m_formCliparts;
-        FormLayers          m_formLayers;
-        FormNumberedBullets m_formBullets;
-        FormPictures        m_formPictures;
-        FormScreenshots     m_formScreenshots;
-        FormTextBoxes       m_formTextboxes;
+        FormArrows*          m_formArrows;
+        FormCharts*          m_formCharts;
+        FormCliparts*        m_formCliparts;
+        FormLayers*          m_formLayers;
+        FormNumberedBullets* m_formBullets;
+        FormPictures*        m_formPictures;
+        FormScreenshots*     m_formScreenshots;
+        FormTextBoxes*       m_formTextboxes;
 
         QMap<e_BUTTON_IDS, int> m_listIndexes;
-
-        int m_width;
-        int m_height;
+        QMap<BaseGraphicItem::CustomTypes, BaseForm*> m_itemForms;
 
         // Scene
         QGraphicsScene m_scene;
 
         QGraphicsRectItem *m_borderSceneItem;
+
+        int nbSceneElts;
 
         // Layers
         Layers m_Layers;
@@ -105,7 +105,7 @@ private:
         void init();
         void buildMenu();
         void buildToolBar();
-        void buildStackedWidget();
+        void buildForms();
         void buildView();
 
     private slots:
@@ -122,13 +122,13 @@ private:
 
         // Items
         void slotNumberedBullets();
-        void slotNumberedBulletsSaveConfig();
         void slotTextBoxes(bool);
         void slotTextPicture();
         void slotGraphs(const GraphsInfo &infos);
         void slotArrowsGraphicsItem();
 
-        //void slotScreenshot();
+        //
+        void setBackground(QPixmap pix);
 
         void itemSelected(QGraphicsItem* item);
 

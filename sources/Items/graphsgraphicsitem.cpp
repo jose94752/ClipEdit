@@ -41,20 +41,13 @@ GraphsGraphicsItem::GraphsGraphicsItem(QGraphicsItem* parent) : BaseGraphicItem(
 }
 
 
-// Pure virtual methods implementation
+// Virtual methods from BaseGraphicItem
 // -----------------------------------
 
 QRectF GraphsGraphicsItem::boundingRect() const
 {
-    //m_infos.m_boundingRect = {-100,-100,200,200};
-    //return QRectF(0,0,500,500);
-
-    //return m_infos.m_boundingRect;
-
     return BaseGraphicItem::boundingRect();
 }
-
-
 
 void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                                QWidget *widget)
@@ -80,7 +73,6 @@ void GraphsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
        this->drawHisto(painter, option, widget);
     }
 }
-
 
 int GraphsGraphicsItem::type() const
 {

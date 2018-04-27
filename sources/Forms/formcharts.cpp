@@ -15,7 +15,7 @@
 #include "ui_formcharts.h"
 
 FormCharts::FormCharts(QWidget* parent)
-    :   QWidget(parent), ui(new Ui::FormCharts)
+    :   BaseForm(parent), ui(new Ui::FormCharts)
 {
     ui->setupUi(this);
 
@@ -107,5 +107,17 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
  }
 
+ // Load data
+ // ---------
+
+ void FormCharts::loadFromItem(BaseGraphicItem* item) const
+ {
+     if (qgraphicsitem_cast<GraphsGraphicsItem*>(item))
+     {
+         GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
+
+         // Load data into the form
+     }
+ }
 
 

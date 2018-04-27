@@ -10,6 +10,7 @@
 // Includes
 // --------
 
+#include <QDebug>
 #include <QColorDialog>
 #include <QColor>
 #include <QSettings>
@@ -17,12 +18,13 @@
 #include "formtextboxes.h"
 #include "ui_formtextboxes.h"
 #include "Classes/colorbutton.h"
+#include "../Items/textboxitem.h"
 
 // Constructor, destructor
 // -----------------------
 
 FormTextBoxes::FormTextBoxes(QWidget *parent)
-    :   QWidget(parent), ui(new Ui::FormTextBoxes)
+    :   BaseForm(parent), ui(new Ui::FormTextBoxes)
 {
     ui->setupUi(this);
 
@@ -39,6 +41,7 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
 
     // Connect
     connect(ui->pushButtonSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
+    connect(ui->pushButtonApplyTheme, SIGNAL(clicked(bool)), this, SLOT(loadDefaultTheme()));
 }
 
 FormTextBoxes::~FormTextBoxes()
@@ -59,7 +62,7 @@ void FormTextBoxes::saveDefaultTheme()
     font.setBold(ui->checkBoxBold->isChecked());
     font.setItalic(ui->checkBoxItalic->isChecked());
 
-    s.setValue("FormTextBoxes/font", font);
+    s.setValue("FormTextBoxes/font", font.toString());
     s.setValue("FormTextBoxes/alignment", ui->comboBoxAlignment->currentData());
     s.setValue("FormTextBoxes/background-color", ui->pushButtonBackgroundColor->getColor().name());
     s.setValue("FormTextBoxes/text-color", ui->pushButtonTextColor->getColor().name());
@@ -76,22 +79,21 @@ void FormTextBoxes::loadDefaultTheme()
     QFont f;
     f.fromString(s.value("FormTextBoxes/font").toString());
 
-    ui->plainTextEdit->setPlainText(s.value("FormTextBoxes/text").toString());
-    ui->fontComboBox->setCurrentFont(f);
+    ui->fontComboBox->setCurrentText(f.family());
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
 
-    int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment").toInt());
+    int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment", Qt::AlignLeft).toInt());
     ui->comboBoxAlignment->setCurrentIndex(idx);
 
-    ui->pushButtonBackgroundColor->setColor(QColor(s.value("FormTextBoxes/background-color").toString()));
-    ui->pushButtonTextColor->setColor(QColor(s.value("FormTextBoxes/text-color").toString()));
-    ui->pushButtonBorderColor->setColor(QColor(s.value("FormTextBoxes/border-color").toString()));
+    ui->pushButtonBackgroundColor->setColor(QColor(s.value("FormTextBoxes/background-color", QColor(Qt::white).name()).toString()));
+    ui->pushButtonTextColor->setColor(QColor(s.value("FormTextBoxes/text-color", QColor(Qt::black).name()).toString()));
+    ui->pushButtonBorderColor->setColor(QColor(s.value("FormTextBoxes/border-color", QColor(Qt::black).name()).toString()));
 
-    ui->checkBoxHasBorders->setChecked(s.value("FormTextBoxes/border-visible").toBool());
-    ui->spinBoxBorderWidth->setValue(s.value("FormTextBoxes/border-width").toInt());
-    ui->spinBoxBorderRadius->setValue(s.value("FormTextBoxes/border-radius").toInt());
+    ui->checkBoxHasBorders->setChecked(s.value("FormTextBoxes/border-visible", true).toBool());
+    ui->spinBoxBorderWidth->setValue(s.value("FormTextBoxes/border-width", 1).toInt());
+    ui->spinBoxBorderRadius->setValue(s.value("FormTextBoxes/border-radius", 0).toInt());
 }
 
 // Getters and setters
@@ -134,7 +136,7 @@ void FormTextBoxes::setItemData(const QVariant& data)
     f.fromString(vh["font"].toString());
 
     ui->plainTextEdit->setPlainText(vh["text"].toString());
-    ui->fontComboBox->setCurrentFont(f);
+    ui->fontComboBox->setCurrentText(f.family());
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
@@ -151,3 +153,31 @@ void FormTextBoxes::setItemData(const QVariant& data)
     ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
 }
 
+// Load data
+// ---------
+
+void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<TextBoxItem*>(item))
+    {
+        TextBoxItem* castedItem = qgraphicsitem_cast<TextBoxItem*>(item);
+
+        // Load data into the form
+        QFont f = castedItem->font();
+
+        ui->plainTextEdit->setPlainText(castedItem->text());
+        ui->fontComboBox->setCurrentText(f.family());
+        ui->spinBoxPointSize->setValue(f.pointSize());
+        ui->checkBoxBold->setChecked(f.bold());
+        ui->checkBoxItalic->setChecked(f.italic());
+        ui->comboBoxAlignment->setCurrentIndex(castedItem->alignment());
+
+        ui->pushButtonBackgroundColor->setColor(castedItem->backgroundColor());
+        ui->pushButtonTextColor->setColor(castedItem->textColor());
+        ui->pushButtonBorderColor->setColor(castedItem->borderColor());
+
+        ui->checkBoxHasBorders->setChecked(castedItem->hasBorders());
+        ui->spinBoxBorderWidth->setValue(castedItem->borderWidth());
+        ui->spinBoxBorderRadius->setValue(castedItem->borderRadius());
+    }
+}

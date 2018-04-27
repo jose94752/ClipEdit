@@ -13,8 +13,9 @@
 // Includes
 // --------
 
-#include <QWidget>
 #include <QMap>
+
+#include "baseform.h"
 
 class QPushButton;
 
@@ -28,7 +29,7 @@ namespace Ui
 // -----
 
 class FormTextBoxes
-    :   public QWidget
+    :   public BaseForm
 {
     Q_OBJECT
 
@@ -43,6 +44,9 @@ class FormTextBoxes
 
         QVariant getItemData() const;
         void setItemData(const QVariant& data);
+
+        // Load data
+        void loadFromItem(BaseGraphicItem* item) const;
 
     private slots:
 

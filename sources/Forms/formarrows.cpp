@@ -12,15 +12,17 @@
 // Includes
 // --------
 
+#include <QDebug>
+
 #include "formarrows.h"
 #include "ui_formarrows.h"
-#include <QDebug>
+#include "../Items/arrowsgraphicsitem.h"
 
 // Constructor, destructor
 // -----------------------
 
 FormArrows::FormArrows(QWidget *parent)
-    :   QWidget(parent), ui(new Ui::FormArrows)
+    :   BaseForm(parent), ui(new Ui::FormArrows)
 {
     ui->setupUi(this);
     //
@@ -113,7 +115,8 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
     ui->toolButtonOutlineColorContents->setColor(ArrowOutlineColor);
     ui->toolButtonFillColorContents->setColor(ArrowFillColor);
 
-    //LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+
+  //LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
 
     LineThicknessContents=LineThickness;
 
@@ -138,3 +141,15 @@ void FormArrows::outlineColorArrowChanged(const QColor& color)
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
+// Load data
+// ---------
+
+void FormArrows::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<ArrowsGraphicsItem*>(item))
+    {
+        ArrowsGraphicsItem* castedItem = qgraphicsitem_cast<ArrowsGraphicsItem*>(item);
+
+        // Load data into the form
+    }
+}

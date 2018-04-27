@@ -84,11 +84,12 @@ class BaseGraphicItem
         enum CustomTypes
         {
             TextBoxGraphicsItem = UserType+1,
-            ImageGraphicsItem,
+            PictureGraphicsItem,
             ArrowGraphicsItem,
             ChartGraphicsItem,
             ScreenshotGraphicsItem,
-            NumberedBulletGraphicsItem
+            NumberedBulletGraphicsItem,
+            ClipartGraphicsItem,
         };
 
         // Constructors, destructor
@@ -107,9 +108,6 @@ class BaseGraphicItem
         // Type of the item
         // Return a type from the enum (add a new one in the enum above)
         virtual int type() const = 0;
-
-        // Item information for storage
-        //QMap<QString, QVariant> infos() = 0;
 
         // Getters and setters
         bool hasHandlers() const;

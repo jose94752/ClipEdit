@@ -17,6 +17,7 @@
 #include <QImage>
 #include <QRgb>
 
+
 #include "picturesgraphicsitem.h"
 
 // Constructor
@@ -37,7 +38,7 @@ PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* par
 }
 
 
-// Pure virtual methods implementation
+// Virtual methods from BaseGraphicItem
 // -----------------------------------
 
 
@@ -81,30 +82,41 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
 
      QPixmap img(path);
+     QPixmap pixmap_img;
+
      QImage  image1(img.toImage());
      QColor  color(image1.pixel(0, 1));
 
-   //  qDebug() <<"color  pixel 0-1 =" <<color;
+     qDebug() <<"picturegraphics ; color  pixel 0-1 =" <<color;
 
 
      if (black_white) {
-         QRgb color;
-         int  f1, f2;
-
-         for (int f1=0; f1<width; f1++) {
-             for (int f2=0; f2<height; f2++) {
-                 color = image1.pixel(f1, f2);
-                 image1.setPixel(f1, f2, QColor((qRed(color) + qGreen(color) + qBlue(color))/3).rgb());
+         qDebug() <<"black - white (1)";
+         for (int i = 0; i < width; i++) {
+             for (int j = 0; j < height; j++) {
+                 int gray = qGray(image1.pixel(i, j));
+                 image1.setPixel(i, j, QColor(gray, gray, gray).rgb());
              }
          }
+
+
+           qDebug() <<"black - white (2)";
+
+           pixmap_img.convertFromImage(image1);
+           painter->drawPixmap(m_rect.toRect(),pixmap_img);
      }
+      else {
+           painter->drawPixmap(m_rect.toRect(),img);
+      }
 
 
-    painter->drawPixmap(m_rect.toRect(),img);
+ //    qDebug() <<"picturegraphics: avt paint drawPixmap ===";
+ //    painter->drawPixmap(m_rect.toRect(),img);
 
     w_h         = ' ';
     w_h_fixed   = false;
     black_white = false;
+    path        = " ";
 
     lg_font.setPointSize(lg_size);
 
@@ -170,12 +182,14 @@ Qt::AlignCenter
 }
 
 // Type
-// ----
 
 int PicturesGraphicsItem::type() const
 {
-    return CustomTypes::ImageGraphicsItem;
+    return CustomTypes::PictureGraphicsItem;
 }
+
+// Utils
+// -----
 
 void PicturesGraphicsItem::modification_width () {
      qDebug() <<"modification_width, 2w";
@@ -193,8 +207,6 @@ void PicturesGraphicsItem::modification_height () {
 
 
 }
-
-
 
 //void PicturesGraphicsItem::change_w_h(char w_h){
 //      qDebug() <<"dans PictureGraphic Slot, w_h="  <<w_h ;

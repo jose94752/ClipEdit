@@ -61,10 +61,9 @@ class GraphsGraphicsItem : public BaseGraphicItem
         // Constructor
         GraphsGraphicsItem( QGraphicsItem* parent = 0);
 
-        // Pure virtual methods implementation
+        // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-
         int type() const;
 
         // Getters and setters

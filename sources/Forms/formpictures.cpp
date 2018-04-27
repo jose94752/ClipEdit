@@ -16,23 +16,30 @@
 #include <QPixmap>
 #include <QDebug>
 #include <QFileDialog>
+#include <QDir>
+#include <QSettings>
 
 #include "formpictures.h"
 #include "formpictures.h"
 #include "ui_formpictures.h"
+#include "../Items/picturesgraphicsitem.h"
 
 // Constructor, destructor
 // -----------------------
 
 FormPictures::FormPictures(QWidget *parent)
-    :   QWidget(parent), ui(new Ui::FormPictures)
+    :   BaseForm(parent), ui(new Ui::FormPictures)
 {
     ui->setupUi(this);
 
 
-    //connect (ui->pushButton_simple, SIGNAL(clicked(bool)), this, SLOT(simple_click(bool)));
+
+      connect (ui->pushButton_lg_ok,  SIGNAL(clicked(bool)), this, SLOT(legend_ok(bool)));
 
       connect (ui->toolButton_path,   SIGNAL(pressed()),     this, SLOT(chose_picture()));
+
+      connect (ui->checkBox_pic_black_white, SIGNAL(released()), this, SLOT(picture_modification()));
+
 
       connect (ui->spinBox_pic_w, SIGNAL(editingFinished())  , this, SLOT(picture_modification_w()));
       connect (ui->spinBox_pic_h, SIGNAL(editingFinished())  , this, SLOT(picture_modification_h()));
@@ -74,8 +81,20 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
 
 void FormPictures::chose_picture()
 {
-     qDebug()<<"FORM: picture  changed";
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), "/home/formation/Images/image_01.jpeg", tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
+    QString grp     = "m2i_patrol";
+    QString prj     = "clipart_picture";
+    QString grp_prj = grp + "/" + prj;
+
+    QSettings setting;
+
+    QString s_path = setting.value(grp_prj).toString();
+
+    //QSettings(const QString &fileName, Format format, QObject *parent = Q_NULLPTR)
+    //QColor color = settings.value("DataPump/bgcolor").value<QColor>();
+
+    QString home_path = QDir::homePath();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), home_path, tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
 
     QPixmap file_image (fileName);
 
@@ -94,7 +113,7 @@ void FormPictures::chose_picture()
 
   qDebug()<<"FORM: picture  changed";
      emit picture_changed();
-
+  //    ui->lineEdit_pic_path->setText(" ");
 }
 
 
@@ -119,4 +138,23 @@ void FormPictures::picture_modification_h()
     emit picture_changed_w_h(w_h1);
 
     qDebug() <<" form H : w_h:"  <<w_h1 ;
+}
+
+
+void FormPictures::legend_ok(bool)
+{
+    emit picture_changed();
+}
+
+// Load data
+// ---------
+
+void FormPictures::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<PicturesGraphicsItem*>(item))
+    {
+        PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
+
+        // Load data into the form
+    }
 }

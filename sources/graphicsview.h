@@ -30,16 +30,17 @@ class GraphicsView
         // Constructor
         GraphicsView(QWidget* parent = 0);
 
-        //couleur de fond
+        // Background color
         QColor m_backgroundColor;
 
-        void setGraphicsRectItem(QGraphicsRectItem*);
+        void setGraphicsRectItem(QGraphicsRectItem**);
+        void setNbElts(int*);
 
     public slots:
 
         void clear();
         void contentToView();
-        void setZoomLevel(int zoom);
+        void setZoomLevel(int scale);
         void changeBackgroundColor();
 
     protected:
@@ -57,8 +58,11 @@ class GraphicsView
     private:
 
         // Pos for panning
-        QPointF m_oldPos;
-        QGraphicsRectItem *m_graphRectItem;
+        //QPointF m_oldPos;
+
+        // Rect
+        QGraphicsRectItem **m_graphRectItem;
+        int *nbSceneElts;
 
 };
 
