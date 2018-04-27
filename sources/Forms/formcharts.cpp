@@ -20,7 +20,7 @@ FormCharts::FormCharts(QWidget* parent)
     ui->setupUi(this);
 
     QStringList types;
-    types  << "Pie" << "Line" ;  // "Histogram"  ;
+    types  << "Pie" << "Line" << "Histogram"  ;
     ui->qChartType->addItems(types);
 
     loadDefaultTheme();
