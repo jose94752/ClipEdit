@@ -23,9 +23,6 @@ FormCharts::FormCharts(QWidget* parent)
     types  << "Pie" << "Line" ;  // "Histogram"  ;
     ui->qChartType->addItems(types);
 
-    //ui->qColor->setColor( Qt::darkBlue);
-    //ui->qBackColor->setColor( Qt::yellow);
-
     loadDefaultTheme();
 
     connect(ui->qGo, SIGNAL(clicked(bool)), this, SLOT( createChart() ) );
@@ -143,35 +140,6 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
  void FormCharts::loadDefaultTheme()
  {
-     //QColor
- /*
-     QSettings q;
-     int from(1), to(1), taille(1);
-     from = q.value("FormNumberedBullets/from", from).toInt();
-     to = q.value("FormNumberedBullets/to", to).toInt ();
-     taille = q.value("FormNumberedBullets/size", taille).toInt ();
-
-     QColor bulletcolor(Qt::blue), numbercolor(Qt::red);
-     QString str_bulletcolor (bulletcolor.name()), str_numbercolor (numbercolor.name());
-     str_bulletcolor = q.value("FormNumberedBullets/bulletcolor", str_bulletcolor).toString();
-     str_numbercolor = q.value("FormNumberedBullets/numbercolor", str_numbercolor).toString ();
-     bulletcolor.setNamedColor(str_bulletcolor);
-     numbercolor.setNamedColor(str_numbercolor);
-
-     int qfont_index(0);
-     qfont_index = q.value("FormNumberedBullets/font", qfont_index).toInt();
-
-     int index_shape(0);
-     index_shape = q.value("FormNumberedBullets/shape", index_shape).toInt();
-
-     ui->spinBox_From->setValue(from);
-     ui->spinBox_To->setValue(to);
-     ui->spinBox_Size->setValue (taille);
-     ui->ColorButton_BulletColor->setColor(bulletcolor);
-     ui->ColorBullet_NumberColor->setColor(numbercolor);
-     ui->fontComboBox->setCurrentIndex(qfont_index);
-     ui->comboBox_Shape->setCurrentIndex(index_shape);
- */
 
      QSettings s;
      GraphsInfo infos;
