@@ -156,5 +156,44 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
         PicturesGraphicsItem* castedItem = qgraphicsitem_cast<PicturesGraphicsItem*>(item);
 
         // Load data into the form
+        QFont f = castedItem->getFont();
+
+        ui->lineEdit_pic_path->setText(castedItem->getPath());
+        ui->spinBox_pic_w->setValue(castedItem->getWidth());
+        ui->spinBox_pic_h->setValue(castedItem->getHeight());
+        ui->checkBox_pic_fx->setChecked(castedItem->hasFixedRatio());
+        ui->checkBox_pic_black_white->setChecked(castedItem->isGrayscale());
+        ui->horizontalSlider_pic_opacity->setValue(castedItem->getOpacity());
+        ui->lineEdit_lg_txt->setText(castedItem->getLegend());
+        ui->fontComboBox_lg_font->setCurrentText(f.family());
+        ui->spinBox_lg_size->setValue(f.pointSize());
+        ui->toolButton_color->setColor(castedItem->getFontColor());
+
+        QString pos = castedItem->getPosition();
+        if (pos == "Left") {
+            ui->comboBox_lg_pos->setCurrentIndex(0);
+        }
+        else if (pos == "Right")   {
+            ui->comboBox_lg_pos->setCurrentIndex(1);
+        }
+        else if (pos == "HCenter") {
+            ui->comboBox_lg_pos->setCurrentIndex(2);
+        }
+        else if (pos == "Justify") {
+             ui->comboBox_lg_pos->setCurrentIndex(3);
+        }
+        else if (pos == "Top")     {
+            ui->comboBox_lg_pos->setCurrentIndex(4);
+        }
+        else if (pos == "Bottom")  {
+            ui->comboBox_lg_pos->setCurrentIndex(5);
+        }
+        else if (pos == "VCenter") {
+            ui->comboBox_lg_pos->setCurrentIndex(6);
+        }
+        else if (pos == "Center")  {
+            ui->comboBox_lg_pos->setCurrentIndex(7);
+        }
+
     }
 }
