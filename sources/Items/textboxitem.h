@@ -15,8 +15,6 @@
 // Includes
 // --------
 
-#include <QGraphicsItem>
-
 #include "basegraphicitem.h"
 
 // Class
@@ -33,14 +31,23 @@ class TextBoxItem
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+        const QVariant itemData() const;
+        void setItemData(const QVariant& data);
         int type() const;
 
         // Determine the best size from the members
         void textToRect();
 
-        // Setters and getters
-        QVariant getItemData();
-        void setItemData(const QVariant& data);
+        // Getters
+        const QString& text() const;
+        const QFont& font() const;
+        Qt::AlignmentFlag alignment() const;
+        const QColor& backgroundColor() const;
+        const QColor& textColor() const;
+        const QColor& borderColor() const;
+        bool hasBorders();
+        int borderWidth();
+        int borderRadius();
 
     private:
 

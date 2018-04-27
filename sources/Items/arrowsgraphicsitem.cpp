@@ -143,11 +143,11 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
 
-
-
-
     BaseGraphicItem::paint(painter,option,widget);
 }
+
+// Getters
+// -------
 
 void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                                         int &ArrowWidth, int &ArrowHeight,

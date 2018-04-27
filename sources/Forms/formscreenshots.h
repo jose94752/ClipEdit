@@ -31,6 +31,8 @@
 #include <QGraphicsScene>
 #include<QRect>
 
+#include "baseform.h"
+
 
 // Forward Declaration
 namespace Ui
@@ -44,7 +46,7 @@ namespace Ui
 /// of two types: WholeScreenShot and region
 ///
 
-class FormScreenshots :   public QWidget
+class FormScreenshots :   public BaseForm
 {
     Q_OBJECT
 
@@ -52,7 +54,7 @@ public:
 ///
 /// \brief The TypeCapture enum : enum with the type of capture
 ///
-    enum TypeCapture { WholeScreen, Region };
+    enum TypeCapture { Desktop, Area };
 
  ///
  /// \brief FormScreenshots : constructor
@@ -64,6 +66,10 @@ public:
    // virtual const char* what() const throw(bad_function_call);
 
         ~FormScreenshots();
+
+
+    // Load data
+    void loadFromItem(BaseGraphicItem* item) const;
 
 protected:
     ///
@@ -82,16 +88,17 @@ private:
         // Ui
         Ui::FormScreenshots *ui;
         QGraphicsScene *m_scene;
+        QPixmap m_background;
 
 
         ///
-        /// \brief m_typecapture WholeScreen and window.
+        /// \brief m_typecapture Desktop and window.
         ///
         TypeCapture m_typecapture;
         ///
         /// \brief m_pixmap : the pixmap of the window screenshoted.
         ///
-        QPixmap m_pixmap;
+        QPixmap m_pix;
         ///
         /// \brief m_formscreenshot is used to display the rectangle region drawed on mouse clicked
         ///
@@ -135,33 +142,35 @@ private:
         QPointF *m_point1;
         QPointF *m_point;
         qreal x,y,x1,y1;
+        int m_width;
+        int m_height;
         QPainter *m_painter;
 
      private slots:
         ///
-        /// \brief Capture : capture slot in WholeScreen and window
+        /// \brief snapshot : snapshot slot in Desktop and window
         ///
         void snapshot();
-//        ///
-//        /// \brief CaptureArea this method take an area selected by he user.
-//        ///
-//        void CaptureArea();
         ///
-        /// \brief CaptureWholeScreen : this method take all Desktop
+        /// \brief CaptureDesktop : this method take all Desktop
         ///
-        void CaptureWholeScreen();
- //       void CaptureRegion(bool val, QRect r);
+        void CaptureDesktop();
+        void CaptureArea(bool val, QRect a);
         void updatehide();
-        ///
-        /// \brief updateLabel this slot is called whenever the user changes the delay
-        /// using the Screenshot Delay second option
-        //void slotScreenshot(QPixmap p);
+        void setBackground(QPixmap pix);
+
+
 
      signals:
         ///
         /// \brief InsertImageText signal sent when text is to be inserted in TextEdit.
         ///
       //  void InsertImageText(QPixmap pix);
+        ///
+        /// \brief dimensionsMade signal
+        ///
+        void dimensionsMade( bool, QRect );
+        void itemInserted();
         void mousePressEvent();
         void mouseReleaseEvent();
 };
