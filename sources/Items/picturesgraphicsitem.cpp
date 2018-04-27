@@ -31,7 +31,6 @@ PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* par
 
     ptr->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
-    ptr_1 = ptr;
 
     setRect(QRectF(0, 0, width, height));
 
@@ -56,7 +55,6 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
  // painter->(boundingRect(), m_picture);
 
 
-     ptr_1->getPictureValues(path, height, width, w_h_fixed, w_h, black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
 
      if (w_h != ' ') {
          if (w_h_fixed) {
@@ -116,7 +114,6 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
     w_h         = ' ';
     w_h_fixed   = false;
     black_white = false;
-    path        = " ";
 
     lg_font.setPointSize(lg_size);
 

@@ -33,19 +33,19 @@ Saving autorize to store in a file all the user data for a project. It's
 Graphics Item must implements 2 methods getParameters and setParameters
 
 ##The getter
-void getParameters(QSettings *settings,QString itemName) which gets the list of the items properties before saving.
+void getParameters(QSettings *settings,int itemIndex) which gets the list of the items properties before saving.
 settings is a pointeur to the settings list object
 name is the name of your item given by the save method
 
 Each parameter is stored in the follow form 
-settings->setValue(itemName/parameterName,QVariant);
+settings->setValue("item"+QString::number(itemIndex)+"/parameterName",parameterName);
 
 
 #The Setter
-void setParameters(QSettings *settings,QString itemName) which initialise item with settings properties
+void setParameters(QSettings *settings,int itemIndex) which initialise item with settings properties
 settings is a pointeur to the settings list object
 name is the name of your item given by the save method
 
 Each parameter is got by the method
-QVariant variantVar=settings->value(item/name/parameterName);
+QVariant variantVar=settings->value("item"+QString::number(itemIndex)+"/parameterName");
 MyType var=variantVar.toMyType();

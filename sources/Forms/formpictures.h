@@ -14,6 +14,7 @@
 // --------
 
 #include <QWidget>
+#include <QSettings>
 
 #include "baseform.h"
 
@@ -54,10 +55,20 @@ class FormPictures
         void picture_modification_h();
 
 
-    private:
+        void save_settings(bool);
+        void restore_settings(bool);
+private:
 
         // Ui
         Ui::FormPictures *ui;
+
+        QSettings setting;
+        bool      s_black_white;
+        QString     s_lg_font;
+        int       s_lg_size;
+        QColor    s_lg_color;
+        QString   s_lg_pos;
+
 
     signals:
 

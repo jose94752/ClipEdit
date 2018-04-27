@@ -44,6 +44,11 @@ FormPictures::FormPictures(QWidget *parent)
       connect (ui->spinBox_pic_w, SIGNAL(editingFinished())  , this, SLOT(picture_modification_w()));
       connect (ui->spinBox_pic_h, SIGNAL(editingFinished())  , this, SLOT(picture_modification_h()));
 
+
+      connect (ui->toolButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
+      connect (ui->toolButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
+
+
     ui->comboBox_lg_pos->addItem(tr("Left"));
     ui->comboBox_lg_pos->addItem(tr("Right"));
     ui->comboBox_lg_pos->addItem(tr("HCenter"));
@@ -52,6 +57,7 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
+
 
 }
 
@@ -81,18 +87,20 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width, bool
 
 void FormPictures::chose_picture()
 {
-    QString grp     = "m2i_patrol";
-    QString prj     = "clipart_picture";
-    QString grp_prj = grp + "/" + prj;
+   //   QSettings settings;
+   //   settings.setValue("animal/snake", 58);
+   //   settings.value("animal/snake", 1024).toInt();   // returns 58
+   //   settings.value("animal/zebra", 1024).toInt();   // returns 1024
+   //   settings.value("animal/zebra").toInt();         // returns 0
 
-    QSettings setting;
-
-    QString s_path = setting.value(grp_prj).toString();
 
     //QSettings(const QString &fileName, Format format, QObject *parent = Q_NULLPTR)
     //QColor color = settings.value("DataPump/bgcolor").value<QColor>();
 
     QString home_path = QDir::homePath();
+
+    QString s_path = setting.value("path_name").toString();
+    if (s_path != "")  home_path = s_path;
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open image"), home_path, tr("Image files (*.bmp, *.jpg, *.gif, *.png)"));
 
@@ -111,7 +119,9 @@ void FormPictures::chose_picture()
 
      ui->lineEdit_pic_path->setText(s);
 
-  qDebug()<<"FORM: picture  changed";
+     setting.setValue("path_name", s);
+
+  qDebug()<<"FORM: picture  changed, path ="  <<s;
      emit picture_changed();
   //    ui->lineEdit_pic_path->setText(" ");
 }
@@ -146,6 +156,57 @@ void FormPictures::legend_ok(bool)
     emit picture_changed();
 }
 
+void FormPictures::save_settings(bool)
+{
+    s_black_white = ui->checkBox_pic_black_white->isChecked();
+    setting.setValue("FormPictures/black_white", s_black_white);
+
+    s_lg_font     = ui->fontComboBox_lg_font->currentFont().family();
+    setting.setValue("FormPictures/font", s_lg_font);
+
+    s_lg_size     = ui->spinBox_lg_size->value();
+    setting.setValue("FormPictures/size", s_lg_size);
+
+    s_lg_color    = ui->toolButton_color->getColor();
+    setting.setValue("FormPictures/color", s_lg_color);
+
+    s_lg_pos      = ui->comboBox_lg_pos->currentText();
+    setting.setValue("FormPictures/position", s_lg_pos);
+
+}
+
+void FormPictures::restore_settings(bool)
+{
+    // bool      s_black_white;
+    // QFont     s_lg_font;
+    // int       s_lg_size;
+    // QColor    s_lg_color;
+    // QString   s_lg_pos;
+
+    s_black_white = setting.value("FormPictures/black_white").toBool();
+    ui->checkBox_pic_black_white->setChecked(s_black_white);
+
+    s_lg_font  =  setting.value("FormPictures/font").toString() ;
+
+    ui->fontComboBox_lg_font->setCurrentText(s_lg_font);
+
+    s_lg_size  = setting.value("FormPictures/size").toInt() ;
+    ui->spinBox_lg_size->setValue(s_lg_size);
+
+
+    s_lg_color =   setting.value("FormPicures/color").toString() ;
+    ui->toolButton_color->setColor(s_lg_color);
+
+
+    s_lg_pos   =  setting.value("FormPicures/position").toString() ;
+    ui->comboBox_lg_pos->setCurrentText(s_lg_pos);
+
+
+
+}
+
+
+
 // Load data
 // ---------
 
@@ -158,3 +219,4 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
         // Load data into the form
     }
 }
+

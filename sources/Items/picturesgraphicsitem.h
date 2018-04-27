@@ -57,11 +57,9 @@ class PicturesGraphicsItem
 private:
 
         QPainter  m_picture;
-        FormPictures* ptr_1;
 
 
-private slots:
-   void change_w_h(char w_h);
+
 };
 
 #endif
