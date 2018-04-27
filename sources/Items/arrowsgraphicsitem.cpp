@@ -169,9 +169,9 @@ void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAncho
     m_LineThickness = LineThickness;
 
 
-    //To do
+    //To do others HeadTypeChoiceContents
     // comboBoxHeadTypeChoiceContents
-
+    m_SizeHeadTypeChoice = SizeHeadTypeChoice;
 }
 
 void ArrowsGraphicsItem::updateArrowPosition()

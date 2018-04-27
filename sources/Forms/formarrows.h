@@ -84,6 +84,7 @@ class FormArrows
 
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
+        void radioButtonWithoutAnchorPointMethod(bool);
 
     signals:
 

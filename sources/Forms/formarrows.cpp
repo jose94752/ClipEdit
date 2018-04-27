@@ -13,6 +13,7 @@
 // --------
 
 #include "formarrows.h"
+#include "formarrows.h"
 #include "ui_formarrows.h"
 #include <QDebug>
 
@@ -61,9 +62,15 @@ FormArrows::FormArrows(QWidget *parent)
 
     // End default values of FormArrows
 
+    // Connects for Anchor Arrows
+    connect(ui->radioButtonWithoutAnchorPoint,SIGNAL(clicked(bool)),this,SLOT(radioButtonWithoutAnchorPointMethod(bool)));
+
     // Connects for change color of the FormArrow
     connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(outlineColorArrowChanged(QColor)));
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
+
+    // Connects for
+
 }
 
 FormArrows::~FormArrows()
@@ -115,3 +122,7 @@ void FormArrows::outlineColorArrowChanged(const QColor& color)
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
+void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
+{
+    //To do
+}

@@ -93,6 +93,8 @@ class ArrowsGraphicsItem
 
         int m_LineThickness;
 
+        int m_SizeHeadTypeChoice;
+
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;
 
