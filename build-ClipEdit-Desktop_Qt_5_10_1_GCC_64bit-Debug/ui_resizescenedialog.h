@@ -21,6 +21,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QVBoxLayout>
+#include "Classes/colorbutton.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -30,8 +31,8 @@ public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QLabel *label_format;
-    QComboBox *comboBox_format;
+    QLabel *labelUnit;
+    QComboBox *comboBoxUnit;
     QHBoxLayout *horizontalLayout_2;
     QLabel *labelWidth;
     QDoubleSpinBox *doubleSpinBoxWidth;
@@ -39,30 +40,33 @@ public:
     QLabel *labelHeight;
     QDoubleSpinBox *doubleSpinBoxHeight;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *labelUnit;
-    QComboBox *comboBoxUnit;
+    QLabel *label_format;
+    QComboBox *comboBox_format;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_color;
+    ColorButton *colorButton;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *ResizeSceneDialog)
     {
         if (ResizeSceneDialog->objectName().isEmpty())
             ResizeSceneDialog->setObjectName(QStringLiteral("ResizeSceneDialog"));
-        ResizeSceneDialog->resize(208, 219);
+        ResizeSceneDialog->resize(198, 263);
         verticalLayout_2 = new QVBoxLayout(ResizeSceneDialog);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label_format = new QLabel(ResizeSceneDialog);
-        label_format->setObjectName(QStringLiteral("label_format"));
+        labelUnit = new QLabel(ResizeSceneDialog);
+        labelUnit->setObjectName(QStringLiteral("labelUnit"));
 
-        horizontalLayout->addWidget(label_format);
+        horizontalLayout->addWidget(labelUnit);
 
-        comboBox_format = new QComboBox(ResizeSceneDialog);
-        comboBox_format->setObjectName(QStringLiteral("comboBox_format"));
+        comboBoxUnit = new QComboBox(ResizeSceneDialog);
+        comboBoxUnit->setObjectName(QStringLiteral("comboBoxUnit"));
 
-        horizontalLayout->addWidget(comboBox_format);
+        horizontalLayout->addWidget(comboBoxUnit);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -76,7 +80,7 @@ public:
 
         doubleSpinBoxWidth = new QDoubleSpinBox(ResizeSceneDialog);
         doubleSpinBoxWidth->setObjectName(QStringLiteral("doubleSpinBoxWidth"));
-        doubleSpinBoxWidth->setMaximum(1500);
+        doubleSpinBoxWidth->setMaximum(10000);
 
         horizontalLayout_2->addWidget(doubleSpinBoxWidth);
 
@@ -92,7 +96,7 @@ public:
 
         doubleSpinBoxHeight = new QDoubleSpinBox(ResizeSceneDialog);
         doubleSpinBoxHeight->setObjectName(QStringLiteral("doubleSpinBoxHeight"));
-        doubleSpinBoxHeight->setMaximum(1500);
+        doubleSpinBoxHeight->setMaximum(10000);
 
         horizontalLayout_3->addWidget(doubleSpinBoxHeight);
 
@@ -101,18 +105,33 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        labelUnit = new QLabel(ResizeSceneDialog);
-        labelUnit->setObjectName(QStringLiteral("labelUnit"));
+        label_format = new QLabel(ResizeSceneDialog);
+        label_format->setObjectName(QStringLiteral("label_format"));
 
-        horizontalLayout_4->addWidget(labelUnit);
+        horizontalLayout_4->addWidget(label_format);
 
-        comboBoxUnit = new QComboBox(ResizeSceneDialog);
-        comboBoxUnit->setObjectName(QStringLiteral("comboBoxUnit"));
+        comboBox_format = new QComboBox(ResizeSceneDialog);
+        comboBox_format->setObjectName(QStringLiteral("comboBox_format"));
 
-        horizontalLayout_4->addWidget(comboBoxUnit);
+        horizontalLayout_4->addWidget(comboBox_format);
 
 
         verticalLayout->addLayout(horizontalLayout_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label_color = new QLabel(ResizeSceneDialog);
+        label_color->setObjectName(QStringLiteral("label_color"));
+
+        horizontalLayout_5->addWidget(label_color);
+
+        colorButton = new ColorButton(ResizeSceneDialog);
+        colorButton->setObjectName(QStringLiteral("colorButton"));
+
+        horizontalLayout_5->addWidget(colorButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
 
         buttonBox = new QDialogButtonBox(ResizeSceneDialog);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
@@ -125,9 +144,9 @@ public:
         verticalLayout_2->addLayout(verticalLayout);
 
 #ifndef QT_NO_SHORTCUT
+        labelUnit->setBuddy(comboBoxUnit);
         labelWidth->setBuddy(doubleSpinBoxWidth);
         labelHeight->setBuddy(doubleSpinBoxHeight);
-        labelUnit->setBuddy(comboBoxUnit);
 #endif // QT_NO_SHORTCUT
 
         retranslateUi(ResizeSceneDialog);
@@ -140,10 +159,12 @@ public:
     void retranslateUi(QDialog *ResizeSceneDialog)
     {
         ResizeSceneDialog->setWindowTitle(QApplication::translate("ResizeSceneDialog", "Resize scene", nullptr));
-        label_format->setText(QApplication::translate("ResizeSceneDialog", "Format", nullptr));
+        labelUnit->setText(QApplication::translate("ResizeSceneDialog", "&Unit", nullptr));
         labelWidth->setText(QApplication::translate("ResizeSceneDialog", "&Width", nullptr));
         labelHeight->setText(QApplication::translate("ResizeSceneDialog", "&Height", nullptr));
-        labelUnit->setText(QApplication::translate("ResizeSceneDialog", "&Unit", nullptr));
+        label_format->setText(QApplication::translate("ResizeSceneDialog", "Format", nullptr));
+        label_color->setText(QApplication::translate("ResizeSceneDialog", "Color", nullptr));
+        colorButton->setText(QString());
     } // retranslateUi
 
 };

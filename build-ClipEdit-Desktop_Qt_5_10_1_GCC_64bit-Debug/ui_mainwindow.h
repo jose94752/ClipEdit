@@ -50,6 +50,8 @@ public:
     QAction *actionClear;
     QAction *actionContentToView;
     QAction *actionSetBackgroundColor;
+    QAction *actionPreferences;
+    QAction *actionPreferences_2;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QSplitter *splitter;
@@ -162,6 +164,10 @@ public:
         QIcon icon16;
         icon16.addFile(QStringLiteral(":/icons/icons/background-color-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSetBackgroundColor->setIcon(icon16);
+        actionPreferences = new QAction(MainWindow);
+        actionPreferences->setObjectName(QStringLiteral("actionPreferences"));
+        actionPreferences_2 = new QAction(MainWindow);
+        actionPreferences_2->setObjectName(QStringLiteral("actionPreferences_2"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -230,6 +236,8 @@ public:
         menuTools->addAction(actionScreenshot);
         menuTools->addSeparator();
         menuTools->addAction(actionLayers);
+        menuTools->addSeparator();
+        menuTools->addAction(actionPreferences_2);
         menuInsert->addAction(actionArrow);
         menuInsert->addAction(actionChart);
         menuInsert->addAction(actionClipart);
@@ -320,6 +328,8 @@ public:
         actionContentToView->setToolTip(QApplication::translate("MainWindow", "Scale the scene to show all items", nullptr));
 #endif // QT_NO_TOOLTIP
         actionSetBackgroundColor->setText(QApplication::translate("MainWindow", "Set background color", nullptr));
+        actionPreferences->setText(QApplication::translate("MainWindow", "Preferences", nullptr));
+        actionPreferences_2->setText(QApplication::translate("MainWindow", "Preferences", nullptr));
         menufile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));

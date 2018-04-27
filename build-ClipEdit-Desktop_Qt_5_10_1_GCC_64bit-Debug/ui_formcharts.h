@@ -71,6 +71,8 @@ public:
     QSpinBox *qHeight;
     QSpinBox *qWidth;
     QHBoxLayout *horizontalLayout_6;
+    QPushButton *qSaveTheme;
+    QPushButton *qApplyTheme;
     QSpacerItem *horizontalSpacer_3;
     QPushButton *qGo;
 
@@ -271,6 +273,22 @@ public:
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        qSaveTheme = new QPushButton(FormCharts);
+        qSaveTheme->setObjectName(QStringLiteral("qSaveTheme"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/icons/icons/save-theme-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        qSaveTheme->setIcon(icon);
+
+        horizontalLayout_6->addWidget(qSaveTheme);
+
+        qApplyTheme = new QPushButton(FormCharts);
+        qApplyTheme->setObjectName(QStringLiteral("qApplyTheme"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/icons/icons/apply-theme-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        qApplyTheme->setIcon(icon1);
+
+        horizontalLayout_6->addWidget(qApplyTheme);
+
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_6->addItem(horizontalSpacer_3);
@@ -309,6 +327,8 @@ public:
         qBackColor->setText(QString());
         label_11->setText(QApplication::translate("FormCharts", "Height", nullptr));
         label_12->setText(QApplication::translate("FormCharts", "Width", nullptr));
+        qSaveTheme->setText(QString());
+        qApplyTheme->setText(QString());
         qGo->setText(QApplication::translate("FormCharts", "Go", nullptr));
     } // retranslateUi
 
