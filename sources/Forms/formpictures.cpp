@@ -32,13 +32,9 @@ FormPictures::FormPictures(QWidget *parent)
 {
     ui->setupUi(this);
 
-
-
       connect (ui->pushButton_ok,            SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
 
       connect (ui->toolButton_path,          SIGNAL(pressed()),     this, SLOT(chose_picture()));
-
-     // connect (ui->checkBox_pic_black_white, SIGNAL(released()),    this, SLOT(picture_modification()));
 
       connect (ui->toolButton_save,    SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
       connect (ui->toolButton_restore, SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
@@ -52,7 +48,6 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
-
 
 }
 
@@ -107,7 +102,7 @@ void FormPictures::chose_picture()
 
   qDebug()<<"FORM: picture  changed, path ="  <<s;
      emit picture_changed();
-  //    ui->lineEdit_pic_path->setText(" ");
+
 }
 
 
