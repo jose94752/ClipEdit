@@ -42,7 +42,6 @@ FormNumberedBullets::~FormNumberedBullets()
 //for now shape : 0-> circle
 //                1-> rectangle
 //                2-> rounded rectangle
-//TBD enum in NumberedBulletGraphicItem
 void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) const
 {
     from = ui->spinBox_From->value();
