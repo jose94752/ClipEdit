@@ -37,7 +37,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     $${FORM_DIRECTORY}/baseform.cpp \
-    $${FORM_DIRECTORY}/dialogfilealreadyexists.cpp \
     $${FORM_DIRECTORY}/dialogsave.cpp \
     $${FORM_DIRECTORY}/formarrows.cpp \
     $${FORM_DIRECTORY}/formcharts.cpp \
@@ -65,7 +64,6 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     $${FORM_DIRECTORY}/baseform.h \
-    $${FORM_DIRECTORY}/dialogfilealreadyexists.h \
     $${FORM_DIRECTORY}/dialogsave.h \
     $${FORM_DIRECTORY}/formarrows.h \
     $${FORM_DIRECTORY}/formcharts.h \
@@ -92,7 +90,6 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
-    $${FORM_DIRECTORY}/dialogfilealreadyexists.ui \
     $${FORM_DIRECTORY}/dialogsave.ui \
     $${FORM_DIRECTORY}/formarrows.ui \
     $${FORM_DIRECTORY}/formcharts.ui \

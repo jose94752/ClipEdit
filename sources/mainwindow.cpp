@@ -25,7 +25,6 @@
 
 #include "Classes/save.h"
 #include "Forms/resizescenedialog.h"
-#include "Forms/dialogfilealreadyexists.h"
 #include "Forms/dialogsave.h"
 #include "Forms/formscreenshots.h"
 #include "Items/picturesgraphicsitem.h"
@@ -217,22 +216,24 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeScene()
 {
-    ResizeSceneDialog scenedialog(&m_scene, this, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false, this);
     scenedialog.exec();
 }
 
 void MainWindow::slotNew(bool)
 {
-    if(m_scene.items().count()>1){
-        DialogSave dialogSave(this, m_scene.items());
+    if (m_scene.items().count() > 1)
+    {
+        DialogSave dialogSave(m_scene.items(), this);
         dialogSave.exec();
     }
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor,true);
+
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, this);
     scenedialog.exec();
-    QRectF rectf=m_borderSceneItem->rect();
-    QBrush brush=m_borderSceneItem->brush();
+    QRectF rectf = m_borderSceneItem->rect();
+    QBrush brush = m_borderSceneItem->brush();
     m_scene.clear();
-    m_borderSceneItem=m_scene.addRect(rectf);
+    m_borderSceneItem = m_scene.addRect(rectf);
     m_borderSceneItem->setBrush(brush);
 }
 
@@ -241,20 +242,18 @@ void MainWindow::slotNew(bool)
 ///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
-  //checker le new ok
-  qDebug() << "\tdans slot NumberedBullets\n" ;
   int from (0), to (0), taille (0);
   int shape (0);
   QColor bulletcolor, numbercolor;
   QFont qfont;
   m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
-  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
-  qDebug () << "\tfrom == " << from << "\n";
-  qDebug () << "\tto == " << to << "\n";
+  NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
+
   if (to < from) {
       qDebug () << "invalid interval\n";
       return;
   }
+
   int numbullet (from);
   QPointF scene_topleft (m_scene.sceneRect().topLeft());
   QPointF scene_topright (m_scene.sceneRect().topRight());
@@ -286,12 +285,9 @@ void MainWindow::slotTextBoxes()
 
 void MainWindow::slotTextPicture()
 {
-    qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem* PictureItem = new PicturesGraphicsItem (m_formPictures);
-    //m_scene.clear();
     m_scene.addItem(PictureItem);
 }
-
 
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
@@ -340,12 +336,8 @@ void MainWindow::slotArrowsGraphicsItem()
 
 void MainWindow::setBackground(const QPixmap& pix)
 {
-     //Get screen background.
-    qDebug () << "mainWindow slot of the Screenshot";
-
-    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
+    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem (pix);
     m_scene.addItem(sc);
-
 }
 
 void MainWindow::itemSelected()
@@ -391,8 +383,7 @@ void MainWindow::exportView(bool)
 
     if (fileName != extfilename && fileToSave.exists())
     {
-        DialogFileAlreadyExists d;
-        d.exec();
+        QMessageBox::warning(this, tr("Warning"), tr("File %1 already exists").arg(fileToSave.fileName()));
     }
     else
     {
@@ -417,7 +408,7 @@ void MainWindow::openFile(bool)
 
     if (!fileName.isEmpty())
     {
-        Save save(&m_scene,fileName);
+        Save save(&m_scene, fileName);
         //save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
         //save.open();
     }
@@ -446,8 +437,7 @@ void MainWindow::saveAs(bool)
 
         if (fileName != extfilename && fileToSave.exists())
         {
-            DialogFileAlreadyExists dfae;
-            dfae.exec();
+            QMessageBox::warning(this, tr("Warning"), tr("File %1 already exists").arg(fileToSave.fileName()));
         }
         else
         {
