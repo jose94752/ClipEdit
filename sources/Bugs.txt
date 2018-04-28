@@ -4,7 +4,6 @@
 - Layers : replace the buttons my Icon buttons
 - Pictures : opacity
 - Pictures : crop property
-- TextBoxes : vertical centering, top , bottom
 - Scene : Control ++ and Control -- make zoom
 
 

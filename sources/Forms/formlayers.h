@@ -39,12 +39,11 @@ class FormLayers: public QWidget
 
         // Constructor, destructor
         explicit FormLayers(QWidget* parent = 0);
-
         ~FormLayers();
 
         void setScene(QGraphicsScene & scene);
 
-private slots:
+    private slots:
 
         void cellActivated(int row, int column);
         void contextMenu(const QPoint &pos);
@@ -56,32 +55,30 @@ private slots:
 
 //        void on_pushAdd_clicked();
 
-        void ActionClicked(int line, int col);
+        void actionClicked(int line, int col);
+        void actionUp();
+        void actionDown();
+        void actionAdd();
+        void actionSupp();
 
-        void ActionUp();
-        void ActionDown();
-        void ActionAdd();
-        void ActionSupp();
-
-private:
+    private:
 
         // Ui
-        Ui::FormLayers *ui;
-        QGraphicsScene * m_scene;
+        Ui::FormLayers* ui;
+        QGraphicsScene* m_scene;
 
         qreal m_zvalue;
 
-        QLabel *Icon(QIcon icon);
-        QLabel *Icon(QString filename);
+        QLabel* cellIcon(const QIcon& icon);
+        QLabel* cellIcon(const QString& filename);
 
         void initForm();
-        void ShowLayers();
+        void updateLayers();
 
         int m_lineSelected;
         int m_columnSelected;
 
         BaseGraphicItem * m_itemSelected;
-//        QGraphicsItem * m_itemSelected;
 };
 
 #endif
