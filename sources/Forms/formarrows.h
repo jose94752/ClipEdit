@@ -73,17 +73,24 @@ class FormArrows
         QColor DefaultFormFillColorArrow;
 
         // Arrow settings
+        int FormArrowHeadSize; // <- FormArrowHeadSize is First issue of Form Arrow Head Size and is a temporary solution
         int FormArrowWidth;
         int FormArrowHeight;
         QPolygonF FormArrowHeadType;
 
+        int BeforeFormArrowHeadSize; // cf. FormArrowHeadSize
         int BeforeFormArrowWidth;
         int BeforeFormArrowHeight;
         QPolygonF BeforeFormArrowHeadType;
 
+        int DefaultFormArrowHeadSize; // cf. FormArrowHeadSize
         int DefaultFormArrowWidth;
         int DefaultFormArrowHeight;
         QPolygonF DefaultFormArrowHeadType;
+
+        //To do others HeadTypeChoiceContents
+        // comboBoxHeadTypeChoiceContents
+        int SizeHeadTypeChoiceContents; // First simple type of ArrowHead from comboBoxHeadTypeChoiceContents
 
         // Line Thickness settings
         int FormLineThickness;
@@ -93,10 +100,6 @@ class FormArrows
         int DefaultLineThickness;
 
         int LineThicknessContents;
-
-        //To do others HeadTypeChoiceContents
-        // comboBoxHeadTypeChoiceContents
-        int SizeHeadTypeChoiceContents; // First simple type of ArrowHead from comboBoxHeadTypeChoiceContents
 
         // Method SetInfosArrows
         void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
