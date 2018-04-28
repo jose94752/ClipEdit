@@ -127,16 +127,16 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     // Draw the arrows
     double angle = qAtan2(-line.dy(), line.dx());
 
-    int arrowSize = 10;
+    arrowHeadSize = 35; // Temp for tests intial 10
 
-    QPointF sourceArrowP1 = *m_StartPositionItem + QPointF(qSin(angle + M_PI / 3) * arrowSize,
-                                                           qCos(angle + M_PI / 3) * arrowSize);
-    QPointF sourceArrowP2 = *m_StartPositionItem + QPointF(qSin(angle + M_PI - M_PI / 3) * arrowSize,
-                                                           qCos(angle + M_PI - M_PI / 3) * arrowSize);
-    QPointF destArrowP1 = *m_EndPositionItem + QPointF(qSin(angle - M_PI / 3) * arrowSize,
-                                                       qCos(angle - M_PI / 3) * arrowSize);
-    QPointF destArrowP2 = *m_EndPositionItem + QPointF(qSin(angle - M_PI + M_PI / 3) * arrowSize,
-                                                       qCos(angle - M_PI + M_PI / 3) * arrowSize);
+    QPointF sourceArrowP1 = *m_StartPositionItem + QPointF(qSin(angle + M_PI / 3) * arrowHeadSize,
+                                                           qCos(angle + M_PI / 3) * arrowHeadSize);
+    QPointF sourceArrowP2 = *m_StartPositionItem + QPointF(qSin(angle + M_PI - M_PI / 3) * arrowHeadSize,
+                                                           qCos(angle + M_PI - M_PI / 3) * arrowHeadSize);
+    QPointF destArrowP1 = *m_EndPositionItem + QPointF(qSin(angle - M_PI / 3) * arrowHeadSize,
+                                                       qCos(angle - M_PI / 3) * arrowHeadSize);
+    QPointF destArrowP2 = *m_EndPositionItem + QPointF(qSin(angle - M_PI + M_PI / 3) * arrowHeadSize,
+                                                       qCos(angle - M_PI + M_PI / 3) * arrowHeadSize);
 
     painter->setBrush(m_Color);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
@@ -206,4 +206,9 @@ QPointF ArrowsGraphicsItem::getStartPosition()
 QPointF ArrowsGraphicsItem::getEndPosition()
 {
     return *m_EndPositionItem;
+}
+
+int ArrowsGraphicsItem::getArrowHeadSize()
+{
+    return arrowHeadSize;
 }
