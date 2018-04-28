@@ -45,9 +45,10 @@ class TextBoxItem
         const QColor& backgroundColor() const;
         const QColor& textColor() const;
         const QColor& borderColor() const;
-        bool hasBorders();
-        int borderWidth();
-        int borderRadius();
+        bool hasBorders() const;
+        int borderWidth() const;
+        int borderRadius() const;
+        int margin() const;
 
     private:
 
@@ -55,6 +56,7 @@ class TextBoxItem
         QString m_text;
         QFont m_font;
         Qt::AlignmentFlag m_alignmentFlag;
+        int m_margin;
 
         // Style
         QColor m_backgroundColor, m_textColor, m_borderColor;

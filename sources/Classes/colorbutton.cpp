@@ -69,8 +69,13 @@ void ColorButton::setColor(const QColor& vcolor)
 
 void ColorButton::pickColor(bool)
 {
-    m_color = QColorDialog::getColor(m_color, this);
-    emit colorChanged(m_color);
-    update();
+    QColor color = QColorDialog::getColor(m_color, this);
+
+    if (color.isValid())
+    {
+        m_color = color;
+        emit colorChanged(m_color);
+        update();
+    }
 }
 

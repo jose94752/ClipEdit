@@ -43,7 +43,7 @@ class FormTextBoxes
         const QPushButton* getAddButton();
 
         QVariant getItemData() const;
-        void setItemData(const QVariant& data);
+        //void setItemData(const QVariant& data);
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
