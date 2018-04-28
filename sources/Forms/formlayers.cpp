@@ -178,7 +178,7 @@ void FormLayers::ShowLayers()
             // 1ere colonne
             if (item->isVisible() == true)
             {
-                ui->tableWidgetLayers->setCellWidget(row - 1, 0, Icon(QIcon(":/icons/icons/eye.png")));
+                ui->tableWidgetLayers->setCellWidget(row - 1, 0, Icon(QIcon(":/icons/icons/eye-icon.png")));
             }
             else
             {

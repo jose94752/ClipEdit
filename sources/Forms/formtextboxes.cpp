@@ -32,9 +32,9 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
     ui->pushButtonTextColor->setColor(Qt::black);
 
     // Build alignment combobox
-    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-left.png"), tr("Left"), Qt::AlignLeft);
-    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-right.png"), tr("Right"), Qt::AlignRight);
-    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-centered.png"), tr("Centered"), Qt::AlignHCenter);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/align-left-icon.png"), tr("Left"), Qt::AlignLeft);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/align-right-icon.png"), tr("Right"), Qt::AlignRight);
+    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/align-hcentered-icon.png"), tr("Centered"), Qt::AlignHCenter);
 
     // Load default theme
     loadDefaultTheme();
