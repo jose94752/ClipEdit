@@ -1,0 +1,11 @@
+----------------------------------------------------------------------------------------------------
+Issues is GitHub's tracker.
+----------------------------------------------------------------------------------------------------
+About issues
+Use issues to track ideas, enhancements, tasks, or bugs for work on GitHub.
+Many projects collect user feedback via a central bug tracker. GitHub's tracker is called "Issues,"
+and can be used with every repository.
+https://help.github.com/articles/about-issues/
+
+But we used the sources/Bugs.txt file for startin the bug tracking as soon as we have chosen
+the Bug's tracking system.
