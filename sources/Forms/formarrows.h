@@ -51,6 +51,8 @@ class FormArrows
                             //To do others HeadTypeChoiceContents
                             // comboBoxHeadTypeChoiceContents
 
+        // Method SetInfosArrows are now set in private section ( it will be move to protected or public if needed
+        // to connect other object if node /= item )
         /*void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints,
                             int ArrowWidth, int ArrowHeight,
                             QColor ArrowOutlineColor, QColor ArrowFillColor,
@@ -83,13 +85,25 @@ class FormArrows
         int DefaultFormArrowHeight;
         QPolygonF DefaultFormArrowHeadType;
 
+        // Line Thickness settings
+        int FormLineThickness;
+
+        int BeforeLineThickness;
+
+        int DefaultLineThickness;
+
         int LineThicknessContents;
 
         //To do others HeadTypeChoiceContents
         // comboBoxHeadTypeChoiceContents
         int SizeHeadTypeChoiceContents; // First simple type of ArrowHead from comboBoxHeadTypeChoiceContents
 
-    private slots:
+        // Method SetInfosArrows
+        void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
+                            int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
+                            int SizeHeadTypeChoice);
+
+private slots:
 
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
