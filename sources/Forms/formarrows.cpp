@@ -42,6 +42,7 @@ FormArrows::FormArrows(QWidget *parent)
      {
          ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
      }
+     DefaultLineThickness = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
 
      // Fill the Simple Arrow Head size 10 to 50
      for (int i = 10; i < 51; i++)
@@ -109,30 +110,62 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
    SizeHeadTypeChoice = SizeHeadTypeChoiceContents;
 
 }
-
-/*void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth, int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness, int SizeHeadTypeChoice)
+// Zone de travaux
+void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
+                                int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
+                                int SizeHeadTypeChoice)
 {
-    //ui->radioButtonWithoutAnchorPoint->isChecked()=WithoutAnchorPoint;
-    //ui->radioButton1AnchorPoints->isChecked()=OneAnchorPoint;
-    //TwoAnchorPoints = ui->radioButton2AnchorPoints->isChecked();
+
+    if (WithoutAnchorPoint and !OneAnchorPoint and !TwoAnchorPoints)
+        {
+            ui->radioButtonWithoutAnchorPoint->setChecked(true);
+            ui->radioButton1AnchorPoints->setChecked(false);
+            ui->radioButton2AnchorPoints->setChecked(false);
+        }
+     else if (!WithoutAnchorPoint and OneAnchorPoint and !TwoAnchorPoints)
+        {
+            ui->radioButtonWithoutAnchorPoint->setChecked(false);
+            ui->radioButton1AnchorPoints->setChecked(true);
+            ui->radioButton2AnchorPoints->setChecked(false);
+        }
+    else if (!WithoutAnchorPoint and !OneAnchorPoint and TwoAnchorPoints)
+        {
+            ui->radioButtonWithoutAnchorPoint->setChecked(false);
+            ui->radioButton1AnchorPoints->setChecked(false);
+            ui->radioButton2AnchorPoints->setChecked(true);
+        }
+    else
+        {
+            // Return error more than one Anchor Method is checked
+            qDebug() << "Error: More than one Anchor Method is checked";
+            qDebug() << "Without Anchor point is = " << WithoutAnchorPoint;
+            qDebug() << "One Anchor point is = " << OneAnchorPoint;
+            qDebug() << "Two Anchors points is = " << TwoAnchorPoints;
+        }
+
 
     ui->spinBoxArrowWidthContents->setValue(ArrowWidth);
+
     ui->spinBoxArrowHeightContents->setValue(ArrowHeight);
 
     ui->toolButtonOutlineColorContents->setColor(ArrowOutlineColor);
+
     ui->toolButtonFillColorContents->setColor(ArrowFillColor);
 
 
-  //LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+    LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
 
-    LineThicknessContents=LineThickness;
+    BeforeLineThickness = LineThicknessContents;
+
+    LineThicknessContents = LineThickness;
 
     //To do others HeadTypeChoiceContents
     // comboBoxHeadTypeChoiceContents
     //SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
     //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
      SizeHeadTypeChoiceContents=SizeHeadTypeChoice;
-}*/
+}
+// fin Zone de travaux
 
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
@@ -155,7 +188,6 @@ void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
 
 // Load data
 // ---------
-
 void FormArrows::loadFromItem(BaseGraphicItem* item) const
 {
     if (qgraphicsitem_cast<ArrowsGraphicsItem*>(item))
