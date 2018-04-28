@@ -7,14 +7,4 @@
 - TextBoxes : vertical centering, top , bottom
 - Scene : Control ++ and Control -- make zoom
 
-----------------------------------------------------------------------------------------------------
-The Admin of the Ripository
-You can put the bugs on Issues which is GitHub's tracker.
-
-About issues
-Use issues to track ideas, enhancements, tasks, or bugs for work on GitHub.
-Many projects collect user feedback via a central bug tracker. GitHub's tracker is called "Issues,"
-and can be used with every repository.
-https://help.github.com/articles/about-issues/
-
 
