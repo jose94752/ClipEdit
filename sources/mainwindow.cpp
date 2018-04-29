@@ -347,7 +347,10 @@ void MainWindow::itemSelected()
 {
     QList<QGraphicsItem*> items = m_scene.selectedItems();
 
-    if (!items.isEmpty() && (ui->stackedWidgetForms->currentIndex() != m_listIndexes[BUTTON_ID_LAYERS]))
+    if (items.isEmpty())
+        return;
+
+    if (ui->stackedWidgetForms->currentIndex() != m_listIndexes[BUTTON_ID_LAYERS])
     {
         // Casting the first selected item
         QGraphicsItem* item = items[0];
@@ -365,6 +368,11 @@ void MainWindow::itemSelected()
             ui->stackedWidgetForms->setCurrentWidget(m_itemForms[itemType]);
             m_itemForms[itemType]->loadFromItem(castedItem);
         }
+    }
+    else
+    {
+        // For Layers, it must select the corresponding layer
+        // TO DO: emit itemSelected ???
     }
 }
 

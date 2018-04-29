@@ -11,12 +11,18 @@
 // --------
 
 #include <QDebug>
+#include <QtMath>
+#include <QMenu>
 
 #include "formlayers.h"
 #include "ui_formlayers.h"
 #include "Items/basegraphicitem.h"
 #include "Classes/layeritemdelegate.h"
 #include "Classes/layeritemmodel.h"
+
+#define Z_DEFAULT       (0.0)
+#define Z_INIT          (10.0)
+#define Z_INCREMENT     (1.0)
 
 // Constructor, destructor
 // -----------------------
@@ -26,10 +32,13 @@ FormLayers::FormLayers(QWidget* parent)
 {
     ui->setupUi(this);
 
+
+    m_lineSelected = -1;
+    m_columnSelected = -1;
     m_scene = NULL;
+    m_itemSelected = NULL;
 
     initForm();
-    updateLayers();
 }
 
 FormLayers::~FormLayers()
@@ -42,37 +51,36 @@ FormLayers::~FormLayers()
 
 void FormLayers::initForm()
 {
+    // Nil -> @David : Voir pour passer en QTableView afin de définir le model pour avoir les items centrés au milieu ?
+    // Par ailleurs j'ai modifié l'appel dans la mainwindow, au lieu de refaire un setScene() sur le clic du bouton je renseigne la scène
+    // dans l'initialisation de la mainwindow et j'appelle juste updateLayers() dans le slot associé à ton bouton.
+    // J'ai ajouté des headers avec des tailles auto et refait les boutons aussi, tu me diras ce que tu en penses
+
+    // Table properties
     ui->tableWidgetLayers->clear();
     ui->tableWidgetLayers->setRowCount(0);
     ui->tableWidgetLayers->setColumnCount(4);
-
+    ui->tableWidgetLayers->showGrid();
+    ui->tableWidgetLayers->setAlternatingRowColors(true);
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    QStringList labels;
-    labels << tr("Visibility") << tr("Type") << tr("Name") << tr("Z-Value");
-    ui->tableWidgetLayers->setHorizontalHeaderLabels(labels);
-    ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableWidgetLayers->horizontalHeader()->show();
-    ui->tableWidgetLayers->verticalHeader()->hide();
-    ui->tableWidgetLayers->setShowGrid(true);
-    ui->tableWidgetLayers->setAlternatingRowColors(true);
-
-    ui->tableWidgetLayers->setItemDelegate(new LayerItemDelegate());
+    //ui->tableWidgetLayers->setItemDelegate(new LayerItemDelegate());
     //ui->tableWidgetLayers->setModel(new LayerItemModel());
 
-    ui->tableWidgetLayers->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    // connect
-    connect(ui->tableWidgetLayers, &QTableWidget::cellActivated, this, &FormLayers::cellActivated);
-    connect(ui->tableWidgetLayers, &QTableWidget::customContextMenuRequested, this, &FormLayers::contextMenu);
+    // Headers
+    QStringList headers;
+    headers << tr("Visibility") << tr("Type") << tr("Name") << tr("Z-Value");
+    ui->tableWidgetLayers->setHorizontalHeaderLabels(headers);
+    ui->tableWidgetLayers->horizontalHeader()->show();
+    ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    // Connects
     connect (ui->tableWidgetLayers, SIGNAL(cellClicked(int,int)), this, SLOT(actionClicked(int ,int)));
-
     connect (ui->buttonUp, SIGNAL(clicked(bool)), this, SLOT(actionUp()));
     connect (ui->buttonDown, SIGNAL(clicked(bool)), this, SLOT(actionDown()));
-    connect (ui->buttonAdd, SIGNAL(clicked(bool)), this, SLOT(actionAdd()));
-    connect (ui->buttonSupp, SIGNAL(clicked(bool)), this, SLOT(actionSupp()));
-
+    connect (ui->buttonCopy, SIGNAL(clicked(bool)), this, SLOT(actionCopy()));
+    connect (ui->buttonDelete, SIGNAL(clicked(bool)), this, SLOT(actionDelete()));
 }
 
 // Slots
@@ -98,6 +106,7 @@ void FormLayers::actionClicked(int line , int col)
 
     qDebug() << "FormLayers::ActionClicked()" << m_itemSelected;
 
+    // Visibility
     if (m_columnSelected == 0)
     {
         m_itemSelected->setVisible(!m_itemSelected->isVisible());
@@ -113,7 +122,7 @@ void FormLayers::actionUp()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() + 0.1;
+    qreal zValue = m_itemSelected->zValue() + Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
 
     updateLayers();
@@ -126,28 +135,29 @@ void FormLayers::actionDown()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() - 0.1;
+    qreal zValue = m_itemSelected->zValue() - Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
 
     updateLayers();
 }
 
-void FormLayers::actionAdd()
+void FormLayers::actionCopy()
 {
     qDebug() << "FormLayers::ActionAdd()";
 
     if (!m_itemSelected)
         return;
 
+    // TODO
 //    m_scene->addItem(new BaseGraphicItem(m_itemSelected));
 //    m_scene->addItem(new QGraphicsItem(m_itemSelected));
 
     updateLayers();
 }
 
-void FormLayers::actionSupp()
+void FormLayers::actionDelete()
 {
-    qDebug() << "FormLayers::ActionSupp()";
+//    qDebug() << "FormLayers::ActionSupp()";
 
     if (!m_itemSelected)
         return;
@@ -163,7 +173,7 @@ void FormLayers::actionSupp()
 
 void FormLayers::updateLayers()
 {
-    qDebug() << "FormLayers::updateLayers()";
+//    qDebug() << "FormLayers::updateLayers()";
 
     if (!m_scene)
         return;
@@ -178,6 +188,14 @@ void FormLayers::updateLayers()
         {
             int row = ui->tableWidgetLayers->rowCount()+1;
             ui->tableWidgetLayers->setRowCount(row);
+
+            // ZValue
+            if (qFabs(item->zValue()) < Z_INCREMENT)
+            {
+                item->setZValue(Z_INIT);
+
+                qDebug() << "FormLayers::ShowLayers(): force ZValue\n\t" << item->zValue() << item;
+            }
 
             // 1ere colonne
             if (item->isVisible())
@@ -222,25 +240,69 @@ void FormLayers::updateLayers()
                 } break;
                 default:
                 {
-                    // Default
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, cellIcon(QIcon(":/icons/icons/eye-icon.png")));
                 } break;
             }
 
-            static const int ObjectName = 0;
-            if (item->data(ObjectName).toString().isEmpty())
+            // 3eme colonne
+            static const int nuData = 0;
+            if (item->data(nuData).toString().isEmpty())
             {
-                item->setData(ObjectName, "Itemx"+QString::number(row));
+                QString labelItem;
+
+                switch (item->type())
+                {
+                    case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
+                    {
+                        labelItem = "TextBox";
+                    } break;
+                    case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+                    {
+                        labelItem = "Arrow";
+                    } break;
+                    case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
+                    {
+                        labelItem = "Chart";
+                    } break;
+                    case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:
+                    {
+                        labelItem = "Clipart";
+                    } break;
+                    case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
+                    {
+                        labelItem = "Picture";
+                    } break;
+                   case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
+                    {
+                        labelItem = "NumberedBullet";
+                    } break;
+                    case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
+                    {
+                        labelItem = "Screenshot";
+                    } break;
+                    default:
+                    {
+                        labelItem = "Other";
+                    } break;
+                }
+                item->setData(nuData, labelItem+" #"+QString::number(row));
             }
 
-            ui->tableWidgetLayers->setCellWidget(row-1, 2, new QLabel(item->data(ObjectName).toString()));
-            ui->tableWidgetLayers->setCellWidget(row-1, 3, new QLabel(QString::number(item->zValue())));
+            // item->getName())); ???
+            ui->tableWidgetLayers->setCellWidget(row-1,2, new QLabel(item->data(nuData).toString()));
+
+            // 4eme colonne
+            ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
     }
 
-    // Init
+    // Init select
     m_lineSelected = -1;
     m_columnSelected = -1;
+
+    m_scene->clearSelection();
     //m_itemSelected = NULL;
+
 }
 
 // Getters
@@ -269,38 +331,4 @@ QLabel* FormLayers::cellIcon(const QString& filename)
     label->setPixmap(icon->pixmap(QSize(24,24)));
     return label;
 }
-
-
-void FormLayers::cellActivated(int row, int column)
-{
-    qDebug() << "FormLayers::cellActivated()" << row << column;
-
-//    const QTableWidgetItem *item = filesTable->item(row, 0);
-//    openFile(fileNameOfItem(item));
-}
-
-void FormLayers::contextMenu(const QPoint &pos)
-{
-    qDebug() << "FormLayers::contextMenu()" << pos;
-
-//    const QTableWidgetItem *item = filesTable->itemAt(pos);
-//    if (!item)
-//        return;
-//    QMenu menu;
-//#ifndef QT_NO_CLIPBOARD
-//    QAction *copyAction = menu.addAction("Copy Name");
-//#endif
-//    QAction *openAction = menu.addAction("Open");
-//    QAction *action = menu.exec(filesTable->mapToGlobal(pos));
-//    if (!action)
-//        return;
-//    const QString fileName = fileNameOfItem(item);
-//    if (action == openAction)
-//        openFile(fileName);
-//#ifndef QT_NO_CLIPBOARD
-//    else if (action == copyAction)
-//        QGuiApplication::clipboard()->setText(QDir::toNativeSeparators(fileName));
-//#endif
-}
-
 

@@ -31,7 +31,8 @@ namespace Ui
 // Class
 // -----
 
-class FormLayers: public QWidget
+class FormLayers
+    :   public QWidget
 {
     Q_OBJECT
 
@@ -49,17 +50,14 @@ class FormLayers: public QWidget
 
     private slots:
 
-        void cellActivated(int row, int column);
-        void contextMenu(const QPoint &pos);
-
         // Cells
         void actionClicked(int line, int col);
 
         // Buttons
         void actionUp();
         void actionDown();
-        void actionAdd();
-        void actionSupp();
+        void actionCopy();
+        void actionDelete();
 
     private:
 

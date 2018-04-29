@@ -31,6 +31,7 @@ namespace Ui
 
 class FormArrows
     :   public BaseForm
+                //, Q_OBJECT // QObject go to yours items test not functionnal
 {
     Q_OBJECT
 
@@ -57,6 +58,19 @@ class FormArrows
                             int ArrowWidth, int ArrowHeight,
                             QColor ArrowOutlineColor, QColor ArrowFillColor,
                             int LineThickness, int SizeHeadTypeChoice);*/
+
+        //return the Form Fill Color Arrow
+        QColor getFormFillColorArrow();
+
+
+//**** Zone test
+        // This emit is for connect on the Others class
+        //void send() { emit fillColorArrowChanged(const QColor& color);}
+//       void send() { emit fillColorArrowChanged(const QColor& color)};
+        //void send() {emit FormFillColorArrowChanged(FormFillColorArrow);
+//*** End zone test
+
+
     private:
 
         // UI
