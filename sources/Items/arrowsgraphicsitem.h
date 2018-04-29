@@ -23,6 +23,10 @@
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
+
+    // Essential macro needed for signals-slots
+    //Q_OBJECT
+
     public:
 
         // 4 Type of Thickness outline lines 4 choices possibilities (1 - 4)
@@ -89,7 +93,12 @@ class ArrowsGraphicsItem
         //return the Item Fill Color Arrow
         QColor getFillColor();
 
-private:
+    protected:
+
+              //void AGIfillColorArrowChanged(const QColor& color);
+       //     void AGIfillColorArrowChanged(QGraphicsSceneMouseEvent* event);
+
+    private:
 
         bool m_WithoutAnchorPoint;
         bool m_OneAnchorPoint;
@@ -120,6 +129,7 @@ private:
 
     private slots:
 
+        //void fillColorArrowUpdate(const QColor& newItemFillColorArrow); // <- Bug if it activate
 
 };
 

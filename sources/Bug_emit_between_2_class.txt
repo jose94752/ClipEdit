@@ -1,0 +1,64 @@
+Bug Exemple d'Internet depuis tentative infractueuse méthode 1. les classes Arrows
+-------------------------------------------------------------------------------------------------------------
+https://www.developpez.net/forums/d1339918/c-cpp/bibliotheques/qt/signaux-slots-personnalises-entre-classes-differentes/
+
+1. soit tu passes un QObject à tes items et tu connectes cet objet à ta scène ou à ta fenêtre principale
+
+Code : 	Sélectionner tout - Visualiser dans une fenêtre à part
+
+class Sender : QObject {
+Q_OBJECT // macro indispensable pour les signaux-slots
+signals:
+    void doubleClicked();
+public:
+    //void send() { emit doubleClicked(); }
+    void send() { emit doubleClicked() }; // correction place virgule
+}
+ 
+class Node : public QGraphicsItem
+{
+public:
+    Node(Sender* sender, GraphWidget* graphWidget = 0);
+private:
+    Sender* _sender;
+protected:
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
+        if (_sender)
+            _sender->emit();
+    }
+};
+ 
+// main
+MainWindow w; // beurk le franglais "FenPrincipale"
+Sender sender;
+QObject::connect(&sender, SIGNAL(doubleClicked()), &w, SLOT(CeQueTuVeux()));
+Node* node = new Node(&sender);
+
+2. Soit tu dérives QGraphicsScene pour ajouter ton signal, tu récupères ta scène dans ton item avec la fonction scene() et tu cast
+
+Code : 	Sélectionner tout - Visualiser dans une fenêtre à part
+
+class MyScene : QGraphicsScene {
+Q_OBJECT // macro indispensable pour les signaux-slots
+signals:
+    void doubleClicked();
+public:
+    void send() { emit doubleClicked(); }
+}
+ 
+class Node : public QGraphicsItem
+{
+public:
+    Node(GraphWidget* graphWidget = 0);
+protected:
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
+        MyScene* scene = qobject_cast<MyScene*>(scene());
+        scene->emit();
+    }
+};
+ 
+// main
+MainWindow w; // beurk le franglais "FenPrincipale"
+MyScene scene;
+QObject::connect(&scene, SIGNAL(doubleClicked()), &w, SLOT(CeQueTuVeux()));
+Node* node = new Node();

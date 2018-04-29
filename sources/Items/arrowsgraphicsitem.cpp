@@ -59,6 +59,19 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
+
+
+    //Test zone
+
+    // Connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
+    //connect ( val, SIGNAL(MonSignal(type)), this, SLOT(MonSlot(type)) ); //syntax connect for SIGNAL
+    // connect entres deux classes différentes test (temporaty comment)
+
+//    connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
+
+    //End Test zone
+
+
 }
 // fin Zone de travaux
 
@@ -254,3 +267,22 @@ QColor ArrowsGraphicsItem::getFillColor()
 {
     return *ItemFillColorArrow;
 }
+
+/* // Test
+void ArrowsGraphicsItem::AGIfillColorArrowChanged(QGraphicsSceneMouseEvent *event)
+{
+    if (m_formArrows)
+    {
+        m_formArrows->emit();
+        //m_formArrows->emit (const QColor &color);
+    }
+}
+*/
+
+// SLOTS
+/*
+void ArrowsGraphicsItem::fillColorArrowUpdate(const QColor &newItemFillColorArrow) // <- Bug if it activate
+{                                                                                   // even with the Q_OBJECT macro
+    *ItemFillColorArrow = newItemFillColorArrow;                                    // we have 9 compile errors
+}
+*/

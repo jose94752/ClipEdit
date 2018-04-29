@@ -182,11 +182,14 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
      SizeHeadTypeChoiceContents = SizeHeadTypeChoice;
 }
 
+//
+// SIGNALS
+//
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
     FormFillColorArrow = color;
-    emit FormFillColorArrowChanged(FormFillColorArrow);
+    emit FormFillColorArrowChanged(FormFillColorArrow); // This emit is for connect on FormArrows class
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)
@@ -196,6 +199,9 @@ void FormArrows::outlineColorArrowChanged(const QColor& color)
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
+//
+// SLOTS
+//
 void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
 {
     //To do
