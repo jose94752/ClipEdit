@@ -1,0 +1,52 @@
+Update of Layers and bug after when you try to compile - 29/04/2018 11:38
+--------------------------------------------------------------------------------------------------------------------
+11:33:10: Exécution des étapes pour le projet ClipEdit...
+11:33:10: Configuration inchangée, étape qmake sautée.
+11:33:10: Débute : "/usr/bin/make" 
+/home/formation/Qt/5.10.1/gcc_64/bin/qmake -o Makefile ../sources/ClipEdit.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
+/home/formation/Qt/5.10.1/gcc_64/bin/uic ../sources/mainwindow.ui -o ui_mainwindow.h
+/home/formation/Qt/5.10.1/gcc_64/bin/uic ../sources/Forms/formlayers.ui -o ui_formlayers.h
+/home/formation/Qt/5.10.1/gcc_64/bin/uic ../sources/Forms/formtextboxes.ui -o ui_formtextboxes.h
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o main.o ../sources/main.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o mainwindow.o ../sources/mainwindow.cpp
+In file included from ../../Qt/5.10.1/gcc_64/include/QtCore/qalgorithms.h:43:0,
+                 from ../../Qt/5.10.1/gcc_64/include/QtCore/qdebug.h:44,
+                 from ../../Qt/5.10.1/gcc_64/include/QtCore/QDebug:1,
+                 from ../sources/mainwindow.cpp:13:
+../sources/mainwindow.cpp: In member function ‘void MainWindow::save(bool)’:
+../sources/mainwindow.cpp:423:28: warning: unused variable ‘item’ [-Wunused-variable]
+     foreach(QGraphicsItem *item,items){
+                            ^
+../../Qt/5.10.1/gcc_64/include/QtCore/qglobal.h:1002:10: note: in definition of macro ‘Q_FOREACH’
+     for (variable = *_container_.i; _container_.control; _container_.control = 0)
+          ^~~~~~~~
+../sources/mainwindow.cpp:423:5: note: in expansion of macro ‘foreach’
+     foreach(QGraphicsItem *item,items){
+     ^
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o baseform.o ../sources/Forms/baseform.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o dialogsave.o ../sources/Forms/dialogsave.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o formarrows.o ../sources/Forms/formarrows.cpp
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o formcharts.o ../sources/Forms/formcharts.cpp
+../sources/Forms/formcharts.cpp: In member function ‘virtual void FormCharts::loadFromItem(BaseGraphicItem*) const’:
+../sources/Forms/formcharts.cpp:114:30: warning: unused variable ‘castedItem’ [-Wunused-variable]
+          GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
+                              ^~~~~~~~~~
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o formcliparts.o ../sources/Forms/formcliparts.cpp
+../sources/Forms/formcliparts.cpp: In member function ‘virtual void FormCliparts::loadFromItem(BaseGraphicItem*) const’:
+../sources/Forms/formcliparts.cpp:224:50: warning: unused parameter ‘item’ [-Wunused-parameter]
+ void FormCliparts::loadFromItem(BaseGraphicItem* item) const
+                                                  ^~~~
+g++ -c -pipe -g -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB -I../sources -I. -I../../Qt/5.10.1/gcc_64/include -I../../Qt/5.10.1/gcc_64/include/QtCharts -I../../Qt/5.10.1/gcc_64/include/QtWidgets -I../../Qt/5.10.1/gcc_64/include/QtGui -I../../Qt/5.10.1/gcc_64/include/QtXml -I../../Qt/5.10.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.10.1/gcc_64/mkspecs/linux-g++ -o formlayers.o ../sources/Forms/formlayers.cpp
+../sources/Forms/formlayers.cpp: In member function ‘void FormLayers::updateLayers()’:
+../sources/Forms/formlayers.cpp:174:17: error: ‘fabs’ was not declared in this scope
+             if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT)
+                 ^~~~
+../sources/Forms/formlayers.cpp:174:17: note: suggested alternative: ‘labs’
+             if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT)
+                 ^~~~
+                 labs
+make: *** [Makefile:5193: formlayers.o] Error 1
+11:33:21: Le processus "/usr/bin/make" s'est terminé avec le code 2.
+Erreur lors de la compilation/déploiement du projet ClipEdit (kit : Desktop Qt 5.10.1 GCC 64bit)
+When executing step "Make"
+11:33:21: Temps écoulé : 00:11
