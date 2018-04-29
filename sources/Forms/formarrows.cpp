@@ -118,34 +118,6 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
                                 //To do others HeadTypeChoiceContents
                                 // comboBoxHeadTypeChoiceContents
 {
-    // ??? if (WithoutAnchorPoint and !OneAnchorPoint and !TwoAnchorPoints)
-    if (WithoutAnchorPoint && !OneAnchorPoint && !TwoAnchorPoints)
-    {
-        ui->radioButtonWithoutAnchorPoint->setChecked(true);
-        ui->radioButton1AnchorPoints->setChecked(false);
-        ui->radioButton2AnchorPoints->setChecked(false);
-    }
-    else if (!WithoutAnchorPoint && OneAnchorPoint && !TwoAnchorPoints)
-    {
-        ui->radioButtonWithoutAnchorPoint->setChecked(false);
-        ui->radioButton1AnchorPoints->setChecked(true);
-        ui->radioButton2AnchorPoints->setChecked(false);
-    }
-    else if (!WithoutAnchorPoint && !OneAnchorPoint && TwoAnchorPoints)
-    {
-        ui->radioButtonWithoutAnchorPoint->setChecked(false);
-        ui->radioButton1AnchorPoints->setChecked(false);
-        ui->radioButton2AnchorPoints->setChecked(true);
-    }
-    else
-    {
-        // Return error more than one Anchor Method is checked
-        qDebug() << "Error: More than one Anchor Method is checked";
-        qDebug() << "Without Anchor point is = " << WithoutAnchorPoint;
-        qDebug() << "One Anchor point is = " << OneAnchorPoint;
-        qDebug() << "Two Anchors points is = " << TwoAnchorPoints;
-    }
-
     // Check and update of Anchor points method
     if (WithoutAnchorPoint && !OneAnchorPoint && !TwoAnchorPoints)
     {
