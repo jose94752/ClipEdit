@@ -15,6 +15,8 @@
 #include "formlayers.h"
 #include "ui_formlayers.h"
 #include "Items/basegraphicitem.h"
+#include "Classes/layeritemdelegate.h"
+#include "Classes/layeritemmodel.h"
 
 // Constructor, destructor
 // -----------------------
@@ -35,6 +37,9 @@ FormLayers::~FormLayers()
     delete ui;
 }
 
+// Init
+// ----
+
 void FormLayers::initForm()
 {
     ui->tableWidgetLayers->clear();
@@ -52,6 +57,9 @@ void FormLayers::initForm()
     ui->tableWidgetLayers->setShowGrid(true);
     ui->tableWidgetLayers->setAlternatingRowColors(true);
 
+    ui->tableWidgetLayers->setItemDelegate(new LayerItemDelegate());
+    //ui->tableWidgetLayers->setModel(new LayerItemModel());
+
     ui->tableWidgetLayers->setContextMenuPolicy(Qt::CustomContextMenu);
 
     // connect
@@ -66,6 +74,9 @@ void FormLayers::initForm()
     connect (ui->buttonSupp, SIGNAL(clicked(bool)), this, SLOT(actionSupp()));
 
 }
+
+// Slots
+// -----
 
 void FormLayers::actionClicked(int line , int col)
 {
@@ -147,6 +158,9 @@ void FormLayers::actionSupp()
     updateLayers();
 }
 
+// Update
+// ------
+
 void FormLayers::updateLayers()
 {
     qDebug() << "FormLayers::updateLayers()";
@@ -154,7 +168,6 @@ void FormLayers::updateLayers()
     if (!m_scene)
         return;
 
-//    ui->tableWidgetLayers->clear();
     ui->tableWidgetLayers->setRowCount(0);
 
     foreach (QGraphicsItem* it, m_scene->items(Qt::AscendingOrder))

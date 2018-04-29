@@ -45,13 +45,13 @@ void GraphicsView::setNbElts(int v_nbElts)
 
 void GraphicsView::mousePressEvent(QMouseEvent* event)
 {
-    QGraphicsView::mousePressEvent(event);
-
     if (event->button() == Qt::LeftButton)
     {
         // Enter drag mode
         setDragMode(QGraphicsView::ScrollHandDrag);
     }
+
+    QGraphicsView::mousePressEvent(event);
 }
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent* event)

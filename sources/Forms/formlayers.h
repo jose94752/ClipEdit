@@ -41,21 +41,21 @@ class FormLayers: public QWidget
         explicit FormLayers(QWidget* parent = 0);
         ~FormLayers();
 
+        // Setter
         void setScene(QGraphicsScene & scene);
+
+        // Update
+        void updateLayers();
 
     private slots:
 
         void cellActivated(int row, int column);
         void contextMenu(const QPoint &pos);
 
-//        void on_buttonUp_clicked();
-//        void on_pushDown_clicked();
-
-//        void on_pushSupp_clicked();
-
-//        void on_pushAdd_clicked();
-
+        // Cells
         void actionClicked(int line, int col);
+
+        // Buttons
         void actionUp();
         void actionDown();
         void actionAdd();
@@ -73,7 +73,6 @@ class FormLayers: public QWidget
         QLabel* cellIcon(const QString& filename);
 
         void initForm();
-        void updateLayers();
 
         int m_lineSelected;
         int m_columnSelected;

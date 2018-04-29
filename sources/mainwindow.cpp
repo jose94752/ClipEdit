@@ -108,6 +108,8 @@ void MainWindow::buildForms()
     m_formScreenshots = new FormScreenshots();
     m_formTextboxes = new FormTextBoxes();
 
+    m_formLayers->setScene(m_scene);
+
     // Item connects
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
@@ -118,7 +120,8 @@ void MainWindow::buildForms()
     connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
-    // Remove all useless pages
+    // Building the stacked widget
+    // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
     {
         QWidget* widget = ui->stackedWidgetForms->widget(page);
@@ -126,7 +129,7 @@ void MainWindow::buildForms()
         widget->deleteLater();
     }
 
-    // Store form indexes
+    // Add forms and store the indexes
     m_listIndexes.insert(BUTTON_ID_ARROW, ui->stackedWidgetForms->addWidget(m_formArrows));
     m_listIndexes.insert(BUTTON_ID_CHART, ui->stackedWidgetForms->addWidget(m_formCharts));
     m_listIndexes.insert(BUTTON_ID_BULLET, ui->stackedWidgetForms->addWidget(m_formBullets));
@@ -136,7 +139,7 @@ void MainWindow::buildForms()
     m_listIndexes.insert(BUTTON_ID_SCREENSHOT, ui->stackedWidgetForms->addWidget(m_formScreenshots));
     m_listIndexes.insert(BUTTON_ID_LAYERS, ui->stackedWidgetForms->addWidget(m_formLayers));
 
-    // Store item forms
+    // items <-> forms association
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ArrowGraphicsItem, m_formArrows);
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ChartGraphicsItem, m_formCharts);
     m_itemForms.insert(BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem, m_formBullets);
@@ -368,7 +371,7 @@ void MainWindow::itemSelected()
 // Layers
 void MainWindow::slotLayers()
 {
-    m_formLayers->setScene(m_scene);
+    m_formLayers->updateLayers();
 }
 
 void MainWindow::exportView(bool)
