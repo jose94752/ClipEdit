@@ -45,16 +45,6 @@ class FormLayers: public QWidget
 
     private slots:
 
-        void cellActivated(int row, int column);
-        void contextMenu(const QPoint &pos);
-
-//        void on_buttonUp_clicked();
-//        void on_pushDown_clicked();
-
-//        void on_pushSupp_clicked();
-
-//        void on_pushAdd_clicked();
-
         void actionClicked(int line, int col);
         void actionUp();
         void actionDown();

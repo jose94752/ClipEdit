@@ -11,6 +11,8 @@
 // --------
 
 #include <QDebug>
+#include <QtMath>
+#include <QMenu>
 
 #include "formlayers.h"
 #include "ui_formlayers.h"
@@ -28,10 +30,13 @@ FormLayers::FormLayers(QWidget* parent)
 {
     ui->setupUi(this);
 
+
+    m_lineSelected = -1;
+    m_columnSelected = -1;
     m_scene = NULL;
+    m_itemSelected = NULL;
 
     initForm();
-    updateLayers();
 }
 
 FormLayers::~FormLayers()
@@ -41,6 +46,7 @@ FormLayers::~FormLayers()
 
 void FormLayers::initForm()
 {
+
     ui->tableWidgetLayers->clear();
     ui->tableWidgetLayers->setRowCount(0);
     ui->tableWidgetLayers->setColumnCount(4);
@@ -51,12 +57,6 @@ void FormLayers::initForm()
     ui->tableWidgetLayers->setColumnWidth(3,30);
 
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-//    ui->tableWidgetLayers->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    // connect
-    connect(ui->tableWidgetLayers, &QTableWidget::cellActivated, this, &FormLayers::cellActivated);
-    connect(ui->tableWidgetLayers, &QTableWidget::customContextMenuRequested, this, &FormLayers::contextMenu);
 
     connect (ui->tableWidgetLayers, SIGNAL(cellClicked(int,int)), this, SLOT(actionClicked(int ,int)));
 
@@ -129,6 +129,7 @@ void FormLayers::actionAdd()
     if (!m_itemSelected)
         return;
 
+    // TODO
 //    m_scene->addItem(new BaseGraphicItem(m_itemSelected));
 //    m_scene->addItem(new QGraphicsItem(m_itemSelected));
 
@@ -168,8 +169,7 @@ void FormLayers::updateLayers()
             ui->tableWidgetLayers->setRowCount(row);
 
             // ZValue
-            //if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT) // <- Bug 'fabs' was not declared in this scope
-            if (labs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT) // <- patch try 'labs' suggesst by compiling
+            if (qFabs(item->zValue()) < Z_INCREMENT)
             {
                 item->setZValue(Z_INIT);
 
@@ -310,38 +310,4 @@ QLabel* FormLayers::cellIcon(const QString& filename)
     label->setPixmap(icon->pixmap(QSize(24,24)));
     return label;
 }
-
-
-void FormLayers::cellActivated(int row, int column)
-{
-    qDebug() << "FormLayers::cellActivated()" << row << column;
-
-//    const QTableWidgetItem *item = filesTable->item(row, 0);
-//    openFile(fileNameOfItem(item));
-}
-
-void FormLayers::contextMenu(const QPoint &pos)
-{
-    qDebug() << "FormLayers::contextMenu()" << pos;
-
-//    const QTableWidgetItem *item = filesTable->itemAt(pos);
-//    if (!item)
-//        return;
-//    QMenu menu;
-//#ifndef QT_NO_CLIPBOARD
-//    QAction *copyAction = menu.addAction("Copy Name");
-//#endif
-//    QAction *openAction = menu.addAction("Open");
-//    QAction *action = menu.exec(filesTable->mapToGlobal(pos));
-//    if (!action)
-//        return;
-//    const QString fileName = fileNameOfItem(item);
-//    if (action == openAction)
-//        openFile(fileName);
-//#ifndef QT_NO_CLIPBOARD
-//    else if (action == copyAction)
-//        QGuiApplication::clipboard()->setText(QDir::toNativeSeparators(fileName));
-//#endif
-}
-
 
