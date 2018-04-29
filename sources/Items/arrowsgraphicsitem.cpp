@@ -120,8 +120,11 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (qFuzzyCompare(line.length(), qreal(0.)))
         return;
 
+    // Set the Line Thickness
+    m_LineThickness = 4; // Temp for tests intial 1
+
     // Draw the line (next step)
-    painter->setPen(QPen(m_Color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 
     // Draw the arrows
@@ -211,4 +214,9 @@ QPointF ArrowsGraphicsItem::getEndPosition()
 int ArrowsGraphicsItem::getArrowHeadSize()
 {
     return arrowHeadSize;
+}
+
+int ArrowsGraphicsItem::getLineThicknessSize()
+{
+    return m_LineThickness;
 }

@@ -83,7 +83,8 @@ class ArrowsGraphicsItem
         //return the ArrowHeadSize
         int getArrowHeadSize();
 
-
+        //return the LineThicknessSize
+        int getLineThicknessSize();
 
 private:
 

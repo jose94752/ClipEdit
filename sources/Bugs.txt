@@ -5,5 +5,7 @@
 - Pictures : opacity
 - Pictures : crop property
 - Scene : Control ++ and Control -- make zoom
+- Arrows : Handle bug when you change azimut of the arrow to full horizontal (or vertical) and you click somewhere then you can't
+			recall these Arrow.
 
 

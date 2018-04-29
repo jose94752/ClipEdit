@@ -208,6 +208,9 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //qDebug() << "getArrowHeadSize = " << (castedItem->getArrowHeadSize()); // For tests
         ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
 
+        qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
+
         // Others:
         //castedItem->setFormArrowMethodsForEachHandleValue();
         //...
