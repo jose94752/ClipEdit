@@ -1,3 +1,11 @@
+Patched formlayers.cpp - 29/04/2018 11:57
+--------------------------------------------------------------------------------------------------------------------
+[...]
+            // ZValue
+            //if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT) // <- Bug 'fabs' was not declared in this scope
+            if (labs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT) // <- patch try 'labs' suggesst by compiling
+[...]
+
 Update of Layers and bug after when you try to compile - 29/04/2018 11:38
 --------------------------------------------------------------------------------------------------------------------
 11:33:10: Exécution des étapes pour le projet ClipEdit...

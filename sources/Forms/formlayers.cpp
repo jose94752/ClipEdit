@@ -171,7 +171,8 @@ void FormLayers::updateLayers()
             ui->tableWidgetLayers->setRowCount(row);
 
             // ZValue
-            if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT)
+            //if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT) // <- Bug 'fabs' was not declared in this scope
+            if (labs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT) // <- patch try 'labs' suggesst by compiling
             {
                 item->setZValue(Z_INIT);
 
