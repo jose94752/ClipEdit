@@ -52,10 +52,7 @@ void FormLayers::initForm()
 
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    ui->tableWidgetLayers->setShowGrid(true);
-    ui->tableWidgetLayers->setAlternatingRowColors(true);
-
-    ui->tableWidgetLayers->setContextMenuPolicy(Qt::CustomContextMenu);
+//    ui->tableWidgetLayers->setContextMenuPolicy(Qt::CustomContextMenu);
 
     // connect
     connect(ui->tableWidgetLayers, &QTableWidget::cellActivated, this, &FormLayers::cellActivated);
