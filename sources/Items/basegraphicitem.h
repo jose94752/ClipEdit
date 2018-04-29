@@ -126,8 +126,6 @@ class BaseGraphicItem
         const QRectF& rect() const;
         void setRect(const QRectF& rect);
 
-        void setNuLayer(int nuLayer);
-
         virtual void getParameters(QSettings*,int);
         virtual void setParameters(QSettings*,int);
 
