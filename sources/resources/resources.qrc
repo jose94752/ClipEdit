@@ -33,6 +33,8 @@
         <file>icons/align-top.png</file>
         <file>icons/align-vcentered-icon.png</file>
         <file>icons/eye-icon.png</file>
+        <file>icons/delete-icon.png</file>
+        <file>icons/copy-icon.ico</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>

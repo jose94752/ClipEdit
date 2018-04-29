@@ -16,6 +16,10 @@
 #include "ui_formlayers.h"
 #include "Items/basegraphicitem.h"
 
+#define Z_DEFAULT       (0.0)
+#define Z_INIT          (10.0)
+#define Z_INCREMENT     (1.0)
+
 // Constructor, destructor
 // -----------------------
 
@@ -43,17 +47,10 @@ void FormLayers::initForm()
     ui->tableWidgetLayers->setColumnCount(4);
     ui->tableWidgetLayers->setColumnWidth(0,40);
     ui->tableWidgetLayers->setColumnWidth(1,40);
-    ui->tableWidgetLayers->setColumnWidth(2,300);
+    ui->tableWidgetLayers->setColumnWidth(2,180);
     ui->tableWidgetLayers->setColumnWidth(3,30);
 
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-//    QStringList labels;
-//    labels << tr("Filename") << tr("Size");
-//    ui->tableWidgetLayers->setHorizontalHeaderLabels(labels);
-//    ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-//    ui->tableWidgetLayers->verticalHeader()->hide();
-//    ui->tableWidgetLayers->setShowGrid(false);
 
     ui->tableWidgetLayers->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -90,16 +87,10 @@ void FormLayers::ActionClicked( int line , int col )
 
     qDebug() << "FormLayers::ActionClicked()" << m_itemSelected;
 
+    // Visibility
     if (m_columnSelected == 0)
     {
-        if (m_itemSelected->isVisible())
-        {
-            m_itemSelected->setVisible(false);
-        }
-        else
-        {
-            m_itemSelected->setVisible(true);
-        }
+        m_itemSelected->setVisible(!m_itemSelected->isVisible());
 
         ShowLayers();
     }
@@ -112,7 +103,7 @@ void FormLayers::ActionUp()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() + 0.1;
+    qreal zValue = m_itemSelected->zValue() - Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
 
     ShowLayers();
@@ -125,7 +116,7 @@ void FormLayers::ActionDown()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() - 0.1;
+    qreal zValue = m_itemSelected->zValue() + Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
 
     ShowLayers();
@@ -146,7 +137,7 @@ void FormLayers::ActionAdd()
 
 void FormLayers::ActionSupp()
 {
-    qDebug() << "FormLayers::ActionSupp()";
+//    qDebug() << "FormLayers::ActionSupp()";
 
     if (!m_itemSelected)
         return;
@@ -159,7 +150,7 @@ void FormLayers::ActionSupp()
 
 void FormLayers::ShowLayers()
 {
-    qDebug() << "FormLayers::ShowLayers()";
+//    qDebug() << "FormLayers::ShowLayers()";
 
     if (!m_scene)
         return;
@@ -174,6 +165,14 @@ void FormLayers::ShowLayers()
         {
             int row=ui->tableWidgetLayers->rowCount()+1;
             ui->tableWidgetLayers->setRowCount(row);
+
+            // ZValue
+            if (fabs(item->zValue()) < Z_INCREMENT) // == Z_DEFAULT)
+            {
+                item->setZValue(Z_INIT);
+
+                qDebug() << "FormLayers::ShowLayers(): force ZValue\n\t" << item->zValue() << item;
+            }
 
             // 1ere colonne
             if (item->isVisible() == true)
@@ -218,25 +217,29 @@ void FormLayers::ShowLayers()
                 } break;
                 default:
                 {
-                    // Default
+                    ui->tableWidgetLayers->setCellWidget(row - 1, 1, Icon(QIcon(":/icons/icons/eye-icon.png")));
                 } break;
             }
 
-            static const int ObjectName = 0;
-            if (item->data(ObjectName).toString().isEmpty())
+            // 3eme colonne
+            static const int nuData = 0;
+            if (item->data(nuData).toString().isEmpty())
             {
-                item->setData(ObjectName, "Itemx"+QString::number(row));
+                item->setData(nuData, "Item"+QString::number(row));
             }
-            // ui->tableWidgetLayers->setCellWidget(row-1,2,new QLabel("Label itemx"+QString::number(row))); // item->getName()));
-            ui->tableWidgetLayers->setCellWidget(row-1,2, new QLabel(item->data(ObjectName).toString()));
+            // item->getName())); ???
+            ui->tableWidgetLayers->setCellWidget(row-1,2, new QLabel(item->data(nuData).toString()));
+
+            // 4eme colonne
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
     }
 
-    // Init
+    // Init select
     m_lineSelected = -1;
     m_columnSelected = -1;
 
+    m_scene->clearSelection();
     m_itemSelected = NULL;
 
 }
