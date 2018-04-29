@@ -26,7 +26,7 @@
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
-    m_formArrows=ptrFormArrows;
+    m_formArrows = ptrFormArrows;
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
@@ -53,8 +53,8 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
    // constructor Constructs an invalid color with the RGB value (0, 0, 0).
    // We must use the default constructor when you want to implement isValid() function of QColor class
    // If you don't do you will have segmentation fault bug
-   ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
-   //ItemFillColorArrow = new QColor(ui->); XXXX Work in progress point XXXX
+   //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+   ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
    ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
 
 
@@ -130,7 +130,8 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     m_LineThickness = 4; // Temp for tests intial 1
 
     // Draw the line (next step)
-    painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    //painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 
     // Draw the arrows
@@ -147,7 +148,8 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     QPointF destArrowP2 = *m_EndPositionItem + QPointF(qSin(angle - M_PI + M_PI / 3) * arrowHeadSize,
                                                        qCos(angle - M_PI + M_PI / 3) * arrowHeadSize);
 
-    painter->setBrush(m_Color);
+    //painter->setBrush(m_Color);
+    painter->setBrush(*ItemFillColorArrow);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();

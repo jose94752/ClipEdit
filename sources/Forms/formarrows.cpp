@@ -112,6 +112,12 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
 
 }
 
+//return the Form Fill Color Arrow
+QColor FormArrows::getFormFillColorArrow()
+{
+    return FormFillColorArrow;
+}
+
 void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
                                 int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
                                 int SizeHeadTypeChoice)

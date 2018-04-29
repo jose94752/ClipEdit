@@ -57,6 +57,10 @@ class FormArrows
                             int ArrowWidth, int ArrowHeight,
                             QColor ArrowOutlineColor, QColor ArrowFillColor,
                             int LineThickness, int SizeHeadTypeChoice);*/
+
+        //return the Form Fill Color Arrow
+        QColor getFormFillColorArrow();
+
     private:
 
         // UI
