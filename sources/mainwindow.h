@@ -16,10 +16,6 @@
 #include <QMainWindow>
 #include <QMap>
 #include <QGraphicsScene>
-
-//#include <QtCharts/QChartView>
-//#include <QtCharts/QLineSeries>
-//#include <QtCharts/QAreaSeries>
 #include <QRectF>
 
 #include "Forms/formarrows.h"

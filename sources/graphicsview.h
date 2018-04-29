@@ -46,7 +46,6 @@ class GraphicsView
     protected:
 
         // Events
-        void mouseDoubleClickEvent(QMouseEvent* event);
         void mousePressEvent(QMouseEvent* event);
         void mouseReleaseEvent(QMouseEvent* event);
         void mouseMoveEvent(QMouseEvent* event);
@@ -61,7 +60,7 @@ class GraphicsView
         //QPointF m_oldPos;
 
         // Rect
-        QGraphicsRectItem **m_graphRectItem;
+        QGraphicsRectItem** m_graphRectItem;
         int m_nbSceneElts;
 
 };

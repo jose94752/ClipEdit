@@ -49,6 +49,7 @@ FormArrows::FormArrows(QWidget *parent)
      {
         ui->comboBoxHeadTypeChoiceContents->addItem("Simple Arrow Head size " + QString::number(i));
      }
+    DefaultFormArrowHeadSize = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
 
     // Get start default color Qt::black on the Class ColorButton we use others Colors
     ui->toolButtonOutlineColorContents->setColor(Qt::darkCyan);
@@ -72,7 +73,7 @@ FormArrows::FormArrows(QWidget *parent)
     connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(outlineColorArrowChanged(QColor)));
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
 
-    // Connects for
+    // Connects for others elements of FormArrrow To do
 
 }
 
@@ -114,8 +115,9 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
 void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
                                 int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
                                 int SizeHeadTypeChoice)
+                                //To do others HeadTypeChoiceContents
+                                // comboBoxHeadTypeChoiceContents
 {
-
     // ??? if (WithoutAnchorPoint and !OneAnchorPoint and !TwoAnchorPoints)
     if (WithoutAnchorPoint && !OneAnchorPoint && !TwoAnchorPoints)
     {
@@ -144,6 +146,37 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
         qDebug() << "Two Anchors points is = " << TwoAnchorPoints;
     }
 
+    // Check and update of Anchor points method
+    if (WithoutAnchorPoint && !OneAnchorPoint && !TwoAnchorPoints)
+    {
+        ui->radioButtonWithoutAnchorPoint->setChecked(true);
+        ui->radioButton1AnchorPoints->setChecked(false);
+        ui->radioButton2AnchorPoints->setChecked(false);
+        // To do check if Anchor points method have changed for these ArrowsGraphicsItem
+    }
+    else if (!WithoutAnchorPoint && OneAnchorPoint && !TwoAnchorPoints)
+    {
+        ui->radioButtonWithoutAnchorPoint->setChecked(false);
+        ui->radioButton1AnchorPoints->setChecked(true);
+        ui->radioButton2AnchorPoints->setChecked(false);
+        // To do check if Anchor points method have changed for these ArrowsGraphicsItem
+    }
+    else if (!WithoutAnchorPoint && !OneAnchorPoint && TwoAnchorPoints)
+    {
+        ui->radioButtonWithoutAnchorPoint->setChecked(false);
+        ui->radioButton1AnchorPoints->setChecked(false);
+        ui->radioButton2AnchorPoints->setChecked(true);
+        // To do check if Anchor points method have changed for these ArrowsGraphicsItem
+    }
+    else
+    {
+        // Return error more than one Anchor Method is checked
+        qDebug() << "Error: More than one Anchor Method is checked when you call FormArrows::SetInfosArrows method";
+        qDebug() << "Without Anchor point is = " << WithoutAnchorPoint;
+        qDebug() << "One Anchor point is = " << OneAnchorPoint;
+        qDebug() << "Two Anchors points is = " << TwoAnchorPoints;
+    }
+
     ui->spinBoxArrowWidthContents->setValue(ArrowWidth);
 
     ui->spinBoxArrowHeightContents->setValue(ArrowHeight);
@@ -152,7 +185,7 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
 
     ui->toolButtonFillColorContents->setColor(ArrowFillColor);
 
-
+    // Line Thinckness update process
     LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
 
     BeforeLineThickness = LineThicknessContents;
@@ -161,9 +194,14 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
 
     //To do others HeadTypeChoiceContents
     // comboBoxHeadTypeChoiceContents
-    //SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
+    SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
+
+    FormArrowHeadSize = SizeHeadTypeChoiceContents; // <- "FormArrowHeadSize = SizeHeadTypeChoiceContents;" is First issue of Form Arrow Head Size and is a temporary solution
+
+    BeforeFormArrowHeadSize = FormArrowHeadSize; // temp method this will change as soon as possible
+
     //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
-     SizeHeadTypeChoiceContents=SizeHeadTypeChoice;
+     SizeHeadTypeChoiceContents = SizeHeadTypeChoice;
 }
 // fin Zone de travaux
 
@@ -195,5 +233,12 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         ArrowsGraphicsItem* castedItem = qgraphicsitem_cast<ArrowsGraphicsItem*>(item);
 
         // Load data into the form
+        //qDebug() << "getArrowHeadSize = " << (castedItem->getArrowHeadSize()); // For tests
+        ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
+
+        // Others:
+        //castedItem->setFormArrowMethodsForEachHandleValue();
+        //...
+
     }
 }
