@@ -22,7 +22,7 @@
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
 
-
+// Zone de travaux
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
@@ -49,12 +49,18 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
    m_Color = Qt::black; // Temp for test
 
-   //ItemOutlineColorArrow = new QColor(Qt::black); // For test you must use a color because the default new QColor(); constructor Constructs an invalid color with the RGB value (0, 0, 0).
+   // For test you must use a color because the default new QColor();
+   // constructor Constructs an invalid color with the RGB value (0, 0, 0).
+   // We must use the default constructor when you want to implement isValid() function of QColor class
+   // If you don't do you will have segmentation fault bug
+   ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+   //ItemFillColorArrow = new QColor(ui->); XXXX Work in progress point XXXX
+   ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 }
-
+// fin Zone de travaux
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
@@ -159,22 +165,43 @@ void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAncho
                                         //To do others HeadTypeChoiceContents
                                         // comboBoxHeadTypeChoiceContents
 {
-    m_WithoutAnchorPoint = WithoutAnchorPoint;
-    m_OneAnchorPoint = OneAnchorPoint;
-    m_TwoAnchorPoints = TwoAnchorPoints;
+    WithoutAnchorPoint = m_WithoutAnchorPoint;
+    OneAnchorPoint = m_OneAnchorPoint;
+    TwoAnchorPoints = m_TwoAnchorPoints;
 
-    m_ArrowWidth  = ArrowWidth;
-    m_ArrowHeight = ArrowHeight;
+    ArrowWidth = m_ArrowWidth;
+    ArrowHeight = m_ArrowHeight;
 
-    ItemOutlineColorArrow = new QColor(ArrowOutlineColor);
-    ItemFillColorArrow = new QColor(ArrowFillColor);
+    if (ItemOutlineColorArrow->isValid())
+        {
+            ArrowOutlineColor = *ItemOutlineColorArrow;
+        }
+    else
+        {
+            qDebug() << "Invalid Item Outline Color Arrow when you call GetInfosArrows Method,"
+                     << " we have replaced it by standard color black.";
+            ItemOutlineColorArrow = new QColor(Qt::black);
+            ArrowOutlineColor = *ItemOutlineColorArrow;
+        }
 
-    m_LineThickness = LineThickness;
+    if (ItemFillColorArrow->isValid())
+        {
+            ArrowFillColor = *ItemFillColorArrow;
+        }
+    else
+        {
+            qDebug() << "Invalid Item Fill Color Arrow when you call GetInfosArrows Method,"
+                     <<  " we have replaced it by standard color black.";
+            ItemFillColorArrow = new QColor(Qt::black);
+            ArrowFillColor = *ItemFillColorArrow;
+        }
+
+    LineThickness = m_LineThickness;
 
 
     //To do others HeadTypeChoiceContents
     // comboBoxHeadTypeChoiceContents
-    m_SizeHeadTypeChoice = SizeHeadTypeChoice;
+    SizeHeadTypeChoice = m_SizeHeadTypeChoice;
 }
 
 void ArrowsGraphicsItem::updateArrowPosition()
@@ -219,4 +246,9 @@ int ArrowsGraphicsItem::getArrowHeadSize()
 int ArrowsGraphicsItem::getLineThicknessSize()
 {
     return m_LineThickness;
+}
+
+QColor ArrowsGraphicsItem::getFillColor()
+{
+    return *ItemFillColorArrow;
 }

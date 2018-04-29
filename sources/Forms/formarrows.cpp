@@ -111,7 +111,7 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
    SizeHeadTypeChoice = SizeHeadTypeChoiceContents;
 
 }
-// Zone de travaux
+
 void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
                                 int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
                                 int SizeHeadTypeChoice)
@@ -175,7 +175,6 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
     //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
      SizeHeadTypeChoiceContents = SizeHeadTypeChoice;
 }
-// fin Zone de travaux
 
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
@@ -208,8 +207,11 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //qDebug() << "getArrowHeadSize = " << (castedItem->getArrowHeadSize()); // For tests
         ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
 
-        qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
         ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
+
+        qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
+        ui->toolButtonFillColorContents->setColor(castedItem->getFillColor());
 
         // Others:
         //castedItem->setFormArrowMethodsForEachHandleValue();
