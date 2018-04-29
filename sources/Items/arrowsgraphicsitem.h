@@ -83,7 +83,11 @@ class ArrowsGraphicsItem
         //return the ArrowHeadSize
         int getArrowHeadSize();
 
+        //return the LineThicknessSize
+        int getLineThicknessSize();
 
+        //return the Item Fill Color Arrow
+        QColor getFillColor();
 
 private:
 
@@ -105,14 +109,12 @@ private:
         QPointF *m_StartPositionItem;
         QPointF *m_EndPositionItem;
 
+        QColor m_Color; // Temp for test
         QColor *ItemOutlineColorArrow;
         QColor *ItemFillColorArrow;
 
         QPolygonF ArrowHeadStart;
         QPolygonF ArrowHeadEnd;
-
-
-        QColor m_Color; // Temp for test
 
         FormArrows *m_formArrows;
 
