@@ -115,9 +115,10 @@ void MainWindow::buildForms()
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    connect( m_formCharts, SIGNAL(FormCreateChart() ), this, SLOT(slotGraphs()));
+    //connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
-    connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Building the stacked widget
@@ -325,18 +326,28 @@ void MainWindow::slotTextPicture()
     m_scene.addItem(PictureItem);
 }
 
+
+// removed parametre
+void MainWindow::slotGraphs( )
+{
+    qDebug() << "slot graphs main window";
+    GraphsInfo infos;
+    // Retrieve data from the form
+    m_formCharts->GetChartsValues(infos);
+    int nbPoints = infos.m_Arcs.size();
+    if( nbPoints > 0 )
+    {
+        qDebug() << "added graph mainWindow Slot Graphs";
+
+        GraphsGraphicsItem *g = new GraphsGraphicsItem();
+        g->setInfos(infos);
+        m_scene.addItem(g);
+     }
+}
+
+/*
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
-
-    //m_scene.addItem(new GraphsGraphicsItem());
-    //m_scene.addItem(new GraphsGraphicsItem());
-
-//    GraphsInfo infos;
-//    m_formCharts.GetChartsValues( infos);
-
-//    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-//    g->setInfos(infos);
-//    m_scene.addItem(g);
 
     //do not add graphs if no points
     int nbPoints = infos.m_Arcs.size();
@@ -350,7 +361,7 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
         m_scene.addItem(g);
      }
 }
-
+*/
 
 void MainWindow::slotArrowsGraphicsItem()
 {

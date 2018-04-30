@@ -116,7 +116,8 @@ class MainWindow
         void slotNumberedBullets();
         void slotTextBoxes();
         void slotTextPicture();
-        void slotGraphs(const GraphsInfo &infos);
+        //void slotGraphs(const GraphsInfo &infos);
+        void slotGraphs();
         void slotArrowsGraphicsItem();
 
         //
