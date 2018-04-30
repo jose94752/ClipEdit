@@ -47,6 +47,7 @@ class ResizeSceneDialog
     protected:
 
         void resizeEvent(QResizeEvent*);
+        void saveDefaultTheme() const;
 
     private:
 
