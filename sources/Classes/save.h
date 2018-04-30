@@ -31,7 +31,6 @@ public:
     static QString current_filename;
     static bool fileNameExists();
 
-    NumberedBulletGraphicItem* setNumberedBulletGraphicItem();
     void save();
     void open();
 private:
