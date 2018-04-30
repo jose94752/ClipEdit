@@ -112,6 +112,7 @@ void MainWindow::buildForms()
     m_formLayers->setScene(m_scene);
 
     // Item connects
+    connect(m_formArrows->getAddPushButtonArrow(),SIGNAL(clicked(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));

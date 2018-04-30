@@ -183,7 +183,7 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
       pathnum += QString ("num");
 
       QVariant vnum;
-      settings->value(pathnum, vnum);
+      vnum=settings->value(pathnum, vnum);
       m_num = vnum.toInt();
     }
     //shape
@@ -192,7 +192,7 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
         pathshape += QString ("shape");
 
         QVariant vshape;
-        settings->value(pathshape, vshape);
+        vshape=settings->value(pathshape, vshape);
         m_shape = (shape_e) vshape.toInt();
     }
     //bulletcolor
@@ -201,7 +201,7 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
       pathbulletcolor += QString ("bulletcolor");
 
       QVariant v_bulletcolor;
-      settings->value(pathbulletcolor, v_bulletcolor);
+      v_bulletcolor=settings->value(pathbulletcolor, v_bulletcolor);
       QString str_bulletcolor = v_bulletcolor.toString();
       m_bulletcolor.setNamedColor(str_bulletcolor);
 
@@ -212,7 +212,7 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
       pathnumbercolor += QString ("numbercolor");
 
       QVariant v_numbercolor;
-      settings->value(pathnumbercolor, v_numbercolor);
+      v_numbercolor=settings->value(pathnumbercolor, v_numbercolor);
       QString str_numbercolor = v_numbercolor.toString();
       m_numbercolor.setNamedColor(str_numbercolor);
     }
@@ -222,7 +222,7 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
       pathfont += QString ("font");
 
       QVariant vfontname;
-      settings->value (pathfont, vfontname);
+      vfontname=settings->value (pathfont, vfontname);
       QString stringfont = vfontname.toString();
       m_font.fromString (stringfont);
     }
@@ -232,7 +232,8 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
         pathsize += QString ("size");
 
         QVariant vsize = m_size;
-        settings->setValue(pathsize, vsize);
+        vsize=settings->value(pathsize, vsize);
+        m_size=vsize.toInt();
     }
 }
 
