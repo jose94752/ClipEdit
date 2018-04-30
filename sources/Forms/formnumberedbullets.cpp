@@ -1,140 +1,299 @@
 /*
-=========================================================
-* File:         formnumberedbullets.cpp
+==========================================================
+* File:         numberedbulletgraphicitem.cpp
 * Project:      ClipEdit
-* Creation:     17/04/2018
-* Brief:        Form to create NumberedBulletGraphicItem
-=========================================================
+* Creation:     18/04/2018
+* Brief:        Inherit from BaseGraphicsItem
+*               Define a set of bubbles containing numbers
+==========================================================
 */
 
 // Includes
 // --------
 
 #include <QDebug>
-#include <QSettings>
-#include <QColor>
+#include <QPainter>
 
-#include "formnumberedbullets.h"
-#include "ui_formnumberedbullets.h"
-#include "../Items/numberedbulletgraphicitem.h"
+#include "numberedbulletgraphicitem.h"
 
-// Constructor, destructor
-// -----------------------
+// Constructor
+// -----------
 
-FormNumberedBullets::FormNumberedBullets(QWidget *parent)
-    :   BaseForm(parent), ui(new Ui::FormNumberedBullets)
+NumberedBulletGraphicItem::NumberedBulletGraphicItem(int num, shape_e bullet_shape, QColor bullet_color,
+                          QColor numbercolor, const QFont font, int size, BaseGraphicItem *parent) :
+    BaseGraphicItem(parent),
+    m_num(num),
+    m_shape(bullet_shape),
+    m_bulletcolor(bullet_color),
+    m_numbercolor(numbercolor),
+    m_font(font),
+    m_size(size)
 {
-    ui->setupUi(this);
-    loadDefaultTheme();
+    int compwidth (0), compheight (0);
+    m_font.setPixelSize(m_size);
 
-    connect(ui->pushButton_saveBulletTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
-    connect(ui->pushButton_loadBulletTheme, SIGNAL(clicked(bool)), this, SLOT(loadDefaultTheme()));
+    eval_width (compwidth);
+    eval_height (compheight);
+
+    //compwidth *= m_size;
+    //compheight *= m_size;
+
+    int cote = (compwidth < compheight ? compheight:compwidth);
+    //cote du rectangle entourant le carre entourant la chaine du chiffre
+    //cote *= 1/0.785; //1 / (pi/4)
+    cote *= 1.2;
+    //cote *=2;
+    //qDebug () << "NB : compwidth == " << compwidth << "\n";
+    //qDebug () << "NB : compheigth == " << compheight << "\n";
+
+    // Setting the size
+    QRectF qrect (0, 0, cote, cote);
+    setRect(qrect);
 }
 
-FormNumberedBullets::~FormNumberedBullets()
+// Virtual methods from BaseGraphicItem
+// ------------------------------------
+
+QRectF NumberedBulletGraphicItem::boundingRect() const
 {
-    delete ui;
+    return BaseGraphicItem::boundingRect();
+}
+
+void NumberedBulletGraphicItem::paint(QPainter* qpainter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+    qpainter->setRenderHint(QPainter::Antialiasing);
+    qpainter->setBrush(m_bulletcolor);
+    qpainter->setPen(m_numbercolor);
+
+    switch (m_shape) {
+    case NB_CIRCLE :
+        qpainter->drawEllipse(m_rect);
+        break;
+    case NB_RECTANGLE :
+        qpainter->drawRect(m_rect);
+        break;
+    case NB_ROUNDEDRECTANGLE :
+        qpainter->drawRoundedRect(m_rect, 10, 10);
+        break;
+    default :
+        break;
+    }
+
+    QString strnum = QString::number(m_num);
+    QTextOption qto;
+    qto.setAlignment(Qt::AlignCenter);
+    //m_font.setPixelSize(m_rect.height());
+    qpainter->setFont(m_font);
+
+    qpainter->drawText(m_rect, strnum, qto);
+
+    BaseGraphicItem::paint(qpainter, option, widget);
+}
+
+int NumberedBulletGraphicItem::type() const
+{
+    return BaseGraphicItem::NumberedBulletGraphicsItem;
+}
+
+// Size calculations
+// -----------------
+
+void NumberedBulletGraphicItem::eval_height(int& height)
+{
+    QFontMetrics fm(m_font);
+    height = fm.height();
+}
+
+void NumberedBulletGraphicItem::eval_width(int& width)
+{
+    width = 0;
+    QString strnum;
+    QFontMetrics fm(m_font);
+
+    strnum = QString::number(m_num);
+    width = fm.width(strnum);
 }
 
 // Getters
 // -------
 
-void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape, QColor& bulletcolor, QColor& numbercolor, QFont& font) const
+int NumberedBulletGraphicItem::getNum() const
 {
-    from = ui->spinBox_From->value();
-    to = ui->spinBox_To->value ();
-    taille = ui->spinBox_Size->value();
-    shape = ui->comboBox_Shape->currentIndex();
-    bulletcolor = ui->ColorButton_BulletColor->getColor();
-    numbercolor = ui->ColorBullet_NumberColor->getColor();
-    font = ui->fontComboBox->currentFont();
+    return m_num;
 }
 
-QPushButton *FormNumberedBullets::getGoPushButton()
+NumberedBulletGraphicItem::shape_e NumberedBulletGraphicItem::getShape() const
 {
-    return ui->pushButtonCreateBullet;
+    return m_shape;
 }
 
-// Slots
+const QColor& NumberedBulletGraphicItem::getBulletColor() const
+{
+    return m_bulletcolor;
+}
+
+const QColor& NumberedBulletGraphicItem::getNumberColor() const
+{
+    return m_numbercolor;
+}
+
+const QFont& NumberedBulletGraphicItem::getFont() const
+{
+    return m_font;
+}
+
+int NumberedBulletGraphicItem::getSize() const
+{
+    return m_size;
+}
+
+// Debug
 // -----
 
-void FormNumberedBullets::saveDefaultTheme () const
+void NumberedBulletGraphicItem::print_debug() const
 {
-    QSettings s;
-    int from(0), to(0), taille(0);
-    int shape;
-    QFont qf;
-    QColor numbercolor, bulletcolor;
+    qDebug () << "m_num == " << m_num << "\n";
+    qDebug () << "m_shape == ";
 
-    get_info(from, to, taille,  shape, bulletcolor, numbercolor, qf);
-    s.setValue("FormNumberedBullets/from", from);
-    s.setValue("FormNumberedBullets/to", to);
-    s.setValue("FormNumberedBullets/size",taille );
-    s.setValue("FormNumberedBullets/bulletcolor",bulletcolor.name ());
-    s.setValue("FormNumberedBullets/numbercolor",numbercolor.name ());
-    s.setValue("FormNumberedBullets/font",ui->fontComboBox->currentIndex());
-    s.setValue("FormNumberedBullets/shape", (int) shape);
+    switch (m_shape) {
+    case NB_CIRCLE :
+      qDebug () << "CIRCLE";
+      break;
+    case NB_RECTANGLE :
+      qDebug () << "RECTANGLE";
+      break;
+    case NB_ROUNDEDRECTANGLE :
+      qDebug () << "ROUNDED_RECTANGLE";
+    }
+    qDebug () << "\n";
 }
 
-void FormNumberedBullets::loadDefaultTheme()
-{
-    QSettings q;
-    int from(1), to(1), taille(12);
-    from = q.value("FormNumberedBullets/from", from).toInt();
-    to = q.value("FormNumberedBullets/to", to).toInt ();
-    taille = q.value("FormNumberedBullets/size", taille).toInt ();
-
-    QColor bulletcolor(Qt::blue), numbercolor(Qt::red);
-    QString str_bulletcolor (bulletcolor.name()), str_numbercolor (numbercolor.name());
-    str_bulletcolor = q.value("FormNumberedBullets/bulletcolor", str_bulletcolor).toString();
-    str_numbercolor = q.value("FormNumberedBullets/numbercolor", str_numbercolor).toString ();
-    bulletcolor.setNamedColor(str_bulletcolor);
-    numbercolor.setNamedColor(str_numbercolor);
-
-    int qfont_index(0);
-    qfont_index = q.value("FormNumberedBullets/font", qfont_index).toInt();
-
-    int index_shape(0);
-    index_shape = q.value("FormNumberedBullets/shape", index_shape).toInt();
-
-    ui->spinBox_From->setValue(from);
-    ui->spinBox_To->setValue(to);
-    ui->spinBox_Size->setValue (taille);
-    ui->ColorButton_BulletColor->setColor(bulletcolor);
-    ui->ColorBullet_NumberColor->setColor(numbercolor);
-    ui->fontComboBox->setCurrentIndex(qfont_index);
-    ui->comboBox_Shape->setCurrentIndex(index_shape);
-}
-
-// Load data
-// ---------
-
-void FormNumberedBullets::loadFromItem(BaseGraphicItem* item) const
-{
-    if (qgraphicsitem_cast<NumberedBulletGraphicItem*>(item))
+//on recoit param ext
+void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex) {
+    QString path;// = "Items";
     {
-        NumberedBulletGraphicItem* castedItem = qgraphicsitem_cast<NumberedBulletGraphicItem*>(item);
+        //QVariant temp = (int) NumberedBulletGraphicsItem;
+        //path += temp.toString();
+        path = "item"+QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //num
+    {
+      QString pathnum (path);
+      pathnum += QString ("num");
 
-        // Load data into the form
-        ui->spinBox_Size->setValue(castedItem->getSize());
+      QVariant vnum;
+      settings->value(pathnum, vnum);
+      m_num = vnum.toInt();
+    }
+    //shape
+    {
+        QString pathshape (path);
+        pathshape += QString ("shape");
 
-        NumberedBulletGraphicItem::shape_e shape = castedItem->getShape();
+        QVariant vshape;
+        settings->value(pathshape, vshape);
+        m_shape = (shape_e) vshape.toInt();
+    }
+    //bulletcolor
+    {
+      QString pathbulletcolor (path);
+      pathbulletcolor += QString ("bulletcolor");
 
-        switch (shape)
-        {
-        case NumberedBulletGraphicItem::shape_e::NB_CIRCLE:
-            ui->comboBox_Shape->setCurrentIndex(0);
-            break;
-        case NumberedBulletGraphicItem::shape_e::NB_RECTANGLE:
-            ui->comboBox_Shape->setCurrentIndex(1);
-            break;
-        case NumberedBulletGraphicItem::shape_e::NB_ROUNDEDRECTANGLE:
-            ui->comboBox_Shape->setCurrentIndex(2);
-            break;
-        }
+      QVariant v_bulletcolor;
+      settings->value(pathbulletcolor, v_bulletcolor);
+      QString str_bulletcolor = v_bulletcolor.toString();
+      m_bulletcolor.setNamedColor(str_bulletcolor);
 
-        ui->ColorButton_BulletColor->setColor(castedItem->getBulletColor());
-        ui->ColorBullet_NumberColor->setColor(castedItem->getNumberColor());
-        ui->fontComboBox->setCurrentText(castedItem->getFont().family());
+    }
+    //numbercolor
+    {
+      QString pathnumbercolor (path);
+      pathnumbercolor += QString ("numbercolor");
+
+      QVariant v_numbercolor;
+      settings->value(pathnumbercolor, v_numbercolor);
+      QString str_numbercolor = v_numbercolor.toString();
+      m_numbercolor.setNamedColor(str_numbercolor);
+    }
+    //m_font
+    {
+      QString pathfont (path);
+      pathfont += QString ("font");
+
+      QVariant vfontname;
+      settings->value (pathfont, vfontname);
+      QString stringfont = vfontname.toString();
+      m_font.fromString (stringfont);
+    }
+    //m_size
+    {
+        QString pathsize (path);
+        pathsize += QString ("size");
+
+        QVariant vsize = m_size;
+        settings->setValue(pathsize, vsize);
+    }
+}
+
+//on ecrit dans Msettinr les params
+void NumberedBulletGraphicItem::getParameters(QSettings *settings,int itemIndex) {
+
+    QString path;// = "Items";
+    {
+        //QVariant temp = (int) NumberedBulletGraphicsItem;
+        //path += temp.toString();
+        path = "item"+QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //num
+    {
+      QString pathnum (path);
+      pathnum += QString ("num");
+
+      QVariant vnum = m_num;
+      settings->setValue(pathnum, vnum);
+    }
+    //shape
+    {
+      QString pathshape (path);
+      pathshape += QString ("shape");
+
+      QVariant vshape = (int) m_shape;
+      settings->setValue(pathshape, vshape);
+    }
+    //bulletcolor
+    {
+      QString pathbulletcolor (path);
+      pathbulletcolor += QString ("bulletcolor");
+
+      QString str_bulletcolor (m_bulletcolor.name());
+      QVariant vbulletcolor = str_bulletcolor;
+      settings->setValue(pathbulletcolor, vbulletcolor);
+    }
+    //numbercolor
+    {
+      QString pathnumbercolor (path);
+      pathnumbercolor += QString ("numbercolor");
+
+      QString str_numbercolor (m_numbercolor.name());
+      QVariant vnumbercolor = str_numbercolor;
+      settings->setValue(pathnumbercolor, vnumbercolor);
+    }
+    //m_font
+    {
+      QString pathfont (path);
+      pathfont += QString ("font");
+
+      QVariant vfontname = m_font.toString();
+      settings->setValue(pathfont, vfontname);
+    }
+    //m_size
+    {
+        QString pathsize (path);
+        pathsize += QString ("size");
+
+        QVariant vsize = m_size;
+        settings->setValue(pathsize, vsize);
     }
 }

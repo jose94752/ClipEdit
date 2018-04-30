@@ -202,9 +202,15 @@ void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex)
 
       QVariant v_bulletcolor;
       settings->value(pathbulletcolor, v_bulletcolor);
-      QString str_bulletcolor = v_bulletcolor.toString();
-      m_bulletcolor.setNamedColor(str_bulletcolor);
-
+      /*QString str_bulletcolor = v_bulletcolor.toString();
+      qDebug()<<"bullet color:"<<str_bulletcolor;*/
+      int r,g,b,a;
+      r=settings->value(pathbulletcolor+"/r", r).toInt();
+      g=settings->value(pathbulletcolor+"/g", g).toInt();
+      b=settings->value(pathbulletcolor+"/b", b).toInt();
+      a=settings->value(pathbulletcolor+"/a", a).toInt();
+      //m_bulletcolor.setNamedColor(str_bulletcolor);
+      m_bulletcolor=QColor(r,g,b,a);
     }
     //numbercolor
     {
@@ -267,9 +273,14 @@ void NumberedBulletGraphicItem::getParameters(QSettings *settings,int itemIndex)
       QString pathbulletcolor (path);
       pathbulletcolor += QString ("bulletcolor");
 
-      QString str_bulletcolor (m_bulletcolor.name());
-      QVariant vbulletcolor = str_bulletcolor;
-      settings->setValue(pathbulletcolor, vbulletcolor);
+      //QString str_bulletcolor (m_bulletcolor.name());
+      //QVariant vbulletcolor = str_bulletcolor;
+      int r,g,b,a;
+      m_bulletcolor.getRgb(&r,&g,&b,&a);
+      settings->setValue(pathbulletcolor+"/r", r);
+      settings->setValue(pathbulletcolor+"/g", g);
+      settings->setValue(pathbulletcolor+"/b", b);
+      settings->setValue(pathbulletcolor+"/a", a);
     }
     //numbercolor
     {
