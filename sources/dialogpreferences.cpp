@@ -3,14 +3,20 @@
 #include "dialogpreferences.h"
 #include "ui_dialogpreferences.h"
 #include <qdebug.h>
+#include <qsettings.h>
 
-DialogPreferences::DialogPreferences(QWidget *parent) :
+DialogPreferences::DialogPreferences(QWidget *parent, QString lang) :
     QDialog(parent),
     ui(new Ui::DialogPreferences)
 {
     ui->setupUi(this);
-    //connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    //connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    ui->comboBox_language->addItem("English","en");
+    ui->comboBox_language->addItem("Français","fr");
+    ui->comboBox_language->addItem("Japanese","jap");
+    ui->comboBox_language->addItem("Oriental Bedloujikistanese","ob");
+    ui->comboBox_language->addItem("Russian","ru");
+    ui->comboBox_language->setCurrentText (lang);
+    //ui->comboBox_language->setCurrentIndex("en");
 }
 
 DialogPreferences::~DialogPreferences()
@@ -19,12 +25,9 @@ DialogPreferences::~DialogPreferences()
 }
 
 void DialogPreferences::accept () {
-    qDebug () << "DialogPreference : accept\n";
-    //lang = ui->comboBox_language->currentData();
-    lang_e lang;
-    lang = (lang_e) ui->comboBox_language->currentIndex();
-    qDebug () << "\tlangue choisie :" << lang << "\n";
-    emit(language (lang));
+    //QString lang =  ui->comboBox_language->currentData().toString();
+    QString lang =  ui->comboBox_language->currentText();
+    emit signal_language (lang);
     QDialog::accept ();
 }
 
