@@ -30,12 +30,16 @@ FormArrows::FormArrows(QWidget *parent)
     // Set Default values of FormArrows
     //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
-    ui->spinBoxArrowWidthContents->setMinimum(20);
-    ui->spinBoxArrowWidthContents->setMinimumWidth(20);
-    ui->spinBoxArrowWidthContents->setMaximum(500);
-    ui->spinBoxArrowHeightContents->setMinimum(20);
-    ui->spinBoxArrowHeightContents->setMinimumHeight(20);
-    ui->spinBoxArrowHeightContents->setMaximum(500);
+    ui->spinBoxArrowWidthContents->setMinimum(0); //temp set to 0 before 20
+    //ui->spinBoxArrowWidthContents->setMinimumWidth(20);
+    ui->spinBoxArrowWidthContents->setMinimumWidth(50); //Set to 50 Max of Simple Arrow Head
+    //ui->spinBoxArrowWidthContents->setMaximum(500);
+    ui->spinBoxArrowWidthContents->setMaximum(2147483647); //temp max for the tests '2 147 483 647' 32 bits int signed type
+    ui->spinBoxArrowHeightContents->setMinimum(0); //temp set to 0 before 20
+    //ui->spinBoxArrowHeightContents->setMinimumHeight(20);
+    ui->spinBoxArrowHeightContents->setMinimumHeight(50); //Set to 50 Max of Simple Arrow Head
+    //ui->spinBoxArrowHeightContents->setMaximum(500);
+    ui->spinBoxArrowHeightContents->setMaximum(2147483647); //temp max for the tests '2 147 483 647' 32 bits int signed type
 
     // Fill the Size of the Line Thickness
      for(int i = 1; i < 5; i++)
