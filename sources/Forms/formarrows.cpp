@@ -232,8 +232,17 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
         ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
 
-        qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
+        //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
         ui->toolButtonFillColorContents->setColor(castedItem->getFillColor());
+
+        //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
+        //ui->toolButtonOutlineColorContents->setColor(castedItem->getOutlineColor()); //To do Method getOutlineColor() when OutlineColorArrow is implement
+
+        qDebug() << "Arrow Width setValue = " << (castedItem->getArrowWidth());
+        ui->spinBoxArrowWidthContents->setValue(castedItem->getArrowWidth());
+
+        qDebug() << "Arrow Height setValue = " << (castedItem->getArrowHeight());
+        ui->spinBoxArrowHeightContents->setValue(castedItem->getArrowHeight());
 
         // Others:
         //castedItem->setFormArrowMethodsForEachHandleValue();
