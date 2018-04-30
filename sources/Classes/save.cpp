@@ -63,39 +63,6 @@ bool Save::fileNameExists()
     }
 }
 
-NumberedBulletGraphicItem *Save::setNumberedBulletGraphicItem()
-{
-    qDebug()<<"je vais la";
-    int from (1), to (2), taille (40);
-    int shape (0);
-    QColor bulletcolor, numbercolor;
-    QFont qfont;
-    m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
-    taille=40;
-    bulletcolor=QColor(Qt::red);
-    numbercolor=QColor(Qt::blue);
-    NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
-    int numbullet (from);
-    QPointF scene_topleft (m_scene->sceneRect().topLeft());
-    QPointF scene_topright (m_scene->sceneRect().topRight());
-    QPointF bulletpos (scene_topleft);
-    qreal delta (0);
-    delta = scene_topright.y() - scene_topleft.y();
-    bulletpos.setY(scene_topleft.y () + delta /5);
-    //qreal posx (0), posy (50), delta (100);
-    for (; numbullet != to+1; ++numbullet) {
-      numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
-      //numberedBulletGraphicItem->setPos(posx, posy);
-      numberedBulletGraphicItem->setPos (bulletpos);
-      //m_scene.addItem(numberedBulletGraphicItem);
-      delta = numberedBulletGraphicItem->rect ().width ();
-      if (bulletpos.x () + delta < scene_topright.x ()) {
-        bulletpos.setX(bulletpos.x() + delta);
-      }
-    }
-    return numberedBulletGraphicItem;
-}
-
 ///save function
 void Save::save()
 {
