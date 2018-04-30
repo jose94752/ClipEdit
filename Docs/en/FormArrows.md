@@ -53,6 +53,7 @@
 | ------------------------------ |
 | pushButtonBeforeShape          |
 | pushButtonDefaultShape         |
+| pushButtonAddArrow             |
 
 
 ## QRadioButton

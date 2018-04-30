@@ -112,15 +112,18 @@ void MainWindow::buildForms()
     m_formLayers->setScene(m_scene);
 
     // Item connects
+    connect(m_formArrows->getAddPushButtonArrow(),SIGNAL(clicked(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    connect( m_formCharts, SIGNAL(FormCreateChart() ), this, SLOT(slotGraphs()));
+    //connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
-    connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-
+    //connect(m_dialogPreferences, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+    connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
     // Building the stacked widget
     // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
@@ -187,7 +190,6 @@ void MainWindow::buildView()
     QSettings s;
     int l_width,l_height;
     QString l_format;
-    QColor l_color;
     l_width=-1;
     l_height=-1;
     l_format="";
@@ -212,13 +214,10 @@ void MainWindow::buildView()
     if(l_format!=""){
         format=l_format;
     }
-    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
-        l_color.setRgb(r,g,b,a);
-    }
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
-    if(l_color.isValid()){
-        //code
+    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
+        m_borderSceneItem->setBrush(QColor(r,g,b,a));
     }
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
@@ -353,18 +352,28 @@ void MainWindow::slotTextPicture()
     m_scene.addItem(PictureItem);
 }
 
+
+// removed parametre
+void MainWindow::slotGraphs( )
+{
+    qDebug() << "slot graphs main window";
+    GraphsInfo infos;
+    // Retrieve data from the form
+    m_formCharts->GetChartsValues(infos);
+    int nbPoints = infos.m_Arcs.size();
+    if( nbPoints > 0 )
+    {
+        qDebug() << "added graph mainWindow Slot Graphs";
+
+        GraphsGraphicsItem *g = new GraphsGraphicsItem();
+        g->setInfos(infos);
+        m_scene.addItem(g);
+     }
+}
+
+/*
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
-
-    //m_scene.addItem(new GraphsGraphicsItem());
-    //m_scene.addItem(new GraphsGraphicsItem());
-
-//    GraphsInfo infos;
-//    m_formCharts.GetChartsValues( infos);
-
-//    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-//    g->setInfos(infos);
-//    m_scene.addItem(g);
 
     //do not add graphs if no points
     int nbPoints = infos.m_Arcs.size();
@@ -378,7 +387,7 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
         m_scene.addItem(g);
      }
 }
-
+*/
 
 void MainWindow::slotArrowsGraphicsItem()
 {
@@ -479,8 +488,7 @@ void MainWindow::openFile(bool)
     if (!fileName.isEmpty())
     {
         Save save(&m_scene, fileName);
-        //save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
-        //save.open();
+        save.open();
     }
 }
 
@@ -488,11 +496,7 @@ void MainWindow::openFile(bool)
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
-    //save.save();
-    QList<QGraphicsItem*> items =m_scene.items();
-    foreach(QGraphicsItem *item,items){
-        //code
-    }
+    save.save();
 }
 
 
@@ -513,7 +517,7 @@ void MainWindow::saveAs(bool)
         {
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(), extfilename);
-            //save.save();
+            save.save();
         }
     }
 }
@@ -529,8 +533,12 @@ void MainWindow::showAboutDialog(bool)
 
 void MainWindow::preferences ()
 {
-    qDebug () << "\tpreferences...\n";
+    qDebug () << "\tMainWindow::preferences...\n";
     m_dialogPreferences= new DialogPreferences(this);
     m_dialogPreferences->show();
 
+}
+
+void MainWindow::slot_language (DialogPreferences::lang_e) {
+  qDebug () << "MainWindow::slot_language...\n";
 }

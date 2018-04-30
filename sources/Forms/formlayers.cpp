@@ -21,7 +21,7 @@
 #include "Classes/layeritemmodel.h"
 
 #define Z_DEFAULT       (0.0)
-#define Z_INIT          (10.0)
+#define Z_INIT          (1.0)
 #define Z_INCREMENT     (1.0)
 
 // Constructor, destructor
@@ -32,7 +32,7 @@ FormLayers::FormLayers(QWidget* parent)
 {
     ui->setupUi(this);
 
-
+    m_zvalue = Z_INIT;
     m_lineSelected = -1;
     m_columnSelected = -1;
     m_scene = NULL;
@@ -124,6 +124,7 @@ void FormLayers::actionUp()
 
     qreal zValue = m_itemSelected->zValue() + Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
+    if (zValue > m_zvalue) m_zvalue = zValue;
 
     updateLayers();
 }
@@ -136,6 +137,9 @@ void FormLayers::actionDown()
         return;
 
     qreal zValue = m_itemSelected->zValue() - Z_INCREMENT;
+
+    if (qFabs(zValue) < Z_INCREMENT) zValue--;
+
     m_itemSelected->setZValue(zValue);
 
     updateLayers();
@@ -192,7 +196,7 @@ void FormLayers::updateLayers()
             // ZValue
             if (qFabs(item->zValue()) < Z_INCREMENT)
             {
-                item->setZValue(Z_INIT);
+                item->setZValue(m_zvalue++);
 
                 qDebug() << "FormLayers::ShowLayers(): force ZValue\n\t" << item->zValue() << item;
             }

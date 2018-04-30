@@ -123,7 +123,8 @@ class MainWindow
         void slotNumberedBullets();
         void slotTextBoxes();
         void slotTextPicture();
-        void slotGraphs(const GraphsInfo &infos);
+        //void slotGraphs(const GraphsInfo &infos);
+        void slotGraphs();
         void slotArrowsGraphicsItem();
 
         //
@@ -134,6 +135,8 @@ class MainWindow
         // Layers
         void slotLayers();
         void preferences ();
+
+        void slot_language (DialogPreferences::lang_e);
 };
 
 #endif

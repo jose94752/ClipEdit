@@ -46,6 +46,10 @@ FormPictures::FormPictures(QWidget *parent)
     ui->comboBox_lg_pos->addItem(tr("Bottom"));
     ui->comboBox_lg_pos->addItem(tr("VCenter"));
     ui->comboBox_lg_pos->addItem(tr("Center"));
+
+
+    ui->comboBox_lg_or->addItem(tr("Horizontal"));
+    ui->comboBox_lg_or->addItem(tr("Vertical"));
 }
 
 
@@ -55,7 +59,7 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos)
+void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or)
 {
     path        = ui->lineEdit_pic_path->text();
     height      = ui->spinBox_pic_h->value();
@@ -67,6 +71,7 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width,  boo
     lg_size     = ui->spinBox_lg_size->value();
     lg_color    = ui->toolButton_color->getColor();
     lg_pos      = ui->comboBox_lg_pos->currentText();
+    lg_or       = ui->comboBox_lg_or->currentText();
 
 }
 
@@ -130,6 +135,9 @@ void FormPictures::save_settings(bool)
     s_lg_pos      = ui->comboBox_lg_pos->currentText();
     setting.setValue("FormPictures/position", s_lg_pos);
 
+    s_lg_or       = ui->comboBox_lg_or->currentText();
+    setting.setValue("FormPictures/orientation", s_lg_or);
+
 }
 
 void FormPictures::restore_settings(bool)
@@ -157,6 +165,8 @@ void FormPictures::restore_settings(bool)
     s_lg_pos   =  setting.value("FormPictures/position").toString() ;
     ui->comboBox_lg_pos->setCurrentText(s_lg_pos);
 
+    s_lg_or   =  setting.value("FormPictures/orientation").toString() ;
+    ui->comboBox_lg_or->setCurrentText(s_lg_or);
 
 
 }
