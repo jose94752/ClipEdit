@@ -46,6 +46,33 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     init();
+    /*int from (1), to (2), taille (40);
+    int shape (0);
+    QColor bulletcolor, numbercolor;
+    QFont qfont;
+    m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
+    taille=40;
+    bulletcolor=QColor(Qt::red);
+    numbercolor=QColor(Qt::blue);
+    NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
+    int numbullet (from);
+    QPointF scene_topleft (m_scene.sceneRect().topLeft());
+    QPointF scene_topright (m_scene.sceneRect().topRight());
+    QPointF bulletpos (scene_topleft);
+    qreal delta (0);
+    delta = scene_topright.y() - scene_topleft.y();
+    bulletpos.setY(scene_topleft.y () + delta /5);
+    //qreal posx (0), posy (50), delta (100);
+    for (; numbullet != to+1; ++numbullet) {
+      numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
+      //numberedBulletGraphicItem->setPos(posx, posy);
+      numberedBulletGraphicItem->setPos (bulletpos);
+      m_scene.addItem(numberedBulletGraphicItem);
+      delta = numberedBulletGraphicItem->rect ().width ();
+      if (bulletpos.x () + delta < scene_topright.x ()) {
+        bulletpos.setX(bulletpos.x() + delta);
+      }
+    }*/
 }
 
 
@@ -186,7 +213,6 @@ void MainWindow::buildView()
     QSettings s;
     int l_width,l_height;
     QString l_format;
-    QColor l_color;
     l_width=-1;
     l_height=-1;
     l_format="";
@@ -211,13 +237,10 @@ void MainWindow::buildView()
     if(l_format!=""){
         format=l_format;
     }
-    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
-        l_color.setRgb(r,g,b,a);
-    }
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
-    if(l_color.isValid()){
-        //code
+    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
+        m_borderSceneItem->setBrush(QColor(r,g,b,a));
     }
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
@@ -451,8 +474,7 @@ void MainWindow::openFile(bool)
     if (!fileName.isEmpty())
     {
         Save save(&m_scene, fileName);
-        //save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
-        //save.open();
+        save.open();
     }
 }
 
@@ -460,11 +482,7 @@ void MainWindow::openFile(bool)
 void MainWindow::save(bool)
 {
     Save save(this->m_scene.items());
-    //save.save();
-    QList<QGraphicsItem*> items =m_scene.items();
-    foreach(QGraphicsItem *item,items){
-        //code
-    }
+    save.save();
 }
 
 
@@ -485,7 +503,7 @@ void MainWindow::saveAs(bool)
         {
             ui->actionSave->setEnabled(true);
             Save save(this->m_scene.items(), extfilename);
-            //save.save();
+            save.save();
         }
     }
 }

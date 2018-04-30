@@ -80,6 +80,9 @@ class GraphsGraphicsItem : public BaseGraphicItem
         // Getters and setters
         void setInfos(const GraphsInfo& infos);
 
+        void getParameters(QSettings *settings,int itemIndex);
+        void setParameters(QSettings *settings,int itemIndex);
+
     private:
 
         GraphsInfo m_infos;
@@ -126,9 +129,6 @@ class GraphsGraphicsItem : public BaseGraphicItem
 
         //histogrames
         void transformPointsHisto();
-
-        void getParameters(QSettings *settings,int itemIndex);
-        void setParameters(QSettings *settings,int itemIndex);
 };
 
 #endif
