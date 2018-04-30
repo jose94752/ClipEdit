@@ -99,12 +99,16 @@ void FormLayers::actionClicked(int line , int col)
     m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
 
     if (!m_itemSelected)
+        m_itemSelected = (BaseGraphicItem*)m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1];
+
+    if (!m_itemSelected)
         return;
 
     m_scene->clearSelection();
     m_itemSelected->setSelected(true);
 
     qDebug() << "FormLayers::ActionClicked()" << m_itemSelected;
+    qDebug() << "FormLayers::ActionClicked()" << m_itemSelected->zValue();
 
     // Visibility
     if (m_columnSelected == 0)
@@ -123,6 +127,7 @@ void FormLayers::actionUp()
         return;
 
     qreal zValue = m_itemSelected->zValue() + Z_INCREMENT;
+    if (qFabs(zValue) < Z_INCREMENT) zValue++;
     m_itemSelected->setZValue(zValue);
     if (zValue > m_zvalue) m_zvalue = zValue;
 
@@ -298,6 +303,7 @@ void FormLayers::updateLayers()
             // 4eme colonne
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
+        else qDebug() << "FormLayers::ShowLayers()" << it;
     }
 
     // Init select

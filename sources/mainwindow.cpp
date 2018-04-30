@@ -218,6 +218,7 @@ void MainWindow::buildView()
     if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
         m_borderSceneItem->setBrush(QColor(r,g,b,a));
     }
+
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
     ui->graphicsView->setScene(&m_scene);
