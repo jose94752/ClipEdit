@@ -48,6 +48,10 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.m_transparent = ui->bTransparent->isChecked();
     infos.m_boundingRect.setRect(0,0, ui->qWidth->value(), ui->qHeight->value());
 
+    infos.SetCoord( ui->qData->text() );
+    infos.SetLegend( ui->qLegends->text() );
+
+ /*
     QString val = ui->qData->text();
     QStringList sl = val.split(",", QString::SkipEmptyParts);
     for (int i = 0; i < sl.size(); ++i)
@@ -84,6 +88,8 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.m_legendFont.setPointSize(10);
 
     infos.m_Legends = ui->qLegends->text().split("," , QString::SkipEmptyParts);
+*/
+
 
     //qDebug() << "Legends numero" << infos.m_Legends.size();
 
@@ -130,6 +136,8 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
          ui->qBackColor->setColor(infos.m_backColor);
          ui->bTransparent->setChecked(infos.m_transparent);
 
+         ui->qData->setText(infos.GetCoord() );
+         ui->qLegends->setText(infos.GetLegend() );
      }
  }
 
@@ -179,4 +187,5 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
      ui->bTransparent->setChecked(infos.m_transparent);
 
+     //datas not restored
  }
