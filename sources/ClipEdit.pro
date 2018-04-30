@@ -60,7 +60,8 @@ SOURCES += \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
     graphicsview.cpp \
     Classes/layeritemdelegate.cpp \
-    Classes/layeritemmodel.cpp
+    Classes/layeritemmodel.cpp \
+    dialogpreferences.cpp
 
 
 HEADERS += \
@@ -89,7 +90,8 @@ HEADERS += \
     $${ITEM_DIRECTORY}/textboxitem.h \
     graphicsview.h \
     Classes/layeritemdelegate.h \
-    Classes/layeritemmodel.h
+    Classes/layeritemmodel.h \
+    dialogpreferences.h
 
 
 FORMS += \
@@ -102,7 +104,8 @@ FORMS += \
     $${FORM_DIRECTORY}/formpictures.ui \
     $${FORM_DIRECTORY}/formscreenshots.ui \
     $${FORM_DIRECTORY}/formtextboxes.ui \
-    $${FORM_DIRECTORY}/resizescenedialog.ui
+    $${FORM_DIRECTORY}/resizescenedialog.ui \
+    dialogpreferences.ui
 
 
 RESOURCES += \

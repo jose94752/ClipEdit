@@ -28,6 +28,7 @@
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/basegraphicitem.h"
+#include "dialogpreferences.h"
 
 class QToolButton;
 
@@ -93,6 +94,8 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
+        //Preferences
+        DialogPreferences* m_dialogPreferences;
         // Building
         void init();
         void buildMenu();
@@ -126,6 +129,7 @@ class MainWindow
 
         // Layers
         void slotLayers();
+        void preferences ();
 };
 
 #endif
