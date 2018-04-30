@@ -17,6 +17,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QBrush>
+#include <QSettings>
 #include "resizescenedialog.h"
 #include "ui_resizescenedialog.h"
 
@@ -88,6 +89,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
     connect(ui->doubleSpinBoxWidth,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
     connect(ui->doubleSpinBoxHeight,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
+    //connect(ui->pushButtonSaveTheme,SIGNAL(clicked(bool)),this,SLOT());
 
     //hide color button if not New page
     m_isNew=isNew;
@@ -317,6 +319,22 @@ void ResizeSceneDialog::formatChanged(QString format)
         unitChanged(unit);
     }
     m_format_changed=false;
+}
+
+void ResizeSceneDialog::saveDefaultTheme() const
+{
+    QSettings s;
+    s.setValue("sceneWidth",m_width);
+    s.setValue("sceneHeight",m_height);
+    s.setValue("sceneFormat",m_format);
+    if(m_isNew){
+        int r,g,b,a;
+        m_backGroundColor.getRgb(&r,&g,&b,&a);
+        s.setValue("sceneColor/r",r);
+        s.setValue("sceneColor/g",g);
+        s.setValue("sceneColor/b",b);
+        s.setValue("sceneColor/a",a);
+    }
 }
 
 void ResizeSceneDialog::resizeEvent(QResizeEvent *event)

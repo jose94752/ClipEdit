@@ -178,10 +178,43 @@ void MainWindow::buildView()
     int dpiy=deskWidget->logicalDpiY();
     int width=210*dpix/25.4;
     int height=297*dpiy/25.4;
-    //m_scene.setSceneRect(QRectF(0,0,width+1,height+1));
-    //m_borderSceneItem=m_scene.addRect(QRectF(0,0,width,height));
+    QString format="None";
+    QSettings s;
+    int l_width,l_height;
+    QString l_format;
+    QColor l_color;
+    l_width=-1;
+    l_height=-1;
+    l_format="";
+    l_width=s.value("sceneWidth",l_width).toInt();
+    l_height=s.value("sceneHeight",l_height).toInt();
+    l_format=s.value("sceneFormat",l_format).toString();
+    int r,g,b,a;
+    r=-1;
+    g=-1;
+    b=-1;
+    a=-1;
+    r=s.value("sceneColor/r",r).toInt();
+    g=s.value("sceneColor/g",g).toInt();
+    b=s.value("sceneColor/b",b).toInt();
+    a=s.value("sceneColor/a",a).toInt();
+    if(l_width!=-1){
+        width=l_width;
+    }
+    if(l_height!=-1){
+        height=l_height;
+    }
+    if(l_format!=""){
+        format=l_format;
+    }
+    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
+        l_color.setRgb(r,g,b,a);
+    }
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
+    if(l_color.isValid()){
+        //code
+    }
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
     ui->graphicsView->setScene(&m_scene);
@@ -397,12 +430,10 @@ void MainWindow::exportView(bool)
         QSize size=m_scene.sceneRect().size().toSize();
         QImage image(size, QImage::Format_ARGB32);
         image.fill(Qt::white);
-        /*QImage cropped(size, QImage::Format_ARGB32);
-        cropped=image.copy(-400,-579,799,1158);
-        QRect rect=image.rect();
-        qDebug()<<rect.x()<<" "<<rect.y()<<" "<<rect.width()<<" "<<rect.height();*/
 
         QPainter painter(&image);
+        QGraphicsItem *item=0;
+        m_scene.setFocusItem(item);
         m_scene.render(&painter);
         image.save(extfilename);
     }

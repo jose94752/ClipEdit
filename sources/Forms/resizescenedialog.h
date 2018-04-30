@@ -41,6 +41,7 @@ public slots:
     void unitChanged(const QString&);
     void valuesChanged();
     void formatChanged(QString);
+    void saveDefaultTheme() const;
 
 protected:
     void resizeEvent(QResizeEvent*);
