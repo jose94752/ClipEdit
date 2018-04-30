@@ -93,7 +93,13 @@ class ArrowsGraphicsItem
         //return the Item Fill Color Arrow
         QColor getFillColor();
 
-    protected:
+        //return the Arrow Width
+        int getArrowWidth();
+
+        //return the Arrow Height
+        int getArrowHeight();
+
+protected:
 
               //void AGIfillColorArrowChanged(const QColor& color);
 
