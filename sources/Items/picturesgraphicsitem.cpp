@@ -130,7 +130,7 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
         else qDebug()  <<"choix alignement  invalide"  << lg_pos;
 
     }
-    else if (lg_or == "Horizontal -") {
+    else if (lg_or == "Horizontal") {
         qDebug() <<"Horizontal";
         painter->rotate(0);
 
