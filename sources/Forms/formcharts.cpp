@@ -93,14 +93,18 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
  void FormCharts::createChart()
  {
-     qDebug() << "charts" ;
-
+ /*
+     //qDebug() << "charts" ;
      GraphsInfo newGraphsInfo;
      GetChartsValues( newGraphsInfo);
 
      qDebug() << "charts"  << newGraphsInfo.m_title ;
 
      emit FormCreateChart( newGraphsInfo);
+*/
+     qDebug() << "charts" ;
+
+     emit FormCreateChart();
 
  }
 
@@ -113,14 +117,26 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
      {
          GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
 
+         qDebug() << "FormCharts::loadFromItem" ;
+
+         GraphsInfo infos = castedItem->getInfos();
+
          // Load data into the form
+         ui->qTitle->setText( infos.m_title);
+         ui->qChartType->setCurrentIndex(infos.m_type);
+         ui->qWidth->setValue( infos.m_boundingRect.width() );
+         ui->qHeight->setValue( infos.m_boundingRect.height() );
+         ui->qColor->setColor(infos.m_color);
+         ui->qBackColor->setColor(infos.m_backColor);
+         ui->bTransparent->setChecked(infos.m_transparent);
+
      }
  }
 
 
 
  // SLOTS
-
+// two icons on dialog, save and load
  void FormCharts::saveDefaultTheme ()
  //const
  {
@@ -136,6 +152,7 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
      s.setValue( KFormChartsBackgroundcolor, infos.m_backColor.name());
      s.setValue( KFormChartsTransparent, infos.m_transparent);
 
+     // datas not saved
 }
 
  void FormCharts::loadDefaultTheme()

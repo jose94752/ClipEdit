@@ -32,9 +32,6 @@ GraphsGraphicsItem::GraphsGraphicsItem(QGraphicsItem* parent) : BaseGraphicItem(
 
     //setRect( QRectF(m_infos.m_boundingRect));
 
-//    m_heightBar = 45;        //pour les histogrames, la larguer d'une bare et la distance entre deux bares
-//    m_heightSpace = m_heightBar/3;
-
       m_heightBar = BAR;        //pour les histogrames, la larguer d'une bare et la distance entre deux bares
       m_heightSpace = SPACE;
 
@@ -93,6 +90,12 @@ void  GraphsGraphicsItem::setInfos(const GraphsInfo& infos)
     qDebug() << "Set Infos title " << m_infos.m_title;
 }
 
+const GraphsInfo &GraphsGraphicsItem::getInfos() const
+{
+    qDebug() << "Get infos ";
+
+    return m_infos;
+}
 
 
 //transform coordonates
@@ -398,12 +401,11 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
 
 void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    qDebug() << "Draw Histo";
+   // qDebug() << "Draw Histo";
 
     calculRects();
     calcSizesHisto();
     transformPointsHisto( );
-    //transformPointsLine( );
 
     int nbPoints = m_GraphPoints.size();
     Qt::BrushStyle style = Qt::SolidPattern;
@@ -450,8 +452,8 @@ void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphics
 void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     //qDebug() << "Draw Line";
-
     //int nbPoints = m_GraphPoints.size();
+
     calculRects();
     calcSizesLine();
     transformPointsLine( );
@@ -534,6 +536,9 @@ void GraphsGraphicsItem::drawLine(QPainter *painter, const QStyleOptionGraphicsI
 void GraphsGraphicsItem::getParameters( QSettings *s, int itemIndex)
 {
     //settings->setValue("item"+QString::number(itemIndex)+"/parameterName",vale);
+
+    qDebug() << "GraphsGraphicsItem::getParameters" ;
+
     QString stritem = "item";
     QString propr = stritem + QString::number(itemIndex)+ KChartsTitle;
     s->setValue( propr, m_infos.m_title);
@@ -561,6 +566,8 @@ void GraphsGraphicsItem::getParameters( QSettings *s, int itemIndex)
 
 void GraphsGraphicsItem::setParameters( QSettings *s, int itemIndex)
 {
+    qDebug() << "GraphsGraphicsItem::setParameters" ;
+
     GraphsInfo infos;
     QString stritem = "item";
     QColor color(Qt::blue), backcolor(Qt::yellow);
@@ -586,5 +593,6 @@ void GraphsGraphicsItem::setParameters( QSettings *s, int itemIndex)
     propr = stritem + QString::number(itemIndex)+ KChartsTransparent;
     infos.m_transparent = s->value( propr, 1).toBool();
 
+    //to do data
 }
 

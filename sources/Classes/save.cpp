@@ -5,6 +5,7 @@
 #include <QRectF>
 #include <mainwindow.h>
 #include <QGraphicsPixmapItem>
+#include "../Items/basegraphicitem.h"
 #include "../Items/picturesgraphicsitem.h"
 #include "../Items/textboxitem.h"
 #include "../Items/numberedbulletgraphicitem.h"
@@ -62,141 +63,37 @@ bool Save::fileNameExists()
     }
 }
 
-///transform TextBoxItem for saving
-/*void Save::getTextBoxItem(TextBoxItem *textBoxItem,QSettings* settings){
-    qDebug()<<"text boxes";
-}
-
-///transform ArrowsGraphicsItem for saving
-void Save::getArrowGraphicsItem(ArrowsGraphicsItem *arrow,QSettings* settings)
+NumberedBulletGraphicItem *Save::setNumberedBulletGraphicItem()
 {
-    qDebug()<< "arrows graphics items";
-    bool WithoutAnchorPoint;
-    bool OneAnchorPoint;
-    bool TwoAnchorPoints;
-    int ArrowWidth;
-    int ArrowHeight;
-    int r,g,b,a;
-    int LineThickness, SizeHeadTypeChoice;
-    QColor ArrowOutlineColor;
-    QColor ArrowFillColor;
-
-    FormArrows *formArrows=arrow->getFormArrow();
-    formArrows->GetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/WithoutAnchorPoint"),QString::number(WithoutAnchorPoint));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/OneAnchorPoint"),QString::number(OneAnchorPoint));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/TwoAnchorPoints"),QString::number(TwoAnchorPoints));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowWidth"),QString::number(ArrowWidth));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowHeight"),QString::number(ArrowHeight));
-    ArrowOutlineColor.getRgb(&r,&g,&b,&a);
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/r"),QString::number(r));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/g"),QString::number(g));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/b"),QString::number(b));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/a"),QString::number(a));
-    ArrowFillColor.getRgb(&r,&g,&b,&a);
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/r"),QString::number(r));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/g"),QString::number(g));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/b"),QString::number(b));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("/ArrowFillColor/a"),QString::number(a));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("LineThickness"),QString::number(LineThickness));
-    settings->setValue(QString("item").append(QString::number(countItems)).append("SizeHeadTypeChoice"),QString::number(SizeHeadTypeChoice));
-}
-
-///transform NumberedBulletGraphicItem for saving
-void Save::getBulletsGraphicsItems(NumberedBulletGraphicItem *,QSettings* settings)
-{
-    qDebug()<<"NumberedBulletGraphicItem ";
-}
-
-///transform PicturesGraphicsItem for saving
-void Save::getPicturesGraphicsItems(PicturesGraphicsItem *,QSettings* settings)
-{
-    qDebug()<<"PicturesGraphicsItem";
-}
-
-///set data for differents forms
-void Save::setFormsPoints(FormArrows *f1, FormCharts *f2, FormCliparts *f3, FormLayers *f4, FormNumberedBullets *f5, FormPictures *f6, FormScreenshots *f7, FormTextBoxes *f8)
-{
-    m_formArrows=f1;
-    m_formCharts=f2;
-    m_formCliparts=f3;
-    m_formLayers=f4;
-    m_formBullets=f5;
-    m_formPicture=f6;
-    m_formScreenshots=f7;
-    m_formTextBoxes=f8;
-}
-
-TextBoxItem* Save::setTextBoxItem(QSettings *settings,int i)
-{
-    QMap<QString, QVariant> data = m_formTextBoxes->getInfos();
-    return new TextBoxItem(data);
-    //m_scene.addItem(new TextBoxItem(data));
-}
-
-ArrowsGraphicsItem* Save::setArrowGraphicsItem(QSettings *settings,QRectF rectf,int i)
-{
-    bool WithoutAnchorPoint;
-    bool OneAnchorPoint;
-    bool TwoAnchorPoints;
-    int ArrowWidth;
-    int ArrowHeight;
-    int r,g,b,a;
-    int LineThickness, SizeHeadTypeChoice;
-    WithoutAnchorPoint=settings->value(QString("item").append(QString::number(countItems)).append("/WithoutAnchorPoint")).toBool();
-    OneAnchorPoint=settings->value(QString("item").append(QString::number(countItems)).append("/OneAnchorPoint")).toBool();
-    TwoAnchorPoints=settings->value(QString("item").append(QString::number(countItems)).append("/TwoAnchorPoints")).toBool();
-    ArrowWidth=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowWidth")).toInt();
-    ArrowHeight=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowHeight")).toInt();
-    QColor ArrowOutlineColor(r,g,b,a);
-    r=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/r")).toInt();
-    g=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/g")).toInt();
-    b=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/b")).toInt();
-    a=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/a")).toInt();
-    r=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/r")).toInt();
-    g=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/g")).toInt();
-    b=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/b")).toInt();
-    a=settings->value(QString("item").append(QString::number(countItems)).append("/ArrowOutlineColor/a")).toInt();
-    QColor ArrowFillColor(r,g,b,a);
-    LineThickness=settings->value(QString("item").append(QString::number(countItems)).append("/LineThickness")).toInt();
-    SizeHeadTypeChoice=settings->value(QString("item").append(QString::number(countItems)).append("/SizeHeadTypeChoice")).toInt();
-    FormArrows *formArrows=new FormArrows();
-    formArrows->GetInfosArrows(WithoutAnchorPoint,OneAnchorPoint,TwoAnchorPoints,ArrowWidth,ArrowHeight,ArrowOutlineColor,ArrowFillColor,LineThickness,SizeHeadTypeChoice);
-    ArrowsGraphicsItem *arrow=new ArrowsGraphicsItem(formArrows);
-    arrow->setRect(rectf);
-    return arrow;
-}
-
-NumberedBulletGraphicItem* Save::setBulletsGraphicsItems(QSettings *settings,int i)
-{
-    int from (0), to (0), taille (0);
+    qDebug()<<"je vais la";
+    int from (1), to (2), taille (40);
     int shape (0);
     QColor bulletcolor, numbercolor;
     QFont qfont;
-    //m_formBullets.get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
-    NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
-    qDebug () << "\tfrom == " << from << "\n";
-    qDebug () << "\tto == " << to << "\n";
+    m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
+    taille=40;
+    bulletcolor=QColor(Qt::red);
+    numbercolor=QColor(Qt::blue);
+    NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
     int numbullet (from);
-    qreal posx (0), posy (50), delta (100);
+    QPointF scene_topleft (m_scene->sceneRect().topLeft());
+    QPointF scene_topright (m_scene->sceneRect().topRight());
+    QPointF bulletpos (scene_topleft);
+    qreal delta (0);
+    delta = scene_topright.y() - scene_topleft.y();
+    bulletpos.setY(scene_topleft.y () + delta /5);
+    //qreal posx (0), posy (50), delta (100);
     for (; numbullet != to+1; ++numbullet) {
       numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
-      numberedBulletGraphicItem->setPos(posx, posy);
-      return numberedBulletGraphicItem;
+      //numberedBulletGraphicItem->setPos(posx, posy);
+      numberedBulletGraphicItem->setPos (bulletpos);
+      //m_scene.addItem(numberedBulletGraphicItem);
+      delta = numberedBulletGraphicItem->rect ().width ();
+      if (bulletpos.x () + delta < scene_topright.x ()) {
+        bulletpos.setX(bulletpos.x() + delta);
+      }
     }
-}
-
-PicturesGraphicsItem* Save::setPicturesGraphicsItems(QSettings *settings,int i)
-{
-    return new PicturesGraphicsItem (m_formPicture);
-}
-
-GraphsGraphicsItem* Save::setCharts(QSettings *, int)
-{
-    GraphsInfo newGraphsInfo;
-    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-    g->setInfos(newGraphsInfo);
-    return g;
+    return numberedBulletGraphicItem;
 }
 
 ///save function
@@ -214,28 +111,39 @@ void Save::save()
         QRectF rect=item->boundingRect();
         double x,y,width,height;
         rect.getRect(&x,&y,&width,&height);
-        if(type>65535 && (x!=0 || y!=0 || width!=0 || height!=0)){
-            settings.setValue(QString("item").append(QString::number(countItems)).append("/type"),QString::number(type));
+        if(type>65535){
+            qDebug()<<"type="<<type;
+            settings.setValue(QString("item").append(QString::number(countItems)).append("/baseGraphicItemType"),QString::number(type));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/x"),QString::number(x));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/y"),QString::number(y));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/width"),QString::number(width));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/height"),QString::number(height));
         }
-
+        ArrowsGraphicsItem *arrow;
+        TextBoxItem *texteBox;
+        NumberedBulletGraphicItem *bullet;
+        PicturesGraphicsItem *picturesItem;
+        GraphsGraphicsItem *graphsItem;
         switch(type)
         {
-            case BaseGraphicItem::Type::TextBoxGraphicsItem:
-                getTextBoxItem((TextBoxItem*)item,&settings);
+            case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
+                //code
             break;
-            case BaseGraphicItem::Type::ArrowGraphicsItem:
-                getArrowGraphicsItem((ArrowsGraphicsItem*)item,&settings);
+            case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+                //coe
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:
-                getBulletsGraphicsItems((NumberedBulletGraphicItem *)item, &settings);
+                bullet=(NumberedBulletGraphicItem*)item;
+                bullet->getParameters(&settings,countItems);
             break;
-            case BaseGraphicItem::Type::ImageGraphicsItem:
-                getPicturesGraphicsItems((PicturesGraphicsItem *)item, &settings);
+            case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
+                //code
             break;
+            case BaseGraphicItem::ChartGraphicsItem:
+                qDebug()<<"chart graphic item case";
+                graphsItem=(GraphsGraphicsItem*)item;
+                graphsItem->getParameters(&settings,countItems);
+        break;
         }
 
         if(type>65535){
@@ -251,9 +159,8 @@ void Save::open()
     int i;
     QSettings settings(current_filename,QSettings::IniFormat);
     countItems=settings.value("nbItems").toInt();
-    qDebug()<<QString::number(countItems);
     for(i=0;i<countItems;i++){
-        QVariant varType=settings.value(QString("item").append(QString::number(i)).append("/type"));
+        QVariant varType=settings.value(QString("item").append(QString::number(i)).append("/baseGraphicItemType"));
         QVariant varX=settings.value(QString("item").append(QString::number(i)).append("/rectF/x"));
         QVariant varY=settings.value(QString("item").append(QString::number(i)).append("/rectF/y"));
         QVariant varWidth=settings.value(QString("item").append(QString::number(i)).append("/rectF/width"));
@@ -271,27 +178,31 @@ void Save::open()
         GraphsGraphicsItem *graphsItem;
         switch(type)
         {
-            case BaseGraphicItem::Type::TextBoxGraphicsItem:
-                texteBox=setTextBoxItem(&settings,i);
-                m_scene->addItem(texteBox);
+            case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
+                //texteBox=setTextBoxItem(&settings,i);
+                //m_scene->addItem(texteBox);
             break;
-            case BaseGraphicItem::Type::ArrowGraphicsItem:
-                arrow=setArrowGraphicsItem(&settings,rect,i);
-                m_scene->addItem(arrow);
+            case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+                //arrow=setArrowGraphicsItem(&settings,rect,i);
+                //m_scene->addItem(arrow);
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:
-                bullet=setBulletsGraphicsItems(&settings,i);
+                qDebug()<<"bullet";
+                //bullet=setNumberedBulletGraphicItem();
+                bullet=new NumberedBulletGraphicItem();
+                bullet->setParameters(&settings,i);
                 m_scene->addItem(bullet);
             break;
-            case BaseGraphicItem::Type::ImageGraphicsItem:
-                picturesItem=setPicturesGraphicsItems(&settings,i);
-                m_scene->addItem(picturesItem);
+            case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
+                //picturesItem=setPicturesGraphicsItems(&settings,i);
+                //m_scene->addItem(picturesItem);
             break;
             case BaseGraphicItem::ChartGraphicsItem:
-                graphsItem=setCharts(&settings,i);
+                graphsItem=new GraphsGraphicsItem();
+                graphsItem->setParameters(&settings,i);
                 m_scene->addItem(graphsItem);
             break;
         }
     }
-}*/
+}
 

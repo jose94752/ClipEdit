@@ -30,18 +30,10 @@ public:
     static QString verifyExtension(QString,QString);
     static QString current_filename;
     static bool fileNameExists();
-    /*void getTextBoxItem(TextBoxItem*,QSettings*);
-    void getArrowGraphicsItem(ArrowsGraphicsItem*,QSettings*);
-    void getBulletsGraphicsItems(NumberedBulletGraphicItem*,QSettings*);
-    void getPicturesGraphicsItems(PicturesGraphicsItem*,QSettings*);
-    void setFormsPoints(FormArrows*,FormCharts*,FormCliparts*,FormLayers*,FormNumberedBullets *,FormPictures*,FormScreenshots*,FormTextBoxes*);
-    TextBoxItem* setTextBoxItem(QSettings*,int);
-    ArrowsGraphicsItem* setArrowGraphicsItem(QSettings*,QRectF,int);
-    NumberedBulletGraphicItem* setBulletsGraphicsItems(QSettings*,int);
-    PicturesGraphicsItem* setPicturesGraphicsItems(QSettings*,int);
-    GraphsGraphicsItem* setCharts(QSettings*,int);
+
+    NumberedBulletGraphicItem* setNumberedBulletGraphicItem();
     void save();
-    void open();*/
+    void open();
 private:
     QList<QGraphicsItem *> m_listItems;
     QGraphicsScene *m_scene;

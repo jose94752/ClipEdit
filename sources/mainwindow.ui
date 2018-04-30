@@ -98,6 +98,7 @@
     <addaction name="separator"/>
     <addaction name="actionLayers"/>
     <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <addaction name="menufile"/>
    <addaction name="menuEdit"/>
@@ -347,11 +348,6 @@
    </property>
   </action>
   <action name="actionPreferences">
-   <property name="text">
-    <string>Preferences</string>
-   </property>
-  </action>
-  <action name="actionPreferences_2">
    <property name="text">
     <string>Preferences</string>
    </property>
