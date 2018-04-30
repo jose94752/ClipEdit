@@ -67,6 +67,7 @@ void BaseGraphicItem::init()
     m_handlerSize = 8;
     m_heightForRotationHandler = 30;
     m_current = 0;
+    m_collapseMode = CollapseMode::AllowReverse;
 
     m_handlerColor = QColor(227, 227, 227);
     m_selectBorderColor = QColor(Qt::blue);
@@ -267,26 +268,85 @@ void BaseGraphicItem::restrictPositions()
     if (!m_current)
         return;
 
-    if (m_current->type() & ItemHandler::HANDLER_TOP)
+    if (m_collapseMode == CollapseMode::DefaultCollapse)
     {
-        if (m_rect.top() > m_rect.bottom())
-            m_rect.setTop(m_rect.bottom());
-    }
-    else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
-    {
-        if (m_rect.top() > m_rect.bottom())
-            m_rect.setBottom(m_rect.top());
-    }
+        if (m_current->type() & ItemHandler::HANDLER_TOP)
+        {
+            if (m_rect.top() > m_rect.bottom())
+                m_rect.setTop(m_rect.bottom());
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+        {
+            if (m_rect.top() > m_rect.bottom())
+                m_rect.setBottom(m_rect.top());
+        }
 
-    if (m_current->type() & ItemHandler::HANDLER_LEFT)
-    {
-        if (m_rect.left() > m_rect.right())
-            m_rect.setLeft(m_rect.right());
+        if (m_current->type() & ItemHandler::HANDLER_LEFT)
+        {
+            if (m_rect.left() > m_rect.right())
+                m_rect.setLeft(m_rect.right());
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+        {
+            if (m_rect.left() > m_rect.right())
+                m_rect.setRight(m_rect.left());
+        }
     }
-    else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+    if (m_collapseMode == CollapseMode::AllowReverse)
     {
-        if (m_rect.left() > m_rect.right())
-            m_rect.setRight(m_rect.left());
+        if (m_current->type() & ItemHandler::HANDLER_TOP)
+        {
+            if (m_rect.top() > m_rect.bottom())
+            {
+               QTransform t(transform());
+               int dx = m_rect.center().x();
+               int dy = m_rect.bottom();
+               t.translate(dx, dy);
+               t.scale(1, -1);
+               t.translate(-dx, -dy);
+               setTransform(t, false);
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+        {
+            if (m_rect.top() > m_rect.bottom())
+            {
+               QTransform t(transform());
+               int dx = m_rect.center().x();
+               int dy = m_rect.top();
+               t.translate(dx, dy);
+               t.scale(1, -1);
+               t.translate(-dx, -dy);
+               setTransform(t, false);
+            }
+        }
+
+        if (m_current->type() & ItemHandler::HANDLER_LEFT)
+        {
+            if (m_rect.left() > m_rect.right())
+            {
+                QTransform t(transform());
+                int dx = m_rect.right();
+                int dy = m_rect.center().y();
+                t.translate(dx, dy);
+                t.scale(-1, 1);
+                t.translate(-dx, -dy);
+                setTransform(t, false);
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+        {
+            if (m_rect.left() > m_rect.right())
+            {
+                QTransform t(transform());
+                int dx = m_rect.left();
+                int dy = m_rect.center().y();
+                t.translate(dx, dy);
+                t.scale(-1, 1);
+                t.translate(-dx, -dy);
+                setTransform(t, false);
+            }
+        }
     }
 }
 
@@ -476,9 +536,12 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
                 QPointF center = m_rect.center();
 
                 // Transformation, move to the center then rotate
+                int sign = (transform().det() > 0) ? 1 : -1;
+
                 QTransform rotationTransform;
                 rotationTransform.translate(center.x(), center.y());
-                rotationTransform.rotate(-QLineF(event->scenePos(),mapToScene(center)).angle() + QLineF(event->lastScenePos(),mapToScene(center)).angle()).translate(-center.x(),-center.y());
+                rotationTransform.rotate(sign * (-QLineF(event->scenePos(),mapToScene(center)).angle() + QLineF(event->lastScenePos(),mapToScene(center)).angle()));
+                rotationTransform.translate(-center.x(), -center.y());
                 setTransform(rotationTransform, true);
             } break;
             default:

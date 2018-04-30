@@ -21,6 +21,108 @@
 #include "graphsgraphicsitem.h"
 
 
+
+GraphsInfo::GraphsInfo()
+{
+    m_type = 0;
+    m_title = "";
+    m_backColor = Qt::white;
+    m_color = Qt::darkBlue;
+
+    m_transparent = true;
+    m_boundingRect.setRect( 0, 0, 200, 200);
+
+    m_Arcs.clear();
+
+    m_Points.clear();
+
+    m_Colors << Qt::red << Qt::darkRed << Qt::green << Qt::darkGreen
+               << Qt::blue << Qt::darkBlue << Qt::cyan
+        << Qt::darkCyan << Qt::magenta << Qt::darkMagenta
+        << Qt::yellow << Qt::darkYellow
+        << Qt::gray<< Qt::darkGray ;
+
+
+    m_titleFont.setFamily("times");
+    m_titleFont.setPointSize(18);
+
+    m_legendFont.setFamily("times");
+    m_legendFont.setPointSize(10);
+
+    m_Legends.clear();
+}
+
+
+
+QString GraphsInfo::GetCoord()
+{
+    //data
+    QString datastr = "";
+    int nbArcs = m_Arcs.size();
+    for ( int i=0; i<nbArcs; i++)
+    {
+        QString str;
+        str = QString("%1").arg( m_Arcs.at(i) );
+        if( i < nbArcs-1)
+             datastr = datastr + str + QChar(',');
+         else
+             datastr = datastr + str;
+     }
+    return datastr;
+}
+
+
+QString GraphsInfo::GetLegend()
+{
+    //legends
+    QString datastr = "";
+    int nbLeg = m_Legends.size();
+    for ( int i=0; i<nbLeg; i++)
+    {
+        if( i < nbLeg-1)
+             datastr = datastr +  m_Legends.at(i) + QChar(',');
+         else
+             datastr = datastr +  m_Legends.at(i);
+    }
+    return datastr;
+}
+
+
+// construct list of points from string separated by comma
+
+void GraphsInfo::SetCoord( const QString &val)
+{
+    //data
+    m_Arcs.clear();
+
+    QStringList sl = val.split(",", QString::SkipEmptyParts);
+    for (int i = 0; i < sl.size(); ++i)
+    {
+       double arc = sl.at(i).toDouble();
+       m_Arcs.append(arc);
+       //qDebug() << "points arcs added " << arc;
+    }
+
+    //points values for lines and histogrames
+    for (int i = 0; i < sl.size(); ++i)
+    {
+       //qDebug() << "points Y added " << sl.at(i) ;
+       QPointF p (i, m_Arcs.at(i) );
+       m_Points.append(p);
+       //qDebug() << "points added " << p.x() << " " << p.y();
+    }
+}
+
+
+// construct list of legends from string separated by comma
+void GraphsInfo::SetLegend( const QString &val)
+{
+    // legends
+    m_Legends = val.split("," , QString::SkipEmptyParts);
+}
+
+
+
 // Constructor
 // -----------
 
@@ -81,12 +183,13 @@ int GraphsGraphicsItem::type() const
 
 void  GraphsGraphicsItem::setInfos(const GraphsInfo& infos)
 {
-    //qDebug() << "Set Infos";
+    qDebug() << "Set Infos";
 
     m_infos = infos;
     m_rect = m_infos.m_boundingRect;
     setRect( QRectF(m_infos.m_boundingRect));
 
+    update();
     qDebug() << "Set Infos title " << m_infos.m_title;
 }
 
@@ -280,6 +383,7 @@ void GraphsGraphicsItem::drawTitle(QPainter *painter, const QStyleOptionGraphics
     Q_UNUSED(widget)
 
     QPen pen( m_infos.m_color);
+    pen.setWidth(0);
     painter->setPen(pen);
 
     painter->setFont( m_infos.m_titleFont);
@@ -296,6 +400,7 @@ void GraphsGraphicsItem::drawLegend(QPainter *painter, const QStyleOptionGraphic
 
     QPen pen( m_infos.m_color);
     painter->setPen(pen);
+    pen.setWidth(0);
 
     painter->setFont( m_infos.m_legendFont);
 
@@ -344,6 +449,7 @@ void GraphsGraphicsItem::drawAxis(QPainter *painter, const QStyleOptionGraphicsI
     Q_UNUSED(widget)
 
     QPen pen( m_infos.m_color);
+    pen.setWidth(0);
     painter->setPen(pen);
 
     painter->drawLine( m_pictRect.bottomLeft(), m_pictRect.bottomRight() );
@@ -380,17 +486,18 @@ void GraphsGraphicsItem::drawPie(QPainter *painter, const QStyleOptionGraphicsIt
     //int radius = pictRect.width()-;
 
     style = Qt::SolidPattern;
+    QPen pen( m_infos.m_color );
+    pen.setWidth(0);
+    painter->setPen(pen);
     for( i = 0; i < nbPoints; i++)
     {
-        QPen pen( m_infos.m_Colors.at(i) );
-        pen.setWidth(0);
-        painter->setPen(pen);
         QBrush brush( m_infos.m_Colors.at(i), style);
         painter->setBrush(brush);
         painter->drawPie( m_pictRect, localArc*16, m_GraphArcs.at(i)*16);
         //double arcText = (localArc+m_infos.m_Arcs.at(i)/2) 3.14/180;
         localArc += m_GraphArcs.at(i);
     }
+
     drawTitle(painter, option, widget);
     drawLegend(painter, option, widget);
 
@@ -423,12 +530,13 @@ void GraphsGraphicsItem::drawHisto(QPainter *painter, const QStyleOptionGraphics
    // int widLine = 10;
    // int space = 10;
     style = Qt::SolidPattern;
+
+    QPen pen( m_infos.m_color );
+    pen.setWidth(0);
+    painter->setPen(pen);
+
     for( i = 0; i < nbPoints; i++)
     {
-
-        QPen pen( m_infos.m_Colors.at(i));
-        pen.setWidth(0);
-        painter->setPen(pen);
         QBrush brush( m_infos.m_Colors.at(i), style);
         painter->setBrush(brush);
 
@@ -561,8 +669,16 @@ void GraphsGraphicsItem::getParameters( QSettings *s, int itemIndex)
     propr = stritem + QString::number(itemIndex)+ KChartsTransparent;
     s->setValue( propr, m_infos.m_transparent);
 
-    //to do data
+    QString datastr = m_infos.GetCoord();
+    propr = stritem + QString::number(itemIndex)+ KChartsData;
+    s->setValue( propr, datastr);
+
+    datastr = m_infos.GetLegend();
+    propr = stritem + QString::number(itemIndex)+ KChartsLegend;
+    s->setValue( propr, datastr);
+
 }
+
 
 void GraphsGraphicsItem::setParameters( QSettings *s, int itemIndex)
 {
@@ -593,6 +709,15 @@ void GraphsGraphicsItem::setParameters( QSettings *s, int itemIndex)
     propr = stritem + QString::number(itemIndex)+ KChartsTransparent;
     infos.m_transparent = s->value( propr, 1).toBool();
 
-    //to do data
+    propr = stritem + QString::number(itemIndex)+ KChartsData;
+    QString dataStr = s->value(propr).toString();
+    infos.SetCoord(dataStr);
+
+    propr = stritem + QString::number(itemIndex)+ KChartsLegend;
+    dataStr = s->value(propr).toString();
+    infos.SetLegend(dataStr);
+
+    setInfos(infos);
+
 }
 
