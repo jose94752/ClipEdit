@@ -23,6 +23,10 @@
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
+
+    // Essential macro needed for signals-slots
+    //Q_OBJECT
+
     public:
 
         // 4 Type of Thickness outline lines 4 choices possibilities (1 - 4)
@@ -80,6 +84,19 @@ class ArrowsGraphicsItem
         QPointF getStartPosition();
         QPointF getEndPosition();
 
+        //return the ArrowHeadSize
+        int getArrowHeadSize();
+
+        //return the LineThicknessSize
+        int getLineThicknessSize();
+
+        //return the Item Fill Color Arrow
+        QColor getFillColor();
+
+    protected:
+
+              //void AGIfillColorArrowChanged(const QColor& color);
+       //     void AGIfillColorArrowChanged(QGraphicsSceneMouseEvent* event);
 
     private:
 
@@ -87,10 +104,13 @@ class ArrowsGraphicsItem
         bool m_OneAnchorPoint;
         bool m_TwoAnchorPoints;
 
+        int arrowHeadSize; // <- arrowHeadSize is First issue of Arrow Head Size and is a temporary solution
         int m_ArrowWidth;
         int m_ArrowHeight;
 
         int m_LineThickness;
+
+        int m_SizeHeadTypeChoice; // m_SizeHeadTypeChoice = arrowHeadSize; for the tests and temporary solution
 
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;
@@ -98,19 +118,18 @@ class ArrowsGraphicsItem
         QPointF *m_StartPositionItem;
         QPointF *m_EndPositionItem;
 
+        QColor m_Color; // Temp for test
         QColor *ItemOutlineColorArrow;
         QColor *ItemFillColorArrow;
 
         QPolygonF ArrowHeadStart;
         QPolygonF ArrowHeadEnd;
 
-
-        QColor m_Color; // Temp for test
-
         FormArrows *m_formArrows;
 
     private slots:
 
+        //void fillColorArrowUpdate(const QColor& newItemFillColorArrow); // <- Bug if it activate
 
 };
 

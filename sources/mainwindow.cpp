@@ -25,7 +25,6 @@
 
 #include "Classes/save.h"
 #include "Forms/resizescenedialog.h"
-#include "Forms/dialogfilealreadyexists.h"
 #include "Forms/dialogsave.h"
 #include "Forms/formscreenshots.h"
 #include "Items/picturesgraphicsitem.h"
@@ -93,6 +92,8 @@ void MainWindow::buildMenu()
     connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
     connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
+    connect(ui->actionPreferences_2, SIGNAL( triggered(bool) ),  this,   SLOT( preferences()));
+
     ui->actionSave->setDisabled(true);
 }
 
@@ -107,6 +108,8 @@ void MainWindow::buildForms()
     m_formScreenshots = new FormScreenshots();
     m_formTextboxes = new FormTextBoxes();
 
+    m_formLayers->setScene(m_scene);
+
     // Item connects
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
@@ -117,7 +120,8 @@ void MainWindow::buildForms()
     connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
-    // Remove all useless pages
+    // Building the stacked widget
+    // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
     {
         QWidget* widget = ui->stackedWidgetForms->widget(page);
@@ -125,7 +129,7 @@ void MainWindow::buildForms()
         widget->deleteLater();
     }
 
-    // Store form indexes
+    // Add forms and store the indexes
     m_listIndexes.insert(BUTTON_ID_ARROW, ui->stackedWidgetForms->addWidget(m_formArrows));
     m_listIndexes.insert(BUTTON_ID_CHART, ui->stackedWidgetForms->addWidget(m_formCharts));
     m_listIndexes.insert(BUTTON_ID_BULLET, ui->stackedWidgetForms->addWidget(m_formBullets));
@@ -135,7 +139,7 @@ void MainWindow::buildForms()
     m_listIndexes.insert(BUTTON_ID_SCREENSHOT, ui->stackedWidgetForms->addWidget(m_formScreenshots));
     m_listIndexes.insert(BUTTON_ID_LAYERS, ui->stackedWidgetForms->addWidget(m_formLayers));
 
-    // Store item forms
+    // items <-> forms association
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ArrowGraphicsItem, m_formArrows);
     m_itemForms.insert(BaseGraphicItem::CustomTypes::ChartGraphicsItem, m_formCharts);
     m_itemForms.insert(BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem, m_formBullets);
@@ -248,22 +252,24 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeScene()
 {
-    ResizeSceneDialog scenedialog(&m_scene, this, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false, this);
     scenedialog.exec();
 }
 
 void MainWindow::slotNew(bool)
 {
-    if(m_scene.items().count()>1){
-        DialogSave dialogSave(this, m_scene.items());
+    if (m_scene.items().count() > 1)
+    {
+        DialogSave dialogSave(m_scene.items(), this);
         dialogSave.exec();
     }
-    ResizeSceneDialog scenedialog(&m_scene,this,&m_borderSceneItem,ui->graphicsView->m_backgroundColor,true);
+
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, this);
     scenedialog.exec();
-    QRectF rectf=m_borderSceneItem->rect();
-    QBrush brush=m_borderSceneItem->brush();
+    QRectF rectf = m_borderSceneItem->rect();
+    QBrush brush = m_borderSceneItem->brush();
     m_scene.clear();
-    m_borderSceneItem=m_scene.addRect(rectf);
+    m_borderSceneItem = m_scene.addRect(rectf);
     m_borderSceneItem->setBrush(brush);
 }
 
@@ -272,20 +278,18 @@ void MainWindow::slotNew(bool)
 ///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
-  //checker le new ok
-  qDebug() << "\tdans slot NumberedBullets\n" ;
   int from (0), to (0), taille (0);
   int shape (0);
   QColor bulletcolor, numbercolor;
   QFont qfont;
   m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
-  NumberedBulletGraphicItem * numberedBulletGraphicItem (NULL);
-  qDebug () << "\tfrom == " << from << "\n";
-  qDebug () << "\tto == " << to << "\n";
+  NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
+
   if (to < from) {
       qDebug () << "invalid interval\n";
       return;
   }
+
   int numbullet (from);
   QPointF scene_topleft (m_scene.sceneRect().topLeft());
   QPointF scene_topright (m_scene.sceneRect().topRight());
@@ -317,12 +321,9 @@ void MainWindow::slotTextBoxes()
 
 void MainWindow::slotTextPicture()
 {
-    qDebug()<<"-----mainwindow : slot TextPicture ===========";
     PicturesGraphicsItem* PictureItem = new PicturesGraphicsItem (m_formPictures);
-    //m_scene.clear();
     m_scene.addItem(PictureItem);
 }
-
 
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
@@ -371,19 +372,18 @@ void MainWindow::slotArrowsGraphicsItem()
 
 void MainWindow::setBackground(const QPixmap& pix)
 {
-     //Get screen background.
-    qDebug () << "mainWindow slot of the Screenshot";
-
-    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
+    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem (pix);
     m_scene.addItem(sc);
-
 }
 
 void MainWindow::itemSelected()
 {
     QList<QGraphicsItem*> items = m_scene.selectedItems();
 
-    if (!items.isEmpty() && (ui->stackedWidgetForms->currentIndex() != m_listIndexes[BUTTON_ID_LAYERS]))
+    if (items.isEmpty())
+        return;
+
+    if (ui->stackedWidgetForms->currentIndex() != m_listIndexes[BUTTON_ID_LAYERS])
     {
         // Casting the first selected item
         QGraphicsItem* item = items[0];
@@ -402,12 +402,17 @@ void MainWindow::itemSelected()
             m_itemForms[itemType]->loadFromItem(castedItem);
         }
     }
+    else
+    {
+        // For Layers, it must select the corresponding layer
+        // TO DO: emit itemSelected ???
+    }
 }
 
 // Layers
 void MainWindow::slotLayers()
 {
-    m_formLayers->setScene(m_scene);
+    m_formLayers->updateLayers();
 }
 
 void MainWindow::exportView(bool)
@@ -422,8 +427,7 @@ void MainWindow::exportView(bool)
 
     if (fileName != extfilename && fileToSave.exists())
     {
-        DialogFileAlreadyExists d;
-        d.exec();
+        QMessageBox::warning(this, tr("Warning"), tr("File %1 already exists").arg(fileToSave.fileName()));
     }
     else
     {
@@ -446,7 +450,7 @@ void MainWindow::openFile(bool)
 
     if (!fileName.isEmpty())
     {
-        Save save(&m_scene,fileName);
+        Save save(&m_scene, fileName);
         //save.setFormsPoints(&m_formArrows,&m_formCharts,&m_formCliparts,&m_formLayers,&m_formBullets,&m_formPictures,&m_formScreenshots,&m_formTextboxes);
         //save.open();
     }
@@ -475,8 +479,7 @@ void MainWindow::saveAs(bool)
 
         if (fileName != extfilename && fileToSave.exists())
         {
-            DialogFileAlreadyExists dfae;
-            dfae.exec();
+            QMessageBox::warning(this, tr("Warning"), tr("File %1 already exists").arg(fileToSave.fileName()));
         }
         else
         {

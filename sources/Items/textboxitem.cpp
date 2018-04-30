@@ -29,6 +29,7 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
     m_text = "Sample Text";
     m_font = QFont();
     m_alignmentFlag = Qt::AlignLeft;
+    m_margin = 5;
 
     m_backgroundColor = QColor(Qt::white);
     m_textColor = QColor(Qt::black);
@@ -54,7 +55,7 @@ void TextBoxItem::paint(QPainter* painter, const QStyleOptionGraphicsItem *optio
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
     QRectF borderRect = m_rect.adjusted(m_borderWidth/2.0, m_borderWidth/2.0, -m_borderWidth/2.0, -m_borderWidth/2.0);
-    QRectF textRect = m_rect.adjusted(m_borderWidth+2, m_borderWidth+2, -m_borderWidth-2, -m_borderWidth-2);
+    QRectF textRect = m_rect.adjusted(m_borderWidth+m_margin, m_borderWidth+m_margin, -m_borderWidth-m_margin, -m_borderWidth-m_margin);
 
     QPen pen(m_borderColor, m_borderWidth);
     painter->setPen(pen);
@@ -85,6 +86,7 @@ const QVariant TextBoxItem::itemData() const
 
     data["text"] = m_text;
     data["font"] = m_font.toString();
+    data["margin"] = m_margin;
     data["alignment"] = m_alignmentFlag;
     data["background-color"] = m_backgroundColor.name();
     data["text-color"] = m_textColor.name();
@@ -102,6 +104,7 @@ void TextBoxItem::setItemData(const QVariant& data)
 
     m_text = vh["text"].toString();
     m_font.fromString(vh["font"].toString());
+    m_margin = vh["margin"].toInt();
     m_alignmentFlag = (Qt::AlignmentFlag)vh["alignment"].toInt();
 
     m_backgroundColor = QColor(vh["background-color"].toString());
@@ -129,7 +132,7 @@ void TextBoxItem::textToRect()
 {
    QFontMetrics fm(m_font);
    QRectF rect = fm.boundingRect(QApplication::desktop()->geometry(), Qt::AlignLeft | Qt::TextWordWrap | Qt::TextExpandTabs, m_text, 4);
-   rect.adjust(-m_borderWidth - 2, -m_borderWidth - 2, m_borderWidth + 2, m_borderWidth + 2);
+   rect.adjust(-m_borderWidth - m_margin, -m_borderWidth - m_margin, m_borderWidth + m_margin, m_borderWidth + m_margin);
 
    setRect(rect);
 }
@@ -168,17 +171,22 @@ const QColor& TextBoxItem::borderColor() const
     return m_borderColor;
 }
 
-bool TextBoxItem::hasBorders()
+bool TextBoxItem::hasBorders() const
 {
     return m_hasBorders;
 }
 
-int TextBoxItem::borderWidth()
+int TextBoxItem::borderWidth() const
 {
     return m_borderWidth;
 }
 
-int TextBoxItem::borderRadius()
+int TextBoxItem::borderRadius() const
 {
     return m_borderRadius;
+}
+
+int TextBoxItem::margin() const
+{
+    return m_margin;
 }

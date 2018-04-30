@@ -17,11 +17,23 @@
 #include <QWidget>
 #include <QGraphicsItem>
 #include <QString>
+#include <QSettings>
 
 #include "basegraphicitem.h"
 
 #define BAR     15        //pour les histogrames, la larguer d'une bare et la distance entre deux bares
 #define SPACE   BAR/3
+
+//save strings
+#define KChartsTitle    "/title"
+#define KChartsType     "/type"
+#define KChartsWidth    "/width"
+#define KChartsHeight   "/height"
+#define KChartsColor    "/color"
+#define KChartsBackgroundcolor    "/backgroundcolor"
+#define KChartsTransparent    "/transparent"
+#define KChartsData    "/data"
+
 
 // Defines
 // -------
@@ -112,7 +124,11 @@ class GraphsGraphicsItem : public BaseGraphicItem
         //pour les pies
         void transformArcsPie();
 
+        //histogrames
         void transformPointsHisto();
+
+        void getParameters(QSettings *settings,int itemIndex);
+        void setParameters(QSettings *settings,int itemIndex);
 };
 
 #endif
