@@ -79,6 +79,7 @@ class GraphsGraphicsItem : public BaseGraphicItem
 
         // Getters and setters
         void setInfos(const GraphsInfo& infos);
+       const GraphsInfo& getInfos( ) const;
 
         void getParameters(QSettings *settings,int itemIndex);
         void setParameters(QSettings *settings,int itemIndex);

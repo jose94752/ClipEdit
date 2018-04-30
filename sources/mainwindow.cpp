@@ -27,6 +27,7 @@
 #include "Forms/resizescenedialog.h"
 #include "Forms/dialogsave.h"
 #include "Forms/formscreenshots.h"
+#include "dialogpreferences.h"
 #include "Items/picturesgraphicsitem.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/textboxitem.h"
@@ -46,33 +47,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     init();
-    /*int from (1), to (2), taille (40);
-    int shape (0);
-    QColor bulletcolor, numbercolor;
-    QFont qfont;
-    m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
-    taille=40;
-    bulletcolor=QColor(Qt::red);
-    numbercolor=QColor(Qt::blue);
-    NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
-    int numbullet (from);
-    QPointF scene_topleft (m_scene.sceneRect().topLeft());
-    QPointF scene_topright (m_scene.sceneRect().topRight());
-    QPointF bulletpos (scene_topleft);
-    qreal delta (0);
-    delta = scene_topright.y() - scene_topleft.y();
-    bulletpos.setY(scene_topleft.y () + delta /5);
-    //qreal posx (0), posy (50), delta (100);
-    for (; numbullet != to+1; ++numbullet) {
-      numberedBulletGraphicItem = new NumberedBulletGraphicItem (numbullet, (NumberedBulletGraphicItem::shape_e)shape, bulletcolor, numbercolor, qfont, taille);
-      //numberedBulletGraphicItem->setPos(posx, posy);
-      numberedBulletGraphicItem->setPos (bulletpos);
-      m_scene.addItem(numberedBulletGraphicItem);
-      delta = numberedBulletGraphicItem->rect ().width ();
-      if (bulletpos.x () + delta < scene_topright.x ()) {
-        bulletpos.setX(bulletpos.x() + delta);
-      }
-    }*/
 }
 
 
@@ -119,7 +93,7 @@ void MainWindow::buildMenu()
     connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
     connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
-    connect(ui->actionPreferences_2, SIGNAL( triggered(bool) ),  this,   SLOT( preferences()));
+    connect(ui->actionPreferences, SIGNAL( triggered(bool) ),  this,   SLOT( preferences()));
 
     ui->actionSave->setDisabled(true);
 }
@@ -142,9 +116,10 @@ void MainWindow::buildForms()
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
+    connect( m_formCharts, SIGNAL(FormCreateChart() ), this, SLOT(slotGraphs()));
+    //connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
-    connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Building the stacked widget
@@ -245,8 +220,35 @@ void MainWindow::buildView()
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
     ui->graphicsView->setScene(&m_scene);
+    ui->graphicsView->viewport()->installEventFilter(this);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
+}
+
+// Events
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched == ui->graphicsView->viewport() && event->type() == QEvent::Wheel)
+    {
+        QWheelEvent* e = static_cast<QWheelEvent*>(event);
+
+        if (!e)
+            return false;
+
+        if (e->modifiers() == Qt::ControlModifier)
+        {
+            QPoint delta = e->angleDelta();
+            int degrees = delta.y() / 8;
+            int steps = degrees / 15;
+
+            m_spinBoxZoom->setValue(m_spinBoxZoom->value() + (steps*m_spinBoxZoom->singleStep()));
+
+            return true;
+        }
+    }
+
+    return QMainWindow::eventFilter(watched, event);
 }
 
 // Slots
@@ -348,18 +350,28 @@ void MainWindow::slotTextPicture()
     m_scene.addItem(PictureItem);
 }
 
+
+// removed parametre
+void MainWindow::slotGraphs( )
+{
+    qDebug() << "slot graphs main window";
+    GraphsInfo infos;
+    // Retrieve data from the form
+    m_formCharts->GetChartsValues(infos);
+    int nbPoints = infos.m_Arcs.size();
+    if( nbPoints > 0 )
+    {
+        qDebug() << "added graph mainWindow Slot Graphs";
+
+        GraphsGraphicsItem *g = new GraphsGraphicsItem();
+        g->setInfos(infos);
+        m_scene.addItem(g);
+     }
+}
+
+/*
 void MainWindow::slotGraphs(const GraphsInfo &infos)
 {
-
-    //m_scene.addItem(new GraphsGraphicsItem());
-    //m_scene.addItem(new GraphsGraphicsItem());
-
-//    GraphsInfo infos;
-//    m_formCharts.GetChartsValues( infos);
-
-//    GraphsGraphicsItem *g = new GraphsGraphicsItem();
-//    g->setInfos(infos);
-//    m_scene.addItem(g);
 
     //do not add graphs if no points
     int nbPoints = infos.m_Arcs.size();
@@ -373,7 +385,7 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
         m_scene.addItem(g);
      }
 }
-
+*/
 
 void MainWindow::slotArrowsGraphicsItem()
 {
@@ -515,4 +527,12 @@ void MainWindow::showAboutDialog(bool)
                         "" + tr("Developed by the M2I Team") + "<br>"
                         "" + tr("Copyright (c) 2018");
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
+}
+
+void MainWindow::preferences ()
+{
+    qDebug () << "\tpreferences...\n";
+    m_dialogPreferences= new DialogPreferences(this);
+    m_dialogPreferences->show();
+
 }
