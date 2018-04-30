@@ -73,7 +73,7 @@ FormArrows::FormArrows(QWidget *parent)
     connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(outlineColorArrowChanged(QColor)));
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
 
-    // Connects for others elements of FormArrrow To do
+     // Connects for others elements of FormArrrow To do
 
 }
 
@@ -117,6 +117,14 @@ QColor FormArrows::getFormFillColorArrow()
 {
     return FormFillColorArrow;
 }
+
+
+// QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
+QPushButton *FormArrows::getAddPushButtonArrow()
+{
+    return ui->pushButtonAddArrow;
+}
+
 
 void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
                                 int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
@@ -206,6 +214,8 @@ void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
 {
     //To do
 }
+
+
 
 // Load data
 // ---------

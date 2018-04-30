@@ -1,0 +1,39 @@
+Bug connect between 2 Class don't work when you have multiple inherit - 30/04/2018 - 11:46
+-------------------------------------------------------------------------------------------------------------------------
+You can't make connect between 2 class when you have multiple inherit.
+
+
+Exemple:
+-------------------------------------------------------------------------------------------------------------------------
+ [Autres includes]
+#include <QObject> 
+[...]
+class FormArrows
+    :   public BaseForm, QObject
+{
+    // Essential macro needed for signals-slots
+	Q_OBJECT
+[...]
+}
+
+[Autres includes]
+#include <QObject> 
+[...]
+class ArrowsGraphicsItem
+    :   public BaseGraphicItem, QObject
+{
+    // Essential macro needed for signals-slots
+    Q_OBJECT
+[...]
+}
+
+Compile errors generate:
+-------------------------------------------------------------------------------------------------------------------------
+/home/formation/ClipEdit/sources/Forms/formarrows.cpp:70: erreur : reference to ‘connect’ is ambiguous
+     connect(ui->radioButtonWithoutAnchorPoint,SIGNAL(clicked(bool)),this,SLOT(radioButtonWithoutAnchorPointMethod(bool)));
+     ^~~~~~~
+[... and others connects ]
+
+/home/formation/ClipEdit/sources/Forms/formarrows.h:33: avertissement : direct base ‘QObject’ inaccessible in ‘FormArrows’ due to ambiguity
+ class FormArrows
+       ^~~~~~~~~~     
