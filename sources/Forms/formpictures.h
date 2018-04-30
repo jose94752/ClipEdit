@@ -53,6 +53,9 @@ class FormPictures
 
         void save_settings(bool);
         void restore_settings(bool);
+
+        void load_position(QString);
+
 private:
 
         // Ui
