@@ -113,3 +113,5 @@ RESOURCES += \
 
 DISTFILES += \
 Bugs.txt
+
+TRANSLATIONS = numberedbulletgraphicitem_fr.ts
