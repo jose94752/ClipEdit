@@ -51,8 +51,6 @@
 
 | QPushButton objects names      |
 | ------------------------------ |
-| pushButtonChangeOutlineColor   |
-| pushButtonChangeFillColor      |
 | pushButtonBeforeShape          |
 | pushButtonDefaultShape         |
 

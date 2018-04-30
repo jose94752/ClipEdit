@@ -37,7 +37,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     $${FORM_DIRECTORY}/baseform.cpp \
-    $${FORM_DIRECTORY}/dialogfilealreadyexists.cpp \
     $${FORM_DIRECTORY}/dialogsave.cpp \
     $${FORM_DIRECTORY}/formarrows.cpp \
     $${FORM_DIRECTORY}/formcharts.cpp \
@@ -59,13 +58,14 @@ SOURCES += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
-    graphicsview.cpp
+    graphicsview.cpp \
+    Classes/layeritemdelegate.cpp \
+    Classes/layeritemmodel.cpp
 
 
 HEADERS += \
     mainwindow.h \
     $${FORM_DIRECTORY}/baseform.h \
-    $${FORM_DIRECTORY}/dialogfilealreadyexists.h \
     $${FORM_DIRECTORY}/dialogsave.h \
     $${FORM_DIRECTORY}/formarrows.h \
     $${FORM_DIRECTORY}/formcharts.h \
@@ -87,12 +87,13 @@ HEADERS += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.h \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
     $${ITEM_DIRECTORY}/textboxitem.h \
-    graphicsview.h
+    graphicsview.h \
+    Classes/layeritemdelegate.h \
+    Classes/layeritemmodel.h
 
 
 FORMS += \
     mainwindow.ui \
-    $${FORM_DIRECTORY}/dialogfilealreadyexists.ui \
     $${FORM_DIRECTORY}/dialogsave.ui \
     $${FORM_DIRECTORY}/formarrows.ui \
     $${FORM_DIRECTORY}/formcharts.ui \
@@ -106,3 +107,6 @@ FORMS += \
 
 RESOURCES += \
     $${RESOURCE_DIRECTORY}/resources.qrc
+
+DISTFILES += \
+    Bugs.txt

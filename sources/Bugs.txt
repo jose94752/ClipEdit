@@ -1,0 +1,11 @@
+- Export : Unselect all GraphicsItem before export file
+- Layers : Up and Down don't work
+- Layers and Background image : put hthe background color with a lowest values of zValue
+- Layers : replace the buttons my Icon buttons
+- Pictures : opacity
+- Pictures : crop property
+- Scene : Control ++ and Control -- make zoom
+- Arrows : Handle bug when you change azimut of the arrow to full horizontal (or vertical) and you click somewhere then you can't
+			recall these Arrow.
+
+

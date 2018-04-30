@@ -31,32 +31,36 @@ class ResizeSceneDialog
 {
     Q_OBJECT
 
-public:
-    explicit ResizeSceneDialog(QGraphicsScene*, QWidget*,QGraphicsRectItem**,QColor,bool);
-    ~ResizeSceneDialog();
-    void detectFormat();
+    public:
 
-public slots:
-    void sizeChanged();
-    void unitChanged(const QString&);
-    void valuesChanged();
-    void formatChanged(QString);
+        explicit ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor, bool isNew, QWidget* parent = 0);
+        ~ResizeSceneDialog();
+        void detectFormat();
 
-protected:
-    void resizeEvent(QResizeEvent*);
+    public slots:
 
-private:
-    Ui::ResizeSceneDialog *ui;
-    QGraphicsScene *m_scene;
-    int m_width;
-    int m_height;
-    int m_dpix;
-    int m_dpiy;
-    QGraphicsRectItem **m_borderSceneItem;
-    QColor m_backGroundColor;
-    static QString m_format;
-    bool m_format_changed;
-    bool m_isNew;
+        void sizeChanged();
+        void valuesChanged();
+        void unitChanged(const QString& unit);
+        void formatChanged(const QString& format);
+
+    protected:
+
+        void resizeEvent(QResizeEvent*);
+
+    private:
+
+        Ui::ResizeSceneDialog *ui;
+        QGraphicsScene *m_scene;
+        int m_width;
+        int m_height;
+        int m_dpix;
+        int m_dpiy;
+        QGraphicsRectItem **m_borderSceneItem;
+        QColor m_backGroundColor;
+        static QString m_format;
+        bool m_format_changed;
+        bool m_isNew;
 };
 
 #endif

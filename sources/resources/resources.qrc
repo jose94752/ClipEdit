@@ -19,15 +19,23 @@
         <file>icons/resize-icon.png</file>
         <file>icons/icon-clipedit.ico</file>
         <file>icons/icon-clipedit.png</file>
-        <file>icons/icon-align-centered.png</file>
-        <file>icons/icon-align-left.png</file>
-        <file>icons/icon-align-right.png</file>
         <file>icons/clear-icon.png</file>
-        <file>icons/eye.png</file>
         <file>icons/background-color-icon.png</file>
         <file>icons/fit-in-view-icon.png</file>
         <file>icons/apply-theme-icon.png</file>
         <file>icons/save-theme-icon.png</file>
+        <file>icons/align-bottom-icon.png</file>
+        <file>icons/align-hcentered-icon.png</file>
+        <file>icons/align-left-icon.png</file>
+        <file>icons/align-right-icon.png</file>
+        <file>icons/align-vcentered-icon.png</file>
+        <file>icons/align-top-icon.png</file>
+        <file>icons/eye-icon.png</file>
+        <file>icons/eye-transparent-icon.png</file>
+        <file>icons/down-icon.png</file>
+        <file>icons/up-icon.png</file>
+        <file>icons/copy-icon.png</file>
+        <file>icons/delete-icon.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>

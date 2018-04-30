@@ -15,6 +15,7 @@
 #include <QDebug>
 
 #include "formarrows.h"
+#include "formarrows.h"
 #include "ui_formarrows.h"
 #include "../Items/arrowsgraphicsitem.h"
 
@@ -41,12 +42,14 @@ FormArrows::FormArrows(QWidget *parent)
      {
          ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
      }
+     DefaultLineThickness = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
 
      // Fill the Simple Arrow Head size 10 to 50
      for (int i = 10; i < 51; i++)
      {
         ui->comboBoxHeadTypeChoiceContents->addItem("Simple Arrow Head size " + QString::number(i));
      }
+    DefaultFormArrowHeadSize = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
 
     // Get start default color Qt::black on the Class ColorButton we use others Colors
     ui->toolButtonOutlineColorContents->setColor(Qt::darkCyan);
@@ -63,9 +66,15 @@ FormArrows::FormArrows(QWidget *parent)
 
     // End default values of FormArrows
 
+    // Connects for Anchor Arrows
+    connect(ui->radioButtonWithoutAnchorPoint,SIGNAL(clicked(bool)),this,SLOT(radioButtonWithoutAnchorPointMethod(bool)));
+
     // Connects for change color of the FormArrow
     connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(outlineColorArrowChanged(QColor)));
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
+
+    // Connects for others elements of FormArrrow To do
+
 }
 
 FormArrows::~FormArrows()
@@ -103,35 +112,84 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
 
 }
 
-/*void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth, int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness, int SizeHeadTypeChoice)
+//return the Form Fill Color Arrow
+QColor FormArrows::getFormFillColorArrow()
 {
-    //ui->radioButtonWithoutAnchorPoint->isChecked()=WithoutAnchorPoint;
-    //ui->radioButton1AnchorPoints->isChecked()=OneAnchorPoint;
-    //TwoAnchorPoints = ui->radioButton2AnchorPoints->isChecked();
+    return FormFillColorArrow;
+}
+
+void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
+                                int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
+                                int SizeHeadTypeChoice)
+                                //To do others HeadTypeChoiceContents
+                                // comboBoxHeadTypeChoiceContents
+{
+    // Check and update of Anchor points method
+    if (WithoutAnchorPoint && !OneAnchorPoint && !TwoAnchorPoints)
+    {
+        ui->radioButtonWithoutAnchorPoint->setChecked(true);
+        ui->radioButton1AnchorPoints->setChecked(false);
+        ui->radioButton2AnchorPoints->setChecked(false);
+        // To do check if Anchor points method have changed for these ArrowsGraphicsItem
+    }
+    else if (!WithoutAnchorPoint && OneAnchorPoint && !TwoAnchorPoints)
+    {
+        ui->radioButtonWithoutAnchorPoint->setChecked(false);
+        ui->radioButton1AnchorPoints->setChecked(true);
+        ui->radioButton2AnchorPoints->setChecked(false);
+        // To do check if Anchor points method have changed for these ArrowsGraphicsItem
+    }
+    else if (!WithoutAnchorPoint && !OneAnchorPoint && TwoAnchorPoints)
+    {
+        ui->radioButtonWithoutAnchorPoint->setChecked(false);
+        ui->radioButton1AnchorPoints->setChecked(false);
+        ui->radioButton2AnchorPoints->setChecked(true);
+        // To do check if Anchor points method have changed for these ArrowsGraphicsItem
+    }
+    else
+    {
+        // Return error more than one Anchor Method is checked
+        qDebug() << "Error: More than one Anchor Method is checked when you call FormArrows::SetInfosArrows method";
+        qDebug() << "Without Anchor point is = " << WithoutAnchorPoint;
+        qDebug() << "One Anchor point is = " << OneAnchorPoint;
+        qDebug() << "Two Anchors points is = " << TwoAnchorPoints;
+    }
 
     ui->spinBoxArrowWidthContents->setValue(ArrowWidth);
+
     ui->spinBoxArrowHeightContents->setValue(ArrowHeight);
 
     ui->toolButtonOutlineColorContents->setColor(ArrowOutlineColor);
+
     ui->toolButtonFillColorContents->setColor(ArrowFillColor);
 
+    // Line Thinckness update process
+    LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
 
-  //LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+    BeforeLineThickness = LineThicknessContents;
 
-    LineThicknessContents=LineThickness;
+    LineThicknessContents = LineThickness;
 
     //To do others HeadTypeChoiceContents
     // comboBoxHeadTypeChoiceContents
-    //SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
-    //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
-     SizeHeadTypeChoiceContents=SizeHeadTypeChoice;
-}*/
+    SizeHeadTypeChoiceContents = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
 
+    FormArrowHeadSize = SizeHeadTypeChoiceContents; // <- "FormArrowHeadSize = SizeHeadTypeChoiceContents;" is First issue of Form Arrow Head Size and is a temporary solution
+
+    BeforeFormArrowHeadSize = FormArrowHeadSize; // temp method this will change as soon as possible
+
+    //qDebug() << "SizeHeadTypeChoiceContents = " << SizeHeadTypeChoiceContents;
+     SizeHeadTypeChoiceContents = SizeHeadTypeChoice;
+}
+
+//
+// SIGNALS
+//
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
     FormFillColorArrow = color;
-    emit FormFillColorArrowChanged(FormFillColorArrow);
+    emit FormFillColorArrowChanged(FormFillColorArrow); // This emit is for connect on FormArrows class
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)
@@ -141,9 +199,16 @@ void FormArrows::outlineColorArrowChanged(const QColor& color)
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
+//
+// SLOTS
+//
+void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
+{
+    //To do
+}
+
 // Load data
 // ---------
-
 void FormArrows::loadFromItem(BaseGraphicItem* item) const
 {
     if (qgraphicsitem_cast<ArrowsGraphicsItem*>(item))
@@ -151,5 +216,18 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         ArrowsGraphicsItem* castedItem = qgraphicsitem_cast<ArrowsGraphicsItem*>(item);
 
         // Load data into the form
+        //qDebug() << "getArrowHeadSize = " << (castedItem->getArrowHeadSize()); // For tests
+        ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
+
+        //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
+
+        qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
+        ui->toolButtonFillColorContents->setColor(castedItem->getFillColor());
+
+        // Others:
+        //castedItem->setFormArrowMethodsForEachHandleValue();
+        //...
+
     }
 }

@@ -30,6 +30,7 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
     m_font = QFont();
     m_margin = 5;
     m_alignmentFlag = Qt::AlignLeft;
+    m_margin = 5;
 
     m_backgroundColor = QColor(Qt::white);
     m_textColor = QColor(Qt::black);
