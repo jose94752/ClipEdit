@@ -66,21 +66,8 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
     setPos(0,0);
 
-    //Test zone
-
-    // Connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
-    //connect ( val, SIGNAL(MonSignal(type)), this, SLOT(MonSlot(type)) ); //syntax connect for SIGNAL
-    // connect entres deux classes différentes test (temporaty comment)
-
-    //connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
-    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //End Test zone
-
-
 }
-// fin Zone de travaux
+
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
@@ -185,8 +172,27 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
 
+
+    //Test zone
+
+    // Connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
+    //connect ( val, SIGNAL(MonSignal(type)), this, SLOT(MonSlot(type)) ); //syntax connect for SIGNAL
+    // connect entres deux classes différentes test (temporaty comment)
+
+    //connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
+    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
+    //connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
+    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
+    //QObject::connect(m_formArrows->getFormFillColorArrow(),SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
+    //End Test zone
+
+
+
+
+
     BaseGraphicItem::paint(painter,option,widget);
 }
+// fin Zone de travaux
 
 // Getters
 // -------
