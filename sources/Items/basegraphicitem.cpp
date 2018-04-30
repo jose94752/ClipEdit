@@ -23,11 +23,7 @@
 BaseGraphicItem::BaseGraphicItem(QGraphicsItem* parent)
     :   QGraphicsItem(parent)
 {
-    m_hasHandlers = true;
-    m_drawBoundingRect = true;
-    m_handlerSize = 10;
-    m_heightForRotationHandler = 30;
-    m_current = 0;
+    init();
 
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
     createHandlers();
@@ -36,11 +32,7 @@ BaseGraphicItem::BaseGraphicItem(QGraphicsItem* parent)
 BaseGraphicItem::BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent)
     :   QGraphicsItem(parent)
 {
-    m_hasHandlers = true;
-    m_drawBoundingRect = true;
-    m_handlerSize = 10;
-    m_heightForRotationHandler = 30;
-    m_current = 0;
+    init();
 
     setRect(rect);
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
@@ -50,11 +42,9 @@ BaseGraphicItem::BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent)
 BaseGraphicItem::BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool drawBoundingRect, QGraphicsItem* parent)
     :   QGraphicsItem(parent)
 {
+    init();
     m_hasHandlers = hasHandlers;
     m_drawBoundingRect = drawBoundingRect;
-    m_handlerSize = 10;
-    m_heightForRotationHandler = 30;
-    m_current = 0;
 
     setRect(rect);
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
@@ -65,6 +55,21 @@ BaseGraphicItem::~BaseGraphicItem()
 {
     for (int i = 0; i < m_handlers.size() ; i++)
         delete m_handlers[i];
+}
+
+// Default settings
+// ----------------
+
+void BaseGraphicItem::init()
+{
+    m_hasHandlers = true;
+    m_drawBoundingRect = true;
+    m_handlerSize = 8;
+    m_heightForRotationHandler = 30;
+    m_current = 0;
+
+    m_handlerColor = QColor(227, 227, 227);
+    m_selectBorderColor = QColor(Qt::blue);
 }
 
 // Getters and setters
@@ -303,7 +308,14 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
     if (isSelected())
     {
         QBrush brush(Qt::NoBrush);
-        QPen pen(Qt::blue);
+        QPen pen(Qt::black);
+        painter->setPen(pen);
+        painter->setBrush(brush);
+
+        // Save painter state
+        painter->save();
+
+        pen.setColor(m_selectBorderColor);
         painter->setPen(pen);
         painter->setBrush(brush);
         painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
@@ -314,7 +326,6 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
             painter->drawRect(m_rect);
         }
 
-        // Handlers
         QPointF p1, p2;
         for (int i = 0; i < m_handlers.size(); i++)
         {
@@ -326,20 +337,34 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
             {
                 p2 = m_handlers[i]->pos();
             }
-
-            if (m_handlers[i]->shape() == ItemHandler::HANDLER_SQUARE)
-            {
-                painter->drawRect(m_handlers[i]->boundingRect());
-            }
-            else if (m_handlers[i]->shape() == ItemHandler::HANDLER_CIRCLE)
-            {
-                painter->drawEllipse(m_handlers[i]->boundingRect());
-            }
         }
 
         // Draw the line between the rect and the rotation handler
         painter->drawLine(p1, p2);
-        //painter->drawPoint(m_rect.center());
+
+        pen.setColor(Qt::black);
+        painter->setPen(pen);
+
+        // Handlers
+        for (int i = 0; i < m_handlers.size(); i++)
+        {
+            if (m_handlers[i]->shape() == ItemHandler::HANDLER_SQUARE)
+            {
+                painter->drawRect(m_handlers[i]->boundingRect());
+                painter->fillRect(m_handlers[i]->boundingRect(), m_handlerColor);
+            }
+            else if (m_handlers[i]->shape() == ItemHandler::HANDLER_CIRCLE)
+            {
+                QPainterPath path;
+                path.addEllipse(m_handlers[i]->boundingRect());
+                painter->fillPath(path, m_handlerColor);
+                painter->drawPath(path);
+                //painter->drawEllipse(m_handlers[i]->boundingRect());
+            }
+        }
+
+        // Restore painter state
+        painter->restore();
     }
 }
 

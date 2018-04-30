@@ -62,6 +62,7 @@ class PicturesGraphicsItem
         int     lg_size;
         QColor  lg_color;
         QString lg_pos;
+        QString lg_or;
 };
 
 #endif
