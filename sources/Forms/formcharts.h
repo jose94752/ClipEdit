@@ -51,9 +51,6 @@ class FormCharts
 
         ~FormCharts();
 
-    void GetChartsValues(int &vChartType, QString &vChartTitle, QString &vXAxis, QString &vYAxis,
-                         QColor &vBackColor, QColor &vColor, int &vWidth, int &vHeight);
-
     void GetChartsValues( GraphsInfo &infos);
 
     // Load data
@@ -74,7 +71,8 @@ private slots:
 
 signals:
 
-    void FormCreateChart( const GraphsInfo & newGraphsInfo);
+    //void FormCreateChart( const GraphsInfo & newGraphsInfo);
+   void FormCreateChart();
 
 };
 

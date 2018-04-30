@@ -103,6 +103,10 @@ class MainWindow
         void buildForms();
         void buildView();
 
+    protected:
+
+        bool eventFilter(QObject* watched, QEvent* event);
+
     private slots:
 
         // Menu and toolbar
@@ -119,7 +123,8 @@ class MainWindow
         void slotNumberedBullets();
         void slotTextBoxes();
         void slotTextPicture();
-        void slotGraphs(const GraphsInfo &infos);
+        //void slotGraphs(const GraphsInfo &infos);
+        void slotGraphs();
         void slotArrowsGraphicsItem();
 
         //

@@ -6,123 +6,157 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>174</width>
-    <height>204</height>
+    <width>216</width>
+    <height>282</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Resize scene</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_7">
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelUnit">
-       <property name="text">
-        <string>&amp;Unit</string>
-       </property>
-       <property name="buddy">
-        <cstring>comboBoxUnit</cstring>
-       </property>
-      </widget>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="labelUnit">
+         <property name="text">
+          <string>&amp;Unit</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBoxUnit</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxUnit"/>
+       </item>
+      </layout>
      </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="comboBoxUnit"/>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="labelWidth">
+         <property name="text">
+          <string>&amp;Width</string>
+         </property>
+         <property name="buddy">
+          <cstring>doubleSpinBoxWidth</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxWidth">
+         <property name="maximum">
+          <double>10000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="labelWidth">
-       <property name="text">
-        <string>&amp;Width</string>
-       </property>
-       <property name="buddy">
-        <cstring>doubleSpinBoxWidth</cstring>
-       </property>
-      </widget>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="labelHeight">
+         <property name="text">
+          <string>&amp;Height</string>
+         </property>
+         <property name="buddy">
+          <cstring>doubleSpinBoxHeight</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxHeight">
+         <property name="maximum">
+          <double>10000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="doubleSpinBoxWidth">
-       <property name="maximum">
-        <double>10000.000000000000000</double>
-       </property>
-      </widget>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_format">
+         <property name="text">
+          <string>&amp;Format</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox_format</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_format"/>
+       </item>
+      </layout>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelHeight">
-       <property name="text">
-        <string>&amp;Height</string>
-       </property>
-       <property name="buddy">
-        <cstring>doubleSpinBoxHeight</cstring>
-       </property>
-      </widget>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QLabel" name="label_color">
+         <property name="text">
+          <string>&amp;Color</string>
+         </property>
+         <property name="buddy">
+          <cstring>colorButton</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ColorButton" name="colorButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="2" column="1">
-      <widget class="QDoubleSpinBox" name="doubleSpinBoxHeight">
-       <property name="maximum">
-        <double>10000.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_format">
-       <property name="text">
-        <string>&amp;Format</string>
-       </property>
-       <property name="buddy">
-        <cstring>comboBox_format</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QComboBox" name="comboBox_format"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_color">
-       <property name="text">
-        <string>&amp;Color</string>
-       </property>
-       <property name="buddy">
-        <cstring>colorButton</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="ColorButton" name="colorButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="pushButtonSaveTheme">
+         <property name="maximumSize">
+          <size>
+           <width>35</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/icons/icons/save-theme-icon.png</normaloff>:/icons/icons/save-theme-icon.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDialogButtonBox" name="buttonBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="standardButtons">
+          <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QPushButton" name="pushButtonSaveTheme">
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>
@@ -133,7 +167,9 @@
    <header>Classes/colorbutton.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

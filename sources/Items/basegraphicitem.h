@@ -132,20 +132,8 @@ class BaseGraphicItem
     protected:
 
         // Events
-        ///
-        /// \brief mousePressEvent
-        /// \param event
-        ///
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
-        ///
-        /// \brief mouseReleaseEvent
-        /// \param event
-        ///
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-        ///
-        /// \brief mouseMoveEvent
-        /// \param event
-        ///
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 
         // Handlers methods
@@ -165,7 +153,15 @@ class BaseGraphicItem
 
     private:
 
+        // Current handler
         ItemHandler* m_current;
+
+        // Style
+        QColor m_handlerColor;
+        QColor m_selectBorderColor;
+
+        // Default settings
+        void init();
 };
 
 #endif

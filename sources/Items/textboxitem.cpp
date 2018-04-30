@@ -28,6 +28,7 @@ TextBoxItem::TextBoxItem(QGraphicsItem* parent)
 {
     m_text = "Sample Text";
     m_font = QFont();
+    m_margin = 5;
     m_alignmentFlag = Qt::AlignLeft;
     m_margin = 5;
 

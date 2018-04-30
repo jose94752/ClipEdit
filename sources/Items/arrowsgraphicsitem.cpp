@@ -60,6 +60,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 
+    setPos(0,0);
 
     //Test zone
 
@@ -67,8 +68,10 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //connect ( val, SIGNAL(MonSignal(type)), this, SLOT(MonSlot(type)) ); //syntax connect for SIGNAL
     // connect entres deux classes différentes test (temporaty comment)
 
-//    connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-
+    //connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
+    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
+    //connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
+    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
     //End Test zone
 
 
@@ -109,6 +112,15 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     */
     // End Example
 
+    //
+    // The scene QPointF for future using to calculate if the resize of Arrows is enable
+    //  copy from the BaseGraphicItem(parent)
+    QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
+    QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
+    QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
+    QPointF right(m_rect.right(), m_rect.top() + m_rect.height() / 2.0);
+    QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
+    // End scene QPointF
 
 
     painter->setRenderHint(QPainter::Antialiasing);
@@ -268,8 +280,9 @@ QColor ArrowsGraphicsItem::getFillColor()
     return *ItemFillColorArrow;
 }
 
-/* // Test
-void ArrowsGraphicsItem::AGIfillColorArrowChanged(QGraphicsSceneMouseEvent *event)
+ // Test
+/*
+void ArrowsGraphicsItem::AGIfillColorArrowChanged(const QColor& color)
 {
     if (m_formArrows)
     {

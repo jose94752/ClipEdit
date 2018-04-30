@@ -17,6 +17,7 @@
 
 #include <QColor>
 #include <QPolygonF>
+//#include <QObject>
 
 #include "baseform.h"
 
@@ -31,8 +32,8 @@ namespace Ui
 
 class FormArrows
     :   public BaseForm
-                //, Q_OBJECT // QObject go to yours items test not functionnal
 {
+     // Essential macro needed for signals-slots
     Q_OBJECT
 
     public:

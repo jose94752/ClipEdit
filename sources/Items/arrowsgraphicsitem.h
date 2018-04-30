@@ -18,14 +18,14 @@
 #include <QPainter>
 #include <QColor>
 #include <QPolygonF>
-
+//#include <QObject>
 
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
 
     // Essential macro needed for signals-slots
-    //Q_OBJECT
+    //Q_OBJECT // <- Bug Generate error (if it activate without connects) "erreur : undefined reference to `vtable for ArrowsGraphicsItem'"
 
     public:
 
@@ -96,7 +96,6 @@ class ArrowsGraphicsItem
     protected:
 
               //void AGIfillColorArrowChanged(const QColor& color);
-       //     void AGIfillColorArrowChanged(QGraphicsSceneMouseEvent* event);
 
     private:
 
