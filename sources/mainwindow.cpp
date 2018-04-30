@@ -112,6 +112,7 @@ void MainWindow::buildForms()
     m_formLayers->setScene(m_scene);
 
     // Item connects
+    connect(m_formArrows->getAddPushButtonArrow(),SIGNAL(clicked(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
     connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
@@ -121,8 +122,8 @@ void MainWindow::buildForms()
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-    //connect(m_dialogPreferences, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
-    connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+    //connect(m_dialogPreferences, SIGNAL(language(DialogPreferences::lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+    //connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
     // Building the stacked widget
     // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
@@ -531,14 +532,22 @@ void MainWindow::showAboutDialog(bool)
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
 }
 
-void MainWindow::preferences ()
+void MainWindow::preferences()
 {
     qDebug () << "\tMainWindow::preferences...\n";
-    m_dialogPreferences= new DialogPreferences(this);
+    QString str_lang ("English");
+    QSettings q;
+    str_lang=q.value ("preferences/language", str_lang).toString();
+    m_dialogPreferences = new DialogPreferences(this, str_lang);
+    connect(m_dialogPreferences, SIGNAL(signal_language(QString)),
+            this, SLOT(slot_language(QString)));
     m_dialogPreferences->show();
 
 }
 
-void MainWindow::slot_language (DialogPreferences::lang_e) {
-  qDebug () << "MainWindow::slot_language...\n";
+void MainWindow::slot_language (QString lang) {
+  qDebug () << "lang == " << lang << "\n";
+  QSettings q;
+  QString path_language ("preferences/language");
+  q.setValue(path_language, lang);
 }

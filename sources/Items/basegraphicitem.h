@@ -93,6 +93,13 @@ class BaseGraphicItem
             ClipartGraphicsItem,
         };
 
+        // Behaviour when opposite handlers meet eachother
+        enum CollapseMode
+        {
+            DefaultCollapse,
+            ReverseCollapse
+        };
+
         // Constructors, destructor
         BaseGraphicItem(QGraphicsItem* parent = 0);
         BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent = 0);
@@ -139,13 +146,20 @@ class BaseGraphicItem
         // Handlers methods
         void createHandlers();
         void updateHandlers();
-        void restrictPositions();
+
+        void restrictPositions(); // Old method, post-movement
+        void restrictMovement(QGraphicsSceneMouseEvent* event); // New method, pre-movement, should eliminates artifact (WiP)
 
         // Handlers properties
         QList<ItemHandler*> m_handlers;
         bool m_hasHandlers;
         int m_handlerSize;
         int m_heightForRotationHandler;
+        CollapseMode m_collapseMode;
+
+        // Style
+        QColor m_handlerColor;
+        QColor m_selectBorderColor;
 
         // Bounding rect (use the setRect to modify it)
         QRectF m_rect;
@@ -155,10 +169,6 @@ class BaseGraphicItem
 
         // Current handler
         ItemHandler* m_current;
-
-        // Style
-        QColor m_handlerColor;
-        QColor m_selectBorderColor;
 
         // Default settings
         void init();

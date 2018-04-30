@@ -265,6 +265,17 @@ QPointF ArrowsGraphicsItem::getEndPosition()
     return *m_EndPositionItem;
 }
 
+int ArrowsGraphicsItem::getArrowWidth()
+{
+    return m_ArrowWidth;
+}
+
+int ArrowsGraphicsItem::getArrowHeight()
+{
+    return m_ArrowHeight;
+}
+
+
 int ArrowsGraphicsItem::getArrowHeadSize()
 {
     return arrowHeadSize;

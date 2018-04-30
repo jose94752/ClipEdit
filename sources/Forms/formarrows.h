@@ -18,6 +18,7 @@
 #include <QColor>
 #include <QPolygonF>
 //#include <QObject>
+#include <QPushButton>
 
 #include "baseform.h"
 
@@ -71,6 +72,8 @@ class FormArrows
         //void send() {emit FormFillColorArrowChanged(FormFillColorArrow);
 //*** End zone test
 
+        // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
+        QPushButton* getAddPushButtonArrow();
 
     private:
 
@@ -125,9 +128,9 @@ private slots:
 
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
-        void radioButtonWithoutAnchorPointMethod(bool);
+        void radioButtonWithoutAnchorPointMethod(bool);       
 
-    signals:
+signals:
 
         void FormFillColorArrowChanged(QColor newFormFillColorArrow);
         void FormOutlineColorArrowChanged(QColor newFormOutlineColorArrow);

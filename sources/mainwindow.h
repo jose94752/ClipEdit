@@ -136,7 +136,7 @@ class MainWindow
         void slotLayers();
         void preferences ();
 
-        void slot_language (DialogPreferences::lang_e);
+        void slot_language (QString lang);
 };
 
 #endif

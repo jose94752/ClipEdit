@@ -17,6 +17,7 @@
 #include <QPainter>
 #include <QImage>
 #include <QRgb>
+#include <QFontMetrics>
 
 
 
@@ -82,39 +83,90 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
     QPen penHText(lg_color);
     painter->setPen(penHText);
-/*
-    int pixelsWide = fm.width(lg_txt);
-    int pixelsHigh = fm.height();
-  const QRect rect_txt = QRect(0, 0, pixelsWide,  pixelsHigh);
-*/
+
+
+    QFontMetrics fm = painter->fontMetrics();
+
+    int pixelsWide_txt = fm.width(lg_txt);
+    int pixelsHigh_txt = fm.height();
+    const QRect rect_txt = QRect(0, 0, pixelsWide_txt,  pixelsHigh_txt);
+
     const QRect rect = QRect(0, 0, width, height);
+    //const QRect rect1 = QRect( 0 - pixelsWide, 0 - pixelsHigh, width, height);
+
+    int  x, y;
 
 
-    if (lg_pos == "Left") {
-        painter->drawText(rect,  Qt::AlignLeft   , lg_txt);
+    if (lg_or == "Vertical") {
+        qDebug() <<"Vertical -";
+        painter->rotate(90);
+
+
+        if (lg_pos == "Top Left") {
+            painter->drawText(0, 0,   lg_txt);
+        }
+        else if (lg_pos == "Top Right")   {
+             x = -width +  pixelsHigh_txt;
+             painter->drawText(0, x,   lg_txt);
+        }
+        else if (lg_pos == "Center Left") {
+             y = (height - pixelsWide_txt) / 2;
+             painter->drawText( y,  0,   lg_txt);
+        }
+        else if (lg_pos == "Center Right") {
+            y = (height - pixelsWide_txt) / 2;
+            x = -width +  pixelsHigh_txt;
+            painter->drawText(y, x,   lg_txt);
+        }
+        else if (lg_pos == "Bottom Left")     {
+            y = (height - pixelsWide_txt);
+             painter->drawText(y, 0,   lg_txt);
+        }
+        else if (lg_pos == "Bottom Right")  {
+            y = (height - pixelsWide_txt);
+            x = -width +  pixelsHigh_txt;
+            painter->drawText(y, x,   lg_txt);
+        }
+        else qDebug()  <<"choix alignement  invalide"  << lg_pos;
+
     }
-    else if (lg_pos == "Right")   {
-        painter->drawText(rect,  Qt::AlignRight  , lg_txt);
+    else if (lg_or == "Horizontal") {
+        qDebug() <<"Horizontal";
+        painter->rotate(0);
+
+
+        if (lg_pos == "Left") {
+            painter->drawText(rect,  Qt::AlignLeft   , lg_txt);
+        }
+        else if (lg_pos == "Right")   {
+            painter->drawText(rect,  Qt::AlignRight  , lg_txt);
+        }
+        else if (lg_pos == "HCenter") {
+            painter->drawText(rect,  Qt::AlignHCenter, lg_txt);
+        }
+        else if (lg_pos == "Justify") {
+             painter->drawText(rect,  Qt::AlignJustify, lg_txt);
+        }
+        else if (lg_pos == "Top")     {
+            painter->drawText(rect,  Qt::AlignTop    , lg_txt);
+        }
+        else if (lg_pos == "Bottom")  {
+            painter->drawText(rect,  Qt::AlignBottom , lg_txt);
+        }
+        else if (lg_pos == "VCenter") {
+            painter->drawText(rect,  Qt::AlignVCenter, lg_txt);
+        }
+        else if (lg_pos == "Center")  {
+            painter->drawText(rect,  Qt::AlignRight  , lg_txt);
+        }
+        else qDebug()  <<"choix alignement  invalide"  << lg_pos;
+
     }
-    else if (lg_pos == "HCenter") {
-        painter->drawText(rect,  Qt::AlignHCenter, lg_txt);
-    }
-    else if (lg_pos == "Justify") {
-         painter->drawText(rect,  Qt::AlignJustify, lg_txt);
-    }
-    else if (lg_pos == "Top")     {
-        painter->drawText(rect,  Qt::AlignTop    , lg_txt);
-    }
-    else if (lg_pos == "Bottom")  {
-        painter->drawText(rect,  Qt::AlignBottom , lg_txt);
-    }
-    else if (lg_pos == "VCenter") {
-        painter->drawText(rect,  Qt::AlignVCenter, lg_txt);
-    }
-    else if (lg_pos == "Center")  {
-        painter->drawText(rect,  Qt::AlignRight  , lg_txt);
-    }
-    else qDebug()  <<"choix alignement  invalide"  << lg_pos;
+    else qDebug() <<"lg_orientation invalide :"  <<lg_or;
+
+
+
+
 
 
     double opac = (double) opacity / 255;
