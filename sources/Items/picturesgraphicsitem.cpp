@@ -9,6 +9,7 @@
 */
 
 #include <QDebug>
+#include <QGraphicsItem>
 #include <QGraphicsRectItem>
 #include <QRect>
 #include <QFontMetrics>
@@ -16,6 +17,7 @@
 #include <QPainter>
 #include <QImage>
 #include <QRgb>
+
 
 
 #include "picturesgraphicsitem.h"
@@ -26,7 +28,7 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos);
+    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos, lg_or);
     setRect(QRectF(0, 0, width, height));
 }
 
@@ -42,6 +44,7 @@ QRectF PicturesGraphicsItem::boundingRect() const
 void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     painter->setRenderHint(QPainter::Antialiasing);
+
 
     QPixmap img(path);
     QPixmap pixmap_img;
@@ -60,11 +63,18 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
         qDebug() <<"black - white (2)";
 
         pixmap_img.convertFromImage(image1);
+
+
         painter->drawPixmap(m_rect.toRect(),pixmap_img);
     }
     else {
+
         painter->drawPixmap(m_rect.toRect(),img);
     }
+
+
+
+
 
     lg_font.setPointSize(lg_size);
 
@@ -105,6 +115,12 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
         painter->drawText(rect,  Qt::AlignRight  , lg_txt);
     }
     else qDebug()  <<"choix alignement  invalide"  << lg_pos;
+
+
+    double opac = (double) opacity / 255;
+    qDebug() <<"opac="  <<opac;
+
+    this->setOpacity(opac);
 
 
     BaseGraphicItem::paint(painter, option, widget);
