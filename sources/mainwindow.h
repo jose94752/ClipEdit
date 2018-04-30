@@ -100,6 +100,10 @@ class MainWindow
         void buildForms();
         void buildView();
 
+    protected:
+
+        bool eventFilter(QObject* watched, QEvent* event);
+
     private slots:
 
         // Menu and toolbar

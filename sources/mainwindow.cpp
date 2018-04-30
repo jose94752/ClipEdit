@@ -222,8 +222,35 @@ void MainWindow::buildView()
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
     ui->graphicsView->setScene(&m_scene);
+    ui->graphicsView->viewport()->installEventFilter(this);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
+}
+
+// Events
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched == ui->graphicsView->viewport() && event->type() == QEvent::Wheel)
+    {
+        QWheelEvent* e = static_cast<QWheelEvent*>(event);
+
+        if (!e)
+            return false;
+
+        if (e->modifiers() == Qt::ControlModifier)
+        {
+            QPoint delta = e->angleDelta();
+            int degrees = delta.y() / 8;
+            int steps = degrees / 15;
+
+            m_spinBoxZoom->setValue(m_spinBoxZoom->value() + (steps*m_spinBoxZoom->singleStep()));
+
+            return true;
+        }
+    }
+
+    return QMainWindow::eventFilter(watched, event);
 }
 
 // Slots
