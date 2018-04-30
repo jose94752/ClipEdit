@@ -64,6 +64,8 @@ class FormArrows
         //return the Form Fill Color Arrow
         QColor getFormFillColorArrow();
 
+        //return the Form Outline Color Arrow
+        QColor getFormOutlineColorArrow();
 
 //**** Zone test
         // This emit is for connect on the Others class

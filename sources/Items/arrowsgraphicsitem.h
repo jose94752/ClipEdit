@@ -18,6 +18,8 @@
 #include <QPainter>
 #include <QColor>
 #include <QPolygonF>
+#include <QSettings>
+
 //#include <QObject>
 
 class ArrowsGraphicsItem
@@ -55,13 +57,14 @@ class ArrowsGraphicsItem
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+
         int type() const { return CustomTypes::ArrowGraphicsItem; }
 
         // Set Fill Color of the Arrow
-        //void setColor(const QColor &color) { ItemFillColorArrow = color; }
+        void setColorFill(const QColor &color) { *ItemFillColorArrow = color; }
 
         // Set Outline Color of the Arrow
-        //void setColorOutline(const QColor &color) { ItemOutlineColorArrow = color; }
+        void setColorOutline(const QColor &color) { *ItemOutlineColorArrow = color; }
 
         /* // For 2 objects anchors
         BaseGraphicItem *startItem() const { return m_StartItem; }
@@ -99,7 +102,11 @@ class ArrowsGraphicsItem
         //return the Arrow Height
         int getArrowHeight();
 
-protected:
+        //Redefine of virtuals methods inherit from BaseGraphicItem class
+        void setParameters(QSettings *settings,int itemIndex);
+        void getParameters(QSettings *settings,int itemIndex);
+
+    protected:
 
               //void AGIfillColorArrowChanged(const QColor& color);
 

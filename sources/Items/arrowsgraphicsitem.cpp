@@ -47,15 +47,19 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_m_EndPositionItem =  endItem.{à définir}scenePos();
 
-   m_Color = Qt::black; // Temp for test
+    m_Color = Qt::black; // Temp for test
 
-   // For test you must use a color because the default new QColor();
-   // constructor Constructs an invalid color with the RGB value (0, 0, 0).
-   // We must use the default constructor when you want to implement isValid() function of QColor class
-   // If you don't do you will have segmentation fault bug
-   //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
-   ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
-   ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    // For test you must use a color because the default new QColor();
+    // constructor Constructs an invalid color with the RGB value (0, 0, 0).
+    // We must use the default constructor when you want to implement isValid() function of QColor class
+    // If you don't do you will have segmentation fault bug
+    //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
+    qDebug() << "Item Fill Color Arrow  = " << *ItemFillColorArrow;
+    //ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    ItemOutlineColorArrow = new QColor();
+    setColorOutline(m_formArrows->getFormOutlineColorArrow());
+    qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
@@ -138,11 +142,13 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (!m_StartPositionItem || !m_EndPositionItem)
         return;
 
+    /* //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
     // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
     if (m_StartPositionItem->x() >= m_EndPositionItem->x())
             m_EndPositionItem->setX(m_StartPositionItem->x());
     if (m_StartPositionItem->y() >= m_EndPositionItem->y())
             m_EndPositionItem->setY(m_StartPositionItem->y());
+    */
 
     // Draw the line
     QLineF line(*m_StartPositionItem, *m_EndPositionItem);
@@ -290,6 +296,36 @@ QColor ArrowsGraphicsItem::getFillColor()
 {
     return *ItemFillColorArrow;
 }
+
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Get external parameters for an ArrowsGraphicsItem
+void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIndex)
+{
+     //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
+    QString path; // = "Items";
+    {
+        path = "item" + QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //To do
+}
+
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Set external parameters for an ArrowsGraphicsItem
+void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIndex)
+{
+    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
+    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
+    //éventuellement fonction de rafraichissement graphique
+    QString path; // = "Items";
+    {
+        path = "item" + QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //To do
+}
+
+
 
  // Test
 /*

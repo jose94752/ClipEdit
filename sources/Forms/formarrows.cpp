@@ -122,6 +122,12 @@ QColor FormArrows::getFormFillColorArrow()
     return FormFillColorArrow;
 }
 
+//return the Form Outline Color Arrow
+QColor FormArrows::getFormOutlineColorArrow()
+{
+    return FormOutlineColorArrow;
+}
+
 
 // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
 QPushButton *FormArrows::getAddPushButtonArrow()
@@ -195,12 +201,13 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
 }
 
 //
-// SIGNALS
+// SLOTS
 //
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
     FormFillColorArrow = color;
+    // SIGNAL emit FormFillColorArrowChanged
     emit FormFillColorArrowChanged(FormFillColorArrow); // This emit is for connect on FormArrows class
 }
 
@@ -208,12 +215,10 @@ void FormArrows::outlineColorArrowChanged(const QColor& color)
 {
     BeforeFormOutlineColorArrow = FormOutlineColorArrow;
     FormOutlineColorArrow = color;
+    // SIGNAL emit FormOutlineColorArrowChanged
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
-//
-// SLOTS
-//
 void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
 {
     //To do

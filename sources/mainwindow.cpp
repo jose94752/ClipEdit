@@ -390,17 +390,23 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
 }
 */
 
+///
+/// \brief MainWindow::slotArrowsGraphicsItem
+///creates arrows items
+/// 3 Methods
+/// Without anchor point:
+///          we need 2 points on the scene
+/// 1 anchor point:
+///          we need 1 point on the scene and an object of scene
+///          or an object of scene and 1 point on the scene
+/// 2 anchors points:
+///          we need 2 objects of scene
 void MainWindow::slotArrowsGraphicsItem()
 {
-    // 3 Methods
-    // Without anchor point:
-    //          we need 2 points on the scene
-    // 1 anchor point:
-    //          we need 1 point on the scene and an object of scene
-    //          or an object of scene and 1 point on the scene
-    // 2 anchors points:
-    //          we need 2 objects of scene
+    // To do
     //m_scene.addItem(new ArrowsGraphicsItem());
+
+    ///Actual version work only without anchor point
 
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(m_formArrows);
