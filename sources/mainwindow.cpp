@@ -27,6 +27,7 @@
 #include "Forms/resizescenedialog.h"
 #include "Forms/dialogsave.h"
 #include "Forms/formscreenshots.h"
+#include "dialogpreferences.h"
 #include "Items/picturesgraphicsitem.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/textboxitem.h"
@@ -92,7 +93,7 @@ void MainWindow::buildMenu()
     connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
     connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
 
-    connect(ui->actionPreferences_2, SIGNAL( triggered(bool) ),  this,   SLOT( preferences()));
+    connect(ui->actionPreferences, SIGNAL( triggered(bool) ),  this,   SLOT( preferences()));
 
     ui->actionSave->setDisabled(true);
 }
@@ -524,4 +525,12 @@ void MainWindow::showAboutDialog(bool)
                         "" + tr("Developed by the M2I Team") + "<br>"
                         "" + tr("Copyright (c) 2018");
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
+}
+
+void MainWindow::preferences ()
+{
+    qDebug () << "\tpreferences...\n";
+    m_dialogPreferences= new DialogPreferences(this);
+    m_dialogPreferences->show();
+
 }
