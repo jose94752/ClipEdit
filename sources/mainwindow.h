@@ -130,6 +130,8 @@ class MainWindow
         // Layers
         void slotLayers();
         void preferences ();
+
+        void slot_language (DialogPreferences::lang_e);
 };
 
 #endif

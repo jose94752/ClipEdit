@@ -274,7 +274,7 @@ void NumberedBulletGraphicItem::getParameters(QSettings *settings,int itemIndex)
     //numbercolor
     {
       QString pathnumbercolor (path);
-      pathnumbercolor += QString ("bulletcolor");
+      pathnumbercolor += QString ("numbercolor");
 
       QString str_numbercolor (m_numbercolor.name());
       QVariant vnumbercolor = str_numbercolor;

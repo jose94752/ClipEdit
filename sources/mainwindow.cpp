@@ -120,7 +120,8 @@ void MainWindow::buildForms()
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
     connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-
+    //connect(m_dialogPreferences, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+    connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
     // Building the stacked widget
     // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
@@ -502,8 +503,12 @@ void MainWindow::showAboutDialog(bool)
 
 void MainWindow::preferences ()
 {
-    qDebug () << "\tpreferences...\n";
+    qDebug () << "\tMainWindow::preferences...\n";
     m_dialogPreferences= new DialogPreferences(this);
     m_dialogPreferences->show();
 
+}
+
+void MainWindow::slot_language (DialogPreferences::lang_e) {
+  qDebug () << "MainWindow::slot_language...\n";
 }
