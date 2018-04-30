@@ -67,7 +67,7 @@ void BaseGraphicItem::init()
     m_handlerSize = 8;
     m_heightForRotationHandler = 30;
     m_current = 0;
-    m_collapseMode = CollapseMode::AllowReverse;
+    m_collapseMode = CollapseMode::ReverseCollapse;
 
     m_handlerColor = QColor(227, 227, 227);
     m_selectBorderColor = QColor(Qt::blue);
@@ -292,7 +292,7 @@ void BaseGraphicItem::restrictPositions()
                 m_rect.setRight(m_rect.left());
         }
     }
-    if (m_collapseMode == CollapseMode::AllowReverse)
+    if (m_collapseMode == CollapseMode::ReverseCollapse)
     {
         if (m_current->type() & ItemHandler::HANDLER_TOP)
         {
@@ -347,6 +347,60 @@ void BaseGraphicItem::restrictPositions()
                 setTransform(t, false);
             }
         }
+    }
+}
+
+void BaseGraphicItem::restrictMovement(QGraphicsSceneMouseEvent* event)
+{
+    if (!m_current)
+        return;
+
+    // Act according to mode
+
+    if (m_collapseMode == CollapseMode::DefaultCollapse)
+    {
+        // Merge but no reverse
+
+        int dx = event->pos().x() - event->lastPos().x();
+        int dy = event->pos().y() - event->lastPos().y();
+
+        if (m_current->type() & ItemHandler::HANDLER_TOP)
+        {
+            if (m_rect.top() + dy >= m_rect.bottom())
+            {
+                event->setPos(QPointF(event->pos().x(), m_rect.bottom()));
+                event->setLastPos(event->pos());
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+        {
+            if (m_rect.bottom() + dy <= m_rect.top())
+            {
+                event->setPos(QPointF(event->pos().x(), m_rect.top()));
+                event->setLastPos(event->pos());
+            }
+        }
+
+        if (m_current->type() & ItemHandler::HANDLER_LEFT)
+        {
+            if (m_rect.left() + dx >= m_rect.right())
+            {
+                event->setPos(QPointF(m_rect.right(), event->pos().y()));
+                event->setLastPos(event->pos());
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+        {
+            if (m_rect.right() + dx <= m_rect.left())
+            {
+                event->setPos(QPointF(m_rect.left(), event->pos().y()));
+                event->setLastPos(event->pos());
+            }
+        }
+    }
+    else if (m_collapseMode == CollapseMode::ReverseCollapse)
+    {
+        // Reverse if a handler reach its opposite handler
     }
 }
 
@@ -496,6 +550,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     if ((event->buttons() == Qt::LeftButton) && m_current)
     {
         prepareGeometryChange();
+        //restrictMovement(event);
 
         switch(m_current->type())
         {

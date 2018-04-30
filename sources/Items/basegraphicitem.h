@@ -97,7 +97,7 @@ class BaseGraphicItem
         enum CollapseMode
         {
             DefaultCollapse,
-            AllowReverse
+            ReverseCollapse
         };
 
         // Constructors, destructor
@@ -146,7 +146,9 @@ class BaseGraphicItem
         // Handlers methods
         void createHandlers();
         void updateHandlers();
-        void restrictPositions();
+
+        void restrictPositions(); // Old method, post-movement
+        void restrictMovement(QGraphicsSceneMouseEvent* event); // New method, pre-movement, should eliminates artifact (WiP)
 
         // Handlers properties
         QList<ItemHandler*> m_handlers;
