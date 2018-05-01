@@ -98,6 +98,7 @@ void FormLayers::actionClicked(int line , int col)
 
     m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
 
+    // Test
     if (!m_itemSelected)
         m_itemSelected = (BaseGraphicItem*)m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1];
 
