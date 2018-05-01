@@ -23,6 +23,7 @@
 #define Z_DEFAULT       (0.0)
 #define Z_INIT          (1.0)
 #define Z_INCREMENT     (1.0)
+#define Z_OUT_OF        (-999.0)
 
 // Constructor, destructor
 // -----------------------
@@ -64,9 +65,8 @@ void FormLayers::initForm()
     ui->tableWidgetLayers->setAlternatingRowColors(true);
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    //ui->tableWidgetLayers->setItemDelegate(new LayerItemDelegate());
-    //ui->tableWidgetLayers->setModel(new LayerItemModel());
-
+//    ui->tableWidgetLayers->setItemDelegate(new LayerItemDelegate());
+//    ui->tableWidgetLayers->setModel(new LayerItemModel());
 
     // Headers
     QStringList headers;
@@ -90,17 +90,17 @@ void FormLayers::actionClicked(int line , int col)
 {
     qDebug() << "FormLayers::ActionClicked()" << line << col;
 
-    if (!m_scene)
-        return;
-
     m_lineSelected = line;
     m_columnSelected = col;
 
-    m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1]);
+    if (!m_scene)
+        return;
 
-    // Test
-    if (!m_itemSelected)
-        m_itemSelected = (BaseGraphicItem*)m_scene->items(Qt::AscendingOrder)[m_lineSelected + 1];
+    m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::DescendingOrder)[m_lineSelected]);
+
+//    // Test
+//    if (!m_itemSelected)
+//        m_itemSelected = (BaseGraphicItem*)m_scene->items(Qt::DescendingOrder)[m_lineSelected + 1];
 
     if (!m_itemSelected)
         return;
@@ -108,8 +108,8 @@ void FormLayers::actionClicked(int line , int col)
     m_scene->clearSelection();
     m_itemSelected->setSelected(true);
 
-    qDebug() << "FormLayers::ActionClicked()" << m_itemSelected;
-    qDebug() << "FormLayers::ActionClicked()" << m_itemSelected->zValue();
+//    qDebug() << "FormLayers::ActionClicked()" << m_itemSelected;
+//    qDebug() << "FormLayers::ActionClicked()" << m_itemSelected->zValue();
 
     // Visibility
     if (m_columnSelected == 0)
@@ -188,9 +188,30 @@ void FormLayers::updateLayers()
     if (!m_scene)
         return;
 
-    ui->tableWidgetLayers->setRowCount(0);
-
+    // ZValue
     foreach (QGraphicsItem* it, m_scene->items(Qt::AscendingOrder))
+    {
+        BaseGraphicItem* item = dynamic_cast<BaseGraphicItem*>(it);
+
+        if (item)
+        {
+            if (qFabs(item->zValue()) < Z_INCREMENT)
+            {
+                item->setZValue(m_zvalue++);
+
+                qDebug() << "FormLayers::updateLayers(): force ZValue\n\t" << item->zValue() << item;
+            }
+        }
+        else
+        {
+            item = (BaseGraphicItem*)(it);
+            if (item) item->setZValue(Z_OUT_OF);
+        }
+    }
+
+    // List
+    ui->tableWidgetLayers->setRowCount(0);
+    foreach (QGraphicsItem* it, m_scene->items(Qt::DescendingOrder))
     {
         BaseGraphicItem* item = dynamic_cast<BaseGraphicItem*>(it);
 
@@ -199,13 +220,13 @@ void FormLayers::updateLayers()
             int row = ui->tableWidgetLayers->rowCount()+1;
             ui->tableWidgetLayers->setRowCount(row);
 
-            // ZValue
-            if (qFabs(item->zValue()) < Z_INCREMENT)
-            {
-                item->setZValue(m_zvalue++);
+//            // ZValue
+//            if (qFabs(item->zValue()) < Z_INCREMENT)
+//            {
+//                item->setZValue(m_zvalue++);
 
-                qDebug() << "FormLayers::ShowLayers(): force ZValue\n\t" << item->zValue() << item;
-            }
+//                qDebug() << "FormLayers::updateLayers(): force ZValue\n\t" << item->zValue() << item;
+//            }
 
             // 1ere colonne
             if (item->isVisible())
@@ -304,7 +325,7 @@ void FormLayers::updateLayers()
             // 4eme colonne
             ui->tableWidgetLayers->setCellWidget(row-1,3,new QLabel(QString::number(item->zValue())));
         }
-        else qDebug() << "FormLayers::ShowLayers()" << it;
+        else qDebug() << "FormLayers::updateLayers()" << it;
     }
 
     // Init select
