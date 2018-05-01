@@ -49,6 +49,9 @@ class ArrowsGraphicsItem
         // Constructor 2 anchors points
         //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
+        // Destructor Virtual method from BaseGraphicsItem
+        ~ArrowsGraphicsItem();
+
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);

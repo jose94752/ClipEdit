@@ -68,6 +68,12 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
 }
 
+ArrowsGraphicsItem::~ArrowsGraphicsItem()
+{
+    //return BaseGraphicItem::~BaseGraphicItem(); // <- if const for desctructor in BaseGraphicItem
+    for (int i = 0; i < m_handlers.size() ; i++)
+        delete m_handlers[i];
+}
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
