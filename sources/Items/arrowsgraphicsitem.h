@@ -20,14 +20,9 @@
 #include <QPolygonF>
 #include <QSettings>
 
-//#include <QObject>
-
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
-
-    // Essential macro needed for signals-slots
-    //Q_OBJECT // <- Bug Generate error (if it activate without connects) "erreur : undefined reference to `vtable for ArrowsGraphicsItem'"
 
     public:
 
@@ -106,10 +101,6 @@ class ArrowsGraphicsItem
         void setParameters(QSettings *settings,int itemIndex);
         void getParameters(QSettings *settings,int itemIndex);
 
-    protected:
-
-              //void AGIfillColorArrowChanged(const QColor& color);
-
     private:
 
         bool m_WithoutAnchorPoint;
@@ -138,10 +129,6 @@ class ArrowsGraphicsItem
         QPolygonF ArrowHeadEnd;
 
         FormArrows *m_formArrows;
-
-    private slots:
-
-        //void fillColorArrowUpdate(const QColor& newItemFillColorArrow); // <- Bug if it activate
 
 };
 

@@ -17,7 +17,6 @@
 
 #include <QColor>
 #include <QPolygonF>
-//#include <QObject>
 #include <QPushButton>
 
 #include "baseform.h"

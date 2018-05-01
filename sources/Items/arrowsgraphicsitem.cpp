@@ -174,21 +174,12 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 
 
     //Test zone
+    // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
+    qDebug() << "Before FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+    m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
+    qDebug() << "After FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
 
-    // Connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
-    //connect ( val, SIGNAL(MonSignal(type)), this, SLOT(MonSlot(type)) ); //syntax connect for SIGNAL
-    // connect entres deux classes différentes test (temporaty comment)
-
-    //connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
-    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //QObject::connect(m_formArrows->getFormFillColorArrow(),SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
     //End Test zone
-
-
-
-
 
     BaseGraphicItem::paint(painter,option,widget);
 }
@@ -331,24 +322,3 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIndex)
     //To do
 }
 
-
-
- // Test
-/*
-void ArrowsGraphicsItem::AGIfillColorArrowChanged(const QColor& color)
-{
-    if (m_formArrows)
-    {
-        m_formArrows->emit();
-        //m_formArrows->emit (const QColor &color);
-    }
-}
-*/
-
-// SLOTS
-/*
-void ArrowsGraphicsItem::fillColorArrowUpdate(const QColor &newItemFillColorArrow) // <- Bug if it activate
-{                                                                                   // even with the Q_OBJECT macro
-    *ItemFillColorArrow = newItemFillColorArrow;                                    // we have 9 compile errors
-}
-*/
