@@ -17,6 +17,8 @@
 #include <QWidget>
 #include <QGraphicsScene>
 
+#include "Classes/layeritemmodel.h"
+
 class QLabel;
 class QPushButton;
 class QTableWidgetItem;
@@ -65,17 +67,21 @@ class FormLayers
         Ui::FormLayers* ui;
         QGraphicsScene* m_scene;
 
-        qreal m_zvalue;
+        // Table model
+        LayerItemModel* m_model;
 
+        // Holders
+        qreal m_zvalue;
+        int m_lineSelected;
+        int m_columnSelected;
+        BaseGraphicItem * m_itemSelected;
+
+        // Utils
         QLabel* cellIcon(const QIcon& icon);
         QLabel* cellIcon(const QString& filename);
 
+        // Init
         void initForm();
-
-        int m_lineSelected;
-        int m_columnSelected;
-
-        BaseGraphicItem * m_itemSelected;
 };
 
 #endif

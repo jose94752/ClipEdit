@@ -36,7 +36,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableWidget" name="tableWidgetLayers">
+    <widget class="QTableView" name="tableWidgetLayers">
      <property name="selectionMode">
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
@@ -49,17 +49,17 @@
      <property name="gridStyle">
       <enum>Qt::NoPen</enum>
      </property>
-     <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>0</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
       <number>32</number>
      </attribute>
-     <attribute name="horizontalHeaderHighlightSections">
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>false</bool>
      </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>0</number>
      </attribute>
     </widget>
    </item>
