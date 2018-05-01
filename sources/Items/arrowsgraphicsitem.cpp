@@ -68,6 +68,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
 }
 
+// ArrowsGraphicsItem Desctructor implement because ~BaseGraphicsItem is virtual
 ArrowsGraphicsItem::~ArrowsGraphicsItem()
 {
     //return BaseGraphicItem::~BaseGraphicItem(); // <- if const for desctructor in BaseGraphicItem

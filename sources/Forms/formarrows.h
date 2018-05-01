@@ -66,13 +66,6 @@ class FormArrows
         //return the Form Outline Color Arrow
         QColor getFormOutlineColorArrow();
 
-//**** Zone test
-        // This emit is for connect on the Others class
-        //void send() { emit fillColorArrowChanged(const QColor& color);}
-//       void send() { emit fillColorArrowChanged(const QColor& color)};
-        //void send() {emit FormFillColorArrowChanged(FormFillColorArrow);
-//*** End zone test
-
         // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
         QPushButton* getAddPushButtonArrow();
 
@@ -125,13 +118,13 @@ class FormArrows
                             int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
                             int SizeHeadTypeChoice);
 
-private slots:
+    public slots:
 
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
-        void radioButtonWithoutAnchorPointMethod(bool);       
+        void radioButtonWithoutAnchorPointMethod(bool);
 
-signals:
+    signals:
 
         void FormFillColorArrowChanged(QColor newFormFillColorArrow);
         void FormOutlineColorArrowChanged(QColor newFormOutlineColorArrow);

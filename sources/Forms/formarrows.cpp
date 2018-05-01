@@ -13,8 +13,8 @@
 // --------
 
 #include <QDebug>
+#include <QColorDialog>
 
-#include "formarrows.h"
 #include "formarrows.h"
 #include "ui_formarrows.h"
 #include "../Items/arrowsgraphicsitem.h"
