@@ -23,6 +23,8 @@
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
+     // Essential macro needed for signals-slots
+   // Q_OBJECT // <- For the tests disable if it is not needed at least
 
     public:
 

@@ -122,6 +122,14 @@ QColor FormArrows::getFormFillColorArrow()
     return FormFillColorArrow;
 }
 
+//return the Form Fill Color Arrow with QColor object
+QColor FormArrows::getFormFillColorArrow(QColor &newFormFillColorArrow)
+{
+    newFormFillColorArrow = FormFillColorArrow;
+    return newFormFillColorArrow;
+}
+
+
 //return the Form Outline Color Arrow
 QColor FormArrows::getFormOutlineColorArrow()
 {

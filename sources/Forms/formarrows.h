@@ -63,13 +63,17 @@ class FormArrows
         //return the Form Fill Color Arrow
         QColor getFormFillColorArrow();
 
+        //return the Form Fill Color Arrow with QColor object
+        QColor getFormFillColorArrow(QColor  &newFormFillColorArrow);
+
         //return the Form Outline Color Arrow
         QColor getFormOutlineColorArrow();
 
         // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
         QPushButton* getAddPushButtonArrow();
 
-    private:
+
+private:
 
         // UI
         Ui::FormArrows *ui;

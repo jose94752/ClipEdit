@@ -16,8 +16,11 @@
 #include <QPainter>
 #include <QColor>
 
+//#include <QObject> // <- For the tests disable if it is not needed at least
+
 #include <QtMath>
 
+#include "itemhandler.h"
 #include "arrowsgraphicsitem.h"
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
@@ -61,6 +64,33 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
     qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
+//    In Qt5, you use QObject::connect to connect signal with slot:
+//
+//    /*
+//       QMetaObject::Connection QObject::connect(
+//        const QObject *sender,
+//        const char *signal,
+//        const char *method,
+//        Qt::ConnectionType type = Qt::AutoConnection) const;
+//     */
+//
+// Example:
+//    #include <QApplication>
+//    #include <QDebug>
+//    #include <QLineEdit>
+//
+//    int main(int argc, char *argv[]) {
+//        QApplication app(argc, argv);
+//        QLineEdit lnedit;
+//
+//        // connect signal `QLineEdit::textChanged` with slot `lambda function`
+//        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
+//
+//        lnedit.show();
+//        return app.exec();
+//    }
+    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
+    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 
