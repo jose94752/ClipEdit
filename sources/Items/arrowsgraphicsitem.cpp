@@ -353,18 +353,18 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
     //FormArrows *m_formArrows;
 }
 
-void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
+void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
 {
-    /*QString path="item"+QString::number(itemIdex)+"/";
-    settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
-    settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
-    settings->setValue(path+"TwoAnchorPointst",m_TwoAnchorPoints);
-    settings->setValue(path+"arrowHeadSize",arrowHeadSize);
-    settings->setValue(path+"ArrowWidth",m_ArrowWidth);
-    settings->setValue(path+"ArrowHeight",m_ArrowHeight);
-    settings->setValue(path+"LineThickness",m_LineThickness);
-    settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
-    settings->setValue(path+"Color",m_Color.name());*/
+    QString path="item"+QString::number(itemIdex)+"/";
+    m_WithoutAnchorPoint=settings->value(path+"WithoutAnchorPoint").toBool();
+    m_OneAnchorPoint=settings->value(path+"OneAnchorPoint").toBool();
+    m_TwoAnchorPoints=settings->value(path+"TwoAnchorPointst").toBool();
+    arrowHeadSize=settings->value(path+"arrowHeadSize").toInt();
+    m_ArrowWidth=settings->value(path+"ArrowWidth").toInt();
+    m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
+    m_LineThickness=settings->value(path+"LineThickness").toInt();
+    m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
+    m_Color.setNamedColor(settings->value(path+"Color").toString());
 }
 
  // Test

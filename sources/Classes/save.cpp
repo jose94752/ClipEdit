@@ -152,8 +152,11 @@ void Save::open()
                 //m_scene->addItem(texteBox);
             break;
             case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
-                //arrow=setArrowGraphicsItem(&settings,rect,i);
-                //m_scene->addItem(arrow);
+                arrow=new ArrowsGraphicsItem(new FormArrows());
+                arrow->setParameters(&settings,i);
+                arrow->setPos(pointf);
+                arrow->setRect(QRectF(0,0,width,height));
+                m_scene->addItem(arrow);
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:
                 //bullet=setNumberedBulletGraphicItem();
