@@ -50,9 +50,26 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartItem = startItem;
     //m_EndItem = endItem;
     //m_StartPositionItem = startItem.{à définir}scenePos();
-    //m_m_EndPositionItem =  endItem.{à définir}scenePos();
+    //m_EndPositionItem =  endItem.{à définir}scenePos();
+
+    m_StartPositionItem = new QPointF(-50, -50);
+    //*m_StartPositionItem = m_rect.topLeft(); // Test
+    m_EndPositionItem = new QPointF(100, 100);
+    //*m_EndPositionItem = m_rect.bottomRight(); // Test
+
+    //
+    // The scene QPointF for future using to calculate if the resize of Arrows is enable
+    //  copy from the BaseGraphicItem(parent)
+//    QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
+//    QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
+//    QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
+//    QPointF right(m_rect.right(), m_rect.top() + m_rect.height() / 2.0);
+//    QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
+    // End scene QPointF
+
 
     m_Color = Qt::black; // Temp for test
+    arrowHeadSize = 35; // Temp for tests intial 10
 
     // For test you must use a color because the default new QColor();
     // constructor Constructs an invalid color with the RGB value (0, 0, 0).
@@ -71,9 +88,10 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
 
-    setRect(QRectF(-50, -50, 100, 100)); // Temp for test
+    //setRect(QRectF(-50, -50, 100, 100)); // Temp for test
+    setRect(QRectF(*m_StartPositionItem, *m_EndPositionItem)); // Temp for test 2
 
-    setPos(0,0);
+    //setPos(0,0);
 
     //Test zone
     // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
@@ -104,7 +122,29 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
 }
 
+/*
+Beware we don't use QGraphicsLineItem Class which reimplement boundingRect()
+[virtual] QRectF QGraphicsLineItem::boundingRect() const
+from QGraphicsItem::boundingRect().
+*************************************************************************************************
+QGraphicsLineItem Class
+The QGraphicsLineItem class provides a line item that you can add to a QGraphicsScene. More...
 
+Header:
+#include <QGraphicsLineItem>
+qmake:
+QT += widgets
+Since:
+Qt 4.2
+Inherits:
+QGraphicsItem
+[..]
+[virtual] QRectF QGraphicsLineItem::boundingRect() const
+Reimplemented from QGraphicsItem::boundingRect().
+**************************************************************************************************
+*/
+
+// Not the case here we inherints from BaseGraphicItem which is inherints QGraphicsItem
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
     return BaseGraphicItem::boundingRect();
@@ -139,26 +179,22 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     */
     // End Example
 
-    //
-    // The scene QPointF for future using to calculate if the resize of Arrows is enable
-    //  copy from the BaseGraphicItem(parent)
-    QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
-    QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
-    QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
-    QPointF right(m_rect.right(), m_rect.top() + m_rect.height() / 2.0);
-    QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
-    // End scene QPointF
 
 
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
 
-    m_StartPositionItem = new QPointF();
+//    m_StartPositionItem = new QPointF();
     *m_StartPositionItem = m_rect.topLeft(); // Test
-    m_EndPositionItem = new QPointF();
+//    m_EndPositionItem = new QPointF();
     *m_EndPositionItem = m_rect.bottomRight(); // Test
 
     //m_Color = Qt::black; // Test
+
+//    m_StartPositionItem = new QPointF();
+//    *m_StartPositionItem = m_rect.topLeft(); // Test
+//    m_EndPositionItem = new QPointF();
+//    *m_EndPositionItem = m_rect.bottomRight(); // Test
 
     // Testing if you have at least the StartPosition and EndPositionItem is one missing
     // we return and nothing is display.
@@ -191,7 +227,7 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     // Draw the arrows
     double angle = qAtan2(-line.dy(), line.dx());
 
-    arrowHeadSize = 35; // Temp for tests intial 10
+
 
     QPointF sourceArrowP1 = *m_StartPositionItem + QPointF(qSin(angle + M_PI / 3) * arrowHeadSize,
                                                            qCos(angle + M_PI / 3) * arrowHeadSize);
@@ -338,6 +374,8 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
     settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
     /*QPointF *m_StartPositionItem;
     QPointF *m_EndPositionItem;*/
+//    settings->setValue(path+"StartPositionItem",*m_StartPositionItem); // Cf. Bug of setParameters below
+//    settings->setValue(path+"EndPositionItem",*m_EndPositionItem);
     settings->setValue(path+"Color",m_Color.name());
     settings->setValue(path+"ItemOutlineColorArrow",*ItemOutlineColorArrow);
     settings->setValue(path+"ItemFillColorArrow",*ItemFillColorArrow);
@@ -358,6 +396,8 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
     m_LineThickness=settings->value(path+"LineThickness").toInt();
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
+//    m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF(); // Bug cannot convert QPointF* to
+//    m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();     //  QPointF in assignement
     m_Color.setNamedColor(settings->value(path+"Color").toString());
     ItemOutlineColorArrow->setNamedColor(settings->value(path+"ItemOutlineColorArrow").toString());
     ItemFillColorArrow->setNamedColor(settings->value(path+"ItemFillColorArrow").toString());

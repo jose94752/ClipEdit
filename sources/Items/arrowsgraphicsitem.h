@@ -133,6 +133,7 @@ class ArrowsGraphicsItem
         QColor *ItemOutlineColorArrow;
         QColor *ItemFillColorArrow;
         QString nameTestFillColor;
+        QString nameItemFillColorArrow;
 
         QPolygonF ArrowHeadStart;
         QPolygonF ArrowHeadEnd;

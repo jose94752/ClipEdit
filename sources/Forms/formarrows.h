@@ -46,7 +46,7 @@ class FormArrows
         void loadFromItem(BaseGraphicItem* item) const;
 
         // Method GetInfosArrows
-        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
+       void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,
                             QColor &ArrowOutlineColor, QColor &ArrowFillColor,
                             int &LineThickness, int &SizeHeadTypeChoice);
