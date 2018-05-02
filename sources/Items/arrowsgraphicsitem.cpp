@@ -17,7 +17,7 @@
 #include <QColor>
 
 //#include <QObject> // <- For the tests disable if it is not needed at least
-#include <QColorDialog>
+//#include <QColorDialog>
 
 #include <QtMath>
 
@@ -64,9 +64,9 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     ItemOutlineColorArrow = new QColor();
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
     qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
-
+    /*
     //    In Qt5, you use QObject::connect to connect signal with slot:
-    //
+    //*/
     //    /*
     //       QMetaObject::Connection QObject::connect(
     //        const QObject *sender,
@@ -74,7 +74,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //        const char *method,
     //        Qt::ConnectionType type = Qt::AutoConnection) const;
     //     */
-    //
+    /*
     // Example:
     //    #include <QApplication>
     //    #include <QDebug>
@@ -90,8 +90,9 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //        lnedit.show();
     //        return app.exec();
     //    }
-
+    */
     //Tests
+    /*
     //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
     //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
 
@@ -102,6 +103,12 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //QColorDialog::currentColorChanged(QColor)
     //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
     //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {m_formArrows->getFormFillColorArrow(QColor);});
+
+    //connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
+    //QObject::connect(&m_formArrows->FormFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
+    */
+
 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
