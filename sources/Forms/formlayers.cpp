@@ -127,10 +127,12 @@ void FormLayers::actionUp()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() + Z_INCREMENT;
-    if (qFabs(zValue) < Z_INCREMENT) zValue++;
+    qreal zValue = m_itemSelected->zValue() + Z_INCREMENT + Z_INCREMENT;
+    if (qFabs(zValue) < Z_INCREMENT)
+        return; // zValue++;
     m_itemSelected->setZValue(zValue);
-    if (zValue > m_zvalue) m_zvalue = zValue;
+    if (zValue > m_zvalue)
+        m_zvalue = zValue;
 
     updateLayers();
 }
@@ -144,7 +146,8 @@ void FormLayers::actionDown()
 
     qreal zValue = m_itemSelected->zValue() - Z_INCREMENT;
 
-    if (qFabs(zValue) < Z_INCREMENT) zValue--;
+    if (qFabs(zValue) < Z_INCREMENT)
+        zValue--;
 
     m_itemSelected->setZValue(zValue);
 
@@ -183,23 +186,49 @@ void FormLayers::actionDelete()
 
 void FormLayers::updateLayers()
 {
+    bool flNew = false;
+    qreal zValue = Z_INIT;
+
 //    qDebug() << "FormLayers::updateLayers()";
 
     if (!m_scene)
         return;
 
     // ZValue
-    foreach (QGraphicsItem* it, m_scene->items(Qt::AscendingOrder))
+//    foreach (QGraphicsItem* it, m_scene->items(Qt::AscendingOrder))
+    foreach (QGraphicsItem* it, m_scene->items(Qt::DescendingOrder))
     {
-        BaseGraphicItem* item = dynamic_cast<BaseGraphicItem*>(it);
+       BaseGraphicItem* item = dynamic_cast<BaseGraphicItem*>(it);
 
         if (item)
         {
             if (qFabs(item->zValue()) < Z_INCREMENT)
             {
-                item->setZValue(m_zvalue++);
+                if (!flNew)
+                {
+                    m_zvalue = Z_INIT;
+                    flNew = true;
+                }
+                item->setZValue(-(m_zvalue++));
 
-                qDebug() << "FormLayers::updateLayers(): force ZValue\n\t" << item->zValue() << item;
+                qDebug() << "FormLayers::updateLayers(): force ZValue à: " << item->zValue() << "\n\t" << item;
+            }
+            else
+            {
+                if (flNew) item->setZValue(-(m_zvalue++));
+                else
+                {
+                    if (item->zValue() == zValue)
+                    {
+                        item->setZValue(--zValue);
+                    }
+                    else if(item->zValue() == (zValue - 2 * Z_INCREMENT) )
+                    {
+                        item->setZValue(--zValue);
+                    }
+                    zValue = item->zValue();
+                }
+                qDebug() << item->zValue();
             }
         }
         else
