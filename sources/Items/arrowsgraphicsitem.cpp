@@ -331,6 +331,8 @@ QColor ArrowsGraphicsItem::getFillColor()
     return *ItemFillColorArrow;
 }
 
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Get parameters for an ArrowsGraphicsItem
 void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
 {
     QString path="item"+QString::number(itemIdex)+"/";
@@ -353,8 +355,21 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
     //FormArrows *m_formArrows;
 }
 
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Set external parameters for an ArrowsGraphicsItem
 void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
 {
+    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
+    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
+    //éventuellement fonction de rafraichissement graphique
+//    QString path; // = "Items";
+//    {
+//        path = "item" + QString::number(itemIndex);
+//    }
+//    path += QString ("/");
+    //To do
+
+
     /*QString path="item"+QString::number(itemIdex)+"/";
     settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
     settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
@@ -384,19 +399,4 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIndex)
     path += QString ("/");
     //To do
 }
-
-//To do redefine virtual method inherit from BaseGraphicItem class
-// Set external parameters for an ArrowsGraphicsItem
-void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIndex)
-{
-    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
-    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
-    //éventuellement fonction de rafraichissement graphique
-    QString path; // = "Items";
-    {
-        path = "item" + QString::number(itemIndex);
-    }
-    path += QString ("/");
-    //To do
-}*/
-
+*/
