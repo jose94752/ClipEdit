@@ -88,6 +88,7 @@ public slots:
 
     void timeFunction();
     void on_changeTime();
+    void quit();
 
     void choose_screenshot();
 
