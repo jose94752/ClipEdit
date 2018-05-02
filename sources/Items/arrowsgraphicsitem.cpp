@@ -66,7 +66,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
 
     TestFillColor = new QColor();
-    nameTestFillColor = TestFillColor->name();
+    //nameTestFillColor = TestFillColor->name();
 
     //qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
@@ -77,10 +77,6 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
 }
 
-// ArrowsGraphicsItem Desctructor implement because ~BaseGraphicsItem is virtual
-ArrowsGraphicsItem::~ArrowsGraphicsItem()
-{
-}
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
@@ -194,8 +190,10 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     m_formArrows->FormFillColorArrowChanged(*TestFillColor);
     nameTestFillColor = TestFillColor->name();
     qDebug() << "nameTestFillColor = " << nameTestFillColor;
+
     QString nameItemFillColorArrow = ItemFillColorArrow->name();
     qDebug() << "nameItemFillColorArrow =" << nameItemFillColorArrow;
+
     if (nameItemFillColorArrow != nameTestFillColor)
       {
         qDebug() << "Colors: nameItemFillColorArrow != nameTestFillColor";

@@ -67,6 +67,12 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
     m_timer->start();
 
+    //connect for Cancel button
+    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
+            this, SLOT(quit()));
+
+
+
 
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
@@ -102,9 +108,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
 
-    connect(ui->radioButtonDeskcapture, SIGNAL(clicked(bool)),
-            this, SLOT(snapshot()));
-
 
 
     //This property holds the cursor shape for this widget.
@@ -114,14 +117,10 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //select a point on the screen.
     //setCursor(Qt::CrossCursor);
 
-
-
     //connect pour tempo: option
-
 
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
-
 }
 
 FormScreenshots::~FormScreenshots()
@@ -147,7 +146,13 @@ void FormScreenshots::on_changeTime()
 {
     if (ui->radioButtonSlow->isChecked()) m_timer->setInterval(1000);
        else if (ui->radioButtonAverage->isChecked()) m_timer->setInterval(500);
-            else if(ui->radioButtonFast->isChecked()) m_timer->setInterval(100);
+    else if(ui->radioButtonFast->isChecked()) m_timer->setInterval(100);
+}
+
+void FormScreenshots::quit()
+{
+    this->close();
+
 }
 
 //1

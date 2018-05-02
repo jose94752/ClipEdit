@@ -52,7 +52,9 @@ class ArrowsGraphicsItem
         //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
         // Destructor Virtual method from BaseGraphicsItem
-        ~ArrowsGraphicsItem();
+        // The virtual destructor makes sure that it gets called even if the class
+        // is getting deleted through a base class pointer.
+        virtual ~ArrowsGraphicsItem() {};
 
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;

@@ -60,7 +60,11 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
+    //new signals
+    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
+    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
 }
+
 
 void MainWindow::buildMenu()
 {

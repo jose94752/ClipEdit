@@ -218,11 +218,19 @@ void FormArrows::fillColorArrowChanged()
 
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
-    BeforeFormFillColorArrow = FormFillColorArrow;
-    FormFillColorArrow = color;
-    // SIGNAL emit FormFillColorArrowChanged
-    //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
-    emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+    if (color.isValid())
+    {
+        BeforeFormFillColorArrow = FormFillColorArrow;
+        FormFillColorArrow = color;
+        // SIGNAL emit FormFillColorArrowChanged
+        //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+        emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+    }
+    else
+    {
+        qDebug() << "Invalid Test Color Arrow when you call SLOT"
+                 <<  " fillColorArrowChanged(const QColor& color).";
+    }
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)
