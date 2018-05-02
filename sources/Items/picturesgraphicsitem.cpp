@@ -19,8 +19,6 @@
 #include <QRgb>
 #include <QFontMetrics>
 
-
-
 #include "picturesgraphicsitem.h"
 
 // Constructor

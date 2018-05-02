@@ -18,9 +18,6 @@
 #include <QDesktopWidget>
 
 #include <QMessageBox>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -36,8 +33,6 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
-
-QT_CHARTS_USE_NAMESPACE
 
 // Constructor, destructor
 // -----------------------
