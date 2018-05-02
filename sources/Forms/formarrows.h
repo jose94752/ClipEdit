@@ -72,8 +72,6 @@ class FormArrows
         // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
         QPushButton* getAddPushButtonArrow();
 
-        // temp for test
-        QColor FormFillColorArrow;
 
 private:
 
@@ -82,7 +80,7 @@ private:
 
         // Colors
         QColor FormOutlineColorArrow;
-        //QColor FormFillColorArrow;
+        QColor FormFillColorArrow;
 
         QColor BeforeFormOutlineColorArrow;
         QColor BeforeFormFillColorArrow;
