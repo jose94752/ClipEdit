@@ -14,11 +14,10 @@
 #include <QtWidgets>
 #include <QFile>
 #include <QFileDialog>
+#include <QApplication>
+#include <QDesktopWidget>
 
 #include <QMessageBox>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -34,10 +33,6 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
-#include <QApplication>
-#include <QDesktopWidget>
-
-QT_CHARTS_USE_NAMESPACE
 
 // Constructor, destructor
 // -----------------------
@@ -79,6 +74,7 @@ void MainWindow::buildMenu()
     connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
     connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
     connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
+    connect(ui->actionPreferences,      SIGNAL( triggered(bool) ),  this,   SLOT( showPreferences()));
     connect(ui->actionQuit,             SIGNAL( triggered(bool) ),  this,   SLOT( close() ));
 
     connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
@@ -95,8 +91,6 @@ void MainWindow::buildMenu()
     connect(ui->actionContentToView,    SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
     connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
     connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
-
-    connect(ui->actionPreferences, SIGNAL( triggered(bool) ),  this,   SLOT( preferences()));
 
     ui->actionSave->setDisabled(true);
 }
@@ -125,8 +119,7 @@ void MainWindow::buildForms()
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-    //connect(m_dialogPreferences, SIGNAL(language(DialogPreferences::lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
-    //connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+
     // Building the stacked widget
     // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
@@ -176,7 +169,6 @@ void MainWindow::buildToolBar()
     m_spinBoxZoom->setSuffix("%");
     m_spinBoxZoom->setAlignment(Qt::AlignHCenter);
     m_spinBoxZoom->setToolTip(tr("Zoom level"));
-    //m_spinBoxZoom->setButtonSymbols(QAbstractSpinBox::NoButtons);
     connect(m_spinBoxZoom, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setZoomLevel(int)));
 
     ui->toolBar->addWidget(m_spinBoxZoom);
@@ -374,23 +366,6 @@ void MainWindow::slotGraphs( )
      }
 }
 
-/*
-void MainWindow::slotGraphs(const GraphsInfo &infos)
-{
-
-    //do not add graphs if no points
-    int nbPoints = infos.m_Arcs.size();
-    if( nbPoints > 0 )
-    {
-        qDebug() << "added graph mainWindow Slot Graphs";
-
-        GraphsGraphicsItem *g = new GraphsGraphicsItem();
-        g->setInfos(infos);
-
-        m_scene.addItem(g);
-     }
-}
-*/
 
 ///
 /// \brief MainWindow::slotArrowsGraphicsItem
@@ -547,22 +522,15 @@ void MainWindow::showAboutDialog(bool)
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
 }
 
-void MainWindow::preferences()
+void MainWindow::showPreferences()
 {
-    qDebug () << "\tMainWindow::preferences...\n";
-    QString str_lang ("English");
-    QSettings q;
-    str_lang=q.value ("preferences/language", str_lang).toString();
-    m_dialogPreferences = new DialogPreferences(this, str_lang);
-    connect(m_dialogPreferences, SIGNAL(signal_language(QString)),
-            this, SLOT(slot_language(QString)));
-    m_dialogPreferences->show();
-
+    DialogPreferences d(this);
+    connect(&d, SIGNAL(preferencesChanged()), this, SLOT(preferencesChanged()));
+    d.exec();
 }
 
-void MainWindow::slot_language (QString lang) {
-  qDebug () << "lang == " << lang << "\n";
-  QSettings q;
-  QString path_language ("preferences/language");
-  q.setValue(path_language, lang);
+void MainWindow::preferencesChanged()
+{
+    // TO DO
 }
+

@@ -60,6 +60,8 @@
     <addaction name="actionSaveAs"/>
     <addaction name="actionExportAs"/>
     <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -98,7 +100,6 @@
     <addaction name="separator"/>
     <addaction name="actionLayers"/>
     <addaction name="separator"/>
-    <addaction name="actionPreferences"/>
    </widget>
    <addaction name="menufile"/>
    <addaction name="menuEdit"/>

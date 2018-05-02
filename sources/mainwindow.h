@@ -97,8 +97,6 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
-        //Preferences
-        DialogPreferences* m_dialogPreferences;
         // Building
         void init();
         void buildMenu();
@@ -137,9 +135,10 @@ class MainWindow
 
         // Layers
         void slotLayers();
-        void preferences ();
 
-        void slot_language (QString lang);
+        // Settings
+        void showPreferences();
+        void preferencesChanged();
 };
 
 #endif
