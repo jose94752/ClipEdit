@@ -253,3 +253,13 @@ void PicturesGraphicsItem::modification_height()
     pixmap = pixmap.scaledToHeight(height);
 }
 
+void PicturesGraphicsItem::getParameters(QSettings *settings, int indexItem)
+{
+
+}
+
+void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
+{
+
+}
+
