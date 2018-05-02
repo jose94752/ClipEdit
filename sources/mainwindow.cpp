@@ -525,12 +525,12 @@ void MainWindow::showAboutDialog(bool)
 void MainWindow::showPreferences()
 {
     DialogPreferences d(this);
-    connect(&d, SIGNAL(preferencesChanged()), this, SLOT(preferencesChanged()));
+    connect(&d, SIGNAL(preferencesChanged(QString)), this, SLOT(slot_preferences(QString)));
     d.exec();
 }
 
-void MainWindow::preferencesChanged()
+void MainWindow::slot_preferences(QString lang)
 {
-    // TO DO
+    qDebug () << "MainWindow : preferences changed : lang == " << lang << "\n";
 }
 
