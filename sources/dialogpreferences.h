@@ -1,27 +1,52 @@
+/*
+================================================
+* File:         dialogpreferences.h
+* Project:      ClipEdit
+* Creation:     30/04/2018
+* Brief:        Settings dialog
+================================================
+*/
+
 #ifndef DIALOGPREFERENCES_H
 #define DIALOGPREFERENCES_H
 
+// Includes
+// --------
+
 #include <QDialog>
 
-namespace Ui {
-class DialogPreferences;
+namespace Ui
+{
+    class DialogPreferences;
 }
 
-class DialogPreferences : public QDialog
+// Class
+// -----
+
+class DialogPreferences
+    :   public QDialog
 {
     Q_OBJECT
 
-public:
-    explicit DialogPreferences(QWidget *parent = 0, QString lang = "English");
-    ~DialogPreferences();
-signals :
-    void signal_language (QString codelang);
-    //void rejected();
-private:
-    Ui::DialogPreferences *ui;
-private slots :
-    void accept ();
-    void reject ();
+    public:
+
+        // Constructor, destructor
+        explicit DialogPreferences(QWidget* parent = 0);
+        ~DialogPreferences();
+
+    signals :
+
+        void preferencesChanged();
+
+    private slots :
+
+        void accept ();
+        void reject ();
+
+    private:
+
+        // Ui
+        Ui::DialogPreferences* ui;
 };
 
-#endif // DIALOGPREFERENCES_H
+#endif

@@ -36,6 +36,9 @@
         <file>icons/up-icon.png</file>
         <file>icons/copy-icon.png</file>
         <file>icons/delete-icon.png</file>
+        <file>icons/lang-de-icon.png</file>
+        <file>icons/lang-en-icon.png</file>
+        <file>icons/lang-fr-icon.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
 </RCC>
