@@ -127,8 +127,10 @@ class ArrowsGraphicsItem
         QPointF *m_EndPositionItem;
 
         QColor m_Color; // Temp for test
+        QColor *TestFillColor;
         QColor *ItemOutlineColorArrow;
         QColor *ItemFillColorArrow;
+        QString nameTestFillColor;
 
         QPolygonF ArrowHeadStart;
         QPolygonF ArrowHeadEnd;

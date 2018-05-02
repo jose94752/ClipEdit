@@ -165,7 +165,7 @@ private:
         /// that can be used as a paint device.
         /// \param pix
         ///
-        void setBackground(QPixmap pix);
+        void setBackground(QPixmap);
         ///
         /// \brief dimensionsMade signal
         ///

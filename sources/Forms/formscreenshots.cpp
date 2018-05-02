@@ -44,6 +44,30 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 {
     ui->setupUi(this);
 
+    //spinBox
+    ui->spinBoxDelay->setSuffix(" s "); //OK it works
+
+    //connection to radioButton
+    connect(ui->radioButtonFast, SIGNAL(clicked(bool)),
+            this, SLOT(on_changeTime()));
+    connect(ui->radioButtonAverage, SIGNAL(clicked(bool)),
+            this, SLOT(on_changeTime()));
+    connect(ui->radioButtonSlow, SIGNAL(clicked(bool)),
+            this, SLOT(on_changeTime()));
+
+    //display the value on the spinBox
+    ui->spinBoxDelay->setMaximum(300);
+
+    //we create an instanace of the QTimer
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()),
+            this, SLOT(timeFunction()));
+
+    m_timer->setInterval(100);
+
+    m_timer->start();
+
+
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
    // this->setAttribute(Qt::WA_DeleteOnClose);
@@ -90,14 +114,14 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //select a point on the screen.
     //setCursor(Qt::CrossCursor);
 
-    ui->spinBoxDelay->setSuffix(" s "); //OK it works
-    ui->spinBoxDelay->setMaximum(60);   //idem
-    ui->spinBoxDelay->setValue(1);
+
 
     //connect pour tempo: option
-//    connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
-//            this, &FormScreenshots::updatehide);
-    //OK
+
+
+
+
+
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 
@@ -106,8 +130,27 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 FormScreenshots::~FormScreenshots()
 {
     //delete the object
-   //setCursor(m_savedcursor);
+   delete m_timer;
    delete ui;
+}
+
+
+void FormScreenshots::timeFunction()
+{
+    //we get the current value
+    int val = ui->spinBoxDelay->value();
+    val++;
+    ui->spinBoxDelay->setValue(val);
+    ui->progressBar->setValue(val%100);
+
+
+}
+
+void FormScreenshots::on_changeTime()
+{
+    if (ui->radioButtonSlow->isChecked()) m_timer->setInterval(1000);
+       else if (ui->radioButtonAverage->isChecked()) m_timer->setInterval(500);
+            else if(ui->radioButtonFast->isChecked()) m_timer->setInterval(100);
 }
 
 //1
@@ -115,18 +158,18 @@ void FormScreenshots::CaptureDesktop()
 {
     //step1:
     //hide();
-    QTimer::singleShot(300, this, SLOT(snapshot()));  // long enough for window manager effects
+   // QTimer::singleShot(300, this, SLOT(snapshot()));  // long enough for window manager effects
 }
 
 //2
 void FormScreenshots::CaptureArea(bool val, QRectF area)
 {
-    this->close();
-    if (val)
-    {
-     m_area=area;
-     QTimer::singleShot(300,this,SLOT(snapshot()));
-    }
+//    this->close();
+//    if (val)
+//    {
+//     m_area=area;
+//     QTimer::singleShot(300,this,SLOT(snapshot()));
+//    }
 
 }
 
@@ -181,27 +224,27 @@ void FormScreenshots::snapshot()
 
 
   //step4
-    QScreen *m_screen = QGuiApplication::primaryScreen();
-    if (const QWindow *window = windowHandle())
-         m_screen = window->screen();
+//    QScreen *m_screen = QGuiApplication::primaryScreen();
+//    if (const QWindow *window = windowHandle())
+//         m_screen = window->screen();
 
-    if (!m_screen)
-           return;
+//    if (!m_screen)
+//           return;
 
-    this->hide();
-    m_pix = m_screen->grabWindow(0);
-    QRect rec(m_area.x()+1,m_area.y()+1,m_area.width()-1,m_area.height()-1);
-    QPixmap pix=m_pix.copy(rec);
-    m_pix=pix;
-
-
-    //?
-    FormScreenshots *w= new FormScreenshots(this);
+//    this->hide();
+//    m_pix = m_screen->grabWindow(0);
+//    QRect rec(m_area.x()+1,m_area.y()+1,m_area.width()-1,m_area.height()-1);
+//    QPixmap pix=m_pix.copy(rec);
+//    m_pix=pix;
 
 
-    connect (this,SIGNAL(setBackground(QPixmap)),this,SIGNAL(setBackground(QPixmap)));
-    this->setBackground(m_pix);
-    this->show();
+//    //?
+//    FormScreenshots *w= new FormScreenshots(this);
+
+
+//    connect (this,SIGNAL(setBackground(QPixmap)),this,SIGNAL(setBackground(QPixmap)));
+//    this->setBackground(m_pix);
+//    this->show();
 
 }
 
@@ -212,22 +255,22 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
    // CaptureWholeScreen();
 
     //QMouseEvent::button() const : Returns the button that caused the event.
-    if(event->button() == Qt::LeftButton) {
-        qDebug() << "left clicked";
+//    if(event->button() == Qt::LeftButton) {
+//        qDebug() << "left clicked";
 
 
-        x=m_point0->x();
-        y=m_point0->y();
-        qDebug()<<x;
+//        x=m_point0->x();
+//        y=m_point0->y();
+//        qDebug()<<x;
 
 
-        x=m_point1->x();
-        y=m_point1->y();
-        qDebug()<<y;
+//        x=m_point1->x();
+//        y=m_point1->y();
+//        qDebug()<<y;
 
-         //QRect QRect::normalized() const : rectangle that has a non-negative width and height.
-        QRectF m_area;
-        m_area=QRectF(m_point0->x(),m_point0->y(),m_point1->x()-m_point0->x(),m_point1->y()-m_point0->y()).normalized();
+//         //QRect QRect::normalized() const : rectangle that has a non-negative width and height.
+//        QRectF m_area;
+//        m_area=QRectF(m_point0->x(),m_point0->y(),m_point1->x()-m_point0->x(),m_point1->y()-m_point0->y()).normalized();
 
         //
 //        QScreen *screen = QGuiApplication::primaryScreen();
@@ -249,7 +292,7 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
 
          //  m_scene->setSceneRect(QRectF(0, 0, 5000, 5000));
          //  connect(m_scene, SIGNAL(itemInserted(Item*)), this, SLOT(itemInserted(tem*)));
-    }
+
 }
 
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
@@ -279,16 +322,6 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
     //    }
 }
 
-void FormScreenshots::timeFunction()
-{
-
-
-}
-
-void FormScreenshots::on_changeTime()
-{
-
-}
 
 void FormScreenshots::choose_screenshot()
 {
