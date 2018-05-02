@@ -19,8 +19,6 @@
 #include <QRgb>
 #include <QFontMetrics>
 
-
-
 #include "picturesgraphicsitem.h"
 
 // Constructor
@@ -251,5 +249,15 @@ void PicturesGraphicsItem::modification_height()
 {
     QPixmap pixmap(path);
     pixmap = pixmap.scaledToHeight(height);
+}
+
+void PicturesGraphicsItem::getParameters(QSettings *settings, int indexItem)
+{
+
+}
+
+void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
+{
+
 }
 
