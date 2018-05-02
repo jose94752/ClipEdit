@@ -40,7 +40,7 @@ class FormPictures
 
         ~FormPictures();
 
-        void getPictureValues(QString &path, int &height, int &width, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos);
+        void getPictureValues(QString &path, int &height, int &width, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or);
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
@@ -53,6 +53,9 @@ class FormPictures
 
         void save_settings(bool);
         void restore_settings(bool);
+
+        void load_position(QString);
+
 private:
 
         // Ui
@@ -65,6 +68,7 @@ private:
         QString   s_lg_font;
         QColor    s_lg_color;
         QString   s_lg_pos;
+        QString   s_lg_or;
 
 
     signals:

@@ -51,7 +51,6 @@ public:
     QAction *actionContentToView;
     QAction *actionSetBackgroundColor;
     QAction *actionPreferences;
-    QAction *actionPreferences_2;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QSplitter *splitter;
@@ -166,8 +165,6 @@ public:
         actionSetBackgroundColor->setIcon(icon16);
         actionPreferences = new QAction(MainWindow);
         actionPreferences->setObjectName(QStringLiteral("actionPreferences"));
-        actionPreferences_2 = new QAction(MainWindow);
-        actionPreferences_2->setObjectName(QStringLiteral("actionPreferences_2"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -237,7 +234,7 @@ public:
         menuTools->addSeparator();
         menuTools->addAction(actionLayers);
         menuTools->addSeparator();
-        menuTools->addAction(actionPreferences_2);
+        menuTools->addAction(actionPreferences);
         menuInsert->addAction(actionArrow);
         menuInsert->addAction(actionChart);
         menuInsert->addAction(actionClipart);
@@ -329,7 +326,6 @@ public:
 #endif // QT_NO_TOOLTIP
         actionSetBackgroundColor->setText(QApplication::translate("MainWindow", "Set background color", nullptr));
         actionPreferences->setText(QApplication::translate("MainWindow", "Preferences", nullptr));
-        actionPreferences_2->setText(QApplication::translate("MainWindow", "Preferences", nullptr));
         menufile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));

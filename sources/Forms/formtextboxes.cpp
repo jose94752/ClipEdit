@@ -28,13 +28,14 @@ FormTextBoxes::FormTextBoxes(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->pushButtonBackgroundColor->setColor(Qt::white);
-    ui->pushButtonTextColor->setColor(Qt::black);
+    // Build alignment comboboxes
+    ui->comboBoxHorizontalAlignment->addItem(QIcon(":/icons/icons/align-left-icon.png"), tr("Left"), Qt::AlignLeft);
+    ui->comboBoxHorizontalAlignment->addItem(QIcon(":/icons/icons/align-right-icon.png"), tr("Right"), Qt::AlignRight);
+    ui->comboBoxHorizontalAlignment->addItem(QIcon(":/icons/icons/align-hcentered-icon.png"), tr("Centered"), Qt::AlignHCenter);
 
-    // Build alignment combobox
-    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-left.png"), tr("Left"), Qt::AlignLeft);
-    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-right.png"), tr("Right"), Qt::AlignRight);
-    ui->comboBoxAlignment->addItem(QIcon(":/icons/icons/icon-align-centered.png"), tr("Centered"), Qt::AlignHCenter);
+    ui->comboBoxVerticalAlignment->addItem(QIcon(":/icons/icons/align-top-icon.png"), tr("Top"), Qt::AlignTop);
+    ui->comboBoxVerticalAlignment->addItem(QIcon(":/icons/icons/align-bottom-icon.png"), tr("Bottom"), Qt::AlignBottom);
+    ui->comboBoxVerticalAlignment->addItem(QIcon(":/icons/icons/align-vcentered-icon.png"), tr("Centered"), Qt::AlignVCenter);
 
     // Load default theme
     loadDefaultTheme();
@@ -63,7 +64,8 @@ void FormTextBoxes::saveDefaultTheme()
     font.setItalic(ui->checkBoxItalic->isChecked());
 
     s.setValue("FormTextBoxes/font", font.toString());
-    s.setValue("FormTextBoxes/alignment", ui->comboBoxAlignment->currentData());
+    s.setValue("FormTextBoxes/margin", ui->spinBoxMargin->value());
+    s.setValue("FormTextBoxes/alignment", ui->comboBoxHorizontalAlignment->currentData().toInt() | ui->comboBoxVerticalAlignment->currentData().toInt());
     s.setValue("FormTextBoxes/background-color", ui->pushButtonBackgroundColor->getColor().name());
     s.setValue("FormTextBoxes/text-color", ui->pushButtonTextColor->getColor().name());
     s.setValue("FormTextBoxes/border-color", ui->pushButtonBorderColor->getColor().name());
@@ -77,15 +79,22 @@ void FormTextBoxes::loadDefaultTheme()
     QSettings s;
 
     QFont f;
-    f.fromString(s.value("FormTextBoxes/font").toString());
+    f.fromString(s.value("FormTextBoxes/font", QFont().toString()).toString());
 
     ui->fontComboBox->setCurrentText(f.family());
     ui->spinBoxPointSize->setValue(f.pointSize());
     ui->checkBoxBold->setChecked(f.bold());
     ui->checkBoxItalic->setChecked(f.italic());
 
-    int idx = ui->comboBoxAlignment->findData(s.value("FormTextBoxes/alignment", Qt::AlignLeft).toInt());
-    ui->comboBoxAlignment->setCurrentIndex(idx);
+    ui->spinBoxMargin->setValue(s.value("FormTextBoxes/margin", 5).toInt());
+
+    int horizontalFlag = s.value("FormTextBoxes/alignment", Qt::AlignLeft).toInt() & Qt::AlignHorizontal_Mask;
+    int verticalFlag = s.value("FormTextBoxes/alignment", Qt::AlignTop).toInt() & Qt::AlignVertical_Mask;
+
+    int idxHorizontal = ui->comboBoxHorizontalAlignment->findData(horizontalFlag);
+    int idxVertical = ui->comboBoxVerticalAlignment->findData(verticalFlag);
+    ui->comboBoxHorizontalAlignment->setCurrentIndex(idxHorizontal);
+    ui->comboBoxVerticalAlignment->setCurrentIndex(idxVertical);
 
     ui->pushButtonBackgroundColor->setColor(QColor(s.value("FormTextBoxes/background-color", QColor(Qt::white).name()).toString()));
     ui->pushButtonTextColor->setColor(QColor(s.value("FormTextBoxes/text-color", QColor(Qt::black).name()).toString()));
@@ -116,7 +125,8 @@ QVariant FormTextBoxes::getItemData() const
 
     data["text"] = ui->plainTextEdit->toPlainText();
     data["font"] = font.toString();
-    data["alignment"] = ui->comboBoxAlignment->currentData();
+    data["margin"] = ui->spinBoxMargin->value();
+    data["alignment"] = ui->comboBoxHorizontalAlignment->currentData().toInt() | ui->comboBoxVerticalAlignment->currentData().toInt();
     data["background-color"] = ui->pushButtonBackgroundColor->getColor().name();
     data["text-color"] = ui->pushButtonTextColor->getColor().name();
     data["border-color"] = ui->pushButtonBorderColor->getColor().name();
@@ -127,31 +137,31 @@ QVariant FormTextBoxes::getItemData() const
     return data;
 }
 
-void FormTextBoxes::setItemData(const QVariant& data)
-{
-    // Set the field from the stored data
-    QVariantHash vh = data.toHash();
+//void FormTextBoxes::setItemData(const QVariant& data)
+//{
+//    // Set the field from the stored data
+//    QVariantHash vh = data.toHash();
 
-    QFont f;
-    f.fromString(vh["font"].toString());
+//    QFont f;
+//    f.fromString(vh["font"].toString());
 
-    ui->plainTextEdit->setPlainText(vh["text"].toString());
-    ui->fontComboBox->setCurrentText(f.family());
-    ui->spinBoxPointSize->setValue(f.pointSize());
-    ui->checkBoxBold->setChecked(f.bold());
-    ui->checkBoxItalic->setChecked(f.italic());
+//    ui->plainTextEdit->setPlainText(vh["text"].toString());
+//    ui->fontComboBox->setCurrentText(f.family());
+//    ui->spinBoxPointSize->setValue(f.pointSize());
+//    ui->checkBoxBold->setChecked(f.bold());
+//    ui->checkBoxItalic->setChecked(f.italic());
 
-    int idx = ui->comboBoxAlignment->findData(vh["alignment"].toInt());
-    ui->comboBoxAlignment->setCurrentIndex(idx);
+//    int idx = ui->comboBoxHorizontalAlignment->findData(vh["alignment"].toInt());
+//    ui->comboBoxHorizontalAlignment->setCurrentIndex(idx);
 
-    ui->pushButtonBackgroundColor->setColor(QColor(vh["background-color"].toString()));
-    ui->pushButtonTextColor->setColor(QColor(vh["text-color"].toString()));
-    ui->pushButtonBorderColor->setColor(QColor(vh["border-color"].toString()));
+//    ui->pushButtonBackgroundColor->setColor(QColor(vh["background-color"].toString()));
+//    ui->pushButtonTextColor->setColor(QColor(vh["text-color"].toString()));
+//    ui->pushButtonBorderColor->setColor(QColor(vh["border-color"].toString()));
 
-    ui->checkBoxHasBorders->setChecked(vh["border-visible"].toBool());
-    ui->spinBoxBorderWidth->setValue(vh["border-width"].toInt());
-    ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
-}
+//    ui->checkBoxHasBorders->setChecked(vh["border-visible"].toBool());
+//    ui->spinBoxBorderWidth->setValue(vh["border-width"].toInt());
+//    ui->spinBoxBorderRadius->setValue(vh["border-radius"].toInt());
+//}
 
 // Load data
 // ---------
@@ -170,7 +180,13 @@ void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
         ui->spinBoxPointSize->setValue(f.pointSize());
         ui->checkBoxBold->setChecked(f.bold());
         ui->checkBoxItalic->setChecked(f.italic());
-        ui->comboBoxAlignment->setCurrentIndex(castedItem->alignment());
+
+        ui->spinBoxMargin->setValue(castedItem->margin());
+
+        int idxHorizontal = ui->comboBoxHorizontalAlignment->findData(castedItem->alignment() & Qt::AlignHorizontal_Mask);
+        int idxVertical = ui->comboBoxVerticalAlignment->findData(castedItem->alignment() & Qt::AlignVertical_Mask);
+        ui->comboBoxHorizontalAlignment->setCurrentIndex(idxHorizontal);
+        ui->comboBoxVerticalAlignment->setCurrentIndex(idxVertical);
 
         ui->pushButtonBackgroundColor->setColor(castedItem->backgroundColor());
         ui->pushButtonTextColor->setColor(castedItem->textColor());

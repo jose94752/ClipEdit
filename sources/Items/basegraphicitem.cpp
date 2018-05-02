@@ -23,11 +23,7 @@
 BaseGraphicItem::BaseGraphicItem(QGraphicsItem* parent)
     :   QGraphicsItem(parent)
 {
-    m_hasHandlers = true;
-    m_drawBoundingRect = true;
-    m_handlerSize = 10;
-    m_heightForRotationHandler = 30;
-    m_current = 0;
+    init();
 
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
     createHandlers();
@@ -36,11 +32,7 @@ BaseGraphicItem::BaseGraphicItem(QGraphicsItem* parent)
 BaseGraphicItem::BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent)
     :   QGraphicsItem(parent)
 {
-    m_hasHandlers = true;
-    m_drawBoundingRect = true;
-    m_handlerSize = 10;
-    m_heightForRotationHandler = 30;
-    m_current = 0;
+    init();
 
     setRect(rect);
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
@@ -50,11 +42,9 @@ BaseGraphicItem::BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent)
 BaseGraphicItem::BaseGraphicItem(const QRectF& rect, bool hasHandlers, bool drawBoundingRect, QGraphicsItem* parent)
     :   QGraphicsItem(parent)
 {
+    init();
     m_hasHandlers = hasHandlers;
     m_drawBoundingRect = drawBoundingRect;
-    m_handlerSize = 10;
-    m_heightForRotationHandler = 30;
-    m_current = 0;
 
     setRect(rect);
     setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemSendsGeometryChanges);
@@ -65,6 +55,22 @@ BaseGraphicItem::~BaseGraphicItem()
 {
     for (int i = 0; i < m_handlers.size() ; i++)
         delete m_handlers[i];
+}
+
+// Default settings
+// ----------------
+
+void BaseGraphicItem::init()
+{
+    m_hasHandlers = true;
+    m_drawBoundingRect = true;
+    m_handlerSize = 8;
+    m_heightForRotationHandler = 30;
+    m_current = 0;
+    m_collapseMode = CollapseMode::ReverseCollapse;
+
+    m_handlerColor = QColor(227, 227, 227);
+    m_selectBorderColor = QColor(Qt::blue);
 }
 
 // Getters and setters
@@ -154,11 +160,6 @@ void BaseGraphicItem::setRect(const QRectF& rect)
 {
     m_rect = rect;
     updateHandlers();
-}
-
-void BaseGraphicItem::setNuLayer(int nuLayer)
-{
-    //m_nuLayer = nuLayer;
 }
 
 void BaseGraphicItem::getParameters(QSettings *settings, int itemIndex)
@@ -267,26 +268,139 @@ void BaseGraphicItem::restrictPositions()
     if (!m_current)
         return;
 
-    if (m_current->type() & ItemHandler::HANDLER_TOP)
+    if (m_collapseMode == CollapseMode::DefaultCollapse)
     {
-        if (m_rect.top() > m_rect.bottom())
-            m_rect.setTop(m_rect.bottom());
-    }
-    else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
-    {
-        if (m_rect.top() > m_rect.bottom())
-            m_rect.setBottom(m_rect.top());
-    }
+        if (m_current->type() & ItemHandler::HANDLER_TOP)
+        {
+            if (m_rect.top() > m_rect.bottom())
+                m_rect.setTop(m_rect.bottom());
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+        {
+            if (m_rect.top() > m_rect.bottom())
+                m_rect.setBottom(m_rect.top());
+        }
 
-    if (m_current->type() & ItemHandler::HANDLER_LEFT)
-    {
-        if (m_rect.left() > m_rect.right())
-            m_rect.setLeft(m_rect.right());
+        if (m_current->type() & ItemHandler::HANDLER_LEFT)
+        {
+            if (m_rect.left() > m_rect.right())
+                m_rect.setLeft(m_rect.right());
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+        {
+            if (m_rect.left() > m_rect.right())
+                m_rect.setRight(m_rect.left());
+        }
     }
-    else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+    if (m_collapseMode == CollapseMode::ReverseCollapse)
     {
-        if (m_rect.left() > m_rect.right())
-            m_rect.setRight(m_rect.left());
+        if (m_current->type() & ItemHandler::HANDLER_TOP)
+        {
+            if (m_rect.top() > m_rect.bottom())
+            {
+               QTransform t(transform());
+               int dx = m_rect.center().x();
+               int dy = m_rect.bottom();
+               t.translate(dx, dy);
+               t.scale(1, -1);
+               t.translate(-dx, -dy);
+               setTransform(t, false);
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+        {
+            if (m_rect.top() > m_rect.bottom())
+            {
+               QTransform t(transform());
+               int dx = m_rect.center().x();
+               int dy = m_rect.top();
+               t.translate(dx, dy);
+               t.scale(1, -1);
+               t.translate(-dx, -dy);
+               setTransform(t, false);
+            }
+        }
+
+        if (m_current->type() & ItemHandler::HANDLER_LEFT)
+        {
+            if (m_rect.left() > m_rect.right())
+            {
+                QTransform t(transform());
+                int dx = m_rect.right();
+                int dy = m_rect.center().y();
+                t.translate(dx, dy);
+                t.scale(-1, 1);
+                t.translate(-dx, -dy);
+                setTransform(t, false);
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+        {
+            if (m_rect.left() > m_rect.right())
+            {
+                QTransform t(transform());
+                int dx = m_rect.left();
+                int dy = m_rect.center().y();
+                t.translate(dx, dy);
+                t.scale(-1, 1);
+                t.translate(-dx, -dy);
+                setTransform(t, false);
+            }
+        }
+    }
+}
+
+void BaseGraphicItem::restrictMovement(QGraphicsSceneMouseEvent* event)
+{
+    if (!m_current)
+        return;
+
+    // Act according to mode
+
+    if (m_collapseMode == CollapseMode::DefaultCollapse)
+    {
+        // Merge but no reverse
+
+        int dx = event->pos().x() - event->lastPos().x();
+        int dy = event->pos().y() - event->lastPos().y();
+
+        if (m_current->type() & ItemHandler::HANDLER_TOP)
+        {
+            if (m_rect.top() + dy >= m_rect.bottom())
+            {
+                event->setPos(QPointF(event->pos().x(), m_rect.bottom()));
+                event->setLastPos(event->pos());
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_BOTTOM)
+        {
+            if (m_rect.bottom() + dy <= m_rect.top())
+            {
+                event->setPos(QPointF(event->pos().x(), m_rect.top()));
+                event->setLastPos(event->pos());
+            }
+        }
+
+        if (m_current->type() & ItemHandler::HANDLER_LEFT)
+        {
+            if (m_rect.left() + dx >= m_rect.right())
+            {
+                event->setPos(QPointF(m_rect.right(), event->pos().y()));
+                event->setLastPos(event->pos());
+            }
+        }
+        else if (m_current->type() & ItemHandler::HANDLER_RIGHT)
+        {
+            if (m_rect.right() + dx <= m_rect.left())
+            {
+                event->setPos(QPointF(m_rect.left(), event->pos().y()));
+                event->setLastPos(event->pos());
+            }
+        }
+    }
+    else if (m_collapseMode == CollapseMode::ReverseCollapse)
+    {
+        // Reverse if a handler reach its opposite handler
     }
 }
 
@@ -308,7 +422,14 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
     if (isSelected())
     {
         QBrush brush(Qt::NoBrush);
-        QPen pen(Qt::blue);
+        QPen pen(Qt::black);
+        painter->setPen(pen);
+        painter->setBrush(brush);
+
+        // Save painter state
+        painter->save();
+
+        pen.setColor(m_selectBorderColor);
         painter->setPen(pen);
         painter->setBrush(brush);
         painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
@@ -319,7 +440,6 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
             painter->drawRect(m_rect);
         }
 
-        // Handlers
         QPointF p1, p2;
         for (int i = 0; i < m_handlers.size(); i++)
         {
@@ -331,20 +451,34 @@ void BaseGraphicItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
             {
                 p2 = m_handlers[i]->pos();
             }
-
-            if (m_handlers[i]->shape() == ItemHandler::HANDLER_SQUARE)
-            {
-                painter->drawRect(m_handlers[i]->boundingRect());
-            }
-            else if (m_handlers[i]->shape() == ItemHandler::HANDLER_CIRCLE)
-            {
-                painter->drawEllipse(m_handlers[i]->boundingRect());
-            }
         }
 
         // Draw the line between the rect and the rotation handler
         painter->drawLine(p1, p2);
-        //painter->drawPoint(m_rect.center());
+
+        pen.setColor(Qt::black);
+        painter->setPen(pen);
+
+        // Handlers
+        for (int i = 0; i < m_handlers.size(); i++)
+        {
+            if (m_handlers[i]->shape() == ItemHandler::HANDLER_SQUARE)
+            {
+                painter->drawRect(m_handlers[i]->boundingRect());
+                painter->fillRect(m_handlers[i]->boundingRect(), m_handlerColor);
+            }
+            else if (m_handlers[i]->shape() == ItemHandler::HANDLER_CIRCLE)
+            {
+                QPainterPath path;
+                path.addEllipse(m_handlers[i]->boundingRect());
+                painter->fillPath(path, m_handlerColor);
+                painter->drawPath(path);
+                //painter->drawEllipse(m_handlers[i]->boundingRect());
+            }
+        }
+
+        // Restore painter state
+        painter->restore();
     }
 }
 
@@ -416,6 +550,7 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     if ((event->buttons() == Qt::LeftButton) && m_current)
     {
         prepareGeometryChange();
+        //restrictMovement(event);
 
         switch(m_current->type())
         {
@@ -456,9 +591,12 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
                 QPointF center = m_rect.center();
 
                 // Transformation, move to the center then rotate
+                int sign = (transform().det() > 0) ? 1 : -1;
+
                 QTransform rotationTransform;
                 rotationTransform.translate(center.x(), center.y());
-                rotationTransform.rotate(-QLineF(event->scenePos(),mapToScene(center)).angle() + QLineF(event->lastScenePos(),mapToScene(center)).angle()).translate(-center.x(),-center.y());
+                rotationTransform.rotate(sign * (-QLineF(event->scenePos(),mapToScene(center)).angle() + QLineF(event->lastScenePos(),mapToScene(center)).angle()));
+                rotationTransform.translate(-center.x(), -center.y());
                 setTransform(rotationTransform, true);
             } break;
             default:

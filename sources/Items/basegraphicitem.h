@@ -93,6 +93,13 @@ class BaseGraphicItem
             ClipartGraphicsItem,
         };
 
+        // Behaviour when opposite handlers meet eachother
+        enum CollapseMode
+        {
+            DefaultCollapse,
+            ReverseCollapse
+        };
+
         // Constructors, destructor
         BaseGraphicItem(QGraphicsItem* parent = 0);
         BaseGraphicItem(const QRectF& rect, QGraphicsItem* parent = 0);
@@ -126,40 +133,33 @@ class BaseGraphicItem
         const QRectF& rect() const;
         void setRect(const QRectF& rect);
 
-        void setNuLayer(int nuLayer);
-
         virtual void getParameters(QSettings*,int);
         virtual void setParameters(QSettings*,int);
 
     protected:
 
         // Events
-        ///
-        /// \brief mousePressEvent
-        /// \param event
-        ///
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
-        ///
-        /// \brief mouseReleaseEvent
-        /// \param event
-        ///
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
-        ///
-        /// \brief mouseMoveEvent
-        /// \param event
-        ///
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 
         // Handlers methods
         void createHandlers();
         void updateHandlers();
-        void restrictPositions();
+
+        void restrictPositions(); // Old method, post-movement
+        void restrictMovement(QGraphicsSceneMouseEvent* event); // New method, pre-movement, should eliminates artifact (WiP)
 
         // Handlers properties
         QList<ItemHandler*> m_handlers;
         bool m_hasHandlers;
         int m_handlerSize;
         int m_heightForRotationHandler;
+        CollapseMode m_collapseMode;
+
+        // Style
+        QColor m_handlerColor;
+        QColor m_selectBorderColor;
 
         // Bounding rect (use the setRect to modify it)
         QRectF m_rect;
@@ -167,7 +167,11 @@ class BaseGraphicItem
 
     private:
 
+        // Current handler
         ItemHandler* m_current;
+
+        // Default settings
+        void init();
 };
 
 #endif

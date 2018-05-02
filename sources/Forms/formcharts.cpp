@@ -48,43 +48,10 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.m_transparent = ui->bTransparent->isChecked();
     infos.m_boundingRect.setRect(0,0, ui->qWidth->value(), ui->qHeight->value());
 
-    QString val = ui->qData->text();
-    QStringList sl = val.split(",", QString::SkipEmptyParts);
-    for (int i = 0; i < sl.size(); ++i)
-    {
-       double arc = sl.at(i).toDouble();
-       infos.m_Arcs.append(arc);
-       qDebug() << "points arcs added " << arc;
-    }
+    infos.SetCoord( ui->qData->text() );
+    infos.SetLegend( ui->qLegends->text() );
 
-    //points values for lines and histogrames
-    //space on x axis for points
-    //int dist =20;
-    for (int i = 0; i < sl.size(); ++i)
-    {
-       //qDebug() << "points Y added " << sl.at(i) ;
-
-       QPointF p (i, infos.m_Arcs.at(i) );        //dist*i
-       infos.m_Points.append(p);
-       //qDebug() << "points added " << p.x() << " " << p.y();
-    }
-
-    //colors
-    infos.m_Colors << Qt::red << Qt::darkRed << Qt::green << Qt::darkGreen
-                   << Qt::blue << Qt::darkBlue << Qt::cyan
-            << Qt::darkCyan << Qt::magenta << Qt::darkMagenta
-            << Qt::yellow << Qt::darkYellow
-            << Qt::gray<< Qt::darkGray ;
-
-
-    infos.m_titleFont.setFamily("times");
-    infos.m_titleFont.setPointSize(18);
-
-    infos.m_legendFont.setFamily("times");
-    infos.m_legendFont.setPointSize(10);
-
-    infos.m_Legends = ui->qLegends->text().split("," , QString::SkipEmptyParts);
-
+   // infos.m_Legends = ui->qLegends->text().split("," , QString::SkipEmptyParts);
     //qDebug() << "Legends numero" << infos.m_Legends.size();
 
 }
@@ -95,12 +62,7 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
  {
      qDebug() << "charts" ;
 
-     GraphsInfo newGraphsInfo;
-     GetChartsValues( newGraphsInfo);
-
-     qDebug() << "charts"  << newGraphsInfo.m_title ;
-
-     emit FormCreateChart( newGraphsInfo);
+     emit FormCreateChart();
 
  }
 
@@ -113,16 +75,29 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
      {
          GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
 
+         qDebug() << "FormCharts::loadFromItem" ;
+
+         GraphsInfo infos = castedItem->getInfos();
+
          // Load data into the form
+         ui->qTitle->setText( infos.m_title);
+         ui->qChartType->setCurrentIndex(infos.m_type);
+         ui->qWidth->setValue( infos.m_boundingRect.width() );
+         ui->qHeight->setValue( infos.m_boundingRect.height() );
+         ui->qColor->setColor(infos.m_color);
+         ui->qBackColor->setColor(infos.m_backColor);
+         ui->bTransparent->setChecked(infos.m_transparent);
+
+         ui->qData->setText(infos.GetCoord() );
+         ui->qLegends->setText(infos.GetLegend() );
      }
  }
 
 
 
- // SLOTS
-
+// SLOTS
+// two icons on dialog, save and load
  void FormCharts::saveDefaultTheme ()
- //const
  {
      QSettings s;
      GraphsInfo infos;
@@ -136,6 +111,7 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
      s.setValue( KFormChartsBackgroundcolor, infos.m_backColor.name());
      s.setValue( KFormChartsTransparent, infos.m_transparent);
 
+     // datas not saved
 }
 
  void FormCharts::loadDefaultTheme()
@@ -162,4 +138,5 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
      ui->bTransparent->setChecked(infos.m_transparent);
 
+     //datas not restored
  }

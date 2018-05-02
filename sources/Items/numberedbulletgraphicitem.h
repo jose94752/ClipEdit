@@ -17,9 +17,11 @@
 #include <QGraphicsEllipseItem>
 #include <QFont>
 #include <QFontMetrics>
+#include <QSettings>
+
 
 #include "basegraphicitem.h"
-#include <qsettings.h>
+
 // Class
 // -----
 

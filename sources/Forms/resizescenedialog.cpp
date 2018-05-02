@@ -17,6 +17,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QBrush>
+#include <QSettings>
 #include "resizescenedialog.h"
 #include "ui_resizescenedialog.h"
 
@@ -25,7 +26,7 @@
 
 QString ResizeSceneDialog::m_format="A4";
 
-ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem,QColor v_backgroundColor,bool isNew)
+ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor,bool isNew, QWidget* parent)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
 {
@@ -88,11 +89,12 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
     connect(ui->doubleSpinBoxWidth,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
     connect(ui->doubleSpinBoxHeight,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
+    //connect(ui->pushButtonSaveTheme,SIGNAL(clicked(bool)),this,SLOT());
 
-    //hide color button if not New page
-    m_isNew=isNew;
-    if(isNew){
-        this->setWindowTitle("Resize and color");
+    // Hide color button if not New page
+    m_isNew = isNew;
+
+    if (isNew){
         ui->colorButton->setColor(Qt::white);
     }else{
         ui->label_color->hide();
@@ -107,56 +109,57 @@ ResizeSceneDialog::~ResizeSceneDialog()
 
 void ResizeSceneDialog::detectFormat()
 {
-    QString detectedFormat="None";
-    int Ax,Ay;
-    Ax=841 * m_dpix/25.4;
-    Ay=1189 * m_dpiy/25.4;
+    QString detectedFormat = "None";
+    int Ax, Ay;
+    Ax = 841 * m_dpix/25.4;
+    Ay = 1189 * m_dpiy/25.4;
+
     //if(m_width >= Ax-3 && m_width <= Ax+3 && m_height >= Ay-3 && m_height <= Ay+3){
-    if(m_width==Ax && m_height==Ay){
+    if (m_width == Ax && m_height == Ay){
         detectedFormat="A0";
     }
-    Ax=594 * m_dpix/25.4;
-    Ay=841 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A1";
+    Ax = 594 * m_dpix/25.4;
+    Ay = 841 * m_dpiy/25.4;
+    if(m_width == Ax && m_height == Ay){
+        detectedFormat = "A1";
     }
-    Ax=420 * m_dpix/25.4;
-    Ay=594 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A2";
+    Ax = 420 * m_dpix/25.4;
+    Ay = 594 * m_dpiy/25.4;
+    if (m_width == Ax && m_height == Ay){
+        detectedFormat = "A2";
     }
-    Ax=297 * m_dpix/25.4;
-    Ay=420 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A3";
+    Ax = 297 * m_dpix/25.4;
+    Ay = 420 * m_dpiy/25.4;
+    if (m_width == Ax && m_height == Ay){
+        detectedFormat = "A3";
     }
-    Ax=210 * m_dpix/25.4;
-    Ay=297 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A4";
+    Ax = 210 * m_dpix/25.4;
+    Ay = 297 * m_dpiy/25.4;
+    if(m_width == Ax && m_height == Ay){
+        detectedFormat = "A4";
     }
-    Ax=148 * m_dpix/25.4;
-    Ay=210 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A5";
+    Ax = 148 * m_dpix/25.4;
+    Ay = 210 * m_dpiy/25.4;
+    if(m_width == Ax && m_height == Ay){
+        detectedFormat = "A5";
     }
-    Ax=105 * m_dpix/25.4;
-    Ay=148 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A6";
+    Ax = 105 * m_dpix/25.4;
+    Ay = 148 * m_dpiy/25.4;
+    if (m_width == Ax && m_height == Ay){
+        detectedFormat = "A6";
     }
-    Ax=74 * m_dpix/25.4;
-    Ay=105 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
-        detectedFormat="A7";
+    Ax = 74 * m_dpix/25.4;
+    Ay = 105 * m_dpiy/25.4;
+    if (m_width == Ax && m_height == Ay){
+        detectedFormat = "A7";
     }
-    Ax=52 * m_dpix/25.4;
-    Ay=74 * m_dpiy/25.4;
-    if(m_width==Ax && m_height==Ay){
+    Ax = 52 * m_dpix/25.4;
+    Ay = 74 * m_dpiy/25.4;
+    if (m_width == Ax && m_height == Ay){
         detectedFormat="A8";
     }
-    if(m_format=="None"){
-        m_format=detectedFormat;
+    if (m_format == "None"){
+        m_format = detectedFormat;
     }
 }
 
@@ -165,7 +168,6 @@ void ResizeSceneDialog::detectFormat()
 
 void ResizeSceneDialog::sizeChanged()
 {
-
     if (!m_scene)
         return;
 
@@ -189,29 +191,64 @@ void ResizeSceneDialog::sizeChanged()
     }
     m_scene->removeItem(*m_borderSceneItem);
     QGraphicsScene scene2;
-    QList<QGraphicsItem *> items=m_scene->items();
-    foreach(QGraphicsItem* item,items){
+    QList<QGraphicsItem *> items = m_scene->items();
+    foreach(QGraphicsItem* item, items){
         scene2.addItem(item);
     }
+
     m_scene->setSceneRect(QRectF(0,0,m_width+2,m_height+2));
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,m_width,m_height));
-    if(m_isNew){
-        QColor l_color=ui->colorButton->getColor();
+
+    if (m_isNew){
+        QColor l_color = ui->colorButton->getColor();
         if(l_color.isValid()){
-            m_backGroundColor=l_color;
+            m_backGroundColor = l_color;
         }
     }
+
     (*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
-    items=scene2.items();
-    foreach(QGraphicsItem* item,items){
+    items = scene2.items();
+    foreach (QGraphicsItem* item,items){
         m_scene->addItem(item);
+    }
+}
+
+void ResizeSceneDialog::valuesChanged()
+{
+    if (!m_format_changed)
+    {
+        QString unit=ui->comboBoxUnit->currentText();
+        if (unit == "mm"){
+            m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/25.4);
+            m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/25.4);
+        }
+        if (unit == "cm"){
+            m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/2.54);
+            m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/2.54);
+        }
+        if (unit == "inch"){
+            m_width=(int)ui->doubleSpinBoxWidth->value()*m_dpix;
+            m_height=(int)ui->doubleSpinBoxHeight->value()*m_dpiy;
+        }
+        if (unit == "px"){
+            m_width=(int)ui->doubleSpinBoxWidth->value();
+            m_height=(int)ui->doubleSpinBoxHeight->value();
+        }
+
+        m_format = "None";
+        ui->comboBox_format->setCurrentText("None");
+        detectFormat();
+        if (m_format != "None"){
+            ui->comboBox_format->setCurrentText(m_format);
+        }
     }
 }
 
 void ResizeSceneDialog::unitChanged(const QString& unit)
 {
-    int width=m_width;
-    int height=m_height;
+    int width = m_width;
+    int height = m_height;
+
     if (unit.isEmpty() || !m_scene)
         return;
 
@@ -241,86 +278,74 @@ void ResizeSceneDialog::unitChanged(const QString& unit)
     }
 }
 
-void ResizeSceneDialog::valuesChanged()
+void ResizeSceneDialog::formatChanged(const QString& format)
 {
-    if(!m_format_changed)
-    {
-        QString unit=ui->comboBoxUnit->currentText();
-        if (unit == "mm"){
-            m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/25.4);
-            m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/25.4);
-        }
-        if (unit == "cm"){
-            m_width=(int)(ui->doubleSpinBoxWidth->value()*m_dpix/2.54);
-            m_height=(int)(ui->doubleSpinBoxHeight->value()*m_dpiy/2.54);
-        }
-        if (unit == "inch"){
-            m_width=(int)ui->doubleSpinBoxWidth->value()*m_dpix;
-            m_height=(int)ui->doubleSpinBoxHeight->value()*m_dpiy;
-        }
-        if (unit == "px"){
-            m_width=(int)ui->doubleSpinBoxWidth->value();
-            m_height=(int)ui->doubleSpinBoxHeight->value();
-        }
-        m_format="None";
-        ui->comboBox_format->setCurrentText("None");
-        detectFormat();
-        if(m_format!="None"){
-            ui->comboBox_format->setCurrentText(m_format);
-        }
-    }
-}
+    m_format_changed = true;
+    QString unit = ui->comboBoxUnit->currentText();
+    m_format = format;
+    QString v_unit = ui->comboBoxUnit->currentText();
 
-void ResizeSceneDialog::formatChanged(QString format)
-{
-    m_format_changed=true;
-    QString unit=ui->comboBoxUnit->currentText();
-    m_format=format;
-    QString v_unit=ui->comboBoxUnit->currentText();
-    if(format!="None"){
-        if(format=="A0"){
+    if(format != "None"){
+        if(format == "A0"){
             m_width = 841 * m_dpix/25.4;
             m_height = 1189 * m_dpiy/25.4;
         }
-        if(format=="A1"){
+        if(format == "A1"){
             m_width = 594 * m_dpix/25.4;
             m_height = 841 * m_dpiy/25.4;
         }
-        if(format=="A2"){
+        if(format == "A2"){
             m_width = 420 * m_dpix/25.4;
             m_height = 594 * m_dpiy/25.4;
         }
-        if(format=="A3"){
+        if(format == "A3"){
             m_width = 297 * m_dpix/25.4;
             m_height = 420 * m_dpiy/25.4;
         }
-        if(format=="A4"){
+        if(format == "A4"){
             m_width = 210 * m_dpix/25.4;
             m_height = 297 * m_dpiy/25.4;
         }
-        if(format=="A5"){
+        if(format == "A5"){
             m_width = 148 * m_dpix/25.4;
             m_height = 210 * m_dpiy/25.4;
         }
-        if(format=="A6"){
+        if(format == "A6"){
             m_width = 105 * m_dpix/25.4;
             m_height = 148 * m_dpiy/25.4;
         }
-        if(format=="A7"){
+        if(format == "A7"){
             m_width = 74 * m_dpix/25.4;
             m_height = 105 * m_dpiy/25.4;
         }
-        if(format=="A8"){
+        if(format == "A8"){
             m_width = 52 * m_dpix/25.4;
             m_height = 74 * m_dpiy/25.4;
         }
         unitChanged(unit);
     }
-    m_format_changed=false;
+
+    m_format_changed = false;
 }
 
-void ResizeSceneDialog::resizeEvent(QResizeEvent *event)
+void ResizeSceneDialog::saveDefaultTheme() const
 {
-    int buttonwidth=ui->doubleSpinBoxWidth->width();
+    QSettings s;
+    s.setValue("sceneWidth",m_width);
+    s.setValue("sceneHeight",m_height);
+    s.setValue("sceneFormat",m_format);
+    if(m_isNew){
+        int r,g,b,a;
+        m_backGroundColor.getRgb(&r,&g,&b,&a);
+        s.setValue("sceneColor/r",r);
+        s.setValue("sceneColor/g",g);
+        s.setValue("sceneColor/b",b);
+        s.setValue("sceneColor/a",a);
+    }
+}
+
+void ResizeSceneDialog::resizeEvent(QResizeEvent* event)
+{
+    int buttonwidth = ui->doubleSpinBoxWidth->width();
     ui->colorButton->setMinimumWidth(buttonwidth);
 }

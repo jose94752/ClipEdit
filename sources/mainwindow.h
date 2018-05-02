@@ -16,10 +16,6 @@
 #include <QMainWindow>
 #include <QMap>
 #include <QGraphicsScene>
-
-//#include <QtCharts/QChartView>
-//#include <QtCharts/QLineSeries>
-//#include <QtCharts/QAreaSeries>
 #include <QRectF>
 
 #include "Forms/formarrows.h"
@@ -32,6 +28,7 @@
 #include "Forms/formtextboxes.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/basegraphicitem.h"
+#include "dialogpreferences.h"
 
 class QToolButton;
 
@@ -100,12 +97,18 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
+        //Preferences
+        DialogPreferences* m_dialogPreferences;
         // Building
         void init();
         void buildMenu();
         void buildToolBar();
         void buildForms();
         void buildView();
+
+    protected:
+
+        bool eventFilter(QObject* watched, QEvent* event);
 
     private slots:
 
@@ -123,7 +126,8 @@ class MainWindow
         void slotNumberedBullets();
         void slotTextBoxes();
         void slotTextPicture();
-        void slotGraphs(const GraphsInfo &infos);
+        //void slotGraphs(const GraphsInfo &infos);
+        void slotGraphs();
         void slotArrowsGraphicsItem();
 
         //
@@ -133,6 +137,9 @@ class MainWindow
 
         // Layers
         void slotLayers();
+        void preferences ();
+
+        void slot_language (QString lang);
 };
 
 #endif

@@ -18,11 +18,14 @@
 #include <QPainter>
 #include <QColor>
 #include <QPolygonF>
-
+#include <QSettings>
 
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
+     // Essential macro needed for signals-slots
+    // Q_OBJECT // <- For the tests disable if it is not needed at least
+
     public:
 
         // 4 Type of Thickness outline lines 4 choices possibilities (1 - 4)
@@ -48,16 +51,20 @@ class ArrowsGraphicsItem
         // Constructor 2 anchors points
         //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
+        // Destructor Virtual method from BaseGraphicsItem
+        ~ArrowsGraphicsItem();
+
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+
         int type() const { return CustomTypes::ArrowGraphicsItem; }
 
         // Set Fill Color of the Arrow
-        //void setColor(const QColor &color) { ItemFillColorArrow = color; }
+        void setColorFill(const QColor &color) { *ItemFillColorArrow = color; }
 
         // Set Outline Color of the Arrow
-        //void setColorOutline(const QColor &color) { ItemOutlineColorArrow = color; }
+        void setColorOutline(const QColor &color) { *ItemOutlineColorArrow = color; }
 
         /* // For 2 objects anchors
         BaseGraphicItem *startItem() const { return m_StartItem; }
@@ -80,6 +87,24 @@ class ArrowsGraphicsItem
         QPointF getStartPosition();
         QPointF getEndPosition();
 
+        //return the ArrowHeadSize
+        int getArrowHeadSize();
+
+        //return the LineThicknessSize
+        int getLineThicknessSize();
+
+        //return the Item Fill Color Arrow
+        QColor getFillColor();
+
+        //Redefine of virtuals methods inherit from BaseGraphicItem class
+        void getParameters(QSettings *setting,int itemIdex);
+        void setParameters(QSettings *setting,int itemIdex);
+
+        //return the Arrow Width
+        int getArrowWidth();
+
+        //return the Arrow Height
+        int getArrowHeight();
 
     private:
 
@@ -87,10 +112,13 @@ class ArrowsGraphicsItem
         bool m_OneAnchorPoint;
         bool m_TwoAnchorPoints;
 
+        int arrowHeadSize; // <- arrowHeadSize is First issue of Arrow Head Size and is a temporary solution
         int m_ArrowWidth;
         int m_ArrowHeight;
 
         int m_LineThickness;
+
+        int m_SizeHeadTypeChoice; // m_SizeHeadTypeChoice = arrowHeadSize; for the tests and temporary solution
 
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;
@@ -98,19 +126,14 @@ class ArrowsGraphicsItem
         QPointF *m_StartPositionItem;
         QPointF *m_EndPositionItem;
 
+        QColor m_Color; // Temp for test
         QColor *ItemOutlineColorArrow;
         QColor *ItemFillColorArrow;
 
         QPolygonF ArrowHeadStart;
         QPolygonF ArrowHeadEnd;
 
-
-        QColor m_Color; // Temp for test
-
         FormArrows *m_formArrows;
-
-    private slots:
-
 
 };
 

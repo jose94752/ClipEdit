@@ -32,7 +32,9 @@
 #define KChartsColor    "/color"
 #define KChartsBackgroundcolor    "/backgroundcolor"
 #define KChartsTransparent    "/transparent"
-#define KChartsData    "/data"
+#define KChartsData      "/data"
+#define KChartsLegend    "/legend"
+
 
 
 // Defines
@@ -63,6 +65,17 @@ public :
 
     QList<QString> m_Legends;
     QList<QColor> m_Colors;
+
+    // Constructor
+    GraphsInfo();
+
+    QString GetCoord();
+    QString GetLegend();
+
+    //creates lists of points and legends from Strings comma separates
+    void SetCoord( const QString &str);
+    void SetLegend( const QString &str);
+
 };
 
 class GraphsGraphicsItem : public BaseGraphicItem
@@ -78,7 +91,11 @@ class GraphsGraphicsItem : public BaseGraphicItem
         int type() const;
 
         // Getters and setters
-        void setInfos(const GraphsInfo& infos);
+       void setInfos(const GraphsInfo& infos);
+       const GraphsInfo& getInfos( ) const;
+
+        void getParameters(QSettings *settings,int itemIndex);
+        void setParameters(QSettings *settings,int itemIndex);
 
     private:
 
@@ -126,11 +143,6 @@ class GraphsGraphicsItem : public BaseGraphicItem
 
         //histogrames
         void transformPointsHisto();
-
-        void getParameters(QSettings *settings,int itemIndex);
-        void setParameters(QSettings *settings,int itemIndex);
 };
 
 #endif
-
-

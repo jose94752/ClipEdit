@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormScreenshots_t {
-    QByteArrayData data[14];
-    char stringdata0[155];
+    QByteArrayData data[16];
+    char stringdata0[182];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,18 +38,21 @@ QT_MOC_LITERAL(3, 31, 3), // "pix"
 QT_MOC_LITERAL(4, 35, 14), // "dimensionsMade"
 QT_MOC_LITERAL(5, 50, 15), // "mousePressEvent"
 QT_MOC_LITERAL(6, 66, 17), // "mouseReleaseEvent"
-QT_MOC_LITERAL(7, 84, 17), // "choose_screenshot"
-QT_MOC_LITERAL(8, 102, 8), // "snapshot"
-QT_MOC_LITERAL(9, 111, 14), // "CaptureDesktop"
-QT_MOC_LITERAL(10, 126, 11), // "CaptureArea"
-QT_MOC_LITERAL(11, 138, 3), // "val"
-QT_MOC_LITERAL(12, 142, 1), // "a"
-QT_MOC_LITERAL(13, 144, 10) // "updatehide"
+QT_MOC_LITERAL(7, 84, 12), // "timeFunction"
+QT_MOC_LITERAL(8, 97, 13), // "on_changeTime"
+QT_MOC_LITERAL(9, 111, 17), // "choose_screenshot"
+QT_MOC_LITERAL(10, 129, 8), // "snapshot"
+QT_MOC_LITERAL(11, 138, 14), // "CaptureDesktop"
+QT_MOC_LITERAL(12, 153, 11), // "CaptureArea"
+QT_MOC_LITERAL(13, 165, 3), // "val"
+QT_MOC_LITERAL(14, 169, 1), // "a"
+QT_MOC_LITERAL(15, 171, 10) // "updatehide"
 
     },
     "FormScreenshots\0setBackground\0\0pix\0"
     "dimensionsMade\0mousePressEvent\0"
-    "mouseReleaseEvent\0choose_screenshot\0"
+    "mouseReleaseEvent\0timeFunction\0"
+    "on_changeTime\0choose_screenshot\0"
     "snapshot\0CaptureDesktop\0CaptureArea\0"
     "val\0a\0updatehide"
 };
@@ -61,7 +64,7 @@ static const uint qt_meta_data_FormScreenshots[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,17 +72,19 @@ static const uint qt_meta_data_FormScreenshots[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   59,    2, 0x06 /* Public */,
-       4,    2,   62,    2, 0x06 /* Public */,
-       5,    0,   67,    2, 0x06 /* Public */,
-       6,    0,   68,    2, 0x06 /* Public */,
+       1,    1,   69,    2, 0x06 /* Public */,
+       4,    2,   72,    2, 0x06 /* Public */,
+       5,    0,   77,    2, 0x06 /* Public */,
+       6,    0,   78,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   69,    2, 0x0a /* Public */,
-       8,    0,   70,    2, 0x08 /* Private */,
-       9,    0,   71,    2, 0x08 /* Private */,
-      10,    2,   72,    2, 0x08 /* Private */,
-      13,    0,   77,    2, 0x08 /* Private */,
+       7,    0,   79,    2, 0x0a /* Public */,
+       8,    0,   80,    2, 0x0a /* Public */,
+       9,    0,   81,    2, 0x0a /* Public */,
+      10,    0,   82,    2, 0x08 /* Private */,
+      11,    0,   83,    2, 0x08 /* Private */,
+      12,    2,   84,    2, 0x08 /* Private */,
+      15,    0,   89,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QPixmap,    3,
@@ -91,7 +96,9 @@ static const uint qt_meta_data_FormScreenshots[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool, QMetaType::QRectF,   11,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool, QMetaType::QRectF,   13,   14,
     QMetaType::Void,
 
        0        // eod
@@ -107,11 +114,13 @@ void FormScreenshots::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 1: _t->dimensionsMade((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QRect(*)>(_a[2]))); break;
         case 2: _t->mousePressEvent(); break;
         case 3: _t->mouseReleaseEvent(); break;
-        case 4: _t->choose_screenshot(); break;
-        case 5: _t->snapshot(); break;
-        case 6: _t->CaptureDesktop(); break;
-        case 7: _t->CaptureArea((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QRectF(*)>(_a[2]))); break;
-        case 8: _t->updatehide(); break;
+        case 4: _t->timeFunction(); break;
+        case 5: _t->on_changeTime(); break;
+        case 6: _t->choose_screenshot(); break;
+        case 7: _t->snapshot(); break;
+        case 8: _t->CaptureDesktop(); break;
+        case 9: _t->CaptureArea((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QRectF(*)>(_a[2]))); break;
+        case 10: _t->updatehide(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -172,13 +181,13 @@ int FormScreenshots::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 11;
     }
     return _id;
 }

@@ -279,6 +279,17 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
     //    }
 }
 
+void FormScreenshots::timeFunction()
+{
+
+
+}
+
+void FormScreenshots::on_changeTime()
+{
+
+}
+
 void FormScreenshots::choose_screenshot()
 {
     QString homepath = QDir::homePath();

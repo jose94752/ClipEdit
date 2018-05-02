@@ -30,40 +30,21 @@ GraphicsView::GraphicsView(QWidget* parent)
     m_backgroundColor = Qt::white;
 }
 
-void GraphicsView::setGraphicsRectItem(QGraphicsRectItem **v_graphRectItem)
+void GraphicsView::setGraphicsRectItem(QGraphicsRectItem** v_graphRectItem)
 {
     m_graphRectItem = v_graphRectItem;
 }
 
 void GraphicsView::setNbElts(int v_nbElts)
 {
-    m_nbSceneElts=v_nbElts;
+    m_nbSceneElts = v_nbElts;
 }
 
 // Events
 // ------
 
-void GraphicsView::mouseDoubleClickEvent(QMouseEvent* event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        if (itemAt(event->pos()))
-        {
-            // Item under the cursor
-            QGraphicsItem* item = itemAt(event->pos());
-            emit itemSelected(item);
-        }
-    }
-}
-
 void GraphicsView::mousePressEvent(QMouseEvent* event)
 {
-//    if (event->button() == Qt::RightButton)
-//    {
-//        setCursor(Qt::ClosedHandCursor);
-//        m_oldPos = event->pos();
-//    }
-
     if (event->button() == Qt::LeftButton)
     {
         // Enter drag mode
@@ -75,31 +56,17 @@ void GraphicsView::mousePressEvent(QMouseEvent* event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent* event)
 {
-//    if (event->button() == Qt::RightButton)
-//    {
-//        setCursor(Qt::ArrowCursor);
-//    }
+    QGraphicsView::mouseReleaseEvent(event);
 
     if (event->button() == Qt::LeftButton)
     {
         // Leave drag mode
         setDragMode(QGraphicsView::NoDrag);
     }
-
-    QGraphicsView::mouseReleaseEvent(event);
 }
 
 void GraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
-//    if (event->buttons() & Qt::RightButton)
-//    {
-//        QPointF delta = event->pos() - m_oldPos;
-//        horizontalScrollBar()->setValue(horizontalScrollBar()->value() + delta.x());
-//        verticalScrollBar()->setValue(verticalScrollBar()->value() + delta.y());
-
-//        m_oldPos = event->pos();
-//    }
-
     QGraphicsView::mouseMoveEvent(event);
 }
 
@@ -111,11 +78,11 @@ void GraphicsView::clear()
     if (scene())
     {
         // Remove all items from the scene
-        QRectF rect=(*m_graphRectItem)->rect();
-        QBrush brush=(*m_graphRectItem)->brush();
+        QRectF rect = (*m_graphRectItem)->rect();
+        QBrush brush = (*m_graphRectItem)->brush();
         scene()->clear();
         scene()->setSceneRect(QRectF(0,0,rect.width()+1,rect.height()+1));
-        *m_graphRectItem=scene()->addRect(rect);
+        *m_graphRectItem = scene()->addRect(rect);
         (*m_graphRectItem)->setBrush(brush);
     }
 }

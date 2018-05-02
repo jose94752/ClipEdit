@@ -16,17 +16,21 @@
 #include <QPainter>
 #include <QColor>
 
+//#include <QObject> // <- For the tests disable if it is not needed at least
+//#include <QColorDialog>
+
 #include <QtMath>
 
+#include "itemhandler.h"
 #include "arrowsgraphicsitem.h"
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
 
-
+// Zone de travaux
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 {
-    m_formArrows=ptrFormArrows;
+    m_formArrows = ptrFormArrows;
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
@@ -47,14 +51,79 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_m_EndPositionItem =  endItem.{à définir}scenePos();
 
-   m_Color = Qt::black; // Temp for test
+    m_Color = Qt::black; // Temp for test
 
-   //ItemOutlineColorArrow = new QColor(Qt::black); // For test you must use a color because the default new QColor(); constructor Constructs an invalid color with the RGB value (0, 0, 0).
+    // For test you must use a color because the default new QColor();
+    // constructor Constructs an invalid color with the RGB value (0, 0, 0).
+    // We must use the default constructor when you want to implement isValid() function of QColor class
+    // If you don't do you will have segmentation fault bug
+    //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
+    qDebug() << "Item Fill Color Arrow  = " << *ItemFillColorArrow;
+    //ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    ItemOutlineColorArrow = new QColor();
+    setColorOutline(m_formArrows->getFormOutlineColorArrow());
+    qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
+    /*
+    //    In Qt5, you use QObject::connect to connect signal with slot:
+    //*/
+    //    /*
+    //       QMetaObject::Connection QObject::connect(
+    //        const QObject *sender,
+    //        const char *signal,
+    //        const char *method,
+    //        Qt::ConnectionType type = Qt::AutoConnection) const;
+    //     */
+    /*
+    // Example:
+    //    #include <QApplication>
+    //    #include <QDebug>
+    //    #include <QLineEdit>
+    //
+    //    int main(int argc, char *argv[]) {
+    //        QApplication app(argc, argv);
+    //        QLineEdit lnedit;
+    //
+    //        // connect signal `QLineEdit::textChanged` with slot `lambda function`
+    //        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
+    //
+    //        lnedit.show();
+    //        return app.exec();
+    //    }
+    */
+    //Tests
+    /*
+    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
+    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
+
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(), [&]() {&FormArrows::getFormFillColorArrow();});
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+
+    //QColorDialog::currentColorChanged(QColor)
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {m_formArrows->getFormFillColorArrow(QColor);});
+
+    //connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
+    //QObject::connect(&m_formArrows->FormFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
+    */
+
 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
+
+    setPos(0,0);
+
 }
 
+// ArrowsGraphicsItem Desctructor implement because ~BaseGraphicsItem is virtual
+ArrowsGraphicsItem::~ArrowsGraphicsItem()
+{
+    //return BaseGraphicItem::~BaseGraphicItem(); // <- if const for desctructor in BaseGraphicItem
+    for (int i = 0; i < m_handlers.size() ; i++)
+        delete m_handlers[i];
+}
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
@@ -90,6 +159,15 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     */
     // End Example
 
+    //
+    // The scene QPointF for future using to calculate if the resize of Arrows is enable
+    //  copy from the BaseGraphicItem(parent)
+    QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
+    QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
+    QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
+    QPointF right(m_rect.right(), m_rect.top() + m_rect.height() / 2.0);
+    QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
+    // End scene QPointF
 
 
     painter->setRenderHint(QPainter::Antialiasing);
@@ -107,11 +185,13 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (!m_StartPositionItem || !m_EndPositionItem)
         return;
 
+    /* //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
     // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
     if (m_StartPositionItem->x() >= m_EndPositionItem->x())
             m_EndPositionItem->setX(m_StartPositionItem->x());
     if (m_StartPositionItem->y() >= m_EndPositionItem->y())
             m_EndPositionItem->setY(m_StartPositionItem->y());
+    */
 
     // Draw the line
     QLineF line(*m_StartPositionItem, *m_EndPositionItem);
@@ -120,31 +200,46 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (qFuzzyCompare(line.length(), qreal(0.)))
         return;
 
+    // Set the Line Thickness
+    m_LineThickness = 4; // Temp for tests intial 1
+
     // Draw the line (next step)
-    painter->setPen(QPen(m_Color, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    //painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->drawLine(line);
 
     // Draw the arrows
     double angle = qAtan2(-line.dy(), line.dx());
 
-    int arrowSize = 10;
+    arrowHeadSize = 35; // Temp for tests intial 10
 
-    QPointF sourceArrowP1 = *m_StartPositionItem + QPointF(qSin(angle + M_PI / 3) * arrowSize,
-                                                           qCos(angle + M_PI / 3) * arrowSize);
-    QPointF sourceArrowP2 = *m_StartPositionItem + QPointF(qSin(angle + M_PI - M_PI / 3) * arrowSize,
-                                                           qCos(angle + M_PI - M_PI / 3) * arrowSize);
-    QPointF destArrowP1 = *m_EndPositionItem + QPointF(qSin(angle - M_PI / 3) * arrowSize,
-                                                       qCos(angle - M_PI / 3) * arrowSize);
-    QPointF destArrowP2 = *m_EndPositionItem + QPointF(qSin(angle - M_PI + M_PI / 3) * arrowSize,
-                                                       qCos(angle - M_PI + M_PI / 3) * arrowSize);
+    QPointF sourceArrowP1 = *m_StartPositionItem + QPointF(qSin(angle + M_PI / 3) * arrowHeadSize,
+                                                           qCos(angle + M_PI / 3) * arrowHeadSize);
+    QPointF sourceArrowP2 = *m_StartPositionItem + QPointF(qSin(angle + M_PI - M_PI / 3) * arrowHeadSize,
+                                                           qCos(angle + M_PI - M_PI / 3) * arrowHeadSize);
+    QPointF destArrowP1 = *m_EndPositionItem + QPointF(qSin(angle - M_PI / 3) * arrowHeadSize,
+                                                       qCos(angle - M_PI / 3) * arrowHeadSize);
+    QPointF destArrowP2 = *m_EndPositionItem + QPointF(qSin(angle - M_PI + M_PI / 3) * arrowHeadSize,
+                                                       qCos(angle - M_PI + M_PI / 3) * arrowHeadSize);
 
-    painter->setBrush(m_Color);
+    //painter->setBrush(m_Color);
+    painter->setBrush(*ItemFillColorArrow);
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
 
+
+    //Test zone
+    // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
+    qDebug() << "Before FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+    m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
+    qDebug() << "After FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+
+    //End Test zone
+
     BaseGraphicItem::paint(painter,option,widget);
 }
+// fin Zone de travaux
 
 // Getters
 // -------
@@ -156,22 +251,43 @@ void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAncho
                                         //To do others HeadTypeChoiceContents
                                         // comboBoxHeadTypeChoiceContents
 {
-    m_WithoutAnchorPoint = WithoutAnchorPoint;
-    m_OneAnchorPoint = OneAnchorPoint;
-    m_TwoAnchorPoints = TwoAnchorPoints;
+    WithoutAnchorPoint = m_WithoutAnchorPoint;
+    OneAnchorPoint = m_OneAnchorPoint;
+    TwoAnchorPoints = m_TwoAnchorPoints;
 
-    m_ArrowWidth  = ArrowWidth;
-    m_ArrowHeight = ArrowHeight;
+    ArrowWidth = m_ArrowWidth;
+    ArrowHeight = m_ArrowHeight;
 
-    ItemOutlineColorArrow = new QColor(ArrowOutlineColor);
-    ItemFillColorArrow = new QColor(ArrowFillColor);
+    if (ItemOutlineColorArrow->isValid())
+        {
+            ArrowOutlineColor = *ItemOutlineColorArrow;
+        }
+    else
+        {
+            qDebug() << "Invalid Item Outline Color Arrow when you call GetInfosArrows Method,"
+                     << " we have replaced it by standard color black.";
+            ItemOutlineColorArrow = new QColor(Qt::black);
+            ArrowOutlineColor = *ItemOutlineColorArrow;
+        }
 
-    m_LineThickness = LineThickness;
+    if (ItemFillColorArrow->isValid())
+        {
+            ArrowFillColor = *ItemFillColorArrow;
+        }
+    else
+        {
+            qDebug() << "Invalid Item Fill Color Arrow when you call GetInfosArrows Method,"
+                     <<  " we have replaced it by standard color black.";
+            ItemFillColorArrow = new QColor(Qt::black);
+            ArrowFillColor = *ItemFillColorArrow;
+        }
+
+    LineThickness = m_LineThickness;
 
 
-    //To do
+    //To do others HeadTypeChoiceContents
     // comboBoxHeadTypeChoiceContents
-
+    SizeHeadTypeChoice = m_SizeHeadTypeChoice;
 }
 
 void ArrowsGraphicsItem::updateArrowPosition()
@@ -207,3 +323,81 @@ QPointF ArrowsGraphicsItem::getEndPosition()
 {
     return *m_EndPositionItem;
 }
+
+int ArrowsGraphicsItem::getArrowWidth()
+{
+    return m_ArrowWidth;
+}
+
+int ArrowsGraphicsItem::getArrowHeight()
+{
+    return m_ArrowHeight;
+}
+
+
+int ArrowsGraphicsItem::getArrowHeadSize()
+{
+    return arrowHeadSize;
+}
+
+int ArrowsGraphicsItem::getLineThicknessSize()
+{
+    return m_LineThickness;
+}
+
+QColor ArrowsGraphicsItem::getFillColor()
+{
+    return *ItemFillColorArrow;
+}
+
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Get parameters for an ArrowsGraphicsItem
+void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
+{
+    QString path="item"+QString::number(itemIdex)+"/";
+    settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
+    settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
+    settings->setValue(path+"TwoAnchorPointst",m_TwoAnchorPoints);
+    settings->setValue(path+"arrowHeadSize",arrowHeadSize);
+    settings->setValue(path+"ArrowWidth",m_ArrowWidth);
+    settings->setValue(path+"ArrowHeight",m_ArrowHeight);
+    settings->setValue(path+"LineThickness",m_LineThickness);
+    settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
+    /*QPointF *m_StartPositionItem;
+    QPointF *m_EndPositionItem;*/
+    settings->setValue(path+"Color",m_Color.name());
+    /*QColor *ItemOutlineColorArrow;
+    QColor *ItemFillColorArrow;*/
+    //settings->setValue(path+"ArrowHeadStart",ArrowHeadStart);
+    //settings->setValue(path+"ArrowHeadStart",ArrowHeadEnd);
+
+    //FormArrows *m_formArrows;
+}
+
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Set external parameters for an ArrowsGraphicsItem
+void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
+{
+    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
+    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
+    //éventuellement fonction de rafraichissement graphique
+//    QString path; // = "Items";
+//    {
+//        path = "item" + QString::number(itemIndex);
+//    }
+//    path += QString ("/");
+    //To do
+
+
+    /*QString path="item"+QString::number(itemIdex)+"/";
+    settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
+    settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
+    settings->setValue(path+"TwoAnchorPointst",m_TwoAnchorPoints);
+    settings->setValue(path+"arrowHeadSize",arrowHeadSize);
+    settings->setValue(path+"ArrowWidth",m_ArrowWidth);
+    settings->setValue(path+"ArrowHeight",m_ArrowHeight);
+    settings->setValue(path+"LineThickness",m_LineThickness);
+    settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
+    settings->setValue(path+"Color",m_Color.name());*/
+}
+
