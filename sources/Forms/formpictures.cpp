@@ -37,19 +37,12 @@ FormPictures::FormPictures(QWidget *parent)
     connect (ui->pushButton_save,       SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
     connect (ui->pushButton_restore,    SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
 
-
-    ui->comboBox_lg_pos->addItem(tr("Left"));
-    ui->comboBox_lg_pos->addItem(tr("Right"));
-    ui->comboBox_lg_pos->addItem(tr("HCenter"));
-    ui->comboBox_lg_pos->addItem(tr("Justify"));
-    ui->comboBox_lg_pos->addItem(tr("Top"));
-    ui->comboBox_lg_pos->addItem(tr("Bottom"));
-    ui->comboBox_lg_pos->addItem(tr("VCenter"));
-    ui->comboBox_lg_pos->addItem(tr("Center"));
+    connect (ui->comboBox_lg_or, SIGNAL(currentTextChanged(QString)), this, SLOT(load_position(QString)));
 
 
     ui->comboBox_lg_or->addItem(tr("Horizontal"));
     ui->comboBox_lg_or->addItem(tr("Vertical"));
+
 }
 
 
@@ -223,5 +216,31 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
 
     }
 }
+
+
+void FormPictures::load_position(QString s){
+
+ui->comboBox_lg_pos->clear();
+
+if (s == "Horizontal") {
+    ui->comboBox_lg_pos->addItem(tr("Left"));
+    ui->comboBox_lg_pos->addItem(tr("Right"));
+    ui->comboBox_lg_pos->addItem(tr("HCenter"));
+    ui->comboBox_lg_pos->addItem(tr("Justify"));
+    ui->comboBox_lg_pos->addItem(tr("Top"));
+    ui->comboBox_lg_pos->addItem(tr("Bottom"));
+    ui->comboBox_lg_pos->addItem(tr("VCenter"));
+    ui->comboBox_lg_pos->addItem(tr("Center"));
+}
+else if (s == "Vertical") {
+    ui->comboBox_lg_pos->addItem(tr("Top Left"));
+    ui->comboBox_lg_pos->addItem(tr("Top Right"));
+    ui->comboBox_lg_pos->addItem(tr("Center Left"));
+    ui->comboBox_lg_pos->addItem(tr("Center Right"));
+    ui->comboBox_lg_pos->addItem(tr("Bottom Left"));
+    ui->comboBox_lg_pos->addItem(tr("Bottom Right"));
+     }
+}
+
 
 // emit picture_changed();

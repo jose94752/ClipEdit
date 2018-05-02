@@ -13,8 +13,8 @@
 // --------
 
 #include <QDebug>
+#include <QColorDialog>
 
-#include "formarrows.h"
 #include "formarrows.h"
 #include "ui_formarrows.h"
 #include "../Items/arrowsgraphicsitem.h"
@@ -30,12 +30,16 @@ FormArrows::FormArrows(QWidget *parent)
     // Set Default values of FormArrows
     //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
-    ui->spinBoxArrowWidthContents->setMinimum(20);
-    ui->spinBoxArrowWidthContents->setMinimumWidth(20);
-    ui->spinBoxArrowWidthContents->setMaximum(500);
-    ui->spinBoxArrowHeightContents->setMinimum(20);
-    ui->spinBoxArrowHeightContents->setMinimumHeight(20);
-    ui->spinBoxArrowHeightContents->setMaximum(500);
+    ui->spinBoxArrowWidthContents->setMinimum(0); //temp set to 0 before 20
+    //ui->spinBoxArrowWidthContents->setMinimumWidth(20);
+    ui->spinBoxArrowWidthContents->setMinimumWidth(50); //Set to 50 Max of Simple Arrow Head
+    //ui->spinBoxArrowWidthContents->setMaximum(500);
+    ui->spinBoxArrowWidthContents->setMaximum(2147483647); //temp max for the tests '2 147 483 647' 32 bits int signed type
+    ui->spinBoxArrowHeightContents->setMinimum(0); //temp set to 0 before 20
+    //ui->spinBoxArrowHeightContents->setMinimumHeight(20);
+    ui->spinBoxArrowHeightContents->setMinimumHeight(50); //Set to 50 Max of Simple Arrow Head
+    //ui->spinBoxArrowHeightContents->setMaximum(500);
+    ui->spinBoxArrowHeightContents->setMaximum(2147483647); //temp max for the tests '2 147 483 647' 32 bits int signed type
 
     // Fill the Size of the Line Thickness
      for(int i = 1; i < 5; i++)
@@ -118,6 +122,20 @@ QColor FormArrows::getFormFillColorArrow()
     return FormFillColorArrow;
 }
 
+//return the Form Fill Color Arrow with QColor object
+QColor FormArrows::getFormFillColorArrow(QColor &newFormFillColorArrow)
+{
+    newFormFillColorArrow = FormFillColorArrow;
+    return newFormFillColorArrow;
+}
+
+
+//return the Form Outline Color Arrow
+QColor FormArrows::getFormOutlineColorArrow()
+{
+    return FormOutlineColorArrow;
+}
+
 
 // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
 QPushButton *FormArrows::getAddPushButtonArrow()
@@ -191,12 +209,13 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
 }
 
 //
-// SIGNALS
+// SLOTS
 //
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
     FormFillColorArrow = color;
+    // SIGNAL emit FormFillColorArrowChanged
     emit FormFillColorArrowChanged(FormFillColorArrow); // This emit is for connect on FormArrows class
 }
 
@@ -204,12 +223,10 @@ void FormArrows::outlineColorArrowChanged(const QColor& color)
 {
     BeforeFormOutlineColorArrow = FormOutlineColorArrow;
     FormOutlineColorArrow = color;
+    // SIGNAL emit FormOutlineColorArrowChanged
     emit FormOutlineColorArrowChanged(FormOutlineColorArrow);
 }
 
-//
-// SLOTS
-//
 void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
 {
     //To do
@@ -232,8 +249,17 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
         ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
 
-        qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
+        //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
         ui->toolButtonFillColorContents->setColor(castedItem->getFillColor());
+
+        //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
+        //ui->toolButtonOutlineColorContents->setColor(castedItem->getOutlineColor()); //To do Method getOutlineColor() when OutlineColorArrow is implement
+
+        qDebug() << "Arrow Width setValue = " << (castedItem->getArrowWidth());
+        ui->spinBoxArrowWidthContents->setValue(castedItem->getArrowWidth());
+
+        qDebug() << "Arrow Height setValue = " << (castedItem->getArrowHeight());
+        ui->spinBoxArrowHeightContents->setValue(castedItem->getArrowHeight());
 
         // Others:
         //castedItem->setFormArrowMethodsForEachHandleValue();

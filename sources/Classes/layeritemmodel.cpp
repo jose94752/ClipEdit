@@ -13,11 +13,17 @@
 
 #include "layeritemmodel.h"
 
-// Constructor
-// -----------
+// Constructors
+// ------------
 
 LayerItemModel::LayerItemModel(QObject* parent)
-    :   QIdentityProxyModel(parent)
+    :   QStandardItemModel(parent)
+{
+
+}
+
+LayerItemModel::LayerItemModel(int rows, int columns, QObject* parent)
+    :   QStandardItemModel(rows, columns, parent)
 {
 
 }
@@ -33,6 +39,6 @@ QVariant LayerItemModel::data(const QModelIndex& proxyIndex, int role) const
     }
     else
     {
-        return QIdentityProxyModel::data(proxyIndex, role);
+        return QStandardItemModel::data(proxyIndex, role);
     }
 }

@@ -122,8 +122,8 @@ void MainWindow::buildForms()
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
     connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
-    //connect(m_dialogPreferences, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
-    connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+    //connect(m_dialogPreferences, SIGNAL(language(DialogPreferences::lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
+    //connect(this, SIGNAL(language(lang_e)), this, SLOT(slot_language(DialogPreferences::lang_e)));
     // Building the stacked widget
     // First, remove all useless pages
     for(int page = 0; page < ui->stackedWidgetForms->count(); ++page)
@@ -219,6 +219,7 @@ void MainWindow::buildView()
     if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
         m_borderSceneItem->setBrush(QColor(r,g,b,a));
     }
+
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
     ui->graphicsView->setScene(&m_scene);
@@ -388,17 +389,23 @@ void MainWindow::slotGraphs(const GraphsInfo &infos)
 }
 */
 
+///
+/// \brief MainWindow::slotArrowsGraphicsItem
+///creates arrows items
+/// 3 Methods
+/// Without anchor point:
+///          we need 2 points on the scene
+/// 1 anchor point:
+///          we need 1 point on the scene and an object of scene
+///          or an object of scene and 1 point on the scene
+/// 2 anchors points:
+///          we need 2 objects of scene
 void MainWindow::slotArrowsGraphicsItem()
 {
-    // 3 Methods
-    // Without anchor point:
-    //          we need 2 points on the scene
-    // 1 anchor point:
-    //          we need 1 point on the scene and an object of scene
-    //          or an object of scene and 1 point on the scene
-    // 2 anchors points:
-    //          we need 2 objects of scene
+    // To do
     //m_scene.addItem(new ArrowsGraphicsItem());
+
+    ///Actual version work only without anchor point
 
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(m_formArrows);
@@ -530,14 +537,22 @@ void MainWindow::showAboutDialog(bool)
     QMessageBox::about(this, tr("About ") + QApplication::applicationName(), content);
 }
 
-void MainWindow::preferences ()
+void MainWindow::preferences()
 {
     qDebug () << "\tMainWindow::preferences...\n";
-    m_dialogPreferences= new DialogPreferences(this);
+    QString str_lang ("English");
+    QSettings q;
+    str_lang=q.value ("preferences/language", str_lang).toString();
+    m_dialogPreferences = new DialogPreferences(this, str_lang);
+    connect(m_dialogPreferences, SIGNAL(signal_language(QString)),
+            this, SLOT(slot_language(QString)));
     m_dialogPreferences->show();
 
 }
 
-void MainWindow::slot_language (DialogPreferences::lang_e) {
-  qDebug () << "MainWindow::slot_language...\n";
+void MainWindow::slot_language (QString lang) {
+  qDebug () << "lang == " << lang << "\n";
+  QSettings q;
+  QString path_language ("preferences/language");
+  q.setValue(path_language, lang);
 }

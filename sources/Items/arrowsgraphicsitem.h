@@ -18,14 +18,13 @@
 #include <QPainter>
 #include <QColor>
 #include <QPolygonF>
-//#include <QObject>
+#include <QSettings>
 
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
 {
-
-    // Essential macro needed for signals-slots
-    //Q_OBJECT // <- Bug Generate error (if it activate without connects) "erreur : undefined reference to `vtable for ArrowsGraphicsItem'"
+     // Essential macro needed for signals-slots
+   // Q_OBJECT // <- For the tests disable if it is not needed at least
 
     public:
 
@@ -52,16 +51,20 @@ class ArrowsGraphicsItem
         // Constructor 2 anchors points
         //ArrowsGraphicsItem(FormArrows* ptrFormArrows, BaseGraphicItem *m_StartItem, BaseGraphicItem *m_EndItem, QGraphicsItem *parent = 0);
 
+        // Destructor Virtual method from BaseGraphicsItem
+        ~ArrowsGraphicsItem();
+
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+
         int type() const { return CustomTypes::ArrowGraphicsItem; }
 
         // Set Fill Color of the Arrow
-        //void setColor(const QColor &color) { ItemFillColorArrow = color; }
+        void setColorFill(const QColor &color) { *ItemFillColorArrow = color; }
 
         // Set Outline Color of the Arrow
-        //void setColorOutline(const QColor &color) { ItemOutlineColorArrow = color; }
+        void setColorOutline(const QColor &color) { *ItemOutlineColorArrow = color; }
 
         /* // For 2 objects anchors
         BaseGraphicItem *startItem() const { return m_StartItem; }
@@ -93,12 +96,15 @@ class ArrowsGraphicsItem
         //return the Item Fill Color Arrow
         QColor getFillColor();
 
+        //Redefine of virtuals methods inherit from BaseGraphicItem class
         void getParameters(QSettings *setting,int itemIdex);
         void setParameters(QSettings *setting,int itemIdex);
 
-    protected:
+        //return the Arrow Width
+        int getArrowWidth();
 
-              //void AGIfillColorArrowChanged(const QColor& color);
+        //return the Arrow Height
+        int getArrowHeight();
 
     private:
 
@@ -128,10 +134,6 @@ class ArrowsGraphicsItem
         QPolygonF ArrowHeadEnd;
 
         FormArrows *m_formArrows;
-
-    private slots:
-
-        //void fillColorArrowUpdate(const QColor& newItemFillColorArrow); // <- Bug if it activate
 
 };
 

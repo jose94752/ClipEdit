@@ -17,7 +17,6 @@
 
 #include <QColor>
 #include <QPolygonF>
-//#include <QObject>
 #include <QPushButton>
 
 #include "baseform.h"
@@ -64,18 +63,17 @@ class FormArrows
         //return the Form Fill Color Arrow
         QColor getFormFillColorArrow();
 
+        //return the Form Fill Color Arrow with QColor object
+        QColor getFormFillColorArrow(QColor  &newFormFillColorArrow);
 
-//**** Zone test
-        // This emit is for connect on the Others class
-        //void send() { emit fillColorArrowChanged(const QColor& color);}
-//       void send() { emit fillColorArrowChanged(const QColor& color)};
-        //void send() {emit FormFillColorArrowChanged(FormFillColorArrow);
-//*** End zone test
+        //return the Form Outline Color Arrow
+        QColor getFormOutlineColorArrow();
 
         // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
         QPushButton* getAddPushButtonArrow();
 
-    private:
+
+private:
 
         // UI
         Ui::FormArrows *ui;
@@ -124,13 +122,13 @@ class FormArrows
                             int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
                             int SizeHeadTypeChoice);
 
-private slots:
+    public slots:
 
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
-        void radioButtonWithoutAnchorPointMethod(bool);       
+        void radioButtonWithoutAnchorPointMethod(bool);
 
-signals:
+    signals:
 
         void FormFillColorArrowChanged(QColor newFormFillColorArrow);
         void FormOutlineColorArrowChanged(QColor newFormOutlineColorArrow);

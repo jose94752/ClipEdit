@@ -16,8 +16,11 @@
 #include <QPainter>
 #include <QColor>
 
+//#include <QObject> // <- For the tests disable if it is not needed at least
+
 #include <QtMath>
 
+#include "itemhandler.h"
 #include "arrowsgraphicsitem.h"
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
@@ -47,36 +50,61 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_m_EndPositionItem =  endItem.{à définir}scenePos();
 
-   m_Color = Qt::black; // Temp for test
+    m_Color = Qt::black; // Temp for test
 
-   // For test you must use a color because the default new QColor();
-   // constructor Constructs an invalid color with the RGB value (0, 0, 0).
-   // We must use the default constructor when you want to implement isValid() function of QColor class
-   // If you don't do you will have segmentation fault bug
-   //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
-   ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
-   ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    // For test you must use a color because the default new QColor();
+    // constructor Constructs an invalid color with the RGB value (0, 0, 0).
+    // We must use the default constructor when you want to implement isValid() function of QColor class
+    // If you don't do you will have segmentation fault bug
+    //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
+    qDebug() << "Item Fill Color Arrow  = " << *ItemFillColorArrow;
+    //ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
+    ItemOutlineColorArrow = new QColor();
+    setColorOutline(m_formArrows->getFormOutlineColorArrow());
+    qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
+//    In Qt5, you use QObject::connect to connect signal with slot:
+//
+//    /*
+//       QMetaObject::Connection QObject::connect(
+//        const QObject *sender,
+//        const char *signal,
+//        const char *method,
+//        Qt::ConnectionType type = Qt::AutoConnection) const;
+//     */
+//
+// Example:
+//    #include <QApplication>
+//    #include <QDebug>
+//    #include <QLineEdit>
+//
+//    int main(int argc, char *argv[]) {
+//        QApplication app(argc, argv);
+//        QLineEdit lnedit;
+//
+//        // connect signal `QLineEdit::textChanged` with slot `lambda function`
+//        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
+//
+//        lnedit.show();
+//        return app.exec();
+//    }
+    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
+    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 
     setPos(0,0);
 
-    //Test zone
-
-    // Connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
-    //connect ( val, SIGNAL(MonSignal(type)), this, SLOT(MonSlot(type)) ); //syntax connect for SIGNAL
-    // connect entres deux classes différentes test (temporaty comment)
-
-    //connect(m_formArrows-><??? Ne fontionne pas entre classes /=  ???>,SIGNAL(FormFillColorArrowChanged(QColor)),this,SLOT(fillColorArrowUpdate(QColor)));
-    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //QObject::connect(m_formArrows->FormFillColorArrow,SIGNAL(FormFillColorArrowChanged(QColor)),this->ItemFillColorArrow,SLOT(fillColorArrowUpdate(QColor))); //<- Bug because FormFillColorArrow is private
-    //End Test zone
-
-
 }
-// fin Zone de travaux
+
+// ArrowsGraphicsItem Desctructor implement because ~BaseGraphicsItem is virtual
+ArrowsGraphicsItem::~ArrowsGraphicsItem()
+{
+    //return BaseGraphicItem::~BaseGraphicItem(); // <- if const for desctructor in BaseGraphicItem
+    for (int i = 0; i < m_handlers.size() ; i++)
+        delete m_handlers[i];
+}
 
 QRectF ArrowsGraphicsItem::boundingRect() const
 {
@@ -138,11 +166,13 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (!m_StartPositionItem || !m_EndPositionItem)
         return;
 
+    /* //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
     // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
     if (m_StartPositionItem->x() >= m_EndPositionItem->x())
             m_EndPositionItem->setX(m_StartPositionItem->x());
     if (m_StartPositionItem->y() >= m_EndPositionItem->y())
             m_EndPositionItem->setY(m_StartPositionItem->y());
+    */
 
     // Draw the line
     QLineF line(*m_StartPositionItem, *m_EndPositionItem);
@@ -179,8 +209,18 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
 
+
+    //Test zone
+    // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
+    qDebug() << "Before FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+    m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
+    qDebug() << "After FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+
+    //End Test zone
+
     BaseGraphicItem::paint(painter,option,widget);
 }
+// fin Zone de travaux
 
 // Getters
 // -------
@@ -265,6 +305,17 @@ QPointF ArrowsGraphicsItem::getEndPosition()
     return *m_EndPositionItem;
 }
 
+int ArrowsGraphicsItem::getArrowWidth()
+{
+    return m_ArrowWidth;
+}
+
+int ArrowsGraphicsItem::getArrowHeight()
+{
+    return m_ArrowHeight;
+}
+
+
 int ArrowsGraphicsItem::getArrowHeadSize()
 {
     return arrowHeadSize;
@@ -319,19 +370,33 @@ void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
  // Test
 /*
 void ArrowsGraphicsItem::AGIfillColorArrowChanged(const QColor& color)
+=======
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Get external parameters for an ArrowsGraphicsItem
+void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIndex)
+>>>>>>> 9debfe398666098081545a71041e87faffa725af
 {
-    if (m_formArrows)
+     //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
+    QString path; // = "Items";
     {
-        m_formArrows->emit();
-        //m_formArrows->emit (const QColor &color);
+        path = "item" + QString::number(itemIndex);
     }
+    path += QString ("/");
+    //To do
 }
-*/
 
-// SLOTS
-/*
-void ArrowsGraphicsItem::fillColorArrowUpdate(const QColor &newItemFillColorArrow) // <- Bug if it activate
-{                                                                                   // even with the Q_OBJECT macro
-    *ItemFillColorArrow = newItemFillColorArrow;                                    // we have 9 compile errors
-}
-*/
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Set external parameters for an ArrowsGraphicsItem
+void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIndex)
+{
+    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
+    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
+    //éventuellement fonction de rafraichissement graphique
+    QString path; // = "Items";
+    {
+        path = "item" + QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //To do
+}*/
+

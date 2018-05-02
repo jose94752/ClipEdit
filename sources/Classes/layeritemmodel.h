@@ -14,19 +14,20 @@
 // Includes
 // --------
 
-#include <QIdentityProxyModel>
+#include <QStandardItemModel>
 
 // Class
 // -----
 
 class LayerItemModel
-    :   public QIdentityProxyModel
+    :   public QStandardItemModel
 {
 
     public:
 
         // Constructor
         LayerItemModel(QObject* parent = 0);
+        LayerItemModel(int rows, int columns, QObject* parent = 0);
 
         // Reimplemented virtual methods
         QVariant data(const QModelIndex& proxyIndex, int role) const;
