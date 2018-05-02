@@ -17,6 +17,7 @@
 #include <QColor>
 
 //#include <QObject> // <- For the tests disable if it is not needed at least
+//#include <QColorDialog>
 
 #include <QtMath>
 
@@ -63,34 +64,52 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     ItemOutlineColorArrow = new QColor();
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
     qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
-
-//    In Qt5, you use QObject::connect to connect signal with slot:
-//
-//    /*
-//       QMetaObject::Connection QObject::connect(
-//        const QObject *sender,
-//        const char *signal,
-//        const char *method,
-//        Qt::ConnectionType type = Qt::AutoConnection) const;
-//     */
-//
-// Example:
-//    #include <QApplication>
-//    #include <QDebug>
-//    #include <QLineEdit>
-//
-//    int main(int argc, char *argv[]) {
-//        QApplication app(argc, argv);
-//        QLineEdit lnedit;
-//
-//        // connect signal `QLineEdit::textChanged` with slot `lambda function`
-//        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
-//
-//        lnedit.show();
-//        return app.exec();
-//    }
+    /*
+    //    In Qt5, you use QObject::connect to connect signal with slot:
+    //*/
+    //    /*
+    //       QMetaObject::Connection QObject::connect(
+    //        const QObject *sender,
+    //        const char *signal,
+    //        const char *method,
+    //        Qt::ConnectionType type = Qt::AutoConnection) const;
+    //     */
+    /*
+    // Example:
+    //    #include <QApplication>
+    //    #include <QDebug>
+    //    #include <QLineEdit>
+    //
+    //    int main(int argc, char *argv[]) {
+    //        QApplication app(argc, argv);
+    //        QLineEdit lnedit;
+    //
+    //        // connect signal `QLineEdit::textChanged` with slot `lambda function`
+    //        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
+    //
+    //        lnedit.show();
+    //        return app.exec();
+    //    }
+    */
+    //Tests
+    /*
     //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
     //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
+
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(), [&]() {&FormArrows::getFormFillColorArrow();});
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+
+    //QColorDialog::currentColorChanged(QColor)
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {m_formArrows->getFormFillColorArrow(QColor);});
+
+    //connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
+    //QObject::connect(&m_formArrows->FormFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
+    */
+
+
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 
@@ -331,6 +350,8 @@ QColor ArrowsGraphicsItem::getFillColor()
     return *ItemFillColorArrow;
 }
 
+//To do redefine virtual method inherit from BaseGraphicItem class
+// Get parameters for an ArrowsGraphicsItem
 void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
 {
     QString path="item"+QString::number(itemIdex)+"/";
@@ -366,37 +387,4 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
     m_Color.setNamedColor(settings->value(path+"Color").toString());
 }
-
- // Test
-/*
-void ArrowsGraphicsItem::AGIfillColorArrowChanged(const QColor& color)
-=======
-//To do redefine virtual method inherit from BaseGraphicItem class
-// Get external parameters for an ArrowsGraphicsItem
-void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIndex)
->>>>>>> 9debfe398666098081545a71041e87faffa725af
-{
-     //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
-    QString path; // = "Items";
-    {
-        path = "item" + QString::number(itemIndex);
-    }
-    path += QString ("/");
-    //To do
-}
-
-//To do redefine virtual method inherit from BaseGraphicItem class
-// Set external parameters for an ArrowsGraphicsItem
-void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIndex)
-{
-    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
-    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
-    //éventuellement fonction de rafraichissement graphique
-    QString path; // = "Items";
-    {
-        path = "item" + QString::number(itemIndex);
-    }
-    path += QString ("/");
-    //To do
-}*/
 

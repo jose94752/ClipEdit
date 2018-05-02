@@ -30,16 +30,13 @@ FormArrows::FormArrows(QWidget *parent)
     // Set Default values of FormArrows
     //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
-    ui->spinBoxArrowWidthContents->setMinimum(0); //temp set to 0 before 20
-    //ui->spinBoxArrowWidthContents->setMinimumWidth(20);
-    ui->spinBoxArrowWidthContents->setMinimumWidth(50); //Set to 50 Max of Simple Arrow Head
-    //ui->spinBoxArrowWidthContents->setMaximum(500);
-    ui->spinBoxArrowWidthContents->setMaximum(2147483647); //temp max for the tests '2 147 483 647' 32 bits int signed type
-    ui->spinBoxArrowHeightContents->setMinimum(0); //temp set to 0 before 20
-    //ui->spinBoxArrowHeightContents->setMinimumHeight(20);
-    ui->spinBoxArrowHeightContents->setMinimumHeight(50); //Set to 50 Max of Simple Arrow Head
-    //ui->spinBoxArrowHeightContents->setMaximum(500);
-    ui->spinBoxArrowHeightContents->setMaximum(2147483647); //temp max for the tests '2 147 483 647' 32 bits int signed type
+
+    // Interval : 0 to 50 (@José, tu peux définir les bornes en passant par le Designer)
+    ui->spinBoxArrowWidthContents->setMinimum(0);
+    ui->spinBoxArrowWidthContents->setMaximum(50);
+
+    ui->spinBoxArrowHeightContents->setMinimum(0);
+    ui->spinBoxArrowHeightContents->setMaximum(50);
 
     // Fill the Size of the Line Thickness
      for(int i = 1; i < 5; i++)
@@ -211,12 +208,21 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
 //
 // SLOTS
 //
+void FormArrows::fillColorArrowChanged()
+{
+    BeforeFormFillColorArrow = FormFillColorArrow;
+    // SIGNAL emit FormFillColorArrowChanged
+    emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+}
+
+
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
     FormFillColorArrow = color;
     // SIGNAL emit FormFillColorArrowChanged
-    emit FormFillColorArrowChanged(FormFillColorArrow); // This emit is for connect on FormArrows class
+    //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+    emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)

@@ -1,22 +1,39 @@
-#ifndef __DIALOGPREERENCES_H
-#define __DIALOGPREFERENCES_H
+/*
+================================================
+* File:         dialogpreferences.cpp
+* Project:      ClipEdit
+* Creation:     30/04/2018
+* Brief:        Settings dialog
+================================================
+*/
+
+// Includes
+// --------
+
+#include <QDebug>
+#include <QSettings>
+
 #include "dialogpreferences.h"
 #include "ui_dialogpreferences.h"
-#include <qdebug.h>
-#include <qsettings.h>
 
-DialogPreferences::DialogPreferences(QWidget *parent, QString lang) :
+// Constructor, destructor
+// -----------------------
+
+DialogPreferences::DialogPreferences(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogPreferences)
 {
     ui->setupUi(this);
-    ui->comboBox_language->addItem("English","en");
-    ui->comboBox_language->addItem("Français","fr");
-    ui->comboBox_language->addItem("Japanese","jap");
-    ui->comboBox_language->addItem("Oriental Bedloujikistanese","ob");
-    ui->comboBox_language->addItem("Russian","ru");
-    ui->comboBox_language->setCurrentText (lang);
-    //ui->comboBox_language->setCurrentIndex("en");
+
+    ui->comboBoxLanguage->addItem(QIcon(":/icons/icons/lang-en-icon.png"), "English", "en");
+    ui->comboBoxLanguage->addItem(QIcon(":/icons/icons/lang-fr-icon.png"), "Français", "fr");
+    ui->comboBoxLanguage->addItem(QIcon(":/icons/icons/lang-de-icon.png"), "Deutsch", "de");
+
+    // Load from settings
+    QSettings s;
+    QString lang = s.value("Settings/lang", "en").toString();
+    int idx = ui->comboBoxLanguage->findData(lang);
+    ui->comboBoxLanguage->setCurrentIndex(idx);
 }
 
 DialogPreferences::~DialogPreferences()
@@ -24,16 +41,22 @@ DialogPreferences::~DialogPreferences()
     delete ui;
 }
 
-void DialogPreferences::accept () {
-    //QString lang =  ui->comboBox_language->currentData().toString();
-    QString lang =  ui->comboBox_language->currentText();
-    emit signal_language (lang);
-    QDialog::accept ();
+// Slots
+// -----
+
+void DialogPreferences::accept ()
+{
+    QString lang = ui->comboBoxLanguage->currentData().toString();
+
+    // Save in settings
+    QSettings s;
+    s.setValue("Settings/lang", lang);
+
+    emit preferencesChanged();
+    QDialog::accept();
 }
 
-void DialogPreferences::reject () {
-    qDebug () << "DialogPreference : reject\n";
+void DialogPreferences::reject()
+{
     QDialog::reject();
 }
-
-#endif
