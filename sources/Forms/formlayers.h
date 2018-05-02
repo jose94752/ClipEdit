@@ -71,7 +71,7 @@ class FormLayers
         LayerItemModel* m_model;
 
         // Holders
-        qreal m_zvalue;
+        int m_nLabel;
         int m_lineSelected;
         int m_columnSelected;
         BaseGraphicItem * m_itemSelected;

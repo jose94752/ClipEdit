@@ -140,7 +140,7 @@ class MainWindow
 
         // Settings
         void showPreferences();
-        void preferencesChanged();
+        void slot_preferences(QString);
 };
 
 #endif

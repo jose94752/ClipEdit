@@ -36,7 +36,7 @@ class DialogPreferences
 
     signals :
 
-        void preferencesChanged();
+        void preferencesChanged(QString);
 
     private slots :
 

@@ -33,7 +33,7 @@ FormLayers::FormLayers(QWidget* parent)
 {
     ui->setupUi(this);
 
-    m_zvalue = Z_INIT;
+    m_nLabel = 1;
     m_lineSelected = -1;
     m_columnSelected = -1;
     m_scene = NULL;
@@ -127,12 +127,8 @@ void FormLayers::actionUp()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() + Z_INCREMENT + Z_INCREMENT;
-    if (qFabs(zValue) < Z_INCREMENT)
-        return; // zValue++;
+    qreal zValue = m_itemSelected->zValue() + 1.5 * Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
-    if (zValue > m_zvalue)
-        m_zvalue = zValue;
 
     updateLayers();
 }
@@ -144,11 +140,7 @@ void FormLayers::actionDown()
     if (!m_itemSelected)
         return;
 
-    qreal zValue = m_itemSelected->zValue() - Z_INCREMENT;
-
-    if (qFabs(zValue) < Z_INCREMENT)
-        zValue--;
-
+    qreal zValue = m_itemSelected->zValue() - 1.5 * Z_INCREMENT;
     m_itemSelected->setZValue(zValue);
 
     updateLayers();
@@ -186,55 +178,28 @@ void FormLayers::actionDelete()
 
 void FormLayers::updateLayers()
 {
-    bool flNew = false;
-    qreal zValue = Z_INIT;
-
 //    qDebug() << "FormLayers::updateLayers()";
 
     if (!m_scene)
         return;
 
     // ZValue
-//    foreach (QGraphicsItem* it, m_scene->items(Qt::AscendingOrder))
+    qreal zValue = Z_INIT;
     foreach (QGraphicsItem* it, m_scene->items(Qt::DescendingOrder))
     {
        BaseGraphicItem* item = dynamic_cast<BaseGraphicItem*>(it);
 
         if (item)
         {
-            if (qFabs(item->zValue()) < Z_INCREMENT)
-            {
-                if (!flNew)
-                {
-                    m_zvalue = Z_INIT;
-                    flNew = true;
-                }
-                item->setZValue(-(m_zvalue++));
+            item->setZValue(-(zValue++));
 
-                qDebug() << "FormLayers::updateLayers(): force ZValue à: " << item->zValue() << "\n\t" << item;
-            }
-            else
-            {
-                if (flNew) item->setZValue(-(m_zvalue++));
-                else
-                {
-                    if (item->zValue() == zValue)
-                    {
-                        item->setZValue(--zValue);
-                    }
-                    else if(item->zValue() == (zValue - 2 * Z_INCREMENT) )
-                    {
-                        item->setZValue(--zValue);
-                    }
-                    zValue = item->zValue();
-                }
-                qDebug() << item->zValue();
-            }
+            qDebug() << "FormLayers::updateLayers(): force ZValue à: " << item->zValue() << "\n\t" << item;
         }
         else
         {
             item = (BaseGraphicItem*)(it);
-            if (item) item->setZValue(Z_OUT_OF);
+            if (item)
+                item->setZValue(Z_OUT_OF);
         }
     }
 
@@ -248,14 +213,6 @@ void FormLayers::updateLayers()
         {
             int row = ui->tableWidgetLayers->rowCount()+1;
             ui->tableWidgetLayers->setRowCount(row);
-
-//            // ZValue
-//            if (qFabs(item->zValue()) < Z_INCREMENT)
-//            {
-//                item->setZValue(m_zvalue++);
-
-//                qDebug() << "FormLayers::updateLayers(): force ZValue\n\t" << item->zValue() << item;
-//            }
 
             // 1ere colonne
             if (item->isVisible())
@@ -345,7 +302,7 @@ void FormLayers::updateLayers()
                         labelItem = "Other";
                     } break;
                 }
-                item->setData(nuData, labelItem+" #"+QString::number(row));
+                item->setData(nuData, labelItem+" #"+QString::number(m_nLabel++));
             }
 
             // item->getName())); ???
