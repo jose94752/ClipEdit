@@ -26,11 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-CLASS_DIRECTORY     = Classes
-COMPONENT_DIRECTORY = Classes
-ITEM_DIRECTORY      = Items
-FORM_DIRECTORY      = Forms
-RESOURCE_DIRECTORY  = resources
+CLASS_DIRECTORY    = Classes
+ITEM_DIRECTORY     = Items
+FORM_DIRECTORY     = Forms
+RESOURCE_DIRECTORY = resources
 
 
 SOURCES += \
@@ -48,8 +47,9 @@ SOURCES += \
     $${FORM_DIRECTORY}/formtextboxes.cpp \
     $${FORM_DIRECTORY}/resizescenedialog.cpp \
     $${CLASS_DIRECTORY}/colorbutton.cpp \
+    $${CLASS_DIRECTORY}/layeritemdelegate.cpp \
+    $${CLASS_DIRECTORY}/layeritemmodel.cpp \
     $${CLASS_DIRECTORY}/save.cpp \
-    $${COMPONENT_DIRECTORY}/cpn_img_button.cpp \
     $${ITEM_DIRECTORY}/basegraphicitem.cpp \
     $${ITEM_DIRECTORY}/arrowsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/graphsgraphicsitem.cpp \
@@ -59,8 +59,6 @@ SOURCES += \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
     graphicsview.cpp \
-    Classes/layeritemdelegate.cpp \
-    Classes/layeritemmodel.cpp \
     dialogpreferences.cpp
 
 
@@ -78,8 +76,9 @@ HEADERS += \
     $${FORM_DIRECTORY}/formtextboxes.h \
     $${FORM_DIRECTORY}/resizescenedialog.h \
     $${CLASS_DIRECTORY}/colorbutton.h \
+    $${CLASS_DIRECTORY}/layeritemdelegate.h \
+    $${CLASS_DIRECTORY}/layeritemmodel.h \
     $${CLASS_DIRECTORY}/save.h \
-    $${COMPONENT_DIRECTORY}/cpn_img_button.h \
     $${ITEM_DIRECTORY}/basegraphicitem.h \
     $${ITEM_DIRECTORY}/arrowsgraphicsitem.h \
     $${ITEM_DIRECTORY}/graphsgraphicsitem.h \
@@ -89,8 +88,6 @@ HEADERS += \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
     $${ITEM_DIRECTORY}/textboxitem.h \
     graphicsview.h \
-    Classes/layeritemdelegate.h \
-    Classes/layeritemmodel.h \
     dialogpreferences.h
 
 
@@ -99,6 +96,7 @@ FORMS += \
     $${FORM_DIRECTORY}/dialogsave.ui \
     $${FORM_DIRECTORY}/formarrows.ui \
     $${FORM_DIRECTORY}/formcharts.ui \
+    $${FORM_DIRECTORY}/formcliparts.ui \
     $${FORM_DIRECTORY}/formlayers.ui \
     $${FORM_DIRECTORY}/formnumberedbullets.ui \
     $${FORM_DIRECTORY}/formpictures.ui \
@@ -112,6 +110,6 @@ RESOURCES += \
     $${RESOURCE_DIRECTORY}/resources.qrc
 
 DISTFILES += \
-Bugs.txt
+    Bugs.txt
 
 TRANSLATIONS = numberedbulletgraphicitem_fr.ts
