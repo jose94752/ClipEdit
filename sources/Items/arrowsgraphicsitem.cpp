@@ -65,8 +65,8 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     ItemOutlineColorArrow = new QColor();
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
 
-    TestFillColor = new QColor();
-    //nameTestFillColor = TestFillColor->name();
+    TestFillColor = new QColor(m_formArrows->getFormFillColorArrow());
+    nameTestFillColor = TestFillColor->name();
 
     //qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
@@ -74,6 +74,33 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 
     setPos(0,0);
+
+    //Test zone
+    // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
+    //qDebug() << "Before setColorFill FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+    //m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
+
+    // Signal recept
+    m_formArrows->FormFillColorArrowChanged(*TestFillColor);
+
+    nameTestFillColor = TestFillColor->name();
+    qDebug() << "nameTestFillColor = " << nameTestFillColor;
+
+    QString nameItemFillColorArrow = ItemFillColorArrow->name();
+    qDebug() << "nameItemFillColorArrow =" << nameItemFillColorArrow;
+
+    if (nameItemFillColorArrow != nameTestFillColor)
+      {
+        qDebug() << "Colors: nameItemFillColorArrow != nameTestFillColor";
+        setColorFill(m_formArrows->getFormFillColorArrow());
+      }
+    else
+      {
+          qDebug() << "Colors *ItemFillColorArrow == *TestFillColor";
+      }
+    //qDebug() << "After setColorFill FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+
+    //End Test zone
 
 }
 
@@ -180,33 +207,6 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
     painter->restore();
-
-
-    //Test zone
-    // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
-    //qDebug() << "Before setColorFill FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
-    //m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
-
-    m_formArrows->FormFillColorArrowChanged(*TestFillColor);
-    nameTestFillColor = TestFillColor->name();
-    qDebug() << "nameTestFillColor = " << nameTestFillColor;
-
-    QString nameItemFillColorArrow = ItemFillColorArrow->name();
-    qDebug() << "nameItemFillColorArrow =" << nameItemFillColorArrow;
-
-    if (nameItemFillColorArrow != nameTestFillColor)
-      {
-        qDebug() << "Colors: nameItemFillColorArrow != nameTestFillColor";
-        setColorFill(m_formArrows->getFormFillColorArrow());
-      }
-    else
-      {
-          qDebug() << "Colors *ItemFillColorArrow == *TestFillColor";
-      }
-    //qDebug() << "After setColorFill FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
-
-    //End Test zone
-
 
     BaseGraphicItem::paint(painter,option,widget);
 }
