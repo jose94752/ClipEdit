@@ -15,6 +15,7 @@
 #include <QPen>
 #include <QPainter>
 #include <QColor>
+#include <QString>
 
 //#include <QObject> // <- For the tests disable if it is not needed at least
 //#include <QColorDialog>
@@ -59,56 +60,15 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     // If you don't do you will have segmentation fault bug
     //ItemFillColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
     ItemFillColorArrow = new QColor(m_formArrows->getFormFillColorArrow());
-    qDebug() << "Item Fill Color Arrow  = " << *ItemFillColorArrow;
+    //qDebug() << "Item Fill Color Arrow  = " << *ItemFillColorArrow;
     //ItemOutlineColorArrow = new QColor(); // for tests and the use isValid() function of QColor class
     ItemOutlineColorArrow = new QColor();
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
-    qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
-    /*
-    //    In Qt5, you use QObject::connect to connect signal with slot:
-    //*/
-    //    /*
-    //       QMetaObject::Connection QObject::connect(
-    //        const QObject *sender,
-    //        const char *signal,
-    //        const char *method,
-    //        Qt::ConnectionType type = Qt::AutoConnection) const;
-    //     */
-    /*
-    // Example:
-    //    #include <QApplication>
-    //    #include <QDebug>
-    //    #include <QLineEdit>
-    //
-    //    int main(int argc, char *argv[]) {
-    //        QApplication app(argc, argv);
-    //        QLineEdit lnedit;
-    //
-    //        // connect signal `QLineEdit::textChanged` with slot `lambda function`
-    //        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
-    //
-    //        lnedit.show();
-    //        return app.exec();
-    //    }
-    */
-    //Tests
-    /*
-    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
-    //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
 
-    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
-    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(), [&]() {&FormArrows::getFormFillColorArrow();});
-    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    TestFillColor = new QColor();
+    nameTestFillColor = TestFillColor->name();
 
-    //QColorDialog::currentColorChanged(QColor)
-    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
-    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {m_formArrows->getFormFillColorArrow(QColor);});
-
-    //connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
-    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
-    //QObject::connect(&m_formArrows->FormFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {setColorFill(m_formArrows->getFormFillColorArrow(QColor));});
-    */
-
+    //qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
@@ -231,11 +191,27 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 
     //Test zone
     // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
-    qDebug() << "Before FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
-    m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
-    qDebug() << "After FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+    //qDebug() << "Before setColorFill FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
+    //m_formArrows->FormFillColorArrowChanged(*ItemFillColorArrow);
+
+    m_formArrows->FormFillColorArrowChanged(*TestFillColor);
+    nameTestFillColor = TestFillColor->name();
+    qDebug() << "nameTestFillColor = " << nameTestFillColor;
+    QString nameItemFillColorArrow = ItemFillColorArrow->name();
+    qDebug() << "nameItemFillColorArrow =" << nameItemFillColorArrow;
+    if (nameItemFillColorArrow != nameTestFillColor)
+      {
+        qDebug() << "Colors: nameItemFillColorArrow != nameTestFillColor";
+        setColorFill(m_formArrows->getFormFillColorArrow());
+      }
+    else
+      {
+          qDebug() << "Colors *ItemFillColorArrow == *TestFillColor";
+      }
+    //qDebug() << "After setColorFill FormFillColorArrowChanged() the *ItemFillColorArrow = " << *ItemFillColorArrow;
 
     //End Test zone
+
 
     BaseGraphicItem::paint(painter,option,widget);
 }
@@ -307,6 +283,8 @@ void ArrowsGraphicsItem::updateArrowPosition()
     //Example
     //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
     //setLine(line);
+
+    update();
 }
 
 FormArrows* ArrowsGraphicsItem::getFormArrow()
