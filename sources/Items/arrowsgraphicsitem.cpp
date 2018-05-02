@@ -17,6 +17,7 @@
 #include <QColor>
 
 //#include <QObject> // <- For the tests disable if it is not needed at least
+#include <QColorDialog>
 
 #include <QtMath>
 
@@ -64,33 +65,44 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     setColorOutline(m_formArrows->getFormOutlineColorArrow());
     qDebug() << "Item Outline Color Arrow = " << *ItemOutlineColorArrow;
 
-//    In Qt5, you use QObject::connect to connect signal with slot:
-//
-//    /*
-//       QMetaObject::Connection QObject::connect(
-//        const QObject *sender,
-//        const char *signal,
-//        const char *method,
-//        Qt::ConnectionType type = Qt::AutoConnection) const;
-//     */
-//
-// Example:
-//    #include <QApplication>
-//    #include <QDebug>
-//    #include <QLineEdit>
-//
-//    int main(int argc, char *argv[]) {
-//        QApplication app(argc, argv);
-//        QLineEdit lnedit;
-//
-//        // connect signal `QLineEdit::textChanged` with slot `lambda function`
-//        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
-//
-//        lnedit.show();
-//        return app.exec();
-//    }
+    //    In Qt5, you use QObject::connect to connect signal with slot:
+    //
+    //    /*
+    //       QMetaObject::Connection QObject::connect(
+    //        const QObject *sender,
+    //        const char *signal,
+    //        const char *method,
+    //        Qt::ConnectionType type = Qt::AutoConnection) const;
+    //     */
+    //
+    // Example:
+    //    #include <QApplication>
+    //    #include <QDebug>
+    //    #include <QLineEdit>
+    //
+    //    int main(int argc, char *argv[]) {
+    //        QApplication app(argc, argv);
+    //        QLineEdit lnedit;
+    //
+    //        // connect signal `QLineEdit::textChanged` with slot `lambda function`
+    //        QObject::connect(&lnedit, &QLineEdit::textChanged, [&](){qDebug()<<lnedit.text()<<endl;});
+    //
+    //        lnedit.show();
+    //        return app.exec();
+    //    }
+
+    //Tests
     //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){qDebug() << &ItemFillColorArrow = m_formArrows->getFormOutlineColorArrow();});
     //QObject::connect(&ItemFillColorArrow, &FormArrows::FormFillColorArrowChanged(QColor), [&](){&FormArrows::getFormFillColorArrow(QColor);});
+
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(), [&]() {&FormArrows::getFormFillColorArrow();});
+    //QObject::connect(&ItemFillColorArrow,  &FormArrows::FormFillColorArrowChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+
+    //QColorDialog::currentColorChanged(QColor)
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {&FormArrows::getFormFillColorArrow(QColor);});
+    //QObject::connect(&ItemFillColorArrow, QColorDialog::currentColorChanged(QColor), [&]() {m_formArrows->getFormFillColorArrow(QColor);});
+
 
     setRect(QRectF(-50, -50, 100, 100)); // Temp for test
 
@@ -382,21 +394,3 @@ void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
     settings->setValue(path+"Color",m_Color.name());*/
 }
 
- // Test
-/*
-void ArrowsGraphicsItem::AGIfillColorArrowChanged(const QColor& color)
-=======
-//To do redefine virtual method inherit from BaseGraphicItem class
-// Get external parameters for an ArrowsGraphicsItem
-void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIndex)
->>>>>>> 9debfe398666098081545a71041e87faffa725af
-{
-     //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
-    QString path; // = "Items";
-    {
-        path = "item" + QString::number(itemIndex);
-    }
-    path += QString ("/");
-    //To do
-}
-*/

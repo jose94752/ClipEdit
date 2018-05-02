@@ -123,13 +123,14 @@ private:
                             int SizeHeadTypeChoice);
 
     public slots:
-
+        void fillColorArrowChanged();
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
         void radioButtonWithoutAnchorPointMethod(bool);
 
     signals:
 
+        void FormFillColorArrowChanged();
         void FormFillColorArrowChanged(QColor newFormFillColorArrow);
         void FormOutlineColorArrowChanged(QColor newFormOutlineColorArrow);
 

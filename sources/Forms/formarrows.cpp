@@ -211,12 +211,21 @@ void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bo
 //
 // SLOTS
 //
+void FormArrows::fillColorArrowChanged()
+{
+    BeforeFormFillColorArrow = FormFillColorArrow;
+    // SIGNAL emit FormFillColorArrowChanged
+    emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+}
+
+
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
     BeforeFormFillColorArrow = FormFillColorArrow;
     FormFillColorArrow = color;
     // SIGNAL emit FormFillColorArrowChanged
-    emit FormFillColorArrowChanged(FormFillColorArrow); // This emit is for connect on FormArrows class
+    //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+    emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)
