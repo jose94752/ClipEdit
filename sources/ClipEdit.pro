@@ -114,4 +114,7 @@ RESOURCES += \
 DISTFILES += \
 Bugs.txt
 
-TRANSLATIONS = numberedbulletgraphicitem_fr.ts
+TRANSLATIONS += \
+    languages/clipedit_en.ts \
+    languages/clipedit_fr.ts \
+    languages/clipedit_de.ts

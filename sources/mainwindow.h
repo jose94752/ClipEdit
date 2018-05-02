@@ -17,6 +17,7 @@
 #include <QMap>
 #include <QGraphicsScene>
 #include <QRectF>
+#include <QTranslator>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -89,7 +90,8 @@ class MainWindow
 
         QGraphicsRectItem *m_borderSceneItem;
 
-        //int nbSceneElts;
+        // App translator
+        QTranslator m_translator;
 
         // Zoom
         QSpinBox* m_spinBoxZoom;
