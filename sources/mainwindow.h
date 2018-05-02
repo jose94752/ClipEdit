@@ -17,6 +17,7 @@
 #include <QMap>
 #include <QGraphicsScene>
 #include <QRectF>
+#include <QTranslator>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -55,6 +56,9 @@ class MainWindow
 
     private:
 
+   int  m_height ;
+   int  m_width ;
+
         // Buttons Ids
         enum e_BUTTON_IDS {
             BUTTON_ID_ARROW = 0,
@@ -89,13 +93,12 @@ class MainWindow
 
         QGraphicsRectItem *m_borderSceneItem;
 
-        //int nbSceneElts;
+        // App translator
+        QTranslator m_translator;
 
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
-        //Preferences
-        DialogPreferences* m_dialogPreferences;
         // Building
         void init();
         void buildMenu();
@@ -134,9 +137,10 @@ class MainWindow
 
         // Layers
         void slotLayers();
-        void preferences ();
 
-        void slot_language (QString lang);
+        // Settings
+        void showPreferences();
+        void preferencesChanged();
 };
 
 #endif

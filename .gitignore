@@ -1,7 +1,7 @@
 *.swp
 *.pro.user
 *.pro.user.*
-Build*/
+build*/
 *.a
 *.pdf
 *.odt
