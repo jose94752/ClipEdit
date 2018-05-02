@@ -14,6 +14,9 @@
 // --------
 
 #include <QWidget>
+
+//add
+#include<QTimer>
 #include<QPixmap>
 #include<QGroupBox>
 #include<QSpinBox>
@@ -51,10 +54,6 @@ class FormScreenshots :   public BaseForm
     Q_OBJECT
 
 public:
-///
-/// \brief The TypeCapture enum : enum with the type of capture
-///
-    enum TypeCapture { Desktop, Area };
 
  ///
  /// \brief FormScreenshots : constructor
@@ -87,6 +86,9 @@ protected:
 
 public slots:
 
+    void timeFunction();
+    void on_changeTime();
+
     void choose_screenshot();
 
 private:
@@ -94,11 +96,6 @@ private:
         Ui::FormScreenshots *ui;
         QGraphicsScene *m_scene;
 
-
-        ///
-        /// \brief m_typecapture Desktop and window.
-        ///
-        TypeCapture m_typecapture;
         ///
         /// \brief m_pixmap : the pixmap of the window screenshoted.
         ///
@@ -133,11 +130,11 @@ private:
         /// \brief m_region The QRect class defines a rectangle
         ///  in the chosen region  in the plane using integer precision.
         ///
-        QRect m_area;
+        QRectF m_area;
         ///
         /// \brief m_captureTimer is an instance of class provides repetitive and single-shot timers.
         ///
-        QTimer  *m_captureTimer;
+        QTimer  *m_timer;
 
         ///
         /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
@@ -159,7 +156,7 @@ private:
         /// \brief CaptureDesktop : this method take all Desktop
         ///
         void CaptureDesktop();
-        void CaptureArea(bool val, QRect a);
+        void CaptureArea(bool val, QRectF a);
         void updatehide();
 
      signals:

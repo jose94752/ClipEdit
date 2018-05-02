@@ -56,6 +56,9 @@ class MainWindow
 
     private:
 
+   int  m_height ;
+   int  m_width ;
+
         // Buttons Ids
         enum e_BUTTON_IDS {
             BUTTON_ID_ARROW = 0,

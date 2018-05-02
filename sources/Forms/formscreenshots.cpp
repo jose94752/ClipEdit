@@ -27,10 +27,12 @@
 #include<QDebug>
 #include<exception>
 #include<QRect>
+#include<QRectF>
 #include<QPointF>
 #include<QGraphicsView>
 #include<QDir>
 #include<QFileDialog>
+#include<QGraphicsScene>
 
 
 
@@ -42,37 +44,42 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 {
     ui->setupUi(this);
 
+
     //THis makes Qt delete this widget when the widget has accepted the close even.
-    this->setAttribute(Qt::WA_DeleteOnClose);
+   // this->setAttribute(Qt::WA_DeleteOnClose);
 
     //Some of these flags depend on whether the underlying window manager supports them
     //Produces a borderless window. The user cannot move or resize a borderless
     //window via the window system.
-    setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
+    //setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
 
     //Indicates that the widget has no background, i.e. when the widget receives paint events,
     //the background is not automatically repainted.
-     setAttribute(Qt::WA_NoSystemBackground, true);
+    // setAttribute(Qt::WA_NoSystemBackground, true);
 
     //Indicates that the widget should have a translucent background,
     //i.e., any non-opaque regions of the widgets will be translucent
     //because the widget will have an alpha channel.
     //Setting this flag causes WA_NoSystemBackground to be set
-    setAttribute(Qt::WA_TranslucentBackground);
+   // setAttribute(Qt::WA_TranslucentBackground);
 
     //Shows the widget in full-screen mode.
-     //this->showFullScreen();
+   //  this->showFullScreen();
 
     //put here the signal that point to the mainwindow class
     //create a pixmap
 
-    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT(choose_screenshot()));
+    //open a directory
+   // connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT);
+
+    //open a directory
+    //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT(choose_screenshot()));
 
  //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
  //           this, SLOT(CaptureRegion()));
 
-    connect(ui->radioButtonWholecapture, SIGNAL(clicked(bool)),
-            this, SLOT(CaptureDesktop()));
+    connect(ui->radioButtonDeskcapture, SIGNAL(clicked(bool)),
+            this, SLOT(snapshot()));
 
 
 
@@ -112,7 +119,7 @@ void FormScreenshots::CaptureDesktop()
 }
 
 //2
-void FormScreenshots::CaptureArea(bool val, QRect area)
+void FormScreenshots::CaptureArea(bool val, QRectF area)
 {
     this->close();
     if (val)
@@ -120,24 +127,44 @@ void FormScreenshots::CaptureArea(bool val, QRect area)
      m_area=area;
      QTimer::singleShot(300,this,SLOT(snapshot()));
     }
+
 }
 
 //3
 void FormScreenshots::snapshot()
 {
 /**
-    //step1
+    //step1 : OK but not local screen shot.
     static int count = 0;
 
-    QPixmap p = QPixmap::grabWindow(QApplication::desktop()->winId());
-    p.save(QString("/home/toumi/doCapture/screenshot%1.png").arg(count));
+   if(ui->radioButtonDeskcapture->isChecked() ){
+
+
+    connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
+                                                        this, &FormScreenshots::snapshot) ;
+
+    QPixmap pix;
+    pix = QPixmap::grabWindow(QApplication::desktop()->winId());
+
+    pix.save(QString("/home/formation/doCapture/screenshot%1.png").arg(count));
     count++;
-    show();
 
     //qApp is global pointer referring to the unique application object.
-    QTimer::singleShot(300, qApp, SLOT(quit())); // close the app in 0,3 secs
-
+   // QTimer::singleShot(100, qApp, SLOT(quit())); // close the app in 0,3 secs
+ }
 */
+
+/**
+    //new test
+    if(ui->radioButtonDeskcapture->isChecked()) {
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QPixmap qpix = screen->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
+                  QApplication::desktop()->height());
+    qpix.save("/home/formation/doCapture/Hello.png");
+    this->show();
+    }
+*/
+
  /**
     //step2
     if (ui->radioButtonWholecapture->isChecked()) m_typecapture=Desktop;
@@ -150,27 +177,10 @@ void FormScreenshots::snapshot()
          connect(this ,SIGNAL(dimensionsMade(bool,QRect)),this,SLOT(CaptureArea(bool,QRect)));
          this->show();
         }
+*/
 
-    //step3
-    QScreen *screen = QGuiApplication::primaryScreen();
-    if (const QWindow *window = windowHandle())
-         screen = window->screen();
-    if (!screen)
-           return;
-    this->hide();
-    m_pixmap = screen->grabWindow(0);
-    QRect rec(m_region.x()+1,m_region.y()+1,m_region.width()-1,m_region.height()-1);
-    QPixmap pix=m_pixmap.copy(rec);
-    m_pixmap=pix;
-    if ( ui->checkBoxHideAncestor->isChecked()) emit showAncestors();
-    DialogScreenShotCompose *w= new DialogScreenShotCompose(this);
-    connect (w,SIGNAL(InsertImageText(QString)),this,SIGNAL(InsertImageText(QString)));
-    w->setBackground(m_pixmap);
-    w->exec();
 
-  */
-
-  //
+  //step4
     QScreen *m_screen = QGuiApplication::primaryScreen();
     if (const QWindow *window = windowHandle())
          m_screen = window->screen();
@@ -189,17 +199,10 @@ void FormScreenshots::snapshot()
     FormScreenshots *w= new FormScreenshots(this);
 
 
-    connect (w,SIGNAL(InsertImageText(QPixmap)),this,SIGNAL(InsertImageText(QPixmap)));
-    w->setBackground(m_pix);
-    w->show();
+    connect (this,SIGNAL(setBackground(QPixmap)),this,SIGNAL(setBackground(QPixmap)));
+    this->setBackground(m_pix);
+    this->show();
 
-/**
-    //new test
-    QScreen *QSCREEN = QGuiApplication::primaryScreen();
-    QPixmap qpix = QSCREEN->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
-                  QApplication::desktop()->height());
-    qpix.save("/home/formation/doCapture/Hello.png");
- */
 }
 
 
@@ -213,11 +216,18 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
         qDebug() << "left clicked";
 
 
-        x=m_point->x();
+        x=m_point0->x();
+        y=m_point0->y();
         qDebug()<<x;
-        y= m_point->y();
+
+
+        x=m_point1->x();
+        y=m_point1->y();
         qDebug()<<y;
-        qDebug()<<m_point;
+
+         //QRect QRect::normalized() const : rectangle that has a non-negative width and height.
+        QRectF m_area;
+        m_area=QRectF(m_point0->x(),m_point0->y(),m_point1->x()-m_point0->x(),m_point1->y()-m_point0->y()).normalized();
 
         //
 //        QScreen *screen = QGuiApplication::primaryScreen();
@@ -269,10 +279,19 @@ void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
     //    }
 }
 
-void FormScreenshots::choose_screenshot()
+void FormScreenshots::timeFunction()
 {
 
 
+}
+
+void FormScreenshots::on_changeTime()
+{
+
+}
+
+void FormScreenshots::choose_screenshot()
+{
     QString homepath = QDir::homePath();
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open ClipEdit Project"), homepath, tr("ClipEdit Files (*.png)"));
@@ -282,7 +301,6 @@ void FormScreenshots::choose_screenshot()
     QPixmap pix (fileName);
 
     emit setBackground(pix);
-
 }
 
 void FormScreenshots::updatehide()

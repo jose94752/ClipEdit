@@ -366,38 +366,27 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
     /*QPointF *m_StartPositionItem;
     QPointF *m_EndPositionItem;*/
     settings->setValue(path+"Color",m_Color.name());
-    /*QColor *ItemOutlineColorArrow;
-    QColor *ItemFillColorArrow;*/
+    settings->setValue(path+"ItemOutlineColorArrow",*ItemOutlineColorArrow);
+    settings->setValue(path+"ItemFillColorArrow",*ItemFillColorArrow);
     //settings->setValue(path+"ArrowHeadStart",ArrowHeadStart);
     //settings->setValue(path+"ArrowHeadStart",ArrowHeadEnd);
 
     //FormArrows *m_formArrows;
 }
 
-//To do redefine virtual method inherit from BaseGraphicItem class
-// Set external parameters for an ArrowsGraphicsItem
-void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
+void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
 {
-    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
-    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
-    //éventuellement fonction de rafraichissement graphique
-//    QString path; // = "Items";
-//    {
-//        path = "item" + QString::number(itemIndex);
-//    }
-//    path += QString ("/");
-    //To do
-
-
-    /*QString path="item"+QString::number(itemIdex)+"/";
-    settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
-    settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
-    settings->setValue(path+"TwoAnchorPointst",m_TwoAnchorPoints);
-    settings->setValue(path+"arrowHeadSize",arrowHeadSize);
-    settings->setValue(path+"ArrowWidth",m_ArrowWidth);
-    settings->setValue(path+"ArrowHeight",m_ArrowHeight);
-    settings->setValue(path+"LineThickness",m_LineThickness);
-    settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
-    settings->setValue(path+"Color",m_Color.name());*/
+    QString path="item"+QString::number(itemIdex)+"/";
+    m_WithoutAnchorPoint=settings->value(path+"WithoutAnchorPoint").toBool();
+    m_OneAnchorPoint=settings->value(path+"OneAnchorPoint").toBool();
+    m_TwoAnchorPoints=settings->value(path+"TwoAnchorPointst").toBool();
+    arrowHeadSize=settings->value(path+"arrowHeadSize").toInt();
+    m_ArrowWidth=settings->value(path+"ArrowWidth").toInt();
+    m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
+    m_LineThickness=settings->value(path+"LineThickness").toInt();
+    m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
+    m_Color.setNamedColor(settings->value(path+"Color").toString());
+    ItemOutlineColorArrow->setNamedColor(settings->value(path+"ItemOutlineColorArrow").toString());
+    ItemFillColorArrow->setNamedColor(settings->value(path+"ItemFillColorArrow").toString());
 }
 

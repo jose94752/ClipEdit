@@ -18,9 +18,6 @@
 #include <QDesktopWidget>
 
 #include <QMessageBox>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QAreaSeries>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -36,8 +33,6 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
-
-QT_CHARTS_USE_NAMESPACE
 
 // Constructor, destructor
 // -----------------------
@@ -65,6 +60,9 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
+    //new signals
+    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
+    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
 }
 
 
@@ -368,23 +366,6 @@ void MainWindow::slotGraphs( )
      }
 }
 
-/*
-void MainWindow::slotGraphs(const GraphsInfo &infos)
-{
-
-    //do not add graphs if no points
-    int nbPoints = infos.m_Arcs.size();
-    if( nbPoints > 0 )
-    {
-        qDebug() << "added graph mainWindow Slot Graphs";
-
-        GraphsGraphicsItem *g = new GraphsGraphicsItem();
-        g->setInfos(infos);
-
-        m_scene.addItem(g);
-     }
-}
-*/
 
 ///
 /// \brief MainWindow::slotArrowsGraphicsItem
@@ -412,8 +393,15 @@ void MainWindow::slotArrowsGraphicsItem()
 
 void MainWindow::setBackground(const QPixmap& pix)
 {
-    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem (pix);
+     //Get screen background.
+    qDebug () << "msg from the mainWindow slot of the Screenshot";
+
+    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
     m_scene.addItem(sc);
+
+    m_height=pix.height();
+    m_width=pix.width();
+    this->adjustSize();
 }
 
 void MainWindow::itemSelected()
