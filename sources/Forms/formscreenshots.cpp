@@ -119,9 +119,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //connect pour tempo: option
 
 
-
-
-
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(close()));
 

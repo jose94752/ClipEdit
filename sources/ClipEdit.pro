@@ -112,6 +112,6 @@ DISTFILES += \
     Bugs.txt
 
 TRANSLATIONS += \
-    languages/clipedit_en.ts \
-    languages/clipedit_fr.ts \
-    languages/clipedit_de.ts
+    $${RESOURCE_DIRECTORY}/lang/clipedit_en.ts \
+    $${RESOURCE_DIRECTORY}/lang/clipedit_fr.ts \
+    $${RESOURCE_DIRECTORY}/lang/clipedit_de.ts
