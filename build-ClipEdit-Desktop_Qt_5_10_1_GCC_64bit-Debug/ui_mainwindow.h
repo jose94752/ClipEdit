@@ -222,6 +222,8 @@ public:
         menufile->addAction(actionSaveAs);
         menufile->addAction(actionExportAs);
         menufile->addSeparator();
+        menufile->addAction(actionPreferences);
+        menufile->addSeparator();
         menufile->addAction(actionQuit);
         menuHelp->addAction(actionAbout);
         menuEdit->addAction(actionResize);
@@ -234,7 +236,6 @@ public:
         menuTools->addSeparator();
         menuTools->addAction(actionLayers);
         menuTools->addSeparator();
-        menuTools->addAction(actionPreferences);
         menuInsert->addAction(actionArrow);
         menuInsert->addAction(actionChart);
         menuInsert->addAction(actionClipart);

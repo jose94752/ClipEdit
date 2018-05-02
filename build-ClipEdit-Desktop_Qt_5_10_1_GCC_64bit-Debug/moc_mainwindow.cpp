@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[22];
-    char stringdata0[251];
+    QByteArrayData data[21];
+    char stringdata0[255];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,9 +50,8 @@ QT_MOC_LITERAL(15, 178, 13), // "setBackground"
 QT_MOC_LITERAL(16, 192, 3), // "pix"
 QT_MOC_LITERAL(17, 196, 12), // "itemSelected"
 QT_MOC_LITERAL(18, 209, 10), // "slotLayers"
-QT_MOC_LITERAL(19, 220, 11), // "preferences"
-QT_MOC_LITERAL(20, 232, 13), // "slot_language"
-QT_MOC_LITERAL(21, 246, 4) // "lang"
+QT_MOC_LITERAL(19, 220, 15), // "showPreferences"
+QT_MOC_LITERAL(20, 236, 18) // "preferencesChanged"
 
     },
     "MainWindow\0save\0\0saveAs\0openFile\0"
@@ -60,8 +59,8 @@ QT_MOC_LITERAL(21, 246, 4) // "lang"
     "slotNew\0showAboutDialog\0slotNumberedBullets\0"
     "slotTextBoxes\0slotTextPicture\0slotGraphs\0"
     "slotArrowsGraphicsItem\0setBackground\0"
-    "pix\0itemSelected\0slotLayers\0preferences\0"
-    "slot_language\0lang"
+    "pix\0itemSelected\0slotLayers\0showPreferences\0"
+    "preferencesChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -96,7 +95,7 @@ static const uint qt_meta_data_MainWindow[] = {
       17,    0,  134,    2, 0x08 /* Private */,
       18,    0,  135,    2, 0x08 /* Private */,
       19,    0,  136,    2, 0x08 /* Private */,
-      20,    1,  137,    2, 0x08 /* Private */,
+      20,    0,  137,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Bool,    2,
@@ -116,7 +115,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   21,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -143,8 +142,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 13: _t->setBackground((*reinterpret_cast< const QPixmap(*)>(_a[1]))); break;
         case 14: _t->itemSelected(); break;
         case 15: _t->slotLayers(); break;
-        case 16: _t->preferences(); break;
-        case 17: _t->slot_language((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 16: _t->showPreferences(); break;
+        case 17: _t->preferencesChanged(); break;
         default: ;
         }
     }

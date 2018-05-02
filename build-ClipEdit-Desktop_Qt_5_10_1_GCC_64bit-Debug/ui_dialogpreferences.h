@@ -16,7 +16,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QVBoxLayout>
@@ -27,45 +27,39 @@ class Ui_DialogPreferences
 {
 public:
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_2;
-    QHBoxLayout *horizontalLayout;
+    QFormLayout *formLayout;
     QLabel *label;
-    QComboBox *comboBox_language;
+    QComboBox *comboBoxLanguage;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DialogPreferences)
     {
         if (DialogPreferences->objectName().isEmpty())
             DialogPreferences->setObjectName(QStringLiteral("DialogPreferences"));
-        DialogPreferences->resize(400, 300);
+        DialogPreferences->resize(187, 76);
         verticalLayout = new QVBoxLayout(DialogPreferences);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        formLayout = new QFormLayout();
+        formLayout->setObjectName(QStringLiteral("formLayout"));
         label = new QLabel(DialogPreferences);
         label->setObjectName(QStringLiteral("label"));
 
-        horizontalLayout->addWidget(label);
+        formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
-        comboBox_language = new QComboBox(DialogPreferences);
-        comboBox_language->setObjectName(QStringLiteral("comboBox_language"));
+        comboBoxLanguage = new QComboBox(DialogPreferences);
+        comboBoxLanguage->setObjectName(QStringLiteral("comboBoxLanguage"));
 
-        horizontalLayout->addWidget(comboBox_language);
+        formLayout->setWidget(0, QFormLayout::FieldRole, comboBoxLanguage);
 
 
-        horizontalLayout_2->addLayout(horizontalLayout);
+        verticalLayout->addLayout(formLayout);
 
         buttonBox = new QDialogButtonBox(DialogPreferences);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setOrientation(Qt::Vertical);
+        buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
-        horizontalLayout_2->addWidget(buttonBox);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addWidget(buttonBox);
 
 
         retranslateUi(DialogPreferences);
@@ -77,9 +71,9 @@ public:
 
     void retranslateUi(QDialog *DialogPreferences)
     {
-        DialogPreferences->setWindowTitle(QApplication::translate("DialogPreferences", "Dialog", nullptr));
+        DialogPreferences->setWindowTitle(QApplication::translate("DialogPreferences", "Preferences", nullptr));
         label->setText(QApplication::translate("DialogPreferences", "Language", nullptr));
-        comboBox_language->setCurrentText(QString());
+        comboBoxLanguage->setCurrentText(QString());
     } // retranslateUi
 
 };

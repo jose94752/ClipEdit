@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormScreenshots_t {
-    QByteArrayData data[16];
-    char stringdata0[182];
+    QByteArrayData data[15];
+    char stringdata0[178];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,22 +34,21 @@ static const qt_meta_stringdata_FormScreenshots_t qt_meta_stringdata_FormScreens
 QT_MOC_LITERAL(0, 0, 15), // "FormScreenshots"
 QT_MOC_LITERAL(1, 16, 13), // "setBackground"
 QT_MOC_LITERAL(2, 30, 0), // ""
-QT_MOC_LITERAL(3, 31, 3), // "pix"
-QT_MOC_LITERAL(4, 35, 14), // "dimensionsMade"
-QT_MOC_LITERAL(5, 50, 15), // "mousePressEvent"
-QT_MOC_LITERAL(6, 66, 17), // "mouseReleaseEvent"
-QT_MOC_LITERAL(7, 84, 12), // "timeFunction"
-QT_MOC_LITERAL(8, 97, 13), // "on_changeTime"
-QT_MOC_LITERAL(9, 111, 17), // "choose_screenshot"
-QT_MOC_LITERAL(10, 129, 8), // "snapshot"
-QT_MOC_LITERAL(11, 138, 14), // "CaptureDesktop"
-QT_MOC_LITERAL(12, 153, 11), // "CaptureArea"
-QT_MOC_LITERAL(13, 165, 3), // "val"
-QT_MOC_LITERAL(14, 169, 1), // "a"
-QT_MOC_LITERAL(15, 171, 10) // "updatehide"
+QT_MOC_LITERAL(3, 31, 14), // "dimensionsMade"
+QT_MOC_LITERAL(4, 46, 15), // "mousePressEvent"
+QT_MOC_LITERAL(5, 62, 17), // "mouseReleaseEvent"
+QT_MOC_LITERAL(6, 80, 12), // "timeFunction"
+QT_MOC_LITERAL(7, 93, 13), // "on_changeTime"
+QT_MOC_LITERAL(8, 107, 17), // "choose_screenshot"
+QT_MOC_LITERAL(9, 125, 8), // "snapshot"
+QT_MOC_LITERAL(10, 134, 14), // "CaptureDesktop"
+QT_MOC_LITERAL(11, 149, 11), // "CaptureArea"
+QT_MOC_LITERAL(12, 161, 3), // "val"
+QT_MOC_LITERAL(13, 165, 1), // "a"
+QT_MOC_LITERAL(14, 167, 10) // "updatehide"
 
     },
-    "FormScreenshots\0setBackground\0\0pix\0"
+    "FormScreenshots\0setBackground\0\0"
     "dimensionsMade\0mousePressEvent\0"
     "mouseReleaseEvent\0timeFunction\0"
     "on_changeTime\0choose_screenshot\0"
@@ -73,21 +72,21 @@ static const uint qt_meta_data_FormScreenshots[] = {
 
  // signals: name, argc, parameters, tag, flags
        1,    1,   69,    2, 0x06 /* Public */,
-       4,    2,   72,    2, 0x06 /* Public */,
-       5,    0,   77,    2, 0x06 /* Public */,
-       6,    0,   78,    2, 0x06 /* Public */,
+       3,    2,   72,    2, 0x06 /* Public */,
+       4,    0,   77,    2, 0x06 /* Public */,
+       5,    0,   78,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   79,    2, 0x0a /* Public */,
-       8,    0,   80,    2, 0x0a /* Public */,
-       9,    0,   81,    2, 0x0a /* Public */,
-      10,    0,   82,    2, 0x08 /* Private */,
-      11,    0,   83,    2, 0x08 /* Private */,
-      12,    2,   84,    2, 0x08 /* Private */,
-      15,    0,   89,    2, 0x08 /* Private */,
+       6,    0,   79,    2, 0x0a /* Public */,
+       7,    0,   80,    2, 0x0a /* Public */,
+       8,    0,   81,    2, 0x0a /* Public */,
+       9,    0,   82,    2, 0x08 /* Private */,
+      10,    0,   83,    2, 0x08 /* Private */,
+      11,    2,   84,    2, 0x08 /* Private */,
+      14,    0,   89,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QPixmap,    3,
+    QMetaType::Void, QMetaType::QPixmap,    2,
     QMetaType::Void, QMetaType::Bool, QMetaType::QRect,    2,    2,
     QMetaType::Void,
     QMetaType::Void,
@@ -98,7 +97,7 @@ static const uint qt_meta_data_FormScreenshots[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool, QMetaType::QRectF,   13,   14,
+    QMetaType::Void, QMetaType::Bool, QMetaType::QRectF,   12,   13,
     QMetaType::Void,
 
        0        // eod

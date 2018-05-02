@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DialogPreferences_t {
-    QByteArrayData data[6];
-    char stringdata0[58];
+    QByteArrayData data[5];
+    char stringdata0[52];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,15 +32,14 @@ struct qt_meta_stringdata_DialogPreferences_t {
 static const qt_meta_stringdata_DialogPreferences_t qt_meta_stringdata_DialogPreferences = {
     {
 QT_MOC_LITERAL(0, 0, 17), // "DialogPreferences"
-QT_MOC_LITERAL(1, 18, 15), // "signal_language"
-QT_MOC_LITERAL(2, 34, 0), // ""
-QT_MOC_LITERAL(3, 35, 8), // "codelang"
-QT_MOC_LITERAL(4, 44, 6), // "accept"
-QT_MOC_LITERAL(5, 51, 6) // "reject"
+QT_MOC_LITERAL(1, 18, 18), // "preferencesChanged"
+QT_MOC_LITERAL(2, 37, 0), // ""
+QT_MOC_LITERAL(3, 38, 6), // "accept"
+QT_MOC_LITERAL(4, 45, 6) // "reject"
 
     },
-    "DialogPreferences\0signal_language\0\0"
-    "codelang\0accept\0reject"
+    "DialogPreferences\0preferencesChanged\0"
+    "\0accept\0reject"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,14 +57,14 @@ static const uint qt_meta_data_DialogPreferences[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x06 /* Public */,
+       1,    0,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   32,    2, 0x08 /* Private */,
-       5,    0,   33,    2, 0x08 /* Private */,
+       3,    0,   30,    2, 0x08 /* Private */,
+       4,    0,   31,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
@@ -80,7 +79,7 @@ void DialogPreferences::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         DialogPreferences *_t = static_cast<DialogPreferences *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->signal_language((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 0: _t->preferencesChanged(); break;
         case 1: _t->accept(); break;
         case 2: _t->reject(); break;
         default: ;
@@ -88,13 +87,14 @@ void DialogPreferences::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            typedef void (DialogPreferences::*_t)(QString );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DialogPreferences::signal_language)) {
+            typedef void (DialogPreferences::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DialogPreferences::preferencesChanged)) {
                 *result = 0;
                 return;
             }
         }
     }
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject DialogPreferences::staticMetaObject = {
@@ -134,10 +134,9 @@ int DialogPreferences::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void DialogPreferences::signal_language(QString _t1)
+void DialogPreferences::preferencesChanged()
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
