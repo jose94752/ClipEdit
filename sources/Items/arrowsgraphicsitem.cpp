@@ -366,8 +366,8 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
     /*QPointF *m_StartPositionItem;
     QPointF *m_EndPositionItem;*/
     settings->setValue(path+"Color",m_Color.name());
-    /*QColor *ItemOutlineColorArrow;
-    QColor *ItemFillColorArrow;*/
+    settings->setValue(path+"ItemOutlineColorArrow",*ItemOutlineColorArrow);
+    settings->setValue(path+"ItemFillColorArrow",*ItemFillColorArrow);
     //settings->setValue(path+"ArrowHeadStart",ArrowHeadStart);
     //settings->setValue(path+"ArrowHeadStart",ArrowHeadEnd);
 
@@ -386,5 +386,7 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     m_LineThickness=settings->value(path+"LineThickness").toInt();
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
     m_Color.setNamedColor(settings->value(path+"Color").toString());
+    ItemOutlineColorArrow->setNamedColor(settings->value(path+"ItemOutlineColorArrow").toString());
+    ItemFillColorArrow->setNamedColor(settings->value(path+"ItemFillColorArrow").toString());
 }
 
