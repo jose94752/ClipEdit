@@ -15,9 +15,19 @@
 #include <QWidget>
 #include <QString>
 #include <QColor>
+#include <QSettings>
 
 #include "baseform.h"
 #include "../Items/graphsgraphicsitem.h"
+
+
+#define KFormChartsTitle    "FormCharts/title"
+#define KFormChartsType    "FormCharts/type"
+#define KFormChartsWidth    "FormCharts/width"
+#define KFormChartsHeight    "FormCharts/height"
+#define KFormChartsColor    "FormCharts/color"
+#define KFormChartsBackgroundcolor    "FormCharts/backgroundcolor"
+#define KFormChartsTransparent    "FormCharts/transparent"
 
 
 // Forward Declaration
@@ -58,8 +68,9 @@ private:
 private slots:
 
    void createChart();
-    //   void fillColorArrowChanged(const QColor& color);
-    //   void outlineColorArrowChanged(const QColor& color);
+
+   void saveDefaultTheme() ;        //const;
+   void loadDefaultTheme();
 
 signals:
 

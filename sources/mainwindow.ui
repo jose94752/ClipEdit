@@ -98,7 +98,6 @@
     <addaction name="separator"/>
     <addaction name="actionLayers"/>
     <addaction name="separator"/>
-    <addaction name="actionPreferences_2"/>
    </widget>
    <addaction name="menufile"/>
    <addaction name="menuEdit"/>

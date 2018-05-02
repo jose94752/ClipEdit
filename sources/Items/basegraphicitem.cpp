@@ -158,7 +158,19 @@ void BaseGraphicItem::setRect(const QRectF& rect)
 
 void BaseGraphicItem::setNuLayer(int nuLayer)
 {
-    m_nuLayer = nuLayer;
+    //m_nuLayer = nuLayer;
+}
+
+void BaseGraphicItem::getParameters(QSettings *settings, int itemIndex)
+{
+    //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
+}
+
+void BaseGraphicItem::setParameters(QSettings *settings, int itemIndex)
+{
+    //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
+    //QMaVar m_maVariable=variantMaVariable.toQMaVar();
+    //éventuellement fonction de rafraichissement graphique
 }
 
 // Handlers

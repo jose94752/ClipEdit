@@ -168,3 +168,132 @@ void NumberedBulletGraphicItem::print_debug() const
     qDebug () << "\n";
 }
 
+//on recoit param ext
+void NumberedBulletGraphicItem::setParameters(QSettings *settings,int itemIndex) {
+    QString path;// = "Items";
+    {
+        //QVariant temp = (int) NumberedBulletGraphicsItem;
+        //path += temp.toString();
+        path = "item"+QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //num
+    {
+      QString pathnum (path);
+      pathnum += QString ("num");
+
+      QVariant vnum;
+      settings->value(pathnum, vnum);
+      m_num = vnum.toInt();
+    }
+    //shape
+    {
+        QString pathshape (path);
+        pathshape += QString ("shape");
+
+        QVariant vshape;
+        settings->value(pathshape, vshape);
+        m_shape = (shape_e) vshape.toInt();
+    }
+    //bulletcolor
+    {
+      QString pathbulletcolor (path);
+      pathbulletcolor += QString ("bulletcolor");
+
+      QVariant v_bulletcolor;
+      settings->value(pathbulletcolor, v_bulletcolor);
+      QString str_bulletcolor = v_bulletcolor.toString();
+      m_bulletcolor.setNamedColor(str_bulletcolor);
+
+    }
+    //numbercolor
+    {
+      QString pathnumbercolor (path);
+      pathnumbercolor += QString ("numbercolor");
+
+      QVariant v_numbercolor;
+      settings->value(pathnumbercolor, v_numbercolor);
+      QString str_numbercolor = v_numbercolor.toString();
+      m_numbercolor.setNamedColor(str_numbercolor);
+    }
+    //m_font
+    {
+      QString pathfont (path);
+      pathfont += QString ("font");
+
+      QVariant vfontname;
+      settings->value (pathfont, vfontname);
+      QString stringfont = vfontname.toString();
+      m_font.fromString (stringfont);
+    }
+    //m_size
+    {
+        QString pathsize (path);
+        pathsize += QString ("size");
+
+        QVariant vsize = m_size;
+        settings->setValue(pathsize, vsize);
+    }
+}
+
+//on ecrit dans Msettinr les params
+void NumberedBulletGraphicItem::getParameters(QSettings *settings,int itemIndex) {
+
+    QString path;// = "Items";
+    {
+        //QVariant temp = (int) NumberedBulletGraphicsItem;
+        //path += temp.toString();
+        path = "item"+QString::number(itemIndex);
+    }
+    path += QString ("/");
+    //num
+    {
+      QString pathnum (path);
+      pathnum += QString ("num");
+
+      QVariant vnum = m_num;
+      settings->setValue(pathnum, vnum);
+    }
+    //shape
+    {
+      QString pathshape (path);
+      pathshape += QString ("shape");
+
+      QVariant vshape = (int) m_shape;
+      settings->setValue(pathshape, vshape);
+    }
+    //bulletcolor
+    {
+      QString pathbulletcolor (path);
+      pathbulletcolor += QString ("bulletcolor");
+
+      QString str_bulletcolor (m_bulletcolor.name());
+      QVariant vbulletcolor = str_bulletcolor;
+      settings->setValue(pathbulletcolor, vbulletcolor);
+    }
+    //numbercolor
+    {
+      QString pathnumbercolor (path);
+      pathnumbercolor += QString ("bulletcolor");
+
+      QString str_numbercolor (m_numbercolor.name());
+      QVariant vnumbercolor = str_numbercolor;
+      settings->setValue(pathnumbercolor, vnumbercolor);
+    }
+    //m_font
+    {
+      QString pathfont (path);
+      pathfont += QString ("font");
+
+      QVariant vfontname = m_font.toString();
+      settings->setValue(pathfont, vfontname);
+    }
+    //m_size
+    {
+        QString pathsize (path);
+        pathsize += QString ("size");
+
+        QVariant vsize = m_size;
+        settings->setValue(pathsize, vsize);
+    }
+}

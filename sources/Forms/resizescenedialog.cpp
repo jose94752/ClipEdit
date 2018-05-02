@@ -25,7 +25,7 @@
 
 QString ResizeSceneDialog::m_format="A4";
 
-ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem,QColor v_backgroundColor)
+ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGraphicsRectItem **v_borderSceneItem,QColor v_backgroundColor,bool isNew)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
 {
@@ -41,6 +41,10 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     m_backGroundColor=v_backgroundColor;
 
     m_format_changed=false;
+
+    //button color size
+    int buttonwidth=ui->doubleSpinBoxWidth->width();
+    ui->colorButton->setMinimumWidth(buttonwidth);
 
     // Get monitor dpi
     QDesktopWidget* desktop = QApplication::desktop();
@@ -84,6 +88,16 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QWidget* parent,QGr
     connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
     connect(ui->doubleSpinBoxWidth,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
     connect(ui->doubleSpinBoxHeight,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
+
+    //hide color button if not New page
+    m_isNew=isNew;
+    if(isNew){
+        this->setWindowTitle("Resize and color");
+        ui->colorButton->setColor(Qt::white);
+    }else{
+        ui->label_color->hide();
+        ui->colorButton->hide();
+    }
 }
 
 ResizeSceneDialog::~ResizeSceneDialog()
@@ -181,6 +195,12 @@ void ResizeSceneDialog::sizeChanged()
     }
     m_scene->setSceneRect(QRectF(0,0,m_width+2,m_height+2));
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,m_width,m_height));
+    if(m_isNew){
+        QColor l_color=ui->colorButton->getColor();
+        if(l_color.isValid()){
+            m_backGroundColor=l_color;
+        }
+    }
     (*m_borderSceneItem)->setBrush(QBrush(m_backGroundColor));
     items=scene2.items();
     foreach(QGraphicsItem* item,items){
@@ -297,4 +317,10 @@ void ResizeSceneDialog::formatChanged(QString format)
         unitChanged(unit);
     }
     m_format_changed=false;
+}
+
+void ResizeSceneDialog::resizeEvent(QResizeEvent *event)
+{
+    int buttonwidth=ui->doubleSpinBoxWidth->width();
+    ui->colorButton->setMinimumWidth(buttonwidth);
 }

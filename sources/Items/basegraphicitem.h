@@ -14,6 +14,7 @@
 // --------
 
 #include <QGraphicsItem>
+#include <QSettings>
 
 class ItemHandler;
 
@@ -127,6 +128,9 @@ class BaseGraphicItem
 
         void setNuLayer(int nuLayer);
 
+        virtual void getParameters(QSettings*,int);
+        virtual void setParameters(QSettings*,int);
+
     protected:
 
         // Events
@@ -162,8 +166,6 @@ class BaseGraphicItem
         bool m_drawBoundingRect;
 
     private:
-
-        int m_nuLayer;
 
         ItemHandler* m_current;
 };

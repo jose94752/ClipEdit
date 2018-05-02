@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>208</width>
-    <height>219</height>
+    <width>416</width>
+    <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,14 +19,17 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="label_format">
+        <widget class="QLabel" name="labelUnit">
          <property name="text">
-          <string>Format</string>
+          <string>&amp;Unit</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBoxUnit</cstring>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_format"/>
+        <widget class="QComboBox" name="comboBoxUnit"/>
        </item>
       </layout>
      </item>
@@ -45,7 +48,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="doubleSpinBoxWidth">
          <property name="maximum">
-          <double>1500.000000000000000</double>
+          <double>10000.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -66,7 +69,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="doubleSpinBoxHeight">
          <property name="maximum">
-          <double>1500.000000000000000</double>
+          <double>10000.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -75,19 +78,41 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QLabel" name="labelUnit">
+        <widget class="QLabel" name="label_format">
          <property name="text">
-          <string>&amp;Unit</string>
-         </property>
-         <property name="buddy">
-          <cstring>comboBoxUnit</cstring>
+          <string>Format</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxUnit"/>
+        <widget class="QComboBox" name="comboBox_format"/>
        </item>
       </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_color">
+         <property name="text">
+          <string>Color</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ColorButton" name="colorButton">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonSaveTheme">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">
@@ -103,6 +128,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>Classes/colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
