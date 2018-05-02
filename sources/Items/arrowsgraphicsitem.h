@@ -93,6 +93,9 @@ class ArrowsGraphicsItem
         //return the Item Fill Color Arrow
         QColor getFillColor();
 
+        void getParameters(QSettings *setting,int itemIdex);
+        void setParameters(QSettings *setting,int itemIdex);
+
     protected:
 
               //void AGIfillColorArrowChanged(const QColor& color);

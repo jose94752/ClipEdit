@@ -280,6 +280,42 @@ QColor ArrowsGraphicsItem::getFillColor()
     return *ItemFillColorArrow;
 }
 
+void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
+{
+    QString path="item"+QString::number(itemIdex)+"/";
+    settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
+    settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
+    settings->setValue(path+"TwoAnchorPointst",m_TwoAnchorPoints);
+    settings->setValue(path+"arrowHeadSize",arrowHeadSize);
+    settings->setValue(path+"ArrowWidth",m_ArrowWidth);
+    settings->setValue(path+"ArrowHeight",m_ArrowHeight);
+    settings->setValue(path+"LineThickness",m_LineThickness);
+    settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
+    /*QPointF *m_StartPositionItem;
+    QPointF *m_EndPositionItem;*/
+    settings->setValue(path+"Color",m_Color.name());
+    /*QColor *ItemOutlineColorArrow;
+    QColor *ItemFillColorArrow;*/
+    //settings->setValue(path+"ArrowHeadStart",ArrowHeadStart);
+    //settings->setValue(path+"ArrowHeadStart",ArrowHeadEnd);
+
+    //FormArrows *m_formArrows;
+}
+
+void ArrowsGraphicsItem::setParameters(QSettings *setting, int itemIdex)
+{
+    /*QString path="item"+QString::number(itemIdex)+"/";
+    settings->setValue(path+"WithoutAnchorPoint",m_WithoutAnchorPoint);
+    settings->setValue(path+"OneAnchorPoint",m_OneAnchorPoint);
+    settings->setValue(path+"TwoAnchorPointst",m_TwoAnchorPoints);
+    settings->setValue(path+"arrowHeadSize",arrowHeadSize);
+    settings->setValue(path+"ArrowWidth",m_ArrowWidth);
+    settings->setValue(path+"ArrowHeight",m_ArrowHeight);
+    settings->setValue(path+"LineThickness",m_LineThickness);
+    settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
+    settings->setValue(path+"Color",m_Color.name());*/
+}
+
  // Test
 /*
 void ArrowsGraphicsItem::AGIfillColorArrowChanged(const QColor& color)

@@ -74,12 +74,13 @@ void Save::save()
         if(type>65535){
             settings.setValue(QString("item").append(QString::number(countItems)).append("/type"),QString::number(type));
         }
-        //qDebug()<<type;
         QRectF rect=item->boundingRect();
         double x,y,width,height;
         rect.getRect(&x,&y,&width,&height);
+        QPoint pos=item->pos().toPoint();
+        x=pos.x();
+        y=pos.y();
         if(type>65535){
-            qDebug()<<"type="<<type;
             settings.setValue(QString("item").append(QString::number(countItems)).append("/baseGraphicItemType"),QString::number(type));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/x"),QString::number(x));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/y"),QString::number(y));
@@ -97,7 +98,8 @@ void Save::save()
                 //code
             break;
             case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
-                //coe
+                arrow=(ArrowsGraphicsItem*)item;
+                arrow->getParameters(&settings,countItems);
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:
                 bullet=(NumberedBulletGraphicItem*)item;
@@ -107,7 +109,6 @@ void Save::save()
                 //code
             break;
             case BaseGraphicItem::ChartGraphicsItem:
-                qDebug()<<"chart graphic item case";
                 graphsItem=(GraphsGraphicsItem*)item;
                 graphsItem->getParameters(&settings,countItems);
         break;
@@ -137,6 +138,7 @@ void Save::open()
         double y=varY.toDouble();
         double width=varWidth.toDouble();
         double height=varHeight.toDouble();
+        QPointF pointf(QPoint(x,y));
         QRectF rect(x,y,width,height);
         ArrowsGraphicsItem *arrow;
         TextBoxItem *texteBox;
@@ -154,10 +156,10 @@ void Save::open()
                 //m_scene->addItem(arrow);
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:
-                qDebug()<<"bullet";
                 //bullet=setNumberedBulletGraphicItem();
                 bullet=new NumberedBulletGraphicItem();
                 bullet->setParameters(&settings,i);
+                bullet->setPos(pointf);
                 m_scene->addItem(bullet);
             break;
             case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
@@ -167,6 +169,7 @@ void Save::open()
             case BaseGraphicItem::ChartGraphicsItem:
                 graphsItem=new GraphsGraphicsItem();
                 graphsItem->setParameters(&settings,i);
+                graphsItem->setPos(pointf);
                 m_scene->addItem(graphsItem);
             break;
         }

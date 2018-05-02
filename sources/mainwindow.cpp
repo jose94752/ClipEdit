@@ -356,7 +356,6 @@ void MainWindow::slotTextPicture()
 // removed parametre
 void MainWindow::slotGraphs( )
 {
-    qDebug() << "slot graphs main window";
     GraphsInfo infos;
     // Retrieve data from the form
     m_formCharts->GetChartsValues(infos);
