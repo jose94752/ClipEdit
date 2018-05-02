@@ -363,23 +363,6 @@ void MainWindow::slotGraphs( )
      }
 }
 
-/*
-void MainWindow::slotGraphs(const GraphsInfo &infos)
-{
-
-    //do not add graphs if no points
-    int nbPoints = infos.m_Arcs.size();
-    if( nbPoints > 0 )
-    {
-        qDebug() << "added graph mainWindow Slot Graphs";
-
-        GraphsGraphicsItem *g = new GraphsGraphicsItem();
-        g->setInfos(infos);
-
-        m_scene.addItem(g);
-     }
-}
-*/
 
 ///
 /// \brief MainWindow::slotArrowsGraphicsItem
