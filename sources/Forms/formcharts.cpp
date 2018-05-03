@@ -81,21 +81,6 @@ void FormCharts::initTableColors()
 
      //tw->s
 
-/*
-    // Headers
-    QStringList headers;
-    headers << tr("Visibility") << tr("Type") << tr("Name") << tr("Z-Value");
-    ui->tableWidgetLayers->setHorizontalHeaderLabels(headers);
-    ui->tableWidgetLayers->horizontalHeader()->show();
-    ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-    // Connects
-    connect (ui->tableWidgetLayers, SIGNAL(cellClicked(int,int)), this, SLOT(actionClicked(int ,int)));
-    connect (ui->buttonUp, SIGNAL(clicked(bool)), this, SLOT(actionUp()));
-    connect (ui->buttonDown, SIGNAL(clicked(bool)), this, SLOT(actionDown()));
-    connect (ui->buttonCopy, SIGNAL(clicked(bool)), this, SLOT(actionCopy()));
-    connect (ui->buttonDelete, SIGNAL(clicked(bool)), this, SLOT(actionDelete()));
-*/
 }
 
 //QTableWidgetItem*
@@ -230,7 +215,8 @@ void FormCharts::retranslate()
      //datas not restored
  }
 
-/*
+
+ /*
  QTableWidgetItem * newItem = new QTableWidgetItem( tr("%1").arg( (row + 1) * (column + 1) ) );
  tableWidget->setItem( row, column, newItem );
 
