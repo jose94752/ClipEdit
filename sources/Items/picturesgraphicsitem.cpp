@@ -290,6 +290,5 @@ void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
     lg_color=settings->value(itemPath+"/lg_color").value<QColor>();
     lg_pos=settings->value(itemPath+"/lg_pos").toString();
     lg_or=settings->value(itemPath+"/lg_or").toString();
-    setRect(QRectF(0, 0, width, height));
     paint(painter, option,widget);
 }
