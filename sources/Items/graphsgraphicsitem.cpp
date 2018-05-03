@@ -149,17 +149,29 @@ void GraphsInfo::SetColors( const QTableWidget *table)
 }
 
 // construct list of colors from string comma separated
+// do not create empty list, initialize with list of QT colors
 void GraphsInfo::SetColors( const QString &val)
 {
     //data
     m_Colors.clear();
 
     QStringList sl = val.split(",", QString::SkipEmptyParts);
-    for (int i = 0; i < sl.size(); ++i)
+    if( sl.size()> 0)
     {
-       QColor col;
-       col.setNamedColor(sl.at(i));
-       m_Colors.append(col);
+        for (int i = 0; i < sl.size(); ++i)
+        {
+            QColor col;
+            col.setNamedColor(sl.at(i));
+            m_Colors.append(col);
+        }
+    }
+    else
+    {
+        m_Colors << Qt::red << Qt::darkRed << Qt::green << Qt::darkGreen
+                   << Qt::blue << Qt::darkBlue << Qt::cyan
+            << Qt::darkCyan << Qt::magenta << Qt::darkMagenta
+            << Qt::yellow << Qt::darkYellow
+            << Qt::gray<< Qt::darkGray ;
     }
 }
 

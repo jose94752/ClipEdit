@@ -65,7 +65,7 @@ class FormCharts
     private:
 
         Ui::FormCharts *ui;
-        void initTableColors();
+  //      void initTableColors();
 
         void CreateTableColors(const QList<QColor> &listColors);
 

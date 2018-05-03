@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
+#include <QApplication>
 
 #include "basegraphicitem.h"
 #include "itemhandler.h"
@@ -67,10 +68,12 @@ void BaseGraphicItem::init()
     m_handlerSize = 8;
     m_heightForRotationHandler = 30;
     m_current = 0;
-    m_collapseMode = CollapseMode::ReverseCollapse;
+    m_collapseMode = CollapseMode::DefaultCollapse;
 
     m_handlerColor = QColor(227, 227, 227);
     m_selectBorderColor = QColor(Qt::blue);
+
+    setAcceptHoverEvents(true);
 }
 
 // Getters and setters
@@ -164,11 +167,15 @@ void BaseGraphicItem::setRect(const QRectF& rect)
 
 void BaseGraphicItem::getParameters(QSettings *settings, int itemIndex)
 {
+    Q_UNUSED(settings)
+    Q_UNUSED(itemIndex)
     //settings->setValue("item"+QString::number(itemIndex)+"/maVariable",m_maVariable);
 }
 
 void BaseGraphicItem::setParameters(QSettings *settings, int itemIndex)
 {
+    Q_UNUSED(settings)
+    Q_UNUSED(itemIndex)
     //QVariant variantMaVariable=settings->value("item"+QString::number(itemIndex)+"/maVariable");
     //QMaVar m_maVariable=variantMaVariable.toQMaVar();
     //éventuellement fonction de rafraichissement graphique
@@ -616,3 +623,47 @@ void BaseGraphicItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         QGraphicsItem::mouseMoveEvent(event);
     }
 }
+
+void BaseGraphicItem::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
+{
+    for (int i = 0; i < m_handlers.size(); i++)
+    {
+        if (m_handlers[i]->boundingRect().contains(event->pos()))
+        {
+            switch (m_handlers[i]->type())
+            {
+                case ItemHandler::HANDLER_TOP:
+                case ItemHandler::HANDLER_BOTTOM:
+                    QApplication::setOverrideCursor(Qt::SizeVerCursor);
+                break;
+                case ItemHandler::HANDLER_LEFT:
+                case ItemHandler::HANDLER_RIGHT:
+                    QApplication::setOverrideCursor(Qt::SizeHorCursor);
+                break;
+                case ItemHandler::HANDLER_TOP_LEFT:
+                case ItemHandler::HANDLER_BOTTOM_RIGHT:
+                    QApplication::setOverrideCursor(Qt::SizeFDiagCursor);
+                break;
+                case ItemHandler::HANDLER_TOP_RIGHT:
+                case ItemHandler::HANDLER_BOTTOM_LEFT:
+                    QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
+                break;
+                default:
+                    QApplication::setOverrideCursor(Qt::ArrowCursor);
+                break;
+            }
+
+            return;
+        }
+        else
+        {
+            QApplication::restoreOverrideCursor();
+        }
+    }
+}
+
+void BaseGraphicItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
+{
+    QApplication::restoreOverrideCursor();
+}
+
