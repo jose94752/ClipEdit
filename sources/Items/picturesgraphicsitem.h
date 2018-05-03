@@ -67,6 +67,7 @@ class PicturesGraphicsItem
         QColor  lg_color;
         QString lg_pos;
         QString lg_or;
+        QPixmap img;
 };
 
 #endif

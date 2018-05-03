@@ -106,7 +106,8 @@ void Save::save()
                 bullet->getParameters(&settings,countItems);
             break;
             case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
-                //code
+                picturesItem=(PicturesGraphicsItem*)item;
+                picturesItem->getParameters(&settings,countItems);
             break;
             case BaseGraphicItem::ChartGraphicsItem:
                 graphsItem=(GraphsGraphicsItem*)item;
@@ -159,15 +160,16 @@ void Save::open()
                 m_scene->addItem(arrow);
             break;
             case BaseGraphicItem::NumberedBulletGraphicsItem:
-                //bullet=setNumberedBulletGraphicItem();
                 bullet=new NumberedBulletGraphicItem();
                 bullet->setParameters(&settings,i);
                 bullet->setPos(pointf);
                 m_scene->addItem(bullet);
             break;
             case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
-                //picturesItem=setPicturesGraphicsItems(&settings,i);
-                //m_scene->addItem(picturesItem);
+                picturesItem=new PicturesGraphicsItem(new FormPictures());
+                picturesItem->setParameters(&settings,i);
+                picturesItem->setPos(pointf);
+                m_scene->addItem(picturesItem);
             break;
             case BaseGraphicItem::ChartGraphicsItem:
                 graphsItem=new GraphsGraphicsItem();
