@@ -197,3 +197,11 @@ void FormTextBoxes::loadFromItem(BaseGraphicItem* item) const
         ui->spinBoxBorderRadius->setValue(castedItem->borderRadius());
     }
 }
+
+// Translation
+// -----------
+
+void FormTextBoxes::retranslate()
+{
+    ui->retranslateUi(this);
+}

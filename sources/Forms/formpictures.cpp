@@ -243,4 +243,10 @@ else if (s == "Vertical") {
 }
 
 
-// emit picture_changed();
+// Translation
+// -----------
+
+void FormPictures::retranslate()
+{
+    ui->retranslateUi(this);
+}

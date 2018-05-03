@@ -50,37 +50,37 @@ class FormCharts
 
     public:
 
+        // Constructor, destructor
         explicit FormCharts(QWidget* parent = 0);
-
         ~FormCharts();
 
-    void GetChartsValues( GraphsInfo &infos);
+        void GetChartsValues( GraphsInfo &infos);
 
-    // Load data
-    void loadFromItem(BaseGraphicItem* item) const;
+        // Load data
+        void loadFromItem(BaseGraphicItem* item) const;
 
-public slots:
+        // Translation
+        void retranslate();
 
-private:
+    private:
 
         Ui::FormCharts *ui;
         void initTableColors();
 
-private slots:
+    private slots:
 
-   void createChart();
+        void createChart();
 
-   void saveDefaultTheme() ;        //const;
-   void loadDefaultTheme();
+        void saveDefaultTheme();
+        void loadDefaultTheme();
 
-//   void tableColorChanged( QModelIndex model);
 
-   void tableColorChanged( QTableWidgetItem *tw);
+ 	void tableColorChanged( QTableWidgetItem *tw);
 
-signals:
+    signals:
 
-    //void FormCreateChart( const GraphsInfo & newGraphsInfo);
-   void FormCreateChart();
+        //void FormCreateChart( const GraphsInfo & newGraphsInfo);
+        void FormCreateChart();
 
 };
 

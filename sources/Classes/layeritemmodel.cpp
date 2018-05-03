@@ -33,12 +33,13 @@ LayerItemModel::LayerItemModel(int rows, int columns, QObject* parent)
 
 QVariant LayerItemModel::data(const QModelIndex& proxyIndex, int role) const
 {
-    if (role == Qt::TextAlignmentRole)
-    {
-        return Qt::AlignCenter;
-    }
-    else
-    {
-        return QStandardItemModel::data(proxyIndex, role);
-    }
+    return QStandardItemModel::data(proxyIndex, role);
+//    if (role == Qt::TextAlignmentRole)
+//    {
+//        return Qt::AlignCenter;
+//    }
+//    else
+//    {
+//        return QStandardItemModel::data(proxyIndex, role);
+//    }
 }

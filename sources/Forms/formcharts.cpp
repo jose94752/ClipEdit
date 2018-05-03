@@ -147,13 +147,13 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
  }
 
- // Load data
- // ---------
+// Load data
+// ---------
 
- void FormCharts::loadFromItem(BaseGraphicItem* item) const
- {
-     if (qgraphicsitem_cast<GraphsGraphicsItem*>(item))
-     {
+void FormCharts::loadFromItem(BaseGraphicItem* item) const
+{
+    if (qgraphicsitem_cast<GraphsGraphicsItem*>(item))
+    {
          GraphsGraphicsItem* castedItem = qgraphicsitem_cast<GraphsGraphicsItem*>(item);
 
          qDebug() << "FormCharts::loadFromItem" ;
@@ -171,8 +171,16 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
 
          ui->qData->setText(infos.GetCoord() );
          ui->qLegends->setText(infos.GetLegend() );
-     }
- }
+    }
+}
+
+// Translation
+// -----------
+
+void FormCharts::retranslate()
+{
+    ui->retranslateUi(this);
+}
 
 
 

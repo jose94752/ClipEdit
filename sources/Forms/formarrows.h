@@ -45,8 +45,11 @@ class FormArrows
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+        // Translation
+        void retranslate();
+
         // Method GetInfosArrows
-        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
+       void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,
                             QColor &ArrowOutlineColor, QColor &ArrowFillColor,
                             int &LineThickness, int &SizeHeadTypeChoice);
@@ -72,8 +75,6 @@ class FormArrows
         // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
         QPushButton* getAddPushButtonArrow();
 
-        // temp for test
-        QColor FormFillColorArrow;
 
 private:
 
@@ -82,7 +83,7 @@ private:
 
         // Colors
         QColor FormOutlineColorArrow;
-        //QColor FormFillColorArrow;
+        QColor FormFillColorArrow;
 
         QColor BeforeFormOutlineColorArrow;
         QColor BeforeFormFillColorArrow;

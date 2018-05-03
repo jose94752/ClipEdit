@@ -31,7 +31,10 @@ FormArrows::FormArrows(QWidget *parent)
     //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
 
+    //
     // Interval : 0 to 50 (@José, tu peux définir les bornes en passant par le Designer)
+    // Je sais mais je suis la consigne du professeur qui préfère qu'on mette ce code hors du designer graphique
+    //
     ui->spinBoxArrowWidthContents->setMinimum(0);
     ui->spinBoxArrowWidthContents->setMaximum(50);
 
@@ -218,11 +221,20 @@ void FormArrows::fillColorArrowChanged()
 
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
-    BeforeFormFillColorArrow = FormFillColorArrow;
-    FormFillColorArrow = color;
-    // SIGNAL emit FormFillColorArrowChanged
-    //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
-    emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+    if (color.isValid())
+    {
+        BeforeFormFillColorArrow = FormFillColorArrow;
+        FormFillColorArrow = color;
+        // SIGNAL emit FormFillColorArrowChanged
+        //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+        emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+        update();
+    }
+    else
+    {
+        qDebug() << "Invalid Test Color Arrow when you call SLOT"
+                 <<  " fillColorArrowChanged(const QColor& color).";
+    }
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)
@@ -272,4 +284,12 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //...
 
     }
+}
+
+// Translation
+// -----------
+
+void FormArrows::retranslate()
+{
+    ui->retranslateUi(this);
 }
