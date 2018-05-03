@@ -395,16 +395,114 @@ void MainWindow::slotGraphs( )
 ///          or an object of scene and 1 point on the scene
 /// 2 anchors points:
 ///          we need 2 objects of scene
+///
+/// Actual version work only without anchor point
+///
 void MainWindow::slotArrowsGraphicsItem()
 {
-    // To do
-    //m_scene.addItem(new ArrowsGraphicsItem());
 
-    ///Actual version work only without anchor point
+    // Control of the size of scene vs size of the arrows
+    bool WithoutAnchorPoint(true), OneAnchorPoint(false), TwoAnchorPoints(false);
+    int ArrowWidth(0), ArrowHeight(0);
+    QColor ArrowOutlineColor, ArrowFillColor;
+    int LineThickness(0), SizeHeadTypeChoice(0);
+
+    m_formArrows->GetInfosArrows(WithoutAnchorPoint, OneAnchorPoint, TwoAnchorPoints,
+                                 ArrowWidth, ArrowHeight,
+                                 ArrowOutlineColor, ArrowFillColor,
+                                 LineThickness, SizeHeadTypeChoice);
+                                //To do others HeadTypeChoiceContents
+                                // comboBoxHeadTypeChoiceContents
+
+
 
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(m_formArrows);
+
+    QPointF scene_TopLeft (m_scene.sceneRect().topLeft());
+    QPointF scene_BottomRight (m_scene.sceneRect().bottomRight());
+
+
+    //    BaseGraphicItem *m_StartItem;
+    //    BaseGraphicItem *m_EndItem;
+
+    QPointF *arrow_StartPositionItem = new QPointF();
+    *arrow_StartPositionItem = ArrowItem->getStartPosition();
+    qDebug() << "arrow_StartPositionItem"
+             << "x = " << arrow_StartPositionItem->x()
+             << "y = " << arrow_StartPositionItem->y();
+
+    QPointF *arrow_EndPositionItem = new QPointF();
+    *arrow_EndPositionItem = ArrowItem->getEndPosition();
+    qDebug() << "arrow_EndPositionItem"
+             << "x = " << arrow_EndPositionItem->x()
+             << "y = " << arrow_EndPositionItem->y();
+
+    qreal Min_Xpos(0), Max_Xpos (0), Min_Ypos(0), Max_Ypos (0);
+    /// TopLeft
+    ///                         -Y
+    ///     The scene limits     |   The scene limits
+    ///       for the arrows     |    for the arrows
+    ///        1/4 = X, -Y       |      2/4 = X, -Y
+    ///                          |
+    /// -X ----------------------0----------------------> X
+    ///                          |
+    ///     The scene limits     |   The scene limits
+    ///      for the arrows      |    for the arrows
+    ///        3/4 = -X, Y       |      4/4 = X, Y
+    ///                          V
+    ///                          Y
+    ///                                          BottomRight
+
+    // To Test the Max Width and the Max Height for the scene
+    Max_Ypos = scene_BottomRight.y() - scene_TopLeft.y();
+    //qDebug()<< "Max_Ypos =" << Max_Ypos;
+    Max_Xpos = scene_BottomRight.x() - scene_TopLeft.x();
+    //qDebug()<< "Max_Xpos =" << Max_Xpos;
+
+/*  // Work on progress
+    // if (ArrowWidth > Max_XPos)
+    //      ArrowWidth = Max_XPos;
+
+    // if (ArrowHeight > Max_YPos)
+    //      ArrowHeight = Max_YPos;
+*/
+    Min_Ypos = scene_TopLeft.y();
+    qDebug()<< "Min_Ypos =" << Min_Ypos;
+    Min_Xpos = scene_TopLeft.x();
+    qDebug()<< "Min_Xpos =" << Min_Xpos;
+
+/*  // Work on progress
+    //    To do debug
+   //     /home/formation/ClipEdit/sources/mainwindow.cpp:459: erreur : invalid type argument of unary ‘*’ (have ‘qreal {aka double}’)
+   //  if (*arrow_StartPositionItem->y() < Min_Ypos)
+   //                                 ^
+   ///home/formation/ClipEdit/sources/mainwindow.cpp:460: erreur : void value not ignored as it ought to be
+   //      *arrow_StartPositionItem->setY(Min_Ypos);
+   //       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+   //
+
+    // Check the Arrows on the scene and fix it
+    if (*arrow_StartPositionItem->y() < Min_Ypos)
+        *arrow_StartPositionItem->setY(Min_Ypos);
+    if (*arrow_StartPositionItem->x() < Min_Xpos)
+        *arrow_StartPositionItem->setX(Min_Xpos);
+    if (*arrow_EndPositionItem->y() < Min_Ypos)
+        *arrow_EndPositionItem->setY(Min_Ypos);
+    if (*arrow_EndPositionItem->x() < Min_Xpos)
+        *arrow_EndPositionItem->setX(Min_Xpos);
+*/
+    // Add Arrow on the scene
+    //m_scene.addItem(new ArrowsGraphicsItem());
     m_scene.addItem(ArrowItem);
+
+/*  // Work on progress
+    delta = numberedBulletGraphicItem->rect ().width ();
+    if (bulletpos.x () + delta < scene_topright.x ()) {
+      bulletpos.setX(bulletpos.x() + delta);
+    }
+
+*/
 }
 
 

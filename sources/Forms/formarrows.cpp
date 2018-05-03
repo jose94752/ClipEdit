@@ -31,7 +31,10 @@ FormArrows::FormArrows(QWidget *parent)
     //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
 
+    //
     // Interval : 0 to 50 (@José, tu peux définir les bornes en passant par le Designer)
+    // Je sais mais je suis la consigne du professeur qui préfère qu'on mette ce code hors du designer graphique
+    //
     ui->spinBoxArrowWidthContents->setMinimum(0);
     ui->spinBoxArrowWidthContents->setMaximum(50);
 
@@ -225,6 +228,7 @@ void FormArrows::fillColorArrowChanged(const QColor& color)
         // SIGNAL emit FormFillColorArrowChanged
         //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
         emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+        update();
     }
     else
     {
