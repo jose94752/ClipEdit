@@ -43,6 +43,8 @@ FormCharts::~FormCharts()
     delete ui;
 }
 
+
+/*
 void FormCharts::initTableColors()
 {
     QList<QColor> colors;
@@ -56,6 +58,7 @@ void FormCharts::initTableColors()
 
     CreateTableColors(colors);
 }
+*/
 
 
 //QTableWidgetItem*
@@ -225,7 +228,6 @@ void FormCharts::retranslate()
      qDebug() << "loadDefaultTheme CreateTableColors";
 
      CreateTableColors(infos.m_Colors);
-
      //datas not restored
  }
 
