@@ -42,7 +42,6 @@ GraphsInfo::GraphsInfo()
         << Qt::yellow << Qt::darkYellow
         << Qt::gray<< Qt::darkGray ;
 
-
     m_titleFont.setFamily("times");
     m_titleFont.setPointSize(18);
 
@@ -88,6 +87,20 @@ QString GraphsInfo::GetLegend()
 }
 
 
+QString GraphsInfo::GetColors()
+{
+    QString datastr = "";
+    int nbCol = m_Colors.size();
+    for ( int i=0; i<nbCol; i++)
+    {
+        if( i < nbCol-1)
+             datastr = datastr +  m_Colors.at(i).name() + QChar(',');
+         else
+             datastr = datastr +  m_Colors.at(i).name();
+    }
+    return datastr;
+}
+
 // construct list of points from string separated by comma
 
 void GraphsInfo::SetCoord( const QString &val)
@@ -122,12 +135,33 @@ void GraphsInfo::SetLegend( const QString &val)
 }
 
 // construct list of colors from QtableWidget
-void GraphsInfo::SetColors( const QTableWidget *)
+void GraphsInfo::SetColors( const QTableWidget *table)
 {
-    // legends
-    //m_Legends = val.split("," , QString::SkipEmptyParts);
+    int nb = table->rowCount();
+    m_Colors.clear();
+    for( int i=0; i< nb; i++ )
+    {
+        QTableWidgetItem * it = table->item(i,0);
+        QBrush br = it->background();
+        QColor q = br.color();
+        m_Colors.append(q);
+    }
 }
 
+// construct list of colors from string comma separated
+void GraphsInfo::SetColors( const QString &val)
+{
+    //data
+    m_Colors.clear();
+
+    QStringList sl = val.split(",", QString::SkipEmptyParts);
+    for (int i = 0; i < sl.size(); ++i)
+    {
+       QColor col;
+       col.setNamedColor(sl.at(i));
+       m_Colors.append(col);
+    }
+}
 
 // Constructor
 // -----------
@@ -677,6 +711,11 @@ void GraphsGraphicsItem::getParameters( QSettings *s, int itemIndex)
     propr = stritem + QString::number(itemIndex)+ KChartsLegend;
     s->setValue( propr, datastr);
 
+    datastr = m_infos.GetColors();
+    propr = stritem + QString::number(itemIndex)+ KChartsListColors;
+    s->setValue( propr, datastr);
+
+
 /*
     //data
     QString datastr = "";
@@ -745,6 +784,10 @@ void GraphsGraphicsItem::setParameters( QSettings *s, int itemIndex)
     propr = stritem + QString::number(itemIndex)+ KChartsLegend;
     dataStr = s->value(propr).toString();
     infos.SetLegend(dataStr);
+
+    propr = stritem + QString::number(itemIndex)+ KChartsListColors;
+    dataStr = s->value(propr).toString();
+    infos.SetColors(dataStr);
 
     setInfos(infos);
 
