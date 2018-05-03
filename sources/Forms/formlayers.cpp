@@ -61,6 +61,12 @@ void FormLayers::initForm()
     ui->tableWidgetLayers->clear();
     ui->tableWidgetLayers->setRowCount(0);
     ui->tableWidgetLayers->setColumnCount(4);
+
+//    ui->tableWidgetLayers->setColumnWidth(0,40);
+//    ui->tableWidgetLayers->setColumnWidth(1,40);
+//    ui->tableWidgetLayers->setColumnWidth(2,300);
+//    ui->tableWidgetLayers->setColumnWidth(3,40);
+
     ui->tableWidgetLayers->showGrid();
     ui->tableWidgetLayers->setAlternatingRowColors(true);
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -70,10 +76,12 @@ void FormLayers::initForm()
 
     // Headers
     QStringList headers;
-    headers << tr("Visibility") << tr("Type") << tr("Name") << tr("Z-Value");
+    headers << tr("Visibility") << tr("Type") << tr("Name") << tr("Z"); // -Value"");
     ui->tableWidgetLayers->setHorizontalHeaderLabels(headers);
     ui->tableWidgetLayers->horizontalHeader()->show();
+
     ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//    ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     // Connects
     connect (ui->tableWidgetLayers, SIGNAL(cellClicked(int,int)), this, SLOT(actionClicked(int ,int)));
@@ -81,6 +89,7 @@ void FormLayers::initForm()
     connect (ui->buttonDown, SIGNAL(clicked(bool)), this, SLOT(actionDown()));
     connect (ui->buttonCopy, SIGNAL(clicked(bool)), this, SLOT(actionCopy()));
     connect (ui->buttonDelete, SIGNAL(clicked(bool)), this, SLOT(actionDelete()));
+
 }
 
 // Slots
@@ -90,11 +99,11 @@ void FormLayers::actionClicked(int line , int col)
 {
     qDebug() << "FormLayers::ActionClicked()" << line << col;
 
-    m_lineSelected = line;
-    m_columnSelected = col;
-
     if (!m_scene)
         return;
+
+    m_lineSelected = line;
+    m_columnSelected = col;
 
     m_itemSelected = dynamic_cast<BaseGraphicItem*>(m_scene->items(Qt::DescendingOrder)[m_lineSelected]);
 
