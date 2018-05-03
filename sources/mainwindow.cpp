@@ -300,7 +300,7 @@ void MainWindow::slotNew(bool)
 {
     if (m_scene.items().count() > 1)
     {
-        DialogSave dialogSave(m_scene.items(), this);
+        DialogSave dialogSave(m_scene.items(),m_borderSceneItem,this);
         dialogSave.exec();
     }
 
@@ -594,14 +594,14 @@ void MainWindow::openFile(bool)
     if (!fileName.isEmpty())
     {
         Save save(&m_scene, fileName);
-        save.open();
+        m_borderSceneItem=save.open();
     }
 }
 
 
 void MainWindow::save(bool)
 {
-    Save save(this->m_scene.items());
+    Save save(this->m_scene.items(),m_borderSceneItem->rect(),m_borderSceneItem->brush().color());
     save.save();
 }
 
@@ -622,7 +622,7 @@ void MainWindow::saveAs(bool)
         else
         {
             ui->actionSave->setEnabled(true);
-            Save save(this->m_scene.items(), extfilename);
+            Save save(this->m_scene.items(), extfilename,m_borderSceneItem->rect(),m_borderSceneItem->brush().color());
             save.save();
         }
     }

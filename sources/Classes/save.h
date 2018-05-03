@@ -24,15 +24,15 @@ class Save
 {
 public:
     Save(QGraphicsScene*,QString);
-    Save(QList<QGraphicsItem *>);
-    Save(QList<QGraphicsItem *>,QString);
+    Save(QList<QGraphicsItem *>,QRectF,QColor);
+    Save(QList<QGraphicsItem *>,QString,QRectF, QColor);
     //QDomElement setLayer()
     static QString verifyExtension(QString,QString);
     static QString current_filename;
     static bool fileNameExists();
 
     void save();
-    void open();
+    QGraphicsRectItem* open();
 private:
     QList<QGraphicsItem *> m_listItems;
     QGraphicsScene *m_scene;
@@ -45,6 +45,8 @@ private:
     FormPictures *m_formPicture;
     FormScreenshots *m_formScreenshots;
     FormTextBoxes *m_formTextBoxes;
+    QColor m_backgroundColor;
+    QRectF m_globalRectF;
 };
 
 #endif // SAVE_H
