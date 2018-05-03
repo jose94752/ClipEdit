@@ -19,6 +19,7 @@
 #include <QColor>
 #include <QPolygonF>
 #include <QSettings>
+#include <QPen>
 
 class ArrowsGraphicsItem
     :   public BaseGraphicItem
@@ -127,6 +128,8 @@ class ArrowsGraphicsItem
 
         QPointF *m_StartPositionItem;
         QPointF *m_EndPositionItem;
+
+        QPen pen;
 
         QColor m_Color; // Temp for test
         QColor *TestFillColor;
