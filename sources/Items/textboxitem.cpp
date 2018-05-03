@@ -191,3 +191,13 @@ int TextBoxItem::margin() const
 {
     return m_margin;
 }
+
+void TextBoxItem::getParameters(QSettings *, int)
+{
+
+}
+
+void TextBoxItem::setParameters(QSettings *, int)
+{
+
+}
