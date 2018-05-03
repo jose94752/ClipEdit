@@ -42,11 +42,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     init();
-    /*FormPictures *localFormPicture=new FormPictures();
-    QPixmap monPixmap("/home/olivier/Images/roundedRect.png");
-    localFormPicture->initWithImage(monPixmap);
-    PicturesGraphicsItem* monPictureItem = new PicturesGraphicsItem (localFormPicture);
-    m_scene.addItem(monPictureItem);*/
 }
 
 
