@@ -20,4 +20,3 @@ BaseForm::BaseForm(QWidget *parent)
 {
 
 }
-

@@ -138,3 +138,11 @@ void FormNumberedBullets::loadFromItem(BaseGraphicItem* item) const
         ui->fontComboBox->setCurrentText(castedItem->getFont().family());
     }
 }
+
+// Translation
+// -----------
+
+void FormNumberedBullets::retranslate()
+{
+    ui->retranslateUi(this);
+}

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>658</width>
-    <height>708</height>
+    <width>354</width>
+    <height>615</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,85 +40,60 @@
      <property name="title">
       <string>Data</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Chart Type</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Data</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Colors</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Chart Title</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Legends</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QComboBox" name="qChartType"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="qData"/>
-          </item>
-          <item>
-           <widget class="QTableView" name="gGraphColors"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="qTitle"/>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="qLegends">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Chart Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="qChartType"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="qData"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Colors</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QTableView" name="gGraphColors"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Chart Title</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Legends</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="qTitle"/>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="qLegends">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -128,123 +103,103 @@
      <property name="title">
       <string>Properties</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Chart Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>Backround Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="bTransparent">
-              <property name="text">
-               <string>Transparent</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="ColorButton" name="qColor">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="ColorButton" name="qBackColor">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Chart Color</string>
+          </property>
+         </widget>
         </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Height</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_12">
-              <property name="text">
-               <string>Width</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
-            <item>
-             <widget class="QSpinBox" name="qHeight">
-              <property name="maximum">
-               <number>400</number>
-              </property>
-              <property name="singleStep">
-               <number>20</number>
-              </property>
-              <property name="value">
-               <number>200</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="qWidth">
-              <property name="maximum">
-               <number>400</number>
-              </property>
-              <property name="singleStep">
-               <number>20</number>
-              </property>
-              <property name="value">
-               <number>200</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+        <item row="0" column="1">
+         <widget class="ColorButton" name="qColor">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Backround Color</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="ColorButton" name="qBackColor">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="bTransparent">
+          <property name="text">
+           <string>Transparent</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QFormLayout" name="formLayout_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Height</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="qHeight">
+          <property name="maximum">
+           <number>400</number>
+          </property>
+          <property name="singleStep">
+           <number>20</number>
+          </property>
+          <property name="value">
+           <number>200</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Width</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="qWidth">
+          <property name="maximum">
+           <number>400</number>
+          </property>
+          <property name="singleStep">
+           <number>20</number>
+          </property>
+          <property name="value">
+           <number>200</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -297,6 +252,19 @@
      </item>
     </layout>
    </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -308,7 +276,6 @@
  </customwidgets>
  <tabstops>
   <tabstop>qChartType</tabstop>
-  <tabstop>qLegends</tabstop>
  </tabstops>
  <resources>
   <include location="../resources/resources.qrc"/>

@@ -17,6 +17,7 @@
 #include <QMap>
 #include <QGraphicsScene>
 #include <QRectF>
+#include <QTranslator>
 
 #include "Forms/formarrows.h"
 #include "Forms/formcharts.h"
@@ -55,6 +56,9 @@ class MainWindow
 
     private:
 
+   int  m_height ;
+   int  m_width ;
+
         // Buttons Ids
         enum e_BUTTON_IDS {
             BUTTON_ID_ARROW = 0,
@@ -89,7 +93,8 @@ class MainWindow
 
         QGraphicsRectItem *m_borderSceneItem;
 
-        //int nbSceneElts;
+        // App translator
+        QTranslator m_translator;
 
         // Zoom
         QSpinBox* m_spinBoxZoom;
@@ -103,7 +108,9 @@ class MainWindow
 
     protected:
 
+        // Events
         bool eventFilter(QObject* watched, QEvent* event);
+        void changeEvent(QEvent* event);
 
     private slots:
 
@@ -135,7 +142,7 @@ class MainWindow
 
         // Settings
         void showPreferences();
-        void preferencesChanged();
+        void applyPreferences();
 };
 
 #endif
