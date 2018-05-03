@@ -29,8 +29,6 @@ FormCharts::FormCharts(QWidget* parent)
 
     loadDefaultTheme();
 
-    initTableColors();
-
     connect(ui->qGo, SIGNAL(clicked(bool)), this, SLOT( createChart() ) );
     connect(ui->qSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
     connect(ui->qApplyTheme, SIGNAL(clicked(bool)), this, SLOT(loadDefaultTheme()));
@@ -45,12 +43,10 @@ FormCharts::~FormCharts()
     delete ui;
 }
 
+
+/*
 void FormCharts::initTableColors()
 {
-
-    // Table properties
-    QTableWidget *tw =  ui->gGraphColors;
-
     QList<QColor> colors;
     colors << Qt::red << Qt::darkRed << Qt::green << Qt::darkGreen
            << Qt::blue << Qt::darkBlue << Qt::cyan
@@ -59,29 +55,11 @@ void FormCharts::initTableColors()
         << Qt::gray<< Qt::darkGray ;
 
     qDebug() << "colors.size " << colors.size();
-    tw->clear();
-    tw->setRowCount( colors.size());
-    tw->setColumnCount(1);
-    tw->showGrid();
 
-    for(int i=0; i < colors.size(); i++)
-    {
-
-        QTableWidgetItem * newItem = new QTableWidgetItem( "");
-        QBrush brush( colors.at(i));
-        newItem->setBackground( brush );
-        tw->setItem( i /*row*/, 0 /*column*/, newItem );
-
-     }
-    tw->horizontalHeader()->hide();
-    //tw->horizontalHeader()->show();
-    tw->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-    tw->verticalHeader()->hide();
-
-     //tw->s
-
+    CreateTableColors(colors);
 }
+*/
+
 
 //QTableWidgetItem*
 //void FormCharts::tableColorChanged( QModelIndex model)
@@ -118,8 +96,7 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.SetLegend( ui->qLegends->text() );
 
     infos.SetColors( ui->gGraphColors );
-   // infos.m_Legends = ui->qLegends->text().split("," , QString::SkipEmptyParts);
-    //qDebug() << "Legends numero" << infos.m_Legends.size();
+
 }
 
 
@@ -184,9 +161,42 @@ void FormCharts::retranslate()
      s.setValue( KFormChartsColor, infos.m_color.name());
      s.setValue( KFormChartsBackgroundcolor, infos.m_backColor.name());
      s.setValue( KFormChartsTransparent, infos.m_transparent);
+     qDebug() << "saveDefaultTheme CreateTableColors" << infos.GetColors() ;
+
+     s.setValue( KFormChartsListColors, infos.GetColors() );
 
      // datas not saved
 }
+
+
+ //QList<QColor> *listColors
+
+ void FormCharts::CreateTableColors( const QList<QColor> &listColors)
+ {
+
+     qDebug() << "colors.size " << listColors.size();
+     QTableWidget *tw =  ui->gGraphColors;
+
+     tw->clear();
+     tw->setRowCount( listColors.size());
+     tw->setColumnCount(1);
+     tw->showGrid();
+
+     for(int i=0; i < listColors.size(); i++)
+     {
+         QTableWidgetItem * newItem = new QTableWidgetItem( "");
+         QBrush brush( listColors.at(i));
+         newItem->setBackground( brush );
+         tw->setItem( i /*row*/, 0 /*column*/, newItem );
+
+      }
+     tw->horizontalHeader()->hide();
+     //tw->horizontalHeader()->show();
+     tw->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+     tw->verticalHeader()->hide();
+ }
+
 
  void FormCharts::loadDefaultTheme()
  {
@@ -201,7 +211,10 @@ void FormCharts::retranslate()
      infos.m_boundingRect.setHeight( s.value(KFormChartsHeight, 200).toInt() );
      infos.m_color.setNamedColor( s.value(KFormChartsColor, color).toString() );
      infos.m_backColor.setNamedColor( s.value(KFormChartsBackgroundcolor, backcolor).toString() );
-     infos.m_transparent = s.value(KFormChartsTransparent, 1).toBool();
+     infos.m_transparent = s.value( KFormChartsTransparent, 1).toBool();
+
+     QString strColors = s.value( KFormChartsListColors).toString();
+     infos.SetColors( strColors);
 
      ui->qTitle->setText( infos.m_title);
      ui->qChartType->setCurrentIndex(infos.m_type);
@@ -212,6 +225,9 @@ void FormCharts::retranslate()
 
      ui->bTransparent->setChecked(infos.m_transparent);
 
+     qDebug() << "loadDefaultTheme CreateTableColors";
+
+     CreateTableColors(infos.m_Colors);
      //datas not restored
  }
 

@@ -142,6 +142,9 @@ class BaseGraphicItem
         void mousePressEvent(QGraphicsSceneMouseEvent* event);
         void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
         void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+        void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+
 
         // Handlers methods
         void createHandlers();
