@@ -50,9 +50,8 @@ class FormLayers
         // Update
         void updateLayers();
 
-    protected:
-
-        void changeEvent(QEvent* event);
+        // Retranslation (Note: all dynamic string should be defined here)
+        //void retranslateUi();
 
     private slots:
 

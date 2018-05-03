@@ -13,8 +13,6 @@
 // Includes
 // --------
 
-#include <QMap>
-
 #include "baseform.h"
 
 class QPushButton;
