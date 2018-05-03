@@ -108,7 +108,9 @@ class MainWindow
 
     protected:
 
+        // Events
         bool eventFilter(QObject* watched, QEvent* event);
+        void changeEvent(QEvent* event);
 
     private slots:
 
@@ -140,7 +142,7 @@ class MainWindow
 
         // Settings
         void showPreferences();
-        void slot_preferences(QString);
+        void applyPreferences();
 };
 
 #endif

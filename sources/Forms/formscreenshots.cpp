@@ -366,6 +366,13 @@ void FormScreenshots::loadFromItem(BaseGraphicItem* item) const
     }
 }
 
+// Translation
+// -----------
+
+void FormScreenshots::retranslate()
+{
+    ui->retranslateUi(this);
+}
 
 
 

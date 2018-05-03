@@ -281,3 +281,11 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
 
     }
 }
+
+// Translation
+// -----------
+
+void FormArrows::retranslate()
+{
+    ui->retranslateUi(this);
+}

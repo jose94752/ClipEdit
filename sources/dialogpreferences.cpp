@@ -51,8 +51,7 @@ void DialogPreferences::accept ()
     // Save in settings
     QSettings s;
     s.setValue("Settings/lang", lang);
-    qDebug () << "lang == " << lang << "\n";
-    emit preferencesChanged(lang);
+    emit preferencesChanged();
     QDialog::accept();
 }
 

@@ -60,9 +60,7 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
-    //new signals
-    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
-    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
+    applyPreferences();
 }
 
 
@@ -223,7 +221,9 @@ void MainWindow::buildView()
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
 }
 
+
 // Events
+// ------
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
@@ -247,6 +247,23 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     }
 
     return QMainWindow::eventFilter(watched, event);
+}
+
+void MainWindow::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+
+        foreach (BaseForm* bf, m_itemForms)
+        {
+            bf->retranslate();
+        }
+    }
+    else
+    {
+        QMainWindow::changeEvent(event);
+    }
 }
 
 // Slots
@@ -493,7 +510,7 @@ void MainWindow::save(bool)
 
 void MainWindow::saveAs(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this, tr("Save File"),"project.cle", tr("ClipEdit File (*.cle)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),"project.cle", tr("ClipEdit File (*.cle)"));
 
     if (!fileName.isEmpty())
     {
@@ -525,12 +542,17 @@ void MainWindow::showAboutDialog(bool)
 void MainWindow::showPreferences()
 {
     DialogPreferences d(this);
-    connect(&d, SIGNAL(preferencesChanged(QString)), this, SLOT(slot_preferences(QString)));
+    connect(&d, SIGNAL(preferencesChanged()), this, SLOT(applyPreferences()));
     d.exec();
 }
 
-void MainWindow::slot_preferences(QString lang)
+void MainWindow::applyPreferences()
 {
-    qDebug () << "MainWindow : preferences changed : lang == " << lang << "\n";
-}
+    QSettings s;
+    QString lang = s.value("Settings/lang", "en").toString();
 
+    // Language
+    qApp->removeTranslator(&m_translator);
+    if(m_translator.load(QString(":/lang/lang/clipedit_%1").arg(lang)))
+        qApp->installTranslator(&m_translator);
+}

@@ -40,6 +40,8 @@ class FormCliparts
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+        // Translation
+        void retranslate();
 
     private:
 

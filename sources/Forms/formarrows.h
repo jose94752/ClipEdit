@@ -45,6 +45,9 @@ class FormArrows
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+        // Translation
+        void retranslate();
+
         // Method GetInfosArrows
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,

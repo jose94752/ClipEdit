@@ -48,6 +48,9 @@ class FormTextBoxes
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+        // Translation
+        void retranslate();
+
     private slots:
 
         void saveDefaultTheme();

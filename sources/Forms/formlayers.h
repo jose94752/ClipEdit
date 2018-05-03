@@ -50,6 +50,10 @@ class FormLayers
         // Update
         void updateLayers();
 
+    protected:
+
+        void changeEvent(QEvent* event);
+
     private slots:
 
         // Cells
@@ -68,7 +72,7 @@ class FormLayers
         QGraphicsScene* m_scene;
 
         // Table model
-        LayerItemModel* m_model;
+        QStandardItemModel* m_model;
 
         // Holders
         qreal m_zvalue;

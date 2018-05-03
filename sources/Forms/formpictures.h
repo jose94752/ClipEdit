@@ -45,6 +45,9 @@ class FormPictures
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+        // Translation
+        void retranslate();
+
     public slots:
 
         void chose_picture();
