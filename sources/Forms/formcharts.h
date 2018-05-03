@@ -31,7 +31,7 @@
 #define KFormChartsColor    "FormCharts/color"
 #define KFormChartsBackgroundcolor    "FormCharts/backgroundcolor"
 #define KFormChartsTransparent    "FormCharts/transparent"
-
+#define KFormChartsListColors    "FormCharts/listcolors"
 
 // Forward Declaration
 namespace Ui
@@ -67,7 +67,9 @@ class FormCharts
         Ui::FormCharts *ui;
         void initTableColors();
 
-    private slots:
+        void CreateTableColors(const QList<QColor> &listColors);
+
+private slots:
 
         void createChart();
 
