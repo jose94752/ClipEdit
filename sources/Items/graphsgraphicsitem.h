@@ -35,7 +35,7 @@
 #define KChartsTransparent    "/transparent"
 #define KChartsData      "/data"
 #define KChartsLegend    "/legend"
-
+#define KChartsListColors    "/listcolors"
 
 
 // Defines
@@ -67,19 +67,18 @@ public :
     QList<QString> m_Legends;
     QList<QColor> m_Colors;
 
-
     // Constructor
     GraphsInfo();
 
     QString GetCoord();
-    QString GetLegend();
+    QString GetLegend(); 
+    QString GetColors();
 
     //creates lists of points and legends from Strings comma separates
     void SetCoord( const QString &str);
     void SetLegend( const QString &str);
     void SetColors( const QTableWidget *);
-
-
+    void SetColors(const QString &val);
 };
 
 class GraphsGraphicsItem : public BaseGraphicItem

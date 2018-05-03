@@ -143,6 +143,54 @@ QPushButton *FormArrows::getAddPushButtonArrow()
     return ui->pushButtonAddArrow;
 }
 
+//--------------------------------------------------
+// Methods return the Defaults values for Arrows
+//--------------------------------------------------
+
+//return the Default Form Outline Color Arrow
+QColor FormArrows::getDefaultFormOutlineColorArrow()
+{
+    return DefaultFormOutlineColorArrow;
+}
+
+//return the Default Form Fill Color Arrow
+QColor FormArrows::getDefaultFormFillColorArrow()
+{
+    return DefaultFormFillColorArrow;
+}
+
+//return the Default Form Arrow Head Size
+int FormArrows::getDefaultFormArrowHeadSize ()
+{
+    return DefaultFormArrowHeadSize;
+}
+
+//return the Default Form Arrow Width
+int FormArrows::getDefaultFormArrowWidth()
+{
+    return DefaultFormArrowWidth;
+}
+
+//return the Default Form Arrow Height
+int FormArrows::getDefaultFormArrowHeight()
+{
+    return DefaultFormArrowHeight;
+}
+
+//return the Default Form Arrow Head Type
+QPolygonF FormArrows::getDefaultFormArrowHeadType()
+{
+    return DefaultFormArrowHeadType;
+}
+
+//return the Default Line Thickness
+int FormArrows::getDefaultLineThickness()
+{
+    return DefaultLineThickness;
+}
+
+//--------------------------------------------------
+
 
 void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
                                 int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
