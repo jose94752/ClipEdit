@@ -11,6 +11,10 @@
 
 #include "QDebug"
 
+#include <QColorDialog>
+#include <QModelIndex>
+
+
 #include "formcharts.h"
 #include "ui_formcharts.h"
 
@@ -25,9 +29,14 @@ FormCharts::FormCharts(QWidget* parent)
 
     loadDefaultTheme();
 
+    initTableColors();
+
     connect(ui->qGo, SIGNAL(clicked(bool)), this, SLOT( createChart() ) );
     connect(ui->qSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
     connect(ui->qApplyTheme, SIGNAL(clicked(bool)), this, SLOT(loadDefaultTheme()));
+
+ //   connect(ui->gGraphColors, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(tableColorChanged(QModelIndex) ) );
+    connect(ui->gGraphColors, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(tableColorChanged( QTableWidgetItem*) ) );
 
 }
 
@@ -36,6 +45,63 @@ FormCharts::~FormCharts()
     delete ui;
 }
 
+void FormCharts::initTableColors()
+{
+
+    // Table properties
+    QTableWidget *tw =  ui->gGraphColors;
+
+    QList<QColor> colors;
+    colors << Qt::red << Qt::darkRed << Qt::green << Qt::darkGreen
+           << Qt::blue << Qt::darkBlue << Qt::cyan
+        << Qt::darkCyan << Qt::magenta << Qt::darkMagenta
+        << Qt::yellow << Qt::darkYellow
+        << Qt::gray<< Qt::darkGray ;
+
+    qDebug() << "colors.size " << colors.size();
+    tw->clear();
+    tw->setRowCount( colors.size());
+    tw->setColumnCount(1);
+    tw->showGrid();
+
+    for(int i=0; i < colors.size(); i++)
+    {
+
+        QTableWidgetItem * newItem = new QTableWidgetItem( "");
+        QBrush brush( colors.at(i));
+        newItem->setBackground( brush );
+        tw->setItem( i /*row*/, 0 /*column*/, newItem );
+
+     }
+    tw->horizontalHeader()->hide();
+    //tw->horizontalHeader()->show();
+    tw->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    tw->verticalHeader()->hide();
+
+     //tw->s
+
+}
+
+//QTableWidgetItem*
+//void FormCharts::tableColorChanged( QModelIndex model)
+void FormCharts::tableColorChanged( QTableWidgetItem *tw)
+{
+    QBrush brush = tw->background();
+    QColor color = QColorDialog::getColor( brush.color(), this);
+
+    if ( color.isValid())
+    {
+        brush.setColor(color);
+        tw->setBackground( brush);
+
+       // m_color = color;
+       // emit colorChanged(m_color);
+       tw->setSelected(false);
+
+       update();
+    }
+}
 
 void FormCharts::GetChartsValues( GraphsInfo &infos)
 {
@@ -51,9 +117,9 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.SetCoord( ui->qData->text() );
     infos.SetLegend( ui->qLegends->text() );
 
+    infos.SetColors( ui->gGraphColors );
    // infos.m_Legends = ui->qLegends->text().split("," , QString::SkipEmptyParts);
     //qDebug() << "Legends numero" << infos.m_Legends.size();
-
 }
 
 
@@ -148,3 +214,12 @@ void FormCharts::retranslate()
 
      //datas not restored
  }
+
+
+ /*
+ QTableWidgetItem * newItem = new QTableWidgetItem( tr("%1").arg( (row + 1) * (column + 1) ) );
+ tableWidget->setItem( row, column, newItem );
+
+ tableWidget->setItem(8, 0, new QTableWidgetItem);
+ tableWidget->item(8, 0)->setBackground(Qt::red);
+*/

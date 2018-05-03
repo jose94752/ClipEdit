@@ -16,6 +16,9 @@
 #include <QString>
 #include <QColor>
 #include <QSettings>
+#include <QTableWidgetItem>
+
+
 
 #include "baseform.h"
 #include "../Items/graphsgraphicsitem.h"
@@ -62,6 +65,7 @@ class FormCharts
     private:
 
         Ui::FormCharts *ui;
+        void initTableColors();
 
     private slots:
 
@@ -69,6 +73,9 @@ class FormCharts
 
         void saveDefaultTheme();
         void loadDefaultTheme();
+
+
+ 	void tableColorChanged( QTableWidgetItem *tw);
 
     signals:
 

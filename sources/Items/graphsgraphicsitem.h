@@ -18,6 +18,7 @@
 #include <QGraphicsItem>
 #include <QString>
 #include <QSettings>
+#include <QTableWidget>
 
 #include "basegraphicitem.h"
 
@@ -76,6 +77,8 @@ public :
     //creates lists of points and legends from Strings comma separates
     void SetCoord( const QString &str);
     void SetLegend( const QString &str);
+    void SetColors( const QTableWidget *);
+
 
 };
 

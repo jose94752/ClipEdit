@@ -121,6 +121,12 @@ void GraphsInfo::SetLegend( const QString &val)
     m_Legends = val.split("," , QString::SkipEmptyParts);
 }
 
+// construct list of colors from QtableWidget
+void GraphsInfo::SetColors( const QTableWidget *)
+{
+    // legends
+    //m_Legends = val.split("," , QString::SkipEmptyParts);
+}
 
 
 // Constructor
