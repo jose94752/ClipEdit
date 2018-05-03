@@ -177,36 +177,53 @@
       <item row="0" column="1">
        <widget class="QLineEdit" name="lineEdit_lg_txt"/>
       </item>
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QLabel" name="label_13">
         <property name="text">
          <string>Font</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="2" column="1">
+       <widget class="QFontComboBox" name="fontComboBox_lg_font"/>
+      </item>
+      <item row="4" column="0">
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>Font Size</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Font Color</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="2">
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Orientation</string>
-          </property>
-         </widget>
-        </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Orientation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="spinBox_lg_size">
+        <property name="minimum">
+         <number>6</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="ColorButton" name="toolButton_color">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QComboBox" name="comboBox_lg_or"/>
         </item>
@@ -217,38 +234,38 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>18</width>
-            <height>18</height>
+            <width>40</width>
+            <height>20</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Position</string>
-          </property>
-         </widget>
-        </item>
+       </layout>
+      </item>
+      <item row="8" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QComboBox" name="comboBox_lg_pos"/>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
-      <item row="1" column="1">
-       <widget class="QFontComboBox" name="fontComboBox_lg_font"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="spinBox_lg_size">
-        <property name="minimum">
-         <number>6</number>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="ColorButton" name="toolButton_color">
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>...</string>
+         <string>Position</string>
         </property>
        </widget>
       </item>
