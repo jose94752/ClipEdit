@@ -66,6 +66,7 @@ public :
     QList<QString> m_Legends;
     QList<QColor> m_Colors;
 
+
     // Constructor
     GraphsInfo();
 

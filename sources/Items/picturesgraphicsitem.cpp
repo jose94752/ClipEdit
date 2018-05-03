@@ -27,9 +27,8 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos, lg_or);
+    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos, lg_or,img);
     setRect(QRectF(0, 0, width, height));
-    qDebug()<<"constructeur";
 }
 
 
@@ -276,7 +275,10 @@ void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
 {
     QString itemPath="item"+QString::number(indexItem);
     QVariant variantImage=settings->value(itemPath+"/image");
-    QPixmap img=variantImage.value<QPixmap>();
+    img=variantImage.value<QPixmap>();
+    QPainter *painter=new QPainter();
+    QStyleOptionGraphicsItem* option;
+    QWidget* widget;
     //QString path; voir remplacement
     height=settings->value(itemPath+"/height").toInt();
     width=settings->value(itemPath+"/width").toInt();
@@ -288,8 +290,6 @@ void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
     lg_color=settings->value(itemPath+"/lg_color").value<QColor>();
     lg_pos=settings->value(itemPath+"/lg_pos").toString();
     lg_or=settings->value(itemPath+"/lg_or").toString();
-    QPainter *painter=new QPainter();
-    QStyleOptionGraphicsItem* option;
-    QWidget *widget;
-    paint(painter,option,widget);
+    setRect(QRectF(0, 0, width, height));
+    paint(painter, option,widget);
 }
