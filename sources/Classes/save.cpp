@@ -27,17 +27,21 @@ Save::Save(QGraphicsScene* v_scene,QString v_filename)
 }
 
 ///constructor to save a project when filename is known
-Save::Save(QList<QGraphicsItem *> v_listItems){
+Save::Save(QList<QGraphicsItem *> v_listItems,QRectF v_rectf,QColor v_color){
     m_listItems=v_listItems;
     m_scene=0;
+    m_backgroundColor=v_color;
+    m_globalRectF=v_rectf;
 }
 
 ///constructor to save a file when filename is unknown (save as)
-Save::Save(QList<QGraphicsItem* > v_listItems,QString filename)
+Save::Save(QList<QGraphicsItem* > v_listItems,QString filename,QRectF v_rectf,QColor v_color)
 {
     current_filename=filename;
     m_listItems=v_listItems;
     m_scene=0;
+    m_backgroundColor=v_color;
+    m_globalRectF=v_rectf;
 }
 
 ///complete file extension .cle if extension is not present in the file name
@@ -68,6 +72,8 @@ void Save::save()
 {
     QSettings settings(current_filename,QSettings::IniFormat);
     settings.clear();
+    settings.setValue("backgroundColor",m_backgroundColor);
+    settings.setValue("globalRectF",m_globalRectF);
     countItems=0;
     foreach(QGraphicsItem *item,m_listItems){
         int type=item->type();
@@ -88,14 +94,15 @@ void Save::save()
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/height"),QString::number(height));
         }
         ArrowsGraphicsItem *arrow;
-        TextBoxItem *texteBox;
+        TextBoxItem *textBox;
         NumberedBulletGraphicItem *bullet;
         PicturesGraphicsItem *picturesItem;
         GraphsGraphicsItem *graphsItem;
         switch(type)
         {
             case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
-                //code
+                textBox=(TextBoxItem*)item;
+                textBox->getParameters(&settings,countItems);
             break;
             case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
                 arrow=(ArrowsGraphicsItem*)item;
@@ -123,10 +130,15 @@ void Save::save()
 }
 
 //open project function
-void Save::open()
+QGraphicsRectItem* Save::open()
 {
     int i;
     QSettings settings(current_filename,QSettings::IniFormat);
+    m_backgroundColor=settings.value("backgroundColor").value<QColor>();
+    m_globalRectF=settings.value("globalRectF").value<QRectF>();
+    m_scene->clear();
+    QGraphicsRectItem * borderSceneItem=m_scene->addRect(QRectF(m_globalRectF));
+    borderSceneItem->setBrush(m_backgroundColor);
     countItems=settings.value("nbItems").toInt();
     for(i=0;i<countItems;i++){
         QVariant varType=settings.value(QString("item").append(QString::number(i)).append("/baseGraphicItemType"));
@@ -142,15 +154,18 @@ void Save::open()
         QPointF pointf(QPoint(x,y));
         QRectF rect(x,y,width,height);
         ArrowsGraphicsItem *arrow;
-        TextBoxItem *texteBox;
+        TextBoxItem *textBox;
         NumberedBulletGraphicItem *bullet;
         PicturesGraphicsItem *picturesItem;
         GraphsGraphicsItem *graphsItem;
         switch(type)
         {
             case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
-                //texteBox=setTextBoxItem(&settings,i);
-                //m_scene->addItem(texteBox);
+                textBox=new TextBoxItem();
+                textBox->setParameters(&settings,i);
+                textBox->setPos(pointf);
+                textBox->setRect(QRectF(0,0,width,height));
+                m_scene->addItem(textBox);
             break;
             case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
                 arrow=new ArrowsGraphicsItem(new FormArrows());
@@ -163,21 +178,25 @@ void Save::open()
                 bullet=new NumberedBulletGraphicItem();
                 bullet->setParameters(&settings,i);
                 bullet->setPos(pointf);
+                bullet->setRect(QRectF(0,0,width,height));
                 m_scene->addItem(bullet);
             break;
             case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
                 picturesItem=new PicturesGraphicsItem(new FormPictures());
                 picturesItem->setParameters(&settings,i);
                 picturesItem->setPos(pointf);
+                picturesItem->setRect(QRectF(0,0,width,height));
                 m_scene->addItem(picturesItem);
             break;
             case BaseGraphicItem::ChartGraphicsItem:
                 graphsItem=new GraphsGraphicsItem();
                 graphsItem->setParameters(&settings,i);
                 graphsItem->setPos(pointf);
+                graphsItem->setRect(QRectF(0,0,width,height));
                 m_scene->addItem(graphsItem);
             break;
         }
     }
+    return borderSceneItem;
 }
 
