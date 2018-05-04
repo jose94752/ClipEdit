@@ -68,8 +68,6 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_LineThickness = 4; // Temp for tests intial 1
     //qDebug() << "m_LineThickness =" << m_LineThickness;
 
-    //painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-
 
 
     // For test you must use a color because the default new QColor();
@@ -208,11 +206,10 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (qFuzzyCompare(line.length(), qreal(0.)))
         return;
 
-    QPen pen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-
     // Draw the line (next step)
     //painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     //painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    QPen pen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter->setPen(pen);
     painter->drawLine(line);
 
@@ -387,7 +384,7 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     m_ArrowWidth=settings->value(path+"ArrowWidth").toInt();
     m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
     m_LineThickness=settings->value(path+"LineThickness").toInt();
-    if(m_LineThickness<3) m_LineThickness=3;
+    //if(m_LineThickness<3) m_LineThickness=3;
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
 //    m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF(); // Bug cannot convert QPointF* to
 //    m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();     //  QPointF in assignement
