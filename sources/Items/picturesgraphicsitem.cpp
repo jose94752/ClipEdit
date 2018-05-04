@@ -18,6 +18,7 @@
 #include <QImage>
 #include <QRgb>
 #include <QFontMetrics>
+#include <QStyleOptionGraphicsItem>
 
 #include "picturesgraphicsitem.h"
 
@@ -90,7 +91,7 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 
     int pixelsWide_txt = fm.width(lg_txt);
     int pixelsHigh_txt = fm.height();
-    const QRect rect_txt = QRect(0, 0, pixelsWide_txt,  pixelsHigh_txt);
+    //const QRect rect_txt = QRect(0, 0, pixelsWide_txt,  pixelsHigh_txt);
 
     const QRect rect = QRect(0, 0, width, height);
     //const QRect rect1 = QRect( 0 - pixelsWide, 0 - pixelsHigh, width, height);
@@ -277,8 +278,8 @@ void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
     QVariant variantImage=settings->value(itemPath+"/image");
     img=variantImage.value<QPixmap>();
     QPainter *painter=new QPainter();
-    QStyleOptionGraphicsItem* option;
-    QWidget* widget;
+    QStyleOptionGraphicsItem option;
+    QWidget widget;
     //QString path; voir remplacement
     height=settings->value(itemPath+"/height").toInt();
     width=settings->value(itemPath+"/width").toInt();
@@ -290,5 +291,5 @@ void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
     lg_color=settings->value(itemPath+"/lg_color").value<QColor>();
     lg_pos=settings->value(itemPath+"/lg_pos").toString();
     lg_or=settings->value(itemPath+"/lg_or").toString();
-    paint(painter, option,widget);
+    paint(painter, &option, &widget);
 }

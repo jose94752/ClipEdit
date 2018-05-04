@@ -255,7 +255,7 @@ void FormPictures::initWithImage(QPixmap file_image)
 {
     /*QString fileName = v_path;
 
-    /*QPixmap file_image (fileName);*/
+      QPixmap file_image (fileName);*/
 
     int h;
     int w;

@@ -145,13 +145,8 @@ class MainWindow
 
         // Settings
         void showPreferences();
-<<<<<<< HEAD
-        void preferencesChanged();
 
-
-=======
         void applyPreferences();
->>>>>>> e16124144dbd6f84f89fd2211cddb00ea0555fb7
 };
 
 #endif

@@ -662,7 +662,7 @@ void BaseGraphicItem::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
     }
 }
 
-void BaseGraphicItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)
+void BaseGraphicItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* /*event*/)
 {
     QApplication::restoreOverrideCursor();
 }

@@ -62,13 +62,12 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
-<<<<<<< HEAD
-    //new signals
-//    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
-//    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
-=======
-    applyPreferences();
->>>>>>> e16124144dbd6f84f89fd2211cddb00ea0555fb7
+
+//  new signals
+//  connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
+//  connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
+
+//  applyPreferences();
 }
 
 

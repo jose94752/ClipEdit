@@ -341,7 +341,7 @@ void ResizeSceneDialog::saveDefaultTheme()
     }
 }
 
-void ResizeSceneDialog::resizeEvent(QResizeEvent* event)
+void ResizeSceneDialog::resizeEvent(QResizeEvent* /*event*/)
 {
     int buttonwidth = ui->doubleSpinBoxWidth->width();
     ui->colorButton->setMinimumWidth(buttonwidth);

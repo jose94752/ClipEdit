@@ -332,7 +332,7 @@ void FormScreenshots::loadFromItem(BaseGraphicItem* item) const
  {
     if (qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item))
     {
-        ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
+        //ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
 
         // Load data into the form
     }
