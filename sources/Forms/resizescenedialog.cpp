@@ -26,12 +26,13 @@
 
 QString ResizeSceneDialog::m_format="A4";
 
-ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor,bool isNew, QWidget* parent)
+ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor,bool isNew,bool *resized, QWidget* parent)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
 {
     if (!vscene)
         close();
+    m_resized=resized;
 
     ui->setupUi(this);
 
@@ -195,7 +196,7 @@ void ResizeSceneDialog::sizeChanged()
     foreach(QGraphicsItem* item, items){
         scene2.addItem(item);
     }
-
+    *m_resized=true;
     m_scene->setSceneRect(QRectF(0,0,m_width+2,m_height+2));
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,m_width,m_height));
 

@@ -99,6 +99,8 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
+        bool m_resized;
+
         // Building
         void init();
         void buildMenu();

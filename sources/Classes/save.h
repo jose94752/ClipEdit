@@ -24,8 +24,8 @@ class Save
 {
 public:
     Save(QGraphicsScene*,QString);
-    Save(QList<QGraphicsItem *>,QRectF,QColor);
-    Save(QList<QGraphicsItem *>,QString,QRectF, QColor);
+    Save(QList<QGraphicsItem *>,QRectF,QRectF,QColor,bool);
+    Save(QList<QGraphicsItem *>,QString,QRectF,QRectF, QColor,bool);
     //QDomElement setLayer()
     static QString verifyExtension(QString,QString);
     static QString current_filename;
@@ -47,6 +47,8 @@ private:
     FormTextBoxes *m_formTextBoxes;
     QColor m_backgroundColor;
     QRectF m_globalRectF;
+    QRectF m_sceneRectF;
+    bool m_resized;
 };
 
 #endif // SAVE_H

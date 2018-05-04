@@ -209,6 +209,7 @@ void MainWindow::buildView()
     }
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
+    m_borderSceneItem->setBrush(Qt::white);
     if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
         m_borderSceneItem->setBrush(QColor(r,g,b,a));
     }
@@ -219,6 +220,7 @@ void MainWindow::buildView()
     ui->graphicsView->viewport()->installEventFilter(this);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
+    m_resized=false;
 }
 
 
@@ -292,7 +294,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeScene()
 {
-    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false, this);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false,&m_resized, this);
     scenedialog.exec();
 }
 
@@ -300,11 +302,11 @@ void MainWindow::slotNew(bool)
 {
     if (m_scene.items().count() > 1)
     {
-        DialogSave dialogSave(m_scene.items(),m_borderSceneItem,this);
+        DialogSave dialogSave(m_scene.items(),m_scene.sceneRect(),m_borderSceneItem,this);
         dialogSave.exec();
     }
 
-    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, this);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, &m_resized,this);
     scenedialog.exec();
     QRectF rectf = m_borderSceneItem->rect();
     QBrush brush = m_borderSceneItem->brush();
@@ -601,7 +603,7 @@ void MainWindow::openFile(bool)
 
 void MainWindow::save(bool)
 {
-    Save save(this->m_scene.items(),m_borderSceneItem->rect(),m_borderSceneItem->brush().color());
+    Save save(this->m_scene.items(),m_borderSceneItem->rect(),m_scene.sceneRect(),m_borderSceneItem->brush().color(),m_resized);
     save.save();
 }
 
@@ -622,7 +624,7 @@ void MainWindow::saveAs(bool)
         else
         {
             ui->actionSave->setEnabled(true);
-            Save save(this->m_scene.items(), extfilename,m_borderSceneItem->rect(),m_borderSceneItem->brush().color());
+            Save save(this->m_scene.items(), extfilename,m_scene.sceneRect(),m_borderSceneItem->rect(),m_borderSceneItem->brush().color(),m_resized);
             save.save();
         }
     }
