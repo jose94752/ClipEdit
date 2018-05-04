@@ -90,6 +90,7 @@ void Save::save()
         QRectF rect=item->boundingRect();
         double x,y,width,height;
         rect.getRect(&x,&y,&width,&height);
+        height-=30;
         QPoint pos=item->pos().toPoint();
         if(m_resized){
             x=pos.x()-m_sceneRectF.width()/2;
@@ -115,6 +116,8 @@ void Save::save()
             case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
                 textBox=(TextBoxItem*)item;
                 textBox->getParameters(&settings,countItems);
+                height-=5;
+                settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/height"),QString::number(height));
             break;
             case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
                 arrow=(ArrowsGraphicsItem*)item;

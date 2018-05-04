@@ -666,6 +666,7 @@ void MainWindow::openFile(bool)
     {
         Save save(&m_scene, fileName);
         m_borderSceneItem=save.open();
+        ui->actionSave->setEnabled(true);
     }
 }
 
