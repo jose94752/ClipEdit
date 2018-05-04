@@ -164,9 +164,9 @@ void FormScreenshots::goCapture()
 {
     static int count = 0;
 
-    this->hide();
+//  this->hide();
 
-    if(ui->pushButtonCapture->isChecked()) {
+//  if(ui->pushButtonCapture->isChecked()) {
        QScreen *screen = QGuiApplication::primaryScreen();
        QPixmap m_pix = screen->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
                      QApplication::desktop()->height());
@@ -185,8 +185,8 @@ void FormScreenshots::goCapture()
        emit signalBackground(m_pix);
 
       count++;
-       }
-    this->show();
+//   }
+//  this->show();
 }
 
 
