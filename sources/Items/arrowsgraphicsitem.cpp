@@ -30,7 +30,9 @@
 // Zone de travaux
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
+
 {
+    QPen pen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     m_formArrows = ptrFormArrows;
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
@@ -53,9 +55,8 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_EndPositionItem =  endItem.{à définir}scenePos();
 
     m_StartPositionItem = new QPointF(-50, -50);
-    //*m_StartPositionItem = m_rect.topLeft(); // Test
     m_EndPositionItem = new QPointF(100, 100);
-    //*m_EndPositionItem = m_rect.bottomRight(); // Test
+
 
     //
     // The scene QPointF for future using to calculate if the resize of Arrows is enable
@@ -70,6 +71,16 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
 
     m_Color = Qt::black; // Temp for test
     arrowHeadSize = 35; // Temp for tests intial 10
+
+
+    qDebug() << "m_LineThickness =" << m_LineThickness;
+    // To Do Set the new Line Thickness
+    //m_LineThickness = 4; // Temp for tests intial 1
+    //qDebug() << "m_LineThickness =" << m_LineThickness;
+
+    //painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+
+
 
     // For test you must use a color because the default new QColor();
     // constructor Constructs an invalid color with the RGB value (0, 0, 0).
@@ -184,17 +195,8 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
 
-//    m_StartPositionItem = new QPointF();
-    *m_StartPositionItem = m_rect.topLeft(); // Test
-//    m_EndPositionItem = new QPointF();
-    *m_EndPositionItem = m_rect.bottomRight(); // Test
-
-    //m_Color = Qt::black; // Test
-
-//    m_StartPositionItem = new QPointF();
-//    *m_StartPositionItem = m_rect.topLeft(); // Test
-//    m_EndPositionItem = new QPointF();
-//    *m_EndPositionItem = m_rect.bottomRight(); // Test
+    *m_StartPositionItem = m_rect.topLeft();
+    *m_EndPositionItem = m_rect.bottomRight();
 
     // Testing if you have at least the StartPosition and EndPositionItem is one missing
     // we return and nothing is display.
@@ -216,12 +218,12 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (qFuzzyCompare(line.length(), qreal(0.)))
         return;
 
-    // Set the Line Thickness
-    m_LineThickness = 4; // Temp for tests intial 1
+
 
     // Draw the line (next step)
     //painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    //painter->setPen(QPen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter->setPen(pen);
     painter->drawLine(line);
 
     // Draw the arrows

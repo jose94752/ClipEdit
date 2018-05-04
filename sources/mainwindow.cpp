@@ -416,6 +416,7 @@ void MainWindow::slotArrowsGraphicsItem()
                                 //To do others HeadTypeChoiceContents
                                 // comboBoxHeadTypeChoiceContents
 
+    qDebug() << "LineThickness =" << LineThickness;
 
 
     // Define new ArrowsGraphicsItem on the scene
@@ -462,13 +463,13 @@ void MainWindow::slotArrowsGraphicsItem()
     Max_Xpos = scene_BottomRight.x() - scene_TopLeft.x();
     //qDebug()<< "Max_Xpos =" << Max_Xpos;
 
-/*  // Work on progress
-    // if (ArrowWidth > Max_XPos)
-    //      ArrowWidth = Max_XPos;
+    // Work on progress
+     if (ArrowWidth > Max_Xpos)
+          ArrowWidth = Max_Xpos;
 
-    // if (ArrowHeight > Max_YPos)
-    //      ArrowHeight = Max_YPos;
-*/
+     if (ArrowHeight > Max_Ypos)
+          ArrowHeight = Max_Ypos;
+
     Min_Ypos = scene_TopLeft.y();
     qDebug()<< "Min_Ypos =" << Min_Ypos;
     Min_Xpos = scene_TopLeft.x();

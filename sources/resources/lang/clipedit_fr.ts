@@ -281,7 +281,7 @@
     <message>
         <location filename="../../Forms/formlayers.cpp" line="73"/>
         <source>Visibility</source>
-        <translation>Visibilité</translation>
+        <translation>Visible</translation>
     </message>
     <message>
         <location filename="../../Forms/formlayers.cpp" line="73"/>
