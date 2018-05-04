@@ -34,7 +34,10 @@
 ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QPixmap pix, QGraphicsItem *parent)
         : BaseGraphicItem(parent)
  {
-    Q_UNUSED(pix)
+   // Q_UNUSED(pix)
+
+    m_pix = pix;
+
 
     setFlag(BaseGraphicItem::ItemIsSelectable, true);
 
@@ -58,9 +61,12 @@ void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphic
         Q_UNUSED(option)
         Q_UNUSED(widget)
 
-     qDebug() << "screenshot case";
+       // painter->drawPixmap(m_rect_sc.toRect(),m_pix);
+       painter->drawPixmap(m_rect_sc.toRect(),  m_pix);
 
-     painter->fillRect(boundingRect(), Qt::red);
+
+
+
 
 }
 
@@ -75,20 +81,20 @@ int ScreenshotsGraphicsItem::type() const{
 // Getters and setters
 // -------------------
 
-//void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
-//{
-//    if(rect == m_rect_sc)  return;
+void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
+{
+    if(rect == m_rect_sc)  return;
 
-//    //This call is important to inform the scene about the coming geometry change.
-//    //prepareGeometryChange();
-//    //m_rect_sc = rect;
-//}
+    //This call is important to inform the scene about the coming geometry change.
+    //prepareGeometryChange();
+    m_rect_sc = rect;
+}
 
 
-//QRectF ScreenshotsGraphicsItem::getRect()
-//{
-//    return m_rect_sc;
-//}
+QRectF ScreenshotsGraphicsItem::getRect()
+{
+    return m_rect_sc;
+}
 
 
 

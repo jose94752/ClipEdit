@@ -130,8 +130,9 @@ class MainWindow
         void slotGraphs();
         void slotArrowsGraphicsItem();
 
-        //
-        void setBackground(const QPixmap& pix);
+        //slot for screenshot
+        void slotBackground(QPixmap);
+
 
         void itemSelected();
 
@@ -141,6 +142,8 @@ class MainWindow
         // Settings
         void showPreferences();
         void preferencesChanged();
+
+
 };
 
 #endif

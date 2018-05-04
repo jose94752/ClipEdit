@@ -42,7 +42,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     init();
-}
+    //connect
+
+  }
 
 
 MainWindow::~MainWindow()
@@ -61,8 +63,8 @@ void MainWindow::init()
     buildToolBar();
     buildView();
     //new signals
-    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
-    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
+//    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
+//    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
 }
 
 
@@ -115,9 +117,10 @@ void MainWindow::buildForms()
     connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
     connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
     connect( m_formCharts, SIGNAL(FormCreateChart() ), this, SLOT(slotGraphs()));
+
     //connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
     connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-    connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
+    connect(m_formScreenshots, SIGNAL(signalBackground(QPixmap)), this, SLOT(slotBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Building the stacked widget
@@ -390,19 +393,14 @@ void MainWindow::slotArrowsGraphicsItem()
     m_scene.addItem(ArrowItem);
 }
 
-
-void MainWindow::setBackground(const QPixmap& pix)
+void MainWindow::slotBackground(QPixmap pix)
 {
-     //Get screen background.
-    qDebug () << "msg from the mainWindow slot of the Screenshot";
 
-    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
+    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(pix);
     m_scene.addItem(sc);
-
-    m_height=pix.height();
-    m_width=pix.width();
-    this->adjustSize();
 }
+
+
 
 void MainWindow::itemSelected()
 {
