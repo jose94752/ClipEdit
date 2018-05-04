@@ -40,7 +40,7 @@
 // -----------------------
 
 FormScreenshots::FormScreenshots(QWidget* parent)
-    :   BaseForm(parent), ui(new Ui::FormScreenshots)
+    :   BaseFormItem(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
 
@@ -66,13 +66,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     m_timer->setInterval(100);
 
     m_timer->start();
-
-    //connect for Cancel button
-    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
-            this, SLOT(quit()));
-
-
-
 
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
@@ -118,9 +111,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //setCursor(Qt::CrossCursor);
 
     //connect pour tempo: option
-
-    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
-            this, SLOT(close()));
 }
 
 FormScreenshots::~FormScreenshots()
@@ -166,6 +156,10 @@ void FormScreenshots::CaptureDesktop()
 //2
 void FormScreenshots::CaptureArea(bool val, QRectF area)
 {
+    // TMP
+    Q_UNUSED(val)
+    Q_UNUSED(area)
+
 //    this->close();
 //    if (val)
 //    {
@@ -253,6 +247,9 @@ void FormScreenshots::snapshot()
 
 void FormScreenshots::mousePressEvent(QMouseEvent *event)
 {
+    // TMP
+    Q_UNUSED(event)
+
     //Whole screen capture
    // CaptureWholeScreen();
 
@@ -299,7 +296,9 @@ void FormScreenshots::mousePressEvent(QMouseEvent *event)
 
 void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
 {
+    // TMP
     Q_UNUSED(event)
+
 //    QPoint m_point1;
 //    m_point1 = event->globalPos();//get global position according to ur parent-child relationship
 //    QPainter m_painter(this);
@@ -360,7 +359,7 @@ void FormScreenshots::loadFromItem(BaseGraphicItem* item) const
 {
     if (qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item))
     {
-        ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
+        //ScreenshotsGraphicsItem* castedItem = qgraphicsitem_cast<ScreenshotsGraphicsItem*>(item);
 
         // Load data into the form
     }
@@ -374,6 +373,13 @@ void FormScreenshots::retranslate()
     ui->retranslateUi(this);
 }
 
+// Getter add button
+// -----------------
+
+const QPushButton* FormScreenshots::getAddButton() const
+{
+    return ui->pushButtonCapture;
+}
 
 
 

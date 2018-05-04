@@ -23,16 +23,26 @@
 #include "ui_mainwindow.h"
 
 #include "Classes/save.h"
-#include "Forms/resizescenedialog.h"
-#include "Forms/dialogsave.h"
-#include "Forms/formscreenshots.h"
-#include "dialogpreferences.h"
+
 #include "Items/picturesgraphicsitem.h"
 #include "Items/numberedbulletgraphicitem.h"
 #include "Items/textboxitem.h"
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
+
+#include "Forms/resizescenedialog.h"
+#include "Forms/dialogsave.h"
+#include "Forms/baseformitem.h"
+#include "Forms/formarrows.h"
+#include "Forms/formcharts.h"
+#include "Forms/formcliparts.h"
+#include "Forms/formlayers.h"
+#include "Forms/formnumberedbullets.h"
+#include "Forms/formpictures.h"
+#include "Forms/formscreenshots.h"
+#include "Forms/formtextboxes.h"
+#include "Items/numberedbulletgraphicitem.h"
 
 // Constructor, destructor
 // -----------------------
@@ -60,6 +70,8 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
+
+    fillDynamicStrings();
     applyPreferences();
 }
 
@@ -67,55 +79,53 @@ void MainWindow::init()
 void MainWindow::buildMenu()
 {
     // Connects
-    connect(ui->actionSave,             SIGNAL( triggered(bool) ),  this,   SLOT( save(bool) ));
-    connect(ui->actionSaveAs,           SIGNAL( triggered(bool) ),  this,   SLOT( saveAs(bool) ));
-    connect(ui->actionOpen,             SIGNAL( triggered(bool) ),  this,   SLOT( openFile(bool) ));
-    connect(ui->actionExportAs,         SIGNAL( triggered(bool) ),  this,   SLOT( exportView(bool) ));
-    connect(ui->actionNew,              SIGNAL( triggered(bool) ),  this,   SLOT( slotNew(bool) ));
-    connect(ui->actionPreferences,      SIGNAL( triggered(bool) ),  this,   SLOT( showPreferences()));
-    connect(ui->actionQuit,             SIGNAL( triggered(bool) ),  this,   SLOT( close() ));
+    connect(ui->actionSave,                 SIGNAL(triggered(bool)),    this,                 SLOT(save(bool)));
+    connect(ui->actionSaveAs,               SIGNAL(triggered(bool)),    this,                 SLOT(saveAs(bool)));
+    connect(ui->actionOpen,                 SIGNAL(triggered(bool)),    this,                 SLOT(openFile(bool)));
+    connect(ui->actionExportAs,             SIGNAL(triggered(bool)),    this,                 SLOT(exportView(bool)));
+    connect(ui->actionNew,                  SIGNAL(triggered(bool)),    this,                 SLOT(slotNew(bool)));
+    connect(ui->actionPreferences,          SIGNAL(triggered(bool)),    this,                 SLOT(showPreferences()));
+    connect(ui->actionQuit,                 SIGNAL(triggered(bool)),    this,                 SLOT(close()));
 
-    connect(ui->actionArrow,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionChart,            SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionClipart,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionNumberedBullets,  SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionPicture,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionScreenshot,       SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionTextBox,          SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionLayers,           SIGNAL( triggered(bool) ),  this,   SLOT( actionClicked(bool) ));
-    connect(ui->actionAbout,            SIGNAL( triggered(bool) ),  this,   SLOT( showAboutDialog(bool) ));
+    connect(ui->actionArrow,                SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionChart,                SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionClipart,              SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionNumberedBullets,      SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionPicture,              SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionScreenshot,           SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionTextBox,              SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionLayers,               SIGNAL(triggered(bool)),    this,                 SLOT(actionClicked(bool)));
+    connect(ui->actionAbout,                SIGNAL(triggered(bool)),    this,                 SLOT(showAboutDialog(bool)));
 
-    connect(ui->actionResize,           SIGNAL( triggered(bool) ),  this,               SLOT( resizeScene() ));
-    connect(ui->actionContentToView,    SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( contentToView() ));
-    connect(ui->actionClear,            SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( clear() ));
-    connect(ui->actionSetBackgroundColor, SIGNAL( triggered(bool) ),  ui->graphicsView,   SLOT( changeBackgroundColor()));
+    connect(ui->actionResize,               SIGNAL(triggered(bool)),    this,                 SLOT(resizeScene()));
+    connect(ui->actionContentToView,        SIGNAL(triggered(bool)),    ui->graphicsView,     SLOT(contentToView()));
+    connect(ui->actionClear,                SIGNAL(triggered(bool)),    ui->graphicsView,     SLOT(clear()));
+    connect(ui->actionSetBackgroundColor,   SIGNAL(triggered(bool)),    ui->graphicsView,     SLOT(changeBackgroundColor()));
 
     ui->actionSave->setDisabled(true);
 }
 
 void MainWindow::buildForms()
 {
-    m_formArrows = new FormArrows();
-    m_formCharts = new FormCharts();
-    m_formCliparts = new FormCliparts();
-    m_formLayers = new FormLayers();
-    m_formBullets = new FormNumberedBullets();
-    m_formPictures = new FormPictures();
-    m_formScreenshots = new FormScreenshots();
-    m_formTextboxes = new FormTextBoxes();
+    FormArrows* formArrows = new FormArrows();
+    FormCharts* formCharts = new FormCharts();
+    FormCliparts* formCliparts = new FormCliparts();
+    FormLayers* formLayers = new FormLayers();
+    FormNumberedBullets* formBullets = new FormNumberedBullets();
+    FormPictures* formPictures = new FormPictures();
+    FormScreenshots* formScreenshots = new FormScreenshots();
+    FormTextBoxes* formTextboxes = new FormTextBoxes();
 
-    m_formLayers->setScene(m_scene);
+    formLayers->setScene(m_scene);
 
     // Item connects
-    connect(m_formArrows->getAddPushButtonArrow(),SIGNAL(clicked(bool)),this,SLOT(slotArrowsGraphicsItem()));
-    connect(m_formPictures, SIGNAL(picture_changed()) , this, SLOT(slotTextPicture()));
-    connect(m_formBullets->getGoPushButton(),SIGNAL(clicked(bool)), SLOT(slotNumberedBullets()));
-    connect(m_formTextboxes->getAddButton(), SIGNAL(clicked(bool)), this, SLOT(slotTextBoxes()));
-    connect(ui->actionChart, SIGNAL(triggered(bool)), this, SLOT(slotGraphs()));
-    connect( m_formCharts, SIGNAL(FormCreateChart() ), this, SLOT(slotGraphs()));
-    //connect(m_formCharts, SIGNAL(FormCreateChart( const GraphsInfo&)), this, SLOT(slotGraphs( const GraphsInfo&)));
-    connect(ui->actionArrow, SIGNAL(triggered(bool)),this,SLOT(slotArrowsGraphicsItem()));
-    connect(m_formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
+    connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
+    connect(formPictures->getAddButton(),   SIGNAL(clicked(bool)),  this,   SLOT(slotTextPicture()));
+    connect(formBullets->getAddButton(),    SIGNAL(clicked(bool)),  this,   SLOT(slotNumberedBullets()));
+    connect(formTextboxes->getAddButton(),  SIGNAL(clicked(bool)),  this,   SLOT(slotTextBoxes()));
+    connect(formCharts->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotGraphs()));
+    connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
+    connect(formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Building the stacked widget
@@ -127,24 +137,34 @@ void MainWindow::buildForms()
         widget->deleteLater();
     }
 
-    // Add forms and store the indexes
-    m_listIndexes.insert(BUTTON_ID_ARROW, ui->stackedWidgetForms->addWidget(m_formArrows));
-    m_listIndexes.insert(BUTTON_ID_CHART, ui->stackedWidgetForms->addWidget(m_formCharts));
-    m_listIndexes.insert(BUTTON_ID_BULLET, ui->stackedWidgetForms->addWidget(m_formBullets));
-    m_listIndexes.insert(BUTTON_ID_CLIPART, ui->stackedWidgetForms->addWidget(m_formCliparts));
-    m_listIndexes.insert(BUTTON_ID_PICTURE, ui->stackedWidgetForms->addWidget(m_formPictures));
-    m_listIndexes.insert(BUTTON_ID_TEXTBOX, ui->stackedWidgetForms->addWidget(m_formTextboxes));
-    m_listIndexes.insert(BUTTON_ID_SCREENSHOT, ui->stackedWidgetForms->addWidget(m_formScreenshots));
-    m_listIndexes.insert(BUTTON_ID_LAYERS, ui->stackedWidgetForms->addWidget(m_formLayers));
+    // Add forms to the stacked widget
+    ui->stackedWidgetForms->addWidget(formArrows);
+    ui->stackedWidgetForms->addWidget(formCharts);
+    ui->stackedWidgetForms->addWidget(formBullets);
+    ui->stackedWidgetForms->addWidget(formCliparts);
+    ui->stackedWidgetForms->addWidget(formPictures);
+    ui->stackedWidgetForms->addWidget(formTextboxes);
+    ui->stackedWidgetForms->addWidget(formScreenshots);
+    ui->stackedWidgetForms->addWidget(formLayers);
 
-    // items <-> forms association
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::ArrowGraphicsItem, m_formArrows);
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::ChartGraphicsItem, m_formCharts);
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem, m_formBullets);
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::ClipartGraphicsItem, m_formCliparts);
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::PictureGraphicsItem, m_formPictures);
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::TextBoxGraphicsItem, m_formTextboxes);
-    m_itemForms.insert(BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem, m_formScreenshots);
+    // Store forms by button id
+    m_forms.insert(BUTTON_ID_ARROW, formArrows);
+    m_forms.insert(BUTTON_ID_CHART, formCharts);
+    m_forms.insert(BUTTON_ID_BULLET, formBullets);
+    m_forms.insert(BUTTON_ID_CLIPART, formCliparts);
+    m_forms.insert(BUTTON_ID_PICTURE, formPictures);
+    m_forms.insert(BUTTON_ID_TEXTBOX, formTextboxes);
+    m_forms.insert(BUTTON_ID_SCREENSHOT, formScreenshots);
+    m_forms.insert(BUTTON_ID_LAYERS, formLayers);
+
+    // Bind item types to button id
+    m_bounds.insert(BaseGraphicItem::CustomTypes::ArrowGraphicsItem, BUTTON_ID_ARROW);
+    m_bounds.insert(BaseGraphicItem::CustomTypes::ChartGraphicsItem, BUTTON_ID_CHART);
+    m_bounds.insert(BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem, BUTTON_ID_BULLET);
+    m_bounds.insert(BaseGraphicItem::CustomTypes::ClipartGraphicsItem, BUTTON_ID_CLIPART);
+    m_bounds.insert(BaseGraphicItem::CustomTypes::PictureGraphicsItem, BUTTON_ID_PICTURE);
+    m_bounds.insert(BaseGraphicItem::CustomTypes::TextBoxGraphicsItem, BUTTON_ID_TEXTBOX);
+    m_bounds.insert(BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem, BUTTON_ID_SCREENSHOT);
 
     ui->stackedWidgetForms->setCurrentIndex(0);
 }
@@ -166,7 +186,6 @@ void MainWindow::buildToolBar()
     m_spinBoxZoom->setSingleStep(10);
     m_spinBoxZoom->setSuffix("%");
     m_spinBoxZoom->setAlignment(Qt::AlignHCenter);
-    m_spinBoxZoom->setToolTip(tr("Zoom level"));
     connect(m_spinBoxZoom, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setZoomLevel(int)));
 
     ui->toolBar->addWidget(m_spinBoxZoom);
@@ -174,44 +193,30 @@ void MainWindow::buildToolBar()
 
 void MainWindow::buildView()
 {
-    QDesktopWidget *deskWidget=QApplication::desktop();
-    int dpix=deskWidget->logicalDpiX();
-    int dpiy=deskWidget->logicalDpiY();
-    int width=210*dpix/25.4;
-    int height=297*dpiy/25.4;
-    QString format="None";
     QSettings s;
-    int l_width,l_height;
-    QString l_format;
-    l_width=-1;
-    l_height=-1;
-    l_format="";
-    l_width=s.value("sceneWidth",l_width).toInt();
-    l_height=s.value("sceneHeight",l_height).toInt();
-    l_format=s.value("sceneFormat",l_format).toString();
-    int r,g,b,a;
-    r=-1;
-    g=-1;
-    b=-1;
-    a=-1;
-    r=s.value("sceneColor/r",r).toInt();
-    g=s.value("sceneColor/g",g).toInt();
-    b=s.value("sceneColor/b",b).toInt();
-    a=s.value("sceneColor/a",a).toInt();
-    if(l_width!=-1){
-        width=l_width;
-    }
-    if(l_height!=-1){
-        height=l_height;
-    }
-    if(l_format!=""){
-        format=l_format;
-    }
+
+    // Screen dpi
+    QDesktopWidget* deskWidget = QApplication::desktop();
+    int dpix = deskWidget->logicalDpiX();
+    int dpiy = deskWidget->logicalDpiY();
+
+    // Size and format
+    int default_width = 210*dpix/25.4;
+    int default_height = 297*dpiy/25.4;
+    QString default_format="None";
+    int width = s.value("sceneWidth", default_width).toInt();
+    int height = s.value("sceneHeight", default_height).toInt();
+    QString format = s.value("sceneFormat", default_format).toString();
+
+    // Rect color
+    int r = s.value("sceneColor/r", 0).toInt();
+    int g = s.value("sceneColor/g", 0).toInt();
+    int b = s.value("sceneColor/b", 0).toInt();
+    int a = s.value("sceneColor/a", 1).toInt();
+
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
-    m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
-    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
-        m_borderSceneItem->setBrush(QColor(r,g,b,a));
-    }
+    m_borderSceneItem = m_scene.addRect(QRectF(-width/2, -height/2, width, height));
+    m_borderSceneItem->setBrush(QColor(r,g,b,a));
 
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
@@ -221,6 +226,10 @@ void MainWindow::buildView()
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
 }
 
+void MainWindow::fillDynamicStrings()
+{
+    m_spinBoxZoom->setToolTip(tr("Zoom level"));
+}
 
 // Events
 // ------
@@ -253,9 +262,14 @@ void MainWindow::changeEvent(QEvent* event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
+        // Translate main ui
         ui->retranslateUi(this);
 
-        foreach (BaseForm* bf, m_itemForms)
+        // Dynamic strings retranslation
+        fillDynamicStrings();
+
+        // Retranslate all forms
+        foreach (BaseForm* bf, m_forms)
         {
             bf->retranslate();
         }
@@ -272,21 +286,21 @@ void MainWindow::changeEvent(QEvent* event)
 void MainWindow::actionClicked(bool)
 {
     if (sender() == ui->actionArrow) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_ARROW]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_ARROW]);
     } else if (sender() == ui->actionChart) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_CHART]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_CHART]);
     } else if (sender() == ui->actionClipart) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_CLIPART]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_CLIPART]);
     } else if (sender() == ui->actionLayers) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_LAYERS]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_LAYERS]);
     } else if (sender() == ui->actionNumberedBullets) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_BULLET]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_BULLET]);
     } else if (sender() == ui->actionPicture) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_PICTURE]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_PICTURE]);
     } else if (sender() == ui->actionScreenshot) {
-        ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_SCREENSHOT]);
+        ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_SCREENSHOT]);
     } else if (sender() == ui->actionTextBox) {
-       ui->stackedWidgetForms->setCurrentIndex(m_listIndexes[BUTTON_ID_TEXTBOX]);
+       ui->stackedWidgetForms->setCurrentWidget(m_forms[BUTTON_ID_TEXTBOX]);
     }
 }
 
@@ -318,11 +332,20 @@ void MainWindow::slotNew(bool)
 ///creates bullets items from...to
 void MainWindow::slotNumberedBullets()
 {
+    FormNumberedBullets* form = 0;
+    if (m_forms.contains(BUTTON_ID_BULLET))
+    {
+        form = dynamic_cast<FormNumberedBullets*>(m_forms[BUTTON_ID_BULLET]);
+
+        if (!form)
+            return;
+    }
+
   int from (0), to (0), taille (0);
   int shape (0);
   QColor bulletcolor, numbercolor;
   QFont qfont;
-  m_formBullets->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
+  form->get_info(from, to, taille,  shape, bulletcolor, numbercolor, qfont);
   NumberedBulletGraphicItem* numberedBulletGraphicItem (NULL);
 
   if (to < from) {
@@ -352,8 +375,17 @@ void MainWindow::slotNumberedBullets()
 
 void MainWindow::slotTextBoxes()
 {
+    FormTextBoxes* form = 0;
+    if (m_forms.contains(BUTTON_ID_TEXTBOX))
+    {
+        form = dynamic_cast<FormTextBoxes*>(m_forms[BUTTON_ID_TEXTBOX]);
+
+        if (!form)
+            return;
+    }
+
     // Retrieve data from the form
-    QVariant data = m_formTextboxes->getItemData();
+    QVariant data = form->getItemData();
     TextBoxItem* item = new TextBoxItem();
     item->setItemData(data);
     m_scene.addItem(item);
@@ -361,23 +393,37 @@ void MainWindow::slotTextBoxes()
 
 void MainWindow::slotTextPicture()
 {
-    PicturesGraphicsItem* PictureItem = new PicturesGraphicsItem (m_formPictures);
+    FormPictures* form = 0;
+    if (m_forms.contains(BUTTON_ID_PICTURE))
+    {
+        form = dynamic_cast<FormPictures*>(m_forms[BUTTON_ID_PICTURE]);
+
+        if (!form)
+            return;
+    }
+
+    PicturesGraphicsItem* PictureItem = new PicturesGraphicsItem(form);
     m_scene.addItem(PictureItem);
 }
 
-
-// removed parametre
-void MainWindow::slotGraphs( )
+void MainWindow::slotGraphs()
 {
-    GraphsInfo infos;
+    FormCharts* form = 0;
+    if (m_forms.contains(BUTTON_ID_CHART))
+    {
+        form = dynamic_cast<FormCharts*>(m_forms[BUTTON_ID_CHART]);
+
+        if (!form)
+            return;
+    }
+
     // Retrieve data from the form
-    m_formCharts->GetChartsValues(infos);
+    GraphsInfo infos;
+    form->GetChartsValues(infos);
     int nbPoints = infos.m_Arcs.size();
     if( nbPoints > 0 )
     {
-        qDebug() << "added graph mainWindow Slot Graphs";
-
-        GraphsGraphicsItem *g = new GraphsGraphicsItem();
+        GraphsGraphicsItem* g = new GraphsGraphicsItem();
         g->setInfos(infos);
         m_scene.addItem(g);
      }
@@ -400,6 +446,15 @@ void MainWindow::slotGraphs( )
 ///
 void MainWindow::slotArrowsGraphicsItem()
 {
+    FormArrows* form = 0;
+    if (m_forms.contains(BUTTON_ID_ARROW))
+    {
+        form = dynamic_cast<FormArrows*>(m_forms[BUTTON_ID_ARROW]);
+
+        if (!form)
+            return;
+    }
+
 
     // Control of the size of scene vs size of the arrows
     bool WithoutAnchorPoint(true), OneAnchorPoint(false), TwoAnchorPoints(false);
@@ -407,7 +462,7 @@ void MainWindow::slotArrowsGraphicsItem()
     QColor ArrowOutlineColor, ArrowFillColor;
     int LineThickness(0), SizeHeadTypeChoice(0);
 
-    m_formArrows->GetInfosArrows(WithoutAnchorPoint, OneAnchorPoint, TwoAnchorPoints,
+    form->GetInfosArrows(WithoutAnchorPoint, OneAnchorPoint, TwoAnchorPoints,
                                  ArrowWidth, ArrowHeight,
                                  ArrowOutlineColor, ArrowFillColor,
                                  LineThickness, SizeHeadTypeChoice);
@@ -418,7 +473,7 @@ void MainWindow::slotArrowsGraphicsItem()
 
 
     // Define new ArrowsGraphicsItem on the scene
-    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(m_formArrows);
+    ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(form);
 
     QPointF scene_TopLeft (m_scene.sceneRect().topLeft());
     QPointF scene_BottomRight (m_scene.sceneRect().bottomRight());
@@ -509,14 +564,11 @@ void MainWindow::slotArrowsGraphicsItem()
 
 void MainWindow::setBackground(const QPixmap& pix)
 {
-     //Get screen background.
-    qDebug () << "msg from the mainWindow slot of the Screenshot";
-
-    ScreenshotsGraphicsItem  *sc = new ScreenshotsGraphicsItem (pix);
+    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(pix);
     m_scene.addItem(sc);
 
-    m_height=pix.height();
-    m_width=pix.width();
+    m_height = pix.height();
+    m_width = pix.width();
     this->adjustSize();
 }
 
@@ -527,7 +579,7 @@ void MainWindow::itemSelected()
     if (items.isEmpty())
         return;
 
-    if (ui->stackedWidgetForms->currentIndex() != m_listIndexes[BUTTON_ID_LAYERS])
+    if (ui->stackedWidgetForms->currentWidget() != m_forms[BUTTON_ID_LAYERS])
     {
         // Casting the first selected item
         QGraphicsItem* item = items[0];
@@ -539,11 +591,19 @@ void MainWindow::itemSelected()
         // Retrieve the type
         BaseGraphicItem::CustomTypes itemType = (BaseGraphicItem::CustomTypes)item->type();
 
-        if (m_itemForms.contains(itemType))
+        if (m_bounds.contains(itemType))
         {
-            // Use it to switch lateral form and load data into it
-            ui->stackedWidgetForms->setCurrentWidget(m_itemForms[itemType]);
-            m_itemForms[itemType]->loadFromItem(castedItem);
+            if (m_forms.contains(m_bounds[itemType]))
+            {
+                BaseFormItem* form = dynamic_cast<BaseFormItem*>(m_forms[m_bounds[itemType]]);
+
+                if (form)
+                {
+                    // Use it to switch lateral form and load data into it
+                    ui->stackedWidgetForms->setCurrentWidget(form);
+                    form->loadFromItem(castedItem);
+                }
+            }
         }
     }
     else
@@ -556,7 +616,15 @@ void MainWindow::itemSelected()
 // Layers
 void MainWindow::slotLayers()
 {
-    m_formLayers->updateLayers();
+    if (m_forms.contains(BUTTON_ID_LAYERS))
+    {
+        FormLayers* layers = dynamic_cast<FormLayers*>(m_forms[BUTTON_ID_LAYERS]);
+
+        if (layers)
+        {
+            layers->updateLayers();
+        }
+    }
 }
 
 void MainWindow::exportView(bool)

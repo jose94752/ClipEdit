@@ -28,11 +28,10 @@
 // -----------------------
 
 FormPictures::FormPictures(QWidget *parent)
-    :   BaseForm(parent), ui(new Ui::FormPictures)
+    :   BaseFormItem(parent), ui(new Ui::FormPictures)
 {
     ui->setupUi(this);
 
-    connect (ui->pushButton_ok,         SIGNAL(clicked(bool)), this, SLOT(validation_ok(bool)));
     connect (ui->toolButton_path,       SIGNAL(pressed()),     this, SLOT(chose_picture()));
     connect (ui->pushButton_save,       SIGNAL(clicked(bool)), this, SLOT(save_settings(bool)));
     connect (ui->pushButton_restore,    SIGNAL(clicked(bool)), this, SLOT(restore_settings(bool)));
@@ -51,7 +50,7 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or,QPixmap &pixmap)
+void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or,QPixmap &pixmap) const
 {
     path        = ui->lineEdit_pic_path->text();
     height      = ui->spinBox_pic_h->value();
@@ -98,13 +97,6 @@ void FormPictures::chose_picture()
   qDebug()<<"FORM: picture  changed, path ="  <<s;
 
 }
-
-
-void FormPictures::validation_ok(bool) {
-    emit picture_changed();
-}
-
-
 
 void FormPictures::save_settings(bool)
 {
@@ -218,30 +210,48 @@ void FormPictures::loadFromItem(BaseGraphicItem* item) const
 }
 
 
-void FormPictures::load_position(QString s){
+void FormPictures::load_position(const QString& s)
+{
+    ui->comboBox_lg_pos->clear();
 
-ui->comboBox_lg_pos->clear();
-
-if (s == "Horizontal") {
-    ui->comboBox_lg_pos->addItem(tr("Left"));
-    ui->comboBox_lg_pos->addItem(tr("Right"));
-    ui->comboBox_lg_pos->addItem(tr("HCenter"));
-    ui->comboBox_lg_pos->addItem(tr("Justify"));
-    ui->comboBox_lg_pos->addItem(tr("Top"));
-    ui->comboBox_lg_pos->addItem(tr("Bottom"));
-    ui->comboBox_lg_pos->addItem(tr("VCenter"));
-    ui->comboBox_lg_pos->addItem(tr("Center"));
+    if (s == "Horizontal")
+    {
+        ui->comboBox_lg_pos->addItem(tr("Left"));
+        ui->comboBox_lg_pos->addItem(tr("Right"));
+        ui->comboBox_lg_pos->addItem(tr("HCenter"));
+        ui->comboBox_lg_pos->addItem(tr("Justify"));
+        ui->comboBox_lg_pos->addItem(tr("Top"));
+        ui->comboBox_lg_pos->addItem(tr("Bottom"));
+        ui->comboBox_lg_pos->addItem(tr("VCenter"));
+        ui->comboBox_lg_pos->addItem(tr("Center"));
+    }
+    else if (s == "Vertical")
+    {
+        ui->comboBox_lg_pos->addItem(tr("Top Left"));
+        ui->comboBox_lg_pos->addItem(tr("Top Right"));
+        ui->comboBox_lg_pos->addItem(tr("Center Left"));
+        ui->comboBox_lg_pos->addItem(tr("Center Right"));
+        ui->comboBox_lg_pos->addItem(tr("Bottom Left"));
+        ui->comboBox_lg_pos->addItem(tr("Bottom Right"));
+    }
 }
-else if (s == "Vertical") {
-    ui->comboBox_lg_pos->addItem(tr("Top Left"));
-    ui->comboBox_lg_pos->addItem(tr("Top Right"));
-    ui->comboBox_lg_pos->addItem(tr("Center Left"));
-    ui->comboBox_lg_pos->addItem(tr("Center Right"));
-    ui->comboBox_lg_pos->addItem(tr("Bottom Left"));
-    ui->comboBox_lg_pos->addItem(tr("Bottom Right"));
-     }
-}
 
+void FormPictures::initWithImage(const QPixmap& image)
+{
+    /*QString fileName = v_path;
+
+    QPixmap file_image (fileName);*/
+
+    int h;
+    int w;
+    QString s;
+    h = image.height();
+    w = image.width();
+
+    ui->spinBox_pic_h->setValue(h);
+    ui->spinBox_pic_w->setValue(w);
+    s_file=image;
+}
 
 // Translation
 // -----------
@@ -251,19 +261,11 @@ void FormPictures::retranslate()
     ui->retranslateUi(this);
 }
 
-void FormPictures::initWithImage(QPixmap file_image)
+// Getter add button
+// -----------------
+
+const QPushButton* FormPictures::getAddButton() const
 {
-    /*QString fileName = v_path;
-
-    /*QPixmap file_image (fileName);*/
-
-    int h;
-    int w;
-    QString s;
-     h = file_image.height();
-     w = file_image.width();
-
-     ui->spinBox_pic_h->setValue(h);
-     ui->spinBox_pic_w->setValue(w);
-     s_file=file_image;
+    return ui->pushButton_ok;
 }
+

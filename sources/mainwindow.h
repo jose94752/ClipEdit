@@ -19,19 +19,12 @@
 #include <QRectF>
 #include <QTranslator>
 
-#include "Forms/formarrows.h"
-#include "Forms/formcharts.h"
-#include "Forms/formcliparts.h"
-#include "Forms/formlayers.h"
-#include "Forms/formnumberedbullets.h"
-#include "Forms/formpictures.h"
-#include "Forms/formscreenshots.h"
-#include "Forms/formtextboxes.h"
-#include "Items/numberedbulletgraphicitem.h"
 #include "Items/basegraphicitem.h"
 #include "dialogpreferences.h"
 
+class BaseForm;
 class QToolButton;
+class QSpinBox;
 
 // Forward declaration
 namespace Ui
@@ -76,22 +69,13 @@ class MainWindow
         Ui::MainWindow* ui;
 
         // Forms
-        FormArrows*          m_formArrows;
-        FormCharts*          m_formCharts;
-        FormCliparts*        m_formCliparts;
-        FormLayers*          m_formLayers;
-        FormNumberedBullets* m_formBullets;
-        FormPictures*        m_formPictures;
-        FormScreenshots*     m_formScreenshots;
-        FormTextBoxes*       m_formTextboxes;
-
-        QMap<e_BUTTON_IDS, int> m_listIndexes;
-        QMap<BaseGraphicItem::CustomTypes, BaseForm*> m_itemForms;
+        QMap<e_BUTTON_IDS, BaseForm*> m_forms;
+        QMap<BaseGraphicItem::CustomTypes, e_BUTTON_IDS> m_bounds;
 
         // Scene
         QGraphicsScene m_scene;
 
-        QGraphicsRectItem *m_borderSceneItem;
+        QGraphicsRectItem* m_borderSceneItem;
 
         // App translator
         QTranslator m_translator;
@@ -105,6 +89,9 @@ class MainWindow
         void buildToolBar();
         void buildForms();
         void buildView();
+
+        // Dynamic strings setter (for retranslation)
+        void fillDynamicStrings();
 
     protected:
 

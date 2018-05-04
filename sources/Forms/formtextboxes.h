@@ -13,7 +13,7 @@
 // Includes
 // --------
 
-#include "baseform.h"
+#include "baseformitem.h"
 
 class QPushButton;
 
@@ -27,7 +27,7 @@ namespace Ui
 // -----
 
 class FormTextBoxes
-    :   public BaseForm
+    :   public BaseFormItem
 {
     Q_OBJECT
 
@@ -38,7 +38,7 @@ class FormTextBoxes
         ~FormTextBoxes();
 
         // Getters and setters
-        const QPushButton* getAddButton();
+        const QPushButton* getAddButton() const;
 
         QVariant getItemData() const;
         //void setItemData(const QVariant& data);

@@ -19,22 +19,17 @@
 #include "ui_formcharts.h"
 
 FormCharts::FormCharts(QWidget* parent)
-    :   BaseForm(parent), ui(new Ui::FormCharts)
+    :   BaseFormItem(parent), ui(new Ui::FormCharts)
 {
     ui->setupUi(this);
 
-    QStringList types;
-    types  << "Pie" << "Line" << "Histogram"  ;
-    ui->qChartType->addItems(types);
-
     loadDefaultTheme();
 
-    connect(ui->qGo, SIGNAL(clicked(bool)), this, SLOT( createChart() ) );
     connect(ui->qSaveTheme, SIGNAL(clicked(bool)), this, SLOT(saveDefaultTheme()));
     connect(ui->qApplyTheme, SIGNAL(clicked(bool)), this, SLOT(loadDefaultTheme()));
 
- //   connect(ui->gGraphColors, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(tableColorChanged(QModelIndex) ) );
-    connect(ui->gGraphColors, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(tableColorChanged( QTableWidgetItem*) ) );
+    //connect(ui->gGraphColors, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(tableColorChanged(QModelIndex) ) );
+    connect(ui->gGraphColors, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(tableColorChanged(QTableWidgetItem*) ) );
 
 }
 
@@ -81,9 +76,8 @@ void FormCharts::tableColorChanged( QTableWidgetItem *tw)
     }
 }
 
-void FormCharts::GetChartsValues( GraphsInfo &infos)
+void FormCharts::GetChartsValues(GraphsInfo& infos)
 {
-
     infos.m_type = ui->qChartType->currentIndex();
     infos.m_title = ui->qTitle->text();
     infos.m_backColor = ui->qBackColor->getColor();
@@ -98,16 +92,6 @@ void FormCharts::GetChartsValues( GraphsInfo &infos)
     infos.SetColors( ui->gGraphColors );
 
 }
-
-
-
- void FormCharts::createChart()
- {
-     qDebug() << "charts" ;
-
-     emit FormCreateChart();
-
- }
 
 // Load data
 // ---------
@@ -144,9 +128,17 @@ void FormCharts::retranslate()
     ui->retranslateUi(this);
 }
 
+// Getter add button
+// -----------------
 
+const QPushButton* FormCharts::getAddButton() const
+{
+    return ui->qGo;
+}
 
-// SLOTS
+// Slots
+// -----
+
 // two icons on dialog, save and load
  void FormCharts::saveDefaultTheme ()
  {

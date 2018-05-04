@@ -24,18 +24,18 @@
 // -----------------------
 
 FormTextBoxes::FormTextBoxes(QWidget *parent)
-    :   BaseForm(parent), ui(new Ui::FormTextBoxes)
+    :   BaseFormItem(parent), ui(new Ui::FormTextBoxes)
 {
     ui->setupUi(this);
 
     // Build alignment comboboxes
-    ui->comboBoxHorizontalAlignment->addItem(QIcon(":/icons/icons/align-left-icon.png"), tr("Left"), Qt::AlignLeft);
-    ui->comboBoxHorizontalAlignment->addItem(QIcon(":/icons/icons/align-right-icon.png"), tr("Right"), Qt::AlignRight);
-    ui->comboBoxHorizontalAlignment->addItem(QIcon(":/icons/icons/align-hcentered-icon.png"), tr("Centered"), Qt::AlignHCenter);
+    ui->comboBoxHorizontalAlignment->setItemData(0, Qt::AlignLeft);
+    ui->comboBoxHorizontalAlignment->setItemData(1, Qt::AlignRight);
+    ui->comboBoxHorizontalAlignment->setItemData(2, Qt::AlignHCenter);
 
-    ui->comboBoxVerticalAlignment->addItem(QIcon(":/icons/icons/align-top-icon.png"), tr("Top"), Qt::AlignTop);
-    ui->comboBoxVerticalAlignment->addItem(QIcon(":/icons/icons/align-bottom-icon.png"), tr("Bottom"), Qt::AlignBottom);
-    ui->comboBoxVerticalAlignment->addItem(QIcon(":/icons/icons/align-vcentered-icon.png"), tr("Centered"), Qt::AlignVCenter);
+    ui->comboBoxVerticalAlignment->setItemData(0, Qt::AlignTop);
+    ui->comboBoxVerticalAlignment->setItemData(1, Qt::AlignBottom);
+    ui->comboBoxVerticalAlignment->setItemData(2, Qt::AlignVCenter);
 
     // Load default theme
     loadDefaultTheme();
@@ -108,7 +108,7 @@ void FormTextBoxes::loadDefaultTheme()
 // Getters and setters
 // -------------------
 
-const QPushButton* FormTextBoxes::getAddButton()
+const QPushButton* FormTextBoxes::getAddButton() const
 {
     return ui->pushButtonAdd;
 }
