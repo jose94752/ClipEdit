@@ -22,7 +22,7 @@
 // -----------------------
 
 FormNumberedBullets::FormNumberedBullets(QWidget *parent)
-    :   BaseForm(parent), ui(new Ui::FormNumberedBullets)
+    :   BaseFormItem(parent), ui(new Ui::FormNumberedBullets)
 {
     ui->setupUi(this);
     loadDefaultTheme();
@@ -50,7 +50,7 @@ void FormNumberedBullets::get_info (int& from, int& to, int& taille, int& shape,
     font = ui->fontComboBox->currentFont();
 }
 
-QPushButton *FormNumberedBullets::getGoPushButton()
+const QPushButton* FormNumberedBullets::getAddButton() const
 {
     return ui->pushButtonCreateBullet;
 }

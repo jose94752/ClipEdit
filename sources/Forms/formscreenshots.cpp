@@ -40,7 +40,7 @@
 // -----------------------
 
 FormScreenshots::FormScreenshots(QWidget* parent)
-    :   BaseForm(parent), ui(new Ui::FormScreenshots)
+    :   BaseFormItem(parent), ui(new Ui::FormScreenshots)
 {
     ui->setupUi(this);
 
@@ -66,13 +66,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     m_timer->setInterval(100);
 
     m_timer->start();
-
-    //connect for Cancel button
-    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
-            this, SLOT(quit()));
-
-
-
 
 
     //THis makes Qt delete this widget when the widget has accepted the close even.
@@ -119,9 +112,6 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
     //connect pour tempo: option
 
-    connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
-            this, SLOT(quit()));
-
     //goCapture
     connect(ui->radioButtonDeskcapture, SIGNAL(clicked(bool)),
              this, SLOT(goCapture()));
@@ -164,9 +154,9 @@ void FormScreenshots::goCapture()
 {
     static int count = 0;
 
-    this->hide();
+//  this->hide();
 
-    if(ui->pushButtonCapture->isChecked()) {
+//  if(ui->pushButtonCapture->isChecked()) {
        QScreen *screen = QGuiApplication::primaryScreen();
        QPixmap m_pix = screen->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
                      QApplication::desktop()->height());
@@ -185,8 +175,8 @@ void FormScreenshots::goCapture()
        emit signalBackground(m_pix);
 
       count++;
-       }
-    this->show();
+//   }
+//  this->show();
 }
 
 
@@ -197,19 +187,13 @@ void FormScreenshots::goCapture()
 /**
     //step1 : OK but not local screen shot.
     static int count = 0;
-
    if(ui->radioButtonDeskcapture->isChecked() ){
-
-
     connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
                                                         this, &FormScreenshots::snapshot) ;
-
     QPixmap pix;
     pix = QPixmap::grabWindow(QApplication::desktop()->winId());
-
     pix.save(QString("/home/formation/doCapture/screenshot%1.png").arg(count));
     count++;
-
     //qApp is global pointer referring to the unique application object.
    // QTimer::singleShot(100, qApp, SLOT(quit())); // close the app in 0,3 secs
  }
@@ -346,6 +330,13 @@ void FormScreenshots::retranslate()
     ui->retranslateUi(this);
 }
 
+// Getter add button
+// -----------------
+
+const QPushButton* FormScreenshots::getAddButton() const
+{
+    return ui->pushButtonCapture;
+}
 
 
 

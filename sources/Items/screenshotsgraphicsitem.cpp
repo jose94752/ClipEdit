@@ -10,19 +10,20 @@
 
 // Includes
 // --------
-#include<QGraphicsItem>
-#include <QGraphicsRectItem>
-#include<QRect>
-#include<QPainter>
-#include<QRectF>
-#include<QRect>
-#include<QPixmap>
-
-#include<QStyle>
-#include<QApplication>
-#include<QDesktopWidget>
-#include<QDebug>
 #include "screenshotsgraphicsitem.h"
+
+#include <QGraphicsItem>
+#include <QGraphicsRectItem>
+#include <QRect>
+#include <QPainter>
+#include <QRectF>
+#include <QRect>
+#include <QPixmap>
+
+#include <QStyle>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QDebug>
 
 // Constructor, destructor
 // -----------------------
@@ -58,11 +59,16 @@ QRectF ScreenshotsGraphicsItem::boundingRect() const
 
 void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-        Q_UNUSED(option)
-        Q_UNUSED(widget)
+        Q_UNUSED(option);
+        Q_UNUSED(widget);
+
+//      qDebug() << m_rect_sc;
 
        // painter->drawPixmap(m_rect_sc.toRect(),m_pix);
-       painter->drawPixmap(m_rect_sc.toRect(),  m_pix);
+       //painter->drawPixmap(m_rect_sc.toRect(),  m_pix);
+       painter->drawPixmap(((painter->viewport().width()  - m_pix.rect().width())  / 1.33333f),
+                           ((painter->viewport().height() - m_pix.rect().height()) * 1.66666f),
+                           m_pix);
 
 
 

@@ -18,6 +18,7 @@
 #include <QGraphicsScene>
 
 #include "Classes/layeritemmodel.h"
+#include "Forms/baseform.h"
 
 class QLabel;
 class QPushButton;
@@ -34,7 +35,7 @@ namespace Ui
 // -----
 
 class FormLayers
-    :   public QWidget
+    :   public BaseForm
 {
     Q_OBJECT
 
@@ -50,8 +51,8 @@ class FormLayers
         // Update
         void updateLayers();
 
-        // Retranslation (Note: all dynamic string should be defined here)
-        //void retranslateUi();
+        // Translation
+        void retranslate();
 
     private slots:
 
@@ -85,6 +86,7 @@ class FormLayers
 
         // Init
         void initForm();
+        void fillDynamicStrings();
 };
 
 #endif

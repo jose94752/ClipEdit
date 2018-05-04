@@ -58,7 +58,8 @@ SOURCES += \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
     graphicsview.cpp \
-    dialogpreferences.cpp
+    dialogpreferences.cpp \
+    Forms/baseformitem.cpp
 
 
 HEADERS += \
@@ -87,7 +88,8 @@ HEADERS += \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
     $${ITEM_DIRECTORY}/textboxitem.h \
     graphicsview.h \
-    dialogpreferences.h
+    dialogpreferences.h \
+    Forms/baseformitem.h
 
 
 FORMS += \

@@ -34,7 +34,7 @@
 #include <QGraphicsScene>
 #include<QRect>
 
-#include "baseform.h"
+#include "baseformitem.h"
 
 
 // Forward Declaration
@@ -49,7 +49,8 @@ namespace Ui
 /// of two types: WholeScreenShot and region
 ///
 
-class FormScreenshots :   public BaseForm
+class FormScreenshots
+    :   public BaseFormItem
 {
     Q_OBJECT
 
@@ -72,6 +73,9 @@ public:
 
     // Translation
     void retranslate();
+
+    // Getter add button
+    const QPushButton* getAddButton() const;
 
 protected:
     ///

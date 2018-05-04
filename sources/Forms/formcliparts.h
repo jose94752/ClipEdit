@@ -13,7 +13,7 @@
 // Includes
 // --------
 
-#include "baseform.h"
+#include "baseformitem.h"
 
 
 // Forward Declaration
@@ -26,7 +26,7 @@ namespace Ui {
 // -----
 
 class FormCliparts
-    :   public BaseForm
+    :   public BaseFormItem
 {
     Q_OBJECT
 
@@ -43,8 +43,12 @@ class FormCliparts
         // Translation
         void retranslate();
 
+        // Getter add button
+        const QPushButton* getAddButton() const;
+
     private:
 
+        // Ui
         Ui::FormCollections* ui;
 };
 

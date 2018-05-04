@@ -17,7 +17,7 @@
 #include <QPushButton>
 #include <QToolButton>
 
-#include "baseform.h"
+#include "baseformitem.h"
 
 // Forward Declaration
 namespace Ui
@@ -29,7 +29,7 @@ namespace Ui
 // -----
 
 class FormNumberedBullets
-    :   public BaseForm
+    :   public BaseFormItem
 {
     Q_OBJECT
 
@@ -40,14 +40,15 @@ class FormNumberedBullets
 
         // Getters and setters
         void get_info (int& /*from*/, int& /*to*/, int& taille, int& shape, QColor& button_color, QColor& number_color, QFont&) const;
-        QPushButton* getGoPushButton();
-        //void setFrom (const int&);
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
         // Translation
         void retranslate();
+
+        // Getter add button
+        const QPushButton* getAddButton() const;
 
     private slots:
 
