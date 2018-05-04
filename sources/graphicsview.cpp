@@ -18,6 +18,8 @@
 #include <QDesktopWidget>
 #include <QRectF>
 #include <QBrush>
+#include <QMessageBox>
+#include <QSettings>
 
 #include "graphicsview.h"
 
@@ -81,7 +83,7 @@ void GraphicsView::clear()
         QRectF rect = (*m_graphRectItem)->rect();
         QBrush brush = (*m_graphRectItem)->brush();
         scene()->clear();
-        scene()->setSceneRect(QRectF(0,0,rect.width()+1,rect.height()+1));
+        //scene()->setSceneRect(QRectF(0,0,rect.width()+1,rect.height()+1));
         *m_graphRectItem = scene()->addRect(rect);
         (*m_graphRectItem)->setBrush(brush);
     }
@@ -116,5 +118,10 @@ void GraphicsView::changeBackgroundColor()
        m_backgroundColor = color;
        //this->setBackgroundBrush(QBrush(m_backgroundColor, Qt::SolidPattern));
        (*m_graphRectItem)->setBrush(QBrush(m_backgroundColor));
+       int save=QMessageBox::question(this,"Save Preferences","Do you wants to save the preferences?");
+       if(save==QMessageBox::Yes){
+           QSettings s;
+           s.setValue("backgroundColor",m_backgroundColor);
+       }
    }
 }

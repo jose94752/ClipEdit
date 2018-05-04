@@ -31,7 +31,10 @@ FormArrows::FormArrows(QWidget *parent)
     //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
 
+    //
     // Interval : 0 to 50 (@José, tu peux définir les bornes en passant par le Designer)
+    // Je sais mais je suis la consigne du professeur qui préfère qu'on mette ce code hors du designer graphique
+    //
     ui->spinBoxArrowWidthContents->setMinimum(0);
     ui->spinBoxArrowWidthContents->setMaximum(50);
 
@@ -140,6 +143,54 @@ QPushButton *FormArrows::getAddPushButtonArrow()
     return ui->pushButtonAddArrow;
 }
 
+//--------------------------------------------------
+// Methods return the Defaults values for Arrows
+//--------------------------------------------------
+
+//return the Default Form Outline Color Arrow
+QColor FormArrows::getDefaultFormOutlineColorArrow()
+{
+    return DefaultFormOutlineColorArrow;
+}
+
+//return the Default Form Fill Color Arrow
+QColor FormArrows::getDefaultFormFillColorArrow()
+{
+    return DefaultFormFillColorArrow;
+}
+
+//return the Default Form Arrow Head Size
+int FormArrows::getDefaultFormArrowHeadSize ()
+{
+    return DefaultFormArrowHeadSize;
+}
+
+//return the Default Form Arrow Width
+int FormArrows::getDefaultFormArrowWidth()
+{
+    return DefaultFormArrowWidth;
+}
+
+//return the Default Form Arrow Height
+int FormArrows::getDefaultFormArrowHeight()
+{
+    return DefaultFormArrowHeight;
+}
+
+//return the Default Form Arrow Head Type
+QPolygonF FormArrows::getDefaultFormArrowHeadType()
+{
+    return DefaultFormArrowHeadType;
+}
+
+//return the Default Line Thickness
+int FormArrows::getDefaultLineThickness()
+{
+    return DefaultLineThickness;
+}
+
+//--------------------------------------------------
+
 
 void FormArrows::SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
                                 int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
@@ -218,11 +269,20 @@ void FormArrows::fillColorArrowChanged()
 
 void FormArrows::fillColorArrowChanged(const QColor& color)
 {
-    BeforeFormFillColorArrow = FormFillColorArrow;
-    FormFillColorArrow = color;
-    // SIGNAL emit FormFillColorArrowChanged
-    //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
-    emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+    if (color.isValid())
+    {
+        BeforeFormFillColorArrow = FormFillColorArrow;
+        FormFillColorArrow = color;
+        // SIGNAL emit FormFillColorArrowChanged
+        //emit FormFillColorArrowChanged(); // This emit is for connect on FormArrows class
+        emit FormFillColorArrowChanged(FormFillColorArrow); // This 2nd emit is for connect on FormArrows class
+        update();
+    }
+    else
+    {
+        qDebug() << "Invalid Test Color Arrow when you call SLOT"
+                 <<  " fillColorArrowChanged(const QColor& color).";
+    }
 }
 
 void FormArrows::outlineColorArrowChanged(const QColor& color)
@@ -272,4 +332,12 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //...
 
     }
+}
+
+// Translation
+// -----------
+
+void FormArrows::retranslate()
+{
+    ui->retranslateUi(this);
 }

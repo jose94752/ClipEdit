@@ -16,6 +16,9 @@
 #include <QString>
 #include <QColor>
 #include <QSettings>
+#include <QTableWidgetItem>
+
+
 
 #include "baseform.h"
 #include "../Items/graphsgraphicsitem.h"
@@ -28,7 +31,7 @@
 #define KFormChartsColor    "FormCharts/color"
 #define KFormChartsBackgroundcolor    "FormCharts/backgroundcolor"
 #define KFormChartsTransparent    "FormCharts/transparent"
-
+#define KFormChartsListColors    "FormCharts/listcolors"
 
 // Forward Declaration
 namespace Ui
@@ -47,32 +50,39 @@ class FormCharts
 
     public:
 
+        // Constructor, destructor
         explicit FormCharts(QWidget* parent = 0);
-
         ~FormCharts();
 
-    void GetChartsValues( GraphsInfo &infos);
+        void GetChartsValues( GraphsInfo &infos);
 
-    // Load data
-    void loadFromItem(BaseGraphicItem* item) const;
+        // Load data
+        void loadFromItem(BaseGraphicItem* item) const;
 
-public slots:
+        // Translation
+        void retranslate();
 
-private:
+    private:
 
         Ui::FormCharts *ui;
+  //      void initTableColors();
+
+        void CreateTableColors(const QList<QColor> &listColors);
 
 private slots:
 
-   void createChart();
+        void createChart();
 
-   void saveDefaultTheme() ;        //const;
-   void loadDefaultTheme();
+        void saveDefaultTheme();
+        void loadDefaultTheme();
 
-signals:
 
-    //void FormCreateChart( const GraphsInfo & newGraphsInfo);
-   void FormCreateChart();
+ 	void tableColorChanged( QTableWidgetItem *tw);
+
+    signals:
+
+        //void FormCreateChart( const GraphsInfo & newGraphsInfo);
+        void FormCreateChart();
 
 };
 

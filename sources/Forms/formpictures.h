@@ -40,10 +40,15 @@ class FormPictures
 
         ~FormPictures();
 
-        void getPictureValues(QString &path, int &height, int &width, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or);
+        void getPictureValues(QString &path, int &height, int &width, bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or,QPixmap &pixmap);
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
+
+        // Translation
+        void retranslate();
+
+        void initWithImage(QPixmap);
 
     public slots:
 
@@ -69,6 +74,7 @@ private:
         QColor    s_lg_color;
         QString   s_lg_pos;
         QString   s_lg_or;
+        QPixmap s_file;
 
 
     signals:

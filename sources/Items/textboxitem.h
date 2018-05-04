@@ -14,7 +14,7 @@
 
 // Includes
 // --------
-
+#include <QSettings>
 #include "basegraphicitem.h"
 
 // Class
@@ -49,6 +49,8 @@ class TextBoxItem
         int borderWidth() const;
         int borderRadius() const;
         int margin() const;
+        void getParameters(QSettings*,int);
+        void setParameters(QSettings*,int);
 
     private:
 

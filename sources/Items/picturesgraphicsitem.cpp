@@ -27,7 +27,7 @@
 PicturesGraphicsItem::PicturesGraphicsItem(FormPictures* ptr, QGraphicsItem* parent)
     :   BaseGraphicItem(parent)
 {
-    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos, lg_or);
+    ptr->getPictureValues(path, height, width,  black_white, opacity, lg_txt, lg_font, lg_size, lg_color, lg_pos, lg_or,img);
     setRect(QRectF(0, 0, width, height));
 }
 
@@ -44,8 +44,11 @@ void PicturesGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsIt
 {
     painter->setRenderHint(QPainter::Antialiasing);
 
+    if(img.isNull()){
+        img=QPixmap(path);
+    }
 
-    QPixmap img(path);
+    //QPixmap img(path);
     QPixmap pixmap_img;
     QImage  image1(img.toImage());
 
@@ -253,11 +256,39 @@ void PicturesGraphicsItem::modification_height()
 
 void PicturesGraphicsItem::getParameters(QSettings *settings, int indexItem)
 {
-
+    QString itemPath="item"+QString::number(indexItem);
+    QPixmap pixmap(path);
+    settings->setValue(itemPath+"/image",pixmap);
+    settings->setValue(itemPath+"/height",height);
+    settings->setValue(itemPath+"/width",width);
+    settings->setValue(itemPath+"/opacity",opacity);
+    settings->setValue(itemPath+"/black_white",black_white);
+    settings->setValue(itemPath+"/lg_txt",lg_txt);
+    settings->setValue(itemPath+"/lg_font",lg_font);
+    settings->setValue(itemPath+"/lg_size",lg_size);
+    settings->setValue(itemPath+"/lg_color",lg_color);
+    settings->setValue(itemPath+"/lg_pos",lg_pos);
+    settings->setValue(itemPath+"/lg_or",lg_or);
 }
 
 void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
 {
-
+    QString itemPath="item"+QString::number(indexItem);
+    QVariant variantImage=settings->value(itemPath+"/image");
+    img=variantImage.value<QPixmap>();
+    QPainter *painter=new QPainter();
+    QStyleOptionGraphicsItem* option;
+    QWidget* widget;
+    //QString path; voir remplacement
+    height=settings->value(itemPath+"/height").toInt();
+    width=settings->value(itemPath+"/width").toInt();
+    opacity=settings->value(itemPath+"/opacity").toInt();
+    black_white=settings->value(itemPath+"/black_white").toBool();
+    lg_txt=settings->value(itemPath+"/lg_txt").toString();
+    lg_font=settings->value(itemPath+"/lg_font").value<QFont>();
+    lg_size=settings->value(itemPath+"/lg_size").toInt();
+    lg_color=settings->value(itemPath+"/lg_color").value<QColor>();
+    lg_pos=settings->value(itemPath+"/lg_pos").toString();
+    lg_or=settings->value(itemPath+"/lg_or").toString();
+    paint(painter, option,widget);
 }
-

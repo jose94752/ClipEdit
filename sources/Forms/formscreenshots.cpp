@@ -118,6 +118,7 @@ FormScreenshots::FormScreenshots(QWidget* parent)
     //setCursor(Qt::CrossCursor);
 
     //connect pour tempo: option
+
     connect(ui->pushButtonCancel, SIGNAL(clicked(bool)),
             this, SLOT(quit()));
 
@@ -337,6 +338,13 @@ void FormScreenshots::loadFromItem(BaseGraphicItem* item) const
     }
 }
 
+// Translation
+// -----------
+
+void FormScreenshots::retranslate()
+{
+    ui->retranslateUi(this);
+}
 
 
 

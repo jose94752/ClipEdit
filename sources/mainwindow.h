@@ -99,6 +99,8 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
+        bool m_resized;
+
         // Building
         void init();
         void buildMenu();
@@ -108,7 +110,9 @@ class MainWindow
 
     protected:
 
+        // Events
         bool eventFilter(QObject* watched, QEvent* event);
+        void changeEvent(QEvent* event);
 
     private slots:
 
@@ -141,9 +145,13 @@ class MainWindow
 
         // Settings
         void showPreferences();
+<<<<<<< HEAD
         void preferencesChanged();
 
 
+=======
+        void applyPreferences();
+>>>>>>> e16124144dbd6f84f89fd2211cddb00ea0555fb7
 };
 
 #endif

@@ -191,3 +191,36 @@ int TextBoxItem::margin() const
 {
     return m_margin;
 }
+
+void TextBoxItem::getParameters(QSettings *settings, int itemIndex)
+{
+    QString itemPath="item"+QString::number(itemIndex);
+    settings->setValue(itemPath+"/m_text",m_text);
+    settings->setValue(itemPath+"/m_font",m_font);
+    settings->setValue(itemPath+"/m_alignmentFlag",m_alignmentFlag);
+    settings->setValue(itemPath+"/m_margin",m_margin);
+    // Style
+    settings->setValue(itemPath+"/m_backgroundColor",m_backgroundColor);
+    settings->setValue(itemPath+"/m_textColor",m_textColor);
+    settings->setValue(itemPath+"/m_borderColor",m_borderColor);
+    settings->setValue(itemPath+"/m_hasBorders",m_hasBorders);
+    settings->setValue(itemPath+"/m_borderWidth",m_borderWidth);
+    settings->setValue(itemPath+"/m_borderRadius",m_borderRadius);
+}
+
+void TextBoxItem::setParameters(QSettings *settings, int itemIndex)
+{
+    QString itemPath="item"+QString::number(itemIndex);
+    m_text=settings->value(itemPath+"/m_text").toString();
+    m_font=settings->value(itemPath+"/m_font").value<QFont>();
+    int alignmentFlagInt=settings->value(itemPath+"/m_alignmentFlag").toInt();
+    m_alignmentFlag=(Qt::AlignmentFlag)alignmentFlagInt;
+    m_margin=settings->value(itemPath+"/m_margin").toInt();
+    // Style
+    m_backgroundColor=settings->value(itemPath+"/m_backgroundColor").value<QColor>();
+    m_textColor=settings->value(itemPath+"/m_textColor").value<QColor>();
+    m_borderColor=settings->value(itemPath+"/m_borderColor").value<QColor>();
+    m_hasBorders=settings->value(itemPath+"/m_hasBorders").toBool();
+    m_borderWidth=settings->value(itemPath+"/m_borderWidth").toInt();
+    m_borderRadius=settings->value(itemPath+"/m_borderRadius").toInt();
+}

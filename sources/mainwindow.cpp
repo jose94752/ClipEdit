@@ -62,9 +62,13 @@ void MainWindow::init()
     buildForms();
     buildToolBar();
     buildView();
+<<<<<<< HEAD
     //new signals
 //    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(hide()));
 //    connect(ui->actionScreenshot, SIGNAL(triggered(bool)), this, SLOT(show()));
+=======
+    applyPreferences();
+>>>>>>> e16124144dbd6f84f89fd2211cddb00ea0555fb7
 }
 
 
@@ -194,15 +198,10 @@ void MainWindow::buildView()
     l_width=s.value("sceneWidth",l_width).toInt();
     l_height=s.value("sceneHeight",l_height).toInt();
     l_format=s.value("sceneFormat",l_format).toString();
-    int r,g,b,a;
-    r=-1;
-    g=-1;
-    b=-1;
-    a=-1;
-    r=s.value("sceneColor/r",r).toInt();
-    g=s.value("sceneColor/g",g).toInt();
-    b=s.value("sceneColor/b",b).toInt();
-    a=s.value("sceneColor/a",a).toInt();
+    QColor color=s.value("backgroundColor").value<QColor>();
+    if(!color.isValid()){
+        color=Qt::white;
+    }
     if(l_width!=-1){
         width=l_width;
     }
@@ -214,9 +213,7 @@ void MainWindow::buildView()
     }
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
-    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
-        m_borderSceneItem->setBrush(QColor(r,g,b,a));
-    }
+    m_borderSceneItem->setBrush(QBrush(color));
 
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
@@ -224,9 +221,12 @@ void MainWindow::buildView()
     ui->graphicsView->viewport()->installEventFilter(this);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
+    m_resized=false;
 }
 
+
 // Events
+// ------
 
 bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 {
@@ -250,6 +250,23 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     }
 
     return QMainWindow::eventFilter(watched, event);
+}
+
+void MainWindow::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+
+        foreach (BaseForm* bf, m_itemForms)
+        {
+            bf->retranslate();
+        }
+    }
+    else
+    {
+        QMainWindow::changeEvent(event);
+    }
 }
 
 // Slots
@@ -278,7 +295,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeScene()
 {
-    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false, this);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false,&m_resized, this);
     scenedialog.exec();
 }
 
@@ -286,11 +303,11 @@ void MainWindow::slotNew(bool)
 {
     if (m_scene.items().count() > 1)
     {
-        DialogSave dialogSave(m_scene.items(), this);
+        DialogSave dialogSave(m_scene.items(),m_scene.sceneRect(),m_borderSceneItem,this);
         dialogSave.exec();
     }
 
-    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, this);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, &m_resized,this);
     scenedialog.exec();
     QRectF rectf = m_borderSceneItem->rect();
     QBrush brush = m_borderSceneItem->brush();
@@ -381,16 +398,115 @@ void MainWindow::slotGraphs( )
 ///          or an object of scene and 1 point on the scene
 /// 2 anchors points:
 ///          we need 2 objects of scene
+///
+/// Actual version work only without anchor point
+///
 void MainWindow::slotArrowsGraphicsItem()
 {
-    // To do
-    //m_scene.addItem(new ArrowsGraphicsItem());
 
-    ///Actual version work only without anchor point
+    // Control of the size of scene vs size of the arrows
+    bool WithoutAnchorPoint(true), OneAnchorPoint(false), TwoAnchorPoints(false);
+    int ArrowWidth(0), ArrowHeight(0);
+    QColor ArrowOutlineColor, ArrowFillColor;
+    int LineThickness(0), SizeHeadTypeChoice(0);
+
+    m_formArrows->GetInfosArrows(WithoutAnchorPoint, OneAnchorPoint, TwoAnchorPoints,
+                                 ArrowWidth, ArrowHeight,
+                                 ArrowOutlineColor, ArrowFillColor,
+                                 LineThickness, SizeHeadTypeChoice);
+                                //To do others HeadTypeChoiceContents
+                                // comboBoxHeadTypeChoiceContents
+
+    qDebug() << "LineThickness =" << LineThickness;
+
 
     // Define new ArrowsGraphicsItem on the scene
     ArrowsGraphicsItem  * ArrowItem = new ArrowsGraphicsItem(m_formArrows);
+
+    QPointF scene_TopLeft (m_scene.sceneRect().topLeft());
+    QPointF scene_BottomRight (m_scene.sceneRect().bottomRight());
+
+
+    //    BaseGraphicItem *m_StartItem;
+    //    BaseGraphicItem *m_EndItem;
+
+    QPointF *arrow_StartPositionItem = new QPointF();
+    *arrow_StartPositionItem = ArrowItem->getStartPosition();
+    qDebug() << "arrow_StartPositionItem"
+             << "x = " << arrow_StartPositionItem->x()
+             << "y = " << arrow_StartPositionItem->y();
+
+    QPointF *arrow_EndPositionItem = new QPointF();
+    *arrow_EndPositionItem = ArrowItem->getEndPosition();
+    qDebug() << "arrow_EndPositionItem"
+             << "x = " << arrow_EndPositionItem->x()
+             << "y = " << arrow_EndPositionItem->y();
+
+    qreal Min_Xpos(0), Max_Xpos (0), Min_Ypos(0), Max_Ypos (0);
+    /// TopLeft
+    ///                         -Y
+    ///     The scene limits     |   The scene limits
+    ///       for the arrows     |    for the arrows
+    ///        1/4 = X, -Y       |      2/4 = X, -Y
+    ///                          |
+    /// -X ----------------------0----------------------> X
+    ///                          |
+    ///     The scene limits     |   The scene limits
+    ///      for the arrows      |    for the arrows
+    ///        3/4 = -X, Y       |      4/4 = X, Y
+    ///                          V
+    ///                          Y
+    ///                                          BottomRight
+
+    // To Test the Max Width and the Max Height for the scene
+    Max_Ypos = scene_BottomRight.y() - scene_TopLeft.y();
+    //qDebug()<< "Max_Ypos =" << Max_Ypos;
+    Max_Xpos = scene_BottomRight.x() - scene_TopLeft.x();
+    //qDebug()<< "Max_Xpos =" << Max_Xpos;
+
+    // Work on progress
+     if (ArrowWidth > Max_Xpos)
+          ArrowWidth = Max_Xpos;
+
+     if (ArrowHeight > Max_Ypos)
+          ArrowHeight = Max_Ypos;
+
+    Min_Ypos = scene_TopLeft.y();
+    qDebug()<< "Min_Ypos =" << Min_Ypos;
+    Min_Xpos = scene_TopLeft.x();
+    qDebug()<< "Min_Xpos =" << Min_Xpos;
+
+/*  // Work on progress
+    //    To do debug
+   //     /home/formation/ClipEdit/sources/mainwindow.cpp:459: erreur : invalid type argument of unary ‘*’ (have ‘qreal {aka double}’)
+   //  if (*arrow_StartPositionItem->y() < Min_Ypos)
+   //                                 ^
+   ///home/formation/ClipEdit/sources/mainwindow.cpp:460: erreur : void value not ignored as it ought to be
+   //      *arrow_StartPositionItem->setY(Min_Ypos);
+   //       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+   //
+
+    // Check the Arrows on the scene and fix it
+    if (*arrow_StartPositionItem->y() < Min_Ypos)
+        *arrow_StartPositionItem->setY(Min_Ypos);
+    if (*arrow_StartPositionItem->x() < Min_Xpos)
+        *arrow_StartPositionItem->setX(Min_Xpos);
+    if (*arrow_EndPositionItem->y() < Min_Ypos)
+        *arrow_EndPositionItem->setY(Min_Ypos);
+    if (*arrow_EndPositionItem->x() < Min_Xpos)
+        *arrow_EndPositionItem->setX(Min_Xpos);
+*/
+    // Add Arrow on the scene
+    //m_scene.addItem(new ArrowsGraphicsItem());
     m_scene.addItem(ArrowItem);
+
+/*  // Work on progress
+    delta = numberedBulletGraphicItem->rect ().width ();
+    if (bulletpos.x () + delta < scene_topright.x ()) {
+      bulletpos.setX(bulletpos.x() + delta);
+    }
+
+*/
 }
 
 void MainWindow::slotBackground(QPixmap pix)
@@ -477,21 +593,21 @@ void MainWindow::openFile(bool)
     if (!fileName.isEmpty())
     {
         Save save(&m_scene, fileName);
-        save.open();
+        m_borderSceneItem=save.open();
     }
 }
 
 
 void MainWindow::save(bool)
 {
-    Save save(this->m_scene.items());
+    Save save(this->m_scene.items(),m_borderSceneItem->rect(),m_scene.sceneRect(),m_borderSceneItem->brush().color(),m_resized);
     save.save();
 }
 
 
 void MainWindow::saveAs(bool)
 {
-    QString fileName=QFileDialog::getSaveFileName(this, tr("Save File"),"project.cle", tr("ClipEdit File (*.cle)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),"project.cle", tr("ClipEdit File (*.cle)"));
 
     if (!fileName.isEmpty())
     {
@@ -505,7 +621,7 @@ void MainWindow::saveAs(bool)
         else
         {
             ui->actionSave->setEnabled(true);
-            Save save(this->m_scene.items(), extfilename);
+            Save save(this->m_scene.items(), extfilename,m_scene.sceneRect(),m_borderSceneItem->rect(),m_borderSceneItem->brush().color(),m_resized);
             save.save();
         }
     }
@@ -523,12 +639,17 @@ void MainWindow::showAboutDialog(bool)
 void MainWindow::showPreferences()
 {
     DialogPreferences d(this);
-    connect(&d, SIGNAL(preferencesChanged()), this, SLOT(preferencesChanged()));
+    connect(&d, SIGNAL(preferencesChanged()), this, SLOT(applyPreferences()));
     d.exec();
 }
 
-void MainWindow::preferencesChanged()
+void MainWindow::applyPreferences()
 {
-    // TO DO
-}
+    QSettings s;
+    QString lang = s.value("Settings/lang", "en").toString();
 
+    // Language
+    qApp->removeTranslator(&m_translator);
+    if(m_translator.load(QString(":/lang/lang/clipedit_%1").arg(lang)))
+        qApp->installTranslator(&m_translator);
+}

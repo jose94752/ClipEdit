@@ -50,6 +50,9 @@ class FormLayers
         // Update
         void updateLayers();
 
+        // Retranslation (Note: all dynamic string should be defined here)
+        //void retranslateUi();
+
     private slots:
 
         // Cells
@@ -68,10 +71,10 @@ class FormLayers
         QGraphicsScene* m_scene;
 
         // Table model
-        LayerItemModel* m_model;
+        QStandardItemModel* m_model;
 
         // Holders
-        qreal m_zvalue;
+        int m_nLabel;
         int m_lineSelected;
         int m_columnSelected;
         BaseGraphicItem * m_itemSelected;

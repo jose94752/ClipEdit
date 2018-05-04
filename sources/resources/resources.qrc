@@ -41,4 +41,12 @@
         <file>icons/lang-fr-icon.png</file>
     </qresource>
     <qresource prefix="/fonts"/>
+    <qresource prefix="/lang">
+        <file>lang/clipedit_de.qm</file>
+        <file>lang/clipedit_de.ts</file>
+        <file>lang/clipedit_en.qm</file>
+        <file>lang/clipedit_en.ts</file>
+        <file>lang/clipedit_fr.qm</file>
+        <file>lang/clipedit_fr.ts</file>
+    </qresource>
 </RCC>

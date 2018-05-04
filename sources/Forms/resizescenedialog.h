@@ -33,7 +33,7 @@ class ResizeSceneDialog
 
     public:
 
-        explicit ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor, bool isNew, QWidget* parent = 0);
+        explicit ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor, bool isNew,bool*,QWidget* parent = 0);
         ~ResizeSceneDialog();
         void detectFormat();
 
@@ -43,11 +43,11 @@ class ResizeSceneDialog
         void valuesChanged();
         void unitChanged(const QString& unit);
         void formatChanged(const QString& format);
+        void saveDefaultTheme();
 
     protected:
 
         void resizeEvent(QResizeEvent*);
-        void saveDefaultTheme() const;
 
     private:
 
@@ -62,6 +62,7 @@ class ResizeSceneDialog
         static QString m_format;
         bool m_format_changed;
         bool m_isNew;
+        bool *m_resized;
 };
 
 #endif

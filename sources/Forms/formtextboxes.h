@@ -13,8 +13,6 @@
 // Includes
 // --------
 
-#include <QMap>
-
 #include "baseform.h"
 
 class QPushButton;
@@ -47,6 +45,9 @@ class FormTextBoxes
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
+
+        // Translation
+        void retranslate();
 
     private slots:
 

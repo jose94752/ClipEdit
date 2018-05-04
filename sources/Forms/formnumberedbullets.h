@@ -46,6 +46,9 @@ class FormNumberedBullets
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
 
+        // Translation
+        void retranslate();
+
     private slots:
 
         // Default theme

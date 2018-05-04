@@ -7,11 +7,11 @@
 QT       += core gui
 QT       += xml
 
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ClipEdit
 TEMPLATE = app
+CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -112,6 +112,6 @@ DISTFILES += \
     Bugs.txt
 
 TRANSLATIONS += \
-    languages/clipedit_en.ts \
-    languages/clipedit_fr.ts \
-    languages/clipedit_de.ts
+    $${RESOURCE_DIRECTORY}/lang/clipedit_en.ts \
+    $${RESOURCE_DIRECTORY}/lang/clipedit_fr.ts \
+    $${RESOURCE_DIRECTORY}/lang/clipedit_de.ts

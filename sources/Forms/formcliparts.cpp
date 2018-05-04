@@ -32,3 +32,11 @@ void FormCliparts::loadFromItem(BaseGraphicItem* item) const
     // TO DO : Cast the base item to your item
     // Then, import data from the casted item
 }
+
+// Translation
+// -----------
+
+void FormCliparts::retranslate()
+{
+    ui->retranslateUi(this);
+}

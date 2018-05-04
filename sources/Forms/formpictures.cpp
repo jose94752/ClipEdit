@@ -42,7 +42,6 @@ FormPictures::FormPictures(QWidget *parent)
 
     ui->comboBox_lg_or->addItem(tr("Horizontal"));
     ui->comboBox_lg_or->addItem(tr("Vertical"));
-
 }
 
 
@@ -52,7 +51,7 @@ FormPictures::~FormPictures()
 }
 
 
-void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or)
+void FormPictures::getPictureValues(QString &path, int &height, int &width,  bool &black_white, int &opacity, QString &lg_txt, QFont &lg_font, int &lg_size, QColor &lg_color, QString &lg_pos, QString &lg_or,QPixmap &pixmap)
 {
     path        = ui->lineEdit_pic_path->text();
     height      = ui->spinBox_pic_h->value();
@@ -65,6 +64,7 @@ void FormPictures::getPictureValues(QString &path, int &height, int &width,  boo
     lg_color    = ui->toolButton_color->getColor();
     lg_pos      = ui->comboBox_lg_pos->currentText();
     lg_or       = ui->comboBox_lg_or->currentText();
+    pixmap=s_file;
 
 }
 
@@ -243,4 +243,27 @@ else if (s == "Vertical") {
 }
 
 
-// emit picture_changed();
+// Translation
+// -----------
+
+void FormPictures::retranslate()
+{
+    ui->retranslateUi(this);
+}
+
+void FormPictures::initWithImage(QPixmap file_image)
+{
+    /*QString fileName = v_path;
+
+    /*QPixmap file_image (fileName);*/
+
+    int h;
+    int w;
+    QString s;
+     h = file_image.height();
+     w = file_image.width();
+
+     ui->spinBox_pic_h->setValue(h);
+     ui->spinBox_pic_w->setValue(w);
+     s_file=file_image;
+}

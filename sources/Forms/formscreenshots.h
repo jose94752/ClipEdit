@@ -70,6 +70,9 @@ public:
     // Load data
     void loadFromItem(BaseGraphicItem* item) const;
 
+    // Translation
+    void retranslate();
+
 protected:
     ///
     /// \brief mousePressEvent This event handler, for event event, can be reimplemented
@@ -83,6 +86,7 @@ protected:
     /// \param event
     ///
    // void mouseReleaseEvent(QMouseEvent *event);
+
 
 public slots:
 
