@@ -27,21 +27,25 @@ Save::Save(QGraphicsScene* v_scene,QString v_filename)
 }
 
 ///constructor to save a project when filename is known
-Save::Save(QList<QGraphicsItem *> v_listItems,QRectF v_rectf,QColor v_color){
+Save::Save(QList<QGraphicsItem *> v_listItems,QRectF v_sceneRect,QRectF v_rectf,QColor v_color,bool v_resized){
     m_listItems=v_listItems;
     m_scene=0;
     m_backgroundColor=v_color;
     m_globalRectF=v_rectf;
+    m_sceneRectF=v_sceneRect;
+    m_resized=v_resized;
 }
 
 ///constructor to save a file when filename is unknown (save as)
-Save::Save(QList<QGraphicsItem* > v_listItems,QString filename,QRectF v_rectf,QColor v_color)
+Save::Save(QList<QGraphicsItem* > v_listItems,QString filename,QRectF v_sceneRect,QRectF v_rectf,QColor v_color,bool v_resized)
 {
     current_filename=filename;
     m_listItems=v_listItems;
     m_scene=0;
     m_backgroundColor=v_color;
     m_globalRectF=v_rectf;
+    m_sceneRectF=v_sceneRect;
+    m_resized=v_resized;
 }
 
 ///complete file extension .cle if extension is not present in the file name
@@ -74,6 +78,9 @@ void Save::save()
     settings.clear();
     settings.setValue("backgroundColor",m_backgroundColor);
     settings.setValue("globalRectF",m_globalRectF);
+    settings.setValue("sceneRect",m_sceneRectF);
+
+    settings.setValue("resized",m_resized);
     countItems=0;
     foreach(QGraphicsItem *item,m_listItems){
         int type=item->type();
@@ -84,8 +91,13 @@ void Save::save()
         double x,y,width,height;
         rect.getRect(&x,&y,&width,&height);
         QPoint pos=item->pos().toPoint();
-        x=pos.x();
-        y=pos.y();
+        if(m_resized){
+            x=pos.x()-m_sceneRectF.width()/2;
+            y=pos.y()-m_sceneRectF.height()/2;
+        }else{
+            x=pos.x();
+            y=pos.y();
+        }
         if(type>65535){
             settings.setValue(QString("item").append(QString::number(countItems)).append("/baseGraphicItemType"),QString::number(type));
             settings.setValue(QString("item").append(QString::number(countItems)).append("/rectF/x"),QString::number(x));
@@ -135,9 +147,17 @@ QGraphicsRectItem* Save::open()
     int i;
     QSettings settings(current_filename,QSettings::IniFormat);
     m_backgroundColor=settings.value("backgroundColor").value<QColor>();
+    if(!m_backgroundColor.isValid()){
+        m_backgroundColor=Qt::white;
+    }
     m_globalRectF=settings.value("globalRectF").value<QRectF>();
+    m_sceneRectF=settings.value("sceneRect").value<QRectF>();
+    m_resized=settings.value("resized").toBool();
     m_scene->clear();
-    QGraphicsRectItem * borderSceneItem=m_scene->addRect(QRectF(m_globalRectF));
+    int width=m_globalRectF.width();
+    int height=m_globalRectF.height();
+    m_scene->setSceneRect(QRectF(-width/2,-height/2,width,height));
+    QGraphicsRectItem * borderSceneItem=m_scene->addRect(QRectF(-width/2,-height/2,width+2,height+2));
     borderSceneItem->setBrush(m_backgroundColor);
     countItems=settings.value("nbItems").toInt();
     for(i=0;i<countItems;i++){

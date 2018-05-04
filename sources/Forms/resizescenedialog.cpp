@@ -26,12 +26,13 @@
 
 QString ResizeSceneDialog::m_format="A4";
 
-ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor,bool isNew, QWidget* parent)
+ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem** v_borderSceneItem, const QColor& v_backgroundColor,bool isNew,bool *resized, QWidget* parent)
     :   QDialog(parent),
         ui(new Ui::ResizeSceneDialog)
 {
     if (!vscene)
         close();
+    m_resized=resized;
 
     ui->setupUi(this);
 
@@ -89,8 +90,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem**
     connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
     connect(ui->doubleSpinBoxWidth,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
     connect(ui->doubleSpinBoxHeight,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
-    //connect(ui->pushButtonSaveTheme,SIGNAL(clicked(bool)),this,SLOT());
-
+    connect(ui->pushButtonSaveTheme,SIGNAL(clicked(bool)),this,SLOT(saveDefaultTheme()));
     // Hide color button if not New page
     m_isNew = isNew;
 
@@ -100,6 +100,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem**
         ui->label_color->hide();
         ui->colorButton->hide();
     }
+    formatChanged("A4");
 }
 
 ResizeSceneDialog::~ResizeSceneDialog()
@@ -195,7 +196,7 @@ void ResizeSceneDialog::sizeChanged()
     foreach(QGraphicsItem* item, items){
         scene2.addItem(item);
     }
-
+    *m_resized=true;
     m_scene->setSceneRect(QRectF(0,0,m_width+2,m_height+2));
     *m_borderSceneItem=m_scene->addRect(QRectF(0,0,m_width,m_height));
 
@@ -328,26 +329,20 @@ void ResizeSceneDialog::formatChanged(const QString& format)
     m_format_changed = false;
 }
 
-void ResizeSceneDialog::saveDefaultTheme() const
+void ResizeSceneDialog::saveDefaultTheme()
 {
     QSettings s;
+    qDebug()<<"save default theme";
     s.setValue("sceneWidth",m_width);
     s.setValue("sceneHeight",m_height);
     s.setValue("sceneFormat",m_format);
     if(m_isNew){
-        int r,g,b,a;
-        m_backGroundColor.getRgb(&r,&g,&b,&a);
-        s.setValue("sceneColor/r",r);
-        s.setValue("sceneColor/g",g);
-        s.setValue("sceneColor/b",b);
-        s.setValue("sceneColor/a",a);
+        s.setValue("backgroundColor",ui->colorButton->getColor());
     }
 }
 
-void ResizeSceneDialog::resizeEvent(QResizeEvent* event)
+void ResizeSceneDialog::resizeEvent(QResizeEvent* /*event*/)
 {
-    Q_UNUSED(event)
-
     int buttonwidth = ui->doubleSpinBoxWidth->width();
     ui->colorButton->setMinimumWidth(buttonwidth);
 }

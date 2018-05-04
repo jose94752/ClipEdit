@@ -83,13 +83,13 @@ protected:
     ///  in a subclass to receive mouse press events for the widget
     /// \param event
     ///
-    void mousePressEvent(QMouseEvent *event);
+   //void mousePressEvent(QMouseEvent *event);
     ///
     /// \brief mouseReleaseEvent This event handler, for event event, can be reimplemented
     /// in a subclass to receive mouse release events for the widget.
     /// \param event
     ///
-    void mouseReleaseEvent(QMouseEvent *event);
+   // void mouseReleaseEvent(QMouseEvent *event);
 
 
 public slots:
@@ -97,8 +97,6 @@ public slots:
     void timeFunction();
     void on_changeTime();
     void quit();
-
-    void choose_screenshot();
 
 private:
         // Ui
@@ -160,27 +158,27 @@ private:
         ///
         /// \brief snapshot : snapshot slot in Desktop and window
         ///
-        void snapshot();
+        //void snapshot();
         ///
         /// \brief CaptureDesktop : this method take all Desktop
         ///
-        void CaptureDesktop();
-        void CaptureArea(bool val, QRectF a);
-        void updatehide();
+        void goCapture();
+        //void CaptureArea(bool val, QRectF a);
+
+
 
      signals:
         ///
         /// \brief setBackground : QPixmap class is an off-screen image representation
-        /// that can be used as a paint device.
+        /// that can be used as a paint device. to define a slot slotBackground in mainwindow.h
         /// \param pix
         ///
-        void setBackground(QPixmap);
+        void signalBackground(QPixmap);
         ///
         /// \brief dimensionsMade signal
         ///
-        void dimensionsMade( bool, QRect );
-        void mousePressEvent();
-        void mouseReleaseEvent();
+        void dimensionsMade( bool, QRectF );
+
 };
 
 #endif // FORMSCREENSHOOTS_H

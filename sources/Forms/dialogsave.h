@@ -32,7 +32,7 @@ class DialogSave
     public:
 
         // Constructor, destructor
-        explicit DialogSave(QList<QGraphicsItem*>,QGraphicsRectItem*,QWidget* parent = 0);
+        explicit DialogSave(QList<QGraphicsItem*>,QRectF,QGraphicsRectItem*,bool,QWidget* parent = 0);
         ~DialogSave();
 
     private slots:
@@ -48,6 +48,10 @@ class DialogSave
         QList<QGraphicsItem*> m_items;
 
         QGraphicsRectItem *m_rectItem;
+
+        QRectF m_sceneRect;
+
+        bool m_resized;
 };
 
 #endif

@@ -53,6 +53,10 @@ class ScreenshotsGraphicsItem
 
     private:
         QRectF m_rect_sc;
+        QPixmap m_pix;
+
+signals:
+        void signalBackground(QPixmap);
 
 };
 

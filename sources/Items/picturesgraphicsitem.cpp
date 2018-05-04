@@ -18,6 +18,7 @@
 #include <QImage>
 #include <QRgb>
 #include <QFontMetrics>
+#include <QStyleOptionGraphicsItem>
 
 #include "picturesgraphicsitem.h"
 
@@ -271,23 +272,23 @@ void PicturesGraphicsItem::getParameters(QSettings *settings, int indexItem)
     settings->setValue(itemPath+"/lg_or",lg_or);
 }
 
-void PicturesGraphicsItem::setParameters(QSettings *settings, int indexItem)
+void PicturesGraphicsItem::setParameters(QSettings* settings, int indexItem)
 {
-    QString itemPath="item"+QString::number(indexItem);
-    QVariant variantImage=settings->value(itemPath+"/image");
-    img=variantImage.value<QPixmap>();
+    QString itemPath = "item"+QString::number(indexItem);
+    QVariant variantImage = settings->value(itemPath+"/image");
+    img = variantImage.value<QPixmap>();
 
     //QString path; voir remplacement
-    height=settings->value(itemPath+"/height").toInt();
-    width=settings->value(itemPath+"/width").toInt();
-    opacity=settings->value(itemPath+"/opacity").toInt();
-    black_white=settings->value(itemPath+"/black_white").toBool();
-    lg_txt=settings->value(itemPath+"/lg_txt").toString();
-    lg_font=settings->value(itemPath+"/lg_font").value<QFont>();
-    lg_size=settings->value(itemPath+"/lg_size").toInt();
-    lg_color=settings->value(itemPath+"/lg_color").value<QColor>();
-    lg_pos=settings->value(itemPath+"/lg_pos").toString();
-    lg_or=settings->value(itemPath+"/lg_or").toString();
+    height = settings->value(itemPath+"/height").toInt();
+    width = settings->value(itemPath+"/width").toInt();
+    opacity = settings->value(itemPath+"/opacity").toInt();
+    black_white = settings->value(itemPath+"/black_white").toBool();
+    lg_txt = settings->value(itemPath+"/lg_txt").toString();
+    lg_font = settings->value(itemPath+"/lg_font").value<QFont>();
+    lg_size = settings->value(itemPath+"/lg_size").toInt();
+    lg_color = settings->value(itemPath+"/lg_color").value<QColor>();
+    lg_pos = settings->value(itemPath+"/lg_pos").toString();
+    lg_or = settings->value(itemPath+"/lg_or").toString();
 
     update();
 }

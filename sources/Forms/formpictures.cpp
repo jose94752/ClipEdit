@@ -261,6 +261,7 @@ void FormPictures::retranslate()
     ui->retranslateUi(this);
 }
 
+
 // Getter add button
 // -----------------
 

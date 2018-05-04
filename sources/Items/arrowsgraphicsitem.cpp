@@ -32,7 +32,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     :   BaseGraphicItem(parent)
 
 {
-    QPen pen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+
     m_formArrows = ptrFormArrows;
     // Temp dud BaseGraphicItem::paintEvent()
     //ArrowsGraphicsItem->setHasHandler(false);
@@ -57,16 +57,6 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     m_StartPositionItem = new QPointF(-50, -50);
     m_EndPositionItem = new QPointF(100, 100);
 
-
-    //
-    // The scene QPointF for future using to calculate if the resize of Arrows is enable
-    //  copy from the BaseGraphicItem(parent)
-//    QPointF top(m_rect.left() + m_rect.width()/2.0, m_rect.top());
-//    QPointF bottom(m_rect.left() + m_rect.width()/2.0, m_rect.bottom());
-//    QPointF left(m_rect.left(), m_rect.top() + m_rect.height() / 2.0);
-//    QPointF right(m_rect.right(), m_rect.top() + m_rect.height() / 2.0);
-//    QPointF rotation(m_rect.left() + m_rect.width()/2.0, m_rect.top() - m_heightForRotationHandler);
-    // End scene QPointF
 
 
     m_Color = Qt::black; // Temp for test
@@ -218,7 +208,7 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (qFuzzyCompare(line.length(), qreal(0.)))
         return;
 
-
+    QPen pen(*ItemFillColorArrow, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     // Draw the line (next step)
     //painter->setPen(QPen(m_Color, m_LineThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
@@ -397,6 +387,7 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     m_ArrowWidth=settings->value(path+"ArrowWidth").toInt();
     m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
     m_LineThickness=settings->value(path+"LineThickness").toInt();
+    if(m_LineThickness<3) m_LineThickness=3;
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
 //    m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF(); // Bug cannot convert QPointF* to
 //    m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();     //  QPointF in assignement

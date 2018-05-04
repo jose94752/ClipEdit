@@ -83,6 +83,8 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
+        bool m_resized;
+
         // Building
         void init();
         void buildMenu();
@@ -119,8 +121,9 @@ class MainWindow
         void slotGraphs();
         void slotArrowsGraphicsItem();
 
-        //
-        void setBackground(const QPixmap& pix);
+        //slot for screenshot
+        void slotBackground(QPixmap);
+
 
         void itemSelected();
 
@@ -129,6 +132,7 @@ class MainWindow
 
         // Settings
         void showPreferences();
+
         void applyPreferences();
 };
 

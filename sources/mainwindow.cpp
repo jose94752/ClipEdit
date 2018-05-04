@@ -52,7 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     init();
-}
+    //connect
+
+  }
 
 
 MainWindow::~MainWindow()
@@ -119,13 +121,14 @@ void MainWindow::buildForms()
     formLayers->setScene(m_scene);
 
     // Item connects
+
     connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
     connect(formPictures->getAddButton(),   SIGNAL(clicked(bool)),  this,   SLOT(slotTextPicture()));
     connect(formBullets->getAddButton(),    SIGNAL(clicked(bool)),  this,   SLOT(slotNumberedBullets()));
     connect(formTextboxes->getAddButton(),  SIGNAL(clicked(bool)),  this,   SLOT(slotTextBoxes()));
     connect(formCharts->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotGraphs()));
     connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
-    connect(formScreenshots, SIGNAL(setBackground(QPixmap)), this, SLOT(setBackground(QPixmap)));
+    connect(formScreenshots,                SIGNAL(signalBackground(QPixmap)), this, SLOT(slotBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Building the stacked widget
@@ -209,14 +212,15 @@ void MainWindow::buildView()
     QString format = s.value("sceneFormat", default_format).toString();
 
     // Rect color
-    int r = s.value("sceneColor/r", 0).toInt();
-    int g = s.value("sceneColor/g", 0).toInt();
-    int b = s.value("sceneColor/b", 0).toInt();
-    int a = s.value("sceneColor/a", 1).toInt();
+    QColor color = s.value("backgroundColor").value<QColor>();
+    if (!color.isValid())
+    {
+        color = Qt::white;
+    }
 
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem = m_scene.addRect(QRectF(-width/2, -height/2, width, height));
-    m_borderSceneItem->setBrush(QColor(r,g,b,a));
+    m_borderSceneItem->setBrush(QBrush(color));
 
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());
@@ -224,6 +228,7 @@ void MainWindow::buildView()
     ui->graphicsView->viewport()->installEventFilter(this);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
+    m_resized=false;
 }
 
 void MainWindow::fillDynamicStrings()
@@ -306,7 +311,7 @@ void MainWindow::actionClicked(bool)
 
 void MainWindow::resizeScene()
 {
-    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false, this);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, false,&m_resized, this);
     scenedialog.exec();
 }
 
@@ -314,11 +319,11 @@ void MainWindow::slotNew(bool)
 {
     if (m_scene.items().count() > 1)
     {
-        DialogSave dialogSave(m_scene.items(),m_borderSceneItem,this);
+        DialogSave dialogSave(m_scene.items(),m_scene.sceneRect(),m_borderSceneItem,this);
         dialogSave.exec();
     }
 
-    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, this);
+    ResizeSceneDialog scenedialog(&m_scene, &m_borderSceneItem, ui->graphicsView->m_backgroundColor, true, &m_resized,this);
     scenedialog.exec();
     QRectF rectf = m_borderSceneItem->rect();
     QBrush brush = m_borderSceneItem->brush();
@@ -561,16 +566,12 @@ void MainWindow::slotArrowsGraphicsItem()
 */
 }
 
-
-void MainWindow::setBackground(const QPixmap& pix)
+void MainWindow::slotBackground(QPixmap pix)
 {
     ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(pix);
     m_scene.addItem(sc);
-
-    m_height = pix.height();
-    m_width = pix.width();
-    this->adjustSize();
 }
+
 
 void MainWindow::itemSelected()
 {
@@ -670,7 +671,7 @@ void MainWindow::openFile(bool)
 
 void MainWindow::save(bool)
 {
-    Save save(this->m_scene.items(),m_borderSceneItem->rect(),m_borderSceneItem->brush().color());
+    Save save(this->m_scene.items(),m_borderSceneItem->rect(),m_scene.sceneRect(),m_borderSceneItem->brush().color(),m_resized);
     save.save();
 }
 
@@ -691,7 +692,7 @@ void MainWindow::saveAs(bool)
         else
         {
             ui->actionSave->setEnabled(true);
-            Save save(this->m_scene.items(), extfilename,m_borderSceneItem->rect(),m_borderSceneItem->brush().color());
+            Save save(this->m_scene.items(), extfilename,m_scene.sceneRect(),m_borderSceneItem->rect(),m_borderSceneItem->brush().color(),m_resized);
             save.save();
         }
     }
