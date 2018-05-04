@@ -19,7 +19,7 @@
 #include <QPolygonF>
 #include <QPushButton>
 
-#include "baseform.h"
+#include "baseformitem.h"
 
 // Forward Declaration
 namespace Ui
@@ -31,7 +31,7 @@ namespace Ui
 // -----
 
 class FormArrows
-    :   public BaseForm
+    :   public BaseFormItem
 {
      // Essential macro needed for signals-slots
     Q_OBJECT
@@ -47,6 +47,9 @@ class FormArrows
 
         // Translation
         void retranslate();
+
+        // Getter add button
+        const QPushButton* getAddButton() const;
 
         // Method GetInfosArrows
        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,

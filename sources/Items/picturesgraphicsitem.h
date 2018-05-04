@@ -49,12 +49,12 @@ class PicturesGraphicsItem
         int getFontSize() const;
 
         // Edit size (@Laurent : They do nothing)
-        void modification_width ();
+        void modification_width();
         void modification_height();
 
         //saving methods
-        void getParameters(QSettings* settings,int indexItem);
-        void setParameters(QSettings* settings,int indexItem);
+        void getParameters(QSettings* settings, int indexItem);
+        void setParameters(QSettings* settings, int indexItem);
 
         // Properties (@Laurent: MUST BE SET TO PRIVATE LATER)
         QString path;

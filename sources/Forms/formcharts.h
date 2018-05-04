@@ -12,26 +12,17 @@
 #ifndef FORMCHARTS_H
 #define FORMCHARTS_H
 
+// Includes
+// --------
+
 #include <QWidget>
 #include <QString>
 #include <QColor>
 #include <QSettings>
 #include <QTableWidgetItem>
 
-
-
-#include "baseform.h"
+#include "baseformitem.h"
 #include "../Items/graphsgraphicsitem.h"
-
-
-#define KFormChartsTitle    "FormCharts/title"
-#define KFormChartsType    "FormCharts/type"
-#define KFormChartsWidth    "FormCharts/width"
-#define KFormChartsHeight    "FormCharts/height"
-#define KFormChartsColor    "FormCharts/color"
-#define KFormChartsBackgroundcolor    "FormCharts/backgroundcolor"
-#define KFormChartsTransparent    "FormCharts/transparent"
-#define KFormChartsListColors    "FormCharts/listcolors"
 
 // Forward Declaration
 namespace Ui
@@ -39,12 +30,24 @@ namespace Ui
     class FormCharts;
 }
 
+// Defines
+// -------
+
+#define KFormChartsTitle            "FormCharts/title"
+#define KFormChartsType             "FormCharts/type"
+#define KFormChartsWidth            "FormCharts/width"
+#define KFormChartsHeight           "FormCharts/height"
+#define KFormChartsColor            "FormCharts/color"
+#define KFormChartsBackgroundcolor  "FormCharts/backgroundcolor"
+#define KFormChartsTransparent      "FormCharts/transparent"
+#define KFormChartsListColors       "FormCharts/listcolors"
+
 
 // Class
 // -----
 
 class FormCharts
-    :   public BaseForm
+    :   public BaseFormItem
 {
     Q_OBJECT
 
@@ -54,7 +57,7 @@ class FormCharts
         explicit FormCharts(QWidget* parent = 0);
         ~FormCharts();
 
-        void GetChartsValues( GraphsInfo &infos);
+        void GetChartsValues(GraphsInfo& infos);
 
         // Load data
         void loadFromItem(BaseGraphicItem* item) const;
@@ -62,27 +65,27 @@ class FormCharts
         // Translation
         void retranslate();
 
+        // Getter add button
+        const QPushButton* getAddButton() const;
+
     private:
 
-        Ui::FormCharts *ui;
-  //      void initTableColors();
+        // Ui
+        Ui::FormCharts* ui;
 
-        void CreateTableColors(const QList<QColor> &listColors);
+        void initTableColors();
+        void CreateTableColors(const QList<QColor>& listColors);
 
-private slots:
-
-        void createChart();
+    private slots:
 
         void saveDefaultTheme();
         void loadDefaultTheme();
 
-
- 	void tableColorChanged( QTableWidgetItem *tw);
+        void tableColorChanged(QTableWidgetItem* tw);
 
     signals:
 
         //void FormCreateChart( const GraphsInfo & newGraphsInfo);
-        void FormCreateChart();
 
 };
 

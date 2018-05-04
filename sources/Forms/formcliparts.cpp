@@ -17,7 +17,7 @@
 // Constructor, destructor
 // -----------------------
 
-FormCliparts::FormCliparts(QWidget* parent) : BaseForm(parent), ui(new Ui::FormCollections) {
+FormCliparts::FormCliparts(QWidget* parent) : BaseFormItem(parent), ui(new Ui::FormCollections) {
     ui->setupUi(this);
 }
 
@@ -39,4 +39,12 @@ void FormCliparts::loadFromItem(BaseGraphicItem* item) const
 void FormCliparts::retranslate()
 {
     ui->retranslateUi(this);
+}
+
+// Getter add button
+// -----------------
+
+const QPushButton* FormCliparts::getAddButton() const
+{
+    return NULL;
 }

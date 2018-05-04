@@ -23,7 +23,7 @@
 // -----------------------
 
 FormArrows::FormArrows(QWidget *parent)
-    :   BaseForm(parent), ui(new Ui::FormArrows)
+    :   BaseFormItem(parent), ui(new Ui::FormArrows)
 {
     ui->setupUi(this);
     //
@@ -84,6 +84,12 @@ FormArrows::FormArrows(QWidget *parent)
 FormArrows::~FormArrows()
 {
     delete ui;
+}
+
+// Return the add button
+const QPushButton* FormArrows::getAddButton() const
+{
+    return ui->pushButtonAddArrow;
 }
 
 // Method GetInfosArrows

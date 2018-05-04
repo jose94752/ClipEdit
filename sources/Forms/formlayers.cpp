@@ -29,7 +29,7 @@
 // -----------------------
 
 FormLayers::FormLayers(QWidget* parent)
-    :   QWidget(parent), ui(new Ui::FormLayers)
+    :   BaseForm(parent), ui(new Ui::FormLayers)
 {
     ui->setupUi(this);
 
@@ -52,36 +52,19 @@ FormLayers::~FormLayers()
 
 void FormLayers::initForm()
 {
-    // Nil -> @David : Voir pour passer en QTableView afin de définir le model pour avoir les items centrés au milieu ?
-    // Par ailleurs j'ai modifié l'appel dans la mainwindow, au lieu de refaire un setScene() sur le clic du bouton je renseigne la scène
-    // dans l'initialisation de la mainwindow et j'appelle juste updateLayers() dans le slot associé à ton bouton.
-    // J'ai ajouté des headers avec des tailles auto et refait les boutons aussi, tu me diras ce que tu en penses
-
     // Table properties
     ui->tableWidgetLayers->clear();
     ui->tableWidgetLayers->setRowCount(0);
     ui->tableWidgetLayers->setColumnCount(4);
 
-//    ui->tableWidgetLayers->setColumnWidth(0,40);
-//    ui->tableWidgetLayers->setColumnWidth(1,40);
-//    ui->tableWidgetLayers->setColumnWidth(2,300);
-//    ui->tableWidgetLayers->setColumnWidth(3,40);
-
     ui->tableWidgetLayers->showGrid();
     ui->tableWidgetLayers->setAlternatingRowColors(true);
     ui->tableWidgetLayers->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-//    ui->tableWidgetLayers->setItemDelegate(new LayerItemDelegate());
-//    ui->tableWidgetLayers->setModel(new LayerItemModel());
-
     // Headers
-    QStringList headers;
-    headers << tr("Visibility") << tr("Type") << tr("Name") << tr("Z"); // -Value"");
-    ui->tableWidgetLayers->setHorizontalHeaderLabels(headers);
     ui->tableWidgetLayers->horizontalHeader()->show();
 
     ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-//    ui->tableWidgetLayers->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     // Connects
     connect (ui->tableWidgetLayers, SIGNAL(cellClicked(int,int)), this, SLOT(actionClicked(int ,int)));
@@ -90,6 +73,14 @@ void FormLayers::initForm()
     connect (ui->buttonCopy, SIGNAL(clicked(bool)), this, SLOT(actionCopy()));
     connect (ui->buttonDelete, SIGNAL(clicked(bool)), this, SLOT(actionDelete()));
 
+    fillDynamicStrings();
+}
+
+void FormLayers::fillDynamicStrings()
+{
+    QStringList headers;
+    headers << tr("Visibility") << tr("Type") << tr("Name") << tr("Z");
+    ui->tableWidgetLayers->setHorizontalHeaderLabels(headers);
 }
 
 // Slots
@@ -335,7 +326,13 @@ void FormLayers::updateLayers()
 // Translation
 // -----------
 
+void FormLayers::retranslate()
+{
+    ui->retranslateUi(this);
 
+    // Retranslate dynamic strings
+    fillDynamicStrings();
+}
 
 // Getters
 // -------

@@ -156,10 +156,66 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QComboBox" name="comboBoxHorizontalAlignment"/>
+           <widget class="QComboBox" name="comboBoxHorizontalAlignment">
+            <item>
+             <property name="text">
+              <string>Left</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources/resources.qrc">
+               <normaloff>:/icons/icons/align-left-icon.png</normaloff>:/icons/icons/align-left-icon.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Right</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources/resources.qrc">
+               <normaloff>:/icons/icons/align-right-icon.png</normaloff>:/icons/icons/align-right-icon.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Centered</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources/resources.qrc">
+               <normaloff>:/icons/icons/align-hcentered-icon.png</normaloff>:/icons/icons/align-hcentered-icon.png</iconset>
+             </property>
+            </item>
+           </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QComboBox" name="comboBoxVerticalAlignment"/>
+           <widget class="QComboBox" name="comboBoxVerticalAlignment">
+            <item>
+             <property name="text">
+              <string>Top</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources/resources.qrc">
+               <normaloff>:/icons/icons/align-top-icon.png</normaloff>:/icons/icons/align-top-icon.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Bottom</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources/resources.qrc">
+               <normaloff>:/icons/icons/align-bottom-icon.png</normaloff>:/icons/icons/align-bottom-icon.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Centered</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../resources/resources.qrc">
+               <normaloff>:/icons/icons/align-vcentered-icon.png</normaloff>:/icons/icons/align-vcentered-icon.png</iconset>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </item>

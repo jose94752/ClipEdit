@@ -37,22 +37,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="48"/>
+        <location filename="../../Forms/dialogsave.cpp" line="49"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="48"/>
+        <location filename="../../Forms/dialogsave.cpp" line="49"/>
         <source>ClipEdit File (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="57"/>
+        <location filename="../../Forms/dialogsave.cpp" line="58"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="57"/>
+        <location filename="../../Forms/dialogsave.cpp" line="58"/>
         <source>File %1 already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -142,7 +142,7 @@
     </message>
     <message>
         <location filename="../../Forms/formarrows.ui" line="171"/>
-        <source>Add Arrow</source>
+        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -160,62 +160,77 @@
     </message>
     <message>
         <location filename="../../Forms/formcharts.ui" line="41"/>
-        <location filename="../../Forms/formcharts.ui" line="58"/>
+        <location filename="../../Forms/formcharts.ui" line="73"/>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="51"/>
-        <source>Chart Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formcharts.ui" line="65"/>
+        <location filename="../../Forms/formcharts.ui" line="83"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="85"/>
-        <source>Chart Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formcharts.ui" line="92"/>
+        <location filename="../../Forms/formcharts.ui" line="100"/>
         <source>Legends</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="129"/>
+        <location filename="../../Forms/formcharts.ui" line="55"/>
+        <source>Pie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formcharts.ui" line="47"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formcharts.ui" line="60"/>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formcharts.ui" line="65"/>
+        <source>Histogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formcharts.ui" line="93"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formcharts.ui" line="120"/>
         <source>Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="141"/>
+        <location filename="../../Forms/formcharts.ui" line="128"/>
         <source>Chart Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="148"/>
-        <source>Backround Color</source>
+        <location filename="../../Forms/formcharts.ui" line="142"/>
+        <source>Background Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="155"/>
+        <location filename="../../Forms/formcharts.ui" line="156"/>
         <source>Transparent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="204"/>
+        <location filename="../../Forms/formcharts.ui" line="183"/>
         <source>Height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="211"/>
+        <location filename="../../Forms/formcharts.ui" line="203"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formcharts.ui" line="294"/>
+        <location filename="../../Forms/formcharts.ui" line="265"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,23 +271,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="73"/>
+        <location filename="../../Forms/formlayers.cpp" line="79"/>
         <source>Visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="73"/>
+        <location filename="../../Forms/formlayers.cpp" line="79"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="73"/>
+        <location filename="../../Forms/formlayers.cpp" line="79"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="73"/>
-        <source>Z-Value</source>
+        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <source>Z</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -395,7 +410,7 @@
     </message>
     <message>
         <location filename="../../Forms/formpictures.ui" line="65"/>
-        <location filename="../../Forms/formpictures.ui" line="251"/>
+        <location filename="../../Forms/formpictures.ui" line="221"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -435,127 +450,127 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="190"/>
+        <location filename="../../Forms/formpictures.ui" line="193"/>
         <source>Font Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="197"/>
+        <location filename="../../Forms/formpictures.ui" line="200"/>
         <source>Font Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="206"/>
+        <location filename="../../Forms/formpictures.ui" line="207"/>
         <source>Orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="229"/>
+        <location filename="../../Forms/formpictures.ui" line="268"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="263"/>
+        <location filename="../../Forms/formpictures.ui" line="280"/>
         <source>Save as default theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="277"/>
+        <location filename="../../Forms/formpictures.ui" line="294"/>
         <source>Apply default theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.ui" line="304"/>
+        <location filename="../../Forms/formpictures.ui" line="321"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="43"/>
+        <location filename="../../Forms/formpictures.cpp" line="42"/>
         <source>Horizontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="44"/>
+        <location filename="../../Forms/formpictures.cpp" line="43"/>
         <source>Vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="79"/>
+        <location filename="../../Forms/formpictures.cpp" line="78"/>
         <source>Open image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="79"/>
+        <location filename="../../Forms/formpictures.cpp" line="78"/>
         <source>Image files (*.bmp, *.jpg, *.gif, *.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="226"/>
+        <location filename="../../Forms/formpictures.cpp" line="219"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="227"/>
+        <location filename="../../Forms/formpictures.cpp" line="220"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="228"/>
+        <location filename="../../Forms/formpictures.cpp" line="221"/>
         <source>HCenter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="229"/>
+        <location filename="../../Forms/formpictures.cpp" line="222"/>
         <source>Justify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="230"/>
+        <location filename="../../Forms/formpictures.cpp" line="223"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="231"/>
+        <location filename="../../Forms/formpictures.cpp" line="224"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="232"/>
+        <location filename="../../Forms/formpictures.cpp" line="225"/>
         <source>VCenter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="233"/>
+        <location filename="../../Forms/formpictures.cpp" line="226"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="236"/>
+        <location filename="../../Forms/formpictures.cpp" line="230"/>
         <source>Top Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="237"/>
+        <location filename="../../Forms/formpictures.cpp" line="231"/>
         <source>Top Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="238"/>
+        <location filename="../../Forms/formpictures.cpp" line="232"/>
         <source>Center Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="239"/>
+        <location filename="../../Forms/formpictures.cpp" line="233"/>
         <source>Center Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="240"/>
+        <location filename="../../Forms/formpictures.cpp" line="234"/>
         <source>Bottom Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formpictures.cpp" line="241"/>
+        <location filename="../../Forms/formpictures.cpp" line="235"/>
         <source>Bottom Right</source>
         <translation type="unfinished"></translation>
     </message>
@@ -568,62 +583,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="249"/>
+        <location filename="../../Forms/formscreenshots.ui" line="226"/>
+        <source>Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="38"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Screenshots&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="29"/>
+        <location filename="../../Forms/formscreenshots.ui" line="71"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="46"/>
+        <location filename="../../Forms/formscreenshots.ui" line="81"/>
         <source>Screenshot delay second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="86"/>
+        <location filename="../../Forms/formscreenshots.ui" line="121"/>
         <source>Hide this window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="126"/>
+        <location filename="../../Forms/formscreenshots.ui" line="161"/>
         <source>Fast</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="133"/>
+        <location filename="../../Forms/formscreenshots.ui" line="168"/>
         <source>Average</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="140"/>
+        <location filename="../../Forms/formscreenshots.ui" line="175"/>
         <source>Slow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="175"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="204"/>
-        <source>Go</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="271"/>
+        <location filename="../../Forms/formscreenshots.ui" line="47"/>
         <source>Desk screen capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.cpp" line="327"/>
+        <location filename="../../Forms/formscreenshots.cpp" line="331"/>
         <source>Open ClipEdit Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.cpp" line="327"/>
+        <location filename="../../Forms/formscreenshots.cpp" line="331"/>
         <source>ClipEdit Files (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -696,102 +706,102 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="171"/>
+        <location filename="../../Forms/formtextboxes.ui" line="227"/>
         <source>&amp;Margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="181"/>
-        <location filename="../../Forms/formtextboxes.ui" line="253"/>
-        <location filename="../../Forms/formtextboxes.ui" line="273"/>
+        <location filename="../../Forms/formtextboxes.ui" line="237"/>
+        <location filename="../../Forms/formtextboxes.ui" line="309"/>
+        <location filename="../../Forms/formtextboxes.ui" line="329"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="197"/>
+        <location filename="../../Forms/formtextboxes.ui" line="253"/>
         <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="203"/>
+        <location filename="../../Forms/formtextboxes.ui" line="259"/>
         <source>Back&amp;ground color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="213"/>
+        <location filename="../../Forms/formtextboxes.ui" line="269"/>
         <source>Text &amp;color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="223"/>
+        <location filename="../../Forms/formtextboxes.ui" line="279"/>
         <source>&amp;Borders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="233"/>
+        <location filename="../../Forms/formtextboxes.ui" line="289"/>
         <source>Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="243"/>
+        <location filename="../../Forms/formtextboxes.ui" line="299"/>
         <source>Border &amp;radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="263"/>
+        <location filename="../../Forms/formtextboxes.ui" line="319"/>
         <source>Border &amp;width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="286"/>
-        <location filename="../../Forms/formtextboxes.ui" line="293"/>
-        <location filename="../../Forms/formtextboxes.ui" line="310"/>
+        <location filename="../../Forms/formtextboxes.ui" line="342"/>
+        <location filename="../../Forms/formtextboxes.ui" line="349"/>
+        <location filename="../../Forms/formtextboxes.ui" line="366"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="300"/>
+        <location filename="../../Forms/formtextboxes.ui" line="356"/>
         <source>B&amp;order color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="322"/>
+        <location filename="../../Forms/formtextboxes.ui" line="378"/>
         <source>Save as default theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="336"/>
+        <location filename="../../Forms/formtextboxes.ui" line="392"/>
         <source>Apply default theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.ui" line="363"/>
+        <location filename="../../Forms/formtextboxes.ui" line="419"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.cpp" line="32"/>
+        <location filename="../../Forms/formtextboxes.ui" line="162"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.cpp" line="33"/>
+        <location filename="../../Forms/formtextboxes.ui" line="171"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.cpp" line="34"/>
-        <location filename="../../Forms/formtextboxes.cpp" line="38"/>
+        <location filename="../../Forms/formtextboxes.ui" line="180"/>
+        <location filename="../../Forms/formtextboxes.ui" line="211"/>
         <source>Centered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.cpp" line="36"/>
+        <location filename="../../Forms/formtextboxes.ui" line="193"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formtextboxes.cpp" line="37"/>
+        <location filename="../../Forms/formtextboxes.ui" line="202"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1010,69 +1020,69 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="172"/>
+        <location filename="../../mainwindow.cpp" line="187"/>
         <source>Zoom level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="449"/>
+        <location filename="../../mainwindow.cpp" line="622"/>
         <source>Export as image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="449"/>
+        <location filename="../../mainwindow.cpp" line="622"/>
         <source>Image File (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="459"/>
-        <location filename="../../mainwindow.cpp" line="506"/>
+        <location filename="../../mainwindow.cpp" line="632"/>
+        <location filename="../../mainwindow.cpp" line="679"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="459"/>
-        <location filename="../../mainwindow.cpp" line="506"/>
+        <location filename="../../mainwindow.cpp" line="632"/>
+        <location filename="../../mainwindow.cpp" line="679"/>
         <source>File %1 already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="478"/>
+        <location filename="../../mainwindow.cpp" line="651"/>
         <source>Open ClipEdit Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="478"/>
+        <location filename="../../mainwindow.cpp" line="651"/>
         <source>ClipEdit Files (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="497"/>
+        <location filename="../../mainwindow.cpp" line="670"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="497"/>
+        <location filename="../../mainwindow.cpp" line="670"/>
         <source>ClipEdit File (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="520"/>
+        <location filename="../../mainwindow.cpp" line="693"/>
         <source>A simple document editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="521"/>
+        <location filename="../../mainwindow.cpp" line="694"/>
         <source>Developed by the M2I Team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="522"/>
+        <location filename="../../mainwindow.cpp" line="695"/>
         <source>Copyright (c) 2018</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="523"/>
+        <location filename="../../mainwindow.cpp" line="696"/>
         <source>About </source>
         <translation type="unfinished"></translation>
     </message>
