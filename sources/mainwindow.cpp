@@ -189,15 +189,10 @@ void MainWindow::buildView()
     l_width=s.value("sceneWidth",l_width).toInt();
     l_height=s.value("sceneHeight",l_height).toInt();
     l_format=s.value("sceneFormat",l_format).toString();
-    int r,g,b,a;
-    r=-1;
-    g=-1;
-    b=-1;
-    a=-1;
-    r=s.value("sceneColor/r",r).toInt();
-    g=s.value("sceneColor/g",g).toInt();
-    b=s.value("sceneColor/b",b).toInt();
-    a=s.value("sceneColor/a",a).toInt();
+    QColor color=s.value("backgroundColor").value<QColor>();
+    if(!color.isValid()){
+        color=Qt::white;
+    }
     if(l_width!=-1){
         width=l_width;
     }
@@ -209,10 +204,7 @@ void MainWindow::buildView()
     }
     m_scene.setSceneRect(QRectF(-(width+1)/2, -(height+1)/2, width+1, height+1));
     m_borderSceneItem=m_scene.addRect(QRectF(-width/2, -height/2, width, height));
-    m_borderSceneItem->setBrush(Qt::white);
-    if(r!=-1 && g!=-1 && b!=-1 && a!=-1){
-        m_borderSceneItem->setBrush(QColor(r,g,b,a));
-    }
+    m_borderSceneItem->setBrush(QBrush(color));
 
     ui->graphicsView->setGraphicsRectItem(&m_borderSceneItem);
     ui->graphicsView->setNbElts(m_scene.items().count());

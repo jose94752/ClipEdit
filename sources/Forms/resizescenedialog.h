@@ -43,11 +43,11 @@ class ResizeSceneDialog
         void valuesChanged();
         void unitChanged(const QString& unit);
         void formatChanged(const QString& format);
+        void saveDefaultTheme();
 
     protected:
 
         void resizeEvent(QResizeEvent*);
-        void saveDefaultTheme() const;
 
     private:
 

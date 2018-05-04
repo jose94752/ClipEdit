@@ -90,8 +90,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem**
     connect(ui->comboBox_format, SIGNAL(currentTextChanged(QString)),this,SLOT(formatChanged(QString)));
     connect(ui->doubleSpinBoxWidth,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
     connect(ui->doubleSpinBoxHeight,SIGNAL(valueChanged(double)),this,SLOT(valuesChanged()));
-    //connect(ui->pushButtonSaveTheme,SIGNAL(clicked(bool)),this,SLOT());
-
+    connect(ui->pushButtonSaveTheme,SIGNAL(clicked(bool)),this,SLOT(saveDefaultTheme()));
     // Hide color button if not New page
     m_isNew = isNew;
 
@@ -101,6 +100,7 @@ ResizeSceneDialog::ResizeSceneDialog(QGraphicsScene* vscene, QGraphicsRectItem**
         ui->label_color->hide();
         ui->colorButton->hide();
     }
+    formatChanged("A4");
 }
 
 ResizeSceneDialog::~ResizeSceneDialog()
@@ -329,19 +329,15 @@ void ResizeSceneDialog::formatChanged(const QString& format)
     m_format_changed = false;
 }
 
-void ResizeSceneDialog::saveDefaultTheme() const
+void ResizeSceneDialog::saveDefaultTheme()
 {
     QSettings s;
+    qDebug()<<"save default theme";
     s.setValue("sceneWidth",m_width);
     s.setValue("sceneHeight",m_height);
     s.setValue("sceneFormat",m_format);
     if(m_isNew){
-        int r,g,b,a;
-        m_backGroundColor.getRgb(&r,&g,&b,&a);
-        s.setValue("sceneColor/r",r);
-        s.setValue("sceneColor/g",g);
-        s.setValue("sceneColor/b",b);
-        s.setValue("sceneColor/a",a);
+        s.setValue("backgroundColor",ui->colorButton->getColor());
     }
 }
 
