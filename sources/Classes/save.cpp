@@ -79,6 +79,7 @@ void Save::save()
     settings.setValue("backgroundColor",m_backgroundColor);
     settings.setValue("globalRectF",m_globalRectF);
     settings.setValue("sceneRect",m_sceneRectF);
+
     settings.setValue("resized",m_resized);
     countItems=0;
     foreach(QGraphicsItem *item,m_listItems){
@@ -91,8 +92,8 @@ void Save::save()
         rect.getRect(&x,&y,&width,&height);
         QPoint pos=item->pos().toPoint();
         if(m_resized){
-            x=pos.x()-width/2;
-            y=pos.y()-height/2;
+            x=pos.x()-m_sceneRectF.width()/2;
+            y=pos.y()-m_sceneRectF.height()/2;
         }else{
             x=pos.x();
             y=pos.y();
