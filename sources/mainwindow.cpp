@@ -569,6 +569,7 @@ void MainWindow::exportView(bool)
     }
     else
     {
+        m_scene.clearSelection();
         QSize size=m_scene.sceneRect().size().toSize();
         QImage image(size, QImage::Format_ARGB32);
         image.fill(Qt::white);
