@@ -15,7 +15,7 @@
 #include "../Forms/formarrows.h"
 #include <QGraphicsItem>
 #include <QRectF>
-#include <QPainter>
+//#include <QPainter>
 #include <QColor>
 #include <QPolygonF>
 #include <QSettings>

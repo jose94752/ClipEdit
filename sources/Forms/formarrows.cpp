@@ -317,9 +317,11 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
 
         // Load data into the form
         //qDebug() << "getArrowHeadSize = " << (castedItem->getArrowHeadSize()); // For tests
+        //qDebug() << "setCurrentIndex = getArrowHeadSize -10 == " << ((castedItem->getArrowHeadSize())-10); // For tests
         ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
 
-        //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        qDebug() << "setCurrentIndex = getLineThicknessSize -1 == " << ((castedItem->getLineThicknessSize())-1); // For tests
         ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
 
         //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
