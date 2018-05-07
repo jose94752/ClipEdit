@@ -63,10 +63,13 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     arrowHeadSize = 35; // Temp for tests intial 10
 
 
-    qDebug() << "m_LineThickness =" << m_LineThickness;
+    qDebug() << "Constructor receive for m_LineThickness =" << m_LineThickness;
     // To Do Set the new Line Thickness
-    //m_LineThickness = 4; // Temp for tests intial 1
-    //qDebug() << "m_LineThickness =" << m_LineThickness;
+    m_LineThickness = 4; // Temp for tests intial 1
+    //if(m_LineThickness < 3) m_LineThickness = 3;
+    //if(m_LineThickness < 4) m_LineThickness = 4;
+    //if (m_LineThickness < 4) m_LineThickness = m_formArrows->getDefaultLineThickness(); // <- Don't use bug with values send by FormArrows
+    qDebug() << "Constructor Debug for m_LineThickness =" << m_LineThickness;
 
 
 
@@ -384,7 +387,12 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     m_ArrowWidth=settings->value(path+"ArrowWidth").toInt();
     m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
     m_LineThickness=settings->value(path+"LineThickness").toInt();
-    //if(m_LineThickness<3) m_LineThickness=3;
+    // Don't delete these until the
+    //Debug temp redefine here the default ligne m_LineThickness for incorrect values
+    if(m_LineThickness < 3) m_LineThickness = 3;
+    //if(m_LineThickness < 4) m_LineThickness = 4;
+    //if(m_LineThickness < 4) m_LineThickness = m_formArrows->getDefaultLineThickness(); // <- Don't use bug with values send by FormArrows
+    //end Debug temp
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
 //    m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF(); // Bug cannot convert QPointF* to
 //    m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();     //  QPointF in assignement
