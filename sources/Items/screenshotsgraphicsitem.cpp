@@ -4,102 +4,60 @@
 * Project:      ClipEdit
 * Creation:     18/04/2018
 * Brief:        Inherit from BaseGraphicsItem
-*               Manage graphic view screenshots
+*               Manage screenshot items
 ================================================
 */
 
 // Includes
 // --------
-#include "screenshotsgraphicsitem.h"
 
-#include <QGraphicsItem>
-#include <QGraphicsRectItem>
-#include <QRect>
+#include <QDebug>
 #include <QPainter>
-#include <QRectF>
-#include <QRect>
 #include <QPixmap>
 
-#include <QStyle>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QDebug>
+#include "screenshotsgraphicsitem.h"
 
 // Constructor, destructor
 // -----------------------
 
-//we subclass QGraphicItem and call the new class ScreenshotsGraphicsItem.
-//The class' constructor accepts a pointer to a QGraphicItem item.
-//This pointer is then passed to the constructor of the BaseGraphicItem.
-
-ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(QPixmap pix, QGraphicsItem *parent)
+ScreenshotsGraphicsItem::ScreenshotsGraphicsItem(const QPixmap& pix, QGraphicsItem* parent)
         : BaseGraphicItem(parent)
- {
-   // Q_UNUSED(pix)
-
-    m_pix = pix;
-
-
-    setFlag(BaseGraphicItem::ItemIsSelectable, true);
-
-    //m_rect_sc(0,0,100,100) : default value.
-   // setRect(QRectF(0, 0, 100, 100));
-
+{
+    setScreenshot(pix);
 }
 
-// Redefinition of the pure virtual methods
-// -----------------------------------
+// Virtual methods from BaseGraphicItem
+// ------------------------------------
 
 QRectF ScreenshotsGraphicsItem::boundingRect() const
 {
-   // return BaseGraphicItem::boundingRect();
-   return QRectF(0, 0, 75, 75);
-
+    return BaseGraphicItem::boundingRect();
 }
 
-void ScreenshotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void ScreenshotsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-        Q_UNUSED(option);
-        Q_UNUSED(widget);
+    painter->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
-//      qDebug() << m_rect_sc;
+    QPixmap scaledScreenshot = m_screenshot.scaled(m_rect.toRect().size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    painter->drawPixmap(m_rect.toRect(), scaledScreenshot);
 
-       // painter->drawPixmap(m_rect_sc.toRect(),m_pix);
-       //painter->drawPixmap(m_rect_sc.toRect(),  m_pix);
-       painter->drawPixmap(((painter->viewport().width()  - m_pix.rect().width())  / 1.33333f),
-                           ((painter->viewport().height() - m_pix.rect().height()) * 1.66666f),
-                           m_pix);
-
-
-
-
-
+    BaseGraphicItem::paint(painter, option, widget);
 }
 
-// Type
-// ----
-
-int ScreenshotsGraphicsItem::type() const{
-
+int ScreenshotsGraphicsItem::type() const
+{
     return CustomTypes::ScreenshotGraphicsItem;
 }
 
 // Getters and setters
 // -------------------
 
-void ScreenshotsGraphicsItem::setRect(const QRectF& rect)
+void ScreenshotsGraphicsItem::setScreenshot(const QPixmap& screenshot)
 {
-    if(rect == m_rect_sc)  return;
+    m_screenshot = screenshot;
 
-    //This call is important to inform the scene about the coming geometry change.
-    //prepareGeometryChange();
-    m_rect_sc = rect;
-}
-
-
-QRectF ScreenshotsGraphicsItem::getRect()
-{
-    return m_rect_sc;
+    // Set the content rect accordingly
+    setRect(QRectF(-m_screenshot.width()/4, -m_screenshot.height()/4, m_screenshot.width()/2, m_screenshot.height()/2));
 }
 
 

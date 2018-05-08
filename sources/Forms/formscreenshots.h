@@ -13,29 +13,7 @@
 // Includes
 // --------
 
-#include <QWidget>
-
-//add
-#include<QTimer>
-#include<QPixmap>
-#include<QGroupBox>
-#include<QSpinBox>
-#include<QRadioButton>
-#include<QCheckBox>
-#include<QString>
-#include<QCursor>
-#include<QLabel>
-#include<QPointF>
-#include<QGraphicsPixmapItem>
-#include<QPainter>
-#include<QGraphicsItem>
-#include<exception>
-#include<QMouseEvent>
-#include <QGraphicsScene>
-#include<QRect>
-
 #include "baseformitem.h"
-
 
 // Forward Declaration
 namespace Ui
@@ -43,142 +21,57 @@ namespace Ui
     class FormScreenshots;
 }
 
-
-///
-/// \brief The FormScreenshots class : his charge is to making a Screenshot
-/// of two types: WholeScreenShot and region
-///
-
 class FormScreenshots
     :   public BaseFormItem
 {
     Q_OBJECT
 
-public:
+    public:
 
- ///
- /// \brief FormScreenshots : constructor
- /// \param parent
- ///
-    // explicit FormScreenshots(QWidget* parent = 0, QGraphicsScene*);
-    explicit FormScreenshots(QWidget* parent = 0) ;
-
-   // virtual const char* what() const throw(bad_function_call);
-
+        explicit FormScreenshots(QWidget* parent = 0) ;
         ~FormScreenshots();
 
+        // Load data
+        void loadFromItem(BaseGraphicItem* item) const;
 
-    // Load data
-    void loadFromItem(BaseGraphicItem* item) const;
+        // Translation
+        void retranslate();
 
-    // Translation
-    void retranslate();
+        // Getters
+        const QPixmap& getScreenshot() const;
+        const QPushButton* getAddButton() const;
 
-    // Getter add button
-    const QPushButton* getAddButton() const;
+    protected:
 
-protected:
-    ///
-    /// \brief mousePressEvent This event handler, for event event, can be reimplemented
-    ///  in a subclass to receive mouse press events for the widget
-    /// \param event
-    ///
-   //void mousePressEvent(QMouseEvent *event);
-    ///
-    /// \brief mouseReleaseEvent This event handler, for event event, can be reimplemented
-    /// in a subclass to receive mouse release events for the widget.
-    /// \param event
-    ///
-   // void mouseReleaseEvent(QMouseEvent *event);
-
-
-public slots:
-
-    void timeFunction();
-    void on_changeTime();
-    void quit();
-
-private:
-        // Ui
-        Ui::FormScreenshots *ui;
-        QGraphicsScene *m_scene;
-
-        ///
-        /// \brief m_pixmap : the pixmap of the window screenshoted.
-        ///
-        QPixmap m_pix;
-        ///
-        /// \brief m_formscreenshot is used to display the rectangle region drawed on mouse clicked
-        ///
-        FormScreenshots *m_formScreenshots;
-        ///
-        /// \brief m_delayspinbox it gives the time for a user to rearrange this desktop.
-        ///
-        QSpinBox *m_delayspinbox;
-        ///
-        /// \brief m_hidewindow Hiding the application's window while the screenshot is taken.
-        ///
-        QCheckBox *m_hidewindow;
-        ///
-        /// \brief m_label label of our screen shot
-        ///
-        QLabel *m_label;
-        ///
-        /// \brief m_optionsGroupbox the QGroupBox widget provides a group box frame with a title.
-        ///
-        QGroupBox *m_optionsGroupbox;
-        ///
-        /// \brief m_savedcursor class provides a mouse cursor with an arbitrary shape.
-        ///
-        QCursor m_savedcursor;
-
-        bool m_buttonpressed;
-        ///
-        /// \brief m_region The QRect class defines a rectangle
-        ///  in the chosen region  in the plane using integer precision.
-        ///
-        QRectF m_area;
-        ///
-        /// \brief m_captureTimer is an instance of class provides repetitive and single-shot timers.
-        ///
-        QTimer  *m_timer;
-
-        ///
-        /// \brief if m_point1 = point2 this mean the user has taken the whole screen.
-        ///
-        QPointF *m_point0;
-        QPointF *m_point1;
-        QPointF *m_point;
-        qreal x,y,x1,y1;
-        int m_width;
-        int m_height;
-        QPainter *m_painter;
+        // Events
+        void resizeEvent(QResizeEvent* event);
 
      private slots:
-        ///
-        /// \brief snapshot : snapshot slot in Desktop and window
-        ///
-        //void snapshot();
-        ///
-        /// \brief CaptureDesktop : this method take all Desktop
-        ///
-        void goCapture();
-        //void CaptureArea(bool val, QRectF a);
 
+        void startCountdown();
+        void takeScreenshot();
 
+        // Screenshot received from the mainwindow
+        void screenshotReceived(const QPixmap& screenshot);
 
-     signals:
-        ///
-        /// \brief setBackground : QPixmap class is an off-screen image representation
-        /// that can be used as a paint device. to define a slot slotBackground in mainwindow.h
-        /// \param pix
-        ///
-        void signalBackground(QPixmap);
-        ///
-        /// \brief dimensionsMade signal
-        ///
-        void dimensionsMade( bool, QRectF );
+    signals:
 
+        // Window visibility
+        void adjustWindowVisibility(bool visible);
+
+        // Request a screenshot from the main window
+        void requestScreenshot(bool wholeScreen);
+
+    private:
+
+        // Update
+        void updatePreviewLabel();
+
+        // Ui
+        Ui::FormScreenshots* ui;
+
+        // Image
+        QPixmap m_screenshot;
 };
 
-#endif // FORMSCREENSHOOTS_H
+#endif

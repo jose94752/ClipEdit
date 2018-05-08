@@ -37,22 +37,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="49"/>
+        <location filename="../../Forms/dialogsave.cpp" line="51"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="49"/>
+        <location filename="../../Forms/dialogsave.cpp" line="51"/>
         <source>ClipEdit File (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="58"/>
+        <location filename="../../Forms/dialogsave.cpp" line="60"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="58"/>
+        <location filename="../../Forms/dialogsave.cpp" line="60"/>
         <source>File %1 already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -271,22 +271,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Z</source>
         <translation type="unfinished"></translation>
     </message>
@@ -625,16 +625,6 @@
     <message>
         <location filename="../../Forms/formscreenshots.ui" line="47"/>
         <source>Desk screen capture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.cpp" line="331"/>
-        <source>Open ClipEdit Project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.cpp" line="331"/>
-        <source>ClipEdit Files (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1020,69 +1010,69 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="187"/>
+        <location filename="../../mainwindow.cpp" line="236"/>
         <source>Zoom level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="622"/>
+        <location filename="../../mainwindow.cpp" line="633"/>
         <source>Export as image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="622"/>
+        <location filename="../../mainwindow.cpp" line="633"/>
         <source>Image File (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="632"/>
-        <location filename="../../mainwindow.cpp" line="679"/>
+        <location filename="../../mainwindow.cpp" line="643"/>
+        <location filename="../../mainwindow.cpp" line="692"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="632"/>
-        <location filename="../../mainwindow.cpp" line="679"/>
+        <location filename="../../mainwindow.cpp" line="643"/>
+        <location filename="../../mainwindow.cpp" line="692"/>
         <source>File %1 already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="651"/>
+        <location filename="../../mainwindow.cpp" line="663"/>
         <source>Open ClipEdit Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="651"/>
+        <location filename="../../mainwindow.cpp" line="663"/>
         <source>ClipEdit Files (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="670"/>
+        <location filename="../../mainwindow.cpp" line="683"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="670"/>
+        <location filename="../../mainwindow.cpp" line="683"/>
         <source>ClipEdit File (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="693"/>
+        <location filename="../../mainwindow.cpp" line="706"/>
         <source>A simple document editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="694"/>
+        <location filename="../../mainwindow.cpp" line="707"/>
         <source>Developed by the M2I Team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="695"/>
+        <location filename="../../mainwindow.cpp" line="708"/>
         <source>Copyright (c) 2018</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="696"/>
+        <location filename="../../mainwindow.cpp" line="709"/>
         <source>About </source>
         <translation type="unfinished"></translation>
     </message>

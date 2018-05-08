@@ -7,33 +7,16 @@
 ================================================
 */
 
-
 #include "formscreenshots.h"
 #include "ui_formscreenshots.h"
 #include "../Items/screenshotsgraphicsitem.h"
 
-//add
 #include<QTimer>
 #include<QWindow>
 #include<QDesktopWidget>
 #include<QApplication>
 #include<QScreen>
-#include<QEvent>
-#include<QKeyEvent>
-#include<QCursor>
-#include<QPixmap>
-#include<QLabel>
-#include<QPainter>
 #include<QDebug>
-#include<exception>
-#include<QRect>
-#include<QRectF>
-#include<QPointF>
-#include<QGraphicsView>
-#include<QDir>
-#include<QFileDialog>
-#include<QGraphicsScene>
-
 
 
 // Constructor, destructor
@@ -44,270 +27,95 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 {
     ui->setupUi(this);
 
-    //spinBox
-    ui->spinBoxDelay->setSuffix(" s "); //OK it works
-
-    //connection to radioButton
-    connect(ui->radioButtonFast, SIGNAL(clicked(bool)),
-            this, SLOT(on_changeTime()));
-    connect(ui->radioButtonAverage, SIGNAL(clicked(bool)),
-            this, SLOT(on_changeTime()));
-    connect(ui->radioButtonSlow, SIGNAL(clicked(bool)),
-            this, SLOT(on_changeTime()));
-
-    //display the value on the spinBox
+    // SpinBox
+    ui->spinBoxDelay->setSuffix(" s");
     ui->spinBoxDelay->setMaximum(100);
 
-    //we create an instanace of the QTimer
-    m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()),
-            this, SLOT(timeFunction()));
+    // Preview label
+    ui->labelPreview->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->labelPreview->setAlignment(Qt::AlignCenter);
 
-    m_timer->setInterval(100);
+    // Capture button
+    connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT(startCountdown()));
 
-    m_timer->start();
-
-
-    //THis makes Qt delete this widget when the widget has accepted the close even.
-   // this->setAttribute(Qt::WA_DeleteOnClose);
-
-    //Some of these flags depend on whether the underlying window manager supports them
-    //Produces a borderless window. The user cannot move or resize a borderless
-    //window via the window system.
-    //setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
-
-    //Indicates that the widget has no background, i.e. when the widget receives paint events,
-    //the background is not automatically repainted.
-    // setAttribute(Qt::WA_NoSystemBackground, true);
-
-    //Indicates that the widget should have a translucent background,
-    //i.e., any non-opaque regions of the widgets will be translucent
-    //because the widget will have an alpha channel.
-    //Setting this flag causes WA_NoSystemBackground to be set
-   // setAttribute(Qt::WA_TranslucentBackground);
-
-    //Shows the widget in full-screen mode.
-   //  this->showFullScreen();
-
-    //put here the signal that point to the mainwindow class
-    //create a pixmap
-
-    //open a directory
-   // connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT);
-
-    //open a directory
-    //connect(ui->pushButtonCapture, SIGNAL(clicked(bool)), this, SLOT(choose_screenshot()));
-
- //   connect(ui->radioButtonRegion, SIGNAL(clicked(bool)),
- //           this, SLOT(CaptureRegion()));
-
-
-
-    //This property holds the cursor shape for this widget.
-   // m_savedcursor=cursor();
-
-    //A crosshair cursor is used to help the user accurately
-    //select a point on the screen.
-    //setCursor(Qt::CrossCursor);
-
-    //connect pour tempo: option
-
-    //goCapture
-    connect(ui->radioButtonDeskcapture, SIGNAL(clicked(bool)),
-             this, SLOT(goCapture()));
+    // Capture button disabled by default
+    ui->pushButtonAdd->setEnabled(false);
 }
 
 FormScreenshots::~FormScreenshots()
 {
-   //delete the object
-   delete m_timer;
    delete ui;
 }
 
+// Update
+// ------
 
-void FormScreenshots::timeFunction()
+void FormScreenshots::updatePreviewLabel()
 {
-    //we get the current value
-    int val = ui->spinBoxDelay->value();
-    val++;
-    ui->spinBoxDelay->setValue(val);
-    ui->progressBar->setValue(val%100);
-
-
+    ui->labelPreview->setPixmap(m_screenshot.scaled(ui->labelPreview->size(),
+                                                    Qt::KeepAspectRatio,
+                                                    Qt::SmoothTransformation));
 }
 
-void FormScreenshots::on_changeTime()
+// Events
+// ------
+
+void FormScreenshots::resizeEvent(QResizeEvent* /*event*/)
 {
-    if (ui->radioButtonSlow->isChecked()) m_timer->setInterval(1000);
-       else if (ui->radioButtonAverage->isChecked()) m_timer->setInterval(500);
-    else if(ui->radioButtonFast->isChecked()) m_timer->setInterval(100);
-}
+    QSize screenshotSize = m_screenshot.size();
+    screenshotSize.scale(ui->labelPreview->size(), Qt::KeepAspectRatio);
 
-void FormScreenshots::quit()
-{
-    this->close();
-
-}
-
-//1
-void FormScreenshots::goCapture()
-{
-    static int count = 0;
-
-//  this->hide();
-
-//  if(ui->pushButtonCapture->isChecked()) {
-       QScreen *screen = QGuiApplication::primaryScreen();
-       QPixmap m_pix = screen->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
-                     QApplication::desktop()->height());
-
-      // if(m_pix.isNull()) return;
-
-       //not save but make a emit.
-       // m_pix.save(QString("/home/formation/doCapture/Hello%1.png").arg(count));
-
-
-       //FormScreenshots *f = new FormScreenshots(this);
-
-//       connect(this, SIGNAL(signalBackground(QPixmap)),
-//               this, SIGNAL(signalBackground(QPixmap)));
-
-       emit signalBackground(m_pix);
-
-      count++;
-//   }
-//  this->show();
-}
-
-
-
-//3
-//void FormScreenshots::snapshot()
-//{
-/**
-    //step1 : OK but not local screen shot.
-    static int count = 0;
-   if(ui->radioButtonDeskcapture->isChecked() ){
-    connect(m_delayspinbox, QOverload<int>::of(&QSpinBox::valueChanged),
-                                                        this, &FormScreenshots::snapshot) ;
-    QPixmap pix;
-    pix = QPixmap::grabWindow(QApplication::desktop()->winId());
-    pix.save(QString("/home/formation/doCapture/screenshot%1.png").arg(count));
-    count++;
-    //qApp is global pointer referring to the unique application object.
-   // QTimer::singleShot(100, qApp, SLOT(quit())); // close the app in 0,3 secs
- }
-*/
-
-/**
-    //new test
-    if(ui->radioButtonDeskcapture->isChecked()) {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QPixmap qpix = screen->grabWindow(this->winId(), 0, 0, QApplication::desktop()->width(),
-                  QApplication::desktop()->height());
-    qpix.save("/home/formation/doCapture/Hello.png");
-    this->show();
+    if (m_screenshot.size() != screenshotSize && ui->labelPreview->pixmap())
+    {
+        updatePreviewLabel();
     }
-*/
+}
 
- /**
-    //step2
-    if (ui->radioButtonWholecapture->isChecked()) m_typecapture=Desktop;
-   // updatehide();
-    if ( m_typecapture==Desktop)
-         QTimer::singleShot(200,this,SLOT(CaptureDesktop()));
-    else
-        {
-        // m_formScreenshots = new FormScreenshots(0);
-         connect(this ,SIGNAL(dimensionsMade(bool,QRect)),this,SLOT(CaptureArea(bool,QRect)));
-         this->show();
-        }
-*/
+// Slots
+// -----
 
+void FormScreenshots::startCountdown()
+{
+    // Clear the preview
+    ui->labelPreview->clear();
 
-  //step4
-//    QScreen *m_screen = QGuiApplication::primaryScreen();
-//    if (const QWindow *window = windowHandle())
-//         m_screen = window->screen();
+    // Disable interactions
+    ui->pushButtonAdd->setEnabled(false);
+    ui->pushButtonCapture->setEnabled(false);
 
-//    if (!m_screen)
-//           return;
+    // Hide window if requested
+    if (ui->checkBoxHideWindow->isChecked())
+        emit adjustWindowVisibility(false);
 
-//    this->hide();
-//    m_pix = m_screen->grabWindow(0);
-//    QRect rec(m_area.x()+1,m_area.y()+1,m_area.width()-1,m_area.height()-1);
-//    QPixmap pix=m_pix.copy(rec);
-//    m_pix=pix;
+    // Start the timer
+    QTimer::singleShot(ui->spinBoxDelay->value()*1000, this, &FormScreenshots::takeScreenshot);
+}
 
+void FormScreenshots::takeScreenshot()
+{
+    bool wholeScreen = ui->checkBoxWholeScreen->isChecked();
 
-//    //?
-//    FormScreenshots *w= new FormScreenshots(this);
+    emit requestScreenshot(wholeScreen);
+}
 
+void FormScreenshots::screenshotReceived(const QPixmap& screenshot)
+{
+    m_screenshot = screenshot;
 
-//    connect (this,SIGNAL(setBackground(QPixmap)),this,SIGNAL(setBackground(QPixmap)));
-//    this->setBackground(m_pix);
-//    this->show();
-
-//}
+    ui->labelPreview->setPixmap(m_screenshot.scaled(ui->labelPreview->size(),
+                                                    Qt::KeepAspectRatio,
+                                                    Qt::SmoothTransformation));
 
 
+    // Enable interactions
+    ui->pushButtonAdd->setEnabled(true);
+    ui->pushButtonCapture->setEnabled(true);
 
+    // Show if necessary
+    if (ui->checkBoxHideWindow->isChecked())
+        emit adjustWindowVisibility(true);
+}
 
-//void FormScreenshots::mouseReleaseEvent(QMouseEvent *event)
-//{
-//    Q_UNUSED(event)
-//    QPoint m_point1;
-//    m_point1 = event->globalPos();//get global position according to ur parent-child relationship
-//    QPainter m_painter(this);
-
-//    p->drawRect(point1, point2);
-
-//    emit mouseReleaseEvent();
-//    m_buttonpressed=false;
-//    emit dimensionsMade(true, m_region);
-//    close();
-
-//    if(event->MouseButtonRelease)
-//    {
-//         qDebug () << "released";
-//        // QPointF point1= ui->graphicsView->mapFromScene(e->posF());
-//         QPoint point1;
-//         x1=point1.x();
-//         qDebug()<<x1;
-//         y1= point1.y();
-//         qDebug()<<y1;
-//         qDebug()<<point1;
-//        }
-//}
-
-
-//void FormScreenshots::choose_screenshot()
-//{
-//    QString homepath = QDir::homePath();
-
-//    QString fileName = QFileDialog::getOpenFileName(this, tr("Open ClipEdit Project"), homepath, tr("ClipEdit Files (*.png)"));
-
-//    if(fileName.isEmpty())
-//        return;
-//    QPixmap pix (fileName);
-
-//    emit setBackground(pix);
-//}
-
-//void FormScreenshots::updatehide()
-//{
-//    m_delayspinbox = new QSpinBox(this);
-
-//    if (m_delayspinbox->value()== 0)
-//    {
-//       m_hidewindow->setDisabled(true);
-//       m_hidewindow->setChecked(false);
-//    }
-//    else
-//    {
-//        m_hidewindow->setDisabled(false);
-//    }
-//}
 
 // Load data
 // ---------
@@ -330,12 +138,17 @@ void FormScreenshots::retranslate()
     ui->retranslateUi(this);
 }
 
-// Getter add button
+// Getters
 // -----------------
+
+const QPixmap& FormScreenshots::getScreenshot() const
+{
+    return m_screenshot;
+}
 
 const QPushButton* FormScreenshots::getAddButton() const
 {
-    return ui->pushButtonCapture;
+    return ui->pushButtonAdd;
 }
 
 

@@ -37,22 +37,22 @@
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="49"/>
+        <location filename="../../Forms/dialogsave.cpp" line="51"/>
         <source>Save File</source>
         <translation>Sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="49"/>
+        <location filename="../../Forms/dialogsave.cpp" line="51"/>
         <source>ClipEdit File (*.cle)</source>
         <translation>Fichier ClipEdit</translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="58"/>
+        <location filename="../../Forms/dialogsave.cpp" line="60"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="../../Forms/dialogsave.cpp" line="58"/>
+        <location filename="../../Forms/dialogsave.cpp" line="60"/>
         <source>File %1 already exists</source>
         <translation>Le fichier %1 existe déjà</translation>
     </message>
@@ -145,10 +145,6 @@
         <source>Add</source>
         <translation>Ajouter</translation>
     </message>
-    <message>
-        <source>Add Arrow</source>
-        <translation type="vanished">Ajouter</translation>
-    </message>
 </context>
 <context>
     <name>FormCharts</name>
@@ -169,17 +165,9 @@
         <translation>Données</translation>
     </message>
     <message>
-        <source>Chart Type</source>
-        <translation type="vanished">Type</translation>
-    </message>
-    <message>
         <location filename="../../Forms/formcharts.ui" line="83"/>
         <source>Colors</source>
         <translation>Couleurs</translation>
-    </message>
-    <message>
-        <source>Chart Title</source>
-        <translation type="vanished">Titre</translation>
     </message>
     <message>
         <location filename="../../Forms/formcharts.ui" line="100"/>
@@ -227,10 +215,6 @@
         <translation>Couleur de fond</translation>
     </message>
     <message>
-        <source>Backround Color</source>
-        <translation type="vanished">Couleur de fond</translation>
-    </message>
-    <message>
         <location filename="../../Forms/formcharts.ui" line="156"/>
         <source>Transparent</source>
         <translation>Transparent</translation>
@@ -249,29 +233,6 @@
         <location filename="../../Forms/formcharts.ui" line="265"/>
         <source>Add</source>
         <translation>Ajouter</translation>
-    </message>
-</context>
-<context>
-    <name>FormCliparts</name>
-    <message>
-        <source>Form</source>
-        <translation type="vanished">Formulaire</translation>
-    </message>
-    <message>
-        <source>Cliparts library</source>
-        <translation type="vanished">Bibliothèque de cliparts</translation>
-    </message>
-    <message>
-        <source>Path :</source>
-        <translation type="vanished">Chemin:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="vanished">Ajouter</translation>
     </message>
 </context>
 <context>
@@ -310,28 +271,24 @@
         <translation>Calques</translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Visibility</source>
         <translation>Visible</translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../../Forms/formlayers.cpp" line="79"/>
+        <location filename="../../Forms/formlayers.cpp" line="82"/>
         <source>Z</source>
         <translation>Z</translation>
-    </message>
-    <message>
-        <source>Z-Value</source>
-        <translation type="vanished">Z-Valeur</translation>
     </message>
 </context>
 <context>
@@ -636,10 +593,6 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Captures d&apos;écran&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Whole screen capture</source>
-        <translation type="vanished">Capturer tout l&apos;écran</translation>
-    </message>
-    <message>
         <location filename="../../Forms/formscreenshots.ui" line="71"/>
         <source>Options</source>
         <translation>Options</translation>
@@ -670,27 +623,9 @@
         <translation>Lent</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="vanished">Annuler</translation>
-    </message>
-    <message>
-        <source>Go</source>
-        <translation type="vanished">Capturer</translation>
-    </message>
-    <message>
         <location filename="../../Forms/formscreenshots.ui" line="47"/>
         <source>Desk screen capture</source>
         <translation>Capture d&apos;écran du bureau</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.cpp" line="331"/>
-        <source>Open ClipEdit Project</source>
-        <translation>Ouvrir un projet ClipEdit</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.cpp" line="331"/>
-        <source>ClipEdit Files (*.png)</source>
-        <translation>Fichiers ClipEdit (*.png)</translation>
     </message>
 </context>
 <context>
@@ -1067,7 +1002,7 @@
     <message>
         <location filename="../../mainwindow.ui" line="348"/>
         <source>Set background color</source>
-        <translation>Changer les couleurs par défaut</translation>
+        <translation>Changer la couleur de fond</translation>
     </message>
     <message>
         <location filename="../../mainwindow.ui" line="353"/>
@@ -1075,69 +1010,69 @@
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="187"/>
+        <location filename="../../mainwindow.cpp" line="236"/>
         <source>Zoom level</source>
         <translation>Niveau de zoom</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="622"/>
+        <location filename="../../mainwindow.cpp" line="633"/>
         <source>Export as image</source>
         <translation>Exporter en tant qu&apos;image</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="622"/>
+        <location filename="../../mainwindow.cpp" line="633"/>
         <source>Image File (*.png)</source>
         <translation>Fichier image (*.png)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="632"/>
-        <location filename="../../mainwindow.cpp" line="679"/>
+        <location filename="../../mainwindow.cpp" line="643"/>
+        <location filename="../../mainwindow.cpp" line="692"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="632"/>
-        <location filename="../../mainwindow.cpp" line="679"/>
+        <location filename="../../mainwindow.cpp" line="643"/>
+        <location filename="../../mainwindow.cpp" line="692"/>
         <source>File %1 already exists</source>
         <translation>Le fichier %1 existe déjà</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="651"/>
+        <location filename="../../mainwindow.cpp" line="663"/>
         <source>Open ClipEdit Project</source>
         <translation>Ouvrir le projet ClipEdit</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="651"/>
+        <location filename="../../mainwindow.cpp" line="663"/>
         <source>ClipEdit Files (*.cle)</source>
         <translation>Fichiers ClipEdit (*.cle)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="670"/>
+        <location filename="../../mainwindow.cpp" line="683"/>
         <source>Save File</source>
         <translation>Sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="670"/>
+        <location filename="../../mainwindow.cpp" line="683"/>
         <source>ClipEdit File (*.cle)</source>
         <translation>Fichier ClipEdit (*.cle)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="693"/>
+        <location filename="../../mainwindow.cpp" line="706"/>
         <source>A simple document editor</source>
         <translation>Un simple éditeur de document</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="694"/>
+        <location filename="../../mainwindow.cpp" line="707"/>
         <source>Developed by the M2I Team</source>
         <translation>Développé par l&apos;équipe M2I</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="695"/>
+        <location filename="../../mainwindow.cpp" line="708"/>
         <source>Copyright (c) 2018</source>
         <translation>Copyright (c) 2018</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="696"/>
+        <location filename="../../mainwindow.cpp" line="709"/>
         <source>About </source>
         <translation>À propos de </translation>
     </message>

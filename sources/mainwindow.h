@@ -47,10 +47,50 @@ class MainWindow
         explicit MainWindow(QWidget* parent = 0);
         ~MainWindow();
 
-    private:
+    protected:
 
-   int  m_height ;
-   int  m_width ;
+        // Events
+        bool eventFilter(QObject* watched, QEvent* event);
+        void changeEvent(QEvent* event);
+
+    signals:
+
+        void screenshotTaken(const QPixmap& screenshot);
+
+    private slots:
+
+        // Menu and toolbar
+        void save(bool);
+        void saveAs(bool);
+        void openFile(bool);
+        void exportView(bool);
+        void actionClicked(bool);
+        void resizeScene();
+        void slotNew(bool);
+        void showAboutDialog(bool);
+
+        // Items
+        void slotNumberedBullets();
+        void slotTextBoxes();
+        void slotPictures();
+        void slotGraphs();
+        void slotArrows();
+        void slotScreenshots();
+
+        // Screenshots
+        void takeScreenshot(bool wholeScreen);
+
+        // Layers
+        void slotLayers();
+
+        // Selection
+        void itemSelected();
+
+        // Settings
+        void showPreferences();
+        void applyPreferences();
+
+    private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -83,6 +123,9 @@ class MainWindow
         // Zoom
         QSpinBox* m_spinBoxZoom;
 
+        // Format
+        int  m_height ;
+        int  m_width ;
         bool m_resized;
 
         // Building
@@ -94,46 +137,6 @@ class MainWindow
 
         // Dynamic strings setter (for retranslation)
         void fillDynamicStrings();
-
-    protected:
-
-        // Events
-        bool eventFilter(QObject* watched, QEvent* event);
-        void changeEvent(QEvent* event);
-
-    private slots:
-
-        // Menu and toolbar
-        void save(bool);
-        void saveAs(bool);
-        void openFile(bool);
-        void exportView(bool);
-        void actionClicked(bool);
-        void resizeScene();
-        void slotNew(bool);
-        void showAboutDialog(bool);
-
-        // Items
-        void slotNumberedBullets();
-        void slotTextBoxes();
-        void slotTextPicture();
-        //void slotGraphs(const GraphsInfo &infos);
-        void slotGraphs();
-        void slotArrowsGraphicsItem();
-
-        //slot for screenshot
-        void slotBackground(QPixmap);
-
-
-        void itemSelected();
-
-        // Layers
-        void slotLayers();
-
-        // Settings
-        void showPreferences();
-
-        void applyPreferences();
 };
 
 #endif

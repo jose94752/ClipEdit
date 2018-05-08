@@ -121,14 +121,17 @@ void MainWindow::buildForms()
     formLayers->setScene(m_scene);
 
     // Item connects
+    connect(formArrows->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotArrowsGraphicsItem()));
+    connect(formPictures->getAddButton(),       SIGNAL(clicked(bool)),      this,   SLOT(slotPictures()));
+    connect(formBullets->getAddButton(),        SIGNAL(clicked(bool)),      this,   SLOT(slotNumberedBullets()));
+    connect(formTextboxes->getAddButton(),      SIGNAL(clicked(bool)),      this,   SLOT(slotTextBoxes()));
+    connect(formCharts->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotGraphs()));
+    connect(formArrows->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotArrows()));
+    connect(formScreenshots->getAddButton(),    SIGNAL(clicked(bool)),      this,   SLOT(slotScreenshots()));
 
-    connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
-    connect(formPictures->getAddButton(),   SIGNAL(clicked(bool)),  this,   SLOT(slotTextPicture()));
-    connect(formBullets->getAddButton(),    SIGNAL(clicked(bool)),  this,   SLOT(slotNumberedBullets()));
-    connect(formTextboxes->getAddButton(),  SIGNAL(clicked(bool)),  this,   SLOT(slotTextBoxes()));
-    connect(formCharts->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotGraphs()));
-    connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
-    connect(formScreenshots,                SIGNAL(signalBackground(QPixmap)), this, SLOT(slotBackground(QPixmap)));
+    connect(formScreenshots, SIGNAL(adjustWindowVisibility(bool)), this, SLOT(setVisible(bool)));
+    connect(formScreenshots, SIGNAL(requestScreenshot(bool)), this, SLOT(takeScreenshot(bool)));
+    connect(this, SIGNAL(screenshotTaken(QPixmap)), formScreenshots, SLOT(screenshotReceived(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
     // Building the stacked widget
@@ -228,7 +231,7 @@ void MainWindow::buildView()
     ui->graphicsView->viewport()->installEventFilter(this);
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
-    m_resized=false;
+    m_resized = false;
 }
 
 void MainWindow::fillDynamicStrings()
@@ -396,7 +399,7 @@ void MainWindow::slotTextBoxes()
     m_scene.addItem(item);
 }
 
-void MainWindow::slotTextPicture()
+void MainWindow::slotPictures()
 {
     FormPictures* form = 0;
     if (m_forms.contains(BUTTON_ID_PICTURE))
@@ -449,7 +452,7 @@ void MainWindow::slotGraphs()
 ///
 /// Actual version work only without anchor point
 ///
-void MainWindow::slotArrowsGraphicsItem()
+void MainWindow::slotArrows()
 {
     FormArrows* form = 0;
     if (m_forms.contains(BUTTON_ID_ARROW))
@@ -566,12 +569,33 @@ void MainWindow::slotArrowsGraphicsItem()
 */
 }
 
-void MainWindow::slotBackground(QPixmap pix)
+void MainWindow::slotScreenshots()
 {
-    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(pix);
+    FormScreenshots* form = 0;
+    if (m_forms.contains(BUTTON_ID_SCREENSHOT))
+    {
+        form = dynamic_cast<FormScreenshots*>(m_forms[BUTTON_ID_SCREENSHOT]);
+
+        if (!form)
+            return;
+    }
+
+    const QPixmap screenshot = form->getScreenshot();
+
+    ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(screenshot);
     m_scene.addItem(sc);
 }
 
+
+void MainWindow::takeScreenshot(bool wholeScreen)
+{
+    WId id = wholeScreen ? 0 : this->winId();
+
+    QScreen* screen = QGuiApplication::primaryScreen();
+    QPixmap screenshot = screen->grabWindow(id);
+
+    emit screenshotTaken(screenshot);
+}
 
 void MainWindow::itemSelected()
 {
