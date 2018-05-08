@@ -483,7 +483,9 @@ void MainWindow::slotArrows()
                                 //To do others HeadTypeChoiceContents
                                 // comboBoxHeadTypeChoiceContents
 
-    qDebug() << "MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
+    //qDebug() << "MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
+    qDebug() << "MainWindow::slotArrowsGraphicsItem ArrowWidth =" << ArrowWidth;
+    qDebug() << "MainWindow::slotArrowsGraphicsItem ArrowHeight =" << ArrowHeight;
 
 
     // Define new ArrowsGraphicsItem on the scene
@@ -562,7 +564,7 @@ void MainWindow::slotArrows()
 
     // Add Arrow on the scene
     //m_scene.addItem(new ArrowsGraphicsItem());
-    qDebug() << "Before add the Item on scene MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
+    //qDebug() << "Before add the Item on scene MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
     m_scene.addItem(ArrowItem);
 
 }

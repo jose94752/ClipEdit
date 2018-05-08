@@ -78,7 +78,9 @@ FormArrows::FormArrows(QWidget *parent)
     connect(ui->toolButtonOutlineColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(outlineColorArrowChanged(QColor)));
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
 
-     // Connects for others elements of FormArrrow To do
+    // Connects for change
+
+    // Connects for others elements of FormArrrow To do
 
 }
 

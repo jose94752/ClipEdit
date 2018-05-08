@@ -60,7 +60,10 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     m_LineThickness = LineThickness;
     //qDebug() << "Constructor receive for SizeHeadTypeChoice = " << SizeHeadTypeChoice;
     m_SizeHeadTypeChoice = SizeHeadTypeChoice;
-
+    qDebug() << "Constructor receive for ArrowWidth = " << ArrowWidth;
+    m_ArrowWidth = ArrowWidth;
+    qDebug() << "Constructor receive for ArrowHeight = " << ArrowHeight;
+    m_ArrowHeight = ArrowHeight;
 
     // 3 Methods
     // Without anchor point:
@@ -77,8 +80,16 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_EndPositionItem =  endItem.{à définir}scenePos();
 
-    m_StartPositionItem = new QPointF(-50, -50);
-    m_EndPositionItem = new QPointF(100, 100);
+    m_StartPositionItem = new QPointF();
+    qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
+    m_StartPositionItem = new QPointF(-50, -50); // To Do method Get QPointF from the scene after a click on Add button arrow
+    qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state2 =" << *m_StartPositionItem;
+
+    m_EndPositionItem = new QPointF();
+    qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
+    m_EndPositionItem = new QPointF(100, 100);  // To Do method Get QPointF from the scene after a click on Add button arrow
+    qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state2 =" << *m_EndPositionItem;
+
 
     m_Color = Qt::black; // Temp for test
 
@@ -387,15 +398,13 @@ void ArrowsGraphicsItem::getParameters(QSettings *settings, int itemIdex)
     settings->setValue(path+"ArrowHeight",m_ArrowHeight);
     settings->setValue(path+"LineThickness",m_LineThickness);
     settings->setValue(path+"SizeHeadTypeChoice",m_SizeHeadTypeChoice);
-    /*QPointF *m_StartPositionItem;
-    QPointF *m_EndPositionItem;*/
-//    settings->setValue(path+"StartPositionItem",*m_StartPositionItem); // Cf. Bug of setParameters below
-//    settings->setValue(path+"EndPositionItem",*m_EndPositionItem);
+    settings->setValue(path+"StartPositionItem",*m_StartPositionItem);
+    settings->setValue(path+"EndPositionItem",*m_EndPositionItem);
     settings->setValue(path+"Color",m_Color.name());
     settings->setValue(path+"ItemOutlineColorArrow",*ItemOutlineColorArrow);
     settings->setValue(path+"ItemFillColorArrow",*ItemFillColorArrow);
-    //settings->setValue(path+"ArrowHeadStart",ArrowHeadStart);
-    //settings->setValue(path+"ArrowHeadStart",ArrowHeadEnd);
+   // settings->setValue(path+"ArrowHeadStart",ArrowHeadStart);
+   // settings->setValue(path+"ArrowHeadEnd",ArrowHeadEnd);
 
     //FormArrows *m_formArrows;
 }
@@ -429,8 +438,16 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     //end Debug temp
 
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
-//    m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF(); // Bug cannot convert QPointF* to
-//    m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();     //  QPointF in assignement
+
+    qDebug() << "ArrowsGraphicsItem::setParameters *m_StartPositionItem state1 =" << *m_StartPositionItem;
+    *m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF();
+    qDebug() << "ArrowsGraphicsItem::setParameters *m_StartPositionItem state2 =" << *m_StartPositionItem;
+
+    qDebug() << "ArrowsGraphicsItem::setParameters *m_EndPositionItem state1 =" << *m_EndPositionItem;
+    *m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();
+    qDebug() << "ArrowsGraphicsItem::setParameters *m_EndPositionItem state2 =" << *m_EndPositionItem;
+
+
     m_Color.setNamedColor(settings->value(path+"Color").toString());
     ItemOutlineColorArrow->setNamedColor(settings->value(path+"ItemOutlineColorArrow").toString());
     ItemFillColorArrow->setNamedColor(settings->value(path+"ItemFillColorArrow").toString());
