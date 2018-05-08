@@ -47,7 +47,7 @@ FormArrows::FormArrows(QWidget *parent)
          ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
      }
      DefaultLineThickness = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
-     qDebug() << "FormArrows DefaultLineThickness = " << DefaultLineThickness;
+     //qDebug() << "FormArrows DefaultLineThickness = " << DefaultLineThickness;
 
      // Fill the Simple Arrow Head size 10 to 50
      for (int i = 10; i < 51; i++)
