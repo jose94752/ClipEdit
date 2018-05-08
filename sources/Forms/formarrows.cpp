@@ -47,6 +47,7 @@ FormArrows::FormArrows(QWidget *parent)
          ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
      }
      DefaultLineThickness = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+     //qDebug() << "FormArrows DefaultLineThickness = " << DefaultLineThickness;
 
      // Fill the Simple Arrow Head size 10 to 50
      for (int i = 10; i < 51; i++)
@@ -111,7 +112,7 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
    ArrowFillColor = ui->toolButtonFillColorContents->getColor();
 
    LineThicknessContents = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
-   //qDebug() << "LineThicknessContents = " << LineThicknessContents;
+   qDebug() << "FormArrows::GetInfosArrows LineThicknessContents = " << LineThicknessContents;
    LineThickness = LineThicknessContents;
 
    //To do others HeadTypeChoiceContents
@@ -316,9 +317,11 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
 
         // Load data into the form
         //qDebug() << "getArrowHeadSize = " << (castedItem->getArrowHeadSize()); // For tests
+        //qDebug() << "setCurrentIndex = getArrowHeadSize -10 == " << ((castedItem->getArrowHeadSize())-10); // For tests
         ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
 
-        //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        qDebug() << "setCurrentIndex = getLineThicknessSize -1 == " << ((castedItem->getLineThicknessSize())-1); // For tests
         ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
 
         //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests

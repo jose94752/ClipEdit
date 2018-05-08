@@ -121,13 +121,14 @@ void MainWindow::buildForms()
     formLayers->setScene(m_scene);
 
     // Item connects
+
     connect(formArrows->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotArrowsGraphicsItem()));
     connect(formPictures->getAddButton(),       SIGNAL(clicked(bool)),      this,   SLOT(slotPictures()));
     connect(formBullets->getAddButton(),        SIGNAL(clicked(bool)),      this,   SLOT(slotNumberedBullets()));
     connect(formTextboxes->getAddButton(),      SIGNAL(clicked(bool)),      this,   SLOT(slotTextBoxes()));
     connect(formCharts->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotGraphs()));
     connect(formArrows->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotArrows()));
-    connect(formScreenshots->getAddButton(),    SIGNAL(clicked(bool)),      this,   SLOT(slotScreenshots()));
+    //connect(formScreenshots->getAddButton(),    SIGNAL(clicked(bool)),      this,   SLOT(slotScreenshots()));
 
     connect(formScreenshots, SIGNAL(adjustWindowVisibility(bool)), this, SLOT(setVisible(bool)));
     connect(formScreenshots, SIGNAL(requestScreenshot(bool)), this, SLOT(takeScreenshot(bool)));
@@ -465,10 +466,15 @@ void MainWindow::slotArrows()
 
 
     // Control of the size of scene vs size of the arrows
+    // with default sizes set for:
+    // ArrowWidth = 50, ArrowHeight = 50
+    // LineThickness = 1, SizeHeadTypeChoice 10
+    // To Do after correcting arrows bugs size use QColor::QColor() to set invalid color
+    // for ArrowOutlineColor, ArrowFillColor
     bool WithoutAnchorPoint(true), OneAnchorPoint(false), TwoAnchorPoints(false);
-    int ArrowWidth(0), ArrowHeight(0);
+    int ArrowWidth(50), ArrowHeight(50);
     QColor ArrowOutlineColor, ArrowFillColor;
-    int LineThickness(0), SizeHeadTypeChoice(0);
+    int LineThickness(1), SizeHeadTypeChoice(10);
 
     form->GetInfosArrows(WithoutAnchorPoint, OneAnchorPoint, TwoAnchorPoints,
                                  ArrowWidth, ArrowHeight,
@@ -477,7 +483,7 @@ void MainWindow::slotArrows()
                                 //To do others HeadTypeChoiceContents
                                 // comboBoxHeadTypeChoiceContents
 
-    qDebug() << "LineThickness =" << LineThickness;
+    qDebug() << "MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
 
 
     // Define new ArrowsGraphicsItem on the scene
@@ -520,53 +526,45 @@ void MainWindow::slotArrows()
 
     // To Test the Max Width and the Max Height for the scene
     Max_Ypos = scene_BottomRight.y() - scene_TopLeft.y();
-    //qDebug()<< "Max_Ypos =" << Max_Ypos;
+    qDebug()<< "Max_Ypos =" << Max_Ypos;
     Max_Xpos = scene_BottomRight.x() - scene_TopLeft.x();
-    //qDebug()<< "Max_Xpos =" << Max_Xpos;
+    qDebug()<< "Max_Xpos =" << Max_Xpos;
 
-    // Work on progress
+    // Checks if the Arrows Max Width and Max Height exceeds the size of the scene and fix it
      if (ArrowWidth > Max_Xpos)
-          ArrowWidth = Max_Xpos;
+         ArrowWidth = Max_Xpos;
 
      if (ArrowHeight > Max_Ypos)
-          ArrowHeight = Max_Ypos;
+         ArrowHeight = Max_Ypos;
+     // end checks Arrows Max Width and Max Height
 
+    // To Test the Min Width and the Min Height for the scene
     Min_Ypos = scene_TopLeft.y();
     qDebug()<< "Min_Ypos =" << Min_Ypos;
     Min_Xpos = scene_TopLeft.x();
     qDebug()<< "Min_Xpos =" << Min_Xpos;
 
-/*  // Work on progress
-    //    To do debug
-   //     /home/formation/ClipEdit/sources/mainwindow.cpp:459: erreur : invalid type argument of unary ‘*’ (have ‘qreal {aka double}’)
-   //  if (*arrow_StartPositionItem->y() < Min_Ypos)
-   //                                 ^
-   ///home/formation/ClipEdit/sources/mainwindow.cpp:460: erreur : void value not ignored as it ought to be
-   //      *arrow_StartPositionItem->setY(Min_Ypos);
-   //       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
-   //
+    // Checks if the Arrows Start Position Item on the scene and fix it
+    if (arrow_StartPositionItem->y() < Min_Ypos)
+        arrow_StartPositionItem->setY(Min_Ypos);
 
-    // Check the Arrows on the scene and fix it
-    if (*arrow_StartPositionItem->y() < Min_Ypos)
-        *arrow_StartPositionItem->setY(Min_Ypos);
-    if (*arrow_StartPositionItem->x() < Min_Xpos)
-        *arrow_StartPositionItem->setX(Min_Xpos);
-    if (*arrow_EndPositionItem->y() < Min_Ypos)
-        *arrow_EndPositionItem->setY(Min_Ypos);
-    if (*arrow_EndPositionItem->x() < Min_Xpos)
-        *arrow_EndPositionItem->setX(Min_Xpos);
-*/
+    if (arrow_StartPositionItem->x() < Min_Xpos)
+        arrow_StartPositionItem->setX(Min_Xpos);
+    // end checks Arrows Start Position Item
+
+    // Check if the Arrows End Position Item on the scene and fix it
+    if (arrow_EndPositionItem->y() < Min_Ypos)
+        arrow_EndPositionItem->setY(Min_Ypos);
+
+    if (arrow_EndPositionItem->x() < Min_Xpos)
+        arrow_EndPositionItem->setX(Min_Xpos);
+    // end checks Arrows End Position Item
+
     // Add Arrow on the scene
     //m_scene.addItem(new ArrowsGraphicsItem());
+    qDebug() << "Before add the Item on scene MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
     m_scene.addItem(ArrowItem);
 
-/*  // Work on progress
-    delta = numberedBulletGraphicItem->rect ().width ();
-    if (bulletpos.x () + delta < scene_topright.x ()) {
-      bulletpos.setX(bulletpos.x() + delta);
-    }
-
-*/
 }
 
 void MainWindow::slotScreenshots()

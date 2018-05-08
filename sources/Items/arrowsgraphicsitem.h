@@ -13,9 +13,9 @@
 
 #include "basegraphicitem.h"
 #include "../Forms/formarrows.h"
-#include <QGraphicsItem>
+//#include <QGraphicsItem>
 #include <QRectF>
-#include <QPainter>
+//#include <QPainter>
 #include <QColor>
 #include <QPolygonF>
 #include <QSettings>
@@ -121,7 +121,7 @@ class ArrowsGraphicsItem
 
         int m_LineThickness;
 
-        int m_SizeHeadTypeChoice; // m_SizeHeadTypeChoice = arrowHeadSize; for the tests and temporary solution
+        int m_SizeHeadTypeChoice; // arrowHeadSize = m_SizeHeadTypeChoice; for the tests and temporary solution
 
     //    BaseGraphicItem *m_StartItem;
     //    BaseGraphicItem *m_EndItem;
