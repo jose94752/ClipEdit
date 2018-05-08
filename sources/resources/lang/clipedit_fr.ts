@@ -583,49 +583,64 @@
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="226"/>
+        <location filename="../../Forms/formscreenshots.ui" line="51"/>
+        <source>Delay</source>
+        <translation>Délai</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="58"/>
+        <source> s</source>
+        <translation> s</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="65"/>
+        <source>Capture whole screen</source>
+        <translation>Plein écran</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="79"/>
+        <source>Mode</source>
+        <translation>Mode</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="87"/>
+        <source>Automatic</source>
+        <translation>Automatique</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="92"/>
+        <source>Manual</source>
+        <translation>Manuel</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="105"/>
+        <source>Preview</source>
+        <translation>Aperçu</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="113"/>
         <source>Capture</source>
         <translation>Capturer</translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="38"/>
+        <location filename="../../Forms/formscreenshots.ui" line="163"/>
+        <source>Add</source>
+        <translation>Ajouter</translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="36"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Screenshots&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Captures d&apos;écran&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="71"/>
+        <location filename="../../Forms/formscreenshots.ui" line="43"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="81"/>
-        <source>Screenshot delay second</source>
-        <translation>Délai pour la capture</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="121"/>
+        <location filename="../../Forms/formscreenshots.ui" line="72"/>
         <source>Hide this window</source>
         <translation>Cacher cette fenêtre</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="161"/>
-        <source>Fast</source>
-        <translation>Rapide</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="168"/>
-        <source>Average</source>
-        <translation>Moyen</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="175"/>
-        <source>Slow</source>
-        <translation>Lent</translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="47"/>
-        <source>Desk screen capture</source>
-        <translation>Capture d&apos;écran du bureau</translation>
     </message>
 </context>
 <context>
@@ -1010,69 +1025,69 @@
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow.cpp" line="239"/>
         <source>Zoom level</source>
         <translation>Niveau de zoom</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="633"/>
+        <location filename="../../mainwindow.cpp" line="657"/>
         <source>Export as image</source>
         <translation>Exporter en tant qu&apos;image</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="633"/>
+        <location filename="../../mainwindow.cpp" line="657"/>
         <source>Image File (*.png)</source>
         <translation>Fichier image (*.png)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="643"/>
-        <location filename="../../mainwindow.cpp" line="692"/>
+        <location filename="../../mainwindow.cpp" line="667"/>
+        <location filename="../../mainwindow.cpp" line="716"/>
         <source>Warning</source>
         <translation>Avertissement</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="643"/>
-        <location filename="../../mainwindow.cpp" line="692"/>
+        <location filename="../../mainwindow.cpp" line="667"/>
+        <location filename="../../mainwindow.cpp" line="716"/>
         <source>File %1 already exists</source>
         <translation>Le fichier %1 existe déjà</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="663"/>
+        <location filename="../../mainwindow.cpp" line="687"/>
         <source>Open ClipEdit Project</source>
         <translation>Ouvrir le projet ClipEdit</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="663"/>
+        <location filename="../../mainwindow.cpp" line="687"/>
         <source>ClipEdit Files (*.cle)</source>
         <translation>Fichiers ClipEdit (*.cle)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="683"/>
+        <location filename="../../mainwindow.cpp" line="707"/>
         <source>Save File</source>
         <translation>Sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="683"/>
+        <location filename="../../mainwindow.cpp" line="707"/>
         <source>ClipEdit File (*.cle)</source>
         <translation>Fichier ClipEdit (*.cle)</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="706"/>
+        <location filename="../../mainwindow.cpp" line="730"/>
         <source>A simple document editor</source>
         <translation>Un simple éditeur de document</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="707"/>
+        <location filename="../../mainwindow.cpp" line="731"/>
         <source>Developed by the M2I Team</source>
         <translation>Développé par l&apos;équipe M2I</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="708"/>
+        <location filename="../../mainwindow.cpp" line="732"/>
         <source>Copyright (c) 2018</source>
         <translation>Copyright (c) 2018</translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="709"/>
+        <location filename="../../mainwindow.cpp" line="733"/>
         <source>About </source>
         <translation>À propos de </translation>
     </message>

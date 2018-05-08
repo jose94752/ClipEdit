@@ -583,48 +583,63 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="226"/>
+        <location filename="../../Forms/formscreenshots.ui" line="51"/>
+        <source>Delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="58"/>
+        <source> s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="65"/>
+        <source>Capture whole screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="79"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="87"/>
+        <source>Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="92"/>
+        <source>Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="105"/>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="113"/>
         <source>Capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="38"/>
+        <location filename="../../Forms/formscreenshots.ui" line="163"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Forms/formscreenshots.ui" line="36"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Screenshots&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="71"/>
+        <location filename="../../Forms/formscreenshots.ui" line="43"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Forms/formscreenshots.ui" line="81"/>
-        <source>Screenshot delay second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="121"/>
+        <location filename="../../Forms/formscreenshots.ui" line="72"/>
         <source>Hide this window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="161"/>
-        <source>Fast</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="168"/>
-        <source>Average</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="175"/>
-        <source>Slow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Forms/formscreenshots.ui" line="47"/>
-        <source>Desk screen capture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1010,69 +1025,69 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="236"/>
+        <location filename="../../mainwindow.cpp" line="239"/>
         <source>Zoom level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="633"/>
+        <location filename="../../mainwindow.cpp" line="657"/>
         <source>Export as image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="633"/>
+        <location filename="../../mainwindow.cpp" line="657"/>
         <source>Image File (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="643"/>
-        <location filename="../../mainwindow.cpp" line="692"/>
+        <location filename="../../mainwindow.cpp" line="667"/>
+        <location filename="../../mainwindow.cpp" line="716"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="643"/>
-        <location filename="../../mainwindow.cpp" line="692"/>
+        <location filename="../../mainwindow.cpp" line="667"/>
+        <location filename="../../mainwindow.cpp" line="716"/>
         <source>File %1 already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="663"/>
+        <location filename="../../mainwindow.cpp" line="687"/>
         <source>Open ClipEdit Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="663"/>
+        <location filename="../../mainwindow.cpp" line="687"/>
         <source>ClipEdit Files (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="683"/>
+        <location filename="../../mainwindow.cpp" line="707"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="683"/>
+        <location filename="../../mainwindow.cpp" line="707"/>
         <source>ClipEdit File (*.cle)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="706"/>
+        <location filename="../../mainwindow.cpp" line="730"/>
         <source>A simple document editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="707"/>
+        <location filename="../../mainwindow.cpp" line="731"/>
         <source>Developed by the M2I Team</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="708"/>
+        <location filename="../../mainwindow.cpp" line="732"/>
         <source>Copyright (c) 2018</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mainwindow.cpp" line="709"/>
+        <location filename="../../mainwindow.cpp" line="733"/>
         <source>About </source>
         <translation type="unfinished"></translation>
     </message>
