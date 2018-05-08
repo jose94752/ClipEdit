@@ -127,7 +127,13 @@ void MainWindow::buildForms()
     connect(formBullets->getAddButton(),    SIGNAL(clicked(bool)),  this,   SLOT(slotNumberedBullets()));
     connect(formTextboxes->getAddButton(),  SIGNAL(clicked(bool)),  this,   SLOT(slotTextBoxes()));
     connect(formCharts->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotGraphs()));
-    connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem()));
+    /* Disable bug 2 (formArrows->getAddButton(),[...]) = 2 arrows on the scene
+     *  before we have the action BUTTON_ID_ARROW
+     *  for insert ArrowsItem
+     *  may be the bug come this major update of the source code
+     *  which is disable these function.
+     */
+    //connect(formArrows->getAddButton(),     SIGNAL(clicked(bool)),  this,   SLOT(slotArrowsGraphicsItem())); // <- Bug 2 connects = 2 arrows
     connect(formScreenshots,                SIGNAL(signalBackground(QPixmap)), this, SLOT(slotBackground(QPixmap)));
     connect(ui->actionLayers, SIGNAL(triggered(bool)), this, SLOT(slotLayers()));
 
