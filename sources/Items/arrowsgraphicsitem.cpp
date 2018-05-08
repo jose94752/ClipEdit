@@ -10,7 +10,7 @@
 */
 
 #include <QDebug>
-#include <QGraphicsItem>
+//#include <QGraphicsItem>
 #include <QRect>
 #include <QPen>
 //#include <QPainter>
@@ -38,8 +38,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
 
-
-/* Test
+ //Test
     //FormArrowsGetInfosArrows();
     // Control of the size of scene vs size of the arrows
     // with default sizes set for:
@@ -50,7 +49,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     bool WithoutAnchorPoint(true), OneAnchorPoint(false), TwoAnchorPoints(false);
     int ArrowWidth(50), ArrowHeight(50);
     QColor ArrowOutlineColor, ArrowFillColor;
-    int LineThickness(1), SizeHeadTypeChoice(10);
+    int LineThickness(2), SizeHeadTypeChoice(10);
 
     m_formArrows->GetInfosArrows(WithoutAnchorPoint, OneAnchorPoint, TwoAnchorPoints,
                                  ArrowWidth, ArrowHeight,
@@ -58,8 +57,9 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
                                  LineThickness, SizeHeadTypeChoice);
                                 //To do others HeadTypeChoiceContents
                                 // comboBoxHeadTypeChoiceContents
-
-*/ //End Test
+    qDebug() << "Constructor receive for LineThickness = " << LineThickness;
+    m_LineThickness = LineThickness;
+  //End Test
 
 
     // 3 Methods
@@ -409,14 +409,23 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     arrowHeadSize=settings->value(path+"arrowHeadSize").toInt();
     m_ArrowWidth=settings->value(path+"ArrowWidth").toInt();
     m_ArrowHeight=settings->value(path+"ArrowHeight").toInt();
-    m_LineThickness=settings->value(path+"LineThickness").toInt();
-    // Don't delete these until the
-    //Debug temp redefine here the default ligne m_LineThickness for incorrect values
+
+    // Don't comment (or delete) these section until the Constructor receive for m_LineThickness like 3145776
+    // After you should use for futurer integrity test values
+    // Debug temp redefine here the default ligne m_LineThickness for incorrect values
+    qDebug() << "ArrowsGraphicsItem::setParameters  m_LineThickness state1 = " << m_LineThickness;
+    qDebug() << "ArrowsGraphicsItem::setParameters settings->value(path+\"LineThickness\").toInt() = " << settings->value(path+"LineThickness").toInt();
+
+    m_LineThickness=settings->value(path+"LineThickness").toInt(); // <- Don't delete these line
+
+    qDebug() << "ArrowsGraphicsItem::setParameters  m_LineThickness state2 = " << m_LineThickness;
     //if(m_LineThickness < 3) m_LineThickness = 3; // <- Bug the LineThinckness is between 1 and 4 (see FormArrows class you can search in code methods using: ui->comboBoxLineThicknessContents->currentIndex()) + 1; )
     if(m_LineThickness > 4) m_LineThickness = 2;
     if(m_LineThickness < 1) m_LineThickness = 3;
     //if(m_LineThickness > 4) m_LineThickness = m_formArrows->getDefaultLineThickness(); // <- Don't use bug with values send by FormArrows
+    qDebug() << "ArrowsGraphicsItem::setParameters  m_LineThickness state3 = " << m_LineThickness;
     //end Debug temp
+
     m_SizeHeadTypeChoice=settings->value(path+"SizeHeadTypeChoice").toInt();
 //    m_StartPositionItem=settings->value(path+"StartPositionItem").toPointF(); // Bug cannot convert QPointF* to
 //    m_EndPositionItem=settings->value(path+"EndPositionItem").toPointF();     //  QPointF in assignement

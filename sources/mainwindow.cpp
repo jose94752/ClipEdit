@@ -532,37 +532,35 @@ void MainWindow::slotArrowsGraphicsItem()
     Max_Xpos = scene_BottomRight.x() - scene_TopLeft.x();
     qDebug()<< "Max_Xpos =" << Max_Xpos;
 
-    // Work on progress
+    // Checks if the Arrows Max Width and Max Height exceeds the size of the scene and fix it
      if (ArrowWidth > Max_Xpos)
-          ArrowWidth = Max_Xpos;
+         ArrowWidth = Max_Xpos;
 
      if (ArrowHeight > Max_Ypos)
-          ArrowHeight = Max_Ypos;
+         ArrowHeight = Max_Ypos;
+     // end checks Arrows Max Width and Max Height
 
+    // To Test the Min Width and the Min Height for the scene
     Min_Ypos = scene_TopLeft.y();
     qDebug()<< "Min_Ypos =" << Min_Ypos;
     Min_Xpos = scene_TopLeft.x();
     qDebug()<< "Min_Xpos =" << Min_Xpos;
 
-    // Work on progress
-     if (ArrowWidth < Min_Xpos)
-          ArrowWidth = Min_Xpos;
-
-     if (ArrowHeight < Min_Ypos)
-          ArrowHeight = Min_Ypos;
-
-    // Check the Arrows on the scene and fix it
+    // Checks if the Arrows Start Position Item on the scene and fix it
     if (arrow_StartPositionItem->y() < Min_Ypos)
         arrow_StartPositionItem->setY(Min_Ypos);
 
     if (arrow_StartPositionItem->x() < Min_Xpos)
         arrow_StartPositionItem->setX(Min_Xpos);
+    // end checks Arrows Start Position Item
 
+    // Check if the Arrows End Position Item on the scene and fix it
     if (arrow_EndPositionItem->y() < Min_Ypos)
         arrow_EndPositionItem->setY(Min_Ypos);
 
     if (arrow_EndPositionItem->x() < Min_Xpos)
         arrow_EndPositionItem->setX(Min_Xpos);
+    // end checks Arrows End Position Item
 
     // Add Arrow on the scene
     //m_scene.addItem(new ArrowsGraphicsItem());

@@ -13,7 +13,7 @@
 
 #include "basegraphicitem.h"
 #include "../Forms/formarrows.h"
-#include <QGraphicsItem>
+//#include <QGraphicsItem>
 #include <QRectF>
 //#include <QPainter>
 #include <QColor>
