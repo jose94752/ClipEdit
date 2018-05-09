@@ -231,6 +231,18 @@ void MainWindow::buildView()
     ui->graphicsView->setScene(&m_scene);
     ui->graphicsView->viewport()->installEventFilter(this);
 
+    //Try to Correct bug QGraphicsScene::removeItem: item 0x1afffac8's scene (0x0) is different from this scene (0x22fdec)
+    // and crash bug when you open ClipEdit and use immediately the keyboard key delete
+   /* if (m_itemSelected->scene() == &m_scene)
+    {
+        m_scene.addText("Same");
+    }
+    else
+    {
+        m_scene.addText("Different");
+    }*/
+    // end correcting 2 bugs
+
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
     m_resized = false;
 }
@@ -602,6 +614,7 @@ void MainWindow::itemSelected()
 {
     QList<QGraphicsItem*> items = m_scene.selectedItems();
 
+
     if (items.isEmpty())
         return;
 
@@ -639,105 +652,110 @@ void MainWindow::itemSelected()
         // TO DO: emit itemSelected ???
     }
 
-    // For the itemSelected on the scene
-    if (!items.isEmpty())
-    {
+    //if(m_itemSelected->scene() != NULL && /*{To find value here}*/->scene() != NULL){
 
-        // Exit the code from the upper else section because it never call
-        // This is to implement the delete key from the keyboard for any item
-        // For Identify the selected Item
-        // Signal sent from scene
-        QGraphicsItem* item2 = items[0];
-        BaseGraphicItem* castedItem2 = dynamic_cast<BaseGraphicItem*>(item2);
-
-        if (!castedItem2)
-            return;
-
-        // Retrieve the type
-        BaseGraphicItem::CustomTypes itemType2 = (BaseGraphicItem::CustomTypes)item2->type();
-
-        if (m_bounds.contains(itemType2))
+        // For the itemSelected on the scene
+        if (!items.isEmpty())
         {
-            if (m_forms.contains(m_bounds[itemType2]))
+
+            // Exit the code from the upper else section because it never call
+            // This is to implement the delete key from the keyboard for any item
+            // For Identify the selected Item
+            // Signal sent from scene
+            QGraphicsItem* item2 = items[0];
+            BaseGraphicItem* castedItem2 = dynamic_cast<BaseGraphicItem*>(item2);
+
+            if (!castedItem2)
+                return;
+
+            // Retrieve the type
+            BaseGraphicItem::CustomTypes itemType2 = (BaseGraphicItem::CustomTypes)item2->type();
+
+            if (m_bounds.contains(itemType2))
             {
-                BaseFormItem* form2 = dynamic_cast<BaseFormItem*>(m_forms[m_bounds[itemType2]]);
-                if (form2)
+                if (m_forms.contains(m_bounds[itemType2]))
                 {
-                    switch (item2->type())
+                    BaseFormItem* form2 = dynamic_cast<BaseFormItem*>(m_forms[m_bounds[itemType2]]);
+                    if (form2)
                     {
-                    case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:";
-                    } break;
-                    case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:";
-                    } break;
-                    case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::ChartGraphicsItem:";
-                    } break;
-                    case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:";
-                    } break;
-                    case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::PictureGraphicsItem:";
-                    } break;
-                    case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:";
-                    } break;
-                    case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
-                    {
-                        // To do some others instructions if necessary
-                        //qDebug() << "case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:";
-                    } break;
-                    default:
-                    {
-                        // Exit when isn't a deletable item from the scene
-                        m_itemSelected = NULL;
-                        qDebug() << "These are not a deletable item from the scene";
-                        goto itemSelectedEnd1;
-                    } break;
+                        switch (item2->type())
+                        {
+                        case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:";
+                        } break;
+                        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:";
+                        } break;
+                        case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::ChartGraphicsItem:";
+                        } break;
+                        case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:";
+                        } break;
+                        case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::PictureGraphicsItem:";
+                        } break;
+                        case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:";
+                        } break;
+                        case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
+                        {
+                            // To do some others instructions if necessary
+                            //qDebug() << "case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:";
+                        } break;
+                        default:
+                        {
+                            // Exit when isn't a deletable item from the scene
+                            m_itemSelected = NULL;
+                            qDebug() << "These are not a deletable item from the scene";
+                            goto itemSelectedEnd1;
+                        } break;
+                        }
+                        //******************************************************************************
+                        // Common for the itemSelected to open delete with the delete key from keyboard
+                        //******************************************************************************
+                        //DiagramItem *ItemSelect = qgraphicsitem_cast<DiagramItem *>(item);
+                        m_itemSelected = dynamic_cast<BaseGraphicItem*>(item2);
+                        qDebug() << "BaseGraphicItem m_itemSelected =" << m_itemSelected;
+                        //QGraphicsItem *ItemSelect = qgraphicsitem_cast<QGraphicsItem *>(item2);
+                        //qDebug() << "QGraphicsItem ItemSelect =" << ItemSelect;
+                        //emit thisItemSelected(m_itemSelected); // <- Bug erreur : cannot allocate an object of abstract type 'BaseGraphicItem'
+                        //emit thisItemSelectedQGI(ItemSelect); // <-Bug erreur : no matching function for call to 'MainWindow::thisItemSelectedQGI(QGraphicsItem*&)'
+                        goto itemSelectedEnd2;
+                        //******************************************************************************
                     }
-                    //******************************************************************************
-                    // Common for the itemSelected to open delete with the delete key from keyboard
-                    //******************************************************************************
-                    //DiagramItem *ItemSelect = qgraphicsitem_cast<DiagramItem *>(item);
-                    m_itemSelected = dynamic_cast<BaseGraphicItem*>(item2);
-                    qDebug() << "BaseGraphicItem m_itemSelected =" << m_itemSelected;
-                    //QGraphicsItem *ItemSelect = qgraphicsitem_cast<QGraphicsItem *>(item2);
-                    //qDebug() << "QGraphicsItem ItemSelect =" << ItemSelect;
-                    //emit thisItemSelected(m_itemSelected); // <- Bug erreur : cannot allocate an object of abstract type 'BaseGraphicItem'
-                    //emit thisItemSelectedQGI(ItemSelect); // <-Bug erreur : no matching function for call to 'MainWindow::thisItemSelectedQGI(QGraphicsItem*&)'
-                    goto itemSelectedEnd2;
-                    //******************************************************************************
                 }
+
             }
+
 
         }
 
-
-    }
-
+    //}
 itemSelectedEnd1:
-    qDebug() << "End of MainWindow::itemSelected m_itemSelected = NULL, checking is value ="
-             << m_itemSelected;
+    //    qDebug() << "End of MainWindow::itemSelected m_itemSelected = NULL, checking is value ="
+    //             << m_itemSelected;
     return;
 itemSelectedEnd2:
-    qDebug() << "End of MainWindow::itemSelected m_itemSelected =" << m_itemSelected;
+    //    qDebug() << "End of MainWindow::itemSelected m_itemSelected =" << m_itemSelected;
     return;
 //itemSelectedEndNormal:
-    qDebug() << "Normal End of MainWindow::itemSelected";
+    //    qDebug() << "Normal End of MainWindow::itemSelected";
+
 }//end implement of the delete key
+
 
 // Layers
 void MainWindow::slotLayers()
@@ -856,7 +874,7 @@ void MainWindow::applyPreferences()
 //This is to implement the delete key from the keyboard for any item
 void MainWindow::actionDeleteItem()
 {
-        qDebug() << "MainWindow::actionDeleteItem()";
+        //qDebug() << "MainWindow::actionDeleteItem()";
 
         if (!m_itemSelected)
             return;
