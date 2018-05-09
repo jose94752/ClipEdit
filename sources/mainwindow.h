@@ -15,6 +15,7 @@
 
 #include <QMainWindow>
 #include <QMap>
+#include <QWidget> // <- This is to implement the delete key from the keyboard for any item
 #include <QGraphicsScene>
 #include <QRectF>
 #include <QTranslator>
@@ -56,6 +57,8 @@ class MainWindow
     signals:
 
         void screenshotTaken(const QPixmap& screenshot);
+        //void thisItemSelected(const BaseGraphicItem& itemSelected);  // <- This is to implement the delete key from the keyboard for any item
+        //void thisItemSelectedQGI(const QGraphicsItem& itemSelected);  // <- This is to implement the delete key from the keyboard for any item
 
     private slots:
 
@@ -90,7 +93,7 @@ class MainWindow
         void showPreferences();
         void applyPreferences();
 
-    private:
+private:
 
         // Buttons Ids
         enum e_BUTTON_IDS {
@@ -137,6 +140,16 @@ class MainWindow
 
         // Dynamic strings setter (for retranslation)
         void fillDynamicStrings();
+
+        // Holders
+        BaseGraphicItem* m_itemSelected; // <- This is to implement the delete key from the keyboard for any item
+
+        //delete item
+        void actionDeleteItem(); // <- This is to implement the delete key from the keyboard for any item
+
+        //keyPressEvent
+        void keyPressEvent(QKeyEvent *event); // <- This is to implement the delete key from the keyboard for any item
+
 };
 
 #endif

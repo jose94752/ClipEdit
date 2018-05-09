@@ -28,6 +28,11 @@ class TextBoxItem
         // Constructors, destructor
         TextBoxItem(QGraphicsItem* parent = 0);
 
+        // Destructor Virtual method from BaseGraphicsItem
+        // The virtual destructor makes sure that it gets called even if the class
+        // is getting deleted through a base class pointer.
+        virtual ~TextBoxItem() {};
+
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
