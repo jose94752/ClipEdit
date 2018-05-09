@@ -46,6 +46,9 @@ class NumberedBulletGraphicItem
         NumberedBulletGraphicItem(int m_num = 0, shape_e bullet_shape = NB_CIRCLE, QColor bullet_color = QColor(),
                                   QColor numbercolor = QColor(), const QFont font = QFont(), int size = 12, BaseGraphicItem* parent = NULL);
 
+        // Destructor
+        virtual ~NumberedBulletGraphicItem() {}
+
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
         void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);

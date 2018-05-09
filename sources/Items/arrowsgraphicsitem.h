@@ -55,7 +55,7 @@ class ArrowsGraphicsItem
         // Destructor Virtual method from BaseGraphicsItem
         // The virtual destructor makes sure that it gets called even if the class
         // is getting deleted through a base class pointer.
-        virtual ~ArrowsGraphicsItem() {};
+        virtual ~ArrowsGraphicsItem() {}
 
         // Virtual methods from BaseGraphicItem
         QRectF boundingRect() const;
