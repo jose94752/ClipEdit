@@ -128,7 +128,7 @@ void MainWindow::buildForms()
     connect(formTextboxes->getAddButton(),      SIGNAL(clicked(bool)),      this,   SLOT(slotTextBoxes()));
     connect(formCharts->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotGraphs()));
     connect(formArrows->getAddButton(),         SIGNAL(clicked(bool)),      this,   SLOT(slotArrows()));
-    //connect(formScreenshots->getAddButton(),    SIGNAL(clicked(bool)),      this,   SLOT(slotScreenshots()));
+    connect(formScreenshots->getAddButton(),    SIGNAL(clicked(bool)),      this,   SLOT(slotScreenshots()));
 
     connect(formScreenshots, SIGNAL(adjustWindowVisibility(bool)), this, SLOT(setVisible(bool)));
     connect(formScreenshots, SIGNAL(requestScreenshot(bool)), this, SLOT(takeScreenshot(bool)));
@@ -579,6 +579,7 @@ void MainWindow::slotScreenshots()
     }
 
     const QPixmap screenshot = form->getScreenshot();
+    screenshot.save("test.png", "png");
 
     ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(screenshot);
     m_scene.addItem(sc);

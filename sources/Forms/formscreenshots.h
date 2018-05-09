@@ -28,6 +28,14 @@ class FormScreenshots
 
     public:
 
+        // Capture type
+        enum CAPTURE_TYPE
+        {
+            CAPTURE_FULLSCREEN,
+            CAPTURE_WINDOW,
+            CAPTURE_MANUAL
+        };
+
         explicit FormScreenshots(QWidget* parent = 0) ;
         ~FormScreenshots();
 
@@ -36,6 +44,7 @@ class FormScreenshots
 
         // Translation
         void retranslate();
+        void fillDynamicStrings();
 
         // Getters
         const QPixmap& getScreenshot() const;

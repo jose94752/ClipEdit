@@ -40,6 +40,8 @@ FormScreenshots::FormScreenshots(QWidget* parent)
 
     // Capture button disabled by default
     ui->pushButtonAdd->setEnabled(false);
+
+    fillDynamicStrings();
 }
 
 FormScreenshots::~FormScreenshots()
@@ -136,6 +138,15 @@ void FormScreenshots::loadFromItem(BaseGraphicItem* item) const
 void FormScreenshots::retranslate()
 {
     ui->retranslateUi(this);
+    fillDynamicStrings();
+}
+
+void FormScreenshots::fillDynamicStrings()
+{
+    ui->comboBoxMode->clear();
+    ui->comboBoxMode->addItem(tr("Fullscreen"), CAPTURE_FULLSCREEN);
+    ui->comboBoxMode->addItem(tr("Window"), CAPTURE_WINDOW);
+    ui->comboBoxMode->addItem(tr("Manual"), CAPTURE_MANUAL);
 }
 
 // Getters
