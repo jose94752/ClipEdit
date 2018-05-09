@@ -639,7 +639,7 @@ void MainWindow::itemSelected()
         // TO DO: emit itemSelected ???
     }
 
-    //if (ui->stackedWidgetForms->currentWidget() != m_forms[BUTTON_ID_LAYERS])
+    // For the itemSelected on the scene
     if (!items.isEmpty())
     {
 
@@ -668,37 +668,37 @@ void MainWindow::itemSelected()
                     case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:";
                     } break;
                     case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:";
                     } break;
                     case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::ChartGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::ChartGraphicsItem:";
                     } break;
                     case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:";
                     } break;
                     case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::PictureGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::PictureGraphicsItem:";
                     } break;
                     case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:";
                     } break;
                     case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
                     {
                         // To do some others instructions if necessary
-                        qDebug() << "case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:";
+                        //qDebug() << "case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:";
                     } break;
                     default:
                     {
@@ -708,9 +708,9 @@ void MainWindow::itemSelected()
                         goto itemSelectedEnd1;
                     } break;
                     }
-
-                    // Use it to
-                    //***************
+                    //******************************************************************************
+                    // Common for the itemSelected to open delete with the delete key from keyboard
+                    //******************************************************************************
                     //DiagramItem *ItemSelect = qgraphicsitem_cast<DiagramItem *>(item);
                     m_itemSelected = dynamic_cast<BaseGraphicItem*>(item2);
                     qDebug() << "BaseGraphicItem m_itemSelected =" << m_itemSelected;
@@ -719,6 +719,7 @@ void MainWindow::itemSelected()
                     //emit thisItemSelected(m_itemSelected); // <- Bug erreur : cannot allocate an object of abstract type 'BaseGraphicItem'
                     //emit thisItemSelectedQGI(ItemSelect); // <-Bug erreur : no matching function for call to 'MainWindow::thisItemSelectedQGI(QGraphicsItem*&)'
                     goto itemSelectedEnd2;
+                    //******************************************************************************
                 }
             }
 
@@ -886,5 +887,5 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
      * then to the parent's parent and then ... (as long as it's not accepted wholesale).
      * It can lead to unwanted effects.
      */
-    else qDebug() << "Event another Key Press than Delete";
+    //else qDebug() << "Event another Key Press than Delete";
 }
