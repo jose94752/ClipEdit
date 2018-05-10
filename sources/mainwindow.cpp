@@ -302,7 +302,7 @@ void MainWindow::changeEvent(QEvent* event)
 }
 
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Delete)
     {
@@ -314,6 +314,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             m_scene.removeItem(selectedItems[i]);
             delete selectedItems[i];
         }
+    }
+    else
+    {
+        QMainWindow::keyPressEvent(event);
     }
 }
 
