@@ -301,6 +301,22 @@ void MainWindow::changeEvent(QEvent* event)
     }
 }
 
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Delete)
+    {
+        QList<QGraphicsItem*> selectedItems = m_scene.selectedItems();
+
+        // Delete all selected items
+        for (int i = 0; i < selectedItems.size(); i++)
+        {
+            m_scene.removeItem(selectedItems[i]);
+            delete selectedItems[i];
+        }
+    }
+}
+
 // Slots
 // -----
 
@@ -644,117 +660,8 @@ void MainWindow::itemSelected()
                 }
             }
         }
-        //goto itemSelectedEndNormal;
     }
-    else
-    {
-        // For Layers, it must select the corresponding layer
-        // TO DO: emit itemSelected ???
-    }
-
-    //if(m_itemSelected->scene() != NULL && /*{To find value here}*/->scene() != NULL){
-
-        // For the itemSelected on the scene
-        if (!items.isEmpty())
-        {
-
-            // Exit the code from the upper else section because it never call
-            // This is to implement the delete key from the keyboard for any item
-            // For Identify the selected Item
-            // Signal sent from scene
-            QGraphicsItem* item2 = items[0];
-            BaseGraphicItem* castedItem2 = dynamic_cast<BaseGraphicItem*>(item2);
-
-            if (!castedItem2)
-                return;
-
-            // Retrieve the type
-            BaseGraphicItem::CustomTypes itemType2 = (BaseGraphicItem::CustomTypes)item2->type();
-
-            if (m_bounds.contains(itemType2))
-            {
-                if (m_forms.contains(m_bounds[itemType2]))
-                {
-                    BaseFormItem* form2 = dynamic_cast<BaseFormItem*>(m_forms[m_bounds[itemType2]]);
-                    if (form2)
-                    {
-                        switch (item2->type())
-                        {
-                        case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem:";
-                        } break;
-                        case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::ArrowGraphicsItem:";
-                        } break;
-                        case BaseGraphicItem::CustomTypes::ChartGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::ChartGraphicsItem:";
-                        } break;
-                        case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::ClipartGraphicsItem:";
-                        } break;
-                        case BaseGraphicItem::CustomTypes::PictureGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::PictureGraphicsItem:";
-                        } break;
-                        case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::NumberedBulletGraphicsItem:";
-                        } break;
-                        case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:
-                        {
-                            // To do some others instructions if necessary
-                            //qDebug() << "case BaseGraphicItem::CustomTypes::ScreenshotGraphicsItem:";
-                        } break;
-                        default:
-                        {
-                            // Exit when isn't a deletable item from the scene
-                            m_itemSelected = NULL;
-                            qDebug() << "These are not a deletable item from the scene";
-                            goto itemSelectedEnd1;
-                        } break;
-                        }
-                        //******************************************************************************
-                        // Common for the itemSelected to open delete with the delete key from keyboard
-                        //******************************************************************************
-                        //DiagramItem *ItemSelect = qgraphicsitem_cast<DiagramItem *>(item);
-                        m_itemSelected = dynamic_cast<BaseGraphicItem*>(item2);
-                        qDebug() << "BaseGraphicItem m_itemSelected =" << m_itemSelected;
-                        //QGraphicsItem *ItemSelect = qgraphicsitem_cast<QGraphicsItem *>(item2);
-                        //qDebug() << "QGraphicsItem ItemSelect =" << ItemSelect;
-                        //emit thisItemSelected(m_itemSelected); // <- Bug erreur : cannot allocate an object of abstract type 'BaseGraphicItem'
-                        //emit thisItemSelectedQGI(ItemSelect); // <-Bug erreur : no matching function for call to 'MainWindow::thisItemSelectedQGI(QGraphicsItem*&)'
-                        goto itemSelectedEnd2;
-                        //******************************************************************************
-                    }
-                }
-
-            }
-
-
-        }
-
-    //}
-itemSelectedEnd1:
-    //    qDebug() << "End of MainWindow::itemSelected m_itemSelected = NULL, checking is value ="
-    //             << m_itemSelected;
-    return;
-itemSelectedEnd2:
-    //    qDebug() << "End of MainWindow::itemSelected m_itemSelected =" << m_itemSelected;
-    return;
-//itemSelectedEndNormal:
-    //    qDebug() << "Normal End of MainWindow::itemSelected";
-
-}//end implement of the delete key
+}
 
 
 // Layers
@@ -868,42 +775,4 @@ void MainWindow::applyPreferences()
     qApp->removeTranslator(&m_translator);
     if(m_translator.load(QString(":/lang/lang/clipedit_%1").arg(lang)))
         qApp->installTranslator(&m_translator);
-}
-
-//delete item
-//This is to implement the delete key from the keyboard for any item
-void MainWindow::actionDeleteItem()
-{
-        //qDebug() << "MainWindow::actionDeleteItem()";
-
-        if (!m_itemSelected)
-            return;
-
-        if (m_itemSelected == NULL)
-            return;
-
-        //m_scene->removeItem(m_itemSelected); // <- Bug erreur : base operand of '->' has non-pointer type 'QGraphicsScene'
-        m_scene.removeItem(m_itemSelected);
-
-        // To do emit or an other way for update and refresh FomLayers list of item
-        //ui->tableWidgetLayers->removeRow(m_lineSelected);
-        //FormLayers::updateLayers(); // <- Bug erreur : cannot call member function 'void FormLayers::updateLayers()' without object
-}
-
-
-// This one is to implement the delete key from the keyboard for any item
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-   //connect ({keyboard delete key}, SIGNAL(pressed(bool)), this, SLOT(actionDeleteItem()));
-    if (event->key() == Qt::Key_Delete) // For the delete key (Suppr on French Keyboards)
-    {
-        itemSelected();
-        actionDeleteItem();
-    }
-    /*
-     * Quick note, if you do not accept the event, it also spreads to the parent,
-     * then to the parent's parent and then ... (as long as it's not accepted wholesale).
-     * It can lead to unwanted effects.
-     */
-    //else qDebug() << "Event another Key Press than Delete";
 }
