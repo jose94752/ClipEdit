@@ -231,17 +231,42 @@ void MainWindow::buildView()
     ui->graphicsView->setScene(&m_scene);
     ui->graphicsView->viewport()->installEventFilter(this);
 
-    //Try to Correct bug QGraphicsScene::removeItem: item 0x1afffac8's scene (0x0) is different from this scene (0x22fdec)
+    // *********************************************************************************************
+    // Try to Correct bug QGraphicsScene::removeItem: item 0x1afffac8's scene (0x0) is different
+    // from this scene (0x22fdec)
     // and crash bug when you open ClipEdit and use immediately the keyboard key delete
-   /* if (m_itemSelected->scene() == &m_scene)
+    // *********************************************************************************************
+
+    // First init answer try to find another for when we load a cle file
+    // with one itemSelected save in a new feature in [General] section for the last itemSelected
+    m_itemSelected = NULL;
+    //m_itemSelected = /* To Do load from cle file or QSettings s or other method */;
+
+    /* //Tests section
+    qDebug() << "MainWindow::buildView m_itemSelected before test is NULL = " << m_itemSelected;
+    if (m_itemSelected == NULL)
+    //qDebug() << "MainWindow::buildView m_itemSelected before test isActive = " << m_itemSelected;
+    //if (!m_itemSelected->isActive())
     {
-        m_scene.addText("Same");
+        //m_itemSelected->zValue(); // <- Not a valid expression for default zValue 0
+        qDebug() << "MainWindow::buildView m_itemSelected is NULL = " << m_itemSelected;
+        m_scene.addText("Different");
     }
     else
     {
-        m_scene.addText("Different");
-    }*/
-    // end correcting 2 bugs
+        qDebug() << "MainWindow::buildView m_itemSelected have value (not NULL) = " << m_itemSelected;
+        qDebug() << "MainWindow::buildView m_itemSelected->scene() = " << m_itemSelected->scene();
+        qDebug() << "MainWindow::buildView &m_scene =" << &m_scene;
+        if (m_itemSelected->scene() == &m_scene)
+        {
+            m_scene.addText("Same");
+        }
+        else
+        {
+            m_scene.addText("Different");
+        }
+    }*/ //end Tests section
+    // End correcting 2 bugs ******************************************************************
 
     connect(&m_scene, SIGNAL(selectionChanged()), this, SLOT(itemSelected()));
     m_resized = false;
@@ -652,12 +677,32 @@ void MainWindow::itemSelected()
         // TO DO: emit itemSelected ???
     }
 
+    // *********************************************************************************************
+    // Correct bug QGraphicsScene::removeItem: item 0x1afffac8's scene (0x0) is different
+    // from this scene (0x22fdec) -> NOT CORRECTED
+    //   To see the bug add an item and clic somewhere on the scene
+    //   example of application message:
+    //    QGraphicsScene::removeItem: item 0x1b2eaf40's scene (0x0) is different from this scene (0x22fdec)
+    // and crash bug when you open ClipEdit and use immediately the keyboard key delete
+    //      -> THIS CORRECTED by below temporary issue
+    // *********************************************************************************************
     //if(m_itemSelected->scene() != NULL && /*{To find value here}*/->scene() != NULL){
-
+    //if(m_itemSelected->scene() != NULL){  // <- Bug Signal name: SIGSEGV,
+                                            //     Signal meaning: Segmentation fault
+    if(m_itemSelected == NULL && !items.isEmpty()) // <- Searching a better test expression for an expression to avoid these
+    {
+        // To Do a method to add an invisible BasicGraphicItem::CustomTypes::notAnItem
+        qDebug() << "The scene is have items we will try to allocate a m_itemSelected";
+        goto commonItemSelected;
+     // *********************************************************************************************
+    }// End 1/2 correcting 2 bugs ***********************************************************************
+     // *********************************************************************************************
+    else
+    {
         // For the itemSelected on the scene
         if (!items.isEmpty())
         {
-
+            commonItemSelected:
             // Exit the code from the upper else section because it never call
             // This is to implement the delete key from the keyboard for any item
             // For Identify the selected Item
@@ -719,10 +764,12 @@ void MainWindow::itemSelected()
                         {
                             // Exit when isn't a deletable item from the scene
                             m_itemSelected = NULL;
+                            //m_itemSelected->zValue(); // <- Not a valid expression for default zValue 0
                             qDebug() << "These are not a deletable item from the scene";
                             goto itemSelectedEnd1;
                         } break;
                         }
+
                         //******************************************************************************
                         // Common for the itemSelected to open delete with the delete key from keyboard
                         //******************************************************************************
@@ -743,7 +790,11 @@ void MainWindow::itemSelected()
 
         }
 
-    //}
+     // *********************************************************************************************
+    }// End 2/2 correcting 2 bugs ***********************************************************************
+     // *********************************************************************************************
+
+
 itemSelectedEnd1:
     //    qDebug() << "End of MainWindow::itemSelected m_itemSelected = NULL, checking is value ="
     //             << m_itemSelected;
