@@ -613,7 +613,6 @@ void MainWindow::slotScreenshots()
     }
 
     const QPixmap screenshot = form->getScreenshot();
-    screenshot.save("test.png", "png");
 
     ScreenshotsGraphicsItem* sc = new ScreenshotsGraphicsItem(screenshot);
     m_scene.addItem(sc);
