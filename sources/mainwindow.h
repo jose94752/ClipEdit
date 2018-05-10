@@ -53,6 +53,7 @@ class MainWindow
         // Events
         bool eventFilter(QObject* watched, QEvent* event);
         void changeEvent(QEvent* event);
+        void keyPressEvent(QKeyEvent* event);
 
     signals:
 
@@ -140,16 +141,6 @@ private:
 
         // Dynamic strings setter (for retranslation)
         void fillDynamicStrings();
-
-        // Holders
-        BaseGraphicItem* m_itemSelected; // <- This is to implement the delete key from the keyboard for any item
-
-        //delete item
-        void actionDeleteItem(); // <- This is to implement the delete key from the keyboard for any item
-
-        //keyPressEvent
-        void keyPressEvent(QKeyEvent *event); // <- This is to implement the delete key from the keyboard for any item
-
 };
 
 #endif
