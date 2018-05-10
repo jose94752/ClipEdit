@@ -38,6 +38,7 @@ void ScreenshotsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphic
 {
     painter->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
+    // Scale the screenshot to fit the content rect
     QPixmap scaledScreenshot = m_screenshot.scaled(m_rect.toRect().size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     painter->drawPixmap(m_rect.toRect(), scaledScreenshot);
 

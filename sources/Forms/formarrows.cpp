@@ -26,15 +26,11 @@ FormArrows::FormArrows(QWidget *parent)
     :   BaseFormItem(parent), ui(new Ui::FormArrows)
 {
     ui->setupUi(this);
-    //
+
     // Set Default values of FormArrows
-    //
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
 
-    //
-    // Interval : 0 to 50 (@José, tu peux définir les bornes en passant par le Designer)
-    // Je sais mais je suis la consigne du professeur qui préfère qu'on mette ce code hors du designer graphique
-    //
+    // Interval : 0 to 50
     ui->spinBoxArrowWidthContents->setMinimum(0);
     ui->spinBoxArrowWidthContents->setMaximum(50);
 
@@ -42,18 +38,19 @@ FormArrows::FormArrows(QWidget *parent)
     ui->spinBoxArrowHeightContents->setMaximum(50);
 
     // Fill the Size of the Line Thickness
-     for(int i = 1; i < 5; i++)
-     {
-         ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
-     }
-     DefaultLineThickness = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
-     //qDebug() << "FormArrows DefaultLineThickness = " << DefaultLineThickness;
+    for(int i = 1; i < 5; i++)
+    {
+        ui->comboBoxLineThicknessContents->addItem("Size " + QString::number(i));
+    }
 
-     // Fill the Simple Arrow Head size 10 to 50
-     for (int i = 10; i < 51; i++)
-     {
-        ui->comboBoxHeadTypeChoiceContents->addItem("Simple Arrow Head size " + QString::number(i));
-     }
+    DefaultLineThickness = (ui->comboBoxLineThicknessContents->currentIndex()) + 1;
+    //qDebug() << "FormArrows DefaultLineThickness = " << DefaultLineThickness;
+
+    // Fill the Simple Arrow Head size 10 to 50
+    for (int i = 10; i < 51; i++)
+    {
+    ui->comboBoxHeadTypeChoiceContents->addItem("Simple Arrow Head size " + QString::number(i));
+    }
     DefaultFormArrowHeadSize = (ui->comboBoxHeadTypeChoiceContents->currentIndex())+ 10;
 
     // Get start default color Qt::black on the Class ColorButton we use others Colors
@@ -145,12 +142,6 @@ QColor FormArrows::getFormOutlineColorArrow()
     return FormOutlineColorArrow;
 }
 
-
-// QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
-QPushButton *FormArrows::getAddPushButtonArrow()
-{
-    return ui->pushButtonAddArrow;
-}
 
 //--------------------------------------------------
 // Methods return the Defaults values for Arrows

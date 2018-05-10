@@ -75,9 +75,6 @@ class FormArrows
         //return the Form Outline Color Arrow
         QColor getFormOutlineColorArrow();
 
-        // QPushButton method To Add Arrows from FormArrows to connect use these get on the MainWindows
-        QPushButton* getAddPushButtonArrow();
-
         //--------------------------------------------------
         // Methods return the Defaults values for Arrows
         //--------------------------------------------------
