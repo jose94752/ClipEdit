@@ -80,18 +80,33 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_EndPositionItem =  endItem.{à définir}scenePos();
 
+    m_StartPositionItem = new QPointF();
+    qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
+
+    m_EndPositionItem = new QPointF();
+    qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
+
     // Test if zero then default arrow temporary method
     if (m_ArrowHeight == 0 && m_ArrowWidth == 0)
     {
-        m_StartPositionItem = new QPointF();
-        qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
-        m_StartPositionItem = new QPointF(-50, -50); // To Do method Get QPointF from the scene after a click on Add button arrow
+        m_StartPositionItem = new QPointF(-50, -50);
         qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state2 =" << *m_StartPositionItem;
 
-        m_EndPositionItem = new QPointF();
-        qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
-        m_EndPositionItem = new QPointF(100, 100);  // To Do method Get QPointF from the scene after a click on Add button arrow
+        m_EndPositionItem = new QPointF(100, 100);
         qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state2 =" << *m_EndPositionItem;
+    }
+    else
+    {   // To Do method Get QPointF from the scene after a click on Add button arrow
+        m_StartPositionItem = new QPointF(-60, -60); //debug test
+        //m_rect.setTopLeft();
+        //m_StartPositionItem = new QPointF(m_rect.topLeft());
+        qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state3 =" << *m_StartPositionItem;
+
+        m_EndPositionItem = new QPointF(110, 110); //debug test
+        //m_rect.setBottomRight();
+        //m_EndPositionItem = new QPointF(m_rect.bottomRight());
+        qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state3 =" << *m_EndPositionItem;
+
     }
 
     m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
@@ -101,6 +116,7 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
 
     m_Color = Qt::black; // Temp for test
+
 
 
     //qDebug() << "Constructor receive for m_LineThickness =" << m_LineThickness;
@@ -215,6 +231,14 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (!m_StartPositionItem || !m_EndPositionItem)
         return;
 
+    m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
+    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
+
+    m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
+    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
+
+
+
     /* //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
     // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
     if (m_StartPositionItem->x() >= m_EndPositionItem->x())
@@ -328,11 +352,6 @@ void ArrowsGraphicsItem::updateArrowPosition()
     //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
     //setLine(line);
 
-    m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
-    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
-
-    m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
-    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
 
     update();
 }
