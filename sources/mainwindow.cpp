@@ -652,6 +652,15 @@ void MainWindow::itemSelected()
             }
         }
     }
+    else
+    {
+        FormLayers* layers = dynamic_cast<FormLayers*>(m_forms[BUTTON_ID_LAYERS]);
+
+        if (layers)
+        {
+            layers->selectItem();
+        }
+    }
 }
 
 

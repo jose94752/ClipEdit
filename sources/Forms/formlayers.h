@@ -51,6 +51,9 @@ class FormLayers
         // Update
         void updateLayers();
 
+        // Select item
+        void selectItem();
+
         // Translation
         void retranslate();
 
@@ -77,7 +80,7 @@ class FormLayers
         // Holders
         int m_nLabel;
         int m_lineSelected;
-        int m_columnSelected;
+
         BaseGraphicItem * m_itemSelected;
 
         // Utils

@@ -5,13 +5,12 @@
 #include <QRectF>
 #include <mainwindow.h>
 #include <QGraphicsPixmapItem>
-#include "../Items/basegraphicitem.h"
-#include "../Items/picturesgraphicsitem.h"
-#include "../Items/textboxitem.h"
-#include "../Items/numberedbulletgraphicitem.h"
-#include "../Items/arrowsgraphicsitem.h"
-#include "../Forms/formarrows.h"
-#include "../Items/graphsgraphicsitem.h"
+#include "Items/basegraphicitem.h"
+#include "Items/picturesgraphicsitem.h"
+#include "Items/textboxitem.h"
+#include "Items/numberedbulletgraphicitem.h"
+#include "Items/arrowsgraphicsitem.h"
+#include "Items/graphsgraphicsitem.h"
 
 ///class to save user projects to a file and to open a project from a file
 
