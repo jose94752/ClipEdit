@@ -30,12 +30,12 @@ FormArrows::FormArrows(QWidget *parent)
     // Set Default values of FormArrows
     ui->radioButtonWithoutAnchorPoint->setChecked(true);
 
-    // Interval : 0 to 50
+    // Interval : 0 to 500 (note the default Arrow is 150 x 150)
     ui->spinBoxArrowWidthContents->setMinimum(0);
-    ui->spinBoxArrowWidthContents->setMaximum(50);
+    ui->spinBoxArrowWidthContents->setMaximum(500);
 
     ui->spinBoxArrowHeightContents->setMinimum(0);
-    ui->spinBoxArrowHeightContents->setMaximum(50);
+    ui->spinBoxArrowHeightContents->setMaximum(500);
 
     // Fill the Size of the Line Thickness
     for(int i = 1; i < 5; i++)

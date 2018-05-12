@@ -80,16 +80,25 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_StartPositionItem = startItem.{à définir}scenePos();
     //m_EndPositionItem =  endItem.{à définir}scenePos();
 
-    m_StartPositionItem = new QPointF();
-    qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
-    m_StartPositionItem = new QPointF(-50, -50); // To Do method Get QPointF from the scene after a click on Add button arrow
-    qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state2 =" << *m_StartPositionItem;
+    // Test if zero then default arrow temporary method
+    if (m_ArrowHeight == 0 && m_ArrowWidth == 0)
+    {
+        m_StartPositionItem = new QPointF();
+        qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
+        m_StartPositionItem = new QPointF(-50, -50); // To Do method Get QPointF from the scene after a click on Add button arrow
+        qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state2 =" << *m_StartPositionItem;
 
-    m_EndPositionItem = new QPointF();
-    qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
-    m_EndPositionItem = new QPointF(100, 100);  // To Do method Get QPointF from the scene after a click on Add button arrow
-    qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state2 =" << *m_EndPositionItem;
+        m_EndPositionItem = new QPointF();
+        qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
+        m_EndPositionItem = new QPointF(100, 100);  // To Do method Get QPointF from the scene after a click on Add button arrow
+        qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state2 =" << *m_EndPositionItem;
+    }
 
+    m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
+    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
+
+    m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
+    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
 
     m_Color = Qt::black; // Temp for test
 
@@ -157,28 +166,6 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //End Test zone
 
 }
-
-/*
-Beware we don't use QGraphicsLineItem Class which reimplement boundingRect()
-[virtual] QRectF QGraphicsLineItem::boundingRect() const
-from QGraphicsItem::boundingRect().
-*************************************************************************************************
-QGraphicsLineItem Class
-The QGraphicsLineItem class provides a line item that you can add to a QGraphicsScene. More...
-
-Header:
-#include <QGraphicsLineItem>
-qmake:
-QT += widgets
-Since:
-Qt 4.2
-Inherits:
-QGraphicsItem
-[..]
-[virtual] QRectF QGraphicsLineItem::boundingRect() const
-Reimplemented from QGraphicsItem::boundingRect().
-**************************************************************************************************
-*/
 
 // Not the case here we inherints from BaseGraphicItem which is inherints QGraphicsItem
 QRectF ArrowsGraphicsItem::boundingRect() const
@@ -340,6 +327,12 @@ void ArrowsGraphicsItem::updateArrowPosition()
     //Example
     //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
     //setLine(line);
+
+    m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
+    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
+
+    m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
+    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
 
     update();
 }
