@@ -27,7 +27,7 @@
 #include "../Forms/formarrows.h"
 #include "ui_mainwindow.h"
 
-// Zone de travaux
+// Default constructor
 ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem *parent)
     :   BaseGraphicItem(parent)
 
@@ -38,7 +38,6 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //ArrowsGraphicsItem->setHasHandler(false);
     // End Temp
 
-    //FormArrowsGetInfosArrows();
     // Control of the size of scene vs size of the arrows
     // with default sizes set for:
     // ArrowWidth = 50, ArrowHeight = 50
@@ -81,19 +80,19 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //m_EndPositionItem =  endItem.{à définir}scenePos();
 
     m_StartPositionItem = new QPointF();
-    qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
+    //qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state1 =" << *m_StartPositionItem;
 
     m_EndPositionItem = new QPointF();
-    qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
+    //qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state1 =" << *m_EndPositionItem;
 
     // Test if zero then default arrow temporary method
     if (m_ArrowHeight == 0 && m_ArrowWidth == 0)
     {
         m_StartPositionItem = new QPointF(-50, -50);
-        qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state2 =" << *m_StartPositionItem;
+        //qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state2 =" << *m_StartPositionItem;
 
         m_EndPositionItem = new QPointF(100, 100);
-        qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state2 =" << *m_EndPositionItem;
+        //qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state2 =" << *m_EndPositionItem;
     }
     else
     {   // To Do method Get QPointF from the scene after a click on Add button arrow
@@ -101,13 +100,13 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
         //m_StartPositionItem = new QPointF(-60, -60); //debug test2
         //m_rect.setTopLeft();
         //m_StartPositionItem = new QPointF(m_rect.topLeft());
-        qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state3 =" << *m_StartPositionItem;
+        //qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state3 =" << *m_StartPositionItem;
 
         m_EndPositionItem = new QPointF(100, 100); //debug test
         //m_EndPositionItem = new QPointF(110, 110); //debug test2
         //m_rect.setBottomRight();
         //m_EndPositionItem = new QPointF(m_rect.bottomRight());
-        qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state3 =" << *m_EndPositionItem;
+        //qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state3 =" << *m_EndPositionItem;
 
     }
 
@@ -307,7 +306,7 @@ void ArrowsGraphicsItem::updateArrowPosition()
     // To do
 
     //  2 anchors points method
-    /* inactive no constructor for the moment
+    /*
     QLineF line(mapFromItem(m_StartItem, 0, 0), mapFromItem(m_EndItem, 0, 0));
     setLine(line);
     */

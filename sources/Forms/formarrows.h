@@ -171,6 +171,7 @@ private:
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
         void radioButtonWithoutAnchorPointMethod(bool);
+        int ArrowWidthUpdated(const int newArrowWidth);
 
     signals:
 

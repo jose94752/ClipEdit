@@ -19,6 +19,7 @@
 #include "ui_formarrows.h"
 #include "../Items/arrowsgraphicsitem.h"
 
+// -----------------------
 // Constructor, destructor
 // -----------------------
 
@@ -82,7 +83,7 @@ FormArrows::FormArrows(QWidget *parent)
     connect(ui->toolButtonFillColorContents, SIGNAL(colorChanged(QColor)), this, SLOT(fillColorArrowChanged(QColor)));
 
     // Connects for change
-
+    connect(ui->spinBoxArrowWidthContents,SIGNAL(valueChanged(int)),this,SLOT(ArrowWidthUpdated(int)));
     // Connects for others elements of FormArrrow To do
 
 }
@@ -91,14 +92,20 @@ FormArrows::~FormArrows()
 {
     delete ui;
 }
+// -----------------------
 
+// -----------------------
 // Return the add button
+// -----------------------
 const QPushButton* FormArrows::getAddButton() const
 {
     return ui->pushButtonAddArrow;
 }
+// -----------------------
 
+// -----------------------
 // Method GetInfosArrows
+// -----------------------
 void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                                 int &ArrowWidth, int &ArrowHeight,
                                 QColor &ArrowOutlineColor, QColor &ArrowFillColor,
@@ -127,6 +134,11 @@ void FormArrows::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, 
    SizeHeadTypeChoice = SizeHeadTypeChoiceContents;
 
 }
+// -----------------------
+
+//--------------------------------------------------
+// Methods get the values for Arrows
+//--------------------------------------------------
 
 //return the Form Fill Color Arrow
 QColor FormArrows::getFormFillColorArrow()
@@ -147,7 +159,7 @@ QColor FormArrows::getFormOutlineColorArrow()
 {
     return FormOutlineColorArrow;
 }
-
+//--------------------------------------------------
 
 //--------------------------------------------------
 // Methods return the Defaults values for Arrows
@@ -194,6 +206,7 @@ int FormArrows::getDefaultLineThickness()
 {
     return DefaultLineThickness;
 }
+//--------------------------------------------------
 
 //--------------------------------------------------
 // Methods set the values for Arrows
@@ -332,6 +345,13 @@ void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
     //To do
 }
 
+int FormArrows::ArrowWidthUpdated(const int newArrowWidth)
+{
+    FormArrowWidth = newArrowWidth;
+
+    return FormArrowWidth;
+}
+
 
 
 // Load data
@@ -347,8 +367,8 @@ void FormArrows::loadFromItem(BaseGraphicItem* item) const
         //qDebug() << "setCurrentIndex = getArrowHeadSize -10 == " << ((castedItem->getArrowHeadSize())-10); // For tests
         ui->comboBoxHeadTypeChoiceContents->setCurrentIndex(castedItem->getArrowHeadSize()-10);
 
-        qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
-        qDebug() << "setCurrentIndex = getLineThicknessSize -1 == " << ((castedItem->getLineThicknessSize())-1); // For tests
+        //qDebug() << "getLineThicknessSize = " << (castedItem->getLineThicknessSize()); // For tests
+        //qDebug() << "setCurrentIndex = getLineThicknessSize -1 == " << ((castedItem->getLineThicknessSize())-1); // For tests
         ui->comboBoxLineThicknessContents->setCurrentIndex((castedItem->getLineThicknessSize())-1);
 
         //qDebug() << "getColorFillColor = " << (castedItem->getFillColor()); // For tests
