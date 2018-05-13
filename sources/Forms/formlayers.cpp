@@ -183,39 +183,39 @@ void FormLayers::actionCopy()
             ArrowsGraphicsItem * arrow=new ArrowsGraphicsItem(new FormArrows());    // m_itemSelected
             arrow->setParameters(&settings, m_lineSelected);
             arrow->setPos(pointf);
-            arrow->setRect(rect);
+            arrow->setRect(m_itemSelected->rect());
             m_scene->addItem(arrow);
         }
         break;
         case BaseGraphicItem::NumberedBulletGraphicsItem: {
             NumberedBulletGraphicItem * bullet=new NumberedBulletGraphicItem();     // m_itemSelected
             bullet->setParameters(&settings, m_lineSelected);
-            bullet->setPos(pointf);
-            bullet->setRect(rect);
+//            bullet->setPos(pointf);
+            bullet->setRect(m_itemSelected->rect());
             m_scene->addItem(bullet);
         }
         break;
         case BaseGraphicItem::CustomTypes::PictureGraphicsItem: {
             PicturesGraphicsItem * picturesItem=new PicturesGraphicsItem(new FormPictures());       // m_itemSelected
             picturesItem->setParameters(&settings, m_lineSelected);
-            picturesItem->setPos(pointf);
-            picturesItem->setRect(rect);
+//            picturesItem->setPos(pointf);
+            picturesItem->setRect(m_itemSelected->rect());
             m_scene->addItem(picturesItem);
         }
         break;
         case BaseGraphicItem::ChartGraphicsItem: {
             GraphsGraphicsItem * graphsItem=new GraphsGraphicsItem(m_itemSelected);
             graphsItem->setParameters(&settings, m_lineSelected);
-            graphsItem->setPos(pointf);
-            graphsItem->setRect(rect);
+//            graphsItem->setPos(pointf);
+            graphsItem->setRect(m_itemSelected->rect());
             m_scene->addItem(graphsItem);
         }
         break;
         case BaseGraphicItem::ScreenshotGraphicsItem: {
 //            ScreenshotsGraphicsItem * screenshotItem=new ScreenshotsGraphicsItem(m_itemSelected);
 //            screenshotItem->setParameters(&settings, m_lineSelected);
-//            screenshotItem->setPos(pointf);
-//            screenshotItem->setRect(rect);
+////            screenshotItem->setPos(pointf);
+//            screenshotItem->setRect(m_itemSelected->rect());
 //            m_scene->addItem(screenshotItem);
         }
         break;
