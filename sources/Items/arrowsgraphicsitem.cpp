@@ -97,12 +97,14 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     }
     else
     {   // To Do method Get QPointF from the scene after a click on Add button arrow
-        m_StartPositionItem = new QPointF(-60, -60); //debug test
+        m_StartPositionItem = new QPointF(-50, -50); //debug test
+        //m_StartPositionItem = new QPointF(-60, -60); //debug test2
         //m_rect.setTopLeft();
         //m_StartPositionItem = new QPointF(m_rect.topLeft());
         qDebug() << "ArrowsGraphicsItem constructor *m_StartPositionItem state3 =" << *m_StartPositionItem;
 
-        m_EndPositionItem = new QPointF(110, 110); //debug test
+        m_EndPositionItem = new QPointF(100, 100); //debug test
+        //m_EndPositionItem = new QPointF(110, 110); //debug test2
         //m_rect.setBottomRight();
         //m_EndPositionItem = new QPointF(m_rect.bottomRight());
         qDebug() << "ArrowsGraphicsItem constructor *m_EndPositionItem state3 =" << *m_EndPositionItem;
@@ -110,10 +112,10 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     }
 
     m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
-    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
+    qDebug() << "Constructor Recaluation of m_ArrowWidth = " << m_ArrowWidth;
 
     m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
-    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
+    qDebug() << "Constructor Recaluation of m_ArrowHeight = " << m_ArrowHeight;
 
     m_Color = Qt::black; // Temp for test
 
@@ -152,7 +154,6 @@ ArrowsGraphicsItem::ArrowsGraphicsItem(FormArrows *ptrFormArrows, QGraphicsItem 
     //setRect(QRectF(-50, -50, 100, 100)); // Temp for test
     setRect(QRectF(*m_StartPositionItem, *m_EndPositionItem)); // Temp for test 2
 
-    //setPos(0,0);
 
     //Test zone
     // Without connect for change *ItemFillColorArrow when signal FormFillColorArrowChanged is emit from FormArrows class
@@ -191,35 +192,6 @@ QRectF ArrowsGraphicsItem::boundingRect() const
 
 void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    // @José: Juste un exemple de dessin trouvé dans un exemple (elastic nodes)
-    // Pour rappel ton rectangle de dessin est m_rect, si tu sors de ce rectangle tu auras des artefacts lors du déplacement de l'item
-    // Par ailleurs le crash venait de ta méthode shape(), car tu avais tout commenté dedans et ça, ça lui plaisait pas... il lui faut un retour absolument
-    // Je pense pas que tu en as besoin d'ailleurs, shape() ça sert surtout à redéfinir une forme plus précise pour ton item, notamment quand tu veux faire de la
-    // détection de collision / click, la forme de base étant un rectangle. Après tu peux le faire si tu veux hein !
-
-    // Example
-    /*
-    painter->setRenderHint(QPainter::Antialiasing);
-    painter->save();
-    QPointF sourcePoint = m_rect.topLeft(); // Test
-    QPointF destPoint = m_rect.bottomRight(); // Test
-    QLineF line(sourcePoint, destPoint);
-    painter->setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter->drawLine(line);
-    double angle = qAtan2(-line.dy(), line.dx());
-    QPointF sourceArrowP1 = sourcePoint + QPointF(qSin(angle + M_PI / 3) * 10, qCos(angle + M_PI / 3) * 10);
-    QPointF sourceArrowP2 = sourcePoint + QPointF(qSin(angle + M_PI - M_PI / 3) * 10, qCos(angle + M_PI - M_PI / 3) * 10);
-    QPointF destArrowP1 = destPoint + QPointF(qSin(angle - M_PI / 3) * 10, qCos(angle - M_PI / 3) * 10);
-    QPointF destArrowP2 = destPoint + QPointF(qSin(angle - M_PI + M_PI / 3) * 10, qCos(angle - M_PI + M_PI / 3) * 10);
-    painter->setBrush(Qt::black);
-    painter->drawPolygon(QPolygonF() << line.p1() << sourceArrowP1 << sourceArrowP2);
-    painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
-    painter->restore();
-    */
-    // End Example
-
-
-
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
 
@@ -230,14 +202,6 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     // we return and nothing is display.
     if (!m_StartPositionItem || !m_EndPositionItem)
         return;
-
-    m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
-    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
-
-    m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
-    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
-
-
 
     /* //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
     // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
@@ -283,7 +247,7 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 
     BaseGraphicItem::paint(painter,option,widget);
 }
-// fin Zone de travaux
+
 
 // Getters
 // -------
@@ -352,6 +316,15 @@ void ArrowsGraphicsItem::updateArrowPosition()
     //QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
     //setLine(line);
 
+    m_formArrows->setBeforeFormArrowWidth(m_ArrowWidth);
+    m_ArrowWidth = qFloor(qFabs(m_StartPositionItem->x()) + qFabs(m_EndPositionItem->x()));
+    qDebug() << "Recaluation of m_ArrowWidth = " << m_ArrowWidth;
+    m_formArrows->setFormArrowWidth(m_ArrowWidth);
+
+    m_formArrows->setBeforeFormArrowHeight(m_ArrowHeight);
+    m_ArrowHeight = qFloor(qFabs(m_StartPositionItem->y()) + qFabs(m_EndPositionItem->y()));
+    qDebug() << "Recaluation of m_ArrowHeight = " << m_ArrowHeight;
+    m_formArrows->setFormArrowHeight(m_ArrowHeight);
 
     update();
 }
@@ -465,3 +438,11 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
     ItemFillColorArrow->setNamedColor(settings->value(path+"ItemFillColorArrow").toString());
 }
 
+void ArrowsGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+{
+    QGraphicsItem::mouseReleaseEvent(event);
+    //Calling updateArrowPosition for the current ArrowItem
+    //ArrowItem->updateArrowPosition();
+    updateArrowPosition();
+
+}

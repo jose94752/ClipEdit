@@ -33,9 +33,15 @@ FormArrows::FormArrows(QWidget *parent)
     // Interval : 0 to 500 (note the default Arrow is 150 x 150)
     ui->spinBoxArrowWidthContents->setMinimum(0);
     ui->spinBoxArrowWidthContents->setMaximum(500);
+    ui->spinBoxArrowWidthContents->setValue(150);
+    DefaultFormArrowWidth = ui->spinBoxArrowWidthContents->value();
+    BeforeFormArrowWidth = ui->spinBoxArrowWidthContents->value();
 
     ui->spinBoxArrowHeightContents->setMinimum(0);
     ui->spinBoxArrowHeightContents->setMaximum(500);
+    ui->spinBoxArrowHeightContents->setValue(150);
+    DefaultFormArrowHeight = ui->spinBoxArrowHeightContents->value();
+    BeforeFormArrowHeight = ui->spinBoxArrowHeightContents->value();
 
     // Fill the Size of the Line Thickness
     for(int i = 1; i < 5; i++)
@@ -187,6 +193,34 @@ QPolygonF FormArrows::getDefaultFormArrowHeadType()
 int FormArrows::getDefaultLineThickness()
 {
     return DefaultLineThickness;
+}
+
+//--------------------------------------------------
+// Methods set the values for Arrows
+//--------------------------------------------------
+
+//set the BeforeFormArrowWidth
+void FormArrows::setBeforeFormArrowWidth(int newBeforeFormArrowWidth)
+{
+   BeforeFormArrowWidth = newBeforeFormArrowWidth;
+}
+
+//set the FormArrowWidth
+void FormArrows::setFormArrowWidth(int newFormArrowWidth)
+{
+   ui->spinBoxArrowWidthContents->setValue(newFormArrowWidth);
+}
+
+//set the BeforeFormArrowHeight
+void FormArrows::setBeforeFormArrowHeight(int newBeforeFormArrowHeight)
+{
+    BeforeFormArrowHeight = newBeforeFormArrowHeight;
+}
+
+//set the FormArrowHeight
+void FormArrows::setFormArrowHeight(int newFormArrowHeight)
+{
+   ui->spinBoxArrowHeightContents->setValue(newFormArrowHeight);
 }
 
 //--------------------------------------------------

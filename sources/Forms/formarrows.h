@@ -102,6 +102,21 @@ class FormArrows
 
         //--------------------------------------------------
 
+        //--------------------------------------------------
+        // Methods set the values for Arrows
+        //--------------------------------------------------
+        //set the BeforeFormArrowWidth
+        void setBeforeFormArrowWidth(int newBeforeFormArrowWidth);
+        //set the FormArrowWidth
+        void setFormArrowWidth(int newFormArrowWidth);
+        //set the BeforeFormArrowHeight
+        void setBeforeFormArrowHeight(int newBeforeFormArrowHeight);
+        //set the FormArrowHeight
+        void setFormArrowHeight(int newFormArrowHeight);
+
+
+        //--------------------------------------------------
+
 private:
 
         // UI

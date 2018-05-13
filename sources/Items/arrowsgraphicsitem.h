@@ -110,6 +110,8 @@ class ArrowsGraphicsItem
         int getArrowHeight();
 
     private:
+        // Event(s) for calling updateArrowsPositions
+        void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 
         bool m_WithoutAnchorPoint;
         bool m_OneAnchorPoint;
