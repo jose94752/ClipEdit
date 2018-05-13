@@ -182,7 +182,7 @@ void FormLayers::actionCopy()
         case BaseGraphicItem::CustomTypes::ArrowGraphicsItem: {
             ArrowsGraphicsItem * arrow=new ArrowsGraphicsItem(new FormArrows());    // m_itemSelected
             arrow->setParameters(&settings, m_lineSelected);
-            arrow->setPos(pointf);
+//            arrow->setPos(pointf);
             arrow->setRect(m_itemSelected->rect());
             m_scene->addItem(arrow);
         }
