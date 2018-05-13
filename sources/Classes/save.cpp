@@ -1,11 +1,9 @@
-#include "save.h"
+
 #include <QDebug>
 #include <QSettings>
 #include <QGraphicsItem>
-#include <QRectF>
-#include <mainwindow.h>
-#include <QGraphicsPixmapItem>
-#include "Items/basegraphicitem.h"
+
+#include "save.h"
 #include "Items/picturesgraphicsitem.h"
 #include "Items/textboxitem.h"
 #include "Items/numberedbulletgraphicitem.h"

@@ -174,8 +174,8 @@ void FormLayers::actionCopy()
         case BaseGraphicItem::CustomTypes::TextBoxGraphicsItem: {
             TextBoxItem * textBox=new TextBoxItem(m_itemSelected);
             textBox->setParameters(&settings, m_lineSelected);
-            textBox->setPos(pointf);
-            textBox->setRect(rect);
+//            textBox->setPos(pointf);
+            textBox->setRect(m_itemSelected->rect());
             m_scene->addItem(textBox);
         }
         break;
@@ -379,11 +379,11 @@ void FormLayers::updateLayers()
     }
 
     // Init select
-    m_lineSelected = -1;
-
+    ui->tableWidgetLayers->clearSelection();
     m_scene->clearSelection();
-    //m_itemSelected = NULL;
 
+    m_lineSelected = -1;
+    m_itemSelected = NULL;
 }
 
 // Select Item
@@ -403,6 +403,7 @@ void FormLayers::selectItem()
 
         if (item == m_itemSelected)
         {
+            ui->tableWidgetLayers->clearSelection();
             ui->tableWidgetLayers->selectRow(line);
             ui->tableWidgetLayers->showNormal();
             break;

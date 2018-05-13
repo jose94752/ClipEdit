@@ -30,6 +30,7 @@
 #include "Items/graphsgraphicsitem.h"
 #include "Items/arrowsgraphicsitem.h"
 #include "Items/screenshotsgraphicsitem.h"
+#include "Items/numberedbulletgraphicitem.h"
 
 #include "Forms/resizescenedialog.h"
 #include "Forms/dialogsave.h"
@@ -42,7 +43,6 @@
 #include "Forms/formpictures.h"
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
-#include "Items/numberedbulletgraphicitem.h"
 
 // Constructor, destructor
 // -----------------------
