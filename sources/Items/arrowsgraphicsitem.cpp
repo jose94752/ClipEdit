@@ -439,7 +439,7 @@ void ArrowsGraphicsItem::setParameters(QSettings *settings, int itemIdex)
 
 void ArrowsGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-    QGraphicsItem::mouseReleaseEvent(event);
+    BaseGraphicItem::mouseReleaseEvent(event);
     //Calling updateArrowPosition for the current ArrowItem
     //ArrowItem->updateArrowPosition();
     updateArrowPosition();
