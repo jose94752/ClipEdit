@@ -1,7 +1,12 @@
+# Update from Qt.gitignore template
+# https://github.com/github/gitignore/blob/master/Qt.gitignore
+# Check it and tune up
+
+# Original No Change if not comment
 *.swp
 *.pro.user
 *.pro.user.*
-build(.)*/
+# build(.)*/
 *.a
 *.pdf
 *.odt
@@ -12,4 +17,49 @@ Docs/en/epub/
 Docs/en/man/
 Docs/en/epub/
 
+# -------------------------------------------------------------------------------------
+# Below from template comment if is all ready in use on Orginal No Change section upper 
+# -------------------------------------------------------------------------------------
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+# *.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
 
+# Qt-es
+object_script.*.Release
+object_script.*.Debug
+*_plugin_import.cpp
+/.qmake.cache
+/.qmake.stash
+# *.pro.user
+# *.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+# Makefile* # One Makefile for all activate if we don't want
+*build-*
+
+# Qt unit tests
+target_wrapper.*
+
+# QtCreator
+*.autosave
+
+# QtCreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCreator CMake
+CMakeLists.txt.user*
