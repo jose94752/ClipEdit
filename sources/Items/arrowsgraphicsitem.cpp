@@ -297,6 +297,7 @@ void ArrowsGraphicsItem::GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAncho
     SizeHeadTypeChoice = m_SizeHeadTypeChoice;
 }
 
+// update Arrow Position and recalculate dimensions of it
 void ArrowsGraphicsItem::updateArrowPosition()
 {
     // Without anchor point method
@@ -343,14 +344,23 @@ QPointF ArrowsGraphicsItem::getEndPosition()
     return *m_EndPositionItem;
 }
 
+//return the Arrow Width
 int ArrowsGraphicsItem::getArrowWidth()
 {
     return m_ArrowWidth;
 }
 
+//return the Arrow Height
 int ArrowsGraphicsItem::getArrowHeight()
 {
     return m_ArrowHeight;
+}
+
+//set the Arrow Width
+void ArrowsGraphicsItem::setArrowWidth(int newArrowWidth)
+{
+    m_ArrowWidth = newArrowWidth;
+    updateArrowPosition();
 }
 
 

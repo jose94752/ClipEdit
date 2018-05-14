@@ -586,8 +586,6 @@ void MainWindow::slotArrows()
     //m_scene.addItem(new ArrowsGraphicsItem());
     //qDebug() << "Before add the Item on scene MainWindow::slotArrowsGraphicsItem LineThickness =" << LineThickness;
     m_scene.addItem(ArrowItem);
-    // Calling updateArrowPosition for the current ArrowItem
-    //ArrowItem->updateArrowPosition(); // -> I Move it to call it in ArrowsGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 }
 
 void MainWindow::slotScreenshots()

@@ -20,6 +20,9 @@
 #include <QPushButton>
 
 #include "baseformitem.h"
+//#include "../Items/arrowsgraphicsitem.h"
+
+class ArrowsGraphicsItem;
 
 // Forward Declaration
 namespace Ui
@@ -51,6 +54,10 @@ class FormArrows
         // Getter add button
         const QPushButton* getAddButton() const;
 
+        //--------------------------------------------------
+        // Methods get the values for Arrows
+        //--------------------------------------------------
+
         // Method GetInfosArrows
        void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,
@@ -59,12 +66,6 @@ class FormArrows
                             //To do others HeadTypeChoiceContents
                             // comboBoxHeadTypeChoiceContents
 
-        // Method SetInfosArrows are now set in private section ( it will be move to protected or public if needed
-        // to connect other object if node /= item )
-        /*void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints,
-                            int ArrowWidth, int ArrowHeight,
-                            QColor ArrowOutlineColor, QColor ArrowFillColor,
-                            int LineThickness, int SizeHeadTypeChoice);*/
 
         //return the Form Fill Color Arrow
         QColor getFormFillColorArrow();
@@ -74,6 +75,7 @@ class FormArrows
 
         //return the Form Outline Color Arrow
         QColor getFormOutlineColorArrow();
+        //--------------------------------------------------
 
         //--------------------------------------------------
         // Methods return the Defaults values for Arrows
@@ -105,12 +107,24 @@ class FormArrows
         //--------------------------------------------------
         // Methods set the values for Arrows
         //--------------------------------------------------
+
+        // Method SetInfosArrows
+        void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints,
+                            int ArrowWidth, int ArrowHeight,
+                            QColor ArrowOutlineColor, QColor ArrowFillColor,
+                            int LineThickness, int SizeHeadTypeChoice);
+                            //To do others HeadTypeChoiceContents
+                            // comboBoxHeadTypeChoiceContents
+
         //set the BeforeFormArrowWidth
         void setBeforeFormArrowWidth(int newBeforeFormArrowWidth);
+
         //set the FormArrowWidth
         void setFormArrowWidth(int newFormArrowWidth);
+
         //set the BeforeFormArrowHeight
         void setBeforeFormArrowHeight(int newBeforeFormArrowHeight);
+
         //set the FormArrowHeight
         void setFormArrowHeight(int newFormArrowHeight);
 
@@ -161,17 +175,12 @@ private:
 
         int LineThicknessContents;
 
-        // Method SetInfosArrows
-        void SetInfosArrows(bool WithoutAnchorPoint, bool OneAnchorPoint, bool TwoAnchorPoints, int ArrowWidth,
-                            int ArrowHeight, QColor ArrowOutlineColor, QColor ArrowFillColor, int LineThickness,
-                            int SizeHeadTypeChoice);
-
     public slots:
         void fillColorArrowChanged();
         void fillColorArrowChanged(const QColor& color);
         void outlineColorArrowChanged(const QColor& color);
         void radioButtonWithoutAnchorPointMethod(bool);
-        int ArrowWidthUpdated(const int newArrowWidth);
+        void ArrowWidthUpdated(const int newArrowWidth);
 
     signals:
 

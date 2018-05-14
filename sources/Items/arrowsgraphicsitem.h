@@ -74,14 +74,16 @@ class ArrowsGraphicsItem
         BaseGraphicItem *endItem() const { return m_EndItem; }
         */
 
+        //--------------------------------------------------
+        // Methods get the values for Arrows
+        //--------------------------------------------------
+
         void GetInfosArrows(bool &WithoutAnchorPoint, bool &OneAnchorPoint, bool &TwoAnchorPoints,
                             int &ArrowWidth, int &ArrowHeight,
                             QColor &ArrowOutlineColor, QColor &ArrowFillColor,
                              int &LineThickness, int &SizeHeadTypeChoice);
                             //To do others HeadTypeChoiceContents
                             // comboBoxHeadTypeChoiceContents
-
-        void updateArrowPosition();
 
         //renvoie du pointeur sur la form arrow
         FormArrows* getFormArrow();
@@ -99,15 +101,29 @@ class ArrowsGraphicsItem
         //return the Item Fill Color Arrow
         QColor getFillColor();
 
-        //Redefine of virtuals methods inherit from BaseGraphicItem class
-        void getParameters(QSettings *setting,int itemIdex);
-        void setParameters(QSettings *setting,int itemIdex);
-
         //return the Arrow Width
         int getArrowWidth();
 
         //return the Arrow Height
         int getArrowHeight();
+        //--------------------------------------------------
+
+        //--------------------------------------------------
+        // Methods set the values for Arrows
+        //--------------------------------------------------
+
+        //set the Arrow Width
+        void setArrowWidth(int newArrowWidth);
+        //--------------------------------------------------
+
+        // update Arrow Position and recalculate dimensions of it
+        void updateArrowPosition();
+
+
+        //Redefine of virtuals methods inherit from BaseGraphicItem class
+        void getParameters(QSettings *setting,int itemIdex);
+        void setParameters(QSettings *setting,int itemIdex);
+
 
     private:
         // Event(s) for calling updateArrowsPositions

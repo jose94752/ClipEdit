@@ -345,11 +345,10 @@ void FormArrows::radioButtonWithoutAnchorPointMethod(bool)
     //To do
 }
 
-int FormArrows::ArrowWidthUpdated(const int newArrowWidth)
+void FormArrows::ArrowWidthUpdated(const int newArrowWidth)
 {
     FormArrowWidth = newArrowWidth;
-
-    return FormArrowWidth;
+    //setArrowWidth(FormArrowWidth); // <-To Do correcting bug
 }
 
 
