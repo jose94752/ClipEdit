@@ -5,6 +5,8 @@
 - Pictures : opacity
 - Pictures : crop property
 - Arrows : Handle bug when you change azimut of the arrow to full horizontal (or vertical) and you click somewhere then you can't
-			recall these Arrow.
+			recall these Arrow. When the size of the Arrow is zero Height and zero Width we have the bug
+			QPainter::end: Painter ended with 2 saved states
+			And the Arrow wanish and you can't recall it.
 
 
