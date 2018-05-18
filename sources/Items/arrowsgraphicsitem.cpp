@@ -202,13 +202,16 @@ void ArrowsGraphicsItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     if (!m_StartPositionItem || !m_EndPositionItem)
         return;
 
-    /* //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
+    //These are no need since the BaseGraphicItem::boundingRect whas updated for 360° Items Arrows direction
+    // Reactivate for trying patch bug Arrow can't handle when width = 0 and/or height = 0
     // Check if m_StartPostionItem >= m_EndPostionItem one for x and one for y
     if (m_StartPositionItem->x() >= m_EndPositionItem->x())
+            //m_EndPositionItem->setX(m_StartPositionItem->x());
             m_EndPositionItem->setX(m_StartPositionItem->x());
     if (m_StartPositionItem->y() >= m_EndPositionItem->y())
+            //m_EndPositionItem->setY(m_StartPositionItem->y());
             m_EndPositionItem->setY(m_StartPositionItem->y());
-    */
+    //*/
 
     // Draw the line
     QLineF line(*m_StartPositionItem, *m_EndPositionItem);
