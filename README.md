@@ -4,3 +4,4 @@ The main goal of the ClipEdit project is to manipulate cliparts to edit, highlig
 Here these is the canevas version.
 
 More Infos see ClipEditCanevas/Docs/en/presentation.md
+French see ClipEditCanevas/Docs/fr/presentation.md
