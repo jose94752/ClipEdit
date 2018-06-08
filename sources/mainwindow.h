@@ -16,12 +16,29 @@
 #include <QMainWindow>
 #include <QMap>
 #include <QWidget> // <- This is to implement the delete key from the keyboard for any item
-#include <QGraphicsScene>
+#include <QGraphicsScene> // <- Check if this needed when the mutation in canvas implement
 #include <QRectF>
 #include <QTranslator>
 
 #include "Items/basegraphicitem.h"
 #include "dialogpreferences.h"
+
+// Adds for canvas
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QStackedWidget>
+
+#include "Components/One_Menu_Button.h"
+
+#include "Forms/formarrows.h"
+#include "Forms/formcharts.h"
+#include "Forms/formcliparts.h"
+#include "Forms/formlayers.h"
+#include "Forms/formnumberedbullets.h"
+#include "Forms/formpictures.h"
+#include "Forms/formscreenshots.h"
+#include "Forms/formtextboxes.h"
+// End add for canvas
+
 
 class BaseForm;
 class QToolButton;
@@ -45,7 +62,8 @@ class MainWindow
     public:
 
         // Constructor & Destructor
-        explicit MainWindow(QWidget* parent = 0);
+        //explicit MainWindow(QWidget* parent = 0); // Version Main
+        explicit MainWindow(QWidget* /*parent*/ = 0); // Version Canvas
         ~MainWindow();
 
     protected:

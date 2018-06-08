@@ -44,11 +44,34 @@
 #include "Forms/formscreenshots.h"
 #include "Forms/formtextboxes.h"
 
+#define INIT_BUTTON(BUTTON_ID, TEXT, PIXMAP) \
+    list_buttons[BUTTON_ID]->set_text(TEXT); \
+    list_buttons[BUTTON_ID]->set_pixmap(PIXMAP); \
+    list_buttons[BUTTON_ID]->button_id = BUTTON_ID; \
+    list_buttons[BUTTON_ID]->unselect(true); \
+    \
+    connect(list_buttons[BUTTON_ID], SIGNAL( on_click(unsigned char) ), this, SLOT( event_onClick(unsigned char) ));
+
+
+#define INIT_SELECTED_BUTTON(BUTTON_ID, TEXT, PIXMAP) \
+    list_buttons[BUTTON_ID]->set_text(TEXT); \
+    list_buttons[BUTTON_ID]->set_pixmap(PIXMAP); \
+    list_buttons[BUTTON_ID]->select(); \
+    list_buttons[BUTTON_ID]->button_id = BUTTON_ID; \
+    selected_button = BUTTON_ID; \
+    \
+    connect(list_buttons[BUTTON_ID], SIGNAL( on_click(unsigned char) ), this, SLOT( event_onClick(unsigned char) ));
+
+
 // Constructor, destructor
 // -----------------------
 
 MainWindow::MainWindow(QWidget *parent)
-    :   QMainWindow(parent), ui(new Ui::MainWindow)
+    :   QMainWindow(parent), ui(new Ui::MainWindow)/*,
+        form_arrows(canvas), form_charts(canvas),
+        form_cliparts(canvas), form_layers(canvas),
+        form_bullets(canvas), form_pictures(canvas),
+        form_screenshots(canvas), form_textboxes(canvas)*/
 {
     ui->setupUi(this);
     init();

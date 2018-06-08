@@ -25,10 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-CLASS_DIRECTORY    = Classes
-ITEM_DIRECTORY     = Items
-FORM_DIRECTORY     = Forms
-RESOURCE_DIRECTORY = resources
+CLASS_DIRECTORY     = Classes
+ITEM_DIRECTORY      = Items
+FORM_DIRECTORY      = Forms
+RESOURCE_DIRECTORY  = resources
+COMPONENT_DIRECTORY = Components
 
 
 SOURCES += \
@@ -57,6 +58,7 @@ SOURCES += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.cpp \
     $${ITEM_DIRECTORY}/textboxitem.cpp \
+    $${COMPONENT_DIRECTORY}/one_menu_button.cpp \
     graphicsview.cpp \
     dialogpreferences.cpp \
     Forms/baseformitem.cpp
@@ -87,6 +89,7 @@ HEADERS += \
     $${ITEM_DIRECTORY}/picturesgraphicsitem.h \
     $${ITEM_DIRECTORY}/screenshotsgraphicsitem.h \
     $${ITEM_DIRECTORY}/textboxitem.h \
+    $${COMPONENT_DIRECTORY}/one_menu_button.h \
     graphicsview.h \
     dialogpreferences.h \
     Forms/baseformitem.h
@@ -104,6 +107,7 @@ FORMS += \
     $${FORM_DIRECTORY}/formscreenshots.ui \
     $${FORM_DIRECTORY}/formtextboxes.ui \
     $${FORM_DIRECTORY}/resizescenedialog.ui \
+    $${COMPONENT_DIRECTORY}/one_menu_button.ui \
     dialogpreferences.ui
 
 
