@@ -10,3 +10,6 @@
 			And the Arrow wanish and you can't recall it.
 
 
+The file will not used on project ClipEditCanevas (may be on ClipEdit if others participants used the same
+work methods: GitHub issue bug classic template and GitHub issue custom template as scrum workflow item).
+The news bugs I find I will create a GitHub issue bug classic template.
