@@ -1,6 +1,6 @@
 - Export as image : Unselect all GraphicsItem before export file
 - Layers : Up and Down don't work
-- Layers and Background image : put hthe background color with a lowest values of zValue
+- Layers and Background image : put the background color with a lowest values of zValue
 - Layers : replace the buttons my Icon buttons
 - Pictures : opacity
 - Pictures : crop property
