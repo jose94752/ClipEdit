@@ -1,11 +1,11 @@
 | Nom de la spécification | Difficulté | Contributeur |
 | ----------------------- | :--------: | ------------ |
-| SpecNumberedBullets     | :two:      | jerome       |
+| SpecNumberedBullets     | :two:      | Jérôme       |
 | SpecPictures            | :two:      | Laurent      |
 | SpecScreenShots         | :three:    | Toumi        |
 | SpecCharts              | :four:     | Mihaela      |
 | SpecCliparts            | :four:     | Cédric       |
 | SpecReadWriteExports    | :four:     | Olivier      |
-| SpecArrows              | :five:     | Jose         |
+| SpecArrows              | :five:     | José         |
 | SpecLayers              | :six:      | David        |
 | SpecTextBoxes           | :six:      | Nilsen       | 
