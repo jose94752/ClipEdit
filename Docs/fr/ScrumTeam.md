@@ -1,14 +1,14 @@
 # Projet ClipEditCanevas commencement en framework scrum
 
-| : ClipEditCanevas Scrum Master : | 
+| ClipEditCanevas Scrum Master | 
 | ----------- |
 | jose94752        |
 
-| : ClipEditCanevas Product Owner : | 
+| ClipEditCanevas Product Owner | 
 | ----------- |
 | jose94752        |
 
-| :Equipe ClipEditCanevas: | 
+| Equipe ClipEditCanevas | 
 | ----------- |
 | jose94752        |
 
