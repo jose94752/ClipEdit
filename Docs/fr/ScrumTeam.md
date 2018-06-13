@@ -1,4 +1,4 @@
-# ClipEditCanevas project start on framework scrum
+# Projet ClipEditCanevas commencement en framework scrum
 
 | : ClipEditCanevas Scrum Master : | 
 | ----------- |
@@ -8,7 +8,7 @@
 | ----------- |
 | jose94752        |
 
-| : Equipe ClipEditCanevas : | 
+| :Equipe ClipEditCanevas: | 
 | ----------- |
 | jose94752        |
 
@@ -17,10 +17,11 @@ et d'autres développeurs C ++ Qt (débutant ou non) peuvent participer au proje
 Mais pour tous, ils doivent écrire un e-mail au Scrum Master
 pour s'enregistrer dans l'équipe ClipEditCanevas.
 
-# ClipEdit project
+# Projet ClipEdit
 
-| : Orignal ClipEdit Team Not Scrum : | 
-| Name of the specification | Contributor |
+Equipe ClipEdit d'Origine Pas de Scrum
+ 
+| Nome de la spécification | Contributeur |
 | ------------------------- | ----------- |
 | SpecNumberedBullets       | Jérôme      |
 | SpecPictures              | Laurent     |
